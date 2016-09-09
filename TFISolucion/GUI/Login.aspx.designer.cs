@@ -10,7 +10,7 @@
 namespace TFI.GUI {
     
     
-    public partial class WebForm1pru {
+    public partial class Login {
         
         /// <summary>
         /// SiteMapDataSource1 control.
