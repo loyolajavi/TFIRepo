@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1pru.aspx.cs" Inherits="TFI.GUI.WebForm1pru" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TFI.GUI.WebForm1pru" %>
 
 <%@ Register assembly="ServerControl1" namespace="ServerControl1" tagprefix="cc1" %>
 
