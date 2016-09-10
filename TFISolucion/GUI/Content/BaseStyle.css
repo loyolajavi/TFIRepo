@@ -3,12 +3,10 @@
     src: url('/fonts/bungee.ttf'); /*URL to font*/
 }
 
-
 .container-fluid {
     background-color: #ededed;
     background-clip: content-box;
     box-shadow: inset 0 0 0 100px #ededed;
-    
 }
 
 .navbar {
@@ -44,5 +42,5 @@
 }
 
 .container {
-     font-family: 'Segoe UI';
+    font-family: 'Segoe UI';
 }
