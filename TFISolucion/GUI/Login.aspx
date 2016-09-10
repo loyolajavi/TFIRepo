@@ -1,20 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TFI.GUI.Login" %>
+﻿<%@ Page Title="Login Page" Language="C#" MasterPageFile="~/Shared/Layout.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TFI.GUI.Home" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContent" runat="server">
 
-<!DOCTYPE html>
+    <form runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="true" />
-    <asp:SiteMapPath ID="SiteMapPathHome" runat="server" PathSeparator=" > " RenderCurrentNodeAsLink="false">
-    </asp:SiteMapPath>
-
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
+        <asp:TextBox ID="txtUser" runat="server" />
     </form>
-</body>
-</html>
+
+    
+
+</asp:Content>
