@@ -3,6 +3,10 @@
     src: url('/fonts/bungee.ttf'); /*Custom Font*/
 }
 
+body {
+    padding-top: 70px
+}
+
 .container {
     font-family: 'Segoe UI';
     color: black;
