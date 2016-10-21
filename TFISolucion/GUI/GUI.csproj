@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D89860B0-4236-4383-B9DF-C738BF41ABDD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TFI.GUI</RootNamespace>
+    <AssemblyName>GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CatalogoPrinc.aspx" />
+    <Content Include="ClientesEmpresa.aspx" />
+    <Content Include="Estilos\EstiloLayoutPropio.css" />
+    <Content Include="Estilos\EstiloBoot\bootstrap-theme.css" />
+    <Content Include="Estilos\EstiloBoot\bootstrap-theme.min.css" />
+    <Content Include="Estilos\EstiloBoot\bootstrap.css" />
+    <Content Include="Estilos\EstiloBoot\bootstrap.min.css" />
+    <Content Include="Estilos\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Estilos\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Estilos\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Estilos\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Estilos\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Estilos\EstiloBoot\bootstrap-theme.min.css.map" />
+    <Content Include="Estilos\EstiloBoot\bootstrap-theme.css.map" />
+    <Content Include="Estilos\EstiloBoot\bootstrap.min.css.map" />
+    <Content Include="Estilos\EstiloBoot\bootstrap.css.map" />
+    <Content Include="Estilos\fonts\bungee.ttf" />
+    <Content Include="General\LayoutGeneral.Master" />
+    <Content Include="General\LayoutBasico.Master" />
+    <Content Include="General\LayoutAdministracion.Master" />
+    <None Include="Scripts\thirdparty\jquery-1.9.1.intellisense.js" />
+    <Content Include="Home.aspx" />
+    <Content Include="Imagenes\Buscar.png" />
+    <Content Include="InfoEmpresa.aspx" />
+    <Content Include="Intranet\GestionClientes.aspx" />
+    <Content Include="Scripts\thirdparty\bootstrap.js" />
+    <Content Include="Scripts\thirdparty\bootstrap.min.js" />
+    <Content Include="Scripts\thirdparty\jquery-1.9.1.js" />
+    <Content Include="Scripts\thirdparty\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\thirdparty\jquery-1.9.1.min.map" />
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CatalogoPrinc.aspx.cs">
+      <DependentUpon>CatalogoPrinc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatalogoPrinc.aspx.designer.cs">
+      <DependentUpon>CatalogoPrinc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientesEmpresa.aspx.cs">
+      <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientesEmpresa.aspx.designer.cs">
+      <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\LayoutAdministracion.Master.cs">
+      <DependentUpon>LayoutAdministracion.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\LayoutAdministracion.Master.designer.cs">
+      <DependentUpon>LayoutAdministracion.Master</DependentUpon>
+    </Compile>
+    <Compile Include="General\LayoutBasico.Master.cs">
+      <DependentUpon>LayoutBasico.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\LayoutBasico.Master.designer.cs">
+      <DependentUpon>LayoutBasico.Master</DependentUpon>
+    </Compile>
+    <Compile Include="General\LayoutGeneral.Master.cs">
+      <DependentUpon>LayoutGeneral.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\LayoutGeneral.Master.designer.cs">
+      <DependentUpon>LayoutGeneral.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InfoEmpresa.aspx.cs">
+      <DependentUpon>InfoEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InfoEmpresa.aspx.designer.cs">
+      <DependentUpon>InfoEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Intranet\GestionClientes.aspx.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Intranet\GestionClientes.aspx.designer.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controles\" />
+    <Folder Include="Estaticas\" />
+    <Folder Include="Seguridad\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerControl1\ServerControl1.csproj">
+      <Project>{E096D120-42AC-4FE0-8780-AAE7F805C743}</Project>
+      <Name>ServerControl1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1952</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1952/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
