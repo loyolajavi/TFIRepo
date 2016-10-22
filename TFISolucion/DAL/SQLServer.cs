@@ -22,11 +22,8 @@ namespace TFI.DAL
         public DataSet Read(string query, Hashtable data)
         {
             ConnectionBind(query);
-
             AddParameters(data);
-
             DataSetFill();
-
             return dataset;
         }
 
