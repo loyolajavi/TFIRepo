@@ -166,9 +166,13 @@
     <Folder Include="Seguridad\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServerControl1\ServerControl1.csproj">
-      <Project>{E096D120-42AC-4FE0-8780-AAE7F805C743}</Project>
-      <Name>ServerControl1</Name>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{f0dc9310-5831-4052-9a86-384f179ca354}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
+      <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
