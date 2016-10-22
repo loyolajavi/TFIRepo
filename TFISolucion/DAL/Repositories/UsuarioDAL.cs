@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using TFI.HelperDAL; using TFI.Entidades;
+
+
 namespace TFI.DAL.DAL
 {
 	public class UsuarioDAL
