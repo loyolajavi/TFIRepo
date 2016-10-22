@@ -72,6 +72,10 @@
                                     </div>
                                 </div>
 
+
+                              <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+
+
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
                                         <img src="http://placehold.it/320x150" alt="">

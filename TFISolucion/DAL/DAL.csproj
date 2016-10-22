@@ -40,9 +40,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperDAL\Mapeador.cs" />
+    <Compile Include="HelperDAL\SqlClientUtility.cs" />
+    <Compile Include="HelperDAL\ValidationUtility.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BitacoraLogDAL.cs" />
+    <Compile Include="Repositories\CategoriaDAL.cs" />
+    <Compile Include="Repositories\ComprobanteDAL.cs" />
+    <Compile Include="Repositories\ComprobanteDetalleDAL.cs" />
+    <Compile Include="Repositories\CondicionFiscalDAL.cs" />
+    <Compile Include="Repositories\ControladorDAL.cs" />
+    <Compile Include="Repositories\DireccionDAL.cs" />
+    <Compile Include="Repositories\DireccionUsuarioDAL.cs" />
+    <Compile Include="Repositories\EmpresaDAL.cs" />
+    <Compile Include="Repositories\EstadoPagoDAL.cs" />
+    <Compile Include="Repositories\EstadoPedidoDAL.cs" />
+    <Compile Include="Repositories\FamiliaDAL.cs" />
+    <Compile Include="Repositories\FormaEntregaDAL.cs" />
+    <Compile Include="Repositories\FormaPagoDAL.cs" />
+    <Compile Include="Repositories\IvaProductoDAL.cs" />
+    <Compile Include="Repositories\LenguajeControlDAL.cs" />
+    <Compile Include="Repositories\LenguajeDAL.cs" />
+    <Compile Include="Repositories\ListaDeseoDAL.cs" />
+    <Compile Include="Repositories\ListaDeseosDetalleDAL.cs" />
+    <Compile Include="Repositories\MarcaDAL.cs" />
+    <Compile Include="Repositories\MonedaDAL.cs" />
+    <Compile Include="Repositories\MonedaEmpresaDAL.cs" />
+    <Compile Include="Repositories\PagoDAL.cs" />
+    <Compile Include="Repositories\PagoEstadoPagoDAL.cs" />
+    <Compile Include="Repositories\PatenteDAL.cs" />
+    <Compile Include="Repositories\PatenteFamiliaDAL.cs" />
+    <Compile Include="Repositories\PedidoDAL.cs" />
+    <Compile Include="Repositories\PedidoDetalleDAL.cs" />
+    <Compile Include="Repositories\PedidoEstadoPedidoDAL.cs" />
+    <Compile Include="Repositories\ProdCategoriaDAL.cs" />
+    <Compile Include="Repositories\ProductoDAL.cs" />
+    <Compile Include="Repositories\ProvinciaDAL.cs" />
+    <Compile Include="Repositories\ReservaDAL.cs" />
+    <Compile Include="Repositories\StockSucursalDAL.cs" />
+    <Compile Include="Repositories\SucursalDAL.cs" />
+    <Compile Include="Repositories\TarjetaDAL.cs" />
+    <Compile Include="Repositories\TelefonoDAL.cs" />
+    <Compile Include="Repositories\TipoComprobanteDAL.cs" />
+    <Compile Include="Repositories\TipoDireccionDAL.cs" />
+    <Compile Include="Repositories\TipoTarjetaDAL.cs" />
+    <Compile Include="Repositories\TipoTelDAL.cs" />
+    <Compile Include="Repositories\UsuarioDAL.cs" />
+    <Compile Include="Repositories\UsuarioFamiliaDAL.cs" />
+    <Compile Include="Repositories\UsuarioPatenteDAL.cs" />
+    <Compile Include="Repositories\UsuarioTipoDAL.cs" />
     <Compile Include="SQLServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
