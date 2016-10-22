@@ -20,7 +20,6 @@ namespace TFI.DAL.DAL
 
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdTarjeta", tarjeta.IdTarjeta),
 				new SqlParameter("@IdTipoTarjeta", tarjeta.IdTipoTarjeta),
 				new SqlParameter("@CUIT", tarjeta.CUIT),
 				new SqlParameter("@NombreUsuario", tarjeta.NombreUsuario),
