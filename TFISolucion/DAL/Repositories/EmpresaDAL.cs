@@ -48,11 +48,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Empresa table by its primary key.
 		/// </summary>
-		public void Delete(int cUIT)
+		public void Delete(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EmpresaDelete", parameters);
@@ -61,11 +61,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the Empresa table.
 		/// </summary>
-		public EmpresaEntidad Select(int cUIT)
+		public EmpresaEntidad Select(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EmpresaSelect", parameters))

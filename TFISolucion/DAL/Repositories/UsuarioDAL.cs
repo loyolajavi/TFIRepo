@@ -28,7 +28,6 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Email", usuario.Email),
 				new SqlParameter("@NombreUsuario", usuario.NombreUsuario),
 				new SqlParameter("@Clave", usuario.Clave),
-				new SqlParameter("@CUITEmpresa", usuario.CUITEmpresa)
 			};
 
 			usuario.IdUsuario = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioInsert", parameters);
@@ -53,7 +52,6 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Email", usuario.Email),
 				new SqlParameter("@NombreUsuario", usuario.NombreUsuario),
 				new SqlParameter("@Clave", usuario.Clave),
-				new SqlParameter("@CUITEmpresa", usuario.CUITEmpresa)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdate", parameters);
@@ -89,14 +87,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Usuario table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUITEmpresa(int cUITEmpresa)
+		public void DeleteAllBycuit(int cuit)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUITEmpresa", cUITEmpresa)
+				new SqlParameter("@cuit", cuit)
 			};
 
-			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioDeleteAllByCUITEmpresa", parameters);
+			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioDeleteAllBycuit", parameters);
 		}
 
 		/// <summary>
@@ -176,14 +174,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Usuario table by a foreign key.
 		/// </summary>
-		public List<UsuarioEntidad> SelectAllByCUITEmpresa(int cUITEmpresa)
+		public List<UsuarioEntidad> SelectAllBycuit(int cuit)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUITEmpresa", cUITEmpresa)
+				new SqlParameter("@cuit", cuit)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioSelectAllByCUITEmpresa", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioSelectAllBycuit", parameters))
 			{
                 List<UsuarioEntidad> lista = new List<UsuarioEntidad>();
                 lista = Mapeador.Mapear<UsuarioEntidad>(dt);

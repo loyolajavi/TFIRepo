@@ -86,11 +86,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pedido table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int cUIT)
+		public void DeleteAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT", parameters);
@@ -113,11 +113,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pedido table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
@@ -185,11 +185,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pedido table by a foreign key.
 		/// </summary>
-		public List<PedidoEntidad> SelectAllByCUIT(int cUIT)
+		public List<PedidoEntidad> SelectAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT", parameters))
@@ -227,11 +227,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pedido table by a foreign key.
 		/// </summary>
-		public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 

@@ -16,7 +16,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the UsuarioEntidad class.
 		/// </summary>
-		public UsuarioEntidad(int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, int cUITEmpresa, DateTime? fecBaja)
+		public UsuarioEntidad(int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
 		{
 			this.IdCondicionFiscal = idCondicionFiscal;
 			this.IdUsuarioTipo = idUsuarioTipo;
@@ -27,14 +27,13 @@ namespace TFI.Entidades
 			this.Email = email;
 			this.NombreUsuario = nombreUsuario;
 			this.Clave = clave;
-			this.CUITEmpresa = cUITEmpresa;
 			this.FecBaja = fecBaja;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the UsuarioEntidad class.
 		/// </summary>
-		public UsuarioEntidad(int idUsuario, int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, int cUITEmpresa, DateTime? fecBaja)
+		public UsuarioEntidad(int idUsuario, int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
 		{
 			this.IdUsuario = idUsuario;
 			this.IdCondicionFiscal = idCondicionFiscal;
@@ -46,7 +45,6 @@ namespace TFI.Entidades
 			this.Email = email;
 			this.NombreUsuario = nombreUsuario;
 			this.Clave = clave;
-			this.CUITEmpresa = cUITEmpresa;
 			this.FecBaja = fecBaja;
 		}
 
@@ -103,12 +101,7 @@ namespace TFI.Entidades
 		/// </summary>
 		public string Clave { get; set; }
 
-		/// <summary>
-		/// Gets or sets the CUITEmpresa value.
-		/// </summary>
-		public int CUITEmpresa { get; set; }
-
-		/// <summary>
+	    /// <summary>
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }

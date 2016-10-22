@@ -30,11 +30,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the UsuarioPatente table by its primary key.
 		/// </summary>
-		public void Delete(int cUIT, string nombreUsuario, int idPatente)
+		public void Delete(int CUIT, string nombreUsuario, int idPatente)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario),
 				new SqlParameter("@IdPatente", idPatente)
 			};
@@ -58,11 +58,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the UsuarioPatente table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
@@ -72,11 +72,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the UsuarioPatente table.
 		/// </summary>
-		public UsuarioPatenteEntidad Select(int cUIT, string nombreUsuario, int idPatente)
+		public UsuarioPatenteEntidad Select(int CUIT, string nombreUsuario, int idPatente)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario),
 				new SqlParameter("@IdPatente", idPatente)
 			};
@@ -118,11 +118,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the UsuarioPatente table by a foreign key.
 		/// </summary>
-		public List<UsuarioPatenteEntidad> SelectAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public List<UsuarioPatenteEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 

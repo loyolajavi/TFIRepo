@@ -86,11 +86,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Tarjeta table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
@@ -158,11 +158,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Tarjeta table by a foreign key.
 		/// </summary>
-		public List<TarjetaEntidad> SelectAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public List<TarjetaEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 

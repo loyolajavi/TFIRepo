@@ -73,14 +73,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pago table by a foreign key.
 		/// </summary>
-		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT)
+		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", nroComprobante),
 				new SqlParameter("@IdSucursal", idSucursal),
 				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters);
@@ -89,11 +89,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pago table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int cUIT)
+		public void DeleteAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDeleteAllByCUIT", parameters);
@@ -169,14 +169,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pago table by a foreign key.
 		/// </summary>
-		public List<PagoEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT)
+		public List<PagoEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", nroComprobante),
 				new SqlParameter("@IdSucursal", idSucursal),
 				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoSelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters))
@@ -192,11 +192,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pago table by a foreign key.
 		/// </summary>
-		public List<PagoEntidad> SelectAllByCUIT(int cUIT)
+		public List<PagoEntidad> SelectAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoSelectAllByCUIT", parameters))

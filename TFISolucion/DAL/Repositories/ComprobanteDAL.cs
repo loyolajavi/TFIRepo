@@ -57,14 +57,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Comprobante table by its primary key.
 		/// </summary>
-		public void Delete(int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT)
+		public void Delete(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", nroComprobante),
 				new SqlParameter("@IdSucursal", idSucursal),
 				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteDelete", parameters);
@@ -73,11 +73,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Comprobante table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int cUIT)
+		public void DeleteAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteDeleteAllByCUIT", parameters);
@@ -125,14 +125,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the Comprobante table.
 		/// </summary>
-		public ComprobanteEntidad Select(int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT)
+		public ComprobanteEntidad Select(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", nroComprobante),
 				new SqlParameter("@IdSucursal", idSucursal),
 				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelect", parameters))
@@ -165,11 +165,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Comprobante table by a foreign key.
 		/// </summary>
-		public List<ComprobanteEntidad> SelectAllByCUIT(int cUIT)
+		public List<ComprobanteEntidad> SelectAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
 			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT", parameters))

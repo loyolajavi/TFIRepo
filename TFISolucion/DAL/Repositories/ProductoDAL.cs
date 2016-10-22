@@ -72,11 +72,11 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Producto table by a foreign key.
         /// </summary>
-        public void DeleteAllByCUIT(int cUIT)
+        public void DeleteAllByCUIT(int CUIT)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoDeleteAllByCUIT", parameters);
@@ -155,11 +155,11 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Producto table by a foreign key.
         /// </summary>
-        public List<ProductoEntidad> SelectAllByCUIT(int cUIT)
+        public List<ProductoEntidad> SelectAllByCUIT(int CUIT)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByCUIT", parameters))

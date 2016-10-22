@@ -22,7 +22,7 @@ namespace TFI.DAL.DAL
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdMoneda", monedaEmpresa.IdMoneda),
-				new SqlParameter("@CUITEmpresa", monedaEmpresa.CUITEmpresa)
+				new SqlParameter("@CUIT", monedaEmpresa.CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaInsert", parameters);
@@ -31,12 +31,12 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the MonedaEmpresa table by its primary key.
 		/// </summary>
-		public void Delete(int idMoneda, int cUITEmpresa)
+		public void Delete(int idMoneda, int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdMoneda", idMoneda),
-				new SqlParameter("@CUITEmpresa", cUITEmpresa)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaDelete", parameters);
@@ -45,14 +45,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the MonedaEmpresa table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUITEmpresa(int cUITEmpresa)
+		public void DeleteAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUITEmpresa", cUITEmpresa)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaDeleteAllByCUITEmpresa", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaDeleteAllByCUIT", parameters);
 		}
 
 		/// <summary>
@@ -72,14 +72,14 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the MonedaEmpresa table by a foreign key.
 		/// </summary>
-		public List<MonedaEmpresaEntidad> SelectAllByCUITEmpresa(int cUITEmpresa)
+		public List<MonedaEmpresaEntidad> SelectAllByCUIT(int CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUITEmpresa", cUITEmpresa)
+				new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaSelectAllByCUITEmpresa", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaSelectAllByCUIT", parameters))
 			{
 				List<MonedaEmpresaEntidad> monedaEmpresaEntidadList = new List<MonedaEmpresaEntidad>();
 

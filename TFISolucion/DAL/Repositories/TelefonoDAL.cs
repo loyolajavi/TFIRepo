@@ -34,11 +34,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Telefono table by its primary key.
 		/// </summary>
-		public void Delete(int cUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
+		public void Delete(int CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario),
 				new SqlParameter("@NroTelefono", nroTelefono),
 				new SqlParameter("@CodArea", codArea),
@@ -64,11 +64,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Telefono table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
@@ -78,11 +78,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the Telefono table.
 		/// </summary>
-		public TelefonoEntidad Select(int cUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
+		public TelefonoEntidad Select(int CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario),
 				new SqlParameter("@NroTelefono", nroTelefono),
 				new SqlParameter("@CodArea", codArea),
@@ -126,11 +126,11 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Telefono table by a foreign key.
 		/// </summary>
-		public List<TelefonoEntidad> SelectAllByCUIT_NombreUsuario(int cUIT, string nombreUsuario)
+		public List<TelefonoEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", cUIT),
+				new SqlParameter("@CUIT", CUIT),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
