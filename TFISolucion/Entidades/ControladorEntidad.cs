@@ -16,24 +16,26 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ControladorEntidad class.
 		/// </summary>
-		public ControladorEntidad(int? idEmpresa, string pagina, string controlador, string descripcion)
+		public ControladorEntidad(int? idEmpresa, string pagina, string controlador, string descripcion, DateTime? FecBaja)
 		{
 			this.IdEmpresa = idEmpresa;
 			this.Pagina = pagina;
 			this.Controlador = controlador;
 			this.Descripcion = descripcion;
+            this.FecBaja = FecBaja;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the ControladorEntidad class.
 		/// </summary>
-		public ControladorEntidad(int idControlador, int? idEmpresa, string pagina, string controlador, string descripcion)
+		public ControladorEntidad(int idControlador, int? idEmpresa, string pagina, string controlador, string descripcion, DateTime? FecBaja)
 		{
 			this.IdControlador = idControlador;
 			this.IdEmpresa = idEmpresa;
 			this.Pagina = pagina;
 			this.Controlador = controlador;
 			this.Descripcion = descripcion;
+            this.FecBaja = FecBaja;
 		}
 
 		#endregion
@@ -63,6 +65,8 @@ namespace TFI.Entidades
 		/// Gets or sets the Descripcion value.
 		/// </summary>
 		public string Descripcion { get; set; }
+
+        public DateTime? FecBaja { get; set; }
 
 		#endregion
 	}
