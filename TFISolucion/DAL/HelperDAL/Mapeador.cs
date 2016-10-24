@@ -45,7 +45,8 @@ namespace TFI.HelperDAL
             {
                 if (prop.PropertyType.IsPrimitive
                     || typeof(String).IsAssignableFrom(prop.PropertyType)
-                    || typeof(DateTime).IsAssignableFrom(prop.PropertyType))
+                    || typeof(DateTime).IsAssignableFrom(prop.PropertyType)
+                    || typeof(Decimal).IsAssignableFrom(prop.PropertyType))
                 {
                     if (typeof(String).IsAssignableFrom(prop.PropertyType))
                     {

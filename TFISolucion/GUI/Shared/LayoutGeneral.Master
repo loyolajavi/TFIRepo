@@ -81,8 +81,7 @@
     <%--Jquery--%>
     <script src="../Scripts/thirdparty/jquery-1.9.1.js"></script>
     <%--Bootstrap scripts--%>
-    <script src="../Scripts/thirdparty/bootstrap.min.js"></script>
-
+        <script src="../Scripts/thirdparty/bootstrap.min.js"></script>
         </form>
 </body>
 </html>

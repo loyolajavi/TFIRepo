@@ -33,7 +33,7 @@
                             </a>
                         </div>
                 </div>
-
+    
 
 
         <div class="row">
@@ -50,30 +50,29 @@
 					<div class="tab-pane active" id="panel-810103">
                           
                           <div class="row">
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$24.99</h4>
-                                            <h4><a href="#">First Product</a>
-                                            </h4>
-                                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <asp:Repeater ID="lstBusquedaProductos" ClientIDMode="Static" runat="server">
+                                    <ItemTemplate>
+                                        <div class="col-sm-4 col-lg-4 col-md-4">
+                                            <div class="thumbnail">
+                                                <img src='<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
+                                                <div class="caption">
+                                                    <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
+                                                    <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <row>
+                                                        <div class="col-sm-3 col-lg-5 col-lg-offset-1 col-md-5">
+                                                            <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
+                                                        </div>
+                                                        <div class="col-sm-3 col-lg-6 col-md-5">
+                                                        <asp:Button CssClass="btn btn-info" ID="btnVerDetalle" runat="server" Text="Ver más" />
+                                                        </div>
+                                                    </row>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                              <%--<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>--%>
+                                    </ItemTemplate>
+                                </asp:Repeater>
 
 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
