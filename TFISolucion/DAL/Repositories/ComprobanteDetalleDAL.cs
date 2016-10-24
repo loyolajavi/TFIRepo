@@ -59,7 +59,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the ComprobanteDetalle table by its primary key.
 		/// </summary>
-		public void Delete(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public void Delete(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -76,7 +76,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the ComprobanteDetalle table by a foreign key.
 		/// </summary>
-		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -105,7 +105,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the ComprobanteDetalle table.
 		/// </summary>
-		public ComprobanteDetalleEntidad Select(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public ComprobanteDetalleEntidad Select(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -147,7 +147,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the ComprobanteDetalle table by a foreign key.
 		/// </summary>
-		public List<ComprobanteDetalleEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public List<ComprobanteDetalleEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

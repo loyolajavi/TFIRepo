@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/General/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="InfoEmpresa.aspx.cs" Inherits="TFI.GUI.InfoEmpresa" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="InfoEmpresa.aspx.cs" Inherits="TFI.GUI.InfoEmpresa" %>
 
 
 

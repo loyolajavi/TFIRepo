@@ -57,37 +57,38 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CatalogoPrinc.aspx" />
+    <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="ClientesEmpresa.aspx" />
-    <Content Include="Estilos\EstiloLayoutPropio.css" />
-    <Content Include="Estilos\EstiloBoot\bootstrap-theme.css" />
-    <Content Include="Estilos\EstiloBoot\bootstrap-theme.min.css" />
-    <Content Include="Estilos\EstiloBoot\bootstrap.css" />
-    <Content Include="Estilos\EstiloBoot\bootstrap.min.css" />
-    <Content Include="Estilos\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Estilos\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Estilos\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Estilos\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Estilos\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Estilos\EstiloBoot\bootstrap-theme.min.css.map" />
-    <Content Include="Estilos\EstiloBoot\bootstrap-theme.css.map" />
-    <Content Include="Estilos\EstiloBoot\bootstrap.min.css.map" />
-    <Content Include="Estilos\EstiloBoot\bootstrap.css.map" />
-    <Content Include="Estilos\fonts\bungee.ttf" />
-    <Content Include="General\LayoutGeneral.Master" />
-    <Content Include="General\LayoutBasico.Master" />
-    <Content Include="General\LayoutAdministracion.Master" />
+    <Content Include="Content\css\propios\EstiloLayoutPropio.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\fonts\bungee.ttf" />
+    <Content Include="Shared\LayoutGeneral.Master" />
+    <Content Include="Shared\LayoutBasico.Master" />
+    <Content Include="Shared\LayoutAdministracion.Master" />
     <None Include="Scripts\thirdparty\jquery-1.9.1.intellisense.js" />
-    <Content Include="Home.aspx" />
-    <Content Include="Imagenes\Buscar.png" />
+    <Content Include="Areas\Public\Forms\Home.aspx" />
+    <Content Include="Content\Images\Iconos\Buscar.png" />
     <Content Include="InfoEmpresa.aspx" />
-    <Content Include="Intranet\GestionClientes.aspx" />
+    <Content Include="Areas\Intranet\Forms\GestionClientes.aspx" />
     <Content Include="Scripts\thirdparty\bootstrap.js" />
     <Content Include="Scripts\thirdparty\bootstrap.min.js" />
     <Content Include="Scripts\thirdparty\jquery-1.9.1.js" />
     <Content Include="Scripts\thirdparty\jquery-1.9.1.min.js" />
     <Content Include="Scripts\thirdparty\jquery-1.9.1.min.map" />
     <Content Include="packages.config" />
+    <None Include="Web.ConnectionStrings.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -102,12 +103,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatalogoPrinc.aspx.cs">
-      <DependentUpon>CatalogoPrinc.aspx</DependentUpon>
+    <Compile Include="Areas\Public\Forms\Catalogo.aspx.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CatalogoPrinc.aspx.designer.cs">
-      <DependentUpon>CatalogoPrinc.aspx</DependentUpon>
+    <Compile Include="Areas\Public\Forms\Catalogo.aspx.designer.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClientesEmpresa.aspx.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
@@ -116,32 +117,32 @@
     <Compile Include="ClientesEmpresa.aspx.designer.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
     </Compile>
-    <Compile Include="General\LayoutAdministracion.Master.cs">
+    <Compile Include="Shared\LayoutAdministracion.Master.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\LayoutAdministracion.Master.designer.cs">
+    <Compile Include="Shared\LayoutAdministracion.Master.designer.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>
     </Compile>
-    <Compile Include="General\LayoutBasico.Master.cs">
+    <Compile Include="Shared\LayoutBasico.Master.cs">
       <DependentUpon>LayoutBasico.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\LayoutBasico.Master.designer.cs">
+    <Compile Include="Shared\LayoutBasico.Master.designer.cs">
       <DependentUpon>LayoutBasico.Master</DependentUpon>
     </Compile>
-    <Compile Include="General\LayoutGeneral.Master.cs">
+    <Compile Include="Shared\LayoutGeneral.Master.cs">
       <DependentUpon>LayoutGeneral.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\LayoutGeneral.Master.designer.cs">
+    <Compile Include="Shared\LayoutGeneral.Master.designer.cs">
       <DependentUpon>LayoutGeneral.Master</DependentUpon>
     </Compile>
-    <Compile Include="Home.aspx.cs">
+    <Compile Include="Areas\Public\Forms\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
+    <Compile Include="Areas\Public\Forms\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="InfoEmpresa.aspx.cs">
@@ -151,11 +152,11 @@
     <Compile Include="InfoEmpresa.aspx.designer.cs">
       <DependentUpon>InfoEmpresa.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Intranet\GestionClientes.aspx.cs">
+    <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.cs">
       <DependentUpon>GestionClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Intranet\GestionClientes.aspx.designer.cs">
+    <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.designer.cs">
       <DependentUpon>GestionClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

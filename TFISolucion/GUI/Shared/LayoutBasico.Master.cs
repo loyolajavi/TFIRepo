@@ -13,5 +13,12 @@ namespace TFI.GUI.General
         {
 
         }
+
+        protected void searchButton_Click(object sender, EventArgs e)
+        {
+            var searchQuery = Server.UrlEncode(txtSearch.Value);
+            Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+        }
+
     }
 }

@@ -16,9 +16,9 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the TelefonoEntidad class.
 		/// </summary>
-		public TelefonoEntidad(int cUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel, DateTime? fecBaja)
+		public TelefonoEntidad(string CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel, DateTime? fecBaja)
 		{
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.NroTelefono = nroTelefono;
 			this.CodArea = codArea;
@@ -32,7 +32,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

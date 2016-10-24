@@ -16,12 +16,12 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ProductoEntidad class.
 		/// </summary>
-		public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, int cUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
+		public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
 		{
 			this.CodigoProducto = codigoProducto;
 			this.PrecioUnitario = precioUnitario;
 			this.IdMarca = idMarca;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.IdIvaProducto = idIvaProducto;
 			this.DescripProducto = descripProducto;
 			this.URL = uRL;
@@ -31,13 +31,13 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ProductoEntidad class.
 		/// </summary>
-		public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, int cUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
+		public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
 		{
 			this.IdProducto = idProducto;
 			this.CodigoProducto = codigoProducto;
 			this.PrecioUnitario = precioUnitario;
 			this.IdMarca = idMarca;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.IdIvaProducto = idIvaProducto;
 			this.DescripProducto = descripProducto;
 			this.URL = uRL;
@@ -70,7 +70,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the IdIvaProducto value.

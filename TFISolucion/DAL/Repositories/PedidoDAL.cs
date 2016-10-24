@@ -86,7 +86,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pedido table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int CUIT)
+		public void DeleteAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -113,7 +113,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pedido table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -185,7 +185,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pedido table by a foreign key.
 		/// </summary>
-		public List<PedidoEntidad> SelectAllByCUIT(int CUIT)
+		public List<PedidoEntidad> SelectAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -227,7 +227,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pedido table by a foreign key.
 		/// </summary>
-		public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

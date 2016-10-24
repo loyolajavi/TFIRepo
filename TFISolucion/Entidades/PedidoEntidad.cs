@@ -16,14 +16,14 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the PedidoEntidad class.
 		/// </summary>
-		public PedidoEntidad(DateTime fechaPedido, DateTime? fechaFinPedido, string nombreUsuario, int? plazoEntrega, int idFormaEntrega, int cUIT, string numeroTracking, int direccionEntrega, DateTime? fecBaja)
+		public PedidoEntidad(DateTime fechaPedido, DateTime? fechaFinPedido, string nombreUsuario, int? plazoEntrega, int idFormaEntrega, string CUIT, string numeroTracking, int direccionEntrega, DateTime? fecBaja)
 		{
 			this.FechaPedido = fechaPedido;
 			this.FechaFinPedido = fechaFinPedido;
 			this.NombreUsuario = nombreUsuario;
 			this.PlazoEntrega = plazoEntrega;
 			this.IdFormaEntrega = idFormaEntrega;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NumeroTracking = numeroTracking;
 			this.DireccionEntrega = direccionEntrega;
 			this.FecBaja = fecBaja;
@@ -32,7 +32,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the PedidoEntidad class.
 		/// </summary>
-		public PedidoEntidad(int idPedido, DateTime fechaPedido, DateTime? fechaFinPedido, string nombreUsuario, int? plazoEntrega, int idFormaEntrega, int cUIT, string numeroTracking, int direccionEntrega, DateTime? fecBaja)
+		public PedidoEntidad(int idPedido, DateTime fechaPedido, DateTime? fechaFinPedido, string nombreUsuario, int? plazoEntrega, int idFormaEntrega, string CUIT, string numeroTracking, int direccionEntrega, DateTime? fecBaja)
 		{
 			this.IdPedido = idPedido;
 			this.FechaPedido = fechaPedido;
@@ -40,7 +40,7 @@ namespace TFI.Entidades
 			this.NombreUsuario = nombreUsuario;
 			this.PlazoEntrega = plazoEntrega;
 			this.IdFormaEntrega = idFormaEntrega;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NumeroTracking = numeroTracking;
 			this.DireccionEntrega = direccionEntrega;
 			this.FecBaja = fecBaja;
@@ -82,7 +82,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NumeroTracking value.

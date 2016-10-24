@@ -16,9 +16,9 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the UsuarioFamiliaEntidad class.
 		/// </summary>
-		public UsuarioFamiliaEntidad(int cUIT, string nombreUsuario, int idFamilia, DateTime? fecBaja)
+		public UsuarioFamiliaEntidad(string CUIT, string nombreUsuario, int idFamilia, DateTime? fecBaja)
 		{
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.IdFamilia = idFamilia;
 			this.FecBaja = fecBaja;
@@ -30,7 +30,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

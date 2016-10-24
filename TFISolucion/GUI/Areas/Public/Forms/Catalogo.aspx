@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/General/LayoutGeneral.Master" AutoEventWireup="true" CodeBehind="CatalogoPrinc.aspx.cs" Inherits="TFI.GUI.CatalogoPrinc" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutGeneral.Master" AutoEventWireup="true" CodeBehind="Catalogo.aspx.cs" Inherits="TFI.GUI.CatalogoPrinc" %>
 
 <asp:Content ID="ContenidoCategorias" ContentPlaceHolderID="ContentPlaceHolderCategorias" runat="server">
         <p class="lead">Shop Name</p>

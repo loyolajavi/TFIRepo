@@ -16,13 +16,13 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ComprobanteDetalleEntidad class.
 		/// </summary>
-		public ComprobanteDetalleEntidad(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT, int idProducto, int cantidadProducto, decimal precioUnitarioFact, DateTime? fecBaja)
+		public ComprobanteDetalleEntidad(int idComprobanteDetalle, int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT, int idProducto, int cantidadProducto, decimal precioUnitarioFact, DateTime? fecBaja)
 		{
 			this.IdComprobanteDetalle = idComprobanteDetalle;
 			this.NroComprobante = nroComprobante;
 			this.IdSucursal = idSucursal;
 			this.IdTipoComprobante = idTipoComprobante;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.IdProducto = idProducto;
 			this.CantidadProducto = cantidadProducto;
 			this.PrecioUnitarioFact = precioUnitarioFact;
@@ -55,7 +55,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the IdProducto value.

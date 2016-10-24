@@ -16,9 +16,9 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ListaDeseoEntidad class.
 		/// </summary>
-		public ListaDeseoEntidad(int cUIT, string nombreUsuario, DateTime? fecBaja)
+		public ListaDeseoEntidad(string CUIT, string nombreUsuario, DateTime? fecBaja)
 		{
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.FecBaja = fecBaja;
 		}
@@ -26,10 +26,10 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ListaDeseoEntidad class.
 		/// </summary>
-		public ListaDeseoEntidad(int idListaDeseos, int cUIT, string nombreUsuario, DateTime? fecBaja)
+		public ListaDeseoEntidad(int idListaDeseos, string CUIT, string nombreUsuario, DateTime? fecBaja)
 		{
 			this.IdListaDeseos = idListaDeseos;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.FecBaja = fecBaja;
 		}
@@ -45,7 +45,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

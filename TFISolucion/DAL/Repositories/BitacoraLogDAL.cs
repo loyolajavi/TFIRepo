@@ -66,7 +66,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the BitacoraLog table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -116,7 +116,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the BitacoraLog table by a foreign key.
 		/// </summary>
-		public List<BitacoraLogEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public List<BitacoraLogEntidad> SelectAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

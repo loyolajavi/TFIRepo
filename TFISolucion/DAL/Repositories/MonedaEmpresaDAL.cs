@@ -31,7 +31,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the MonedaEmpresa table by its primary key.
 		/// </summary>
-		public void Delete(int idMoneda, int CUIT)
+		public void Delete(int idMoneda, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -45,7 +45,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the MonedaEmpresa table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int CUIT)
+		public void DeleteAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -72,7 +72,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the MonedaEmpresa table by a foreign key.
 		/// </summary>
-		public List<MonedaEmpresaEntidad> SelectAllByCUIT(int CUIT)
+		public List<MonedaEmpresaEntidad> SelectAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

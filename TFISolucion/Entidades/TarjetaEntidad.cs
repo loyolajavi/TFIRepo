@@ -16,11 +16,11 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the TarjetaEntidad class.
 		/// </summary>
-		public TarjetaEntidad(int idTarjeta, int idTipoTarjeta, int cUIT, string nombreUsuario, string titular, DateTime vencimiento, long numero, int codSeguridad, DateTime? fecBaja)
+		public TarjetaEntidad(int idTarjeta, int idTipoTarjeta, string CUIT, string nombreUsuario, string titular, DateTime vencimiento, long numero, int codSeguridad, DateTime? fecBaja)
 		{
 			this.IdTarjeta = idTarjeta;
 			this.IdTipoTarjeta = idTipoTarjeta;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.Titular = titular;
 			this.Vencimiento = vencimiento;
@@ -45,7 +45,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

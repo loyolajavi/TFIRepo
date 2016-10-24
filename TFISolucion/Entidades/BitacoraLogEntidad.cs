@@ -16,10 +16,10 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the BitacoraLogEntidad class.
 		/// </summary>
-		public BitacoraLogEntidad(int idBitacoraLog, int cUIT, string nombreUsuario, string evento, DateTime fechaEvento)
+		public BitacoraLogEntidad(int idBitacoraLog, string CUIT, string nombreUsuario, string evento, DateTime fechaEvento)
 		{
 			this.IdBitacoraLog = idBitacoraLog;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.Evento = evento;
 			this.FechaEvento = fechaEvento;
@@ -36,7 +36,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

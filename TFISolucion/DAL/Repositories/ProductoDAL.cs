@@ -72,7 +72,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Producto table by a foreign key.
         /// </summary>
-        public void DeleteAllByCUIT(int CUIT)
+        public void DeleteAllByCUIT(string CUIT)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -155,7 +155,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Producto table by a foreign key.
         /// </summary>
-        public List<ProductoEntidad> SelectAllByCUIT(int CUIT)
+        public List<ProductoEntidad> SelectAllByCUIT(string CUIT)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -212,6 +212,26 @@ namespace TFI.DAL.DAL
                 return productoEntidadList;
             }
         }
+
+
+        public List<ProductoEntidad> ProductoSelectByDescripProducto(string cuit, string DescripProducto)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", cuit),
+                new SqlParameter("@DescripProducto", DescripProducto)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByDescripProducto", parameters))
+            {
+
+                List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
+                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                return productoEntidadList;
+            }
+        }
+
+        
 
 
 

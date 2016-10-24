@@ -16,9 +16,9 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the EmpresaEntidad class.
 		/// </summary>
-		public EmpresaEntidad(int cUIT, string nombreEmpresa, DateTime? fecBaja)
+		public EmpresaEntidad(string CUIT, string nombreEmpresa, DateTime? fecBaja)
 		{
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreEmpresa = nombreEmpresa;
 			this.FecBaja = fecBaja;
 		}
@@ -29,7 +29,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreEmpresa value.

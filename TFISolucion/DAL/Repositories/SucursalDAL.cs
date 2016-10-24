@@ -76,7 +76,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Sucursal table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int CUIT)
+		public void DeleteAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -151,7 +151,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Sucursal table by a foreign key.
 		/// </summary>
-		public List<SucursalEntidad> SelectAllByCUIT(int CUIT)
+		public List<SucursalEntidad> SelectAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

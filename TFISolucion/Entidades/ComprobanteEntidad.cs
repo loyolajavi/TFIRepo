@@ -16,11 +16,11 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ComprobanteEntidad class.
 		/// </summary>
-		public ComprobanteEntidad(int nroComprobante, int idSucursal, int cUIT, int idTipoComprobante, int idComprobante, DateTime fechaComprobante, int idPedido, DateTime? fecBaja)
+		public ComprobanteEntidad(int nroComprobante, int idSucursal, string CUIT, int idTipoComprobante, int idComprobante, DateTime fechaComprobante, int idPedido, DateTime? fecBaja)
 		{
 			this.NroComprobante = nroComprobante;
 			this.IdSucursal = idSucursal;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.IdTipoComprobante = idTipoComprobante;
 			this.IdComprobante = idComprobante;
 			this.FechaComprobante = fechaComprobante;
@@ -44,7 +44,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the IdTipoComprobante value.

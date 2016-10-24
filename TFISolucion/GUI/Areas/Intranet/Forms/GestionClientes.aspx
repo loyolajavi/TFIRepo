@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/General/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="GestionClientes.aspx.cs" Inherits="TFI.GUI.Intranet.GestionClientes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="GestionClientes.aspx.cs" Inherits="TFI.GUI.Intranet.GestionClientes" %>
 
 
 

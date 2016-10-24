@@ -16,14 +16,14 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the UsuarioEntidad class.
 		/// </summary>
-		public UsuarioEntidad(int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
+		public UsuarioEntidad(int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, string CUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
 		{
 			this.IdCondicionFiscal = idCondicionFiscal;
 			this.IdUsuarioTipo = idUsuarioTipo;
 			this.Nombre = nombre;
 			this.Apellido = apellido;
 			this.Dni = dni;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.Email = email;
 			this.NombreUsuario = nombreUsuario;
 			this.Clave = clave;
@@ -33,7 +33,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the UsuarioEntidad class.
 		/// </summary>
-		public UsuarioEntidad(int idUsuario, int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, int cUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
+		public UsuarioEntidad(int idUsuario, int? idCondicionFiscal, int idUsuarioTipo, string nombre, string apellido, string dni, string CUIT, string email, string nombreUsuario, string clave, DateTime? fecBaja)
 		{
 			this.IdUsuario = idUsuario;
 			this.IdCondicionFiscal = idCondicionFiscal;
@@ -41,7 +41,7 @@ namespace TFI.Entidades
 			this.Nombre = nombre;
 			this.Apellido = apellido;
 			this.Dni = dni;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.Email = email;
 			this.NombreUsuario = nombreUsuario;
 			this.Clave = clave;
@@ -84,7 +84,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the Email value.

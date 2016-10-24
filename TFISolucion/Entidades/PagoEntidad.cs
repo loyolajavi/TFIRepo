@@ -16,7 +16,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the PagoEntidad class.
 		/// </summary>
-		public PagoEntidad(int idPedido, DateTime fechaPago, int idFormaPago, decimal montoPago, int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT, DateTime? fecBaja, int? idTarjeta)
+		public PagoEntidad(int idPedido, DateTime fechaPago, int idFormaPago, decimal montoPago, int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT, DateTime? fecBaja, int? idTarjeta)
 		{
 			this.IdPedido = idPedido;
 			this.FechaPago = fechaPago;
@@ -25,7 +25,7 @@ namespace TFI.Entidades
 			this.NroComprobante = nroComprobante;
 			this.IdSucursal = idSucursal;
 			this.IdTipoComprobante = idTipoComprobante;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.FecBaja = fecBaja;
 			this.IdTarjeta = idTarjeta;
 		}
@@ -33,7 +33,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the PagoEntidad class.
 		/// </summary>
-		public PagoEntidad(int idPago, int idPedido, DateTime fechaPago, int idFormaPago, decimal montoPago, int nroComprobante, int idSucursal, int idTipoComprobante, int cUIT, DateTime? fecBaja, int? idTarjeta)
+		public PagoEntidad(int idPago, int idPedido, DateTime fechaPago, int idFormaPago, decimal montoPago, int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT, DateTime? fecBaja, int? idTarjeta)
 		{
 			this.IdPago = idPago;
 			this.IdPedido = idPedido;
@@ -43,7 +43,7 @@ namespace TFI.Entidades
 			this.NroComprobante = nroComprobante;
 			this.IdSucursal = idSucursal;
 			this.IdTipoComprobante = idTipoComprobante;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.FecBaja = fecBaja;
 			this.IdTarjeta = idTarjeta;
 		}
@@ -94,7 +94,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the FecBaja value.

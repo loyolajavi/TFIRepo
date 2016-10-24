@@ -73,7 +73,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pago table by a foreign key.
 		/// </summary>
-		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -89,7 +89,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Pago table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT(int CUIT)
+		public void DeleteAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -169,7 +169,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pago table by a foreign key.
 		/// </summary>
-		public List<PagoEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, int CUIT)
+		public List<PagoEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -192,7 +192,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Pago table by a foreign key.
 		/// </summary>
-		public List<PagoEntidad> SelectAllByCUIT(int CUIT)
+		public List<PagoEntidad> SelectAllByCUIT(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

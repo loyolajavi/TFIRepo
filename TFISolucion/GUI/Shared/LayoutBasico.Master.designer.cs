@@ -31,6 +31,15 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmLayoutConBarra;
         
         /// <summary>
+        /// Control txtSearch.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSearch;
+        
+        /// <summary>
         /// Control siteMap.
         /// </summary>
         /// <remarks>

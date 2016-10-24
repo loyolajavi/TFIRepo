@@ -16,10 +16,10 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the DireccionUsuarioEntidad class.
 		/// </summary>
-		public DireccionUsuarioEntidad(int idDireccion, int cUIT, string nombreUsuario, DateTime? fecBaja)
+		public DireccionUsuarioEntidad(int idDireccion, string CUIT, string nombreUsuario, DateTime? fecBaja)
 		{
 			this.IdDireccion = idDireccion;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.NombreUsuario = nombreUsuario;
 			this.FecBaja = fecBaja;
 		}
@@ -35,7 +35,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NombreUsuario value.

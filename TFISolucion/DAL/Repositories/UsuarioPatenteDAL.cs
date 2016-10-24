@@ -30,7 +30,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the UsuarioPatente table by its primary key.
 		/// </summary>
-		public void Delete(int CUIT, string nombreUsuario, int idPatente)
+		public void Delete(string CUIT, string nombreUsuario, int idPatente)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -58,7 +58,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the UsuarioPatente table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -72,7 +72,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the UsuarioPatente table.
 		/// </summary>
-		public UsuarioPatenteEntidad Select(int CUIT, string nombreUsuario, int idPatente)
+		public UsuarioPatenteEntidad Select(string CUIT, string nombreUsuario, int idPatente)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -118,7 +118,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the UsuarioPatente table by a foreign key.
 		/// </summary>
-		public List<UsuarioPatenteEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public List<UsuarioPatenteEntidad> SelectAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

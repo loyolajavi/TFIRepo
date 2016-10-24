@@ -48,7 +48,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Empresa table by its primary key.
 		/// </summary>
-		public void Delete(int CUIT)
+		public void Delete(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -61,7 +61,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the Empresa table.
 		/// </summary>
-		public EmpresaEntidad Select(int CUIT)
+		public EmpresaEntidad Select(string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

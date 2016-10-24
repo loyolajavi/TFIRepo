@@ -34,7 +34,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Telefono table by its primary key.
 		/// </summary>
-		public void Delete(int CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
+		public void Delete(string CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -64,7 +64,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Deletes a record from the Telefono table by a foreign key.
 		/// </summary>
-		public void DeleteAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public void DeleteAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -78,7 +78,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the Telefono table.
 		/// </summary>
-		public TelefonoEntidad Select(int CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
+		public TelefonoEntidad Select(string CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -126,7 +126,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Telefono table by a foreign key.
 		/// </summary>
-		public List<TelefonoEntidad> SelectAllByCUIT_NombreUsuario(int CUIT, string nombreUsuario)
+		public List<TelefonoEntidad> SelectAllByCUIT_NombreUsuario(string CUIT, string nombreUsuario)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{

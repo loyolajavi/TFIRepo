@@ -16,23 +16,23 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the SucursalEntidad class.
 		/// </summary>
-		public SucursalEntidad(string descripSucursal, int direccionSucursal, int cUIT, DateTime? fecBaja)
+		public SucursalEntidad(string descripSucursal, int direccionSucursal, string CUIT, DateTime? fecBaja)
 		{
 			this.DescripSucursal = descripSucursal;
 			this.DireccionSucursal = direccionSucursal;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.FecBaja = fecBaja;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the SucursalEntidad class.
 		/// </summary>
-		public SucursalEntidad(int idSucursal, string descripSucursal, int direccionSucursal, int cUIT, DateTime? fecBaja)
+		public SucursalEntidad(int idSucursal, string descripSucursal, int direccionSucursal, string CUIT, DateTime? fecBaja)
 		{
 			this.IdSucursal = idSucursal;
 			this.DescripSucursal = descripSucursal;
 			this.DireccionSucursal = direccionSucursal;
-			this.CUIT = cUIT;
+			this.CUIT = CUIT;
 			this.FecBaja = fecBaja;
 		}
 
@@ -57,7 +57,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the CUIT value.
 		/// </summary>
-		public int CUIT { get; set; }
+		public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the FecBaja value.
