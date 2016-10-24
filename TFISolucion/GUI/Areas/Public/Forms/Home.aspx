@@ -40,268 +40,52 @@
             <div class="tabbable" id="tabs-322426">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#panel-810103" data-toggle="tab">Destacados de la semana</a>
+						<a href="#panel-810103" data-toggle="tab">Destacados de la semana (GENLOYS)</a>
 					</li>
 					<li>
-						<a href="#panel-132440" data-toggle="tab">Los más vendidos</a>
+						<a href="#panel-132440" data-toggle="tab">Los más vendidos (DIETETICA SER)</a>
 					</li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-810103">
                           
                           <div class="row">
-                                <asp:Repeater ID="lstBusquedaProductos" ClientIDMode="Static" runat="server">
+                                <asp:Repeater ID="lstProductosDestacados" ClientIDMode="Static" runat="server">
                                     <ItemTemplate>
                                         <div class="col-sm-4 col-lg-4 col-md-4">
                                             <div class="thumbnail">
-                                                <img src='<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
+                                                <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
                                                 <div class="caption">
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-                                                </div>
-                                                <div class="btn-group">
-                                                    <row>
-                                                        <div class="col-sm-3 col-lg-5 col-lg-offset-1 col-md-5">
-                                                            <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
-                                                        </div>
-                                                        <div class="col-sm-3 col-lg-6 col-md-5">
-                                                        <asp:Button CssClass="btn btn-info" ID="btnVerDetalle" runat="server" Text="Ver más" />
-                                                        </div>
-                                                    </row>
+                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
                                                 </div>
                                             </div>
                                         </div>
                                     </ItemTemplate>
                                 </asp:Repeater>
 
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$64.99</h4>
-                                            <h4><a href="#">Second Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">12 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$74.99</h4>
-                                            <h4><a href="#">Third Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">31 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$84.99</h4>
-                                            <h4><a href="#">Fourth Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">6 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$94.99</h4>
-                                            <h4><a href="#">Fifth Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">18 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$94.99</h4>
-                                            <h4><a href="#">Fifth Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">18 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                             </div> <%--Tab1 Row FIN--%>
-
 					</div>
+
 					<div class="tab-pane" id="panel-132440"> <%--tab2 MAS VENDIDOS--%>
                             <div class="row">
 
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$2.99</h4>
-                                            <h4><a href="#">Mas Vendido!!</a>
-                                            </h4>
+                                <asp:Repeater ID="lstMasVendidos" ClientIDMode="Static" runat="server">
+                                    <ItemTemplate>
+                                        <div class="col-sm-4 col-lg-4 col-md-4">
+                                            <div class="thumbnail">
+                                                <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
+                                                <div class="caption">
+                                                    <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
+                                                    <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
+                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
 
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$3.99</h4>
-                                            <h4><a href="#">Mas Vendido!!</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">12 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$4.99</h4>
-                                            <h4><a href="#">Mas Vendido!!</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">31 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$4.99</h4>
-                                            <h4><a href="#">Mas Vendido!!</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">6 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$4.99</h4>
-                                            <h4><a href="#">Mas Vendido!!</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">18 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
                             </div> <%--Tab2 Row FIN--%>
 
 					</div>

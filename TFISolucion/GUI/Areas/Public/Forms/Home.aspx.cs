@@ -5,22 +5,36 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.Entidades;
+using TFI.CORE.Managers;
 
 namespace TFI.GUI
 {
     public partial class Home : System.Web.UI.Page
     {
+
+        //string stringBusqueda = null;
+        List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
+        List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ESTO ERA UNA PRUEBA RAPIDA; NO RESPETABA LA DEPENDENCIA QUE TIENEN QUE TENER LAS CAPAS PORQUE IBA DE LA GUI A LA DAL
-            //List<FormaPagoEntidad> unaFormaPago = new List<FormaPagoEntidad>();
-            //TFI.DAL.DAL.FormaPagoDAL GestorFormaPago = new TFI.DAL.DAL.FormaPagoDAL();
 
-            //unaFormaPago = GestorFormaPago.SelectAll();
+            if (!IsPostBack)
+            {
+                //stringBusqueda = Page.Request.QueryString["search"];
+            }
 
-            //TextBox1.Text = unaFormaPago.FirstOrDefault().DescripFormaPago;
 
-            //UsuarioEntidad unUsuario = new UsuarioEntidad();
+                ProductoCore unProductoCore = new ProductoCore();
+                unosProductosDestacados = unProductoCore.FindAllByCUIT("20112223331");
+
+                lstProductosDestacados.DataSource = unosProductosDestacados;
+                lstProductosDestacados.DataBind();
+
+                unosProductosMasVendidos = unProductoCore.FindAllByCUIT("123456");
+                lstMasVendidos.DataSource = unosProductosMasVendidos;
+                lstMasVendidos.DataBind();
+            
 
         }
     }

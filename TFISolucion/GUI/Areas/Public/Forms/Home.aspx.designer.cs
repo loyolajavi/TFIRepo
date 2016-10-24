@@ -13,12 +13,21 @@ namespace TFI.GUI {
     public partial class Home {
         
         /// <summary>
-        /// Control lstBusquedaProductos.
+        /// Control lstProductosDestacados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater lstBusquedaProductos;
+        protected global::System.Web.UI.WebControls.Repeater lstProductosDestacados;
+        
+        /// <summary>
+        /// Control lstMasVendidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater lstMasVendidos;
     }
 }

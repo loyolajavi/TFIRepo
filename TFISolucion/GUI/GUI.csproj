@@ -75,6 +75,7 @@
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\fonts\bungee.ttf" />
+    <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE8000.png" />

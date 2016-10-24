@@ -50,20 +50,11 @@
             <ItemTemplate>
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src='<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
+                        <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
                         <div class="caption">
                             <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                             <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-                        </div>
-                        <div class="btn-group">
-                            <row>
-                                <div class="col-sm-3 col-lg-5 col-lg-offset-1 col-md-5">
-                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
-                                </div>
-                                <div class="col-sm-3 col-lg-6 col-md-5">
-                                <asp:Button CssClass="btn btn-info" ID="btnVerDetalle" runat="server" Text="Ver más" />
-                                </div>
-                            </row>
+                            <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
                         </div>
                     </div>
                 </div>
