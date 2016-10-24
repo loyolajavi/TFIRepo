@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -88,19 +89,16 @@
     <Content Include="Scripts\thirdparty\jquery-1.9.1.min.js" />
     <Content Include="Scripts\thirdparty\jquery-1.9.1.min.map" />
     <Content Include="packages.config" />
-    <None Include="Web.ConnectionStrings.config" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="Web.sitemap">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Public\Forms\Catalogo.aspx.cs">

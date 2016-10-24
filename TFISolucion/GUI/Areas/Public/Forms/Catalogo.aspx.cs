@@ -13,7 +13,7 @@ namespace TFI.GUI
     {
         
         string stringBusqueda = null;
-        ProductoEntidad unProducto;
+        List<ProductoEntidad> unProducto = new List<ProductoEntidad>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +28,9 @@ namespace TFI.GUI
             {
                 ProductoCore unProductoCore = new ProductoCore();
                 Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
-                unProductoCore.FindAllByDescripProducto(cuit, stringBusqueda);
+                unProducto = unProductoCore.FindAllByDescripProducto(stringBusqueda);
+
+                Response.Write(unProducto);
 
             }
             
