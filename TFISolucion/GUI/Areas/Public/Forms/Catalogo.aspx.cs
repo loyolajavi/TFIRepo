@@ -27,7 +27,7 @@ namespace TFI.GUI
             if (!string.IsNullOrEmpty(stringBusqueda))
             {
                 ProductoCore unProductoCore = new ProductoCore();
-                Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
+                //Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
                 unProducto = unProductoCore.FindAllByDescripProducto(stringBusqueda);
 
                 Response.Write(unProducto);

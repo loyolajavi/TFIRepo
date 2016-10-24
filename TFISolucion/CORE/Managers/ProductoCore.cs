@@ -5,7 +5,7 @@ namespace TFI.CORE.Managers
 {
     public class ProductoCore
     {
-        private ProductoDAL _productoDal;
+        private ProductoDAL _productoDal = new ProductoDAL();
 
         public void ProductoCORE()
         {
@@ -29,7 +29,7 @@ namespace TFI.CORE.Managers
 
         public List<Entidades.ProductoEntidad> FindAllByDescripProducto(string DescripProducto)
         {
-            return _productoDal.ProductoSelectByDescripProducto(Helpers.ConfigSection.Default.Site.Cuit, DescripProducto);
+            return _productoDal.ProductoSelectByDescripProducto(Helpers.ConfigSection.Default.Site.Cuit.ToString(), DescripProducto);
         }
 
 

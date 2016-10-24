@@ -93,6 +93,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.config" />
+    <None Include="Web.ConnectionStrings.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
