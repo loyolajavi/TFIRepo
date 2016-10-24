@@ -92,8 +92,12 @@
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.config" />
-    <None Include="Web.ConnectionStrings.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.ConnectionStrings.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

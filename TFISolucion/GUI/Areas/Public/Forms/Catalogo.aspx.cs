@@ -30,7 +30,7 @@ namespace TFI.GUI
                 //Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
                 unProducto = unProductoCore.FindAllByDescripProducto(stringBusqueda);
 
-                Response.Write(unProducto);
+                Response.Write(unProducto[0].DescripProducto);
 
             }
             

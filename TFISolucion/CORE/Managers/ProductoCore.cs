@@ -29,7 +29,7 @@ namespace TFI.CORE.Managers
 
         public List<Entidades.ProductoEntidad> FindAllByDescripProducto(string DescripProducto)
         {
-            return _productoDal.ProductoSelectByDescripProducto(Helpers.ConfigSection.Default.Site.Cuit.ToString(), DescripProducto);
+            return _productoDal.ProductoSelectByDescripProducto("20112223331", DescripProducto);
         }
 
 

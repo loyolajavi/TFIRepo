@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-
+using System.Linq;
+using System.Reflection;
 
 namespace TFI.HelperDAL
 {
-    class Mapeador
+    internal class Mapeador
     {
-
-
         public static List<T> Mapear<T>(DataTable table) where T : new()
         {
             IList<PropertyInfo> properties = typeof(T).GetProperties().ToList();
@@ -26,8 +22,6 @@ namespace TFI.HelperDAL
 
             return result;
         }
-
-
 
         public static T MapearFirst<T>(DataTable table) where T : new()
         {
@@ -43,8 +37,6 @@ namespace TFI.HelperDAL
             return result;
         }
 
-
-
         private static T CreateItemFromRow<T>(DataRow row, IList<PropertyInfo> properties) where T : new()
         {
             T item = new T();
@@ -55,13 +47,17 @@ namespace TFI.HelperDAL
                     || typeof(String).IsAssignableFrom(prop.PropertyType)
                     || typeof(DateTime).IsAssignableFrom(prop.PropertyType))
                 {
-                    prop.SetValue(item, row[prop.Name], null);
+                    if (typeof(String).IsAssignableFrom(prop.PropertyType))
+                    {
+                        prop.SetValue(item, row[prop.Name].ToString(), null);
+                    }
+                    else
+                    {
+                        prop.SetValue(item, row[prop.Name], null);
+                    }
                 }
             }
             return item;
         }
-
-
-
     }
 }
