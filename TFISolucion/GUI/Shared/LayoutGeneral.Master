@@ -9,8 +9,8 @@
     <title></title>
 
   
-    <link href="../Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -79,9 +79,9 @@
     
 
     <%--Jquery--%>
-    <script src="../Scripts/thirdparty/jquery-1.9.1.js"></script>
+    <script src="/Scripts/thirdparty/jquery-1.9.1.js"></script>
     <%--Bootstrap scripts--%>
-        <script src="../Scripts/thirdparty/bootstrap.min.js"></script>
+        <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
         </form>
 </body>
 </html>
