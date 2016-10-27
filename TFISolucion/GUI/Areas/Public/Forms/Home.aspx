@@ -58,7 +58,7 @@
                                                 <div class="caption">
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
+                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" OnClick="btnComprar_Click" />      
                                                 </div>
                                             </div>
                                         </div>

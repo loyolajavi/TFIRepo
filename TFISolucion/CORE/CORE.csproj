@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Managers\ProductoCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

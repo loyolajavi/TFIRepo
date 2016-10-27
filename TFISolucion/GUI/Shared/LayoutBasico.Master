@@ -17,9 +17,10 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div class="container">
+    
     <form id="frmLayoutConBarra" runat="server">
     <!-- Menu -->
+    <div class="container">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -128,9 +129,9 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolderCuerpo" runat="server">
             </asp:ContentPlaceHolder>
             <%--FIN Cuerpo de la pagina--%>
-
+    </div>
         
-            <footer class="container">
+            <footer class="container-fluid">
                 <div class="row navbar-inverse">
                     <section class="col-xs-12 col-md-6">
                         <h4>Información</h4>
@@ -155,7 +156,7 @@
     
     
 </form>
-</div>
+
     
     <script src="/Scripts/thirdparty/jquery-1.9.1.js"></script>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>

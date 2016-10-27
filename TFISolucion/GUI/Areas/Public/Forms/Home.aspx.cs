@@ -6,13 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.Entidades;
 using TFI.CORE.Managers;
+using TFI.CORE.Helpers;
 
 namespace TFI.GUI
 {
     public partial class Home : System.Web.UI.Page
     {
 
-        //string stringBusqueda = null;
+        //SOLO FUNCIONA BUSCAR PRODUCTOS PORQUE ESTA HARDCODEADO EL CUIT EN EL WEB CONFIG
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
 
@@ -21,12 +22,9 @@ namespace TFI.GUI
 
             if (!IsPostBack)
             {
-                //stringBusqueda = Page.Request.QueryString["search"];
-            }
-
 
                 ProductoCore unProductoCore = new ProductoCore();
-                unosProductosDestacados = unProductoCore.FindAllByCUIT("20112223331");
+                unosProductosDestacados = unProductoCore.FindAllByCUIT(ConfigSection.Default.Site.Cuit);
 
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
@@ -34,8 +32,13 @@ namespace TFI.GUI
                 unosProductosMasVendidos = unProductoCore.FindAllByCUIT("123456");
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
-            
+            }
 
+        }
+
+        protected void btnComprar_Click(object sender, EventArgs e)
+        {
+            Response.Write("hola");
         }
     }
 }

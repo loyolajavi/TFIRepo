@@ -49,6 +49,11 @@
             </div> <!-- ./Contendor Nav Menu -->
         </nav>
 
+            <div class="row" id="breadcrumb">
+                <asp:SiteMapDataSource ID="siteMap" runat="server" ShowStartingNode="true" />
+                <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator=" => " RenderCurrentNodeAsLink="false">
+                </asp:SiteMapPath>
+            </div>        
 
         <div class="container"> 
             <div class="row"> <%--Entero--%>

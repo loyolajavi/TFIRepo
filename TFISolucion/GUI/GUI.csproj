@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
-    <Content Include="ClientesEmpresa.aspx" />
+    <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -76,11 +76,6 @@
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE8000.png" />
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
@@ -95,7 +90,7 @@
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
     <Content Include="Content\Images\Iconos\Buscar.png" />
-    <Content Include="InfoEmpresa.aspx" />
+    <Content Include="Areas\Public\Forms\InfoEmpresa.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionClientes.aspx" />
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
@@ -122,11 +117,11 @@
     <Compile Include="Areas\Public\Forms\Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClientesEmpresa.aspx.cs">
+    <Compile Include="Areas\Public\Forms\ClientesEmpresa.aspx.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClientesEmpresa.aspx.designer.cs">
+    <Compile Include="Areas\Public\Forms\ClientesEmpresa.aspx.designer.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Shared\LayoutAdministracion.Master.cs">
@@ -157,11 +152,11 @@
     <Compile Include="Areas\Public\Forms\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InfoEmpresa.aspx.cs">
+    <Compile Include="Areas\Public\Forms\InfoEmpresa.aspx.cs">
       <DependentUpon>InfoEmpresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InfoEmpresa.aspx.designer.cs">
+    <Compile Include="Areas\Public\Forms\InfoEmpresa.aspx.designer.cs">
       <DependentUpon>InfoEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.cs">
@@ -174,8 +169,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controles\" />
-    <Folder Include="Estaticas\" />
     <Folder Include="Seguridad\" />
   </ItemGroup>
   <ItemGroup>

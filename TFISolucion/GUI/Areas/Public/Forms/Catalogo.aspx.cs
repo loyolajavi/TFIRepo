@@ -30,8 +30,6 @@ namespace TFI.GUI
                 //Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
                 unosProductos = unProductoCore.FindAllByDescripProducto(stringBusqueda);
 
-                Response.Write(unosProductos[0].DescripProducto);
-
                 lstBusquedaProductos.DataSource = unosProductos;
                 lstBusquedaProductos.DataBind();
 
