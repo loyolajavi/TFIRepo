@@ -131,7 +131,7 @@
             <%--FIN Cuerpo de la pagina--%>
     </div>
         
-            <footer class="container-fluid">
+            <footer class="container">
                 <div class="row navbar-inverse">
                     <section class="col-xs-12 col-md-6">
                         <h4>Información</h4>

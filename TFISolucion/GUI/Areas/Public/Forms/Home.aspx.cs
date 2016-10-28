@@ -38,7 +38,7 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            Response.Write("hola");
+
         }
     }
 }
