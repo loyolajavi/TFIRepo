@@ -59,7 +59,7 @@
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                     <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" OnClick="btnComprar_Click" />
-                                                    <input type="text" id="txtIdProducto" value="<%#Eval("IdProducto")%>" runat="server" />
+                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" /> 
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,8 @@
                                                 <div class="caption">
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
+                                                    <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />    
+                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" />  
                                                 </div>
                                             </div>
                                         </div>
@@ -88,14 +89,11 @@
                                 </asp:Repeater>
 
                             </div> <%--Tab2 Row FIN--%>
-
+                        <asp:TextBox ID="hola" runat="server"></asp:TextBox>
 					</div>
 				</div>
 			</div>
         </div>
-
-
-
 
 
     

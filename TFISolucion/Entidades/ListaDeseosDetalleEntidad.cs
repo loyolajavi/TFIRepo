@@ -4,39 +4,7 @@ namespace TFI.Entidades
 {
 	public class ListaDeseosDetalleEntidad
 	{
-		#region Constructors
 
-		/// <summary>
-		/// Initializes a new instance of the ListaDeseosDetalleEntidad class.
-		/// </summary>
-		public ListaDeseosDetalleEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the ListaDeseosDetalleEntidad class.
-		/// </summary>
-		public ListaDeseosDetalleEntidad(int idListaDeseos, int idProducto, DateTime fechaDeseoDetalle, DateTime? fecBaja)
-		{
-			this.IdListaDeseos = idListaDeseos;
-			this.IdProducto = idProducto;
-			this.FechaDeseoDetalle = fechaDeseoDetalle;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the ListaDeseosDetalleEntidad class.
-		/// </summary>
-		public ListaDeseosDetalleEntidad(int idListaDeseos, int idListaDeseosDetalle, int idProducto, DateTime fechaDeseoDetalle, DateTime? fecBaja)
-		{
-			this.IdListaDeseos = idListaDeseos;
-			this.IdListaDeseosDetalle = idListaDeseosDetalle;
-			this.IdProducto = idProducto;
-			this.FechaDeseoDetalle = fechaDeseoDetalle;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>
@@ -63,6 +31,9 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+
+
+        public string CUIT { get; set; }
 
 		#endregion
 	}

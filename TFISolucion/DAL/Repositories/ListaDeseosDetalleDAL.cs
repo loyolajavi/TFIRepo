@@ -23,6 +23,7 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@IdListaDeseos", listaDeseosDetalle.IdListaDeseos),
 				new SqlParameter("@IdProducto", listaDeseosDetalle.IdProducto),
+                new SqlParameter("@CUIT", listaDeseosDetalle.CUIT),
 				new SqlParameter("@FechaDeseoDetalle", listaDeseosDetalle.FechaDeseoDetalle)
 			};
 

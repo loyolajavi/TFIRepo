@@ -14,7 +14,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Saves a record to the ListaDeseos table.
 		/// </summary>
-		public void Insert(ListaDeseoEntidad listaDeseo)
+		public int Insert(ListaDeseoEntidad listaDeseo)
 		{
 			ValidationUtility.ValidateArgument("listaDeseo", listaDeseo);
 
@@ -24,7 +24,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario)
 			};
 
-			listaDeseo.IdListaDeseos = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosInsert", parameters);
+			return listaDeseo.IdListaDeseos = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosInsert", parameters);
 		}
 
 		/// <summary>

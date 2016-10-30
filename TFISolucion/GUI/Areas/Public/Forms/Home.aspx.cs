@@ -17,16 +17,23 @@ namespace TFI.GUI
         //SOLO FUNCIONA BUSCAR PRODUCTOS PORQUE ESTA HARDCODEADO EL CUIT EN EL WEB CONFIG
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
+        ListaDeseoEntidad unaListaDeseos;
+        List<ListaDeseosDetalleEntidad> unosDetallesListaDeseos;
+        ListaDeseosDetalleEntidad unDetalleListaDeseos;
+        HttpContext Current = HttpContext.Current;
+        UsuarioEntidad logueado;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
+
             if (!IsPostBack)
             {
 
                 ProductoCore unProductoCore = new ProductoCore();
 
-                var logueado = (UsuarioEntidad)Session["Usuario"];
+                //var logueado = (UsuarioEntidad)Session["Usuario"];
 
 //**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
                 //SI ESTA LOGUEADO
@@ -69,21 +76,68 @@ namespace TFI.GUI
         {
             var Current = HttpContext.Current;
 
-            var prods = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
+            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
 
-            if (prods == null)
+            if (PedDetalle == null)
                 Current.Session["Producto"] = new List<Entidades.PedidoDetalleEntidad>();
             else
             {
-                prods.Add(new Entidades.PedidoDetalleEntidad()
+                PedDetalle.Add(new Entidades.PedidoDetalleEntidad()
                 {
                     Cantidad = 1,
-                    IdPedido = Int32.Parse(id)
+                    IdProducto = Int32.Parse(id)
                 });
+                
 
-                Current.Session["Producto"] = prods;
+                Current.Session["Producto"] = PedDetalle;
             }
         }
+
+
+        //SI ESTA LOGUEADO HACE ESTO
+        public void AgregarDeseo(int idProd)
+        {
+            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
+            ListaDeseosDetalleCore unaListaDeseosDetalleCore = new ListaDeseosDetalleCore();
+            
+            if (unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueado.NombreUsuario).FirstOrDefault() == null)
+            {
+                unaListaDeseos = new ListaDeseoEntidad();
+                unaListaDeseos.CUIT = ConfigSection.Default.Site.Cuit;
+                unaListaDeseos.NombreUsuario = logueado.NombreUsuario;
+
+                int IdLista;
+                IdLista = unaListaDeseosCore.ListaDeseosInsert(unaListaDeseos);
+
+                if (IdLista > 0)
+                {
+                    unosDetallesListaDeseos = new List<ListaDeseosDetalleEntidad>();
+                    var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
+                    foreach (var prod in PedDetalle)
+                    {
+                        unDetalleListaDeseos = new ListaDeseosDetalleEntidad();
+                        unDetalleListaDeseos.IdListaDeseos = IdLista;
+                        unDetalleListaDeseos.IdProducto = prod.IdProducto;
+                        unDetalleListaDeseos.CUIT = unaListaDeseos.CUIT;
+                        unDetalleListaDeseos.FechaDeseoDetalle = DateTime.Now.Date;
+                        unosDetallesListaDeseos.Add(unDetalleListaDeseos);
+                    }
+
+                    unaListaDeseosDetalleCore.ListaDeseosDetalleInsert(unosDetallesListaDeseos);
+
+
+                }
+            }
+            
+        }
+
+        public void AgregarProductoListaDeseos()
+        {
+
+        }
+
+
+
 
 
     }//FIN CLASE
