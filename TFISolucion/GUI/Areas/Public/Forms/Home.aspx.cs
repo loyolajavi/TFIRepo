@@ -24,12 +24,34 @@ namespace TFI.GUI
             {
 
                 ProductoCore unProductoCore = new ProductoCore();
-                unosProductosDestacados = unProductoCore.FindAllByCUIT(ConfigSection.Default.Site.Cuit);
+
+                var logueado = (UsuarioEntidad)Session["Usuario"];
+
+//**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
+                //SI ESTA LOGUEADO
+                    //MUESTRA PRODUCTOS PRODUCTOS QUE ESTAN DENTRO DE LA MISMA CATEGORIA DE LOS ULTIMOS QUE COMPRO
+
+                //SI NO
+                    //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
+
+
+
+                if (logueado != null)
+                {
+                    //Agregar algun cod para lo del logueo??
+                    Response.Write(logueado.Dni);
+                }
+                else
+                {
+                    unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(ConfigSection.Default.Site.Cuit).OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                }
 
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
 
-                unosProductosMasVendidos = unProductoCore.FindAllByCUIT("123456");
+
+//**************MOSTRAR PRODUCTOS MAS VENDIDOS (PARA LA SEGUNDA PESTAÑA)**********************************************************************                
+                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
             }
@@ -40,5 +62,7 @@ namespace TFI.GUI
         {
 
         }
-    }
+
+
+    }//FIN CLASE
 }

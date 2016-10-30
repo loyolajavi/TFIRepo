@@ -231,7 +231,25 @@ namespace TFI.DAL.DAL
             }
         }
 
-        
+
+        /// <summary>
+        /// Selects all records from the Producto table by a foreign key.
+        /// </summary>
+        public List<ProductoEntidad> ProductoSelectMasVendidosByCUIT(string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", CUIT)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectMasVendidosByCUIT", parameters))
+            {
+                List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
+
+                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                return productoEntidadList;
+            }
+        }
 
 
 

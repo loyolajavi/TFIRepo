@@ -32,6 +32,12 @@ namespace TFI.CORE.Managers
             return _productoDal.ProductoSelectByDescripProducto(Helpers.ConfigSection.Default.Site.Cuit, DescripProducto);
         }
 
+        public List<Entidades.ProductoEntidad> ProductoSelectMasVendidosByCUIT(string cuit)
+        {
+            return _productoDal.ProductoSelectMasVendidosByCUIT(cuit);
+        }
+
+
 
     }
 }

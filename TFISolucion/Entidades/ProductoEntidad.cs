@@ -16,7 +16,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Initializes a new instance of the ProductoEntidad class.
 		/// </summary>
-		public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
+		public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
 		{
 			this.CodigoProducto = codigoProducto;
 			this.PrecioUnitario = precioUnitario;
@@ -26,12 +26,13 @@ namespace TFI.Entidades
 			this.DescripProducto = descripProducto;
 			this.URL = uRL;
 			this.FecBaja = fecBaja;
+            this.DescripLarga = descripLarga;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the ProductoEntidad class.
 		/// </summary>
-		public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja)
+        public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
 		{
 			this.IdProducto = idProducto;
 			this.CodigoProducto = codigoProducto;
@@ -42,6 +43,7 @@ namespace TFI.Entidades
 			this.DescripProducto = descripProducto;
 			this.URL = uRL;
 			this.FecBaja = fecBaja;
+            this.DescripLarga = descripLarga;
 		}
 
 		#endregion
@@ -91,6 +93,8 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+
+        public string DescripLarga { get; set; }
 
 		#endregion
 	}
