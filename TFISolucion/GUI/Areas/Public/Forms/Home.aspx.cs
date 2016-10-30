@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
+using System.Web.Services;
 
 namespace TFI.GUI
 {
@@ -19,7 +20,7 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
             if (!IsPostBack)
             {
 
@@ -60,7 +61,28 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        [WebMethod]
+        public static void AddItem(string id)
+        {
+            var Current = HttpContext.Current;
+
+            var prods = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
+
+            if (prods == null)
+                Current.Session["Producto"] = new List<Entidades.PedidoDetalleEntidad>();
+            else
+            {
+                prods.Add(new Entidades.PedidoDetalleEntidad()
+                {
+                    Cantidad = 1,
+                    IdPedido = Int32.Parse(id)
+                });
+
+                Current.Session["Producto"] = prods;
+            }
         }
 
 

@@ -6,45 +6,45 @@ namespace TFI.Entidades
 	{
 		#region Constructors
 
-		/// <summary>
-		/// Initializes a new instance of the ProductoEntidad class.
-		/// </summary>
-		public ProductoEntidad()
-		{
-		}
+        ///// <summary>
+        ///// Initializes a new instance of the ProductoEntidad class.
+        ///// </summary>
+        //public ProductoEntidad()
+        //{
+        //}
 
-		/// <summary>
-		/// Initializes a new instance of the ProductoEntidad class.
-		/// </summary>
-		public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
-		{
-			this.CodigoProducto = codigoProducto;
-			this.PrecioUnitario = precioUnitario;
-			this.IdMarca = idMarca;
-			this.CUIT = CUIT;
-			this.IdIvaProducto = idIvaProducto;
-			this.DescripProducto = descripProducto;
-			this.URL = uRL;
-			this.FecBaja = fecBaja;
-            this.DescripLarga = descripLarga;
-		}
+        ///// <summary>
+        ///// Initializes a new instance of the ProductoEntidad class.
+        ///// </summary>
+        //public ProductoEntidad(string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
+        //{
+        //    this.CodigoProducto = codigoProducto;
+        //    this.PrecioUnitario = precioUnitario;
+        //    this.IdMarca = idMarca;
+        //    this.CUIT = CUIT;
+        //    this.IdIvaProducto = idIvaProducto;
+        //    this.DescripProducto = descripProducto;
+        //    this.URL = uRL;
+        //    this.FecBaja = fecBaja;
+        //    this.DescripMuyLarga = descripLarga;
+        //}
 
-		/// <summary>
-		/// Initializes a new instance of the ProductoEntidad class.
-		/// </summary>
-        public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
-		{
-			this.IdProducto = idProducto;
-			this.CodigoProducto = codigoProducto;
-			this.PrecioUnitario = precioUnitario;
-			this.IdMarca = idMarca;
-			this.CUIT = CUIT;
-			this.IdIvaProducto = idIvaProducto;
-			this.DescripProducto = descripProducto;
-			this.URL = uRL;
-			this.FecBaja = fecBaja;
-            this.DescripLarga = descripLarga;
-		}
+        ///// <summary>
+        ///// Initializes a new instance of the ProductoEntidad class.
+        ///// </summary>
+        //public ProductoEntidad(int idProducto, string codigoProducto, decimal precioUnitario, int idMarca, string CUIT, int idIvaProducto, string descripProducto, string uRL, DateTime? fecBaja, string descripLarga)
+        //{
+        //    this.IdProducto = idProducto;
+        //    this.CodigoProducto = codigoProducto;
+        //    this.PrecioUnitario = precioUnitario;
+        //    this.IdMarca = idMarca;
+        //    this.CUIT = CUIT;
+        //    this.IdIvaProducto = idIvaProducto;
+        //    this.DescripProducto = descripProducto;
+        //    this.URL = uRL;
+        //    this.FecBaja = fecBaja;
+        //    this.DescripMuyLarga = descripLarga;
+        //}
 
 		#endregion
 
