@@ -83,6 +83,11 @@
     <Content Include="Scripts\shared\Funciones.js" />
     <Content Include="Scripts\thirdparty\bootstrap.js" />
     <Content Include="Scripts\thirdparty\bootstrap.min.js" />
+    <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.js" />
     <Content Include="Shared\LayoutGeneral.Master" />
     <Content Include="Shared\LayoutBasico.Master" />
     <Content Include="Shared\LayoutAdministracion.Master" />
@@ -96,6 +101,8 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.map" />
     <None Include="Web.ConnectionStrings.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

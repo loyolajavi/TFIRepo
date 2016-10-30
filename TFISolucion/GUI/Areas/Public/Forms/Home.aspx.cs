@@ -68,7 +68,8 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            
+            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
+            Response.Write(PedDetalle.First().IdProducto);
         }
 
         [WebMethod]
@@ -90,13 +91,18 @@ namespace TFI.GUI
 
 
                 Current.Session["PedidoDetalle"] = PedDetalle;
+
+                
+
             }
         }
 
 
         //SI ESTA LOGUEADO HACE ESTO
-        public void AgregarDeseo(int idProd)
+        public void AgregarDeseo2(int idProd)
         {
+
+
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
             ListaDeseosDetalleCore unaListaDeseosDetalleCore = new ListaDeseosDetalleCore();
             
