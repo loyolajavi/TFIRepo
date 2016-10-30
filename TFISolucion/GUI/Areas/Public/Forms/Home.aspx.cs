@@ -47,7 +47,7 @@ namespace TFI.GUI
                 if (logueado != null)
                 {
                     //Agregar algun cod para lo del logueo??
-                    Response.Write(logueado.Dni);
+                    Response.Write(logueado.NroIdentificacion);
                 }
                 else
                 {
@@ -72,24 +72,24 @@ namespace TFI.GUI
         }
 
         [WebMethod]
-        public static void AddItem(string id)
+        public static void AgregarDeseo(string idProducto)
         {
             var Current = HttpContext.Current;
 
-            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
+            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
 
             if (PedDetalle == null)
-                Current.Session["Producto"] = new List<Entidades.PedidoDetalleEntidad>();
+                Current.Session["PedidoDetalle"] = new List<Entidades.PedidoDetalleEntidad>();
             else
             {
                 PedDetalle.Add(new Entidades.PedidoDetalleEntidad()
                 {
                     Cantidad = 1,
-                    IdProducto = Int32.Parse(id)
+                    IdProducto = Int32.Parse(idProducto)
                 });
-                
 
-                Current.Session["Producto"] = PedDetalle;
+
+                Current.Session["PedidoDetalle"] = PedDetalle;
             }
         }
 
@@ -112,7 +112,7 @@ namespace TFI.GUI
                 if (IdLista > 0)
                 {
                     unosDetallesListaDeseos = new List<ListaDeseosDetalleEntidad>();
-                    var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["Producto"];
+                    var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
                     foreach (var prod in PedDetalle)
                     {
                         unDetalleListaDeseos = new ListaDeseosDetalleEntidad();

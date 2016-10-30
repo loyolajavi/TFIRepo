@@ -57,6 +57,7 @@
     <Compile Include="Managers\ListaDeseosCore.cs" />
     <Compile Include="Managers\ListaDeseosDetalleCore.cs" />
     <Compile Include="Managers\ProductoCore.cs" />
+    <Compile Include="Managers\UsuarioCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

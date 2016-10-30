@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using TFI.HelperDAL; using TFI.Entidades;
+using TFI.HelperDAL; 
+using TFI.Entidades;
 
 
 namespace TFI.DAL.DAL
@@ -25,7 +26,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdUsuarioTipo", usuario.IdUsuarioTipo),
 				new SqlParameter("@Nombre", usuario.Nombre),
 				new SqlParameter("@Apellido", usuario.Apellido),
-				new SqlParameter("@Dni", usuario.Dni),
+				new SqlParameter("@Dni", usuario.NroIdentificacion),
 				new SqlParameter("@CUIT", usuario.CUIT),
 				new SqlParameter("@Email", usuario.Email),
 				new SqlParameter("@NombreUsuario", usuario.NombreUsuario),
@@ -49,7 +50,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdUsuarioTipo", usuario.IdUsuarioTipo),
 				new SqlParameter("@Nombre", usuario.Nombre),
 				new SqlParameter("@Apellido", usuario.Apellido),
-				new SqlParameter("@Dni", usuario.Dni),
+				new SqlParameter("@Dni", usuario.NroIdentificacion),
 				new SqlParameter("@CUIT", usuario.CUIT),
 				new SqlParameter("@Email", usuario.Email),
 				new SqlParameter("@NombreUsuario", usuario.NombreUsuario),
@@ -72,6 +73,25 @@ namespace TFI.DAL.DAL
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioDelete", parameters);
 		}
+
+
+
+
+        public UsuarioEntidad SelectUserByClaveNombreUsuario(string Clave, string nombreUsuario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Clave", Clave),
+                new SqlParameter("@NombreUsuario", nombreUsuario)
+            };
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "[UsuarioSelectByNombreUsuarioClave]", parameters))
+            {
+                UsuarioEntidad entidad = new UsuarioEntidad();
+                entidad = Mapeador.MapearFirst<UsuarioEntidad>(dt);
+                return entidad;
+            }
+        }
 
 		/// <summary>
 		/// Deletes a record from the Usuario table by a foreign key.

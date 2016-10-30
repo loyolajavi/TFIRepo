@@ -12,6 +12,15 @@ namespace TFI.CORE.Managers
 
         private ListaDeseosDetalleDAL unaListaDeseosDetalleDAL = new ListaDeseosDetalleDAL();
 
+
+        public List<ListaDeseosDetalleEntidad> ListaDeseosDetalleSelectSelectAllByIdListaDeseos(int idListaDeseo)
+        {
+
+            return unaListaDeseosDetalleDAL.SelectAllByIdListaDeseos(idListaDeseo);
+            
+        }
+
+
         public void ListaDeseosDetalleInsert(List<ListaDeseosDetalleEntidad> listaDeseosDetalles)
         {
             foreach (var detalle in listaDeseosDetalles)
