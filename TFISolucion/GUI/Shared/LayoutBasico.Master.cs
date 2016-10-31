@@ -25,7 +25,11 @@ namespace TFI.GUI.General
         protected void Page_Load(object sender, EventArgs e)
         {
             var logueado = (UsuarioEntidad)Session["Usuario"];
-            if (logueado == null) { LiPedido.Visible = false; }
+            if (logueado == null) { 
+                LiPedido.Visible = false;
+                LiDeseos.Visible = false;
+            }
+            
         }
 
         public bool IngresoDeUsuario
@@ -54,7 +58,9 @@ namespace TFI.GUI.General
             //EtiquetaUsuario.CssClass = ""
         }
 
-        public bool EsconderPedido { set { LiPedido.Visible = value; } }
+        public bool MostrarPedido { set { LiPedido.Visible = value; } }
+
+        public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
 
         protected void IngresoBoton_Click(object sender, EventArgs e)
         {
@@ -170,7 +176,7 @@ namespace TFI.GUI.General
 
 
 
-        protected void ActualizarDeseos()
+        public void ActualizarDeseos()
         {
             var Current = HttpContext.Current;
             List<ListaDeseoEntidad> listaDeseosSession = new List<ListaDeseoEntidad>();
@@ -192,16 +198,16 @@ namespace TFI.GUI.General
             sb.Append("<br/>");
             sb.Append("<div class=\"form-group\">");
             sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"btnListaDeseos\"  onserverclick=\"VerListaDeseos\" >");
+            //sb.Append("<a class=\"btn btn-success btn-block\" href=\"~\\ListaDeDeseos.aspx\"  >");
             sb.Append("Ver Lista Deseos");
             sb.Append("</button>");
             sb.Append("</div>");
-            PedidoDropDown.InnerHtml = sb.ToString();
+            DeseosDropDown.InnerHtml = sb.ToString();
         }
 
         protected void VerListaDeseos(object sender, EventArgs e)
         {
-            var searchQuery = Server.UrlEncode(txtSearch.Value);
-            Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+            Response.Redirect("ListaDeDeseos.aspx");
         }
         
 
