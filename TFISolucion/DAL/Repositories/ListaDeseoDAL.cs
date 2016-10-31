@@ -11,47 +11,50 @@ namespace TFI.DAL.DAL
     {
 		#region Methods
 
-		/// <summary>
-		/// Saves a record to the ListaDeseos table.
-		/// </summary>
-		public int Insert(ListaDeseoEntidad listaDeseo)
-		{
-			ValidationUtility.ValidateArgument("listaDeseo", listaDeseo);
+         //<summary>
+         //Saves a record to the ListaDeseos table.
+         //</summary>
+        public void Insert(ListaDeseoEntidad listaDeseo)
+        {
+            ValidationUtility.ValidateArgument("listaDeseo", listaDeseo);
 
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@CUIT", listaDeseo.CUIT),
-				new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario)
-			};
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@CUIT", listaDeseo.CUIT),
+                new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario),
+                new SqlParameter("@IdProducto", listaDeseo.IdProducto)
+            };
 
-			return listaDeseo.IdListaDeseos = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosInsert", parameters);
-		}
+            SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosInsert", parameters);
+        }
 
 		/// <summary>
 		/// Updates a record in the ListaDeseos table.
 		/// </summary>
-		public void Update(ListaDeseoEntidad listaDeseo)
-		{
-			ValidationUtility.ValidateArgument("listaDeseo", listaDeseo);
+        public void Update(ListaDeseoEntidad listaDeseo)
+        {
+            ValidationUtility.ValidateArgument("listaDeseo", listaDeseo);
 
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdListaDeseos", listaDeseo.IdListaDeseos),
-				new SqlParameter("@CUIT", listaDeseo.CUIT),
-				new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario)
-			};
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@CUIT", listaDeseo.CUIT),
+                new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario),
+                new SqlParameter("@IdProducto", listaDeseo.IdProducto)
+            };
 
-			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosUpdate", parameters);
-		}
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosUpdate", parameters);
+        }
 
 		/// <summary>
 		/// Deletes a record from the ListaDeseos table by its primary key.
 		/// </summary>
-		public void Delete(int idListaDeseos)
+        public void Delete(ListaDeseoEntidad listaDeseo)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdListaDeseos", idListaDeseos)
+                new SqlParameter("@CUIT", listaDeseo.CUIT),
+                new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario),
+                new SqlParameter("@IdProducto", listaDeseo.IdProducto)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosDelete", parameters);
@@ -74,11 +77,13 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the ListaDeseos table.
 		/// </summary>
-		public ListaDeseoEntidad Select(int idListaDeseos)
+		public ListaDeseoEntidad Select(ListaDeseoEntidad listaDeseo)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdListaDeseos", idListaDeseos)
+                new SqlParameter("@CUIT", listaDeseo.CUIT),
+                new SqlParameter("@NombreUsuario", listaDeseo.NombreUsuario),
+                new SqlParameter("@IdProducto", listaDeseo.IdProducto)
 			};
 
 			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ListaDeseosSelect", parameters))

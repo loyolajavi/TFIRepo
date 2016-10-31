@@ -65,6 +65,8 @@ namespace TFI.Entidades
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
 
+        public string cuit { get; set; }
+
 		#endregion
 	}
 }

@@ -6,7 +6,7 @@ function onBtnAddClick(btn) {
     $.ajax({
         type: "POST",
         url: "Home.aspx/AgregarDeseo",
-        data: '{ id: ' + idProd + '}',
+        data: '{ idProducto: ' + idProd + '}',
         contentType: "application/json; charset=utf-8",
         dataType: "json"
     });

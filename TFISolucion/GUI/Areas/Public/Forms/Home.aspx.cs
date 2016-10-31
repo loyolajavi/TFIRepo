@@ -21,19 +21,28 @@ namespace TFI.GUI
         List<ListaDeseosDetalleEntidad> unosDetallesListaDeseos;
         ListaDeseosDetalleEntidad unDetalleListaDeseos;
         HttpContext Current = HttpContext.Current;
-        UsuarioEntidad logueado;
+        public UsuarioEntidad logueado;
         
 
         protected void Page_Load(object sender, EventArgs e)
         {
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
+
+            if (logueado != null)
+            {
+                this.Master.IngresoDeUsuario = false;
+                this.Master.SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
+                this.Master.EsconderPedido = true; 
+                //this.Master.ActualizarPedido();
+            }
+
+
             if (!IsPostBack)
             {
 
                 ProductoCore unProductoCore = new ProductoCore();
 
-                //var logueado = (UsuarioEntidad)Session["Usuario"];
 
 //**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
                 //SI ESTA LOGUEADO
@@ -43,16 +52,15 @@ namespace TFI.GUI
                     //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
 
 
-
-                if (logueado != null)
-                {
-                    //Agregar algun cod para lo del logueo??
-                    Response.Write(logueado.NroIdentificacion);
-                }
-                else
-                {
+                
+                //if (logueado != null)
+                //{
+                    
+                //}
+                //else
+                //{
                     unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(ConfigSection.Default.Site.Cuit).OrderByDescending(x => x.IdProducto).Take(2).ToList();
-                }
+                //}
 
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
@@ -68,81 +76,44 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
-            Response.Write(PedDetalle.First().IdProducto);
+            //******************************************************************
+            //CODIGO PARA MOSTRAR LO AGREGADO A LA LISTA DE DESEOS, DPS BORRAR
+            var Current = HttpContext.Current;
+            List<ListaDeseoEntidad> ListaDeseosSesion = new List<ListaDeseoEntidad>();
+
+            ListaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+            foreach (var item in ListaDeseosSesion)
+            {
+                Response.Write(item.IdProducto);
+            }
+            //*************************************************************
         }
 
         [WebMethod]
         public static void AgregarDeseo(string idProducto)
         {
             var Current = HttpContext.Current;
-
-            var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
-
-            if (PedDetalle == null)
-                Current.Session["PedidoDetalle"] = new List<Entidades.PedidoDetalleEntidad>();
-            else
-            {
-                PedDetalle.Add(new Entidades.PedidoDetalleEntidad()
-                {
-                    Cantidad = 1,
-                    IdProducto = Int32.Parse(idProducto)
-                });
-
-
-                Current.Session["PedidoDetalle"] = PedDetalle;
-
-                
-
-            }
-        }
-
-
-        //SI ESTA LOGUEADO HACE ESTO
-        public void AgregarDeseo2(int idProd)
-        {
-
-
+            var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
-            ListaDeseosDetalleCore unaListaDeseosDetalleCore = new ListaDeseosDetalleCore();
-            
-            if (unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueado.NombreUsuario).FirstOrDefault() == null)
+            ListaDeseoEntidad unaListaDeseo = new ListaDeseoEntidad();
+
+            listaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+
+            unaListaDeseo.CUIT = ConfigSection.Default.Site.Cuit;
+            unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
+            unaListaDeseo.IdProducto = Int32.Parse(idProducto);
+
+            //Guardar en BD el nuevo deseo
+            if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
             {
-                unaListaDeseos = new ListaDeseoEntidad();
-                unaListaDeseos.CUIT = ConfigSection.Default.Site.Cuit;
-                unaListaDeseos.NombreUsuario = logueado.NombreUsuario;
-
-                int IdLista;
-                IdLista = unaListaDeseosCore.ListaDeseosInsert(unaListaDeseos);
-
-                if (IdLista > 0)
-                {
-                    unosDetallesListaDeseos = new List<ListaDeseosDetalleEntidad>();
-                    var PedDetalle = (List<Entidades.PedidoDetalleEntidad>)Current.Session["PedidoDetalle"];
-                    foreach (var prod in PedDetalle)
-                    {
-                        unDetalleListaDeseos = new ListaDeseosDetalleEntidad();
-                        unDetalleListaDeseos.IdListaDeseos = IdLista;
-                        unDetalleListaDeseos.IdProducto = prod.IdProducto;
-                        unDetalleListaDeseos.CUIT = unaListaDeseos.CUIT;
-                        unDetalleListaDeseos.FechaDeseoDetalle = DateTime.Now.Date;
-                        unosDetallesListaDeseos.Add(unDetalleListaDeseos);
-                    }
-
-                    unaListaDeseosDetalleCore.ListaDeseosDetalleInsert(unosDetallesListaDeseos);
-
-
-                }
+                //Agregar el deseo a la sesión actual
+                listaDeseosSesion.Add(unaListaDeseo);
+                Current.Session["ListaDeseos"] = listaDeseosSesion;
             }
-            
-        }
-
-        public void AgregarProductoListaDeseos()
-        {
 
         }
-
-
+        
 
 
 

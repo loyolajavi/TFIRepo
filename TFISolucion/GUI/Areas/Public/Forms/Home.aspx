@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TFI.GUI.Home" %>
-
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 
 <asp:Content ID="ContenidoCuerpo" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
@@ -59,7 +59,9 @@
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                     <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" OnClick="btnComprar_Click" />
-                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" /> 
+                                                    <%if (logueado != null){%>
+                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" onclick="onBtnAddClick(this)" /> 
+                                                     <%}%>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +83,9 @@
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                     <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />    
-                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" />  
+                                                     <%if (logueado != null){%>
+                                                    <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" onclick="onBtnAddClick(this)" /> 
+                                                     <%}%>
                                                 </div>
                                             </div>
                                         </div>

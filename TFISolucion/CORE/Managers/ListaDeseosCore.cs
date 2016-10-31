@@ -19,10 +19,16 @@ namespace TFI.CORE.Managers
         }
 
 
-        public int ListaDeseosInsert(ListaDeseoEntidad listaDeseo)
+        public int ListaDeseosInsert(ListaDeseoEntidad laListaDeseo)
         {
-            return unaListaDeseosDAL.Insert(listaDeseo);
+            if (unaListaDeseosDAL.Select(laListaDeseo).IdProducto == 0)
+            {
+                unaListaDeseosDAL.Insert(laListaDeseo);
+                return 1;
+            }
+            return 0;
             
+
         }
 
 

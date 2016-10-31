@@ -1,7 +1,15 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using System.Collections.Generic;
+using System.Web.UI;
+using System.Linq;
+using System.Web.Services;
+using TFI.CORE.Helpers;
+using System.Text;
+
 
 namespace TFI.GUI.General
 {
@@ -16,6 +24,8 @@ namespace TFI.GUI.General
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var logueado = (UsuarioEntidad)Session["Usuario"];
+            if (logueado == null) { LiPedido.Visible = false; }
         }
 
         public bool IngresoDeUsuario
@@ -44,6 +54,8 @@ namespace TFI.GUI.General
             //EtiquetaUsuario.CssClass = ""
         }
 
+        public bool EsconderPedido { set { LiPedido.Visible = value; } }
+
         protected void IngresoBoton_Click(object sender, EventArgs e)
         {
         }
@@ -61,16 +73,32 @@ namespace TFI.GUI.General
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
             var usuario = new UsuarioEntidad();
+            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
 
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
+                    
+                    var Current = HttpContext.Current;
+                    var listaDeseos = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
                         Session["Usuario"] = usuario;
-                        Response.Redirect("Home.aspx");
+
+                        //if (listaDeseos != null)
+                        //{
+                            Current.Session["ListaDeseos"] = new List<ListaDeseoEntidad>();
+                        //}
+                        //else
+                        //{
+                            listaDeseos = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);// PUEDE SER Q TENGA Q INSTANCIAR UN OBJETO PARA Q ANDE ESTO
+                            Session["ListaDeseos"] = listaDeseos;
+                        //}
+                        
+                             
+                        Response.Redirect(Request.RawUrl);
                     }
                     else
                     {
@@ -103,6 +131,80 @@ namespace TFI.GUI.General
             var searchQuery = Server.UrlEncode(txtSearch.Value);
             Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
         }
+
+        //public void ActualizarPedido()
+        //{
+        //    UsuarioEntidad UnUsuario = new UsuarioEntidad();
+        //    UnUsuario = (UsuarioEntidad)Session["Usuario"];
+
+        //    List<HelperPedidoDetalle> ListaPedido = new List<HelperPedidoDetalle>();
+        //    ListaPedido = (List<HelperPedidoDetalle>)Session["Prod"];
+
+        //    StringBuilder sb = new StringBuilder();
+
+        //    if (ListaPedido != null)
+        //    {
+        //        foreach (Item in ListaPedido)
+        //        {
+        //            sb.Append("<div class=\"form-group\">");
+        //            sb.Append("<span class=\"label label-info\">");
+        //            sb.Append(Item.Cantidad + " " + Item.Producto.DescripProducto + " " + Item.Producto.PrecioUnitario);
+        //            sb.Append("</span>");
+        //            sb.Append("</div>");
+        //        }
+        //    }
+        //    sb.Append("<br/>");
+        //    sb.Append("<br/>");
+        //    sb.Append("<div class=\"form-group\">");
+        //    sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"PagarBoton\"  onserverclick=\"PagarClick\" >");
+        //    sb.Append("Pagar");
+        //    sb.Append("</button>");
+        //    //sb.Append("<asp: ID=\"PagarBoton\" OnCommand=\"Boton_Command\" CommandName=\"Pagar\" runat=\"server\" CssClass=\"btn btn-success btn-block\" Text=\"Pagar\" />");
+        //    sb.Append("</div>");
+        //    PedidoDropDown.InnerHtml = sb.ToString();
+        //    //EtiquetaUsuario.InnerText = label;
+        //    //Salir.Text = "Salir";
+        //    //Salir.CssClass = "btn-danger";
+        //    //EtiquetaUsuario.CssClass = ""
+        //}
+
+
+
+        protected void ActualizarDeseos()
+        {
+            var Current = HttpContext.Current;
+            List<ListaDeseoEntidad> listaDeseosSession = new List<ListaDeseoEntidad>();
+            listaDeseosSession = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+            StringBuilder sb = new StringBuilder();
+            
+            if (listaDeseosSession != null)
+            {
+                foreach (ListaDeseoEntidad Item in listaDeseosSession)
+                {
+                    sb.Append("<div class=\"form-group\">");
+                    sb.Append("<span class=\"label label-info\">");
+                    sb.Append(Item.IdProducto);
+                    sb.Append("</span>");
+                    sb.Append("</div>");
+                }
+            }
+            sb.Append("<br/>");
+            sb.Append("<br/>");
+            sb.Append("<div class=\"form-group\">");
+            sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"btnListaDeseos\"  onserverclick=\"VerListaDeseos\" >");
+            sb.Append("Ver Lista Deseos");
+            sb.Append("</button>");
+            sb.Append("</div>");
+            PedidoDropDown.InnerHtml = sb.ToString();
+        }
+
+        protected void VerListaDeseos(object sender, EventArgs e)
+        {
+            var searchQuery = Server.UrlEncode(txtSearch.Value);
+            Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+        }
+        
+
 
     }
 }
