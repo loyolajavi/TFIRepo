@@ -29,6 +29,8 @@ namespace TFI.GUI.General
                 LiPedido.Visible = false;
                 LiDeseos.Visible = false;
             }
+
+            
             
         }
 
@@ -80,6 +82,8 @@ namespace TFI.GUI.General
         {
             var usuario = new UsuarioEntidad();
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
+            ProductoCore unProductoCore = new ProductoCore();
+            List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>(); 
 
             switch (e.CommandName)
             {
@@ -87,7 +91,7 @@ namespace TFI.GUI.General
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
                     
                     var Current = HttpContext.Current;
-                    var listaDeseos = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+                    //listaDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
@@ -95,11 +99,20 @@ namespace TFI.GUI.General
 
                         //if (listaDeseos != null)
                         //{
-                            Current.Session["ListaDeseos"] = new List<ListaDeseoEntidad>();
+                            Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
                         //}
                         //else
                         //{
-                            listaDeseos = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);// PUEDE SER Q TENGA Q INSTANCIAR UN OBJETO PARA Q ANDE ESTO
+                            List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
+                             unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
+
+                             foreach (var item in unasListaDeseoEntidad)
+                            {
+                                ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                                unProductoEntidad = unProductoCore.ProductoSelect(item.IdProducto);
+                                listaDeseos.Add(unProductoEntidad);
+                            } 
+                                                     
                             Session["ListaDeseos"] = listaDeseos;
                         //}
                         
@@ -143,8 +156,8 @@ namespace TFI.GUI.General
         //    UsuarioEntidad UnUsuario = new UsuarioEntidad();
         //    UnUsuario = (UsuarioEntidad)Session["Usuario"];
 
-        //    List<HelperPedidoDetalle> ListaPedido = new List<HelperPedidoDetalle>();
-        //    ListaPedido = (List<HelperPedidoDetalle>)Session["Prod"];
+        //    List<PedidoDetalleEntidad> ListaPedido = new List<PedidoDetalleEntidad>();
+        //    ListaPedido = (List<PedidoDetalleEntidad>)Session["Prod"];
 
         //    StringBuilder sb = new StringBuilder();
 
@@ -179,17 +192,17 @@ namespace TFI.GUI.General
         public void ActualizarDeseos()
         {
             var Current = HttpContext.Current;
-            List<ListaDeseoEntidad> listaDeseosSession = new List<ListaDeseoEntidad>();
-            listaDeseosSession = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+            List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
+            listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             StringBuilder sb = new StringBuilder();
             
             if (listaDeseosSession != null)
             {
-                foreach (ListaDeseoEntidad Item in listaDeseosSession)
+                foreach (ProductoEntidad Item in listaDeseosSession)
                 {
                     sb.Append("<div class=\"form-group\">");
                     sb.Append("<span class=\"label label-info\">");
-                    sb.Append(Item.IdProducto);
+                    sb.Append(Item.DescripProducto);
                     sb.Append("</span>");
                     sb.Append("</div>");
                 }
@@ -209,8 +222,8 @@ namespace TFI.GUI.General
         {
             Response.Redirect("ListaDeDeseos.aspx");
         }
-        
 
+  
 
     }
 }

@@ -18,8 +18,6 @@ namespace TFI.GUI
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
         ListaDeseoEntidad unaListaDeseos;
-        List<ListaDeseosDetalleEntidad> unosDetallesListaDeseos;
-        ListaDeseosDetalleEntidad unDetalleListaDeseos;
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad logueado;
         
@@ -78,17 +76,17 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            //******************************************************************
-            //CODIGO PARA MOSTRAR LO AGREGADO A LA LISTA DE DESEOS, DPS BORRAR
-            var Current = HttpContext.Current;
-            List<ListaDeseoEntidad> ListaDeseosSesion = new List<ListaDeseoEntidad>();
+            ////******************************************************************
+            ////CODIGO PARA MOSTRAR LO AGREGADO A LA LISTA DE DESEOS, DPS BORRAR
+            //var Current = HttpContext.Current;
+            //List<ListaDeseoEntidad> ListaDeseosSesion = new List<ListaDeseoEntidad>();
 
-            ListaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
-            foreach (var item in ListaDeseosSesion)
-            {
-                Response.Write(item.IdProducto);
-            }
-            //*************************************************************
+            //ListaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+            //foreach (var item in ListaDeseosSesion)
+            //{
+            //    Response.Write(item.IdProducto);
+            //}
+            ////*************************************************************
         }
 
         [WebMethod]
@@ -97,10 +95,12 @@ namespace TFI.GUI
             var Current = HttpContext.Current;
             var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
             List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
+            List<ProductoEntidad> unaListaProductos = new List<ProductoEntidad>();
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
             ListaDeseoEntidad unaListaDeseo = new ListaDeseoEntidad();
+            ProductoCore unProductoCore = new ProductoCore();
 
-            listaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
+            unaListaProductos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
 
             unaListaDeseo.CUIT = ConfigSection.Default.Site.Cuit;
             unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
@@ -110,10 +110,26 @@ namespace TFI.GUI
             if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
             {
                 //Agregar el deseo a la sesión actual
-                listaDeseosSesion.Add(unaListaDeseo);
-                Current.Session["ListaDeseos"] = listaDeseosSesion;
+                //List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
+                //unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueadoStatic.NombreUsuario);
+
+                //foreach (var item in unasListaDeseoEntidad)
+                //{
+                    ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                    unProductoEntidad = unProductoCore.ProductoSelect(unaListaDeseo.IdProducto);
+                    unaListaProductos.Add(unProductoEntidad);
+                //} 
+                //listaDeseosSesion.Add(unaListaDeseo);
+                Current.Session["ListaDeseos"] = unaListaProductos;
+                //ActualizarDeseos();
+                
             }
 
+        }
+
+        protected void btnDesear_Click(object sender, EventArgs e)
+        {
+            this.Master.ActualizarDeseos();
         }
         
 

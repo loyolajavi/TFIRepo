@@ -24,7 +24,7 @@ namespace TFI.CORE.Managers
             if (unaListaDeseosDAL.Select(laListaDeseo).IdProducto == 0)
             {
                 unaListaDeseosDAL.Insert(laListaDeseo);
-                return 1;
+                return 1; //Así se si se inserto algo o no
             }
             return 0;
             

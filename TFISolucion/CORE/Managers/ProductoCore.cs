@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TFI.DAL.DAL;
+using TFI.CORE.Helpers;
 
 namespace TFI.CORE.Managers
 {
@@ -12,9 +13,9 @@ namespace TFI.CORE.Managers
             _productoDal = new ProductoDAL();
         }
 
-        public Entidades.ProductoEntidad Find(int id)
+        public Entidades.ProductoEntidad ProductoSelect(int id)
         {
-            return _productoDal.Select(id);
+            return _productoDal.Select(ConfigSection.Default.Site.Cuit, id);
         }
 
         public List<Entidades.ProductoEntidad> FindAll()

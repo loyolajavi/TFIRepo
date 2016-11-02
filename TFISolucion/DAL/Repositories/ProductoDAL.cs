@@ -115,22 +115,20 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects a single record from the Producto table.
         /// </summary>
-        public ProductoEntidad Select(int idProducto)
+        public ProductoEntidad Select(string cuit, int idProducto)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdProducto", idProducto)
+				new SqlParameter("@CUIT", cuit),
+                new SqlParameter("@IdProducto", idProducto)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelect", parameters))
             {
 
                 ProductoEntidad Producto = new ProductoEntidad();
-                //       
 
                 Producto = Mapeador.MapearFirst<ProductoEntidad>(dt);
-
-
 
                 return Producto;
             }
