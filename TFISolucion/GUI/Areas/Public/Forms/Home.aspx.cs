@@ -59,7 +59,7 @@ namespace TFI.GUI
                 //}
                 //else
                 //{
-                    unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(ConfigSection.Default.Site.Cuit).OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                    unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT().OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 //}
 
                 lstProductosDestacados.DataSource = unosProductosDestacados;

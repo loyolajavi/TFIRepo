@@ -217,10 +217,10 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@CUIT", cuit),
-                new SqlParameter("@DescripProducto", DescripProducto)
+                new SqlParameter("@Descripcion", DescripProducto)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByDescripProducto", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByDescripcion", parameters))
             {
 
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();

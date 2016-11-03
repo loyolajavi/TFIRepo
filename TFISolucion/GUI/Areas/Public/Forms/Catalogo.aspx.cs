@@ -1,56 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Services;
-using TFI.Entidades;
-using TFI.CORE;
 using TFI.CORE.Managers;
-using System.Linq;
+using TFI.Entidades;
 
 namespace TFI.GUI
 {
     public partial class Catalogo : System.Web.UI.Page
     {
-
         private ProductoCore _manager;
         public static ProductoEntidad producto;
-        
-        string stringBusqueda = null;
-        List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
 
-
+        private string stringBusqueda = null;
+        private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
 
         public Catalogo()
         {
             _manager = new ProductoCore();
         }
 
-
-        
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 stringBusqueda = Page.Request.QueryString["search"];
             }
 
-
             if (!string.IsNullOrEmpty(stringBusqueda))
             {
-                ProductoCore unProductoCore = new ProductoCore();
-                //Response.Write(stringBusqueda); //Esta para verq ingrese facilmente, DPS BORRARLO
-                unosProductos = unProductoCore.FindAllByDescripProducto(stringBusqueda);
-
+                unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
                 catalogo.DataSource = unosProductos;
                 catalogo.DataBind();
-
-
             }
-            
 
+            if (!unosProductos.Any())
+            {
+                notif.Attributes.Remove("hidden");
+                notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
+            }
         }
-
 
         [WebMethod]
         public static string AgregarItem(string id)
@@ -68,15 +58,10 @@ namespace TFI.GUI
             }
             else
             {
+                
                 ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
             }
-
-            Current.Session["Actual"] = producto;
-
             return producto.CodigoProducto;
         }
-
-
-
     }
 }
