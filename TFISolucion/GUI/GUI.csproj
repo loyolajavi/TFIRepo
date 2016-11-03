@@ -60,6 +60,7 @@
   <ItemGroup>
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
+    <Content Include="Areas\Public\Forms\QuienesSomos.aspx" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -93,7 +94,6 @@
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
     <Content Include="Content\Images\Iconos\Buscar.png" />
-    <Content Include="Areas\Public\Forms\InfoEmpresa.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionClientes.aspx" />
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
@@ -128,6 +128,13 @@
     <Compile Include="Areas\Public\Forms\ClientesEmpresa.aspx.designer.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.cs">
+      <DependentUpon>QuienesSomos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.designer.cs">
+      <DependentUpon>QuienesSomos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\LayoutAdministracion.Master.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,13 +162,6 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Public\Forms\InfoEmpresa.aspx.cs">
-      <DependentUpon>InfoEmpresa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Areas\Public\Forms\InfoEmpresa.aspx.designer.cs">
-      <DependentUpon>InfoEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.cs">
       <DependentUpon>GestionClientes.aspx</DependentUpon>

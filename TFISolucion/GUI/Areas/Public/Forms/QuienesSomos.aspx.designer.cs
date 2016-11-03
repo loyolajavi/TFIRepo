@@ -10,6 +10,6 @@
 namespace TFI.GUI {
     
     
-    public partial class InfoEmpresa {
+    public partial class QuienesSomos {
     }
 }
