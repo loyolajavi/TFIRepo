@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" CodeBehind="DatosPersonales.aspx.cs" EnableEventValidation="true" Inherits="TFI.GUI.DatosPersonales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" CodeBehind="DatosPersonales.aspx.cs" EnableEventValidation="false" Inherits="TFI.GUI.DatosPersonales" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

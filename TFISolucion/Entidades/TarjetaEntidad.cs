@@ -4,32 +4,6 @@ namespace TFI.Entidades
 {
 	public class TarjetaEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the TarjetaEntidad class.
-		/// </summary>
-		public TarjetaEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the TarjetaEntidad class.
-		/// </summary>
-		public TarjetaEntidad(int idTarjeta, int idTipoTarjeta, string CUIT, string nombreUsuario, string titular, DateTime vencimiento, long numero, int codSeguridad, DateTime? fecBaja)
-		{
-			this.IdTarjeta = idTarjeta;
-			this.IdTipoTarjeta = idTipoTarjeta;
-			this.CUIT = CUIT;
-			this.NombreUsuario = nombreUsuario;
-			this.Titular = titular;
-			this.Vencimiento = vencimiento;
-			this.Numero = numero;
-			this.CodSeguridad = codSeguridad;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>

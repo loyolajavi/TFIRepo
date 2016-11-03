@@ -21,7 +21,6 @@ namespace TFI.DAL.DAL
 
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdTipoDireccion", tipoDireccion.IdTipoDireccion),
 				new SqlParameter("@DescripcionDireccion", tipoDireccion.DescripcionDireccion)
 			};
 

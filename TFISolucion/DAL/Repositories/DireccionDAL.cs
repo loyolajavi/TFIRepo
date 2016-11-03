@@ -70,31 +70,8 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionDelete", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the Direccion table by a foreign key.
-        /// </summary>
-        public void DeleteAllByIdProvincia(int idProvincia)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdProvincia", idProvincia)
-			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionDeleteAllByIdProvincia", parameters);
-        }
 
-        /// <summary>
-        /// Deletes a record from the Direccion table by a foreign key.
-        /// </summary>
-        public void DeleteAllByIdTipoDireccion(int idTipoDireccion)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdTipoDireccion", idTipoDireccion)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionDeleteAllByIdTipoDireccion", parameters);
-        }
 
         /// <summary>
         /// Selects a single record from the Direccion table.
@@ -154,25 +131,7 @@ namespace TFI.DAL.DAL
             }
         }
 
-        /// <summary>
-        /// Selects all records from the Direccion table by a foreign key.
-        /// </summary>
-        public List<DireccionEntidad> SelectAllByIdTipoDireccion(int idTipoDireccion)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdTipoDireccion", idTipoDireccion)
-			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionSelectAllByIdTipoDireccion", parameters))
-            {
-                List<DireccionEntidad> direccionEntidadList = new List<DireccionEntidad>();
-
-                direccionEntidadList = Mapeador.Mapear<DireccionEntidad>(dt);
-
-                return direccionEntidadList;
-            }
-        }
 
 
 		#endregion

@@ -24,14 +24,21 @@ namespace TFI.GUI.General
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             var logueado = (UsuarioEntidad)Session["Usuario"];
-            if (logueado == null) { 
-                LiPedido.Visible = false;
-                LiDeseos.Visible = false;
+
+            //ESTO HAY Q TENER CUIDADO PORQUE EL MASTER CARGA LA PAGINA COMO SI FUERA LA PRIMERA VEZ SIEMPRE
+            if (!IsPostBack)
+            {
+                if (logueado == null)
+                {
+                    LiPedido.Visible = false;
+                    LiDeseos.Visible = false;
+                }
             }
 
-            
-            
+
+
         }
 
         public bool IngresoDeUsuario
@@ -83,13 +90,13 @@ namespace TFI.GUI.General
             var usuario = new UsuarioEntidad();
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
             ProductoCore unProductoCore = new ProductoCore();
-            List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>(); 
+            List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>();
 
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
-                    
+
                     var Current = HttpContext.Current;
                     //listaDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
 
@@ -99,24 +106,24 @@ namespace TFI.GUI.General
 
                         //if (listaDeseos != null)
                         //{
-                            Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
+                        Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
                         //}
                         //else
                         //{
-                            List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
-                             unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
+                        List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
+                        unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
 
-                             foreach (var item in unasListaDeseoEntidad)
-                            {
-                                ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                                unProductoEntidad = unProductoCore.Find(item.IdProducto);
-                                listaDeseos.Add(unProductoEntidad);
-                            } 
-                                                     
-                            Session["ListaDeseos"] = listaDeseos;
+                        foreach (var item in unasListaDeseoEntidad)
+                        {
+                            ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                            unProductoEntidad = unProductoCore.Find(item.IdProducto);
+                            listaDeseos.Add(unProductoEntidad);
+                        }
+
+                        Session["ListaDeseos"] = listaDeseos;
                         //}
-                        
-                             
+
+
                         Response.Redirect(Request.RawUrl);
                     }
                     else
@@ -195,7 +202,7 @@ namespace TFI.GUI.General
             List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
             listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             StringBuilder sb = new StringBuilder();
-            
+
             if (listaDeseosSession != null)
             {
                 foreach (ProductoEntidad Item in listaDeseosSession)
@@ -223,7 +230,7 @@ namespace TFI.GUI.General
             Response.Redirect("ListaDeDeseos.aspx");
         }
 
-  
+
 
     }
 }

@@ -99,7 +99,7 @@ namespace TFI.GUI
 
             List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
 
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Where(x => x.FecBaja == null).ToList();
+            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
 
             foreach (var item in DireccionesDeUsuario)
@@ -602,7 +602,7 @@ namespace TFI.GUI
 
 
             List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Where(x => x.FecBaja == null).ToList();
+            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
             foreach (var item in DireccionesDeUsuario)
             {

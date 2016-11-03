@@ -26,7 +26,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdDireccion", direccionUsuario.IdDireccion),
 				new SqlParameter("@cuit", direccionUsuario.CUIT),
 				new SqlParameter("@NombreUsuario", direccionUsuario.NombreUsuario),
-                                new SqlParameter("@Predeterminada", direccionUsuario.Predeterminada)
+                new SqlParameter("@Predeterminada", direccionUsuario.Predeterminada)
 
 			};
 
@@ -48,18 +48,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUsuarioDelete", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the DireccionUsuario table by a foreign key.
-        /// </summary>
-        public void DeleteAllByIdDireccion(int idDireccion)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdDireccion", idDireccion)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUsuarioDeleteAllByIdDireccion", parameters);
-        }
 
         /// <summary>
         /// Deletes a record from the DireccionUsuario table by a foreign key.

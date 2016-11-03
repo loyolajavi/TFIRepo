@@ -4,47 +4,6 @@ namespace TFI.Entidades
 {
 	public class DireccionEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the DireccionEntidad class.
-		/// </summary>
-		public DireccionEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the DireccionEntidad class.
-		/// </summary>
-		public DireccionEntidad(string calle, int numero, int? piso, string departamento, string localidad, int idProvincia, int idTipoDireccion, DateTime? fecBaja)
-		{
-			this.Calle = calle;
-			this.Numero = numero;
-			this.Piso = piso;
-			this.Departamento = departamento;
-			this.Localidad = localidad;
-			this.IdProvincia = idProvincia;
-			this.IdTipoDireccion = idTipoDireccion;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the DireccionEntidad class.
-		/// </summary>
-		public DireccionEntidad(int idDireccion, string calle, int numero, int? piso, string departamento, string localidad, int idProvincia, int idTipoDireccion, DateTime? fecBaja)
-		{
-			this.IdDireccion = idDireccion;
-			this.Calle = calle;
-			this.Numero = numero;
-			this.Piso = piso;
-			this.Departamento = departamento;
-			this.Localidad = localidad;
-			this.IdProvincia = idProvincia;
-			this.IdTipoDireccion = idTipoDireccion;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>

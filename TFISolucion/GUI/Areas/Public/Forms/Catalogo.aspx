@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Catalogo.aspx.cs" Inherits="TFI.GUI.Catalogo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Catalogo.aspx.cs" Inherits="TFI.GUI.Catalogo" %>
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 <%--<asp:Content ID="ContenidoCategorias" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
         <p class="lead">Shop Name</p>

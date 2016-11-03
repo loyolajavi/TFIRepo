@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TFI.GUI.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Home.aspx.cs" Inherits="TFI.GUI.Home" %>
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 
