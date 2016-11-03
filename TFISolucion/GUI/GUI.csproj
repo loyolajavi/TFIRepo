@@ -83,6 +83,7 @@
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
     <Content Include="Areas\Public\Forms\DatosPersonales.aspx" />
+    <Content Include="Areas\Public\Forms\Producto.aspx" />
     <Content Include="Areas\Public\Forms\QuienesSomos.aspx" />
     <Content Include="Areas\Public\Forms\Tarjetas.aspx" />
     <Content Include="Areas\Public\Forms\UltimosPedidos.aspx" />
@@ -182,6 +183,13 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\DatosPersonales.aspx.designer.cs">
       <DependentUpon>DatosPersonales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\Producto.aspx.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\Producto.aspx.designer.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.cs">
       <DependentUpon>QuienesSomos.aspx</DependentUpon>
