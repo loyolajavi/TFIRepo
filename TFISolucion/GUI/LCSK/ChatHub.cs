@@ -401,7 +401,7 @@ namespace TFI.GUI.LCSK
 
             if (shouldSave)
             {
-                string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+                string configPath = HttpContext.Current.Server.MapPath("/Content/Files/" + CONFIG_FILE);
 
                 File.WriteAllText(
                     configPath,
@@ -429,7 +429,7 @@ namespace TFI.GUI.LCSK
 
         private string[] GetConfig()
         {
-            string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+            string configPath = HttpContext.Current.Server.MapPath("/Content/Files/" + CONFIG_FILE);
             if (File.Exists(configPath))
             {
                 return File.ReadAllLines(configPath);

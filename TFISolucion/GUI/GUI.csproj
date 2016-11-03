@@ -130,6 +130,7 @@
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Files\lcsk.dat" />
     <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />
@@ -253,9 +254,7 @@
       <DependentUpon>MiCuenta.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Files\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CORE\CORE.csproj">
       <Project>{69fba2ed-4236-4620-b74b-aca63d94777b}</Project>
