@@ -15,7 +15,7 @@ namespace TFI.GUI
     public partial class DatosPersonales : System.Web.UI.Page
     {
         private UsuarioCore UsuarioBLL = new UsuarioCore();
-        private UsuarioEntidad usuarioentidad;
+        private UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         //Boolean tipo;
         List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
         //Dictionary<int, DireccionEntidad> DiccionarioDeDirecciones = new Dictionary<int, DireccionEntidad>();
@@ -598,6 +598,7 @@ namespace TFI.GUI
         private void CargarGrillaDireccionDeFacturacion()
         {
 
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
             DireccionesFacturacionDeUsuario.Clear();
 
 
@@ -753,7 +754,7 @@ namespace TFI.GUI
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void GrabarDireccionDeFacturacion(string calle, int numero, int piso, string departamento, string localidad, string ddlprovincia)
+        public static void GrabarDireccionDeFacturacion(string calle, int numero, int? piso, string departamento, string localidad, string ddlprovincia)
         {
             var unUsuarioBLL = new UsuarioCore();
             var usuarioEntity = new UsuarioEntidad();

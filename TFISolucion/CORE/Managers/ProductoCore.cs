@@ -23,9 +23,9 @@ namespace TFI.CORE.Managers
             return _productoDal.SelectAll();
         }
 
-        public List<Entidades.ProductoEntidad> FindAllByCUIT(string cuit)
+        public List<Entidades.ProductoEntidad> FindAllByCUIT()
         {
-            return _productoDal.SelectAllByCUIT(cuit);
+            return _productoDal.SelectAllByCUIT(ConfigSection.Default.Site.Cuit);
         }
 
         public List<Entidades.ProductoEntidad> FindAllByDescripProducto(string DescripProducto)

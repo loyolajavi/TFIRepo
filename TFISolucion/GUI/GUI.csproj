@@ -210,7 +210,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Seguridad\" />
+    <Folder Include="Content\Files\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CORE\CORE.csproj">

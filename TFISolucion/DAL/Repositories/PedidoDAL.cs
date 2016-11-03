@@ -69,30 +69,19 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDelete", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the Pedido table by a foreign key.
-        /// </summary>
-        public void DeleteAllByDireccionEntrega(int direccionEntrega)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@DireccionEntrega", direccionEntrega)
-			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByDireccionEntrega", parameters);
-        }
 
         /// <summary>
         /// Deletes a record from the Pedido table by a foreign key.
         /// </summary>
-        public void DeleteAllBycuit(string cuit)
+        public void DeleteAllByCUIT(string cuit)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@cuit", cuit)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllBycuit", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT", parameters);
         }
 
 
@@ -112,7 +101,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Pedido table by a foreign key.
         /// </summary>
-        public void DeleteAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public void DeleteAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -120,7 +109,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllBycuit_NombreUsuario", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT_NombreUsuario", parameters);
         }
 
         /// <summary>
@@ -205,14 +194,14 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Pedido table by a foreign key.
         /// </summary>
-        public List<PedidoEntidad> SelectAllBycuit(string cuit)
+        public List<PedidoEntidad> SelectAllByCUIT(string cuit)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@cuit", cuit)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllBycuit", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT", parameters))
             {
                 List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
 
@@ -247,7 +236,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Pedido table by a foreign key.
         /// </summary>
-        public List<PedidoEntidad> SelectAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -255,7 +244,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllBycuit_NombreUsuario", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT_NombreUsuario", parameters))
             {
                 List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
 

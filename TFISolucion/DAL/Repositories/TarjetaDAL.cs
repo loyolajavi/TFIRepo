@@ -84,7 +84,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Tarjeta table by a foreign key.
         /// </summary>
-        public void DeleteAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public void DeleteAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -92,7 +92,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaDeleteAllBycuit_NombreUsuario", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaDeleteAllByCUIT_NombreUsuario", parameters);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Tarjeta table by a foreign key.
         /// </summary>
-        public List<TarjetaEntidad> SelectAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public List<TarjetaEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -185,7 +185,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectAllBycuit_NombreUsuario", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectAllByCUIT_NombreUsuario", parameters))
             {
                 List<TarjetaEntidad> tarjetaEntidadList = new List<TarjetaEntidad>();
 

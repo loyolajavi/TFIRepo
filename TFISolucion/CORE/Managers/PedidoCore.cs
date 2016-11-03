@@ -16,9 +16,9 @@ namespace TFI.CORE.Managers
         private PedidoDetalleDAL PedidoDetalleDAL = new PedidoDetalleDAL();
         private EstadoPedidoDAL EstadoPedidoDal = new EstadoPedidoDAL();
 
-        public List<PedidoEntidad> SelectAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
-            return PedidoDal.SelectAllBycuit_NombreUsuario(cuit, nombreUsuario);
+            return PedidoDal.SelectAllByCUIT_NombreUsuario(cuit, nombreUsuario);
         }
 
         public PedidoEstadoPedidoEntidad PedidoUltimoEstadoSelect(int idPedido)

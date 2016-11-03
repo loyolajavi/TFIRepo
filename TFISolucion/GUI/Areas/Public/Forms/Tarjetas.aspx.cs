@@ -78,7 +78,7 @@ namespace TFI.GUI
             
 
 
-            TarjetasEntidad = TarjetaBLL.SelectAllTarjetasBycuit_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            TarjetasEntidad = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
 
             foreach (var t in TarjetasEntidad)

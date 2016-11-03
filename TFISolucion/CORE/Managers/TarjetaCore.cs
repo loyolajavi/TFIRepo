@@ -30,11 +30,11 @@ namespace TFI.CORE.Managers
         }
 
 
-        public List<TarjetaEntidad> SelectAllTarjetasBycuit_NombreUsuario(string cuit, string nombreusuario)
+        public List<TarjetaEntidad> SelectAllTarjetasByCUIT_NombreUsuario(string cuit, string nombreusuario)
         {
             try
             {
-                return DalDeTarjetas.SelectAllBycuit_NombreUsuario(cuit, nombreusuario);
+                return DalDeTarjetas.SelectAllByCUIT_NombreUsuario(cuit, nombreusuario);
             }
             catch (Exception ex)
             {

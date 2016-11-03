@@ -70,7 +70,7 @@ namespace TFI.CORE.Managers
         public List<DireccionEntidad> SelectDireccionesDeUsuario(string cuit, string nombreUsuario)
         {
             List<DireccionUsuarioEntidad> ListaDeIntermedias = new List<DireccionUsuarioEntidad>();
-            ListaDeIntermedias = DaldeDireccionUsuario.SelectAllBycuit_NombreUsuario(cuit, nombreUsuario);
+            ListaDeIntermedias = DaldeDireccionUsuario.SelectAllByCUIT_NombreUsuario(cuit, nombreUsuario);
 
             List<DireccionEntidad> ListaDeDirecciones = new List<DireccionEntidad>();
 

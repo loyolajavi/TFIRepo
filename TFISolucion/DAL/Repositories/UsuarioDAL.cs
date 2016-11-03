@@ -48,7 +48,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", usuario.NombreUsuario)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UpdateUsuarioContraseña", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateClave", parameters);
         }
 
 

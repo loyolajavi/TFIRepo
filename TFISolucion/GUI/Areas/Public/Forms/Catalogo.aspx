@@ -1,30 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Catalogo.aspx.cs" Inherits="TFI.GUI.Catalogo" %>
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
-<%--<asp:Content ID="ContenidoCategorias" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
-        <p class="lead">Shop Name</p>
-        <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
-        </div>
-</asp:Content> --%>
+<asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-
-<asp:Content ID="ContenidoCuerpo" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
-    
-  
-   <style>
+    <style>
         .item-toolbar {
             margin: 10px;
             text-align: center;
         }
+
         .btn {
             width: 100px;
         }
+
         .precio {
             font: 400 19px/27px "Open Sans", "Roboto", sans-serif;
             color: #424242;
+        }
+
+        .notification {
+            background-color: #f3d1d1;
+            vertical-align: middle;
+            height: 30px;
+            padding: 5px;
         }
     </style>
 
@@ -36,10 +34,12 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div id="catalogoContainer" class="row">
 
+            <div id="notif" class="notification text-center" runat="server" hidden="hidden"></div>
+            
+            <div id="catalogoContainer" class="row">
                 <%-- ITEMS --%>
-                <asp:Repeater ID="catalogo" ClientIDMode="Static" runat="server">
+                <asp:Repeater ID="catalogo" runat="server">
                     <ItemTemplate>
                         <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail" style="text-align: center;">
@@ -71,20 +71,10 @@
                     <div class="modal-body text-center">
                         <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
                     </div>
-                    <%--<div class="modal-body">
-                       <%-- <%if (producto != null)
-                          { %>
-                        <div><%=producto.CodigoProducto%></div>
-                        <% }
-                          else
-                          { %>
-                        <div>NO DATA TO SHOW</div>
-                        <% } %>
-                    </div>--%>
                     <div class="modal-footer">
                         <div class="text-center">
-                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width:200px;">Ir a Pedidos</button>
-                            <button type="button" class="btn" style="width:200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
+                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>
+                            <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
                         </div>
                     </div>
                 </div>
@@ -92,9 +82,8 @@
         </form>
     </div>
 
-
     <%--ESTO ESTABA EN CODIGO JAVI 02/11/2016--%>
-       <%-- <asp:Repeater ID="lstBusquedaProductos" ClientIDMode="Static" runat="server">
+    <%-- <asp:Repeater ID="lstBusquedaProductos" ClientIDMode="Static" runat="server">
             <ItemTemplate>
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
@@ -102,22 +91,15 @@
                         <div class="caption">
                             <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                             <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-      <%--                      <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />      
+    <%--                      <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />
                         </div>
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>--%>
 
-               
-
-   <%-- </div>--%>
-
-   
-
-
+    <%-- </div>--%>
 </asp:Content>
-
 
 <asp:Content ID="Scripts" ClientIDMode="Static" ContentPlaceHolderID="ScriptSection" runat="server">
 

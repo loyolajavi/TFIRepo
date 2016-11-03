@@ -64,7 +64,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Telefono table by a foreign key.
         /// </summary>
-        public void DeleteAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public void DeleteAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -72,7 +72,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoDeleteAllBycuit_NombreUsuario", parameters);
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoDeleteAllByCUIT_NombreUsuario", parameters);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Telefono table by a foreign key.
         /// </summary>
-        public List<TelefonoEntidad> SelectAllBycuit_NombreUsuario(string cuit, string nombreUsuario)
+        public List<TelefonoEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -134,7 +134,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoSelectAllBycuit_NombreUsuario", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoSelectAllByCUIT_NombreUsuario", parameters))
             {
                 List<TelefonoEntidad> lista = new List<TelefonoEntidad>();
                 lista = Mapeador.Mapear<TelefonoEntidad>(dt);

@@ -42,8 +42,9 @@ namespace TFI.HelperDAL
                         return result;
                     }
                 }
-                catch (Exception)
+                catch (Exception es)
                 {
+                    
                     tr.Rollback();
                     throw;
                 }
@@ -115,7 +116,7 @@ namespace TFI.HelperDAL
                         tr.Commit();
                     }
                 }
-                catch (Exception)
+                catch (Exception es)
                 {
                     tr.Rollback();
                     throw;

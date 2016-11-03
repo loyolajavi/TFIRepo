@@ -34,7 +34,7 @@ namespace TFI.GUI
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
             
-            PedidosEntidad = pedidoCore.SelectAllBycuit_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
             if (PedidosEntidad.Count == 0)
             {
