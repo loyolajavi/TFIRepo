@@ -116,7 +116,7 @@ namespace TFI.GUI
                 //foreach (var item in unasListaDeseoEntidad)
                 //{
                     ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                    unProductoEntidad = unProductoCore.ProductoSelect(unaListaDeseo.IdProducto);
+                    unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
                     unaListaProductos.Add(unProductoEntidad);
                 //} 
                 //listaDeseosSesion.Add(unaListaDeseo);

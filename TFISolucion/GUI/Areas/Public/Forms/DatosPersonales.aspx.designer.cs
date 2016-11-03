@@ -7,243 +7,252 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TFI.GUI.General {
+namespace TFI.GUI {
     
     
-    public partial class LayoutBasico {
+    public partial class DatosPersonales {
         
         /// <summary>
-        /// Control head.
+        /// Control ScriptManager1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// Control frmLayoutConBarra.
+        /// Control usuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmLayoutConBarra;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText usuario;
         
         /// <summary>
-        /// Control txtSearch.
+        /// Control clave.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText clave;
         
         /// <summary>
-        /// Control EtiquetaUsuario.
+        /// Control grilladedatospersonales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor EtiquetaUsuario;
+        protected global::System.Web.UI.WebControls.GridView grilladedatospersonales;
         
         /// <summary>
-        /// Control LiPedido.
+        /// Control grillatelefonos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiPedido;
+        protected global::System.Web.UI.WebControls.GridView grillatelefonos;
         
         /// <summary>
-        /// Control PedidoDropDown.
+        /// Control grilladirecciondefacturacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PedidoDropDown;
+        protected global::System.Web.UI.WebControls.GridView grilladirecciondefacturacion;
         
         /// <summary>
-        /// Control LiDeseos.
+        /// Control upModalFacturacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiDeseos;
+        protected global::System.Web.UI.UpdatePanel upModalFacturacion;
         
         /// <summary>
-        /// Control DeseosDropDown.
+        /// Control calle.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DeseosDropDown;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText calle;
         
         /// <summary>
-        /// Control Salir.
+        /// Control numero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Salir;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl numero;
         
         /// <summary>
-        /// Control liIngresar.
+        /// Control piso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIngresar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText piso;
         
         /// <summary>
-        /// Control IngresoUsuario.
+        /// Control departamento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText IngresoUsuario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText departamento;
         
         /// <summary>
-        /// Control IngresoClave.
+        /// Control localidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword IngresoClave;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText localidad;
         
         /// <summary>
-        /// Control MensajeError.
+        /// Control ddlProvincia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeError;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
         
         /// <summary>
-        /// Control IngresoBoton.
+        /// Control btnGrabarDireccionDeFacturacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button IngresoBoton;
+        protected global::System.Web.UI.WebControls.Button btnGrabarDireccionDeFacturacion;
         
         /// <summary>
-        /// Control liRegistrarse.
+        /// Control grilladirecciondeenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegistrarse;
+        protected global::System.Web.UI.WebControls.GridView grilladirecciondeenvio;
         
         /// <summary>
-        /// Control RegistroNombre.
+        /// Control calleenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText RegistroNombre;
+        protected global::System.Web.UI.WebControls.TextBox calleenvio;
         
         /// <summary>
-        /// Control RegistroApellido.
+        /// Control numeroenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText RegistroApellido;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl numeroenvio;
         
         /// <summary>
-        /// Control RegistroUsuario.
+        /// Control pisoenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText RegistroUsuario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText pisoenvio;
         
         /// <summary>
-        /// Control RegistroPassword1.
+        /// Control departamentoenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword RegistroPassword1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText departamentoenvio;
         
         /// <summary>
-        /// Control RegistroPassword2.
+        /// Control localidadenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword RegistroPassword2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText localidadenvio;
         
         /// <summary>
-        /// Control RegistroEmail.
+        /// Control ddlProvinciaEnvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl RegistroEmail;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaEnvio;
         
         /// <summary>
-        /// Control RegistrarBoton.
+        /// Control btnGrabarDireccionDeEnvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RegistrarBoton;
+        protected global::System.Web.UI.WebControls.Button btnGrabarDireccionDeEnvio;
         
         /// <summary>
-        /// Control siteMap.
+        /// Control upContrasenia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapDataSource siteMap;
+        protected global::System.Web.UI.UpdatePanel upContrasenia;
         
         /// <summary>
-        /// Control siteMapMaster.
+        /// Control passanterior.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapPath siteMapMaster;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passanterior;
         
         /// <summary>
-        /// Control ContentPlaceHolderCuerpo.
+        /// Control passnueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderCuerpo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passnueva;
         
         /// <summary>
-        /// Control ScriptSection.
+        /// Control passnuevarepetida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptSection;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passnuevarepetida;
+        
+        /// <summary>
+        /// Control btnCambiarClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiarClave;
     }
 }

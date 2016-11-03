@@ -4,35 +4,7 @@ namespace TFI.Entidades
 {
 	public class LenguajeEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the LenguajeEntidad class.
-		/// </summary>
-		public LenguajeEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the LenguajeEntidad class.
-		/// </summary>
-		public LenguajeEntidad(string descripcionLenguaje, DateTime? fecBaja)
-		{
-			this.DescripcionLenguaje = descripcionLenguaje;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the LenguajeEntidad class.
-		/// </summary>
-		public LenguajeEntidad(int idLenguaje, string descripcionLenguaje, DateTime? fecBaja)
-		{
-			this.IdLenguaje = idLenguaje;
-			this.DescripcionLenguaje = descripcionLenguaje;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
+		
 
 		#region Properties
 		/// <summary>
@@ -49,6 +21,12 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+
+
+        //ESTO ES LO QUE TENIA PACHU EN LA CLASE LENGUAJE DEL BRANCH DEV
+        //public string Control { get; set; }
+        //public string IsoCode { get; set; }
+        //public string Value { get; set; }
 
 		#endregion
 	}

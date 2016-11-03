@@ -10,15 +10,15 @@
 namespace TFI.GUI {
     
     
-    public partial class CatalogoPrinc {
+    public partial class Catalogo {
         
         /// <summary>
-        /// Control lstBusquedaProductos.
+        /// Control catalogo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater lstBusquedaProductos;
+        protected global::System.Web.UI.WebControls.Repeater catalogo;
     }
 }

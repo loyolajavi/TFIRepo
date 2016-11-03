@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Web;
-using System.Web.UI.WebControls;
-using TFI.CORE.Managers;
-using TFI.Entidades;
 using System.Collections.Generic;
-using System.Web.UI;
 using System.Linq;
-using System.Web.Services;
-using TFI.CORE.Helpers;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using TFI.Entidades;
+using TFI.CORE.Managers;
 using System.Text;
 
 
-namespace TFI.GUI.General
+namespace TFI.GUI.Shared
 {
-    public partial class LayoutBasico : System.Web.UI.MasterPage
+    public partial class MiCuenta : System.Web.UI.MasterPage
     {
+     
         private UsuarioCore _manager;
 
-        public LayoutBasico()
+        public MiCuenta()
         {
             _manager = new UsuarioCore();
         }
@@ -64,9 +63,7 @@ namespace TFI.GUI.General
 
         public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
 
-        protected void IngresoBoton_Click(object sender, EventArgs e)
-        {
-        }
+
 
         protected void Salir_Click(object sender, EventArgs e)
         {
@@ -74,9 +71,7 @@ namespace TFI.GUI.General
             Response.Redirect("Home.aspx");
         }
 
-        protected void RegistrarBoton_Click(object sender, EventArgs e)
-        {
-        }
+
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
@@ -96,7 +91,7 @@ namespace TFI.GUI.General
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
                         Session["Usuario"] = usuario;
-
+                        SetUsuarioLogueado(usuario.NombreUsuario);
                         //if (listaDeseos != null)
                         //{
                             Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
@@ -223,7 +218,6 @@ namespace TFI.GUI.General
             Response.Redirect("ListaDeDeseos.aspx");
         }
 
-  
 
     }
 }

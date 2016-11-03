@@ -4,27 +4,6 @@ namespace TFI.Entidades
 {
 	public class DireccionUsuarioEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the DireccionUsuarioEntidad class.
-		/// </summary>
-		public DireccionUsuarioEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the DireccionUsuarioEntidad class.
-		/// </summary>
-		public DireccionUsuarioEntidad(int idDireccion, string CUIT, string nombreUsuario, DateTime? fecBaja)
-		{
-			this.IdDireccion = idDireccion;
-			this.CUIT = CUIT;
-			this.NombreUsuario = nombreUsuario;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>
@@ -46,6 +25,8 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+
+        public bool Predeterminada { get; set; }
 
 		#endregion
 	}

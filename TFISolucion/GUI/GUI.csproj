@@ -60,7 +60,10 @@
   <ItemGroup>
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
+    <Content Include="Areas\Public\Forms\DatosPersonales.aspx" />
     <Content Include="Areas\Public\Forms\QuienesSomos.aspx" />
+    <Content Include="Areas\Public\Forms\Tarjetas.aspx" />
+    <Content Include="Areas\Public\Forms\UltimosPedidos.aspx" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -76,12 +79,14 @@
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE8000.png" />
+    <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Scripts\shared\Funciones.js" />
+    <Content Include="Scripts\shared\Validaciones.js" />
     <Content Include="Scripts\thirdparty\bootstrap.js" />
     <Content Include="Scripts\thirdparty\bootstrap.min.js" />
     <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
@@ -103,6 +108,7 @@
     </Content>
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.map" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.map" />
+    <Content Include="Shared\MiCuenta.Master" />
     <None Include="Web.ConnectionStrings.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -128,12 +134,36 @@
     <Compile Include="Areas\Public\Forms\ClientesEmpresa.aspx.designer.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Public\Forms\DatosPersonales.aspx.cs">
+      <DependentUpon>DatosPersonales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\DatosPersonales.aspx.designer.cs">
+      <DependentUpon>DatosPersonales.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.cs">
       <DependentUpon>QuienesSomos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.designer.cs">
       <DependentUpon>QuienesSomos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\Tarjetas.aspx.cs">
+      <DependentUpon>Tarjetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\Tarjetas.aspx.designer.cs">
+      <DependentUpon>Tarjetas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\UltimosPedidos.aspx.cs">
+      <DependentUpon>UltimosPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\UltimosPedidos.aspx.designer.cs">
+      <DependentUpon>UltimosPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Shared\LayoutAdministracion.Master.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>
@@ -171,6 +201,13 @@
       <DependentUpon>GestionClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\MiCuenta.Master.cs">
+      <DependentUpon>MiCuenta.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\MiCuenta.Master.designer.cs">
+      <DependentUpon>MiCuenta.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Seguridad\" />
@@ -183,6 +220,10 @@
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
       <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FUNCIONES\FUNCIONES.csproj">
+      <Project>{258f06bf-b0a8-4b0e-a679-e494112df4a1}</Project>
+      <Name>FUNCIONES</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

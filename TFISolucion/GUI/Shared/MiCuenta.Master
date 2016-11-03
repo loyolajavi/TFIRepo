@@ -1,26 +1,30 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LayoutBasico.master.cs" Inherits="TFI.GUI.General.LayoutBasico" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MiCuenta.master.cs" Inherits="TFI.GUI.Shared.MiCuenta" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Datos Personales</title>
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
+    <link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
+   
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
+
+
+
 </head>
 <body>
-    <form id="frmLayoutConBarra" runat="server">
-    <!-- Menu -->
+
+<form id="FormMiCuenta" runat="server">
     <div class="container">
+        <!-- MENU -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <div class="navbar-header">
+<div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -156,85 +160,34 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-            </nav>
-        
-
-
-            <div class="row">
-			<nav class="navbar navbar-default">
-				    <div class="navbar-header">
-					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
-						    <span class="sr-only">Toggle navigation</span>
-						    <span class="icon-bar"></span>
-						    <span class="icon-bar"></span>
-						    <span class="icon-bar"></span>
-					    </button>
-				    </div>
-
-				    <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-2" aria-expanded="true">
-					    <nav>
-						    <ul class="nav navbar-nav">
-							    <li><a href="Home.aspx">Inicio</a></li>
-							    <li class="dropdown">
-								    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos<b class="caret"></b></a>
-								    <ul class="dropdown-menu multi-column columns-3">
-									    <li>
-									    <div class="col-md-4">
-										    <ul class="multi-column-dropdown">
-											    <li><a href="#">Categoria1</a></li>
-											    <li><a href="#">Categoria2</a></li>
-											    <li><a href="#">Categoria3</a></li>
-											    <li><a href="#">Categoria3</a></li>
-											    <li><a href="#">Categoria3</a></li>
-											    <li><a href="#">Categoria3</a></li>
-											    <li><a href="#">Categoria3</a></li>
-										    </ul>
-									    </div>
-									    <div class="col-md-4">
-										    <ul class="multi-column-dropdown">
-											    <li><a href="#">Categoria4</a></li>
-											    <li><a href="#">Categoria4</a></li>
-											    <li><a href="#">Categoria4</a></li>
-											    <li><a href="#">Categoria4</a></li>
-											    <li><a href="#">Categoria4</a></li>
-										    </ul>
-									    </div>
-									    <div class="col-md-4">
-										    <ul class="multi-column-dropdown">
-											    <li><a href="#">Categoria5</a></li>
-											    <li><a href="#">Categoria5</a></li>
-											    <li><a href="#">Categoria5</a></li>
-											    <li><a href="#">Categoria5</a></li>
-											    <li><a href="#">Categoria5</a></li>
-											    <li><a href="#">Categoria5</a></li>
-										    </ul>
-									    </div>
-									    <div class="clearfix"></div>
-									    </li>
-								    </ul>
-							    </li>
-							    <li><a href="#">Quiénes Somos</a></li>
-							    <li><a href="#">Nuestros Clientes</a></li>
-						    </ul>
-					    </nav>
-				    </div>
-			</nav>	
+                
             </div>
-		       
-            <div class="row" id="breadcrumb">
-                <asp:SiteMapDataSource ID="siteMap" runat="server" ShowStartingNode="true" />
-                <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator=" => " RenderCurrentNodeAsLink="false">
-                </asp:SiteMapPath>
-            </div>	  
-        
-            <%--Cuerpo de la Pagina--%>    
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderCuerpo" runat="server">
-            </asp:ContentPlaceHolder>
-            <%--FIN Cuerpo de la pagina--%>
+        </nav>
+
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">Mi Cuenta</p>
+                <div class="list-group">
+                    <a href="DatosPersonales.aspx" class="list-group-item">Datos Personales</a>
+                    <a href="UltimosPedidos.aspx" class="list-group-item">Ultimos Pedidos</a>
+                    <a href="ListaDeDeseos.aspx" class="list-group-item">Lista de deseos</a>
+                    <a href="Tarjetas.aspx" class="list-group-item">Datos de tarjetas</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                 
+
+                   <%--Cuerpo de la Pagina--%>   
+                <asp:ContentPlaceHolder ID="ContentCuenta" runat="server">
+                </asp:ContentPlaceHolder>
+                <%--FIN Cuerpo de la pagina--%>
+            </div>
+        </div>
     </div>
-        
-            <footer class="container">
+
+
+    <footer class="container">
                 <div class="row navbar-inverse">
                     <section class="col-xs-12 col-md-6">
                         <h4>Información</h4>
@@ -255,17 +208,12 @@
                     </section>
                 </div>
             </footer>
-        
-    
-    
-</form>
 
     <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
-    <script src="/Scripts/shared/Funciones.js"></script>
 
-    <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
 
-        
+    <asp:ContentPlaceHolder runat="server" ID="ScriptsSection"></asp:ContentPlaceHolder>
+</form>
 </body>
 </html>

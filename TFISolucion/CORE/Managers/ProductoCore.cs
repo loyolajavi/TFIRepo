@@ -13,7 +13,7 @@ namespace TFI.CORE.Managers
             _productoDal = new ProductoDAL();
         }
 
-        public Entidades.ProductoEntidad ProductoSelect(int id)
+        public Entidades.ProductoEntidad Find(int id)
         {
             return _productoDal.Select(ConfigSection.Default.Site.Cuit, id);
         }

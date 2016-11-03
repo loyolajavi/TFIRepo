@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TFI.GUI.General {
+namespace TFI.GUI.Shared {
     
     
-    public partial class LayoutBasico {
+    public partial class MiCuenta {
         
         /// <summary>
         /// Control head.
@@ -22,13 +22,13 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// Control frmLayoutConBarra.
+        /// Control FormMiCuenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmLayoutConBarra;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormMiCuenta;
         
         /// <summary>
         /// Control txtSearch.
@@ -211,39 +211,21 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.WebControls.Button RegistrarBoton;
         
         /// <summary>
-        /// Control siteMap.
+        /// Control ContentCuenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapDataSource siteMap;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentCuenta;
         
         /// <summary>
-        /// Control siteMapMaster.
+        /// Control ScriptsSection.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapPath siteMapMaster;
-        
-        /// <summary>
-        /// Control ContentPlaceHolderCuerpo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderCuerpo;
-        
-        /// <summary>
-        /// Control ScriptSection.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptSection;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptsSection;
     }
 }

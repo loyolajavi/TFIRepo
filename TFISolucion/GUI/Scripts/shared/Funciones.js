@@ -14,18 +14,15 @@ function onBtnAddClick(btn) {
 };
 
 
-//function ActDropDownDeseo() {
-    
-//    $.ajax({
-//        type: "POST",
-//        url: "LayoutBasico.Master/ActualizarDeseos",
-//        data: '{ idProducto: ' + idProd + '}',
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (Valor) {
-//            //alert("Entre");              
-//            ActDropDownDeseo();
 
-//        }
-//    });
-//}; ActDropDownDeseo
+
+var app = {
+    redirect: function (url) {
+        window.location.href = url;
+    },
+
+    reload: function () {
+        window.location.reload();
+    }
+
+}
