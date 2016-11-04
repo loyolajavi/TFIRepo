@@ -120,7 +120,10 @@ $('#btnCambiarClave').click(function (e) {
 });
 
 /**************Ajax para Agregar direccion de facturacion*******/
-$('#btnGrabarDireccionDeFacturacion').click(function (e) {
+//$('#btnGrabarDireccionDeFacturacion').click(function (e) { onBtnGrabarClick(this) })
+
+function onBtnGrabarClick()
+{
     //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
 
     var parametros = {
@@ -144,7 +147,6 @@ $('#btnGrabarDireccionDeFacturacion').click(function (e) {
         data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
         success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
             // $('#notification').text('La información ha sido guardada exitosamente.');
-            alert("Holaaa entre");
             //window.location.reload();
             ClearModalFacturacion();
             //Exito("Se ha cambiado la contraseña con exito");
@@ -155,19 +157,22 @@ $('#btnGrabarDireccionDeFacturacion').click(function (e) {
 
         }
     });
-});
+    return true;
+};
 
 
 /**************Ajax para Agregar direccion de facturacion*******/
-$('#btnGrabarDireccionDeEnvio').click(function (e) {
+//$('#btnGrabarDireccionDeEnvio').click(function (e) {
     //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
 
+function onbtnGrabarEnvio (){
+
     var parametros = {
-        calleEnvio: $('#calleEnvio').val(),
-        numeroEnvio: $('#numeroEnvio').val(),
-        pisoEnvio: $('#pisoEnvio').val(),
-        departamentoEnvio: $('#departamentoEnvio').val(),
-        localidadEnvio: $('#localidadEnvio').val(),
+        calleEnvio: $('#calleenvio').val(),
+        numeroEnvio: $('#numeroenvio').val(),
+        pisoEnvio: $('#pisoenvio').val(),
+        departamentoEnvio: $('#departamentoenvio').val(),
+        localidadEnvio: $('#localidadenvio').val(),
         ddlprovinciaEnvio: $('#ddlProvinciaEnvio').val()
         //ddlprovincia: $("#ddlProvincia option:selected").text()
     };
@@ -183,7 +188,6 @@ $('#btnGrabarDireccionDeEnvio').click(function (e) {
         data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
         success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
             // $('#notification').text('La información ha sido guardada exitosamente.');
-            alert("Holaaa entre");
             //window.location.reload();
             ClearModalFacturacion();
             //Exito("Se ha cambiado la contraseña con exito");
@@ -194,4 +198,5 @@ $('#btnGrabarDireccionDeEnvio').click(function (e) {
 
         }
     });
-});
+    return true;
+};

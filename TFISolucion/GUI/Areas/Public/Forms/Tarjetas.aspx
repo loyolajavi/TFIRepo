@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" CodeBehind="Tarjetas.aspx.cs" Inherits="TFI.GUI.Tarjetas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" EnableEventValidation="false"  CodeBehind="Tarjetas.aspx.cs" Inherits="TFI.GUI.Tarjetas" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,7 +7,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
 
 
-        <form runat="server">
         <div class="col-lg-12">
             <h1 class="page-header">Datos de tarjetas <small>Mi Cuenta</small>
             </h1>
@@ -90,7 +89,6 @@
                                         <div class="row">
                                             <div class="col-xs-3">
                                                 <select runat="server" class="form-control col-sm-2" name="expiry-month" id="expiryMes">
-                                                    <option>Month</option>
                                                     <option runat="server" value="01">Jan (01)</option>
                                                     <option value="02">Feb (02)</option>
                                                     <option value="03">Mar (03)</option>
@@ -145,7 +143,6 @@
                 </div>
             </div>--%>
         </div>
-    </form>
 
 
 

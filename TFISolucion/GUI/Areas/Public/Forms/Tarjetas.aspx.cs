@@ -75,8 +75,8 @@ namespace TFI.GUI
         private void CargarGrillaTarjetas()
         {
 
-            
-
+            TarjetasEntidad.Clear();
+            TarjetasDTO.Clear();
 
             TarjetasEntidad = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
@@ -96,7 +96,8 @@ namespace TFI.GUI
             }
 
 
-
+            grilladetarjetas.DataSource = null;
+            grilladetarjetas.DataBind();
             grilladetarjetas.DataSource = TarjetasDTO;
             grilladetarjetas.AutoGenerateColumns = false;
             grilladetarjetas.DataBind();
@@ -177,6 +178,9 @@ namespace TFI.GUI
             NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
 
             TarjetaBLL.InsertTarjeta(NuevaTarjeta);
+
+            
+            CargarGrillaTarjetas();
 
 
         }

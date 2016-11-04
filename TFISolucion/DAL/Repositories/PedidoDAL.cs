@@ -23,7 +23,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
 				new SqlParameter("@PlazoEntrega", pedido.PlazoEntrega),
 				new SqlParameter("@IdFormaEntrega", pedido.IdFormaEntrega),
-				new SqlParameter("@cuit", pedido.CUIT),
+				new SqlParameter("@CUIT", pedido.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
 				new SqlParameter("@DireccionEntrega", pedido.DireccionEntrega),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
@@ -47,7 +47,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
 				new SqlParameter("@PlazoEntrega", pedido.PlazoEntrega),
 				new SqlParameter("@IdFormaEntrega", pedido.IdFormaEntrega),
-				new SqlParameter("@cuit", pedido.CUIT),
+				new SqlParameter("@CUIT", pedido.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
 				new SqlParameter("@DireccionEntrega", pedido.DireccionEntrega),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
@@ -78,7 +78,7 @@ namespace TFI.DAL.DAL
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@cuit", cuit)
+				new SqlParameter("@CUIT", cuit)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT", parameters);
@@ -105,7 +105,7 @@ namespace TFI.DAL.DAL
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@cuit", cuit),
+				new SqlParameter("@CUIT", cuit),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
@@ -198,7 +198,7 @@ namespace TFI.DAL.DAL
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@cuit", cuit)
+				new SqlParameter("@CUIT", cuit)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT", parameters))
@@ -240,7 +240,7 @@ namespace TFI.DAL.DAL
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@cuit", cuit),
+				new SqlParameter("@CUIT", cuit),
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 

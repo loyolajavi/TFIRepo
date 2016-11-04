@@ -23,8 +23,7 @@
     <hr />
 
 
-    <form runat="server">
-
+    
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -85,7 +84,7 @@
             </div>
     </div>
 
-     </form>
+
 
     <%--   <div class="col-md-3">
                <div class="text-center">

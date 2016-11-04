@@ -703,13 +703,15 @@ namespace TFI.GUI
 
             var unUsuarioBLL = new UsuarioCore();
             var usuarioentidadStatic = new UsuarioEntidad();
-            var formularioDatosPersonales2 = new DatosPersonales();
             DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
             var Current = HttpContext.Current;
 
+            usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
+
             DireccionUsuarioEntidad NuevaIntermediaEnvio = new DireccionUsuarioEntidad();
-            NuevaIntermedia.CUIT = usuarioentidadStatic.CUIT;
-            NuevaIntermedia.NombreUsuario = usuarioentidadStatic.NombreUsuario;
+            NuevaIntermediaEnvio.CUIT = usuarioentidadStatic.CUIT;
+            NuevaIntermediaEnvio.NombreUsuario = usuarioentidadStatic.NombreUsuario;
+
 
 
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
@@ -736,7 +738,6 @@ namespace TFI.GUI
 
             unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermediaEnvio);
 
-            formularioDatosPersonales2.CargarGrillaDireccionDeEnvio();
 
         }
 
@@ -804,9 +805,21 @@ namespace TFI.GUI
 
             unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
 
-            formularioDatosPersonales.CargarGrillaDireccionDeFacturacion();
+            //formularioDatosPersonales.CargarGrillaDireccionDeFacturacion();
 
 
+        }
+
+        protected void GrabarDireccionDeFacturacion_Click(object sender, EventArgs e)
+        {
+            CargarGrillaDireccionDeFacturacion();
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void GrabarDireccionDeEnvio_Click(object sender, EventArgs e)
+        {
+            CargarGrillaDireccionDeEnvio();
+            Response.Redirect(Request.RawUrl);
         }
 
     }
