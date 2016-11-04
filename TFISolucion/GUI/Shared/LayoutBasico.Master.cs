@@ -28,14 +28,20 @@ namespace TFI.GUI.General
             var logueado = (UsuarioEntidad)Session["Usuario"];
 
             //ESTO HAY Q TENER CUIDADO PORQUE EL MASTER CARGA LA PAGINA COMO SI FUERA LA PRIMERA VEZ SIEMPRE
-            if (!IsPostBack)
-            {
+            //if (!IsPostBack)
+            //{
                 if (logueado == null)
                 {
                     LiPedido.Visible = false;
                     LiDeseos.Visible = false;
                 }
-            }
+            //}
+                else
+                {
+                    LiPedido.Visible = true;
+                    LiDeseos.Visible = true;
+                }
+
 
 
 
@@ -81,9 +87,6 @@ namespace TFI.GUI.General
             Response.Redirect("Home.aspx");
         }
 
-        protected void RegistrarBoton_Click(object sender, EventArgs e)
-        {
-        }
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {

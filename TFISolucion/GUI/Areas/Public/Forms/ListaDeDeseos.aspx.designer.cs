@@ -10,6 +10,18 @@
 namespace TFI.GUI {
     
     
-    public partial class InfoEmpresa {
+    public partial class ListaDeDeseos {
+        
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new TFI.GUI.General.LayoutBasico Master {
+            get {
+                return ((TFI.GUI.General.LayoutBasico)(base.Master));
+            }
+        }
     }
 }
