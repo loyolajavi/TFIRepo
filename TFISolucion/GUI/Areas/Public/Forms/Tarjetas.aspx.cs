@@ -71,7 +71,7 @@ namespace TFI.GUI
 
             CargarGrillaTarjetas();
         }
-
+         
         private void CargarGrillaTarjetas()
         {
 
