@@ -27,63 +27,38 @@ namespace TFI.GUI.General
 
             var logueado = (UsuarioEntidad)Session["Usuario"];
 
-            //ESTO HAY Q TENER CUIDADO PORQUE EL MASTER CARGA LA PAGINA COMO SI FUERA LA PRIMERA VEZ SIEMPRE
-            //if (!IsPostBack)
-            //{
-                if (logueado == null)
+                if (logueado != null)
+                {
+                    liIngresar.Visible = false;
+                    liRegistrarse.Visible = false;
+                    LiPedido.Visible = true;
+                    LiDeseos.Visible = true;
+                    SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
+                }
+                else
                 {
                     LiPedido.Visible = false;
                     LiDeseos.Visible = false;
                 }
-            //}
-                else
-                {
-                    LiPedido.Visible = true;
-                    LiDeseos.Visible = true;
-                }
-
-
-
 
         }
 
-        public bool IngresoDeUsuario
-        {
-            set
-            {
-                liIngresar.Visible = value;
-                liRegistrarse.Visible = value;
-            }
-        }
-
-        public bool EgresoDeUsuario
-        {
-            set
-            {
-                liIngresar.Visible = value;
-                liRegistrarse.Visible = value;
-            }
-        }
 
         public void SetUsuarioLogueado(string label)
         {
             EtiquetaUsuario.InnerText = label;
             Salir.Text = "Salir";
             Salir.CssClass = "btn-danger";
-            //EtiquetaUsuario.CssClass = ""
         }
 
-        public bool MostrarPedido { set { LiPedido.Visible = value; } }
+        //public bool MostrarPedido { set { LiPedido.Visible = value; } }
 
-        public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
-
-        protected void IngresoBoton_Click(object sender, EventArgs e)
-        {
-        }
+        //public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
 
         protected void Salir_Click(object sender, EventArgs e)
         {
-            Session["Usuario"] = null;
+            //Session["Usuario"] = null;
+            Session.Abandon();
             Response.Redirect("Home.aspx");
         }
 

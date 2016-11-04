@@ -24,7 +24,16 @@ namespace TFI.GUI.Shared
         protected void Page_Load(object sender, EventArgs e)
         {
             var logueado = (UsuarioEntidad)Session["Usuario"];
-            if (logueado == null) { 
+            
+            if (logueado != null) {
+                liIngresar.Visible = false;
+                liRegistrarse.Visible = false;
+                LiPedido.Visible = true;
+                LiDeseos.Visible = true;
+                SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
+            }
+            else
+            {
                 LiPedido.Visible = false;
                 LiDeseos.Visible = false;
             }
@@ -33,41 +42,18 @@ namespace TFI.GUI.Shared
             
         }
 
-        public bool IngresoDeUsuario
-        {
-            set
-            {
-                liIngresar.Visible = value;
-                liRegistrarse.Visible = value;
-            }
-        }
-
-        public bool EgresoDeUsuario
-        {
-            set
-            {
-                liIngresar.Visible = value;
-                liRegistrarse.Visible = value;
-            }
-        }
 
         public void SetUsuarioLogueado(string label)
         {
             EtiquetaUsuario.InnerText = label;
             Salir.Text = "Salir";
             Salir.CssClass = "btn-danger";
-            //EtiquetaUsuario.CssClass = ""
         }
-
-        public bool MostrarPedido { set { LiPedido.Visible = value; } }
-
-        public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
-
 
 
         protected void Salir_Click(object sender, EventArgs e)
         {
-            Session["Usuario"] = null;
+            Session.Abandon();
             Response.Redirect("Home.aspx");
         }
 

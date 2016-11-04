@@ -4,10 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Datos Personales</title>
-    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Cuenta</title>
+
+<link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
    
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -24,7 +26,7 @@
         <!-- MENU -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-<div class="navbar-header">
+                <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>

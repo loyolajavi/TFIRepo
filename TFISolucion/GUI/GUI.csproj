@@ -138,7 +138,6 @@
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.js" />
-    <Content Include="Shared\LayoutGeneral.Master" />
     <Content Include="Shared\LayoutBasico.Master" />
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
@@ -239,13 +238,6 @@
     </Compile>
     <Compile Include="Shared\LayoutBasico.Master.designer.cs">
       <DependentUpon>LayoutBasico.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Shared\LayoutGeneral.Master.cs">
-      <DependentUpon>LayoutGeneral.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Shared\LayoutGeneral.Master.designer.cs">
-      <DependentUpon>LayoutGeneral.Master</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

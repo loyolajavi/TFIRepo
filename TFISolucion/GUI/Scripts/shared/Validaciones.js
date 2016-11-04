@@ -176,7 +176,7 @@ $('#btnGrabarDireccionDeEnvio').click(function (e) {
     // Ahora hacemos la llamada tipo AJAX utilizando jQuery
     $.ajax({
         type: 'POST',                               // tipo de llamada (POST, GET)
-        url: 'DatosPersonales.aspx/btnGrabarDireccionDeEnvio',
+        url: 'DatosPersonales.aspx/GrabarDireccionDeEnvio',
         dataType: "json",  // el URL del método que vamos a llamar
         // los parámetros en formato JSON
         contentType: "application/json; charset=utf-8",

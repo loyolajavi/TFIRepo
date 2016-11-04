@@ -18,6 +18,7 @@ namespace TFI.GUI
         private UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         //Boolean tipo;
         List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
+        List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
         //Dictionary<int, DireccionEntidad> DiccionarioDeDirecciones = new Dictionary<int, DireccionEntidad>();
         
         
@@ -97,7 +98,7 @@ namespace TFI.GUI
             }
 
 
-            List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
+
 
             DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
@@ -113,6 +114,7 @@ namespace TFI.GUI
                     Numero = item.Numero,
                     Piso = item.Piso,
                     IdDireccion = item.IdDireccion,
+                    Provincia = item.IdProvincia,
                     Predeterminada = UsuarioBLL.DireccionUsuarioSelect(item.IdDireccion, usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Predeterminada
                 };
 
@@ -175,7 +177,7 @@ namespace TFI.GUI
             public int? Piso { get; set; }
             public string Departamento { get; set; }
             public string Localidad { get; set; }
-            public string Provincia { get; set; }
+            public int Provincia { get; set; }
             public bool Predeterminada { get; set; }
         }
 
@@ -642,12 +644,17 @@ namespace TFI.GUI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                var Id = (string)e.Row.Cells[7].Text;
+                
+                var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
+
                 var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
                 if (ddl != null)
                 {
                     ddl.DataSource = UsuarioBLL.SelectALLProvincias();
                     ddl.DataValueField = "IdProvincia";
                     ddl.DataTextField = "DescripcionProvincia";
+                    ddl.SelectedIndex = Dire.IdProvincia - 1;
                     ddl.DataBind();
 
                 }
@@ -685,47 +692,51 @@ namespace TFI.GUI
             ddlProvinciaEnvio.DataTextField = "DescripcionProvincia";
             ddlProvinciaEnvio.DataBind();
 
-
-
-
         }
 
 
 
-
-        protected void btnGrabarDireccionEnvio_Click(object sender, EventArgs e)
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [System.Web.Services.WebMethod]
+        public static void GrabarDireccionDeEnvio(string calleEnvio, int numeroEnvio, int pisoEnvio, string departamentoEnvio, string localidadEnvio, string ddlprovinciaEnvio)
         {
 
+            var unUsuarioBLL = new UsuarioCore();
+            var usuarioentidadStatic = new UsuarioEntidad();
+            var formularioDatosPersonales2 = new DatosPersonales();
             DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
-            NuevaIntermedia.CUIT = usuarioentidad.CUIT;
-            NuevaIntermedia.NombreUsuario = usuarioentidad.NombreUsuario;
+            var Current = HttpContext.Current;
+
+            DireccionUsuarioEntidad NuevaIntermediaEnvio = new DireccionUsuarioEntidad();
+            NuevaIntermedia.CUIT = usuarioentidadStatic.CUIT;
+            NuevaIntermedia.NombreUsuario = usuarioentidadStatic.NombreUsuario;
 
 
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
 
-            if (!string.IsNullOrEmpty(calleenvio.Text))
+            if (!string.IsNullOrEmpty(calleEnvio))
             {
-                NuevaDireccion.Calle = calleenvio.Text;
+                NuevaDireccion.Calle = calleEnvio;
             }
 
-            if (!string.IsNullOrEmpty(departamentoenvio.Value))
+            if (!string.IsNullOrEmpty(departamentoEnvio))
             {
-                NuevaDireccion.Departamento = departamentoenvio.Value;
+                NuevaDireccion.Departamento = departamentoEnvio;
             }
 
-            if (!string.IsNullOrEmpty(localidadenvio.Value))
+            if (!string.IsNullOrEmpty(localidadEnvio))
             {
-                NuevaDireccion.Localidad = localidadenvio.Value;
+                NuevaDireccion.Localidad = localidadEnvio;
             }
 
             NuevaDireccion.IdTipoDireccion = 2;
-            NuevaDireccion.Numero = Convert.ToInt32(numeroenvio.Value);
-            NuevaDireccion.Piso = Convert.ToInt32(pisoenvio.Value);
-            NuevaDireccion.IdProvincia = ddlProvinciaEnvio.SelectedIndex + 1;
+            NuevaDireccion.Numero = Convert.ToInt32(numeroEnvio);
+            NuevaDireccion.Piso = Convert.ToInt32(pisoEnvio);
+            NuevaDireccion.IdProvincia = Int32.Parse(ddlprovinciaEnvio);
 
-            UsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+            unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermediaEnvio);
 
-            CargarGrillaDireccionDeEnvio();
+            formularioDatosPersonales2.CargarGrillaDireccionDeEnvio();
 
         }
 
@@ -754,7 +765,7 @@ namespace TFI.GUI
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void GrabarDireccionDeFacturacion(string calle, int numero, int? piso, string departamento, string localidad, string ddlprovincia)
+        public static void GrabarDireccionDeFacturacion(string calle, int numero, int piso, string departamento, string localidad, string ddlprovincia)
         {
             var unUsuarioBLL = new UsuarioCore();
             var usuarioEntity = new UsuarioEntidad();

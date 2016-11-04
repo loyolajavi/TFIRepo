@@ -148,13 +148,22 @@ namespace TFI.GUI {
         protected global::System.Web.UI.WebControls.GridView grilladirecciondeenvio;
         
         /// <summary>
+        /// Control UpModalDireEnvio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpModalDireEnvio;
+        
+        /// <summary>
         /// Control calleenvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox calleenvio;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText calleenvio;
         
         /// <summary>
         /// Control numeroenvio.
