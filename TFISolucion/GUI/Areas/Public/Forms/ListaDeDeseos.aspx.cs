@@ -24,12 +24,7 @@ namespace TFI.GUI
 
             if (logueado != null)
             {
-                //this.Master.IngresoDeUsuario = false;
-                //this.Master.SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
-                //this.Master.MostrarPedido = true;
-                //this.Master.MostrarDropDeseos = true;
-                //this.Master.ActualizarPedido();
-                this.Master.ActualizarDeseos();
+                //this.Master.ActualizarDeseos(); LO COMENTO PARA PROBAR SI FUNCIONA PONIENDOLO EN EL MASTER SOLAMENTE
             }
 
 

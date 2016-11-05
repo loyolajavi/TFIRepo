@@ -15,6 +15,11 @@ namespace TFI.GUI.Shared
     {
      
         private UsuarioCore _manager;
+        HttpContext Current = HttpContext.Current;
+        ListaDeseosCore unaListaDeseosCore;
+        ProductoCore unProductoCore;
+        List<ProductoEntidad> listaDeseos;
+        UsuarioEntidad usuario = new UsuarioEntidad();
 
         public MiCuenta()
         {
@@ -31,6 +36,7 @@ namespace TFI.GUI.Shared
                 LiPedido.Visible = true;
                 LiDeseos.Visible = true;
                 SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
+                CargarListaDeseosEnSession();
             }
             else
             {
@@ -61,41 +67,21 @@ namespace TFI.GUI.Shared
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
-            var usuario = new UsuarioEntidad();
-            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
-            ProductoCore unProductoCore = new ProductoCore();
-            List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>(); 
 
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
                     
-                    var Current = HttpContext.Current;
+                    //var Current = HttpContext.Current;
                     //listaDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
                         Session["Usuario"] = usuario;
                         SetUsuarioLogueado(usuario.NombreUsuario);
-                        //if (listaDeseos != null)
-                        //{
-                            Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
-                        //}
-                        //else
-                        //{
-                            List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
-                             unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
 
-                             foreach (var item in unasListaDeseoEntidad)
-                            {
-                                ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                                unProductoEntidad = unProductoCore.Find(item.IdProducto);
-                                listaDeseos.Add(unProductoEntidad);
-                            } 
-                                                     
-                            Session["ListaDeseos"] = listaDeseos;
-                        //}
+                        CargarListaDeseosEnSession();
                         
                              
                         Response.Redirect(Request.RawUrl);
@@ -204,6 +190,36 @@ namespace TFI.GUI.Shared
             Response.Redirect("ListaDeDeseos.aspx");
         }
 
+
+        public void CargarListaDeseosEnSession()
+        {
+
+            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
+            ProductoCore unProductoCore = new ProductoCore();
+            List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>();
+
+            usuario = (UsuarioEntidad)Current.Session["Usuario"];
+            
+            //if (listaDeseos != null)
+            //{
+            Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
+            //}
+            //else
+            //{
+            List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
+            unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
+
+            foreach (var item in unasListaDeseoEntidad)
+            {
+                ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                unProductoEntidad = unProductoCore.Find(item.IdProducto);
+                listaDeseos.Add(unProductoEntidad);
+            }
+
+            Session["ListaDeseos"] = listaDeseos;
+            ActualizarDeseos();
+            //}
+        }
 
     }
 }

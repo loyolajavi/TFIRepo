@@ -13,6 +13,15 @@ namespace TFI.GUI {
     public partial class ListaDeDeseos {
         
         /// <summary>
+        /// Control test.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl test;
+        
+        /// <summary>
         /// Propiedad Master.
         /// </summary>
         /// <remarks>
