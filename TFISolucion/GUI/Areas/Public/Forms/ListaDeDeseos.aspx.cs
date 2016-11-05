@@ -38,8 +38,8 @@ namespace TFI.GUI
 
                 ProductoCore unProductoCore = new ProductoCore();
                 unosProductosListaDeseo = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
-                rptProductosListaDeseo.DataSource = unosProductosListaDeseo;
-                rptProductosListaDeseo.DataBind();
+                //rptProductosListaDeseo.DataSource = unosProductosListaDeseo;
+                //rptProductosListaDeseo.DataBind();
             }
         }
     }
