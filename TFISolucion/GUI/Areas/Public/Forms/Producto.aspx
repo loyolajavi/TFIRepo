@@ -1,11 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="TFI.GUI.Producto" %>
-<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-
-
 
 <asp:Content ID="BodyProducto" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
@@ -14,17 +12,21 @@
             margin-bottom: 100px;
             margin-top: 40px;
         }
+
         .btn {
             border-radius: 0px;
         }
+
         .btn-comprar {
             width: 200px;
             color: #fff;
             background-color: #002c04;
         }
+
             .btn-comprar:hover {
                 color: #fff;
             }
+
         .inner {
             padding: 10px;
             margin-bottom: 20px;
@@ -60,7 +62,7 @@
                         <br />
                         <br />
                         <button class=" btn btn-green"><i class=" glyphicon glyphicon-heart"></i></button>
-                         Agregar a Favoritos
+                        Agregar a Favoritos
                     </p>
                     <p>
                     </p>
@@ -86,7 +88,6 @@
         </div>
     </div>
 </asp:Content>
-
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
 </asp:Content>

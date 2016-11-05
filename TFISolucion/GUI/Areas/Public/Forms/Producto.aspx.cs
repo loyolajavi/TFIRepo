@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -11,8 +6,6 @@ namespace TFI.GUI
 {
     public partial class Producto : System.Web.UI.Page
     {
-
-
         private ProductoCore _manager;
         public const string IMAGES_CONTAINER = "/Content/Images/Productos/";
         private int _IdProducto;
@@ -35,9 +28,7 @@ namespace TFI.GUI
 
         private void LoadProducto(int IdProducto)
         {
-            //lblProductoNombre.InnerText = producto.CodigoProducto;
             imgProducto.Attributes["src"] = string.Format("{0}{1}", IMAGES_CONTAINER, producto.URL);
-
         }
 
         //protected void btnComprar_ServerClick(object sender, EventArgs e)
@@ -62,8 +53,5 @@ namespace TFI.GUI
         //        //no puede comprar, debe estar registrado y haber iniciado sesion
         //    }
         //}
-
-
-
     }
 }

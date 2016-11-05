@@ -14,9 +14,6 @@ namespace TFI.GUI
         public static ProductoEntidad producto;
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad logueado;
-        
-
-
 
         private string stringBusqueda = null;
         private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
@@ -30,8 +27,7 @@ namespace TFI.GUI
         {
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
-
-             if (logueado != null)
+            if (logueado != null)
             {
                 //this.Master.IngresoDeUsuario = false;
                 //this.Master.SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
@@ -41,19 +37,13 @@ namespace TFI.GUI
                 this.Master.ActualizarDeseos();
             }
 
-           
-            
-
-
             if (!IsPostBack)
             {
                 stringBusqueda = Page.Request.QueryString["search"];
             }
 
-
             if (!string.IsNullOrEmpty(stringBusqueda))
             {
-
                 unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
 
                 catalogo.DataSource = unosProductos;
@@ -65,7 +55,6 @@ namespace TFI.GUI
                 notif.Attributes.Remove("hidden");
                 notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
             }
-
         }
 
         [WebMethod]
@@ -84,11 +73,12 @@ namespace TFI.GUI
             }
             else
             {
-                
-                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
             }
-            return producto.CodigoProducto;
+            return producto.DescripProducto;
         }
+
         [WebMethod]
         public static void AgregarDeseo(string idProducto)
         {
@@ -118,23 +108,16 @@ namespace TFI.GUI
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
                 unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
                 unaListaProductos.Add(unProductoEntidad);
-                //} 
+                //}
                 //listaDeseosSesion.Add(unaListaDeseo);
                 Current.Session["ListaDeseos"] = unaListaProductos;
                 //ActualizarDeseos();
-
             }
-
         }
-
 
         protected void btnDesear_Click(object sender, EventArgs e)
         {
             this.Master.ActualizarDeseos();
         }
-
-
-
-
     }
 }
