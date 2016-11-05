@@ -20,7 +20,8 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdProducto", prodCategoria.IdProducto),
-				new SqlParameter("@IdCategoria", prodCategoria.IdCategoria)
+				new SqlParameter("@IdCategoria", prodCategoria.IdCategoria),
+                new SqlParameter("@CUIT", prodCategoria.CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProdCategoriaInsert", parameters);

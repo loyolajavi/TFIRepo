@@ -80,6 +80,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx" />
+    <Content Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx" />
+    <Content Include="Areas\Intranet\Forms\GestionContenidoProductos.aspx" />
+    <Content Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx" />
     <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
@@ -171,6 +175,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx.cs">
+      <DependentUpon>GestionContenidoCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx.designer.cs">
+      <DependentUpon>GestionContenidoCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx.cs">
+      <DependentUpon>GestionContenidoProdCat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx.designer.cs">
+      <DependentUpon>GestionContenidoProdCat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoProductos.aspx.cs">
+      <DependentUpon>GestionContenidoProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoProductos.aspx.designer.cs">
+      <DependentUpon>GestionContenidoProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx.cs">
+      <DependentUpon>GestionContenidoQuienesSomos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx.designer.cs">
+      <DependentUpon>GestionContenidoQuienesSomos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Intranet\Forms\OrdenesPedido.aspx.cs">
       <DependentUpon>OrdenesPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

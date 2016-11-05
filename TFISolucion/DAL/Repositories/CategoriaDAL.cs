@@ -21,10 +21,11 @@ namespace TFI.DAL.DAL
 
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@DescripCategoria", categoria.DescripCategoria)
+				new SqlParameter("@DescripCategoria", categoria.DescripCategoria),
+                new SqlParameter("@CUIT", categoria.CUIT)
 			};
 
-			categoria.IdCategoria = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "CategoriaInsert", parameters);
+			SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "CategoriaInsert", parameters);
 		}
 
 		/// <summary>
@@ -37,7 +38,8 @@ namespace TFI.DAL.DAL
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdCategoria", categoria.IdCategoria),
-				new SqlParameter("@DescripCategoria", categoria.DescripCategoria)
+				new SqlParameter("@DescripCategoria", categoria.DescripCategoria),
+                new SqlParameter("@CUIT", categoria.CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "CategoriaUpdate", parameters);
@@ -92,6 +94,25 @@ namespace TFI.DAL.DAL
 			}
 		}
 
+        /// <summary>
+        /// Selects all records from the Categoria table.
+        /// </summary>
+        public List<CategoriaEntidad> CategoriaSelectAllByCUIT(string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", CUIT)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "CategoriaSelectAllByCUIT", parameters))
+            {
+                List<CategoriaEntidad> categoriaEntidadList = new List<CategoriaEntidad>();
+
+                categoriaEntidadList = Mapeador.Mapear<CategoriaEntidad>(dt);
+
+                return categoriaEntidadList;
+            }
+        }
 
 		#endregion
 	}

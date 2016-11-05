@@ -2,6 +2,7 @@
 using System.Linq;
 using TFI.DAL.DAL;
 using TFI.Entidades;
+using TFI.CORE.Helpers;
 
 namespace TFI.CORE.Managers
 {
@@ -32,7 +33,7 @@ namespace TFI.CORE.Managers
 
         public LenguajeControlEntidad FindControl(int lenguajeID, string control)
         {
-            return _dalControl.Select(control, lenguajeID);
+            return _dalControl.Select(control, lenguajeID,ConfigSection.Default.Site.Cuit);
         }
 
         public List<LenguajeControlEntidad> FindControlAll()

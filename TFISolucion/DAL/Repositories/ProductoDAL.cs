@@ -16,7 +16,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Saves a record to the Producto table.
         /// </summary>
-        public void Insert(ProductoEntidad producto)
+        public int Insert(ProductoEntidad producto)
         {
             ValidationUtility.ValidateArgument("producto", producto);
 
@@ -31,7 +31,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@URL", producto.URL)
 			};
 
-            producto.IdProducto = (int)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoInsert", parameters);
+        return producto.IdProducto = Convert.ToInt32(SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoInsert", parameters));
         }
 
         /// <summary>

@@ -663,12 +663,17 @@ namespace TFI.GUI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                var Id = (string)e.Row.Cells[7].Text;
+
+                var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
+
                 var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
                 if (ddl != null)
                 {
                     ddl.DataSource = UsuarioBLL.SelectALLProvincias();
                     ddl.DataValueField = "IdProvincia";
                     ddl.DataTextField = "DescripcionProvincia";
+                    ddl.SelectedIndex = Dire.IdProvincia - 1;
                     ddl.DataBind();
 
                 }

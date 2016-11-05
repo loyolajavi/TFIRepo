@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Helpers\HelperPedidoDetalle.cs" />
+    <Compile Include="Managers\CategoriaCore.cs" />
     <Compile Include="Managers\DireccionCore.cs" />
+    <Compile Include="Managers\EmpresaCore.cs" />
     <Compile Include="Managers\LenguajeCore.cs" />
     <Compile Include="Managers\ListaDeseosCore.cs" />
     <Compile Include="Managers\PedidoCore.cs" />

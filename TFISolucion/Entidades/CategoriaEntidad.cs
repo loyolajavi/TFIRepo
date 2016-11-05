@@ -4,35 +4,6 @@ namespace TFI.Entidades
 {
 	public class CategoriaEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the CategoriaEntidad class.
-		/// </summary>
-		public CategoriaEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the CategoriaEntidad class.
-		/// </summary>
-		public CategoriaEntidad(string descripCategoria, DateTime? fecBaja)
-		{
-			this.DescripCategoria = descripCategoria;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the CategoriaEntidad class.
-		/// </summary>
-		public CategoriaEntidad(int idCategoria, string descripCategoria, DateTime? fecBaja)
-		{
-			this.IdCategoria = idCategoria;
-			this.DescripCategoria = descripCategoria;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>
@@ -44,6 +15,8 @@ namespace TFI.Entidades
 		/// Gets or sets the DescripCategoria value.
 		/// </summary>
 		public string DescripCategoria { get; set; }
+
+        public string CUIT { get; set; }
 
 		/// <summary>
 		/// Gets or sets the FecBaja value.

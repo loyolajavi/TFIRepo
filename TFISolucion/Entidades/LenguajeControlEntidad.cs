@@ -21,6 +21,8 @@ namespace TFI.Entidades
 		/// </summary>
 		public string Valor { get; set; }
 
+        public string CUIT { get; set; }
+
 		/// <summary>
 		/// Gets or sets the FecBaja value.
 		/// </summary>

@@ -60,27 +60,27 @@ namespace TFI.DAL.DAL
 		}
 
 
-		/// <summary>
-		/// Selects a single record from the LenguajeControl table.
-		/// </summary>
-		public LenguajeControlEntidad Select(string texto, int idLenguaje)
-		{
-			SqlParameter[] parameters = new SqlParameter[]
+        /// <summary>
+        /// Selects a single record from the LenguajeControl table.
+        /// </summary>
+        public LenguajeControlEntidad Select(string texto, int idLenguaje, string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Texto", texto),
-				new SqlParameter("@IdLenguaje", idLenguaje)
+				new SqlParameter("@IdLenguaje", idLenguaje),
+                new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "LenguajeControlSelect", parameters))
-			{
+            {
                 LenguajeControlEntidad LenguajeControlEntidad = new LenguajeControlEntidad();
 
                 LenguajeControlEntidad = Mapeador.MapearFirst<LenguajeControlEntidad>(dt);
 
                 return LenguajeControlEntidad;
-			}
-		}
-
+            }
+        }
 		
 		/// <summary>
 		/// Selects all records from the LenguajeControl table.

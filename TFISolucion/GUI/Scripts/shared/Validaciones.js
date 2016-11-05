@@ -200,3 +200,138 @@ function onbtnGrabarEnvio (){
     });
     return true;
 };
+
+/***************************** FUNCIONES LUCAS  **************//////////////
+
+/***************************** FUNCIONES DE CONTENIDO QUIENES SOMOS  **************//////////////
+function onbtnActualizar() {
+    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+
+    var parametros = {
+        NombreEmpresa: $('#NombreEmpresa').val(),
+        TelefonoEmpresa: $('#TelefonoEmpresa').val(),
+        MailEmpresa: $('#MailEmpresa').val(),
+        QuienesSomos: $('#QuienesSomos').val(),
+        Mision: $('#Mision').val(),
+        Vision: $('#Vision').val()
+    };
+
+
+    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+    $.ajax({
+        type: 'POST',                               // tipo de llamada (POST, GET)
+        url: 'GestionContenidoQuienesSomos.aspx/ActualizarContenidoQuienesSomos',
+        dataType: "json",  // el URL del método que vamos a llamar
+        // los parámetros en formato JSON
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            // $('#notification').text('La información ha sido guardada exitosamente.');
+            //window.location.reload();
+            //Exito("Se ha cambiado la contraseña con exito");
+        },
+        error: function (data) {          // función que se va a ejecutar si el pedido falla
+            alert("ERROR ");
+            //  Error("No se ha podido realizar la consulta");
+
+        }
+    });
+    return true;
+};
+
+
+function onbtnGrabarProducto() {
+    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+    var parametros = {
+        codigoproducto: $('#codigo').val(),
+        descripcion: $('#descripcion').val(),
+        marca: $('#ddlmarcamodal').val(),
+        iva: $('#ddlivamodal').val(),
+        precio: $('#preciounitario').val(),
+        url: $('#url').val(),
+        detalle: $('#descriplarga').val(),
+        categoria: $('#ddlcategoriamodal').val()
+    };
+
+
+    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+    $.ajax({
+        type: 'POST',                               // tipo de llamada (POST, GET)
+        url: 'GestionContenidoProductos.aspx/GrabarProducto',
+        dataType: "json",  // el URL del método que vamos a llamar
+        // los parámetros en formato JSON
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            // $('#notification').text('La información ha sido guardada exitosamente.');
+            //window.location.reload();
+            //Exito("Se ha cambiado la contraseña con exito");
+        },
+        error: function (data) {          // función que se va a ejecutar si el pedido falla
+            alert("ERROR ");
+            //  Error("No se ha podido realizar la consulta");
+
+        }
+    });
+    return true;
+};
+
+
+function onbtnGrabarCategoria() {
+    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+    var parametros = {
+        descripcion: $('#descripcion').val()
+    };
+
+
+    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+    $.ajax({
+        type: 'POST',                               // tipo de llamada (POST, GET)
+        url: 'GestionContenidoCategorias.aspx/GrabarCategoria',
+        dataType: "json",  // el URL del método que vamos a llamar
+        // los parámetros en formato JSON
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            // $('#notification').text('La información ha sido guardada exitosamente.');
+            //window.location.reload();
+            //Exito("Se ha cambiado la contraseña con exito");
+        },
+        error: function (data) {          // función que se va a ejecutar si el pedido falla
+            alert("ERROR ");
+            //  Error("No se ha podido realizar la consulta");
+
+        }
+    });
+    return true;
+};
+
+function onbtnAsociarCategoria() {
+    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+    var parametros = {
+        producto: $('#ddlProducto').val(),
+        categoria: $('#ddlCategoria').val()
+    };
+
+
+    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+    $.ajax({
+        type: 'POST',                               // tipo de llamada (POST, GET)
+        url: 'GestionContenidoProdCat.aspx/GrabarAsociacion',
+        dataType: "json",  // el URL del método que vamos a llamar
+        // los parámetros en formato JSON
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            // $('#notification').text('La información ha sido guardada exitosamente.');
+            //window.location.reload();
+            //Exito("Se ha cambiado la contraseña con exito");
+        },
+        error: function (data) {          // función que se va a ejecutar si el pedido falla
+            alert("ERROR ");
+            //  Error("No se ha podido realizar la consulta");
+
+        }
+    });
+    return true;
+};
