@@ -28,10 +28,6 @@ namespace TFI.GUI
         TextBox txtNumeroEnvio = new TextBox();
 
 
-
-        
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             DireccionesFacturacionDeUsuario.Clear();

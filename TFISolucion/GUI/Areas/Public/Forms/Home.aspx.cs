@@ -17,26 +17,12 @@ namespace TFI.GUI
         //SOLO FUNCIONA BUSCAR PRODUCTOS PORQUE ESTA HARDCODEADO EL CUIT EN EL WEB CONFIG
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
-        ListaDeseoEntidad unaListaDeseos;
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad logueado;
-        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            logueado = (UsuarioEntidad)Current.Session["Usuario"];
-
-
-            if (logueado != null)
-            {
-                //this.Master.IngresoDeUsuario = false;
-                //this.Master.SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
-                //this.Master.MostrarPedido = true;
-                //this.Master.MostrarDropDeseos = true;
-                //this.Master.ActualizarPedido();
-                this.Master.ActualizarDeseos();
-            }
-
 
             if (!IsPostBack)
             {
@@ -44,29 +30,18 @@ namespace TFI.GUI
                 ProductoCore unProductoCore = new ProductoCore();
 
 
-//**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
+                //**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
                 //SI ESTA LOGUEADO
-                    //MUESTRA PRODUCTOS PRODUCTOS QUE ESTAN DENTRO DE LA MISMA CATEGORIA DE LOS ULTIMOS QUE COMPRO
+                //MUESTRA PRODUCTOS PRODUCTOS QUE ESTAN DENTRO DE LA MISMA CATEGORIA DE LOS ULTIMOS QUE COMPRO
 
                 //SI NO
-                    //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
-
-
-                
-                //if (logueado != null)
-                //{
-                    
-                //}
-                //else
-                //{
-                    unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT().OrderByDescending(x => x.IdProducto).Take(2).ToList();
-                //}
-
+                //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
+                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT().OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
 
 
-//**************MOSTRAR PRODUCTOS MAS VENDIDOS (PARA LA SEGUNDA PESTAÑA)**********************************************************************                
+                //**************MOSTRAR PRODUCTOS MAS VENDIDOS (PARA LA SEGUNDA PESTAÑA)**********************************************************************                
                 unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
@@ -76,17 +51,7 @@ namespace TFI.GUI
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            ////******************************************************************
-            ////CODIGO PARA MOSTRAR LO AGREGADO A LA LISTA DE DESEOS, DPS BORRAR
-            //var Current = HttpContext.Current;
-            //List<ListaDeseoEntidad> ListaDeseosSesion = new List<ListaDeseoEntidad>();
 
-            //ListaDeseosSesion = (List<ListaDeseoEntidad>)Current.Session["ListaDeseos"];
-            //foreach (var item in ListaDeseosSesion)
-            //{
-            //    Response.Write(item.IdProducto);
-            //}
-            ////*************************************************************
         }
 
         [WebMethod]
@@ -110,19 +75,11 @@ namespace TFI.GUI
             if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
             {
                 //Agregar el deseo a la sesión actual
-                //List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
-                //unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueadoStatic.NombreUsuario);
-
-                //foreach (var item in unasListaDeseoEntidad)
-                //{
-                    ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                    unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
-                    unaListaProductos.Add(unProductoEntidad);
-                //} 
-                //listaDeseosSesion.Add(unaListaDeseo);
+                ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
+                unaListaProductos.Add(unProductoEntidad);
                 Current.Session["ListaDeseos"] = unaListaProductos;
-                //ActualizarDeseos();
-                
+
             }
 
         }
@@ -131,7 +88,7 @@ namespace TFI.GUI
         {
             this.Master.ActualizarDeseos();
         }
-        
+
 
 
 

@@ -16,9 +16,6 @@ namespace TFI.GUI.Shared
      
         private UsuarioCore _manager;
         HttpContext Current = HttpContext.Current;
-        ListaDeseosCore unaListaDeseosCore;
-        ProductoCore unProductoCore;
-        List<ProductoEntidad> listaDeseos;
         UsuarioEntidad usuario = new UsuarioEntidad();
 
         public MiCuenta()
@@ -28,9 +25,10 @@ namespace TFI.GUI.Shared
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var logueado = (UsuarioEntidad)Session["Usuario"];
+            var logueado = (UsuarioEntidad)Current.Session["Usuario"];
             
-            if (logueado != null) {
+            if (logueado != null) 
+            {
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
                 LiPedido.Visible = true;
