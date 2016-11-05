@@ -47,3 +47,24 @@ footer {
 margin-bottom: 0px;
 
 }
+
+.item-toolbar {
+    margin: 10px;
+    text-align: center;
+}
+
+.btn {
+    width: 100px;
+}
+
+.precio {
+    font: 400 19px/27px "Open Sans", "Roboto", sans-serif;
+    color: #424242;
+}
+
+.notification {
+    background-color: #f3d1d1;
+    vertical-align: middle;
+    height: 30px;
+    padding: 5px;
+}

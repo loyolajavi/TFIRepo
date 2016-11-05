@@ -18,9 +18,9 @@ namespace TFI.GUI {
         /// <remarks>
         /// Propiedad generada automáticamente.
         /// </remarks>
-        public new TFI.GUI.General.LayoutBasico Master {
+        public new TFI.GUI.Shared.MiCuenta Master {
             get {
-                return ((TFI.GUI.General.LayoutBasico)(base.Master));
+                return ((TFI.GUI.Shared.MiCuenta)(base.Master));
             }
         }
     }

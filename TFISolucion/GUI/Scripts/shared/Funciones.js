@@ -1,4 +1,4 @@
-﻿$('#btnDesear').click(function () { onBtnAddClick(this) })
+﻿//$('#btnDesear').click(function () { onBtnAddClick(this) })
 function onBtnAddClick(btn) {
     var control = $(btn);
     var idProd = control.data('producto')

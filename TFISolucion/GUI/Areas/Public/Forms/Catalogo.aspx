@@ -3,7 +3,7 @@
 
 <asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-    <style>
+<%--    <style>
         .item-toolbar {
             margin: 10px;
             text-align: center;
@@ -24,7 +24,7 @@
             height: 30px;
             padding: 5px;
         }
-    </style>
+    </style>--%>
 
     <div class="container">
 
@@ -39,7 +39,7 @@
             
             <div id="catalogoContainer" class="row">
                 <%-- ITEMS --%>
-                <asp:Repeater ID="catalogo" runat="server">
+                <asp:Repeater ID="catalogo" ClientIDMode="Static" runat="server">
                     <ItemTemplate>
                         <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail" style="text-align: center;">

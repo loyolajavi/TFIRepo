@@ -31,15 +31,6 @@ namespace TFI.GUI {
         protected global::System.Web.UI.WebControls.Repeater lstMasVendidos;
         
         /// <summary>
-        /// Control hola.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hola;
-        
-        /// <summary>
         /// Propiedad Master.
         /// </summary>
         /// <remarks>
