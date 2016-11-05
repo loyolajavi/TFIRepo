@@ -100,6 +100,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\propios\EstiloLayoutPropio.css" />
+    <Content Include="Content\css\propios\Pedido.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -109,7 +110,9 @@
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
+    <Content Include="Content\Images\Productos\GE15000ME.jpg" />
     <Content Include="Content\Images\Productos\GE8000.png" />
+    <Content Include="Content\Images\Productos\noimage.jpg" />
     <Content Include="Content\Images\Usuarios\cocaColaLogo.jpg" />
     <Content Include="Content\Images\Usuarios\computersLogo.jpeg" />
     <Content Include="Content\Images\Usuarios\enbelWayLogo.jpg" />

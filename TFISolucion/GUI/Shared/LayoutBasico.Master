@@ -195,8 +195,8 @@
             </asp:ContentPlaceHolder>
             <%--FIN Cuerpo de la pagina--%>
     </div>
-        
-            <footer class="container">
+        <div class="container">
+            <footer class="footer">
                 <div class="row navbar-inverse">
                     <section class="col-xs-12 col-md-6">
                         <h4>Información</h4>
@@ -217,7 +217,7 @@
                     </section>
                 </div>
             </footer>
-        
+       </div> 
     
     
 </form>

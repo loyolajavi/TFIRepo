@@ -4,55 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-    <style>
-        th {
-            padding: 7px 8px 9px 8px;
-        }
+    <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 
-        .message {
-            height: 35px;
-            background-color: #1c2069;
-            padding: 10px;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .space {
-            height: 50px;
-            margin-bottom: 100px;
-        }
-
-        .img-thumbnail {
-            height: 90px;
-            width: 90px;
-
-        }
-
-        .product-descripcion {
-            padding: 10px;
-        }
-
-        .cart_quantity_input {
-            height: 30px;
-            line-height: 27px;
-            padding: 0;
-            text-align: center;
-            width: 48px;
-            background: #fbfbfb;
-            text-align: center;
-        }
-
-        .cart {
-            margin-top: 4px;
-            border-radius: 0px;
-            width: 22px;
-            text-align: center;
-            vertical-align: middle;
-            padding: 1px;
-        }
-    </style>
-    
     <div>
 
         <h1>Productos en su pedido</h1>
@@ -70,7 +23,7 @@
                         <th class="text-center" id="txtPrecioUnitario">Precio Unitario</th>
                         <th class="text-center" id="txtCantidad">Cant.</th>
                         <th></th>
-                        <th class="text-right" id="txtTotal">Total</th>
+                        <th class="text-right" id="txtTotal">Total por Producto</th>
                     </tr>
                 </thead>
 
@@ -80,8 +33,8 @@
                     %>
                     <tr class="<%=p.Producto.IdProducto%>">
                         <td class="text-center" style="padding: 7px;">
-                            <div class="img-thumbnail">
-                                <img class="img-responsive" src="/Content/Images/Productos/<%=p.Producto.URL%>" />
+                            <div class="img-thumbnail img-thumbnail-cart">
+                                <img class="img-responsive" src="/Content/Images/Productos/<%=p.Producto.URL%>" style="vertical-align: middle;" />
                             </div>
                         </td>
                         <td class="product-descripcion">
@@ -103,10 +56,10 @@
                         </td>
                         <td class="text-center">
                             <div class="selection-div">
-                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="cart_quantity_input" value="<%=p.Cantidad%>" />
+                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" />
                                 <div>
-                                    <a class="cart btn btn-default btn-resta" href="#" title="Less">-</a>
-                                    <a class="cart btn btn-default btn-agrega" href="#" title="Add">+</a>
+                                    <a class="cart btn btn-default btn-resta" href="#" title="Menos">-</a>
+                                    <a class="cart btn btn-default btn-agrega" href="#" title="Mas">+</a>
                                 </div>
                             </div>
                         </td>
@@ -115,10 +68,10 @@
                                 <i class=" glyphicon glyphicon-trash"></i>
                             </button>
                         </td>
-                        <td class="text-center unitario" >
-                            <div >
+                        <td class="text-center unitario">
+                            <div>
                                 <p>
-                                    <span>ARS</span> <span>$</span> <span><%=p.Producto.PrecioUnitario %></span>
+                                    <span>$</span> <span id="unitario"><%=p.Producto.PrecioUnitario * p.Cantidad %></span>
                                 </p>
                             </div>
                         </td>
@@ -127,45 +80,45 @@
                     <%
                        } %>
                 </tbody>
-                <tfoot>
-                </tfoot>
             </table>
+            
+            <div class="pasos">
+                <button class="btn btn-lg pull-right" >Caja</button>
+
+            </div>
+
             <%
                } %>
         </div>
-        <hr />
-        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">d</div>
-    </div>
-    <br class="space" />
+        
+        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
 
-    <br />
-    <br />
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
 
     <script>
 
-
-
         $('.btn-agrega').click(function () {
 
             var parentInput = $(this).parents('td').find('input');
+            var idProducto = parentInput.data('prod');
 
             parentInput.val(Number(parentInput.val()) + 1);
+            actualizarCantidad(idProducto, (Number(parentInput.val())), $(this));
+
         });
 
         $('.btn-resta').click(function () {
 
             var parentInput = $(this).parents('td').find('input');
+            var idProducto = parentInput.data('prod');
 
             if (Number(parentInput.val() != 1)) {
                 parentInput.val(Number(parentInput.val()) - 1);
+                actualizarCantidad(idProducto, parentInput.val(), $(this));
             };
         });
-
-        var getIds = function () {
-
-        }
 
         $('.delete-cart').click(function () {
             $.ajax({
@@ -183,5 +136,26 @@
                 }
             });
         });
+
+        var actualizarCantidad = function (id, cantidad, control) {
+
+            $.ajax({
+                type: "POST",
+                url: "Pedidos.aspx/ActualizarCantidad",
+                data: JSON.stringify({
+                    id: id,
+                    cantidad: cantidad
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    control.parents('tr').find('#unitario').text(parseFloat(data.d).toFixed(2));
+                }
+            });
+
+        }
     </script>
 </asp:Content>

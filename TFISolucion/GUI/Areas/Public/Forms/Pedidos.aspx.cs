@@ -9,7 +9,6 @@ namespace TFI.GUI.Areas.Public.Forms
 {
     public partial class Pedidos : System.Web.UI.Page
     {
-        private EstadoPedidoEntidad _pedido;
         public List<ProductoEntidad> productos;
         public List<PedidoLista> lista;
 
@@ -44,7 +43,9 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             var Current = HttpContext.Current;
             var list = (List<ProductoEntidad>)Current.Session["Productos"];
+            var pedido = (List<PedidoLista>)Current.Session["Pedido"];
             Current.Session["Productos"] = list.Where(x => x.IdProducto != id).ToList();
+            Current.Session["Pedido"] = pedido.Where(x => x.Producto.IdProducto != id).ToList();
         }
 
         private void MostrarCarritoVacio()
@@ -53,16 +54,54 @@ namespace TFI.GUI.Areas.Public.Forms
             notificacionCarritoVacio.Attributes.Remove("hidden");
         }
 
+        [WebMethod]
+        public static Decimal ActualizarCantidad(int id, int cantidad)
+        {
+            ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+                .Where(x => x.Producto.IdProducto == id)
+                .First().Cantidad = cantidad;
+
+            var precio = ((List<PedidoLista>)HttpContext.Current.Session["Pedido"]).Where(x => x.Producto.IdProducto == id).First().Producto.PrecioUnitario;
+
+            return precio * cantidad;
+        }
+
         private void CrearPedidoLista()
         {
             var Current = HttpContext.Current;
 
             if (lista == null || !lista.Any())
             {
-                Current.Session["Pedido"] = new List<PedidoLista>();
                 lista = new List<PedidoLista>();
+                productos.ForEach(x =>
+                    lista.Add(new PedidoLista()
+                        {
+                            Producto = x,
+                            Cantidad = 1,
+                            Stock = true
+                        }));
+
+                Current.Session["Pedido"] = lista;
             }
-            productos.ForEach(x => lista.Add(new PedidoLista() { Producto = x, Cantidad = 1, Stock = true }));
+            else
+            {
+                var idsProductos = lista.Select(x => x.Producto.IdProducto).Distinct();
+                var nuevos = productos.Where(x => !idsProductos.Contains(x.IdProducto));
+
+                if (nuevos != null && nuevos.Any())
+                {
+                    nuevos
+                        .ToList()
+                        .ForEach(x => lista.Add(new PedidoLista()
+                            {
+                                Producto = x,
+                                Cantidad = 1,
+                                Stock = true
+                            }));
+
+                    Current.Session["Pedido"] = lista;
+                }
+            }
         }
 
         public class PedidoLista

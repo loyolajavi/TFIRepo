@@ -1,0 +1,58 @@
+﻿th {
+    padding: 7px 8px 9px 8px;
+}
+
+.message {
+    height: 35px;
+    background-color: #1c2069;
+    padding: 10px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.space {
+    height: 50px;
+    margin-bottom: 100px;
+}
+
+.img-thumbnail-cart {
+    height: 90px;
+    width: 90px;
+    border-radius: 0px;
+}
+
+.product-descripcion {
+    padding: 10px;
+}
+
+.input-cart-cantidad {
+    height: 30px;
+    line-height: 27px;
+    padding: 0;
+    text-align: center;
+    width: 48px;
+    background: #fbfbfb;
+    text-align: center;
+}
+
+.cart {
+    margin-top: 4px;
+    border-radius: 0px;
+    width: 22px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px;
+}
+
+.delete-cart {
+    width: 40px;
+}
+
+#tlbPedido {
+    margin-bottom: 60px;
+}
+
+.footer {
+    margin-top:60px;
+}
