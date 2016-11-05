@@ -18,11 +18,12 @@ namespace TFI.GUI
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
         HttpContext Current = HttpContext.Current;
-        public UsuarioEntidad logueado;
+        public UsuarioEntidad logueado = new UsuarioEntidad();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
 
             if (!IsPostBack)
             {

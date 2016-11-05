@@ -93,7 +93,7 @@
 
 
             <div id="test" runat="server">
-            <% if (productos != null && productos.Any())
+            <% if (unosProductosListaDeseo != null && unosProductosListaDeseo.Any())
                {
             %>
             <table class="table-bordered col-md-12" id="tlbPedido">
@@ -101,72 +101,47 @@
                     <tr>
                         <th class="text-center" id="txtProducto">Producto</th>
                         <th class="text-center" id="txtDescripcion">Descripción</th>
-                        <th class="text-center" id="txtDiponibilidad">Disponibilidad</th>
                         <th class="text-center" id="txtPrecioUnitario">Precio Unitario</th>
-                        <th class="text-center" id="txtCantidad">Cant.</th>
                         <th></th>
-                        <th class="text-right" id="txtTotal">Total</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <% foreach (var p in lista)
+                    <% foreach (var p in unosProductosListaDeseo)
                        {
                     %>
-                    <tr class="<%=p.Producto.IdProducto%>">
+                    <tr class="<%=p.IdProducto%>">
                         <td class="text-center" style="padding: 7px;">
                             <div class="img-thumbnail">
-                                <img class="img-responsive" src="/Content/Images/Productos/<%=p.Producto.URL%>" />
+                                <img class="img-responsive" src="/Content/Images/Productos/<%=p.URL%>" />
                             </div>
                         </td>
                         <td class="product-descripcion">
-                            <h4><%=p.Producto.DescripProducto%></h4>
-                            <small>SKU: <%=p.Producto.CodigoProducto%></small>
+                            <h4><%=p.DescripProducto%></h4>
+                            <small>SKU: <%=p.CodigoProducto%></small>
                         </td>
                         <td class="text-center">
                             <p>
-                                <%if (p.Stock)
-                                  { %><span>En Stock</span><% }
-                                  else
-                                  { %> <span>Sin Stock</span><% } %>
+                                <span>ARS</span> <span>$</span> <span><%=p.PrecioUnitario %></span>
                             </p>
                         </td>
                         <td class="text-center">
-                            <p>
-                                <span>ARS</span> <span>$</span> <span><%=p.Producto.PrecioUnitario %></span>
-                            </p>
-                        </td>
-                        <td class="text-center">
-                            <div class="selection-div">
-                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="cart_quantity_input" value="<%=p.Cantidad%>" />
-                                <div>
-                                    <a class="cart btn btn-default btn-resta" href="#" title="Less">-</a>
-                                    <a class="cart btn btn-default btn-agrega" href="#" title="Add">+</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-default delete-cart" data-producto="<%=p.Producto.IdProducto%>">
+                            <button class="btn btn-default delete-cart" data-producto="<%=p.IdProducto%>">
                                 <i class=" glyphicon glyphicon-trash"></i>
                             </button>
-                        </td>
-                        <td class="text-center unitario" >
-                            <div >
-                                <p>
-                                    <span>ARS</span> <span>$</span> <span><%=p.Producto.PrecioUnitario %></span>
-                                </p>
-                            </div>
                         </td>
                     </tr>
 
                     <%
                        } %>
+                    <%--FIN FOR EACH Productos Lista Deseos--%>
                 </tbody>
                 <tfoot>
                 </tfoot>
             </table>
             <%
                } %>
+                <%--FIN IF--%>
         </div>
 
 

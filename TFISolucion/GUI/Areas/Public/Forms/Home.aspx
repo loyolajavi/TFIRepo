@@ -60,7 +60,7 @@
                                                 </div>
                                                 <div class="item-toolbar">
                                                      <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                                    <%if (logueado != null){%>
+                                                    <%if (this.Master.usuario != null){%>
                                                     <%--<input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" onclient="if (onBtnAddClick(this));" onserverclick="Page_Load" /> --%>
                                                     <asp:button Cssclass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" onClick="btnDesear_Click" />
                                                      <%}%>
@@ -85,7 +85,8 @@
                                                     <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                     <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                     <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />    
-                                                     <%if (logueado != null){%>
+                                                     <%if (this.Master.usuario != null)
+                                                       {%>
                                                     <input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" onclick="onBtnAddClick(this)" /> 
                                                      <%}%>
                                                 </div>

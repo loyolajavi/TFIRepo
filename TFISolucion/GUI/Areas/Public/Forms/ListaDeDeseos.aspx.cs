@@ -15,24 +15,23 @@ namespace TFI.GUI
 
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad logueado;
-        List<ProductoEntidad> unosProductosListaDeseo = new List<ProductoEntidad>();
+        public List<ProductoEntidad> unosProductosListaDeseo = new List<ProductoEntidad>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
              logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
-
-            if (logueado != null)
-            {
-                //this.Master.ActualizarDeseos(); LO COMENTO PARA PROBAR SI FUNCIONA PONIENDOLO EN EL MASTER SOLAMENTE
-            }
-
-
             if (!IsPostBack)
             {
 
-                ProductoCore unProductoCore = new ProductoCore();
-                unosProductosListaDeseo = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
+                
+                unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"]; 
+
+                
+
+
+                //ProductoCore unProductoCore = new ProductoCore();
+                //unosProductosListaDeseo = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
                 //rptProductosListaDeseo.DataSource = unosProductosListaDeseo;
                 //rptProductosListaDeseo.DataBind();
             }

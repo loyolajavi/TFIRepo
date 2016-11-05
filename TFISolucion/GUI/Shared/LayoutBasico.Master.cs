@@ -17,7 +17,7 @@ namespace TFI.GUI.General
     {
         private UsuarioCore _manager;
         HttpContext Current = HttpContext.Current;
-        UsuarioEntidad usuario = new UsuarioEntidad();
+        public UsuarioEntidad usuario { get; set; } 
 
         public LayoutBasico()
         {
@@ -27,15 +27,17 @@ namespace TFI.GUI.General
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            usuario = new UsuarioEntidad();
+            usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-                if (logueado != null)
+
+                if (usuario != null)
                 {
                     liIngresar.Visible = false;
                     liRegistrarse.Visible = false;
                     LiPedido.Visible = true;
                     LiDeseos.Visible = true;
-                    SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
+                    SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
                     CargarListaDeseosEnSession();
                 }
                 else
