@@ -82,6 +82,7 @@
   <ItemGroup>
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
+    <Content Include="Areas\Public\Forms\Contacto.aspx" />
     <Content Include="Areas\Public\Forms\DatosPersonales.aspx" />
     <Content Include="Areas\Public\Forms\ListaDeDeseos.aspx" />
     <Content Include="Areas\Public\Forms\Pedidos.aspx" />
@@ -104,6 +105,11 @@
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE8000.png" />
+    <Content Include="Content\Images\Usuarios\cocaColaLogo.jpg" />
+    <Content Include="Content\Images\Usuarios\computersLogo.jpeg" />
+    <Content Include="Content\Images\Usuarios\enbelWayLogo.jpg" />
+    <Content Include="Content\Images\Usuarios\microsoftLogo.jpg" />
+    <Content Include="Content\Images\Usuarios\SonyLogo.jpg" />
     <Content Include="Global.asax" />
     <Content Include="LCSK\Agent.html" />
     <Content Include="LCSK\agent.js" />
@@ -178,6 +184,14 @@
     <Compile Include="Areas\Public\Forms\ClientesEmpresa.aspx.designer.cs">
       <DependentUpon>ClientesEmpresa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Public\Forms\Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\CorreoCore.cs" />
     <Compile Include="Areas\Public\Forms\DatosPersonales.aspx.cs">
       <DependentUpon>DatosPersonales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -270,7 +270,22 @@ namespace TFI.DAL.DAL
             }
         }
 
+        public List<UsuarioEntidad> EmpresasConMasPedidos(string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", CUIT)
+				
+			};
 
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "rankingEmpresas", parameters))
+            {
+                List<UsuarioEntidad> lista = new List<UsuarioEntidad>();
+                lista = Mapeador.Mapear<UsuarioEntidad>(dt);
+
+                return lista;
+            }
+        }
 
 
 

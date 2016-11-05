@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
+    <Compile Include="Correo.cs" />
     <Compile Include="Encriptacion.cs" />
     <Compile Include="IdiomaManager.cs" />
     <Compile Include="LenguajeManager.cs" />

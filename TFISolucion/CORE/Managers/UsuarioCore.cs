@@ -155,7 +155,17 @@ namespace TFI.CORE.Managers
             DaldeDireccionUsuario.Update(direccion);
         }
 
+        /// <summary>
+        /// Metodo que retorna los 5 clientes(empresas solamente) 
+        /// que mas hayan comprado en toda la historia de la empresa.
+        /// </summary>
+        /// <param name="CUIT"></param>
+        /// <returns></returns>
+        public List<UsuarioEntidad> EmpresasConMasPedidos(string cuit)
+        {
+            return DaldeUsuario.EmpresasConMasPedidos(cuit);
 
+        }
 
     }
 }

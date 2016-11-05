@@ -68,3 +68,24 @@ margin-bottom: 0px;
     height: 30px;
     padding: 5px;
 }
+
+.requerido{
+    color:red;
+    margin-left:3px;
+
+}
+
+.form-control{
+    margin-bottom:10px;
+
+}
+.g-recaptcha{
+    margin-bottom: 300px;
+     margin-left: 300px;
+
+}
+
+#btnsContacto{
+    margin-bottom:60px;
+
+}
