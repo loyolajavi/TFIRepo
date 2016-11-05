@@ -54,9 +54,6 @@ namespace TFI.GUI.General
             Salir.CssClass = "btn-danger";
         }
 
-        //public bool MostrarPedido { set { LiPedido.Visible = value; } }
-
-        //public bool MostrarDropDeseos { set { LiDeseos.Visible = value; } }
 
         protected void Salir_Click(object sender, EventArgs e)
         {
@@ -73,9 +70,7 @@ namespace TFI.GUI.General
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
 
-                    //var Current = HttpContext.Current;
-                    //listaDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-
+            
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
                         Session["Usuario"] = usuario;
@@ -96,12 +91,12 @@ namespace TFI.GUI.General
 
                     usuario.Apellido = RegistroApellido.Value;
                     usuario.Clave = RegistroPassword1.Value;
-                    usuario.NroIdentificacion = ""; //Por ahora se banca null pero hay que ver que hacemos
+                    usuario.NroIdentificacion = "";
                     usuario.Email = RegistroEmail.Value;
-                    usuario.IdUsuarioTipo = 1; //Esto lo sabemos porque son tipos fijos, 1 es cliente, 2 es empleado
+                    usuario.IdUsuarioTipo = 1; //Cliente
                     usuario.Nombre = RegistroNombre.Value;
                     usuario.NombreUsuario = RegistroUsuario.Value;
-                    usuario.IdCondicionFiscal = 1; //Y esto?? acepta null pero igual, de donde lo sacamos?
+                    usuario.IdCondicionFiscal = 1;
 
                     UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
                     UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
@@ -184,8 +179,7 @@ namespace TFI.GUI.General
             sb.Append("<br/>");
             sb.Append("<br/>");
             sb.Append("<div class=\"form-group\">");
-            sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"btnListaDeseos\"  onserverclick=\"VerListaDeseos\" >");
-            //sb.Append("<a class=\"btn btn-success btn-block\" href=\"~\\ListaDeDeseos.aspx\"  >");
+            sb.Append("<button runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\"  onserverclick=\"VerListaDeseos\" >");
             sb.Append("Ver Lista Deseos");
             sb.Append("</button>");
             sb.Append("</div>");
