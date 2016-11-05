@@ -114,7 +114,6 @@ namespace TFI.GUI.General
 
                     usuario.Apellido = RegistroApellido.Value;
                     usuario.Clave = RegistroPassword1.Value;
-
                     usuario.NroIdentificacion = ""; //Por ahora se banca null pero hay que ver que hacemos
                     usuario.Email = RegistroEmail.Value;
                     usuario.IdUsuarioTipo = 1; //Esto lo sabemos porque son tipos fijos, 1 es cliente, 2 es empleado
@@ -122,11 +121,19 @@ namespace TFI.GUI.General
                     usuario.NombreUsuario = RegistroUsuario.Value;
                     usuario.IdCondicionFiscal = 1; //Y esto?? acepta null pero igual, de donde lo sacamos?
 
+                    UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
+                    UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
+
+                    if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario)) {
+                    
                     _manager.RegistrarUsuario(usuario);
 
                     Session["Usuario"] = usuario;
                     Response.Redirect("Home.aspx");
+                    }
+
                     break;
+                    
             }
         }
 

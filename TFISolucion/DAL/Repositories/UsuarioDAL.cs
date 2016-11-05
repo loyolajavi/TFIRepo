@@ -72,7 +72,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Clave", usuario.Clave),
 			};
 
-            usuario.IdUsuario = (int)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioInsert", parameters);
+            SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioInsert", parameters);
         }
 
         /// <summary>
