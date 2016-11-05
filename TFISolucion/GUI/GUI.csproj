@@ -80,6 +80,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
     <Content Include="Areas\Public\Forms\Contacto.aspx" />
@@ -170,6 +171,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Intranet\Forms\OrdenesPedido.aspx.cs">
+      <DependentUpon>OrdenesPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\OrdenesPedido.aspx.designer.cs">
+      <DependentUpon>OrdenesPedido.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Public\Forms\Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

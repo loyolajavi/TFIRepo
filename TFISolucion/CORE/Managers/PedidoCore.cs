@@ -45,6 +45,14 @@ namespace TFI.CORE.Managers
             return PedidoDetalleDAL.SelectAllByIdPedido(idPedido);
 
         }
+        public List<PedidoEntidad> SelectAllByCUIT(string CUIT)
+        {
+            // CUIT = "20310708071";
+            return PedidoDal.SelectAllByCUIT(CUIT);
+
+
+        }
+
 
 
     }
