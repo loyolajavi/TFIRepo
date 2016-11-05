@@ -191,7 +191,6 @@
     <Compile Include="Areas\Public\Forms\Contacto.aspx.designer.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Public\Forms\CorreoCore.cs" />
     <Compile Include="Areas\Public\Forms\DatosPersonales.aspx.cs">
       <DependentUpon>DatosPersonales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
