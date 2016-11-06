@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Caja" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="PedidosCaja.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosCaja" %>
+﻿<%@ Page Title="Caja" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="PedidosCaja.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosCaja" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -36,6 +36,11 @@
             padding-top: 10px;
             font-size: 12px;
         }
+
+        .td-lbl {
+            font-weight: bold;
+            width: 150px;
+        }
     </style>
 
     <% if (logueado == null)
@@ -43,8 +48,8 @@
 
     <div>
         <h1>Ingreso</h1>
+        <hr />
     </div>
-    <hr />
     <div class="row">
 
         <div class="col-xs-12 col-sm-6">
@@ -52,11 +57,11 @@
                 <h4 class="box-title">CREAR UNA CUENTA</h4>
                 <hr class="barras" />
                 <p id="msgRegistro">Por favor completar registro para poder continuar:</p>
-                <div class="form_content clearfix">
+                <div class="clearfix">
                     <br />
                     <label for="box-registro">Registro</label>
                     <br />
-                    <a href="#" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i> Registrarse como Cliente</a>
+                    <a href="#" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i>Registrarse como Cliente</a>
                     <br />
                 </div>
             </div>
@@ -67,7 +72,7 @@
                 <h4 class="box-title">INICIAR SESION</h4>
                 <hr class="barras" />
 
-                <div class="form_content clearfix">
+                <div class="clearfix">
                     <label for="box-registro">Usuario</label>
                     <br />
                     <input type="text" name="name" id="txtUser" />
@@ -81,7 +86,7 @@
                     <br />
                     <br />
                     <div>
-                        <a class="btn btn-success btn-box-registro" id="btnRegistro" href="#"><i class="glyphicon glyphicon-user"></i> Iniciar Sesion</a>
+                        <a class="btn btn-success btn-box-registro" id="btnRegistro" href="#"><i class="glyphicon glyphicon-user"></i>Iniciar Sesion</a>
                     </div>
                 </div>
             </div>
@@ -91,10 +96,106 @@
     <% }
        else
        { %>
+    <div>
+        <h1>Datos Personales</h1>
+        <hr />
+    </div>
+    <div class="row">
+         <div class="col-xs-12 col-sm-6">
+            <div class="box">
+                <h4 class="box-title">Direcion de Entrega</h4>
+                <hr class="barras" />
+                <%if (direccionEnvio != null)
+                  { %>
+                <div>
+                    <table>
+                        <tr>
+                            <td id="lblNombre" class="td-lbl">Destinatario : </td>
+                            <td><%=string.Format("{0} {1}", logueado.Nombre , logueado.Apellido)%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblcalle" class="td-lbl">Calle : </td>
+                            <td><%=direccionEnvio.Calle %>  <%=direccionEnvio.Numero %></td>
+                        </tr>
+                        <tr>
+                            <td id="lblProvincia" class="td-lbl">Provincia : </td>
+                            <td><%=direccionEnvio.IdProvincia%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblLocalidad" class="td-lbl">Localidad : </td>
+                            <td><%=direccionEnvio.Localidad%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblTelefono" class="td-lbl">Telefono : </td>
+                            <td><%if (telefonoContacto != null)
+                                  { %> <%=telefonoContacto.NroTelefono%>
+                                <% } else{ %> 
+                                Sin teléfono
+                                <%} %></td>
+                        </tr>
+                    </table>
+                </div>
+                <% }
+                  else
+                  {%>
+                <div>
+                    <p>No existe una direccion para envio, por favor cree una.</p>
+                </div>
+                <%} %>
+            </div>
+        </div>
 
-        
+         <div class="col-xs-12 col-sm-6">
+            <div class="box">
+                <h4 class="box-title">Direcion de Facturacion</h4>
+                <hr class="barras" />
+                <%if (direccionEnvio != null)
+                  { %>
+                <div>
+                    <table>
+                        <tr>
+                            <td id="lblFacturacionNombre" class="td-lbl">Destinatario : </td>
+                            <td><%=string.Format("{0} {1}", logueado.Nombre , logueado.Apellido)%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblFacturacioncalle" class="td-lbl">Calle : </td>
+                            <td><%=direccionEnvio.Calle %>  <%=direccionEnvio.Numero %></td>
+                        </tr>
+                        <tr>
+                            <td id="lblFacturacionProvincia" class="td-lbl">Provincia : </td>
+                            <td><%=direccionEnvio.IdProvincia%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblFacturacionLocalidad" class="td-lbl">Localidad : </td>
+                            <td><%=direccionEnvio.Localidad%></td>
+                        </tr>
+                        <tr>
+                            <td id="lblFacturacionTelefono" class="td-lbl">Telefono : </td>
+                            <td><%if (telefonoContacto != null)
+                                  { %> <%=telefonoContacto.NroTelefono%>
+                                <% } else{ %> 
+                                Sin teléfono
+                                <%} %></td>
+                        </tr>
+                    </table>
+                </div>
+                <% }
+                  else
+                  {%>
+                <div>
+                    <p>No existe una direccion para envio, por favor cree una.</p>
+                </div>
+                <%} %>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 50px;">
 
-
+        <div class="pasos">
+             <a class="btn btn-lg btn-warning pull-right btn-caja" href="Envio.aspx" style="border-radius:0px">Envio</a>
+        </div>
+    </div>
+    
     <% } %>
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="ScriptSection" runat="server">

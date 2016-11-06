@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Configuration;
 using TFI.DAL.DAL;
 using TFI.Entidades;
@@ -165,6 +166,19 @@ namespace TFI.CORE.Managers
         {
             return DaldeUsuario.EmpresasConMasPedidos(cuit);
 
+        }
+
+        public DireccionEntidad FindDireccionPredeterminada(string nombreUsuario)
+        {
+            var direccion = DaldeDireccionUsuario.SelectAllByCUIT_NombreUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario).Where(x => x.Predeterminada).FirstOrDefault();
+            if (direccion == null)
+                return null;
+            return DaldeDireccion.Select(direccion.IdDireccion);
+        }
+
+        public TelefonoEntidad FindTelefonoContacto(string nombreUsuario)
+        {
+            return DaldeTelefono.SelectTelefonosDeUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario).FirstOrDefault();
         }
 
     }

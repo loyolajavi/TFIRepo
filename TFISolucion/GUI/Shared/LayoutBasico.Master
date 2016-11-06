@@ -27,7 +27,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="img-thumbnail-cart">
+                        <div style="vertical-align:middle;">
                             <a href="/Areas/Public/Forms/Home.aspx">
                                 <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
