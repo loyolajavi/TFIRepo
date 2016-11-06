@@ -13,7 +13,6 @@ namespace TFI.GUI
         private ProductoCore _manager;
         public static ProductoEntidad producto;
         HttpContext Current = HttpContext.Current;
-        public UsuarioEntidad logueado;
 
         private string stringBusqueda = null;
         private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
@@ -25,17 +24,6 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            logueado = (UsuarioEntidad)Current.Session["Usuario"];
-
-            if (logueado != null)
-            {
-                //this.Master.IngresoDeUsuario = false;
-                //this.Master.SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
-                //this.Master.MostrarPedido = true;
-                //this.Master.MostrarDropDeseos = true;
-                //this.Master.ActualizarPedido();
-                this.Master.ActualizarDeseos();
-            }
 
             if (!IsPostBack)
             {

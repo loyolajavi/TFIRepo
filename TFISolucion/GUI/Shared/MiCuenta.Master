@@ -33,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/Areas/Extranet/Forms/Home.aspx">
+                    <a class="navbar-brand" href="/Areas/Public/Forms/Home.aspx">
                         <img src="/" alt="Empresa" /></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -211,11 +211,17 @@
                 </div>
             </footer>
 
-    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>
+
+    <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
+
+<%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
+    <script src="/Scripts/shared/Funciones.js"></script>
 
 
-    <asp:ContentPlaceHolder runat="server" ID="ScriptsSection"></asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
+        
+    </asp:ContentPlaceHolder>
 </form>
 </body>
 </html>

@@ -15,6 +15,20 @@ function onBtnAddClick(btn) {
 
 
 
+function onBtnComprar(btn2) {
+    var control = $(btn2);
+    var idProdComprar = control.data('producto2');
+
+    $.ajax({
+        type: "POST",
+        url: "listadedeseos.aspx/ComprarProducto",
+        data: '{ IdProdC: ' + idProdComprar + '}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+    return true;
+};
+
 
 var app = {
     redirect: function (url) {
@@ -25,4 +39,9 @@ var app = {
         window.location.reload();
     }
 
-}
+};
+
+
+
+
+

@@ -40,6 +40,7 @@ namespace TFI.GUI.Shared
             {
                 LiPedido.Visible = false;
                 LiDeseos.Visible = false;
+                Response.Redirect("Home.aspx");
             }
 
             
