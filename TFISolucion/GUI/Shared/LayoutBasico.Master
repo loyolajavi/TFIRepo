@@ -28,7 +28,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="img-thumbnail-cart">
+                        <div style="vertical-align:middle;">
                             <a href="/Areas/Public/Forms/Home.aspx">
                                 <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
@@ -246,9 +246,41 @@
     <%--<script src="/Scripts/jquery.signalR-2.1.2.min.js"></script>--%>
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script src="/LCSK/chat.js"></script>
-
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
     <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
 
+    <script>
+        var obtenerTags = function () {
+            var result;
+            $.ajax({
+                type: "POST",
+                url: "Home.aspx/ObtenerProductos",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+
+            return result;
+        }
+
+        var availableTags = obtenerTags();
+
+        //$("#txtClienteBusqueda").change(function () {
+        //    $(this).autocomplete({
+        //        source: availableTags
+        //    });
+        //});
+
+        $("#txtSearch").autocomplete({
+            source: availableTags
+        });
+    </script>
 
 
 

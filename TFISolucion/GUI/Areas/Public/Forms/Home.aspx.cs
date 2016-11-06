@@ -113,6 +113,20 @@ namespace TFI.GUI
         }
 
 
+        [WebMethod]
+        public static List<String> ObtenerProductos()
+        {
+            var core = new ProductoCore();
+           // var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+
+            var productosEmpresa = core.FindAllByCUIT();
+
+            return productosEmpresa.Select(x => x.DescripProducto).ToList();
+
+
+        }
+
+
 
     }//FIN CLASE
 }

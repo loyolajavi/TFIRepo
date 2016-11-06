@@ -30,12 +30,12 @@ var LCSKChat = function () {
 
         options.width = 250;
 
-        options.offlineTitle = 'Contact us!';
-        options.onlineTitle = 'Chat with us!';
+        options.offlineTitle = 'Contactenos!';
+        options.onlineTitle = 'Chatee con nosotros!';
 
-        options.waitingForOperator = 'Thanks, give us 1 minute to accept the chat...';
-        options.emailSent = 'Your email was sent, thanks we\'ll get back to you asap.';
-        options.emailFailed = 'Doh! The email could not be sent at the moment.<br /><br />Sorry about that.';
+        options.waitingForOperator = 'Gracias, espere unos segundos hasta que un agente pueda responder...';
+        options.emailSent = 'Gracias!, su mensaja fue enviado, la respuesta llegara lo antes posible.';
+        options.emailFailed = 'El email no puede ser enviado en este momento.<br /><br />Lo sentimos.';
 
     }
 
@@ -131,9 +131,9 @@ var LCSKChat = function () {
                 $('#chat-box-header').text(options.offlineTitle);
                 $('#chat-box-input').hide();
                 $('#chat-box').html(
-                    '<p>Your email</p><input type="text" id="chat-box-email" style="border:1px solid #0354cb;border-radius: 3px;width: 100%;" class="chat-editing" />' +
-                    '<p>Your message</p><textarea id="chat-box-cmt" cols="40" rows="7" class="chat-editing" style="border:1px solid #0354cb;border-radius: 3px;"></textarea>' +
-                    '<p><input type="button" id="chat-box-send" value="Contact us" />'
+                    '<p>Su direccion de Email:</p><input type="text" id="chat-box-email" style="border:1px solid #0354cb;border-radius: 3px;width: 100%;" class="chat-editing" /><p style="margin:2px;"></p>' +
+                    '<br/><p>Su mensaje</p><textarea id="chat-box-cmt" cols="40" rows="7" class="chat-editing" style="border:1px solid #0354cb;border-radius: 3px;width:100%;"></textarea>' +
+                    '<p><input type="button" id="chat-box-send" value="Contactenos!" />'
                 );
             }
         }

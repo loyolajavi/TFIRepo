@@ -20,7 +20,6 @@
                    {
                        bool primero = true;
                        foreach (var r in listaRecursos)
-                           
                        {%>
                 <div class="item <%if (primero)
                                    {%> active <% } %>">
@@ -28,7 +27,7 @@
                 </div>
 
                 <%
-                           primero = false;
+                                   primero = false;
                        }
                    } %>
             </div>
@@ -116,7 +115,4 @@
         </div>
 
     </div>
-
-
-
 </asp:Content>
