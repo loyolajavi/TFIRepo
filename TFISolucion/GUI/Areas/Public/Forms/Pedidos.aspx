@@ -6,9 +6,17 @@
 
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 
+    <style>
+        .btn-caja {
+            border-radius:0px;
+        }
+    </style>
+
     <div>
 
         <h1>Productos en su pedido</h1>
+
+
         <hr />
         <div id="test" runat="server">
             <% if (productos != null && productos.Any())
@@ -81,18 +89,16 @@
                        } %>
                 </tbody>
             </table>
-            
-            <div class="pasos">
-                <button class="btn btn-lg pull-right" >Caja</button>
 
+            <div class="pasos">
+                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosCaja.aspx">Caja</a>
             </div>
 
             <%
                } %>
         </div>
-        
-        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
 
+        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
@@ -157,5 +163,8 @@
             });
 
         }
+
+       
+
     </script>
 </asp:Content>
