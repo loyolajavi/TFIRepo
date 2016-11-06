@@ -1,20 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="OrdenesPedido.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.OrdenesPedido" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+
+    <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
-
     <div class="row">
-        <div class="col-md-3">
-            <p class="lead">Mi Cuenta</p>
-            <div class="list-group">
-                <a href="DatosPersonales.aspx" class="list-group-item">Datos Personales</a>
-                <a href="UltimosPedidos.aspx" class="list-group-item">Ultimos Pedidos</a>
-                <a href="ListaDeDeseos.aspx" class="list-group-item">Lista de deseos</a>
-                <a href="Tarjetas.aspx" class="list-group-item">Datos de tarjetas</a>
+        <div class="list-group col-md-4">
+            <div class="form-group">
+                <label for="txtClienteBusqueda" class="control-label">Cliente</label>
+
+                <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
+                <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" />
+
             </div>
+
+            <asp:DropDownList ID="ddlEstadoPedido" CssClass="form-control" runat="server"></asp:DropDownList>
+
         </div>
 
-       
+
+
         <div class="row" runat="server" id="contenedorsinpedidos">
             <div class="col-md-9">
                 <div class="alert alert-info alert-dismissable">
@@ -28,23 +37,26 @@
         <hr />
 
 
+        <div class="col-md-8">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" PageSize="4">
+                        <Columns>
+                            <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn-info" />
+                            <asp:BoundField DataField="NroPedido" HeaderText="Número de Pedido" />
+                            <asp:BoundField DataField="FechaPedido" HeaderText="Fecha de Pedido" />
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" />
+                            <asp:BoundField DataField="NombreUsuario" HeaderText="Cliente" />
+                            <asp:BoundField DataField="Total" HeaderText="Total" />
+                        </Columns>
+                    </asp:GridView>
+                </ContentTemplate>
 
-            <ContentTemplate>
-                <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand">
-                    <Columns>
-                        <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn-info" />
-                        <asp:BoundField DataField="NroPedido" HeaderText="Número de Pedido" />
-                        <asp:BoundField DataField="FechaPedido" HeaderText="Fecha de Pedido" />
-                        <asp:BoundField DataField="Estado" HeaderText="Estado" />
-                    </Columns>
-                </asp:GridView>
-            </ContentTemplate>
-
-        </asp:UpdatePanel>
+            </asp:UpdatePanel>
+        </div>
 
 
 
@@ -88,6 +100,50 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+</asp:Content>
+<asp:Content ID="Scripts" ContentPlaceHolderID="ScriptSection" runat="server">
+
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"></script>
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"></script>
+
+    <script>
+
+
+
+
+
+        var obtenerTags = function () {
+            var result;
+            $.ajax({
+                type: "POST",
+                url: "OrdenesPedido.aspx/ObtenerClientes",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+
+            return result;
+        }
+
+        var availableTags = obtenerTags();
+
+        //$("#txtClienteBusqueda").change(function () {
+        //    $(this).autocomplete({
+        //        source: availableTags
+        //    });
+        //});
+
+        $("#txtClienteBusqueda").autocomplete({
+            source: availableTags
+        });
+    </script>
+
 </asp:Content>

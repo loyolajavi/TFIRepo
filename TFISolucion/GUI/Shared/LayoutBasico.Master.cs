@@ -17,7 +17,7 @@ namespace TFI.GUI.General
     {
         private UsuarioCore _manager;
         HttpContext Current = HttpContext.Current;
-        public UsuarioEntidad usuario { get; set; } 
+        public UsuarioEntidad usuario { get; set; }
 
         public LayoutBasico()
         {
@@ -31,20 +31,20 @@ namespace TFI.GUI.General
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
 
-                if (usuario != null)
-                {
-                    liIngresar.Visible = false;
-                    liRegistrarse.Visible = false;
-                    LiPedido.Visible = true;
-                    LiDeseos.Visible = true;
-                    SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
-                    CargarListaDeseosEnSession();
-                }
-                else
-                {
-                    LiPedido.Visible = false;
-                    LiDeseos.Visible = false;
-                }
+            if (usuario != null)
+            {
+                liIngresar.Visible = false;
+                liRegistrarse.Visible = false;
+                LiPedido.Visible = true;
+                LiDeseos.Visible = true;
+                SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
+                CargarListaDeseosEnSession();
+            }
+            else
+            {
+                LiPedido.Visible = false;
+                LiDeseos.Visible = false;
+            }
 
         }
 
@@ -66,20 +66,20 @@ namespace TFI.GUI.General
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
-           
+
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
 
-            
+
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
                         Session["Usuario"] = usuario;
                         SetUsuarioLogueado(usuario.NombreUsuario);
 
                         CargarListaDeseosEnSession();
-                        
+
 
                         Response.Redirect(Request.RawUrl);
                     }
@@ -103,16 +103,17 @@ namespace TFI.GUI.General
                     UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
                     UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
 
-                    if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario)) {
-                    
-                    _manager.RegistrarUsuario(usuario);
+                    if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
+                    {
 
-                    Session["Usuario"] = usuario;
-                    Response.Redirect("Home.aspx");
+                        _manager.RegistrarUsuario(usuario);
+
+                        Session["Usuario"] = usuario;
+                        Response.Redirect("Home.aspx");
                     }
 
                     break;
-                    
+
             }
         }
 

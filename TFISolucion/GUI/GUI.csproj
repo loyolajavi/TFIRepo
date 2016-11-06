@@ -111,13 +111,14 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\bungee.ttf" />
-    <Content Include="Content\Images\Empresas\Logo Genloys.png" />
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE15000ME.jpg" />
     <Content Include="Content\Images\Productos\GE8000.png" />
     <Content Include="Content\Images\Productos\noimage.jpg" />
+    <Content Include="Content\Images\Recursos\Recurso1.jpg" />
+    <Content Include="Content\Images\Recursos\Recurso2.jpg" />
     <Content Include="Content\Images\Usuarios\cocaColaLogo.jpg" />
     <Content Include="Content\Images\Usuarios\computersLogo.jpeg" />
     <Content Include="Content\Images\Usuarios\enbelWayLogo.jpg" />
@@ -146,6 +147,21 @@
     <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\shared\Funciones.js" />
     <Content Include="Scripts\shared\Validaciones.js" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_highlight-soft_33_003147_1x100.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_highlight-soft_35_222222_1x100.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_highlight-soft_44_444444_1x100.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_loop_25_000000_21x21.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\thirdparty\Autocomplete\jquery-ui.css" />
+    <Content Include="Scripts\thirdparty\Autocomplete\jquery-ui.js" />
+    <Content Include="Scripts\thirdparty\Autocomplete\jquery.js" />
     <Content Include="Scripts\thirdparty\bootstrap.js" />
     <Content Include="Scripts\thirdparty\bootstrap.min.js" />
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.woff" />
@@ -342,7 +358,9 @@
       <DependentUpon>MiCuenta.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Images\Empresas\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CORE\CORE.csproj">
       <Project>{69fba2ed-4236-4620-b74b-aca63d94777b}</Project>

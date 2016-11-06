@@ -62,6 +62,7 @@
     <Compile Include="Managers\ListaDeseosCore.cs" />
     <Compile Include="Managers\PedidoCore.cs" />
     <Compile Include="Managers\ProductoCore.cs" />
+    <Compile Include="Managers\RecursoCore.cs" />
     <Compile Include="Managers\TarjetaCore.cs" />
     <Compile Include="Managers\UsuarioCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

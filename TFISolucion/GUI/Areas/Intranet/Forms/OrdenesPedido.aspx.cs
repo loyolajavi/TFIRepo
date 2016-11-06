@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
@@ -18,18 +19,19 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private PedidoCore pedidoCore = new PedidoCore();
         private DireccionCore DireccionCore = new DireccionCore();
         List<PedidoDTO> PedidosaMostrar = new List<PedidoDTO>();
+        private List<EstadoPedidoEntidad> listaEstados = new List<EstadoPedidoEntidad>();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            { }
+            //if (IsPostBack)
+            //{ }
             CargarGrillaUltimosPedidos();
+
         }
 
         private void CargarGrillaUltimosPedidos()
         {
-
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
             PedidosEntidad = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
@@ -60,7 +62,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
 
                 PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
-
+                PedidosDetalle = pedidoCore.PedidosDetalleSelect(PedidosEntidad[i].IdPedido);
+                PedidoAMostrar.Total = MontoTotalPorPedido(PedidosDetalle);
                 PedidosaMostrar.Add(PedidoAMostrar);
 
             }
@@ -68,6 +71,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grilladeultimospedidos.DataSource = PedidosaMostrar;
             grilladeultimospedidos.AutoGenerateColumns = false;
             grilladeultimospedidos.DataBind();
+            ddlEstadoPedido.DataSource = pedidoCore.EstadoPedidoSelectAll();
+
+            ddlEstadoPedido.DataValueField = "IdEstadoPedido";
+            ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
+            ddlEstadoPedido.DataBind();
+
+
         }
 
         public class PedidoDTO
@@ -124,9 +134,20 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             public string Estado { get; set; }
 
+            public double Total { get; set; }
+
             List<PedidoDetalleEntidad> Detalles = new List<PedidoDetalleEntidad>();
 
 
+
+        }
+
+        protected double MontoTotalPorPedido(List<PedidoDetalleEntidad> listaDetalle)
+        {
+            double montoTotal = 0;
+            foreach (var unDetalle in listaDetalle)
+                montoTotal += Convert.ToDouble(unDetalle.PrecioUnitario * unDetalle.Cantidad);
+            return montoTotal;
 
         }
 
@@ -149,5 +170,28 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             }
         }
+
+        protected void grilladeultimospedidos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grilladedetallesdelpedido.PageIndex = e.NewPageIndex;
+            CargarGrillaUltimosPedidos();
+
+
+        }
+
+        [WebMethod]
+        public static List<String> ObtenerClientes()
+        {
+            var core = new PedidoCore();
+            var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+
+            var pedidos = core.SelectAllByCUIT(usuarioentidad.CUIT);
+
+            return pedidos.Select(x => x.NombreUsuario).ToList();
+
+
+        }
+
+
     }
 }

@@ -19,11 +19,13 @@ namespace TFI.GUI
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad logueado = new UsuarioEntidad();
+        private RecursoCore _coreRecurso = new RecursoCore();
+        public List<String> listaRecursos;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            listaRecursos = CargarRecursos();
 
             if (!IsPostBack)
             {
@@ -47,6 +49,7 @@ namespace TFI.GUI
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
             }
+            
 
         }
 
@@ -90,6 +93,24 @@ namespace TFI.GUI
             this.Master.ActualizarDeseos();
         }
 
+        protected List<string> CargarRecursos()
+        {
+            return _coreRecurso.SelectAll().Select(x => x.Url).ToList();
+
+        }
+
+        [WebMethod]
+        public static List<String> ObtenerProductosEmpresa()
+        {
+            var core = new ProductoCore();
+
+
+            var pedidos = core.FindAllByCUIT();
+
+            return pedidos.Select(x => x.DescripProducto).ToList();
+
+
+        }
 
 
 

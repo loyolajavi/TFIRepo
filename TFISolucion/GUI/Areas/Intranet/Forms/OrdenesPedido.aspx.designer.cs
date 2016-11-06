@@ -13,6 +13,33 @@ namespace TFI.GUI.Areas.Intranet.Forms {
     public partial class OrdenesPedido {
         
         /// <summary>
+        /// Control txtClienteBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClienteBusqueda;
+        
+        /// <summary>
+        /// Control btnBuscarCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
+        
+        /// <summary>
+        /// Control ddlEstadoPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoPedido;
+        
+        /// <summary>
         /// Control contenedorsinpedidos.
         /// </summary>
         /// <remarks>

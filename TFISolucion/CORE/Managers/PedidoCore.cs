@@ -53,6 +53,13 @@ namespace TFI.CORE.Managers
 
         }
 
+        public List<EstadoPedidoEntidad> EstadoPedidoSelectAll()
+        {
+
+            return EstadoPedidoDal.SelectAll();
+
+
+        }
 
 
     }

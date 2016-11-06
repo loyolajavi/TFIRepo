@@ -88,6 +88,7 @@
     <Compile Include="Repositories\ProdCategoriaDAL.cs" />
     <Compile Include="Repositories\ProductoDAL.cs" />
     <Compile Include="Repositories\ProvinciaDAL.cs" />
+    <Compile Include="Repositories\RecursoDAL.cs" />
     <Compile Include="Repositories\ReservaDAL.cs" />
     <Compile Include="Repositories\StockSucursalDAL.cs" />
     <Compile Include="Repositories\SucursalDAL.cs" />
