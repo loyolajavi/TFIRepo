@@ -62,6 +62,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private void CargarGrillaProductos()
         {
 
+            ProductosDeEmpresa.Clear();
+
             ProductoCore ProductoBLL = new ProductoCore();
             ProductosDeEmpresa = ProductoBLL.FindAllByCUIT();
 
@@ -81,10 +83,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grillaproductos.AutoGenerateColumns = false;
 
 
-            if (!IsPostBack)
-            {
-                grillaproductos.DataBind();
-            }
+         
+           grillaproductos.DataBind();
+            
 
         }
 
@@ -120,8 +121,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             GridViewRow row = grillaproductos.Rows[e.RowIndex];
             var CodigoProducto = ((TextBox)row.Cells[2].Controls[0]).Text;
             var Descripcion = ((TextBox)row.Cells[3].Controls[0]).Text;
-            var Marca = ((DropDownList)row.Cells[4].Controls[1]).SelectedIndex + 1;
-            var IVA = ((DropDownList)row.Cells[5].Controls[1]).SelectedIndex + 1;
+            var Marca = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue.ToString();
+            var IVA = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue.ToString();
             var PrecioUnitario = ((TextBox)row.Cells[6].Controls[0]).Text;
             var URL = ((TextBox)row.Cells[7].Controls[0]).Text;
             var Detalle = ((TextBox)row.Cells[8].Controls[0]).Text;
@@ -132,8 +133,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductoActualizado.CUIT = ConfigSection.Default.Site.Cuit;
             ProductoActualizado.CodigoProducto = CodigoProducto;
             ProductoActualizado.DescripProducto = Descripcion;
-            ProductoActualizado.IdMarca = Marca;
-            ProductoActualizado.IdIvaProducto = IVA;
+            ProductoActualizado.IdMarca = Convert.ToInt32(Marca);
+            ProductoActualizado.IdIvaProducto = Convert.ToInt32(IVA);
             ProductoActualizado.PrecioUnitario = Convert.ToDecimal(PrecioUnitario);
             ProductoActualizado.URL = URL;
             ProductoActualizado.DescripLarga = Detalle;
@@ -278,6 +279,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
 
             UnCoreProducto.ProductoCategoriaInsert(NuevaIntermedia);
+
+        }
+
+        protected void grillaproductos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grillaproductos.PageIndex = e.NewPageIndex;
+            CargarGrillaProductos();
 
         }
     }

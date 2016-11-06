@@ -50,7 +50,8 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", producto.CUIT),
 				new SqlParameter("@IdIvaProducto", producto.IdIvaProducto),
 				new SqlParameter("@DescripProducto", producto.DescripProducto),
-				new SqlParameter("@URL", producto.URL)
+				new SqlParameter("@URL", producto.URL),
+                 new SqlParameter("@DescripLarga", producto.DescripLarga)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoUpdate", parameters);

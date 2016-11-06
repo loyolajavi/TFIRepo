@@ -70,7 +70,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ElementosaActualizar.Add("QuienesSomos", QuienesSomos);
             ElementosaActualizar.Add("Mision", Mision);
             ElementosaActualizar.Add("Vision", Vision);
-            ElementosaActualizar.Add("TeleEmpresa", TelefonoEmpresa);
+            ElementosaActualizar.Add("TelEmpresa", TelefonoEmpresa);
             ElementosaActualizar.Add("MailEmpresa", MailEmpresa);
 
             foreach (var elemento in ElementosaActualizar)

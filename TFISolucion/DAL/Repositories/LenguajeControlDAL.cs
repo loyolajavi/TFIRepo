@@ -22,7 +22,8 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@Texto", lenguajeControl.Texto),
 				new SqlParameter("@IdLenguaje", lenguajeControl.IdLenguaje),
-				new SqlParameter("@Valor", lenguajeControl.Valor)
+				new SqlParameter("@Valor", lenguajeControl.Valor),
+                new SqlParameter("@CUIT", lenguajeControl.CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "LenguajeControlInsert", parameters);
@@ -39,7 +40,8 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@Texto", lenguajeControl.Texto),
 				new SqlParameter("@IdLenguaje", lenguajeControl.IdLenguaje),
-				new SqlParameter("@Valor", lenguajeControl.Valor)
+				new SqlParameter("@Valor", lenguajeControl.Valor),
+                new SqlParameter("@CUIT", lenguajeControl.CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "LenguajeControlUpdate", parameters);
