@@ -21,7 +21,7 @@ function onBtnComprar(btn2) {
 
     $.ajax({
         type: "POST",
-        url: "listadedeseos.aspx/ComprarProducto",
+        url: "ListaDeDeseos.aspx/ComprarProducto",
         data: '{ IdProdC: ' + idProdComprar + '}',
         contentType: "application/json; charset=utf-8",
         dataType: "json"

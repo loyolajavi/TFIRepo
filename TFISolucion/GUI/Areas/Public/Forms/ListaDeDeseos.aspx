@@ -53,7 +53,7 @@
             </thead>
 
             <tbody>
-                <asp:Repeater ID="lstProductos" ClientIDMode="Static" runat="server">
+                <asp:Repeater ID="lstProductos" runat="server">
                     <ItemTemplate>
                         <tr class=<%#Eval("IdProducto")%>>
                             <td class="text-center" style="padding: 7px;">
@@ -71,7 +71,7 @@
                                 </p>
                             </td>
                             <td class="text-center">
-                                <asp:button Cssclass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="Comprar" OnClientClick="return onBtnComprar(this)" onClick="btnComprarListaDeseos" />
+                                <asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="Comprar" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />
                             </td>
                         </tr>
 
