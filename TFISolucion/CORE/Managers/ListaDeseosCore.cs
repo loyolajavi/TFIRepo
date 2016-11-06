@@ -27,8 +27,12 @@ namespace TFI.CORE.Managers
                 return 1; //Así se si se inserto algo o no
             }
             return 0;
-            
+        }
 
+        public void ListaDeseosDelete(ListaDeseoEntidad elDeseo)
+        {
+            elDeseo.CUIT = ConfigSection.Default.Site.Cuit;
+            unaListaDeseosDAL.Delete(elDeseo);
         }
 
 

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
+using System.Web.Services;
 
 namespace TFI.GUI
 {
@@ -28,48 +29,67 @@ namespace TFI.GUI
             }
         }
 
-
+        
+        [WebMethod]
         public static void ComprarProducto(string IdProdC)
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
             producto = manager.Find(Int32.Parse(IdProdC));
             List<ProductoEntidad> ListaDeseo = new List<ProductoEntidad>();
-
+            UsuarioEntidad logueadoStatic;
+            
+            logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
             var list = (List<ProductoEntidad>)Current.Session["ListaDeseo"];
 
-            if (list == null || !list.Any())
+            if (logueadoStatic != null)
             {
-                Current.Session["Productos"] = new List<ProductoEntidad>();
-                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-            }
-            else
-            {
-                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                if (list == null || !list.Any())
+                {
+                    Current.Session["Productos"] = new List<ProductoEntidad>();
                     ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+                }
+                else
+                {
+                    if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                        ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+                }
+
+
+                //Quitar al producto de la lista de deseos (solo de SESSION), no así de la bd
+                ListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+
+                if (ListaDeseo != null || ListaDeseo.Any())
+                {
+                    ListaDeseo.RemoveAll(x => x.IdProducto == producto.IdProducto);
+                    Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
+                    Current.Session["ListaDeseos"] = ListaDeseo;
+                }
+
+                //Quitar al producto en BD de la lista de deseos
+                ListaDeseosCore unListaDeseoCore = new ListaDeseosCore();
+                ListaDeseoEntidad DeseoEliminar = new ListaDeseoEntidad();
+                DeseoEliminar.IdProducto = producto.IdProducto;
+                DeseoEliminar.NombreUsuario = logueadoStatic.NombreUsuario;
+                unListaDeseoCore.ListaDeseosDelete(DeseoEliminar);
             }
-            
-            
-            //Quitar al producto de la lista de deseos (solo de SESSION), no así de la bd
-            ListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-            ListaDeseo.RemoveAll(x => x.IdProducto == producto.IdProducto);
-
-
         }
 
-        protected void btnComprarListaDeseos(object sender, EventArgs e)
+        protected void ComprarListaDeseos(object sender, EventArgs e)
         {
-            unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             cargarListaDeseos();
         }
 
         public void cargarListaDeseos()
         {
+
+            unosProductosListaDeseo = 
             unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             lstProductos.DataSource = null;
             lstProductos.DataBind();
             lstProductos.DataSource = unosProductosListaDeseo;
             lstProductos.DataBind();
+            this.Master.ActualizarDeseos();
         }
 
 
