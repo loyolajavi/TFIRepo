@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
     <div class="col-lg-12">
-        <h1 class="page-header">Categorias<small>Gestion de Contenidos</small>
+        <h1 class="page-header">Categorias <small>Gestion de Contenidos</small>
         </h1>
     </div>
 

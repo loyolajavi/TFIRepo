@@ -99,8 +99,11 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\propios\EstiloLayoutPropio.css" />
     <Content Include="Content\css\propios\Pedido.css" />
+    <Content Include="Content\css\sb-admin.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -148,6 +151,10 @@
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Files\lcsk.dat" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />

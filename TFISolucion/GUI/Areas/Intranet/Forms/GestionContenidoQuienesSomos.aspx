@@ -46,7 +46,7 @@
     <hr />
 
      
-    <asp:Button ID="btnActualizar" runat="server" clientidmode="static" class="btn-primary btn-info" OnClientClick="return onbtnActualizar(this)" OnClick="btnActualizar_Click" Text="Actualizar" />
+    <asp:Button ID="btnActualizar" runat="server" clientidmode="static" class="btn btn-primary" OnClientClick="return onbtnActualizar(this)" OnClick="btnActualizar_Click" Text="Actualizar" />
 
 </asp:Content>
 
