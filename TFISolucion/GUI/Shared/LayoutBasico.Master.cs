@@ -91,6 +91,8 @@ namespace TFI.GUI.General
 
                 case ("Registrarse"):
 
+                    usuario = new UsuarioEntidad();
+
                     usuario.Apellido = RegistroApellido.Value;
                     usuario.Clave = RegistroPassword1.Value;
                     usuario.NroIdentificacion = "";
