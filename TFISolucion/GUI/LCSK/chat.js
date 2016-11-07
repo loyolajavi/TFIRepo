@@ -122,7 +122,7 @@ var LCSKChat = function () {
             if (!requestChat) {
                 $('#chat-box').html(
                     '<div id="chat-box-msg" style="height:265px;overflow:auto;">' +
-                    '<p>Have a question? Let\'s chat!</p><p>Add your question on the field below and press ENTER.</p></div>' +
+                    '<p>Tiene consultas? Chatee con nosotros!</p><p>Escriba aquí y presione Enter.</p></div>' +
                     '<div id="chat-box-input" style="height:35px;"><textarea id="chat-box-textinput" style="width:100%;height: 32px;border:1px solid #0354cb;border-radius: 3px;" /></div>'
                 );
             }
@@ -179,9 +179,9 @@ var LCSKChat = function () {
                 toggleChatBox();
             }
 
-            $('#chat-box-msg').append('<p>Continuing your chat with <strong>' + agentName + '</strong></p>');
+            $('#chat-box-msg').append('<p>Continue su chat con: <strong>' + agentName + '</strong></p>');
         } else {
-            $('#chat-box-msg').append('<p>You are now chatting with <strong>' + agentName + '</strong></p>');
+            $('#chat-box-msg').append('<p>Se encuentra chateando con: <strong>' + agentName + '</strong></p>');
         }
     };
 

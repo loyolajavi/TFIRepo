@@ -11,6 +11,7 @@ using System.Text;
 using System.Net.Mail;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using TFI.FUNCIONES;
 
 
 namespace TFI.GUI.LCSK
@@ -116,7 +117,7 @@ namespace TFI.GUI.LCSK
                 Clients.Client(connectionId).setChat(connectionId, agent.Name, false);
 
                 Clients.Caller.addMessage(connectionId, "system", "You invited this visitor to chat...");
-                Clients.Client(connectionId).addMessage(agent.Name, "Hey there. I'm " + agent.Name + " let me know if you have any questions.");
+                Clients.Client(connectionId).addMessage(agent.Name, "Hola, que tal" + agent.Name + " vamos a ver si tenés preguntas.");
             }
         }
 
@@ -349,15 +350,17 @@ namespace TFI.GUI.LCSK
 
         public void SendEmail(string from, string message)
         {
-            var msg = new MailMessage();
-            msg.To.Add(new MailAddress(from));
-            msg.Subject = "LCSK - Offline Contact";
-            msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
+            Correo manager = new Correo();
+            manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", from, "", "martinez.juan.marcos@gmail.com", "", "Consulta Chat", message);
+            //var msg = new MailMessage();
+            //msg.To.Add(new MailAddress(from));
+            //msg.Subject = "LCSK - Offline Contact";
+            //msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
 
-            using (var client = new SmtpClient())
-            {
-                client.Send(msg);
-            }
+            //using (var client = new SmtpClient())
+            //{
+            //    client.Send(msg);
+            //}
         }
 
         #region Install and config methods
