@@ -114,4 +114,28 @@
         </div>
 
     </div>
+
+
+        <div class="modal fade" tabindex="-1" role="dialog">
+        <form id="mdl_pedido_agregado">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" style="color: #29ab29;">Felicitaciones!</h3>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>
+                            <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </asp:Content>

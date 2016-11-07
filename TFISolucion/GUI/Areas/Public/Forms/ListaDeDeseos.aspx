@@ -84,10 +84,10 @@
                         <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
                     </div>
                     <div class="modal-footer">
-                        <div class="text-center">
+                        <%--<div class="text-center">
                             <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>
                             <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -96,29 +96,9 @@
 
 
     <script>
-        $('#btn-pedidos').click(function () {
-            app.redirect('Pedidos.aspx')
-        });
 
-        $('.btn-comprar').click(function () {
-            var control = $(this);
-            var idProducto = control.data('producto');
-            $.ajax({
-                type: "POST",
-                url: "ListaDeDeseos.aspx/AgregarItem",
-                data: '{ id: ' + idProducto + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (result) {
-                    var $modal = $('.modal');
-                    $modal.find('#prod').text(result.d);
-                    $modal.modal("show");
-                }
-            });
-        });
+
+       
     </script>
 
 

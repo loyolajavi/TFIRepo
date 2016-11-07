@@ -14,6 +14,10 @@ function onBtnAddClick(btn) {
 };
 
 
+$('#btn-pedidos').click(function () {
+    app.redirect('Pedidos.aspx')
+});
+
 
 function onBtnComprar(btn2) {
     var control = $(btn2);
@@ -24,7 +28,15 @@ function onBtnComprar(btn2) {
         url: "ListaDeDeseos.aspx/ComprarProducto",
         data: '{ IdProdC: ' + idProdComprar + '}',
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (result) {
+            var $modal = $('.modal');
+            $modal.find('#prod').text(result.d);
+            $modal.modal("show");
+        }
     });
     return true;
 };

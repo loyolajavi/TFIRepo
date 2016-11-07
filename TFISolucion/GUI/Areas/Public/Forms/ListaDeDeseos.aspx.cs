@@ -31,7 +31,7 @@ namespace TFI.GUI
 
         
         [WebMethod]
-        public static void ComprarProducto(string IdProdC)
+        public static string ComprarProducto(string IdProdC)
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
@@ -72,7 +72,10 @@ namespace TFI.GUI
                 DeseoEliminar.IdProducto = producto.IdProducto;
                 DeseoEliminar.NombreUsuario = logueadoStatic.NombreUsuario;
                 unListaDeseoCore.ListaDeseosDelete(DeseoEliminar);
+
+                
             }
+            return producto.DescripProducto;
         }
 
         protected void ComprarListaDeseos(object sender, EventArgs e)
@@ -128,28 +131,7 @@ namespace TFI.GUI
         }
 
 
-        [WebMethod]
-        public static string AgregarItem(string id)
-        {
-            var Current = HttpContext.Current;
-            var manager = new ProductoCore();
-            producto = manager.Find(Int32.Parse(id));
-
-            var list = (List<ProductoEntidad>)Current.Session["Productos"];
-
-            if (list == null || !list.Any())
-            {
-                Current.Session["Productos"] = new List<ProductoEntidad>();
-                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-            }
-            else
-            {
-                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
-                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-            }
-            return producto.DescripProducto;
-        }
-
+        
 
     }
 }
