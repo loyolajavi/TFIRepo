@@ -4,13 +4,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mi Cuenta</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi Cuenta</title>
 
-<link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
-<link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
-   
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
+
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -21,61 +21,61 @@
 </head>
 <body>
 
-<form id="FormMiCuenta" runat="server">
-    <div class="container">
-        <!-- MENU -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/Areas/Public/Forms/Home.aspx">
-                        <img src="/" alt="Empresa" /></a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="nav navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                          <input type="text" id="txtSearch" runat="server" class="form-control" placeholder="Buscar..." />
-                          <a runat="server" onserverclick="searchButton_Click">
-                                <img src="/Content/Images/Iconos/Buscar.png" />
-                            </a>
-                        </div>
+    <form id="FormMiCuenta" runat="server">
+        <div class="container">
+            <!-- MENU -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/Areas/Public/Forms/Home.aspx">
+                            <img src="/" alt="Empresa" /></a>
                     </div>
-                   <ul class="nav navbar-nav navbar-right">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="nav navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" id="txtSearch" runat="server" class="form-control" placeholder="Buscar..." />
+                                <a runat="server" onserverclick="searchButton_Click">
+                                    <img src="/Content/Images/Iconos/Buscar.png" />
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
 
                             <li>
                                 <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
                             </li>
                             <li id="LiPedido" runat="server">
-                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido <b class="caret"></b></a>
-                               <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                   <li>
-                                       <div class="row">
-                                           <div class="col-md-12">
-                                               <div id="PedidoDropDown" runat="server">
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </li>
-                               </ul>
-                           </li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="PedidoDropDown" runat="server">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                             <li id="LiDeseos" runat="server">
-                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
-                               <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                   <li>
-                                       <div class="row">
-                                           <div class="col-md-12">
-                                               <div id="DeseosDropDown" runat="server">
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </li>
-                               </ul>
-                           </li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="DeseosDropDown" runat="server">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                             <li>
                                 <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
                             </li>
@@ -162,66 +162,97 @@
                             </li>
                         </ul>
                     </div>
-                
-            </div>
-        </nav>
 
-        <div class="row">
-            <div class="col-md-3">
-                <p class="lead">Mi Cuenta</p>
-                <div class="list-group">
-                    <a href="DatosPersonales.aspx" class="list-group-item">Datos Personales</a>
-                    <a href="UltimosPedidos.aspx" class="list-group-item">Ultimos Pedidos</a>
-                    <a href="ListaDeDeseos.aspx" class="list-group-item">Lista de deseos</a>
-                    <a href="Tarjetas.aspx" class="list-group-item">Datos de tarjetas</a>
                 </div>
+            </nav>
+
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-2" aria-expanded="true">
+                        <nav>
+                            <ul class="nav navbar-nav">
+                                <li><a href="Home.aspx">Inicio</a></li>
+                                <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">Quiénes Somos</a></li>
+                                <li><a href="/Areas/Public/Forms/ClientesEmpresa.aspx">Nuestros Clientes</a></li>
+                                <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*">Catálogo</a></li>
+                                <li><a href="/Areas/Public/Forms/Contacto.aspx">Contacto</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
             </div>
 
-            <div class="col-md-9">
-                 
+            <div class="row breadcrumb">
+                <asp:SiteMapDataSource ID="siteMap" runat="server" ShowStartingNode="true" />
+                <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator=" => " RenderCurrentNodeAsLink="false">
+                </asp:SiteMapPath>
+            </div>
 
-                   <%--Cuerpo de la Pagina--%>   
-                <asp:ContentPlaceHolder ID="ContentCuenta" runat="server">
-                </asp:ContentPlaceHolder>
-                <%--FIN Cuerpo de la pagina--%>
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="lead">Mi Cuenta</p>
+                    <div class="list-group">
+                        <a href="DatosPersonales.aspx" class="list-group-item">Datos Personales</a>
+                        <a href="UltimosPedidos.aspx" class="list-group-item">Ultimos Pedidos</a>
+                        <a href="ListaDeDeseos.aspx" class="list-group-item">Lista de deseos</a>
+                        <a href="Tarjetas.aspx" class="list-group-item">Datos de tarjetas</a>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+
+
+                    <%--Cuerpo de la Pagina--%>
+                    <asp:ContentPlaceHolder ID="ContentCuenta" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <%--FIN Cuerpo de la pagina--%>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <footer class="container">
-                <div class="row navbar-inverse">
-                    <section class="col-xs-12 col-md-6">
-                        <h4>Información</h4>
-                        <ul class="footer-navigation">
-						    <li class="item">
-					            <a href="#" title="Quiénes Somos">Quiénes Somos</a>
-				            </li>
-                            <li class="item">
-				                <a href="#" title="Contacto">Contacto</a>
-			                </li>
-							<li class="item">
-						        <a href="#" title="Politicas de Privacidad">Politicas de Privacidad</a>
-					        </li>
-							<li>
-				                <a href="#" title="Mapa del sitio">Mapa del sitio</a>
-			                </li>
-					    </ul>                        
-                    </section>
-                </div>
-            </footer>
+        <footer class="container">
+            <div class="row navbar-inverse">
+                <section class="col-xs-12 col-md-6">
+                    <h4>Información</h4>
+                    <ul class="footer-navigation">
+                        <li class="item">
+                            <a href="#" title="Quiénes Somos">Quiénes Somos</a>
+                        </li>
+                        <li class="item">
+                            <a href="#" title="Contacto">Contacto</a>
+                        </li>
+                        <li class="item">
+                            <a href="#" title="Politicas de Privacidad">Politicas de Privacidad</a>
+                        </li>
+                        <li>
+                            <a href="#" title="Mapa del sitio">Mapa del sitio</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </footer>
 
 
-    <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
+        <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
 
-<%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
-    <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
-    <script src="/Scripts/shared/Funciones.js"></script>
+        <%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
+        <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
+        <script src="/Scripts/shared/Funciones.js"></script>
 
 
-    <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
-        
-    </asp:ContentPlaceHolder>
-</form>
+        <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
+        </asp:ContentPlaceHolder>
+    </form>
 </body>
 </html>

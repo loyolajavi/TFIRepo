@@ -1,8 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap>
-  <siteMapNode url="Home.aspx" title="Inicio" description="Ir al Inicio">
-      <siteMapNode url="InfoEmpresa.aspx" title="Quiénes Somos" description="Quiénes Somos" />
-      <siteMapNode url="ClientesEmpresa.aspx" title="Clientes" description="Nuestros Clientes" />
+  <siteMapNode url="/Areas/Public/Forms/Home.aspx" title="Inicio" description="Ir al Inicio">
+    <siteMapNode url="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos" description="Quiénes Somos" />
+    <siteMapNode url="/Areas/Public/Forms/ClientesEmpresa.aspx" title="Clientes" description="Nuestros Clientes" />
+    <siteMapNode url="/Areas/Public/Forms/Catalogo.aspx" title="Catalogo" description="Nuestros Productos" />
+    <siteMapNode url="/Areas/Public/Forms/Contacto.aspx" title="Contacto" description="Contáctenos" />
+    <siteMapNode url="/Areas/Public/Forms/Pedidos.aspx" title="Resumen de Pedido" description="Orden de Pedido">
+      <siteMapNode url="/Areas/Public/Forms/PedidosCaja.aspx" title="Datos de Pedido" description="Confirmar Pedido" />  
+    </siteMapNode>
+    <siteMapNode url="/Areas/Public/Forms/DatosPersonales.aspx" title="Datos Personales" description="Datos Personales" />
+    <siteMapNode url="/Areas/Public/Forms/UltimosPedidos.aspx" title="Pedidos" description="Pedidos" />
+    <siteMapNode url="/Areas/Public/Forms/Tarjetas.aspx" title="Mis Tarjetas" description="Mis Tarjetas" />
+    <siteMapNode url="/Areas/Public/Forms/ListaDeDeseos.aspx" title="Deseos" description="Lista de Deseos" />
   </siteMapNode>
 
 </siteMap>
+
+

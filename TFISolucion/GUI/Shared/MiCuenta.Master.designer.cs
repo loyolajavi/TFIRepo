@@ -211,6 +211,24 @@ namespace TFI.GUI.Shared {
         protected global::System.Web.UI.WebControls.Button RegistrarBoton;
         
         /// <summary>
+        /// Control siteMap.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SiteMapDataSource siteMap;
+        
+        /// <summary>
+        /// Control siteMapMaster.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SiteMapPath siteMapMaster;
+        
+        /// <summary>
         /// Control ContentCuenta.
         /// </summary>
         /// <remarks>

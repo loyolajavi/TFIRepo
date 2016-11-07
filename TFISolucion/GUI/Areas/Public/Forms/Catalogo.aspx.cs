@@ -32,10 +32,24 @@ namespace TFI.GUI
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
                 {
-                    unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
 
-                    catalogo.DataSource = unosProductos;
-                    catalogo.DataBind();
+                    if (stringBusqueda == "*")
+                    {
+                        unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                        catalogo.DataSource = unosProductos;
+                        catalogo.DataBind();
+                    }
+                    else
+                    {
+                        unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
+                        catalogo.DataSource = unosProductos;
+                        catalogo.DataBind();
+                    }
+                }
+                else
+                {
+                    notif.Attributes.Remove("hidden");
+                    notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
                 }
 
                 if (!unosProductos.Any())

@@ -181,13 +181,16 @@
                                 <li><a href="Home.aspx">Inicio</a></li>
                                 <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">Quiénes Somos</a></li>
                                 <li><a href="/Areas/Public/Forms/ClientesEmpresa.aspx">Nuestros Clientes</a></li>
+                                <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*">Catálogo</a></li>
+                                <li><a href="/Areas/Public/Forms/Contacto.aspx">Contacto</a></li>
+
                             </ul>
                         </nav>
                     </div>
                 </nav>
             </div>
 
-            <div class="row" id="breadcrumb">
+            <div class="row breadcrumb">
                 <asp:SiteMapDataSource ID="siteMap" runat="server" ShowStartingNode="true" />
                 <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator=" => " RenderCurrentNodeAsLink="false">
                 </asp:SiteMapPath>
