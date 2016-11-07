@@ -62,7 +62,7 @@ namespace TFI.GUI
                 if (ListaDeseo != null || ListaDeseo.Any())
                 {
                     ListaDeseo.RemoveAll(x => x.IdProducto == producto.IdProducto);
-                    Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
+                    //Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
                     Current.Session["ListaDeseos"] = ListaDeseo;
                 }
 
@@ -83,16 +83,72 @@ namespace TFI.GUI
         public void cargarListaDeseos()
         {
 
-            unosProductosListaDeseo = 
             unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             lstProductos.DataSource = null;
             lstProductos.DataBind();
             lstProductos.DataSource = unosProductosListaDeseo;
             lstProductos.DataBind();
+        }
+
+
+
+        [WebMethod]
+        public static void AgregarDeseo(string idProducto)
+        {
+            var Current = HttpContext.Current;
+            var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
+            List<ProductoEntidad> unaListaProductos = new List<ProductoEntidad>();
+            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
+            ListaDeseoEntidad unaListaDeseo = new ListaDeseoEntidad();
+            ProductoCore unProductoCore = new ProductoCore();
+
+            unaListaProductos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+
+            unaListaDeseo.CUIT = ConfigSection.Default.Site.Cuit;
+            unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
+            unaListaDeseo.IdProducto = Int32.Parse(idProducto);
+
+            //Guardar en BD el nuevo deseo
+            if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
+            {
+                //Agregar el deseo a la sesión actual
+                ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
+                unaListaProductos.Add(unProductoEntidad);
+                Current.Session["ListaDeseos"] = unaListaProductos;
+
+            }
+
+        }
+
+        protected void btnDesear_Click(object sender, EventArgs e)
+        {
             this.Master.ActualizarDeseos();
         }
 
 
+        [WebMethod]
+        public static string AgregarItem(string id)
+        {
+            var Current = HttpContext.Current;
+            var manager = new ProductoCore();
+            producto = manager.Find(Int32.Parse(id));
+
+            var list = (List<ProductoEntidad>)Current.Session["Productos"];
+
+            if (list == null || !list.Any())
+            {
+                Current.Session["Productos"] = new List<ProductoEntidad>();
+                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+            }
+            else
+            {
+                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+            }
+            return producto.DescripProducto;
+        }
 
 
     }

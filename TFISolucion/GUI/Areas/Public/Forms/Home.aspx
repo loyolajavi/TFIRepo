@@ -23,7 +23,7 @@
                        {%>
                 <div class="item <%if (primero)
                                    {%> active <% } %>">
-                    <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" style="height: 300px; width: 800px;">
+                    <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" />
                 </div>
 
                 <%
@@ -70,7 +70,6 @@
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                                 <%if (this.Master.usuario != null)
                                                   {%>
-                                                <%--<input type="button" class="btn btn-info" ID="btnDesear" runat="server" data-producto=<%#Eval("IdProducto")%> value="Desear" onclient="if (onBtnAddClick(this));" onserverclick="Page_Load" /> --%>
                                                 <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
                                                 <%}%>
                                             </div>
@@ -99,7 +98,7 @@
                                                 <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />
                                                 <%if (this.Master.usuario != null)
                                                   {%>
-                                                <input type="button" class="btn btn-info" id="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
+                                                <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
                                                 <%}%>
                                             </div>
                                         </div>

@@ -28,20 +28,21 @@ namespace TFI.GUI
             if (!IsPostBack)
             {
                 stringBusqueda = Page.Request.QueryString["search"];
-            }
 
-            if (!string.IsNullOrEmpty(stringBusqueda))
-            {
-                unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
 
-                catalogo.DataSource = unosProductos;
-                catalogo.DataBind();
-            }
+                if (!string.IsNullOrEmpty(stringBusqueda))
+                {
+                    unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
 
-            if (!unosProductos.Any())
-            {
-                notif.Attributes.Remove("hidden");
-                notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
+                    catalogo.DataSource = unosProductos;
+                    catalogo.DataBind();
+                }
+
+                if (!unosProductos.Any())
+                {
+                    notif.Attributes.Remove("hidden");
+                    notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
+                }
             }
         }
 

@@ -12,6 +12,7 @@ namespace TFI.FUNCIONES
     {
         public void EnviarCorreo(string remitente, string contrasenia, string nombre, string telefono, string destinatario, string nombreEmpresa, string asunto, string cuerpoCorreo)
         {
+            string output = null;
             var serverSMTP = new SmtpClient();
             NetworkCredential credencial = new NetworkCredential(remitente, contrasenia);
             serverSMTP.Credentials = credencial;
@@ -23,7 +24,18 @@ namespace TFI.FUNCIONES
             correo.Subject = asunto;
             correo.Body = cuerpoCorreo;
             serverSMTP.EnableSsl = true;
-            serverSMTP.Send(correo);
+
+            try
+            {
+
+                serverSMTP.Send(correo);
+                correo.Dispose();
+                output = "E-Mail enviado correctamente";
+            }
+            catch (Exception ex)
+            {
+                output = "Error enviando el E-Mail, por favor reitente nuevamente";
+            }
 
         }
     }

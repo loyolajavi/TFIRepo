@@ -27,6 +27,8 @@ namespace TFI.Entidades
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
 
+        public int IdDeseo { get; set; }
+
 		#endregion
 	}
 }

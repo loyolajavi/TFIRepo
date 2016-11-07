@@ -20,7 +20,7 @@ namespace TFI.GUI
         protected void EnviarCorreo(object sender, EventArgs e)
         {
             Correo manager = new Correo();
-            manager.EnviarCorreo("mhernanmartinez@gmail.com", "bestiasexual1984", txtNombre.Value, txtTelefono.Value, txtCorreo.Value, "MascoTrans", txtAsunto.Value, txtMensaje.Value);
+            manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", txtNombre.Value, txtTelefono.Value, txtCorreo.Value, "MascoTrans", txtAsunto.Value, txtMensaje.Value);
 
 
         }

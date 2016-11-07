@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true"  CodeBehind="ListaDeDeseos.aspx.cs" Inherits="TFI.GUI.ListaDeDeseos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" EnableEventValidation="false"  CodeBehind="ListaDeDeseos.aspx.cs" Inherits="TFI.GUI.ListaDeDeseos" %>
 
 <%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 
@@ -22,22 +22,10 @@
 
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
     <div class="col-lg-12">
-        <h1 class="page-header">Lista de desos <small>Mi Cuenta</small>
+        <h1 class="page-header">Lista de deseos <small>Mi Cuenta</small>
         </h1>
     </div>
-<%--    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-            <h3 id="myModalLabel">Eliminar</h3>
-        </div>
-        <div class="modal-body">
-            <p></p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
-            <button data-dismiss="modal" class="btn red" id="btnYes">Confirmar</button>
-        </div>
-    </div>--%>
+
 
 
     <div>
@@ -84,7 +72,7 @@
 
     </div>
 
-<%--    <div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal fade" tabindex="-1" role="dialog">
         <form id="mdl_pedido_agregado">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -104,8 +92,34 @@
                 </div>
             </div>
         </form>
-    </div>--%>
+    </div>
 
+
+    <script>
+        $('#btn-pedidos').click(function () {
+            app.redirect('Pedidos.aspx')
+        });
+
+        $('.btn-comprar').click(function () {
+            var control = $(this);
+            var idProducto = control.data('producto');
+            $.ajax({
+                type: "POST",
+                url: "ListaDeDeseos.aspx/AgregarItem",
+                data: '{ id: ' + idProducto + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (result) {
+                    var $modal = $('.modal');
+                    $modal.find('#prod').text(result.d);
+                    $modal.modal("show");
+                }
+            });
+        });
+    </script>
 
 
 

@@ -69,7 +69,6 @@
     <Compile Include="LenguajeControlEntidad.cs" />
     <Compile Include="LenguajeEntidad.cs" />
     <Compile Include="ListaDeseoEntidad.cs" />
-    <Compile Include="ListaDeseosDetalleEntidad.cs" />
     <Compile Include="MarcaEntidad.cs" />
     <Compile Include="MonedaEmpresaEntidad.cs" />
     <Compile Include="MonedaEntidad.cs" />

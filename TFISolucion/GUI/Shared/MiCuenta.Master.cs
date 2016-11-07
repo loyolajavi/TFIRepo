@@ -175,12 +175,9 @@ namespace TFI.GUI.Shared
             }
             sb.Append("<br/>");
             sb.Append("<br/>");
-            sb.Append("<div class=\"form-group\">");
-            sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"btnListaDeseos\"  onserverclick=\"VerListaDeseos\" >");
-            //sb.Append("<a class=\"btn btn-success btn-block\" href=\"~\\ListaDeDeseos.aspx\"  >");
-            sb.Append("Ver Lista Deseos");
-            sb.Append("</button>");
-            sb.Append("</div>");
+            sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
+            sb.Append("Deseos");
+            sb.Append("</a>");
             DeseosDropDown.InnerHtml = sb.ToString();
         }
 

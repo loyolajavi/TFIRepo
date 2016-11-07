@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Catalogo.aspx.cs" Inherits="TFI.GUI.Catalogo" %>
+
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 <asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-<%--    <style>
+    <%--    <style>
         .item-toolbar {
             margin: 10px;
             text-align: center;
@@ -36,7 +37,7 @@
         <div class="col-md-9">
 
             <div id="notif" class="notification text-center" runat="server" hidden="hidden"></div>
-            
+
             <div id="catalogoContainer" class="row">
                 <%-- ITEMS --%>
                 <asp:Repeater ID="catalogo" ClientIDMode="Static" runat="server">
@@ -50,7 +51,11 @@
                                 </div>
                                 <div class="item-toolbar">
                                     <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                    <input type="button" value="Mas" data-producto='<%#Eval("IdProducto")%>' clientidmode="static" class="btn btn-info" runat="server" onclick="btnInfoClick" />
+                                    <%--<input type="button" value="Mas" data-producto='<%#Eval("IdProducto")%>' clientidmode="static" class="btn btn-info" runat="server" onclick="btnInfoClick" />--%>
+                                    <%if (this.Master.usuario != null)
+                                      {%>
+                                    <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
@@ -82,23 +87,6 @@
         </form>
     </div>
 
-    <%--ESTO ESTABA EN CODIGO JAVI 02/11/2016--%>
-    <%-- <asp:Repeater ID="lstBusquedaProductos" ClientIDMode="Static" runat="server">
-            <ItemTemplate>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
-                        <div class="caption">
-                            <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
-                            <h4>$<%#Eval("PrecioUnitario")%></h4>  <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-    <%--                      <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />
-                        </div>
-                    </div>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>--%>
-
-    <%-- </div>--%>
 </asp:Content>
 
 <asp:Content ID="Scripts" ClientIDMode="Static" ContentPlaceHolderID="ScriptSection" runat="server">
