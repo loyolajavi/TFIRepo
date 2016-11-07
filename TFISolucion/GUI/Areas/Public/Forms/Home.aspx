@@ -95,7 +95,8 @@
                                                 <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
                                                 <h4>$<%#Eval("PrecioUnitario")%></h4>
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
-                                                <asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />
+                                                <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
+                                                <%--<asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />--%>
                                                 <%if (this.Master.usuario != null)
                                                   {%>
                                                 <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />

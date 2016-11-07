@@ -42,6 +42,26 @@ function onBtnComprar(btn2) {
 };
 
 
+$('.btn-comprar').click(function () {
+    var control = $(this);
+    var idProducto = control.data('producto');
+    $.ajax({
+        type: "POST",
+        url: "Catalogo.aspx/AgregarItem",
+        data: '{ id: ' + idProducto + '}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (result) {
+            var $modal = $('.modal');
+            $modal.find('#prod').text(result.d);
+            $modal.modal("show");
+        }
+    });
+});
+
 var app = {
     redirect: function (url) {
         window.location.href = url;
