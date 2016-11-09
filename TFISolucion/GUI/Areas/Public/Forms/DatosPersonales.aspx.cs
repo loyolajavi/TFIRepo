@@ -15,6 +15,7 @@ namespace TFI.GUI
     public partial class DatosPersonales : System.Web.UI.Page
     {
         private UsuarioCore UsuarioBLL = new UsuarioCore();
+        private DireccionCore DireccionBLL = new DireccionCore();
         private UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         //Boolean tipo;
         List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
@@ -93,9 +94,6 @@ namespace TFI.GUI
 
             }
 
-
-
-
             DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
 
@@ -127,6 +125,25 @@ namespace TFI.GUI
                     //DiccionarioDeDirecciones.Add(item.IdDireccion, item);
                 }
 
+            }
+
+            if (DireccionesFacturacionDeUsuario.Count == 1)
+            {
+                DireccionesFacturacionDeUsuario[0].Predeterminada = true;
+                DireccionUsuarioEntidad ActualizarPred =new DireccionUsuarioEntidad();
+                ActualizarPred = DireccionBLL.DireccionUsuarioSelect(DireccionesFacturacionDeUsuario[0].IdDireccion).First();
+                ActualizarPred.Predeterminada = true;
+                UsuarioBLL.DireccionUsuarioUpdate(ActualizarPred);
+                
+            }
+
+            if (DireccionesEnvioDeUsuario.Count == 1)
+            {
+                DireccionesEnvioDeUsuario[0].Predeterminada = true;
+                DireccionUsuarioEntidad ActualizarPred = new DireccionUsuarioEntidad();
+                ActualizarPred = DireccionBLL.DireccionUsuarioSelect(DireccionesEnvioDeUsuario[0].IdDireccion).First();
+                ActualizarPred.Predeterminada = true;
+                UsuarioBLL.DireccionUsuarioUpdate(ActualizarPred);
             }
 
             grilladirecciondefacturacion.DataSource = DireccionesFacturacionDeUsuario;
@@ -665,6 +682,10 @@ namespace TFI.GUI
             {
                 var Id = (string)e.Row.Cells[7].Text;
 
+                if (string.IsNullOrEmpty(Id)) 
+                {
+                    Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
+                }
                 var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
 
                 var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
@@ -677,6 +698,7 @@ namespace TFI.GUI
                     ddl.DataBind();
 
                 }
+                
             }
 
         }

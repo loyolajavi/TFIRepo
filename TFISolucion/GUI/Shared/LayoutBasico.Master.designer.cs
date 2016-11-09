@@ -49,6 +49,15 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor EtiquetaUsuario;
         
         /// <summary>
+        /// Control LiIdioma.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiIdioma;
+        
+        /// <summary>
         /// Control LiPedido.
         /// </summary>
         /// <remarks>

@@ -12,10 +12,16 @@ namespace TFI.CORE.Managers
     {
 
         private DireccionDAL DalDeDireccion = new DireccionDAL();
+        private DireccionUsuarioDAL DalDeDireccionUsuario = new DireccionUsuarioDAL();
 
         public DireccionEntidad DireccionSelect(int idDireccion)
         {
             return DalDeDireccion.Select(idDireccion);
+        }
+
+        public List< DireccionUsuarioEntidad> DireccionUsuarioSelect(int iddireccion)
+        {
+            return DalDeDireccionUsuario.SelectAllByIdDireccion(iddireccion);
         }
 
     }
