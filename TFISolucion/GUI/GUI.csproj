@@ -111,14 +111,20 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\bungee.ttf" />
+    <Content Include="Content\Images\Empresas\Logo.png" />
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\GE10000ME.png" />
     <Content Include="Content\Images\Productos\GE12000ME.png" />
     <Content Include="Content\Images\Productos\GE15000ME.jpg" />
     <Content Include="Content\Images\Productos\GE8000.png" />
     <Content Include="Content\Images\Productos\noimage.jpg" />
+    <Content Include="Content\Images\Productos\ntvgcalor.jpg" />
+    <Content Include="Content\Images\Productos\ntvgtiempo.jpg" />
     <Content Include="Content\Images\Recursos\Recurso1.jpg" />
+    <Content Include="Content\Images\Recursos\Recurso1GM.jpg" />
     <Content Include="Content\Images\Recursos\Recurso2.jpg" />
+    <Content Include="Content\Images\Recursos\Recurso2GM.jpg" />
+    <Content Include="Content\Images\Recursos\Recurso3GM.jpg" />
     <Content Include="Content\Images\Usuarios\cocaColaLogo.jpg" />
     <Content Include="Content\Images\Usuarios\computersLogo.jpeg" />
     <Content Include="Content\Images\Usuarios\enbelWayLogo.jpg" />
@@ -358,9 +364,7 @@
       <DependentUpon>MiCuenta.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Images\Empresas\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CORE\CORE.csproj">
       <Project>{69fba2ed-4236-4620-b74b-aca63d94777b}</Project>

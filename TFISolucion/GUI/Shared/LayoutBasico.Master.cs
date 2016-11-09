@@ -97,7 +97,7 @@ namespace TFI.GUI.General
                     usuario.Clave = RegistroPassword1.Value;
                     usuario.NroIdentificacion = "";
                     usuario.Email = RegistroEmail.Value;
-                    usuario.IdUsuarioTipo = 1; //Cliente
+                    usuario.IdUsuarioTipo = 2; //Cliente
                     usuario.Nombre = RegistroNombre.Value;
                     usuario.NombreUsuario = RegistroUsuario.Value;
                     usuario.IdCondicionFiscal = 1;
