@@ -61,7 +61,7 @@
                     <br />
                     <label for="box-registro">Registro</label>
                     <br />
-                    <a href="#" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i>Registrarse como Cliente</a>
+                    <a href="RegistroCliente.aspx" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i>Registrarse como Cliente</a>
                     <br />
                 </div>
             </div>

@@ -3,8 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
 
     <%-- <form runat="server">--%>
@@ -35,7 +33,6 @@
                     <a id="btnLogin" class="btn btn-primary">Modificar Contraseña</a>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -67,8 +64,11 @@
                 </asp:GridView>
             </div>
 
+            <%-- TELEFONO LISTA --%>
+
             <div class="form-group">
                 <label for="grillatelefonos">Telefono</label>
+
                 <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
@@ -92,6 +92,12 @@
                     <SortedDescendingHeaderStyle BackColor="#383838" />
                 </asp:GridView>
             </div>
+            <div class="text-center">
+
+                <%-- TODO: AGREGAR TELEFONO --%>
+
+                <a href="#mdlAgregarTelefono" class="btn btn-primary" data-toggle="modal">Agregar Teléfono</a>
+            </div>
         </div>
     </div>
 
@@ -99,7 +105,7 @@
 
         <h2>Direcciones de Facturacion</h2>
 
-        <div class="col-lg-6">
+        <div class="text-center">
 
             <div class="form-group">
                 <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None">
@@ -179,22 +185,18 @@
                                 <div class="form-group">
                                     <label for="localidad">Localidad</label>
                                     <input type="text" class="form-control" id="localidad" runat="server" placeholder="Ingrese la localidad" clientidmode="static" />
-
                                 </div>
                                 <div class="form-group">
                                     <label for="provincia">Provincia</label>
                                     <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
-
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                    <asp:Button runat="server" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="Guardar"  OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
+                    <asp:Button runat="server" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="Guardar" OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -202,8 +204,9 @@
 
         <h2>Direcciones de Envio</h2>
 
-        <div class="col-lg-6">
+        <div class="text-center">
             <div class="form-group">
+
                 <label for="grilladirecciondeenvio">Direcciones de Envio</label>
                 <asp:GridView ID="grilladirecciondeenvio" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
                     <Columns>
@@ -265,7 +268,7 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label for="calleenvio">Calle</label>
-                                    <input type="text" class="form-control" ID="calleenvio" runat="server" placeholder="Ingrese la calle" clientidmode="static" /> 
+                                    <input type="text" class="form-control" id="calleenvio" runat="server" placeholder="Ingrese la calle" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <label for="numeroenvio">Numero</label>
@@ -286,7 +289,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlProvinciaEnvio">Provincia</label>
-                                    <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" clientidmode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
@@ -297,18 +300,15 @@
         </div>
     </div>
 
-
     <!--MODAL LOGIN-->
     <div class="modal fade" id="modalLogin" role="dialog">
         <div class="modal-dialog">
-
 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" id="btnCerrarModal" class="close" data-dismiss="modal">&times;</button>
                     <h2>Cambiar Contraseña</h2>
                     <div id="notification"></div>
-
                 </div>
                 <div class="modal-body">
                     <asp:UpdatePanel runat="server" ID="upContrasenia" UpdateMode="Conditional">
@@ -333,7 +333,6 @@
                                     <input type="password" class="form-control" id="passnuevarepetida" clientidmode="static" runat="server" placeholder="Repita la nueva contraseña" maxlength="20" />
                                 </div>
 
-
                                 <%-- <button type="button" id="btnCambiarContra" runat="server"="btnCambiarContra_Click">Cambiar</button>--%>
                             </form>
                         </ContentTemplate>
@@ -346,8 +345,6 @@
     </div>
     <%--</form>--%>
 </asp:Content>
-
-
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsSection" runat="server">
     <script src="../../../Scripts/shared/Validaciones.js"></script>

@@ -18,7 +18,7 @@ namespace TFI.GUI
         private DireccionCore DireccionBLL = new DireccionCore();
         private UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         //Boolean tipo;
-        List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
+        public List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
         List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
         //Dictionary<int, DireccionEntidad> DiccionarioDeDirecciones = new Dictionary<int, DireccionEntidad>();
         

@@ -96,6 +96,7 @@
     <Content Include="Areas\Public\Forms\PedidosEnvio.aspx" />
     <Content Include="Areas\Public\Forms\Producto.aspx" />
     <Content Include="Areas\Public\Forms\QuienesSomos.aspx" />
+    <Content Include="Areas\Public\Forms\RegistroCliente.aspx" />
     <Content Include="Areas\Public\Forms\Tarjetas.aspx" />
     <Content Include="Areas\Public\Forms\UltimosPedidos.aspx" />
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -322,6 +323,13 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\QuienesSomos.aspx.designer.cs">
       <DependentUpon>QuienesSomos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\RegistroCliente.aspx.cs">
+      <DependentUpon>RegistroCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\RegistroCliente.aspx.designer.cs">
+      <DependentUpon>RegistroCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\Tarjetas.aspx.cs">
       <DependentUpon>Tarjetas.aspx</DependentUpon>
