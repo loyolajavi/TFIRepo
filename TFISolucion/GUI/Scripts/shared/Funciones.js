@@ -90,12 +90,12 @@ var updateProductos = function () {
         success: function (data) {
             var container = $('#ulPedidos');
             var cant = data.d.length;
-
+            //LIMPIO DROP
             container.empty();
-            if(cant > 0)
+            //MUESTRO CANTIDAD
+            if (cant > 0)
                $('#cantProd').text('   (' + cant + ')');
-
-
+            //REGENERO EL DROP
             console.log(data.d.length);
             container.append(data.d);
             container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>")
