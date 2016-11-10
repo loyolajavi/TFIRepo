@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
-
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
         <div class="col-lg-12">
             <h1 class="page-header">Datos de tarjetas <small>Mi Cuenta</small>
@@ -47,11 +47,9 @@
 
 
 
-        <div class="col-lg-12 text-center">
             <!--MODAL Alta Tarjeta-->
             <div class="modal fade" id="modalAltaTarjeta">
                 <div class="modal-dialog">
-
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -60,28 +58,27 @@
                             </div>
                         </div>
                         <div class="modal-body">
-                            <form role="form">
+                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btnGrabarTarjeta" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <form role="form" id="formPass">
                                 <div class="form-group">
                                     <label for="tipoTarjeta">Tipo Tarjeta</label>
                                     <asp:DropDownList ID="tipoTarjeta" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta">Numero de tarjeta</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="Numero de tarjeta"/>
-                                    </div>
+                                    <input type="text" class="form-control" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="Numero de tarjeta"/>
                                 </div>
                                 <div class="form-group">
         <label class="col-sm-3 control-label" for="card-holder-name">Titular</label>
-        <div class="col-sm-9">
           <input type="text" class="form-control" name="card-holder-name" id="txtTitular" runat="server" placeholder="Nombre del titular"/>
-        </div>
       </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtCodigoSeguridad">Codigo de seguridad</label>
-                                    <div class="col-sm-3">
                                         <input type="text" runat="server" class="form-control" name="txtCodigoSeguridad" id="txtCodigoSeguridad" placeholder="Codigo de seguridad">
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="expiry-month">Fecha de Expiracion</label>
@@ -127,8 +124,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                   </form>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                                 <button type="button" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block">Aceptar</button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -142,7 +141,8 @@
                     <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Nombre del titular">
                 </div>
             </div>--%>
-        </div>
+
+    
 
 
 

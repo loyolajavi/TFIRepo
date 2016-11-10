@@ -123,7 +123,7 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Numero", numero),
-                new SqlParameter("@CuitEmpresa", cuit)
+                new SqlParameter("@CUIT", cuit)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectByNumero", parameters))

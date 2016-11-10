@@ -39,7 +39,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the Numero value.
 		/// </summary>
-		public long Numero { get; set; }
+		public Int64 Numero { get; set; }
 
 		/// <summary>
 		/// Gets or sets the CodSeguridad value.

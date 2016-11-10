@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.Entidades;
 using TFI.CORE.Managers;
+using TFI.CORE.Helpers;
 
 namespace TFI.GUI
 {
@@ -84,7 +85,7 @@ namespace TFI.GUI
             foreach (var t in TarjetasEntidad)
             {
                 TarjetaDTO TarjetaAMostrar = new TarjetaDTO();
-                TarjetaAMostrar.NumeroTarjeta = t.Numero;
+                TarjetaAMostrar.NumeroTarjeta = Convert.ToInt64(t.Numero);
                 var x = t.CodSeguridad.ToString();
                 TarjetaAMostrar.CodigoSeguridad = x.Replace(x, "****");
                 TarjetaAMostrar.FechaExpiracion = t.Vencimiento.ToShortDateString();
@@ -189,6 +190,15 @@ namespace TFI.GUI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                var numero = (string)e.Row.Cells[1].Text;
+
+                if (string.IsNullOrEmpty(numero))
+                {
+                    numero = ((TextBox)e.Row.Cells[1].Controls[0]).Text;
+                }
+
+                TarjetaEntidad tarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(numero), ConfigSection.Default.Site.Cuit);
+
                 var ddl = e.Row.FindControl("ddlTipoDeTarjeta") as DropDownList;
                 if (ddl != null)
                 {
@@ -196,6 +206,7 @@ namespace TFI.GUI
                     ddl.DataSource = TarjetaBLL.SelectAllTiposDeTarjeta();
                     ddl.DataValueField = "IdTipoTarjeta";
                     ddl.DataTextField = "Descripcion";
+                    ddl.SelectedValue = tarjeta.IdTipoTarjeta.ToString();
                     ddl.DataBind();
 
 
