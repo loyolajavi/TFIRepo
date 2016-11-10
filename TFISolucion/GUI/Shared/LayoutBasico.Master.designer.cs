@@ -256,6 +256,33 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderCuerpo;
         
         /// <summary>
+        /// Control nombreempresa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl nombreempresa;
+        
+        /// <summary>
+        /// Control TelEmpresa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TelEmpresa;
+        
+        /// <summary>
+        /// Control MailEmpresa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor MailEmpresa;
+        
+        /// <summary>
         /// Control ScriptSection.
         /// </summary>
         /// <remarks>

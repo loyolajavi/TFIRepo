@@ -232,8 +232,10 @@
         <div class="container">
             <footer class="footer">
                 <div class="row navbar-inverse">
-                    <section class="col-xs-12 col-md-6">
-                        <h4>Información</h4>
+                    <section class="col-md-3">
+                    </section>
+                    <section class="col-md-3">
+                        <h4 class="TextoFooter">Información</h4>
                         <ul class="footer-navigation">
                             <li class="item">
                                 <a href="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos">Quiénes Somos</a>
@@ -241,13 +243,30 @@
                             <li class="item">
                                 <a href="/Areas/Public/Forms/Contacto.aspx" title="Contacto">Contacto</a>
                             </li>
-                            <li class="item">
-                                <a href="#" title="Politicas de Privacidad">Politicas de Privacidad</a>
-                            </li>
                             <li>
-                                <a href="#" title="Mapa del sitio">Mapa del sitio</a>
+                                <a href="/Areas/Public/Forms/MapaSitio.aspx" title="Mapa del sitio">Mapa del sitio</a>
                             </li>
                         </ul>
+                    </section>
+                    <section id="block_contact_infos" class="footer-block col-md-4 TextoFooter">
+                        <div>
+                            <h4 id="nombreempresa" class="TextoFooter" runat="server"></h4>
+                            <ul class="toggle-footer" style="">
+                                <li>
+                                    <i class="glyphicon glyphicon-phone-alt TextoFooter"></i>
+                                    <span class="TextoFooter">
+                                        Teléfono: 
+                                    </span>
+                                    <p id="TelEmpresa" class="TextoFooter" runat="server"></p>
+                                </li>
+                                <li>
+                                    <i class="icon-envelope-alt TextoFooter"></i><span class="TextoFooter">Email:</span> 
+            		                <span><a href="mailto:#" id="MailEmpresa" runat="server"></a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="col-md-2">
                     </section>
                 </div>
             </footer>

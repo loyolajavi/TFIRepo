@@ -19,6 +19,7 @@ namespace TFI.GUI.General
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
         private int CadenaMaxima = 100;
+        EmpresaCore EmpresaBLL = new EmpresaCore();
 
         public LayoutBasico()
         {
@@ -30,6 +31,11 @@ namespace TFI.GUI.General
 
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
+
+
+            nombreempresa.InnerHtml = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
+            TelEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "TelEmpresa", 1).Valor;
+            MailEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "MailEmpresa", 1).Valor;
 
 
             if (usuario != null)
