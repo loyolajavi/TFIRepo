@@ -4,6 +4,7 @@ using System.Configuration;
 using TFI.DAL.DAL;
 using TFI.Entidades;
 using System.Collections.Generic;
+using TFI.CORE.Helpers;
 
 namespace TFI.CORE.Managers
 {
@@ -180,6 +181,13 @@ namespace TFI.CORE.Managers
         {
             return DaldeTelefono.SelectTelefonosDeUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario).FirstOrDefault();
         }
+
+
+        public List<UsuarioEntidad> UsuarioSelectAllByIdUsuarioTipo_CUIT(int elTipoUsuario)
+        {
+            return DaldeUsuario.UsuarioSelectAllByIdUsuarioTipo_CUIT(elTipoUsuario, ConfigSection.Default.Site.Cuit);
+        }
+
 
     }
 }

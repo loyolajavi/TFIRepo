@@ -46,7 +46,7 @@ namespace TFI.GUI.General
         protected void Salir_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            Response.Redirect("Home.aspx");
+            Response.Redirect("/Areas/public/forms/Home.aspx");
         }
 
         protected void Boton_Command(object sender, CommandEventArgs e)

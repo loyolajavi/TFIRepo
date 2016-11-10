@@ -86,6 +86,7 @@
     <Content Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionPermisos.aspx" />
     <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
+    <Content Include="Areas\Intranet\Forms\PermisosEmpleados.aspx" />
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
     <Content Include="Areas\Public\Forms\Contacto.aspx" />
@@ -255,6 +256,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\OrdenesPedido.aspx.designer.cs">
       <DependentUpon>OrdenesPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\PermisosEmpleados.aspx.cs">
+      <DependentUpon>PermisosEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\PermisosEmpleados.aspx.designer.cs">
+      <DependentUpon>PermisosEmpleados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>

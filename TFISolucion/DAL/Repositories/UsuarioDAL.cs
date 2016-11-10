@@ -254,14 +254,15 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Selects all records from the Usuario table by a foreign key.
         /// </summary>
-        public List<UsuarioEntidad> SelectAllByIdUsuarioTipo(int idUsuarioTipo)
+        public List<UsuarioEntidad> UsuarioSelectAllByIdUsuarioTipo_CUIT(int idUsuarioTipo, string CUIT)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdUsuarioTipo", idUsuarioTipo)
+				new SqlParameter("@IdUsuarioTipo", idUsuarioTipo),
+                new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioSelectAllByIdUsuarioTipo", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioSelectAllByIdUsuarioTipo_CUIT", parameters))
             {
                 List<UsuarioEntidad> lista = new List<UsuarioEntidad>();
                 lista = Mapeador.Mapear<UsuarioEntidad>(dt);
