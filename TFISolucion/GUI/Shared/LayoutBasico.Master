@@ -30,16 +30,25 @@
                         </button>
                         <div style="vertical-align: middle;" id="idlogoempresa">
                             <a href="/Areas/Public/Forms/Home.aspx">
-                                <img class="img-responsive" style="margin-top:10px;" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
+                                <img class="img-responsive" style="margin-top: 10px;" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+
+                                <%--                                <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
                                 <a runat="server" onserverclick="searchButton_Click">
                                     <img src="/Content/Images/Iconos/Buscar.png" />
-                                </a>
+                                </a>--%>
+
+                                <asp:Panel runat="server" DefaultButton="btnBuscar">
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
+                                    <img src="/Content/Images/Iconos/Buscar.png" />
+                                    </asp:LinkButton>
+                                </asp:Panel>
+
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
@@ -47,22 +56,22 @@
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
                             </li>
-                              <li id="LiIdioma" runat="server">
+                            <li id="LiIdioma" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
                                         <div class="row">
                                             <div class="col-md-12">
-                                       <a href="#" id="seleccionadoespanol">Español</a>
-                                                </div>
+                                                <a href="#" id="seleccionadoespanol">Español</a>
                                             </div>
+                                        </div>
                                     </li>
                                     <li>
-                                       <div class="row">
+                                        <div class="row">
                                             <div class="col-md-12">
-                                       <a href="#" id="seleccionadoingles">Ingles</a>
-                                                </div>
+                                                <a href="#" id="seleccionadoingles">Ingles</a>
                                             </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </li>
