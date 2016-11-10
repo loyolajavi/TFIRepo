@@ -135,6 +135,7 @@
     <Content Include="Content\Images\Usuarios\microsoftLogo.jpg" />
     <Content Include="Content\Images\Usuarios\SonyLogo.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="LCSK\Agent.aspx" />
     <Content Include="LCSK\Agent.html" />
     <Content Include="LCSK\agent.js" />
     <Content Include="LCSK\assets\css\bootstrap-theme.min.css" />
@@ -355,6 +356,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LCSK\Agent.aspx.cs">
+      <DependentUpon>Agent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LCSK\Agent.aspx.designer.cs">
+      <DependentUpon>Agent.aspx</DependentUpon>
     </Compile>
     <Compile Include="LCSK\Agent.cs" />
     <Compile Include="LCSK\ChatHub.cs" />

@@ -80,7 +80,7 @@ var app = {
 var updateProductos = function () {
     $.ajax({
         type: "POST",
-        url: "Home.aspx/ObtenerProductosPedido",
+        url: "/Areas/Public/Forms/Home.aspx/ObtenerProductosPedido",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,

@@ -4,12 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
 
-    <link href="../Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../Content/css/sb-admin.css" rel="stylesheet" />
-    <link href="../Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/Content/css/sb-admin.css" rel="stylesheet" />
+    <link href="/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -17,49 +19,53 @@
 </head>
 <body>
 
-<form runat="server">
+    <form runat="server">
 
-     <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                   <a href="/Areas/Public/Forms/Home.aspx">
-                                <img class="img-responsive" style="margin-top:10px;" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="nav navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                          <input type="text" id="txtSearch" runat="server" class="form-control" placeholder="Buscar..." />
-                          <a runat="server" onserverclick="searchButton_Click">
-                                <img src="/Content/Images/Iconos/Buscar.png" />
-                            </a>
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div style="vertical-align: middle;" id="idlogoempresa">
+                            <a href="/Areas/Public/Forms/Home.aspx">
+                                <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
                     </div>
-                   <ul class="nav navbar-nav navbar-right">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="nav navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <asp:Panel runat="server" DefaultButton="btnBuscar">
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
+                                    <img src="/Content/Images/Iconos/Buscar.png" />
+                                    </asp:LinkButton>
+                                </asp:Panel>
+                            </div>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
 
                             <li>
                                 <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
                             </li>
 
                             <li id="LiDeseos" runat="server">
-                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
-                               <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                   <li>
-                                       <div class="row">
-                                           <div class="col-md-12">
-                                               <div id="DeseosDropDown" runat="server">
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </li>
-                               </ul>
-                           </li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="DeseosDropDown" runat="server">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
 
                             <li>
                                 <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
@@ -150,17 +156,17 @@
                 </div>
             </nav>
 
-          <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="Dashboard.aspx"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="Dashboard.aspx"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Graficos</a>
+                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>Graficos</a>
                     </li>
-                   <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#gestioncontenidos"><i class="fa fa-fw fa-arrows-v"></i> Gestion de Contenidos <i class="fa fa-fw fa-caret-down"></i></a>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#gestioncontenidos"><i class="fa fa-fw fa-arrows-v"></i>Gestion de Contenidos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="gestioncontenidos" class="collapse">
                             <li>
                                 <a href="GestionContenidoProductos.aspx">Productos</a>
@@ -168,7 +174,7 @@
                             <li>
                                 <a href="GestionContenidoProdCat.aspx">Categorias asociadas a productos</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="GestionContenidoCategorias.aspx">Categorias</a>
                             </li>
                             <li>
@@ -177,7 +183,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Administracion <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>Administracion <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="Administracion.aspx">Usuarios</a>
@@ -194,24 +200,63 @@
 
             <asp:ContentPlaceHolder ID="MiContenido" runat="server">
             </asp:ContentPlaceHolder>
-            
-    </div>
+
+        </div>
 
 
 
 
-</form>
- 
-    
-    
+    </form>
+
+
+
     <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
-    <%--<script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
     <script src="/Scripts/shared/Funciones.js"></script>
 
-        
-    
- <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
+    <script src="assets/js/jquery.timeago.js" type="text/javascript"></script>
+    <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>
+    <script src="/signalr/hubs" type="text/javascript"></script>
+    <script src="agent.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
+
+
+    <script>
+
+        updateProductos();
+
+        var obtenerTags = function () {
+            var result;
+            $.ajax({
+                type: "POST",
+                url: "/Areas/Public/Forms/Home.aspx/ObtenerProductos",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+
+            return result;
+        }
+
+        var availableTags = obtenerTags();
+
+        $("#txtSearch").autocomplete({
+            source: availableTags
+        });
+
+
+
+
+    </script>
+
+
+    <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
 
 </body>
 </html>
