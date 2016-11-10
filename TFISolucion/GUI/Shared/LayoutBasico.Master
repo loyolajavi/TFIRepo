@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
 
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -36,12 +36,6 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
-
-                                <%--                                <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
-                                <a runat="server" onserverclick="searchButton_Click">
-                                    <img src="/Content/Images/Iconos/Buscar.png" />
-                                </a>--%>
-
                                 <asp:Panel runat="server" DefaultButton="btnBuscar">
                                     <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
                                     <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
@@ -79,12 +73,12 @@
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width:120px;text-align:center; font-weight:bold; ">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
-                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top:5px;" id="ulPedidos">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulPedidos">
                                 </ul>
                             </li>
 
-                            <%-- LISTA DE PEDIDOS END--%>                            
+                            <%-- LISTA DE PEDIDOS END--%>
 
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
@@ -103,7 +97,7 @@
                                 <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
                             </li>
 
-                           
+
 
                             <li runat="server" id="liIngresar">
 
@@ -254,14 +248,13 @@
                             <ul class="toggle-footer" style="">
                                 <li>
                                     <i class="glyphicon glyphicon-phone-alt TextoFooter"></i>
-                                    <span class="TextoFooter">
-                                        Teléfono: 
+                                    <span class="TextoFooter">Teléfono: 
                                     </span>
                                     <p id="TelEmpresa" class="TextoFooter" runat="server"></p>
                                 </li>
                                 <li>
-                                    <i class="icon-envelope-alt TextoFooter"></i><span class="TextoFooter">Email:</span> 
-            		                <span><a href="mailto:#" id="MailEmpresa" runat="server"></a></span>
+                                    <i class="icon-envelope-alt TextoFooter"></i><span class="TextoFooter">Email:</span>
+                                    <span><a href="mailto:#" id="MailEmpresa" runat="server"></a></span>
                                 </li>
                             </ul>
                         </div>
@@ -270,7 +263,7 @@
                     </section>
                 </div>
             </footer>
-        </div>      
+        </div>
 
     </form>
 
@@ -296,7 +289,7 @@
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script src="/LCSK/chat.js"></script>
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
-    
+
 
     <script>
 
@@ -328,7 +321,7 @@
         });
 
 
-        
+
 
     </script>
 

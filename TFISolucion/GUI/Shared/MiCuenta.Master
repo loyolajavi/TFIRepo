@@ -10,7 +10,7 @@
 
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
-
+    <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -39,10 +39,13 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" id="txtSearch" runat="server" class="form-control" placeholder="Buscar..." />
-                                <a runat="server" onserverclick="searchButton_Click">
+                                <asp:Panel runat="server" DefaultButton="btnBuscar">
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
                                     <img src="/Content/Images/Iconos/Buscar.png" />
-                                </a>
+                                    </asp:LinkButton>
+                                </asp:Panel>
+
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
@@ -50,16 +53,35 @@
                             <li>
                                 <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
                             </li>
+                            <li id="LiIdioma" runat="server">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="#" id="seleccionadoespanol">Español</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="#" id="seleccionadoingles">Ingles</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
 
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width:120px;text-align:center; font-weight:bold; ">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
-                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top:5px;" id="ulPedidos">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulPedidos">
                                 </ul>
                             </li>
 
-                            <%-- LISTA DE PEDIDOS END--%>                            
+                            <%-- LISTA DE PEDIDOS END--%>
 
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
@@ -242,14 +264,50 @@
         </footer>
 
 
+
+
+
+
         <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
 
         <%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
         <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
         <script src="/Scripts/shared/Funciones.js"></script>
 
+        <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>
+        <script src="/signalr/hubs" type="text/javascript"></script>
+        <script src="/LCSK/chat.js"></script>
+        <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
+
+
         <script>
             updateProductos();
+
+            var obtenerTags = function () {
+                var result;
+                $.ajax({
+                    type: "POST",
+                    url: "Home.aspx/ObtenerProductos",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    },
+                    success: function (data) {
+                        result = data.d;
+                    }
+                });
+
+                return result;
+            }
+
+            var availableTags = obtenerTags();
+
+            $("#txtSearch").autocomplete({
+                source: availableTags
+            });
+
         </script>
 
         <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
