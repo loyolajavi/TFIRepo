@@ -36,7 +36,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" id="txtSearch" runat="server" class="form-control" placeholder="Buscar..." />
+                                <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
                                 <a runat="server" onserverclick="searchButton_Click">
                                     <img src="/Content/Images/Iconos/Buscar.png" />
                                 </a>

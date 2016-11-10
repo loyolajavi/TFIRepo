@@ -18,6 +18,7 @@ namespace TFI.GUI.General
         private UsuarioCore _manager;
         HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
+        private int CadenaMaxima = 100;
 
         public LayoutBasico()
         {
@@ -122,7 +123,23 @@ namespace TFI.GUI.General
         protected void searchButton_Click(object sender, EventArgs e)
         {
             var searchQuery = Server.UrlEncode(txtSearch.Value);
-            Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                if (searchQuery.Length <= CadenaMaxima)
+                {
+                    Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+                }
+                else
+                {
+                    searchQuery = searchQuery.Substring(0, CadenaMaxima);
+                    Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
+                }
+
+                
+            }
+
         }
 
         //public void ActualizarPedido()
