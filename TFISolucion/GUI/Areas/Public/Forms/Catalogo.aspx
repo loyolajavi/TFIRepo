@@ -32,6 +32,11 @@
         <div class="col-md-3">
             <p class="lead">Categorias</p>
             <div class="list-group">
+                <asp:Repeater ID="rptCategorias" runat="server">
+                    <ItemTemplate>
+                        <h4><a runat="server" class="responsive" href='<%#Eval("IdCategoria", "Catalogo.aspx?Categoria={0}")%>'><%#Eval("DescripCategoria") %></a></h4>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
         <div class="col-md-9">

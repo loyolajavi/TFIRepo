@@ -12,10 +12,13 @@ namespace TFI.GUI
     {
         private ProductoCore _manager;
         public static ProductoEntidad producto;
+        private CategoriaCore ManagerCategoria = new CategoriaCore();
         HttpContext Current = HttpContext.Current;
 
         private string stringBusqueda = null;
+        private string stringCategoria = null;
         private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
+        private List<CategoriaEntidad> unasCategorias = new List<CategoriaEntidad>();
 
         public Catalogo()
         {
@@ -28,6 +31,7 @@ namespace TFI.GUI
             if (!IsPostBack)
             {
                 stringBusqueda = Page.Request.QueryString["search"];
+                stringCategoria = Page.Request.QueryString["Categoria"];
 
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
@@ -46,18 +50,41 @@ namespace TFI.GUI
                         catalogo.DataBind();
                     }
                 }
-                else
+
+
+                if (!string.IsNullOrEmpty(stringCategoria))
                 {
-                    notif.Attributes.Remove("hidden");
-                    notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
+                    if (Int32.Parse(stringCategoria) > 0 && Int32.Parse(stringCategoria) < 500)
+                    {
+                        unosProductos = _manager.ProductoSelectByCategoria(Int32.Parse(stringCategoria));
+                        catalogo.DataSource = unosProductos;
+                        catalogo.DataBind();
+                    }
+                    else
+                    {
+                        notif.Attributes.Remove("hidden");
+                        notif.InnerHtml = string.Format("<span>{0}</span>", "No existe la categoría ingresada");
+                    }
                 }
+
 
                 if (!unosProductos.Any())
                 {
                     notif.Attributes.Remove("hidden");
-                    notif.InnerHtml = string.Format("<span>{0}</span>", "No hay productos que coincidan con la busqueda");
+                    notif.InnerHtml = string.Format("<span>{0}</span>", "No se encontraron productos, por favor realice otra búsqueda");
                 }
+
             }
+
+
+            //CargarCategorias
+
+            unasCategorias = ManagerCategoria.SeleccionarCategorias();
+            rptCategorias.DataSource = unasCategorias;
+            rptCategorias.DataBind();
+
+
+
         }
 
         [WebMethod]

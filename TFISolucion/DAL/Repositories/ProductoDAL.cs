@@ -250,6 +250,22 @@ namespace TFI.DAL.DAL
             }
         }
 
+        public List<ProductoEntidad> ProductoSelectByCategoria(string cuit, int idCategoria)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", cuit),
+                new SqlParameter("@IdCategoria", idCategoria)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByCategoria", parameters))
+            {
+
+                List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
+                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                return productoEntidadList;
+            }
+        }
 
 
 

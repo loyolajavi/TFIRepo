@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TFI.DAL.DAL;
 using TFI.Entidades;
+using TFI.CORE.Helpers;
 
 namespace TFI.CORE.Managers
 {
@@ -32,6 +33,11 @@ namespace TFI.CORE.Managers
         {
             DalDeProdCategoria.Delete(idprod, idcat);
 
+        }
+
+        public List<CategoriaEntidad> SeleccionarCategorias()
+        {
+            return DalDeCategoria.CategoriaSelectAllByCUIT(ConfigSection.Default.Site.Cuit);
         }
 
 

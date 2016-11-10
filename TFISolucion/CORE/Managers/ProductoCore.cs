@@ -90,5 +90,11 @@ namespace TFI.CORE.Managers
         }
 
 
+        public List<ProductoEntidad> ProductoSelectByCategoria(int idCategoria)
+        {
+            return _productoDal.ProductoSelectByCategoria(ConfigSection.Default.Site.Cuit, idCategoria);
+        }
+
+
     }
 }
