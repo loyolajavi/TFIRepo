@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
@@ -12,9 +9,8 @@ namespace TFI.GUI.General
 {
     public partial class LayoutAdministracion : System.Web.UI.MasterPage
     {
-
         private UsuarioCore _manager;
-        HttpContext Current = HttpContext.Current;
+        private HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
 
         public LayoutAdministracion()
@@ -27,21 +23,19 @@ namespace TFI.GUI.General
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-
             if (usuario != null)
             {
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
-                LiPedido.Visible = true;
                 LiDeseos.Visible = true;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
             }
             else
             {
-                LiPedido.Visible = false;
                 LiDeseos.Visible = false;
             }
         }
+
         public void SetUsuarioLogueado(string label)
         {
             EtiquetaUsuario.InnerText = label;
@@ -49,22 +43,18 @@ namespace TFI.GUI.General
             Salir.CssClass = "btn-danger";
         }
 
-
         protected void Salir_Click(object sender, EventArgs e)
         {
             Session.Abandon();
             Response.Redirect("Home.aspx");
         }
 
-
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
-
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
-
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
@@ -95,7 +85,6 @@ namespace TFI.GUI.General
 
                     if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
                     {
-
                         _manager.RegistrarUsuario(usuario);
 
                         Session["Usuario"] = usuario;
@@ -103,9 +92,9 @@ namespace TFI.GUI.General
                     }
 
                     break;
-
             }
         }
+
         protected void searchButton_Click(object sender, EventArgs e)
         {
             var searchQuery = Server.UrlEncode(txtSearch.Value);

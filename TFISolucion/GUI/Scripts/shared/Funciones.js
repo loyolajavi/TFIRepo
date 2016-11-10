@@ -55,9 +55,13 @@ $('.btn-comprar').click(function () {
             alert(error);
         },
         success: function (result) {
+            updateProductos();
+
             var $modal = $('.modal');
             $modal.find('#prod').text(result.d);
             $modal.modal("show");
+
+            
         }
     });
 });
@@ -73,6 +77,32 @@ var app = {
 
 };
 
+var updateProductos = function () {
+    $.ajax({
+        type: "POST",
+        url: "Home.aspx/ObtenerProductosPedido",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            var container = $('#ulPedidos');
+            var cant = data.d.length;
+
+            container.empty();
+            if(cant > 0)
+               $('#cantProd').text('   (' + cant + ')');
+
+
+            console.log(data.d.length);
+            container.append(data.d);
+            container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>")
+
+        }
+    });
+};
 
 
 

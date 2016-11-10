@@ -139,4 +139,11 @@
         </form>
     </div>
 
+
+
+
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="ScriptSection" ID="Scripts" ClientIDMode="Static" runat="server">
+
 </asp:Content>

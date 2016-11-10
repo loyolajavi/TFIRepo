@@ -93,6 +93,7 @@
     <Content Include="Areas\Public\Forms\MapaSitio.aspx" />
     <Content Include="Areas\Public\Forms\Pedidos.aspx" />
     <Content Include="Areas\Public\Forms\PedidosCaja.aspx" />
+    <Content Include="Areas\Public\Forms\PedidosEnvio.aspx" />
     <Content Include="Areas\Public\Forms\Producto.aspx" />
     <Content Include="Areas\Public\Forms\QuienesSomos.aspx" />
     <Content Include="Areas\Public\Forms\Tarjetas.aspx" />
@@ -300,6 +301,13 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\PedidosCaja.aspx.designer.cs">
       <DependentUpon>PedidosCaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\PedidosEnvio.aspx.cs">
+      <DependentUpon>PedidosEnvio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\PedidosEnvio.aspx.designer.cs">
+      <DependentUpon>PedidosEnvio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\Producto.aspx.cs">
       <DependentUpon>Producto.aspx</DependentUpon>

@@ -21,6 +21,9 @@ namespace TFI.GUI.General
         private int CadenaMaxima = 100;
         EmpresaCore EmpresaBLL = new EmpresaCore();
 
+        public List<ProductoEntidad> productos;
+
+
         public LayoutBasico()
         {
             _manager = new UsuarioCore();
@@ -42,14 +45,12 @@ namespace TFI.GUI.General
             {
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
-                LiPedido.Visible = true;
                 LiDeseos.Visible = true;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
                 CargarListaDeseosEnSession();
             }
             else
             {
-                LiPedido.Visible = false;
                 LiDeseos.Visible = false;
             }
 
@@ -246,6 +247,9 @@ namespace TFI.GUI.General
             ActualizarDeseos();
             //}
         }
+
+
+       
 
 
     }

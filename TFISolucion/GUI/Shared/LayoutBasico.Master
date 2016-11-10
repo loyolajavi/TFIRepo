@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title></title>
 
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -75,19 +75,17 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li id="LiPedido" runat="server">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido <b class="caret"></b></a>
-                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="PedidoDropDown" runat="server">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+
+                            <%-- LISTA DE PEDIDOS --%>
+
+                            <li id="pedidosDrop">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width:120px;text-align:center; font-weight:bold; ">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top:5px;" id="ulPedidos">
                                 </ul>
                             </li>
+
+                            <%-- LISTA DE PEDIDOS END--%>                            
+
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
@@ -104,6 +102,8 @@
                             <li>
                                 <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
                             </li>
+
+                           
 
                             <li runat="server" id="liIngresar">
 
@@ -130,7 +130,7 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" />
                                                                 Recordarme
                                                             </label>
                                                         </div>
@@ -270,8 +270,7 @@
                     </section>
                 </div>
             </footer>
-        </div>
-
+        </div>      
 
     </form>
 
@@ -297,9 +296,12 @@
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script src="/LCSK/chat.js"></script>
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
-    <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
+    
 
     <script>
+
+        updateProductos();
+
         var obtenerTags = function () {
             var result;
             $.ajax({
@@ -321,18 +323,17 @@
 
         var availableTags = obtenerTags();
 
-        //$("#txtClienteBusqueda").change(function () {
-        //    $(this).autocomplete({
-        //        source: availableTags
-        //    });
-        //});
-
         $("#txtSearch").autocomplete({
             source: availableTags
         });
+
+
+        
+
     </script>
 
 
+    <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
 
 </body>
 </html>

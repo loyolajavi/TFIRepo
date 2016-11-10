@@ -189,14 +189,16 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-bottom: 50px;">
-
-        <div class="pasos">
-             <a class="btn btn-lg btn-warning pull-right btn-caja" href="Envio.aspx" style="border-radius:0px">Envio</a>
-        </div>
-    </div>
+    
     
     <% } %>
+
+    <div class="row" style="margin-bottom: 50px;">
+        <div class="pasos">
+             <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosEnvio.aspx" style="border-radius:0px" <%if (direccionEnvio == null) { %> disabled <% } %> >Envio</a>
+        </div>
+    </div>
+
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="ScriptSection" runat="server">
 

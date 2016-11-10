@@ -127,6 +127,29 @@ namespace TFI.GUI
         }
 
 
+        [WebMethod]
+        public static List<String> ObtenerProductosPedido()
+        {
+
+            var template = 
+                "<li class=\"row drop-item\">" +
+                        "<div class=\"col-md-4 drop-image-div \">" +
+                            "<img src=\"/Content/Images/Productos/{0}\" class=\"img-responsive drop-image\"/> " +
+                        "</div> " +
+                        "<div style=\"word-wrap:normal;\" class=\"col-md-8\"><h6>{1}</h6></div> " +
+                "</li>";
+            
+            var p = new List<String>();
+
+            var productos = (List<ProductoEntidad>)HttpContext.Current.Session["Productos"];
+
+            if (productos != null && productos.Any())
+            {
+                productos.ForEach(x => p.Add(string.Format(template, x.URL, x.DescripProducto)));
+            }
+
+            return p;
+        }
 
     }//FIN CLASE
 }

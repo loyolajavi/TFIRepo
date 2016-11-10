@@ -92,6 +92,7 @@
 <asp:Content ID="Scripts" ClientIDMode="Static" ContentPlaceHolderID="ScriptSection" runat="server">
 
     <script>
+
         $('.btn-info').click(function () {
             var id = $(this).data('producto');
             app.redirect("Producto.aspx?IdProducto=" + id);
@@ -99,24 +100,6 @@
         $('#btn-pedidos').click(function () {
             app.redirect('Pedidos.aspx')
         });
-        $('.btn-comprar').click(function () {
-            var control = $(this);
-            var idProducto = control.data('producto');
-            $.ajax({
-                type: "POST",
-                url: "Catalogo.aspx/AgregarItem",
-                data: '{ id: ' + idProducto + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (result) {
-                    var $modal = $('.modal');
-                    $modal.find('#prod').text(result.d);
-                    $modal.modal("show");
-                }
-            });
-        });
+
     </script>
 </asp:Content>

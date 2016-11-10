@@ -49,24 +49,6 @@ namespace TFI.GUI.Shared {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor EtiquetaUsuario;
         
         /// <summary>
-        /// Control LiPedido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiPedido;
-        
-        /// <summary>
-        /// Control PedidoDropDown.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PedidoDropDown;
-        
-        /// <summary>
         /// Control LiDeseos.
         /// </summary>
         /// <remarks>

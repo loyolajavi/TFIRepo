@@ -9,7 +9,7 @@
     <title>Mi Cuenta</title>
 
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/css/propios/ecommerce.css" rel="stylesheet" />
+    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -50,19 +50,17 @@
                             <li>
                                 <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
                             </li>
-                            <li id="LiPedido" runat="server">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido <b class="caret"></b></a>
-                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="PedidoDropDown" runat="server">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+
+                            <%-- LISTA DE PEDIDOS --%>
+
+                            <li id="pedidosDrop">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width:120px;text-align:center; font-weight:bold; ">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top:5px;" id="ulPedidos">
                                 </ul>
                             </li>
+
+                            <%-- LISTA DE PEDIDOS END--%>                            
+
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
@@ -250,6 +248,9 @@
         <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
         <script src="/Scripts/shared/Funciones.js"></script>
 
+        <script>
+            updateProductos();
+        </script>
 
         <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
         </asp:ContentPlaceHolder>

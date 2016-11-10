@@ -49,7 +49,6 @@
 }
 
 .btn {
-    width: 100px;
     border-radius: 0px;
 }
 
@@ -96,4 +95,31 @@
 
 .TextoFooter{
     color:white;
+}
+
+.drop-image-div {
+    height:50px; 
+    width:80px;
+}
+
+.drop-btn {
+    height:40px; 
+    padding-top:10px;
+}
+
+.dropdown-menu {
+    border-radius:0px
+}
+
+.drop-image {
+    max-width:50px; 
+    max-height:50px;
+    padding: 5px 0;
+}
+
+.drop-item {
+    vertical-align:middle; 
+    border-bottom: 1px solid #F2F2F2;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
