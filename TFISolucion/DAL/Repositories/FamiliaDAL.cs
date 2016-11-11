@@ -93,6 +93,23 @@ namespace TFI.DAL.DAL
 			}
 		}
 
+        public FamiliaEntidad FamiliaSelectNombreFamiliaByIdUsuario(int idUsuario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdUsuario", idUsuario)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaSelectNombreFamiliaByIdUsuario", parameters))
+            {
+                FamiliaEntidad FamiliaEntidad = new FamiliaEntidad();
+
+                FamiliaEntidad = Mapeador.MapearFirst<FamiliaEntidad>(dt);
+
+                return FamiliaEntidad;
+            }
+        }
+
 		#endregion
 	}
 }

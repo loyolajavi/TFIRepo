@@ -188,6 +188,10 @@ namespace TFI.CORE.Managers
             return DaldeUsuario.UsuarioSelectAllByIdUsuarioTipo_CUIT(elTipoUsuario, ConfigSection.Default.Site.Cuit);
         }
 
+        public UsuarioEntidad UsuarioSelectByIdUsuario(int idUsuario)
+        {
+            return DaldeUsuario.UsuarioSelectByIdUsuario(idUsuario);
+        }
 
     }
 }

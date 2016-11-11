@@ -289,6 +289,24 @@ namespace TFI.DAL.DAL
         }
 
 
+        public UsuarioEntidad UsuarioSelectByIdUsuario(int idUsuario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdUsuario", idUsuario)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioSelectByIdUsuario", parameters))
+            {
+                UsuarioEntidad entidad = new UsuarioEntidad();
+
+                entidad = Mapeador.MapearFirst<UsuarioEntidad>(dt);
+
+                return entidad;
+            }
+        }
+
+
 
 
         #endregion

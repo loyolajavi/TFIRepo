@@ -9,7 +9,7 @@
     <div class="container paddingPaginas">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-3">
                 <h1 class="page-header">Permisos <small>Empleados</small>
                 </h1>
             </div>
@@ -21,9 +21,10 @@
 
                 <asp:Repeater ID="rptEmpleados" ClientIDMode="Static" runat="server">
                     <ItemTemplate>
-                        <table class="table-bordered col-md-12" id="tblEmpleados">
+                        <table class="table-bordered col-md-6 col-md-offset-3 table-responsive" id="tblEmpleados">
                             <thead>
                                 <tr>
+                                    <th class="text-center"><input type="checkbox" id="CheckAllUsuarios" value="Y" runat="server" /></th>
                                     <th class="text-center">Nombre de usuario</th>
                                     <th class="text-center">Apellido</th>
                                     <th class="text-center">Nombre</th>
@@ -32,10 +33,17 @@
                             </thead>
                             <tbody>
                                 <tr class="text-center">
-                                    <td class="text-center" style="padding: 7px;">
-                                        <div class="">
-                                            <a href='<%#Eval("IdUsuario", "#") %>'><%#Eval("Apellido") %></a>
-                                        </div>
+                                    <td>
+                                        <input type="checkbox" id="IdUsuarios" value='<%#Eval("IdUsuario") %>' runat="server" />
+                                    </td>
+                                    <td>
+                                        <a href='<%#Eval("IdUsuario", "/Areas/Intranet/Forms/UpdateEmpleado.aspx?Emple={0}") %>'><%#Eval("NombreUsuario") %></a>
+                                    </td>
+                                    <td>
+                                        <a href='<%#Eval("IdUsuario", "/Areas/Intranet/Forms/UpdateEmpleado.aspx?Emple={0}") %>'><%#Eval("Apellido") %></a>
+                                    </td>
+                                    <td><a href='<%#Eval("IdUsuario", "/Areas/Intranet/Forms/UpdateEmpleado.aspx?Emple={0}") %>'><%#Eval("Nombre") %></a>
+
                                     </td>
                                 </tr>
                             </tbody>
