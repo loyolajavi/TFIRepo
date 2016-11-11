@@ -2,6 +2,26 @@
     padding-top: 70px /*El padding es necesario para que funcione el .navbar-fixed-top*/
 }
 
+.img-logo{
+    max-height: 40px; 
+    padding-top:10px;
+}
+
+.modal-content {
+    border-radius:0px;
+}
+
+.nav-links > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.nav-navegacion {
+    max-height:10px; 
+    min-height: 30px; 
+    border-radius:0px;
+}
+
 .slide-image {
     width: 100%;
 }

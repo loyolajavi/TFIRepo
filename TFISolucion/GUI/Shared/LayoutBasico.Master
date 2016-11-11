@@ -30,7 +30,7 @@
                         </button>
                         <div style="vertical-align: middle;" id="idlogoempresa">
                             <a href="/Areas/Public/Forms/Home.aspx">
-                                <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
+                                <img class="img-responsive img-logo" src="/Content/Images/Empresas/Logo.png" alt="Empresa"/></a>
                         </div>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -187,7 +187,7 @@
 
 
             <div class="row">
-                <nav class="navbar navbar-default">
+                <nav class="navbar navbar-default nav-navegacion">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
                             <span class="sr-only">Toggle navigation</span>
@@ -199,7 +199,7 @@
 
                     <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-2" aria-expanded="true">
                         <nav>
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav nav-links">
                                 <li><a href="Home.aspx">Inicio</a></li>
                                 <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">Quiénes Somos</a></li>
                                 <li><a href="/Areas/Public/Forms/ClientesEmpresa.aspx">Nuestros Clientes</a></li>

@@ -6,7 +6,7 @@
     <siteMapNode url="/Areas/Public/Forms/Catalogo.aspx" title="Catalogo" description="Nuestros Productos" />
     <siteMapNode url="/Areas/Public/Forms/Contacto.aspx" title="Contacto" description="Contáctenos" />
     <siteMapNode url="/Areas/Public/Forms/Pedidos.aspx" title="Resumen de Pedido" description="Orden de Pedido">
-      <siteMapNode url="/Areas/Public/Forms/PedidosCaja.aspx" title="Datos de Pedido" description="Confirmar Pedido" />  
+      <siteMapNode url="/Areas/Public/Forms/PedidosDireccion.aspx" title="Datos de Pedido" description="Confirmar Pedido" />  
     </siteMapNode>
     <siteMapNode url="/Areas/Public/Forms/DatosPersonales.aspx" title="Datos Personales" description="Datos Personales" />
     <siteMapNode url="/Areas/Public/Forms/UltimosPedidos.aspx" title="Pedidos" description="Pedidos" />

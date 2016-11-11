@@ -23,7 +23,7 @@
                        {%>
                 <div class="item <%if (primero)
                                    {%> active <% } %>">
-                    <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" />
+                    <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" style="max-height:380px;" />
                 </div>
 
                 <%

@@ -14,10 +14,6 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
-
-
-
 </head>
 <body>
 
@@ -35,7 +31,7 @@
                         </button>
                         <div style="vertical-align: middle;" id="idlogoempresa">
                             <a href="/Areas/Public/Forms/Home.aspx">
-                                <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
+                                <img class="img-responsive img-logo" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -47,7 +43,6 @@
                                     <img src="/Content/Images/Iconos/Buscar.png" />
                                     </asp:LinkButton>
                                 </asp:Panel>
-
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
@@ -184,7 +179,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </nav>
 
@@ -207,7 +201,6 @@
                                 <li><a href="/Areas/Public/Forms/ClientesEmpresa.aspx">Nuestros Clientes</a></li>
                                 <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*">Catálogo</a></li>
                                 <li><a href="/Areas/Public/Forms/Contacto.aspx">Contacto</a></li>
-
                             </ul>
                         </nav>
                     </div>
@@ -233,7 +226,6 @@
 
                 <div class="col-md-9">
 
-
                     <%--Cuerpo de la Pagina--%>
                     <asp:ContentPlaceHolder ID="ContentCuenta" runat="server">
                     </asp:ContentPlaceHolder>
@@ -241,7 +233,6 @@
                 </div>
             </div>
         </div>
-
 
         <footer class="container">
             <div class="row navbar-inverse">
@@ -265,11 +256,6 @@
             </div>
         </footer>
 
-
-
-
-
-
         <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
 
         <%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
@@ -280,7 +266,6 @@
         <script src="/signalr/hubs" type="text/javascript"></script>
         <script src="/LCSK/chat.js"></script>
         <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
-
 
         <script>
             updateProductos();
@@ -309,7 +294,6 @@
             $("#txtSearch").autocomplete({
                 source: availableTags
             });
-
         </script>
 
         <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">

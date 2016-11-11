@@ -91,7 +91,7 @@
             </table>
 
             <div class="pasos">
-                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosCaja.aspx">Caja</a>
+                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx">Datos Personales</a>
             </div>
 
             <%

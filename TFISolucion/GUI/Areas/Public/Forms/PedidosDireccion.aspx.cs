@@ -6,7 +6,7 @@ using TFI.Entidades;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
-    public partial class PedidosCaja : System.Web.UI.Page
+    public partial class PedidosDireccion : System.Web.UI.Page
     {
        
         
@@ -16,7 +16,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
         protected UsuarioCore _usuarioManager;
 
-        public PedidosCaja()
+        public PedidosDireccion()
         {
             _usuarioManager = new UsuarioCore();
         }

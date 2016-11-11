@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Caja" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="PedidosCaja.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosCaja" %>
+﻿<%@ Page Title="Datos Personales" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="PedidosDireccion.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosDireccion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -142,6 +142,9 @@
                     <p>No existe una direccion para envio, por favor cree una.</p>
                 </div>
                 <%} %>
+
+                <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
+
             </div>
         </div>
 
@@ -186,6 +189,9 @@
                     <p>No existe una direccion para envio, por favor cree una.</p>
                 </div>
                 <%} %>
+
+                <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
+
             </div>
         </div>
     </div>
@@ -211,7 +217,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "PedidosCaja.aspx/Login",
+                url: "PedidosDireccion.aspx/Login",
                 data: JSON.stringify({
                     user: user,
                     pass: pass

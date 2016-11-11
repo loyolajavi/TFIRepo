@@ -10,6 +10,6 @@
 namespace TFI.GUI.Areas.Public.Forms {
     
     
-    public partial class PedidosCaja {
+    public partial class PedidosDireccion {
     }
 }
