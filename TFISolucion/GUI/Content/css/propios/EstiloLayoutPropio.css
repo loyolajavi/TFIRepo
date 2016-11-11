@@ -123,3 +123,17 @@
     padding-bottom: 5px;
     padding-top: 5px;
 }
+
+.menuPrincipal{
+    z-index:2;
+}
+
+.menuSecundario{
+    z-index:1;
+    margin-top:60px;
+}
+
+.paddingPaginas{
+    padding-top: 20px;
+
+}

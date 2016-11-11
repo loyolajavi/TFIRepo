@@ -199,10 +199,10 @@
 .ui-menu {
 	list-style: none;
 	padding: 0;
-    padding-top: 20px;
 	margin: 0;
 	display: block;
 	outline: 0;
+    z-index:4;
 }
 .ui-menu .ui-menu {
 	position: absolute;

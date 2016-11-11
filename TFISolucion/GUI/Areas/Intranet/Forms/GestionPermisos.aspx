@@ -6,15 +6,18 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
 
+    <div class="container paddingPaginas">
 
-    <div class="col-lg-12">
-        <h1 class="page-header">Categorias <small>Gestion de Contenidos</small>
-        </h1>
-    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Categorias <small>Gestion de Contenidos</small>
+                </h1>
+            </div>
+        </div>
 
+        <div class="row">
 
-
-<%--    <asp:Repeater ID="rptFamilia" ClientIDMode="Static" runat="server">
+            <%--    <asp:Repeater ID="rptFamilia" ClientIDMode="Static" runat="server">
         <ItemTemplate>
             <table class="table-bordered col-md-12" id="tblFamilias">
                 <thead>
@@ -36,8 +39,7 @@
 
         </ItemTemplate>
     </asp:Repeater>--%>
-
-
+        </div>
 </asp:Content>
 
 

@@ -27,12 +27,7 @@ namespace TFI.GUI.General
             {
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
-                LiDeseos.Visible = true;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
-            }
-            else
-            {
-                LiDeseos.Visible = false;
             }
         }
 

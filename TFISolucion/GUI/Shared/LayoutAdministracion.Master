@@ -13,6 +13,7 @@
     <%--<link href="/Content/css/sb-admin.css" rel="stylesheet" />--%>
     <link href="/Content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
+    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -21,188 +22,223 @@
 <body>
 
     <form runat="server">
-
+        <!-- Menu -->
         <div class="container-fluid">
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div style="vertical-align: middle;" id="idlogoempresa">
-                        <a href="/Areas/Public/Forms/Home.aspx">
-                            <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
-                    </div>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="nav navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <asp:Panel runat="server" DefaultButton="btnBuscar">
-                                <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
-                                <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
-                                    <img src="/Content/Images/Iconos/Buscar.png" />
-                                </asp:LinkButton>
-                            </asp:Panel>
+            <nav class="navbar navbar-inverse navbar-fixed-top menuPrincipal">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div style="vertical-align: middle;" id="idlogoempresa">
+                            <a href="/Areas/Public/Forms/Home.aspx">
+                                <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa" /></a>
                         </div>
                     </div>
-                    <ul class="nav navbar-nav navbar-right">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="nav navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <asp:Panel runat="server" DefaultButton="btnBuscar">
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
+                                    <img src="/Content/Images/Iconos/Buscar.png" />
+                                    </asp:LinkButton>
+                                </asp:Panel>
 
-                        <li>
-                            <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
-                        </li>
+                            </div>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
 
-                        <li id="LiDeseos" runat="server">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <b class="caret"></b></a>
-                            <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="DeseosDropDown" runat="server">
+                            <li>
+                                <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
+                            </li>
+                            <li id="LiIdioma" runat="server">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="#" id="seleccionadoespanol">Español</a>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="#" id="seleccionadoingles">Ingles</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
-                        </li>
 
-                        <li runat="server" id="liIngresar">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar <b class="caret"></b></a>
-                            <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div>
+                            <li>
+                                <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
+                            </li>
 
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Usuario</label>
-                                                    <input type="text" runat="server" class="form-control" id="IngresoUsuario" placeholder="Usuario" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Clave</label>
-                                                    <input type="password" runat="server" class="form-control" id="IngresoClave" placeholder="Clave" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-9 col-xs-offset-3">
-                                                        <ul runat="server" id="MensajeError"></ul>
+
+
+                            <li runat="server" id="liIngresar">
+
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputEmail2">Usuario</label>
+                                                        <input type="text" runat="server" class="form-control" id="IngresoUsuario" placeholder="Usuario" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Clave</label>
+                                                        <input type="password" runat="server" class="form-control" id="IngresoClave" placeholder="Clave" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-9 col-xs-offset-3">
+                                                            <ul runat="server" id="MensajeError"></ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" />
+                                                                Recordarme
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="Ingresar" />
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox">
-                                                            Recordarme
-                                                        </label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li runat="server" id="liRegistrarse">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registrarse<b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputEmail2">Nombre</label>
+                                                        <input type="text" runat="server" class="form-control" id="RegistroNombre" placeholder="Nombre" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputEmail2">Apellido</label>
+                                                        <input type="text" runat="server" class="form-control" id="RegistroApellido" placeholder="Apellido" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputEmail2">Usuario</label>
+                                                        <input type="text" runat="server" class="form-control" id="RegistroUsuario" placeholder="Usuario" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                        <input type="password" runat="server" class="form-control" id="RegistroPassword1" placeholder="Password" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Repetir password</label>
+                                                        <input type="password" runat="server" class="form-control" id="RegistroPassword2" placeholder="Repetir password" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Email</label>
+                                                        <input type="email" runat="server" class="form-control" id="RegistroEmail" placeholder="E-Mail" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <asp:Button ID="RegistrarBoton" OnCommand="Boton_Command" CommandName="Registrarse" runat="server" CssClass="btn btn-success btn-block" Text="Registrarse" />
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="Ingresar" />
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li runat="server" id="liRegistrarse">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registrarse<b class="caret"></b></a>
-                            <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div>
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Nombre</label>
-                                                    <input type="text" runat="server" class="form-control" id="RegistroNombre" placeholder="Nombre" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Apellido</label>
-                                                    <input type="text" runat="server" class="form-control" id="RegistroApellido" placeholder="Apellido" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Usuario</label>
-                                                    <input type="text" runat="server" class="form-control" id="RegistroUsuario" placeholder="Usuario" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" runat="server" class="form-control" id="RegistroPassword1" placeholder="Password" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Repetir password</label>
-                                                    <input type="password" runat="server" class="form-control" id="RegistroPassword2" placeholder="Repetir password" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Email</label>
-                                                    <input type="email" runat="server" class="form-control" id="RegistroEmail" placeholder="E-Mail" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <asp:Button ID="RegistrarBoton" OnCommand="Boton_Command" CommandName="Registrarse" runat="server" CssClass="btn btn-success btn-block" Text="Registrarse" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
-        </div>
 
-        <div class="container-fluid" style="padding-top: 25px;">
+
+
             <div class="row">
-                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                        <div class="sidebar-nav">
-                            <li class="active">
-                                <a href="Dashboard.aspx"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>Graficos</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#gestioncontenidos"><i class="fa fa-fw fa-arrows-v"></i>Gestion de Contenidos <i class="fa fa-fw fa-caret-down"></i></a>
-                                <ul id="gestioncontenidos" class="collapse">
-                                    <li>
-                                        <a href="GestionContenidoProductos.aspx">Productos</a>
-                                    </li>
-                                    <li>
-                                        <a href="GestionContenidoProdCat.aspx">Categorias asociadas a productos</a>
-                                    </li>
-                                    <li>
-                                        <a href="GestionContenidoCategorias.aspx">Categorias</a>
-                                    </li>
-                                    <li>
-                                        <a href="GestionContenidoQuienesSomos.aspx">Quienes Somos</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>Administracion <i class="fa fa-fw fa-caret-down"></i></a>
-                                <ul id="demo" class="collapse">
-                                    <li>
-                                        <a href="Administracion.aspx">Usuarios</a>
-                                    </li>
-                                    <li>
-                                        <a href="VerPermisos.aspx">Permisos</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
+                <nav class="navbar navbar-default navbar-fixed-top menuSecundario">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
 
-                <div class="col-md-12 col-lg-offset-3">
-                    <asp:ContentPlaceHolder ID="MiContenido" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
+                    <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-2" aria-expanded="true">
+                        <nav class="menuPrincipal">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/Areas/Public/Forms/Home.aspx"><span class="glyphicon glyphicon-home"></span></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contenidos<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="GestionContenidoProductos.aspx">Productos</a>
+                                        </li>
+                                        <li>
+                                            <a href="GestionContenidoProdCat.aspx">Asociar Categorías</a>
+                                        </li>
+                                        <li>
+                                            <a href="GestionContenidoCategorias.aspx">Categorías</a>
+                                        </li>
+                                        <li>
+                                            <a href="GestionContenidoQuienesSomos.aspx">Quiénes Somos</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Clientes</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Empleados</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Permisos</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mail</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Últimos Pedidos</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Pedidos por Cliente</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
             </div>
-        </div>
 
+            <asp:ContentPlaceHolder ID="MiContenido" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
 
 
     </form>
