@@ -183,6 +183,8 @@ namespace TFI.GUI
             
             CargarGrillaTarjetas();
 
+            Response.Redirect(Request.RawUrl);
+
 
         }
 
@@ -190,14 +192,17 @@ namespace TFI.GUI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var numero = (string)e.Row.Cells[1].Text;
+
+                var numero = "";
+                numero = (string)e.Row.Cells[1].Text;
 
                 if (string.IsNullOrEmpty(numero))
                 {
                     numero = ((TextBox)e.Row.Cells[1].Controls[0]).Text;
                 }
 
-                TarjetaEntidad tarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(numero), ConfigSection.Default.Site.Cuit);
+                TarjetaEntidad tarjeta = new TarjetaEntidad();
+                tarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(numero), ConfigSection.Default.Site.Cuit);
 
                 var ddl = e.Row.FindControl("ddlTipoDeTarjeta") as DropDownList;
                 if (ddl != null)

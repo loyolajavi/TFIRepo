@@ -658,6 +658,11 @@ namespace TFI.GUI
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var Id = (string)e.Row.Cells[7].Text;
+
+                if (string.IsNullOrEmpty(Id))
+                {
+                    Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
+                }
                 
                 var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
 
