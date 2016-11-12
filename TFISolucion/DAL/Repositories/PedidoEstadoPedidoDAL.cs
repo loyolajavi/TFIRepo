@@ -37,9 +37,7 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdPedido", pedidoEstadoPedido.IdPedido),
-				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido),
-				new SqlParameter("@Fecha", pedidoEstadoPedido.Fecha),
-				new SqlParameter("@FecBaja", pedidoEstadoPedido.FecBaja)
+				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoUpdate", parameters);

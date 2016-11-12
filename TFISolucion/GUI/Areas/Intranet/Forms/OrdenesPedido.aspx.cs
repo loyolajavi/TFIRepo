@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -28,12 +29,26 @@ namespace TFI.GUI.Areas.Intranet.Forms
             //{ }
             CargarGrillaUltimosPedidos();
 
+            if (!IsPostBack)
+            {
+                CargarDropdownEstados();
+            }
+        }
+
+        private void CargarDropdownEstados()
+        {
+            listaEstados = pedidoCore.EstadoPedidoSelectAll();
+            ddlestados.DataSource = listaEstados;
+            ddlestados.DataTextField = "DescripcionEstadoPedido";
+            ddlestados.DataValueField = "IdEstadoPedido";
+            ddlestados.DataBind();
         }
 
         private void CargarGrillaUltimosPedidos()
         {
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
+           
             PedidosEntidad = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
 
             if (PedidosEntidad.Count == 0)
@@ -169,14 +184,44 @@ namespace TFI.GUI.Areas.Intranet.Forms
                            "ModalScript", sb.ToString(), false);
 
             }
+
+            if (e.CommandName.Equals("CambiarEstado"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
+                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
+                PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(Convert.ToInt32(code));
+                idpedido.Value =  PedidoRow.IdPedido.ToString();
+                if (PedidoEstadoRow.IdEstadoPedido == 6)
+                {
+
+                    notificationestado.InnerHtml = "No puede modificarle el estado a un pedido finalizado.";
+                    ddlEstadoPedido.Visible = false;
+                    btnCambiarEstado.Visible = false;
+
+                }
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#currentestado').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "ModalScript", sb.ToString(), false);
+                
+
+            }
         }
 
         protected void grilladeultimospedidos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grilladedetallesdelpedido.PageIndex = e.NewPageIndex;
             CargarGrillaUltimosPedidos();
+        }
 
-
+        protected void ModificarEstado_Click(object sender, EventArgs e)
+        {
+            CargarGrillaUltimosPedidos();
+            Response.Redirect(Request.RawUrl);
         }
 
         [WebMethod]
@@ -190,6 +235,23 @@ namespace TFI.GUI.Areas.Intranet.Forms
             return pedidos.Select(x => x.NombreUsuario).ToList();
 
 
+        }
+
+        protected void btnCambiarEstado_Click(object sender, EventArgs e)
+        {
+            CargarGrillaUltimosPedidos();
+            Response.Redirect(Request.RawUrl);
+        }
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [System.Web.Services.WebMethod]
+        public static void CambiarEstado(int pedido,string estado)
+        {
+            PedidoCore pedidoCore = new PedidoCore();
+            PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
+            EstadoActualizado.IdPedido = pedido;
+            EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
+            pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
         }
 
 

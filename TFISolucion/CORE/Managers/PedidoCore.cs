@@ -61,6 +61,11 @@ namespace TFI.CORE.Managers
 
         }
 
+        public void PedidoEstadoPedidoUpdate(PedidoEstadoPedidoEntidad pedidoestado)
+        {
+            PedidoEstadoDAL.Update(pedidoestado);
+        }
+
 
     }
 }

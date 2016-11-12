@@ -16,6 +16,15 @@
             </div>
         </div>
 
+            <div class="row" runat="server" id="contenedorsinpedidos">
+                <div class="col-md-9">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>
+                        <div id="sinpedidos" runat="server"></div>
+                    </div>
+                </div>
+            </div>
 
         <div class="row">
             <div class="list-group col-md-4">
@@ -33,15 +42,6 @@
 
 
 
-            <div class="row" runat="server" id="contenedorsinpedidos">
-                <div class="col-md-9">
-                    <div class="alert alert-info alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <i class="fa fa-info-circle"></i>
-                        <div id="sinpedidos" runat="server"></div>
-                    </div>
-                </div>
-            </div>
 
             <hr />
 
@@ -54,12 +54,13 @@
                     <ContentTemplate>
                         <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" PageSize="4">
                             <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn-info" />
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroPedido" HeaderText="Número de Pedido" />
                                 <asp:BoundField DataField="FechaPedido" HeaderText="Fecha de Pedido" />
                                 <asp:BoundField DataField="Estado" HeaderText="Estado" />
                                 <asp:BoundField DataField="NombreUsuario" HeaderText="Cliente" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />
+                                <asp:ButtonField CommandName="CambiarEstado" HeaderText="Cambiar Estado" Text="Cambiar Estado" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>
@@ -69,7 +70,12 @@
 
 
 
-            <div id="currentdetail" class="modal fade">
+            
+        </div>
+    
+    </div>
+
+    <div id="currentdetail" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -109,15 +115,60 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    
+    
+    <div id="currentestado" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">
+                                ×</button>
+                            <h3 id="myModalEstadoLabel">Estado de pedido</h3>
+                        </div>
+                        <div class="modal-body">
+                           
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <ContentTemplate>
+                                    <asp:DetailsView ID="DetailsView2" runat="server"
+                                        CssClass="table table-bordered table-hover"
+                                        BackColor="White" ForeColor="Black"
+                                        FieldHeaderStyle-Wrap="false"
+                                        FieldHeaderStyle-Font-Bold="true"
+                                        FieldHeaderStyle-BackColor="LavenderBlush"
+                                        FieldHeaderStyle-ForeColor="Black"
+                                        BorderStyle="Groove" AutoGenerateRows="False">
+                                        <Fields>
+                                            <asp:BoundField DataField="Estado" HeaderText="Estado de pedido" />
+                                        </Fields>
+                                    </asp:DetailsView>
+                                    <asp:HiddenField id="idpedido" runat="server"  ClientIDMode="static" />
+                                    <asp:DropDownList ID="ddlestados" runat="server"  ClientIDMode="static" CssClass="form-control"></asp:DropDownList>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnCambiarEstado"/>
+                                </Triggers>
+                            </asp:UpdatePanel>
+                            <div class="modal-footer">
+                                   <asp:Button CssClass="form-control" runat="server" ID="btnCambiarEstado" ClientIDMode="static" Text="Modificar Estado" OnClientClick="return onbtnModificarEstado(this)" OnClick="btnCambiarEstado_Click" />
+                                    <div id="notificationestado" runat="server"></div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+     
+
 
 </asp:Content>
 
 
 <asp:Content ID="Scripts" ContentPlaceHolderID="ScriptSection" runat="server">
-
-    <script>
+   <script src="../../../Scripts/shared/Validaciones.js"></script>
+   
+     <script>
         var obtenerTags = function () {
             var result;
             $.ajax({
