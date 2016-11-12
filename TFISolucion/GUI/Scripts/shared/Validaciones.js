@@ -335,3 +335,33 @@ function onbtnAsociarCategoria() {
     });
     return true;
 };
+
+function onbtnGrabarStock() {
+    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+    var parametros = {
+        producto: $('#ddlProducto').val(),
+        stock: $('#cantidad').val()
+    };
+
+
+    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+    $.ajax({
+        type: 'POST',                               // tipo de llamada (POST, GET)
+        url: 'GestionStock.aspx/GrabarStock',
+        dataType: "json",  // el URL del método que vamos a llamar
+        // los parámetros en formato JSON
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            // $('#notification').text('La información ha sido guardada exitosamente.');
+            //window.location.reload();
+            //Exito("Se ha cambiado la contraseña con exito");
+        },
+        error: function (data) {          // función que se va a ejecutar si el pedido falla
+            alert("ERROR ");
+            //  Error("No se ha podido realizar la consulta");
+
+        }
+    });
+    return true;
+};

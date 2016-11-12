@@ -22,7 +22,8 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@IdProducto", stockSucursal.IdProducto),
 				new SqlParameter("@IdSucursal", stockSucursal.IdSucursal),
-				new SqlParameter("@CantidadProducto", stockSucursal.CantidadProducto)
+				new SqlParameter("@CantidadProducto", stockSucursal.CantidadProducto),
+                new SqlParameter("@CUIT",stockSucursal.CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "StockSucursalInsert", parameters);
