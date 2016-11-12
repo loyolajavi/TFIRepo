@@ -193,5 +193,11 @@ namespace TFI.CORE.Managers
             return DaldeUsuario.UsuarioSelectByIdUsuario(idUsuario);
         }
 
+        public void UsuarioUpdateDatosPersonalesConDNI(UsuarioEntidad usuario)
+        {
+             DaldeUsuario.UsuarioUpdateDatosPersonalesConDNI(usuario);
+        }
+
+
     }
 }

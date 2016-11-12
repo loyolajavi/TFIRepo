@@ -20,10 +20,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                <h4 class="page-header">Datos de Cuenta del empleado</h4>
+                <h4 class="page-header">Cuenta del Empleado</h4>
                 <div class="form-group">
                     <label for="txtNombreUsuario">Nombre de Usuario</label>
-                    <input type="text" class="form-control" id="txtNombreUsuario" value="<%UnEmpleado.NombreUsuario%>" runat="server" clientidmode="static" />
+                    <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
                 </div>
                 <div class="form-group">
                     <label for="txtClave">Contraseña</label>
@@ -33,6 +33,8 @@
                     <label for="txtClaveRep">Repetir Contraseña</label>
                     <input type="text" class="form-control" id="txtClaveRep" runat="server" clientidmode="static" />
                 </div>
+                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Cuenta" runat="server" OnClick="btnCambiarClave_Click" />
+                <h4 class="page-header">Datos personales del Empleado</h4>
                 <div class="form-group">
                     <label for="txtApellido">Apellido</label>
                     <input type="text" class="form-control" id="txtApellido" runat="server" clientidmode="static" />

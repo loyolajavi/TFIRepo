@@ -14,7 +14,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
     {
 
         public UsuarioEntidad unEmpleado = new UsuarioEntidad();
-        private UsuarioCore unManagerUsuario;
+        private UsuarioCore unManagerUsuario = new UsuarioCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
 
@@ -22,26 +22,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            usuarioString = Page.Request.QueryString["Emple"];
 
             if (!IsPostBack)
             {
-                usuarioString = Page.Request.QueryString["Emple"];
+                
 
                 if (!string.IsNullOrEmpty(usuarioString))
                 {
                     cargarPermisos();
-
-                    unManagerUsuario = new UsuarioCore();
-                    unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
-                    txtNombreUsuario.Value = unEmpleado.NombreUsuario;
-                    txtClave.Value = "********";
-                    txtClaveRep.Value = "********";
-                    txtApellido.Value = unEmpleado.Apellido;
-                    txtNombre.Value = unEmpleado.Nombre;
-                    txtMail.Value = unEmpleado.Email;
-                    txtDNI.Value = unEmpleado.NroIdentificacion;
-
-                    
+                    cargarDatosEmpleado();
 
 
 
@@ -66,12 +56,38 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlPermisosUsuarioUpdate.DataBind();
         }
 
+
+
+        public void cargarDatosEmpleado(){
+            
+            unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
+            txtNombreUsuario.Value = unEmpleado.NombreUsuario;
+            txtClave.Value = "********";
+            txtClaveRep.Value = "********";
+            txtApellido.Value = unEmpleado.Apellido;
+            txtNombre.Value = unEmpleado.Nombre;
+            txtMail.Value = unEmpleado.Email;
+            txtDNI.Value = unEmpleado.NroIdentificacion;
+        }
+
         protected void btnDatosUsuarioUpdate_Click(object sender, EventArgs e)
         {
-
+            //VALIDAR
+            unEmpleado.Apellido = txtApellido.Value;
+            unEmpleado.Nombre = txtNombre.Value;
+            unEmpleado.Email = txtMail.Value;
+            unEmpleado.NroIdentificacion = txtDNI.Value;
+            unEmpleado.IdUsuario = Int32.Parse(usuarioString);
+            unManagerUsuario.UsuarioUpdateDatosPersonalesConDNI(unEmpleado);
+            cargarDatosEmpleado();
         }
 
         protected void btnPermisosUsuarioUpdate_Click(object sender, EventArgs e)
+        {
+            txtNombreUsuario.Value = "PERMISOS";
+        }
+
+        protected void btnCambiarClave_Click(object sender, EventArgs e)
         {
 
         }

@@ -37,6 +37,24 @@ namespace TFI.DAL.DAL
         }
 
 
+        public void UsuarioUpdateDatosPersonalesConDNI(UsuarioEntidad usuario)
+        {
+            ValidationUtility.ValidateArgument("usuario", usuario);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@Nombre", usuario.Nombre),
+				new SqlParameter("@Apellido", usuario.Apellido),
+				new SqlParameter("@Email", usuario.Email),
+                new SqlParameter("@NroIdentificacion", usuario.NroIdentificacion),
+                new SqlParameter("@IdUsuario", usuario.IdUsuario)
+				
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateDatosPersonalesConDNI", parameters);
+        }
+
+
         public void UpdateUsuarioContraseña(UsuarioEntidad usuario)
         {
             ValidationUtility.ValidateArgument("usuario", usuario);
