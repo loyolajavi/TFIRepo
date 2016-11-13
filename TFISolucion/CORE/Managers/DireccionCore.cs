@@ -24,5 +24,10 @@ namespace TFI.CORE.Managers
             return DalDeDireccionUsuario.SelectAllByIdDireccion(iddireccion);
         }
 
+        public List<DireccionEntidad> FindAll()
+        {
+            return DalDeDireccion.SelectAll();
+        }
+
     }
 }

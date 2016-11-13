@@ -1,28 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Web;
 using System.Web.UI.WebControls;
+using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
 using TFI.Entidades;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Linq;
-using System.Web.Services;
-using TFI.CORE.Helpers;
-using System.Text;
-
 
 namespace TFI.GUI.General
 {
     public partial class LayoutBasico : System.Web.UI.MasterPage
     {
         private UsuarioCore _manager;
-        HttpContext Current = HttpContext.Current;
+        private HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
         private int CadenaMaxima = 100;
-        EmpresaCore EmpresaBLL = new EmpresaCore();
+        private EmpresaCore EmpresaBLL = new EmpresaCore();
 
         public List<ProductoEntidad> productos;
-
 
         public LayoutBasico()
         {
@@ -31,18 +26,17 @@ namespace TFI.GUI.General
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            usuario = new UsuarioEntidad();
+            //usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
-
 
             nombreempresa.InnerHtml = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
             TelEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "TelEmpresa", 1).Valor;
             MailEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "MailEmpresa", 1).Valor;
 
-
             if (usuario != null)
             {
+                
+
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
                 LiDeseos.Visible = true;
@@ -53,9 +47,7 @@ namespace TFI.GUI.General
             {
                 LiDeseos.Visible = false;
             }
-
         }
-
 
         public void SetUsuarioLogueado(string label)
         {
@@ -64,22 +56,18 @@ namespace TFI.GUI.General
             Salir.CssClass = "btn-danger";
         }
 
-
         protected void Salir_Click(object sender, EventArgs e)
         {
             Session.Abandon();
             Response.Redirect("Home.aspx");
         }
 
-
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
-
             switch (e.CommandName)
             {
                 case ("Ingreso"):
                     usuario = _manager.loginUsuario(IngresoClave.Value, IngresoUsuario.Value);
-
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
@@ -87,7 +75,6 @@ namespace TFI.GUI.General
                         SetUsuarioLogueado(usuario.NombreUsuario);
 
                         CargarListaDeseosEnSession();
-
 
                         Response.Redirect(Request.RawUrl);
                     }
@@ -99,38 +86,39 @@ namespace TFI.GUI.General
 
                 case ("Registrarse"):
 
-                    usuario = new UsuarioEntidad();
-
-                    usuario.Apellido = RegistroApellido.Value;
-                    usuario.Clave = RegistroPassword1.Value;
-                    usuario.NroIdentificacion = "";
-                    usuario.Email = RegistroEmail.Value;
-                    usuario.IdUsuarioTipo = 2; //Cliente
-                    usuario.Nombre = RegistroNombre.Value;
-                    usuario.NombreUsuario = RegistroUsuario.Value;
-                    usuario.IdCondicionFiscal = 1;
-
-                    UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
-                    UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
+                    UsuarioEntidad UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, RegistroUsuario.Value);
 
                     if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
                     {
+                        usuario = new UsuarioEntidad()
+                        {
+                            Apellido = RegistroApellido.Value,
+                            Clave = RegistroPassword1.Value,
+                            NroIdentificacion = "",
+                            Email = RegistroEmail.Value,
+                            IdUsuarioTipo = 2,
+                            Nombre = RegistroNombre.Value,
+                            NombreUsuario = RegistroUsuario.Value,
+                            IdCondicionFiscal = 1
+                        };
 
                         _manager.RegistrarUsuario(usuario);
 
                         Session["Usuario"] = usuario;
                         Response.Redirect("Home.aspx");
                     }
+                    else
+                    {
+                        MensajeErrorRegistro.InnerText = "Usuario ya registrado";
+                    }
 
                     break;
-
             }
         }
 
         protected void searchButton_Click(object sender, EventArgs e)
         {
             var searchQuery = Server.UrlEncode(txtSearch.Value);
-
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
@@ -143,10 +131,7 @@ namespace TFI.GUI.General
                     searchQuery = searchQuery.Substring(0, CadenaMaxima);
                     Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
                 }
-
-                
             }
-
         }
 
         //public void ActualizarPedido()
@@ -185,8 +170,6 @@ namespace TFI.GUI.General
         //    //EtiquetaUsuario.CssClass = ""
         //}
 
-
-
         public void ActualizarDeseos()
         {
             var Current = HttpContext.Current;
@@ -220,7 +203,6 @@ namespace TFI.GUI.General
 
         public void CargarListaDeseosEnSession()
         {
-
             ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
             ProductoCore unProductoCore = new ProductoCore();
             List<ProductoEntidad> listaDeseos = new List<ProductoEntidad>();
@@ -247,10 +229,5 @@ namespace TFI.GUI.General
             ActualizarDeseos();
             //}
         }
-
-
-       
-
-
     }
 }

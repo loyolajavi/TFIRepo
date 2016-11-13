@@ -5,48 +5,37 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
 
-    <%-- <form runat="server">--%>
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
-    
-    
-    <div class="col-lg-12">
-        <h1 class="page-header">Datos Personales <small>Mi Cuenta</small>
-        </h1>
-    </div>
 
     <div class="col-lg-12">
+        <h1 class="page-header">Datos Personales <small>Mi Cuenta</small></h1>
+    </div>
+
+    <div id="panelDatosPersonales" class="col-lg-12">
         <h2>Datos de cuenta</h2>
 
-        <div class="text-center">
-            <div class=" col-lg-6 form-group">
-
-                <label for="usuario">Usuario</label>
-                <input runat="server" id="usuario" class="form-control" type="text" readonly="true" />
-                <br />
-            </div>
-
-            <div class="col-lg-6 form-group">
-                <label for="clave">Contraseña</label>
-                <input runat="server" id="clave" class="form-control" type="text" readonly="true" />
-            </div>
-
-            <div class="col-lg-12">
-                <div class="text-center">
-                    <a id="btnLogin" class="btn btn-primary">Modificar Contraseña</a>
-                </div>
-            </div>
+        <div class=" col-lg-6 form-group">
+            <label for="usuario">Usuario</label>
+            <input runat="server" id="usuario" class="form-control" type="text" disabled />
         </div>
-    </div>
 
-    <br />
+        <div class="col-lg-6 form-group">
+            <label for="clave">Contraseña</label>
+            <input runat="server" id="clave" class="form-control" type="text" disabled />
+        </div>
+
+        <div class="text-center">
+            <a id="btnLogin" class="btn btn-primary">Modificar Contraseña</a>
+        </div>
+
+        <hr />
+    </div>
 
     <div id="dpersonales" class="col-lg-12">
         <h2>Datos Personales</h2>
 
         <div class="text-center">
-
             <div class="form-group">
-                <%--<label for="grilladedatospersonales">Datos Personales</label>--%>
                 <asp:GridView ID="grilladedatospersonales" CssClass="table" runat="server" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" ControlStyle-CssClass="btn btn-warning" />
@@ -65,12 +54,16 @@
                     <SortedDescendingHeaderStyle BackColor="#383838" />
                 </asp:GridView>
             </div>
+        </div>
 
-            <%-- TELEFONO LISTA --%>
+        <hr />
+    </div>
 
+    <%-- TELEFONO --%>
+    <div class="col-lg-12">
+        <h2>Teléfonos</h2>
+        <div class="text-center">
             <div class="form-group">
-                <label for="grillatelefonos">Telefono</label>
-
                 <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
@@ -94,6 +87,7 @@
                     <SortedDescendingHeaderStyle BackColor="#383838" />
                 </asp:GridView>
             </div>
+
             <div class="text-center">
 
                 <%-- TODO: AGREGAR TELEFONO --%>
@@ -101,11 +95,14 @@
                 <a href="#mdlAgregarTelefono" class="btn btn-primary" data-toggle="modal">Agregar Teléfono</a>
             </div>
         </div>
+        <hr />
     </div>
+    <%-- TELEFONO END --%>
 
+    <%-- FACTURACION --%>
     <div id="ddireccionfacturacion" class="col-lg-12">
 
-        <h2>Direcciones de Facturacion</h2>
+        <h2>Direcciones de Facturación</h2>
 
         <div class="text-center">
 
@@ -146,7 +143,10 @@
                 <a href="#modalDireccionFacturacion" class="btn btn-primary" data-toggle="modal">Agregar Direccion</a>
             </div>
         </div>
+
+        <hr />
     </div>
+    <%-- FACTURACION END --%>
 
     <!--MODAL DIRECCION FACTURACION-->
     <div class="modal fade" id="modalDireccionFacturacion">
@@ -156,7 +156,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Agregar direccion de facturacion</h2>
+                    <h2>Agregar direccion de facturación</h2>
                     <div id="notificationdireccion">
                     </div>
                 </div>
@@ -202,6 +202,7 @@
         </div>
     </div>
 
+    <%-- ENVIO --%>
     <div id="ddirecciondeenvio" class="col-lg-12">
 
         <h2>Direcciones de Envio</h2>
@@ -209,7 +210,6 @@
         <div class="text-center">
             <div class="form-group">
 
-                <label for="grilladirecciondeenvio">Direcciones de Envio</label>
                 <asp:GridView ID="grilladirecciondeenvio" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
@@ -246,10 +246,12 @@
                 <a href="#modalDireccionenvio" class="btn btn-primary" data-toggle="modal">Agregar Direccion</a>
             </div>
         </div>
+
+        <hr />
     </div>
+    <%-- ENVIO END --%>
 
-    <%--///modal direccion envio--%>
-
+    <%--MODAL DIRECCION ENVIO--%>
     <div class="modal fade" id="modalDireccionenvio">
         <div class="modal-dialog">
 
@@ -345,7 +347,6 @@
             </div>
         </div>
     </div>
-    <%--</form>--%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsSection" runat="server">

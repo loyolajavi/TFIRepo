@@ -51,6 +51,7 @@ namespace TFI.Entidades
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
 
+        public ProvinciaEntidad Provincia { get; set; }
 		#endregion
 	}
 }

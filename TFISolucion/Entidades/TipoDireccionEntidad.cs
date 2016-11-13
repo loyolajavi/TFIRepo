@@ -5,6 +5,12 @@ namespace TFI.Entidades
 	public class TipoDireccionEntidad
 	{
 
+        public enum Options
+        {
+            Facturacion = 1,
+            Envio = 2
+        }
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the IdTipoDireccion value.

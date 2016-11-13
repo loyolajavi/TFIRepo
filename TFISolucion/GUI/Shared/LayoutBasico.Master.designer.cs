@@ -85,6 +85,15 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DeseosDropDown;
         
         /// <summary>
+        /// Control liSalir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSalir;
+        
+        /// <summary>
         /// Control Salir.
         /// </summary>
         /// <remarks>
@@ -202,6 +211,15 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl RegistroEmail;
         
         /// <summary>
+        /// Control MensajeErrorRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeErrorRegistro;
+        
+        /// <summary>
         /// Control RegistrarBoton.
         /// </summary>
         /// <remarks>
@@ -209,15 +227,6 @@ namespace TFI.GUI.General {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button RegistrarBoton;
-        
-        /// <summary>
-        /// Control siteMap.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapDataSource siteMap;
         
         /// <summary>
         /// Control siteMapMaster.

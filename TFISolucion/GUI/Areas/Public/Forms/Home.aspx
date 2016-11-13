@@ -21,15 +21,12 @@
                        bool primero = true;
                        foreach (var r in listaRecursos)
                        {%>
-                <div class="item <%if (primero)
-                                   {%> active <% } %>">
-                    <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" style="max-height:380px;" />
-                </div>
-
-                <%
-                                   primero = false;
-                       }
-                   } %>
+                        <div class="item <%if (primero)
+                                           {%> active <% } %>">
+                            <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" style="max-height:380px;" />
+                        </div>
+                        <%primero = false;}
+                  } %>
             </div>
 
             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

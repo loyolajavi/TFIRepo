@@ -96,6 +96,7 @@
     <Content Include="Areas\Public\Forms\ListaDeDeseos.aspx" />
     <Content Include="Areas\Public\Forms\MapaSitio.aspx" />
     <Content Include="Areas\Public\Forms\Pedidos.aspx" />
+    <Content Include="Areas\Public\Forms\PedidosConfirmacion.aspx" />
     <Content Include="Areas\Public\Forms\PedidosDireccion.aspx" />
     <Content Include="Areas\Public\Forms\PedidosEnvio.aspx" />
     <Content Include="Areas\Public\Forms\Producto.aspx" />
@@ -328,6 +329,13 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\Pedidos.aspx.designer.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\PedidosConfirmacion.aspx.cs">
+      <DependentUpon>PedidosConfirmacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Public\Forms\PedidosConfirmacion.aspx.designer.cs">
+      <DependentUpon>PedidosConfirmacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\PedidosDireccion.aspx.cs">
       <DependentUpon>PedidosDireccion.aspx</DependentUpon>

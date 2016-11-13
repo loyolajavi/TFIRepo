@@ -1,47 +1,10 @@
 ﻿<%@ Page Title="Datos Personales" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="PedidosDireccion.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosDireccion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-    <style>
-        .box {
-            background: #fbfbfb;
-            border: 1px solid #e4e4e4;
-            padding: 14px 18px 13px;
-            margin: 0 0 30px 0;
-            line-height: 23px;
-        }
-
-        .box-title {
-            margin-top: 20px;
-            padding-bottom: 0px;
-        }
-
-        .btn-box-registro {
-            width: 200px;
-            border-radius: 0px;
-        }
-
-        .barras {
-            margin-top: 5px;
-        }
-
-        .pad-bordes {
-            margin: 5px;
-        }
-
-        .link {
-            color: black;
-            padding-top: 10px;
-            font-size: 12px;
-        }
-
-        .td-lbl {
-            font-weight: bold;
-            width: 150px;
-        }
-    </style>
 
     <% if (logueado == null)
        { %>
@@ -61,7 +24,7 @@
                     <br />
                     <label for="box-registro">Registro</label>
                     <br />
-                    <a href="RegistroCliente.aspx" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i>Registrarse como Cliente</a>
+                    <a href="RegistroCliente.aspx" id="btnNuevoRegistro" class="btn btn-warning btn-box-registro"><i class="glyphicon glyphicon-lock"></i>&nbsp;Registrarse como Cliente</a>
                     <br />
                 </div>
             </div>
@@ -86,7 +49,7 @@
                     <br />
                     <br />
                     <div>
-                        <a class="btn btn-success btn-box-registro" id="btnRegistro" href="#"><i class="glyphicon glyphicon-user"></i>Iniciar Sesion</a>
+                        <a class="btn btn-success btn-box-registro" id="btnRegistro" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;Iniciar Sesion</a>
                     </div>
                 </div>
             </div>
@@ -103,7 +66,7 @@
     <div class="row">
          <div class="col-xs-12 col-sm-6">
             <div class="box">
-                <h4 class="box-title">Direcion de Entrega</h4>
+                <h4 class="box-title">Dirección de Envio</h4>
                 <hr class="barras" />
                 <%if (direccionEnvio != null)
                   { %>
@@ -119,7 +82,7 @@
                         </tr>
                         <tr>
                             <td id="lblProvincia" class="td-lbl">Provincia : </td>
-                            <td><%=direccionEnvio.IdProvincia%></td>
+                            <td><%=direccionEnvio.Provincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblLocalidad" class="td-lbl">Localidad : </td>
@@ -142,17 +105,17 @@
                     <p>No existe una direccion para envio, por favor cree una.</p>
                 </div>
                 <%} %>
-
-                <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
-
+                <div style="margin-top:40px;">
+                    <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
+                </div>
             </div>
         </div>
 
          <div class="col-xs-12 col-sm-6">
             <div class="box">
-                <h4 class="box-title">Direcion de Facturacion</h4>
+                <h4 class="box-title">Dirección de Facturación</h4>
                 <hr class="barras" />
-                <%if (direccionEnvio != null)
+                <%if (direccionFacturacion != null)
                   { %>
                 <div>
                     <table>
@@ -162,15 +125,15 @@
                         </tr>
                         <tr>
                             <td id="lblFacturacioncalle" class="td-lbl">Calle : </td>
-                            <td><%=direccionEnvio.Calle %>  <%=direccionEnvio.Numero %></td>
+                            <td><%=direccionFacturacion.Calle %>  <%=direccionEnvio.Numero %></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionProvincia" class="td-lbl">Provincia : </td>
-                            <td><%=direccionEnvio.IdProvincia%></td>
+                            <td><%=direccionFacturacion.Provincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionLocalidad" class="td-lbl">Localidad : </td>
-                            <td><%=direccionEnvio.Localidad%></td>
+                            <td><%=direccionFacturacion.Localidad%></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionTelefono" class="td-lbl">Telefono : </td>
@@ -186,11 +149,12 @@
                   else
                   {%>
                 <div>
-                    <p>No existe una direccion para envio, por favor cree una.</p>
+                    <p>No existe una direccion para facturación, por favor cree una.</p>
                 </div>
                 <%} %>
-
-                <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
+                <div style="margin-top:40px;">
+                    <a class="btn btn-warning" href="DatosPersonales.aspx" >Actualizar Direccion</a>
+                </div>
 
             </div>
         </div>
@@ -201,7 +165,7 @@
 
     <div class="row" style="margin-bottom: 50px;">
         <div class="pasos">
-             <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosEnvio.aspx" style="border-radius:0px" <%if (direccionEnvio == null) { %> disabled <% } %> >Envio</a>
+             <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosEnvio.aspx">Envio</a>
         </div>
     </div>
 

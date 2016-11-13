@@ -64,7 +64,7 @@
                         </td>
                         <td class="text-center">
                             <div class="selection-div">
-                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" />
+                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" disabled/>
                                 <div>
                                     <a class="cart btn btn-default btn-resta" href="#" title="Menos">-</a>
                                     <a class="cart btn btn-default btn-agrega" href="#" title="Mas">+</a>

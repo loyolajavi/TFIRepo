@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Services;
+using TFI.CORE.Managers;
 using TFI.Entidades;
 
 namespace TFI.GUI.Areas.Public.Forms
@@ -11,15 +10,37 @@ namespace TFI.GUI.Areas.Public.Forms
     public partial class PedidosEnvio : System.Web.UI.Page
     {
         public UsuarioEntidad logueado;
-     
+        public List<SucursalEntidad> sucursalesDisponibles;
+        public int? seleccionado;
+
+
+        private SucursalCore _sucursalCore;
+
+        public PedidosEnvio()
+        {
+            _sucursalCore = new SucursalCore();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var Current = HttpContext.Current;
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
-            if (logueado != null)
+            seleccionado = (int?)Current.Session["Seleccionada"];
+
+
+            if (logueado == null)
                 Response.Redirect("Pedidos.aspx");
 
+            sucursalesDisponibles = _sucursalCore.FindAll();
         }
+
+        [WebMethod]
+        public static void Seleccionar(int? id)
+        {
+            HttpContext.Current.Session["Seleccionada"] = id;
+        }
+
+        
     }
 }

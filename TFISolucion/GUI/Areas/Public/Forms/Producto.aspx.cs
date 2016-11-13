@@ -23,6 +23,8 @@ namespace TFI.GUI
 
             producto = _manager.Find(IdProducto);
 
+            Page.Title = producto.DescripProducto;
+
             LoadProducto(IdProducto);
         }
 

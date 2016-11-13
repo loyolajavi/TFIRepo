@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TFI.DAL.DAL;
 using TFI.Entidades;
 
@@ -10,7 +7,6 @@ namespace TFI.CORE.Managers
 {
     public class PedidoCore
     {
-
         private PedidoDAL PedidoDal = new PedidoDAL();
         private PedidoEstadoPedidoDAL PedidoEstadoDAL = new PedidoEstadoPedidoDAL();
         private PedidoDetalleDAL PedidoDetalleDAL = new PedidoDetalleDAL();
@@ -34,31 +30,22 @@ namespace TFI.CORE.Managers
 
         public PedidoEntidad PedidoSelectByCUIT_NroPedido(string cuit, Int64 nropedido)
         {
-
             return PedidoDal.SelectByCUIT_NroPedido(cuit, nropedido);
-
         }
 
         public List<PedidoDetalleEntidad> PedidosDetalleSelect(int idPedido)
         {
-
             return PedidoDetalleDAL.SelectAllByIdPedido(idPedido);
-
         }
+
         public List<PedidoEntidad> SelectAllByCUIT(string CUIT)
         {
-            // CUIT = "20310708071";
             return PedidoDal.SelectAllByCUIT(CUIT);
-
-
         }
 
         public List<EstadoPedidoEntidad> EstadoPedidoSelectAll()
         {
-
             return EstadoPedidoDal.SelectAll();
-
-
         }
 
         public void PedidoEstadoPedidoUpdate(PedidoEstadoPedidoEntidad pedidoestado)

@@ -1,14 +1,14 @@
 ﻿body {
-    padding-top: 70px /*El padding es necesario para que funcione el .navbar-fixed-top*/
+    padding-top: 70px; /*El padding es necesario para que funcione el .navbar-fixed-top*/
 }
 
-.img-logo{
-    max-height: 40px; 
-    padding-top:10px;
+.img-logo {
+    max-height: 40px;
+    padding-top: 10px;
 }
 
 .modal-content {
-    border-radius:0px;
+    border-radius: 0px;
 }
 
 .nav-links > li > a {
@@ -17,9 +17,9 @@
 }
 
 .nav-navegacion {
-    max-height:10px; 
-    min-height: 30px; 
-    border-radius:0px;
+    max-height: 10px;
+    min-height: 30px;
+    border-radius: 0px;
 }
 
 .slide-image {
@@ -40,9 +40,9 @@
     overflow: hidden;
 }
 
-.caption h4 {
-    white-space: pre-wrap;
-}
+    .caption h4 {
+        white-space: pre-wrap;
+    }
 
 .thumbnail img {
     width: 100%;
@@ -58,10 +58,10 @@
     padding: 0;
 }
 
-.thumbnail .caption-full {
-    padding: 9px;
-    color: #333;
-}
+    .thumbnail .caption-full {
+        padding: 9px;
+        color: #333;
+    }
 
 .item-toolbar {
     margin: 10px;
@@ -84,76 +84,99 @@
     padding: 5px;
 }
 
-.requerido{
-    color:red;
-    margin-left:3px;
-
+.requerido {
+    color: red;
+    margin-left: 3px;
 }
 
-.form-control{
-    margin-bottom:10px;
-
+.form-control {
+    margin-bottom: 10px;
 }
-.g-recaptcha{
+
+.g-recaptcha {
     margin-bottom: 300px;
-     margin-left: 300px;
-
+    margin-left: 300px;
 }
 
-#btnsContacto{
-    margin-bottom:60px;
-
+#btnsContacto {
+    margin-bottom: 60px;
 }
 
 #txtSearch {
-    margin-bottom:0px;
+    margin-bottom: 0px;
 }
 
-#imglogoempresa{
-    margin-top:10px;
+#imglogoempresa {
+    margin-top: 10px;
 }
 
-.TextoFooter{
-    color:white;
+.TextoFooter {
+    color: white;
 }
 
 .drop-image-div {
-    height:50px; 
-    width:80px;
+    height: 50px;
+    width: 80px;
 }
 
 .drop-btn {
-    height:40px; 
-    padding-top:10px;
+    height: 40px;
+    padding-top: 10px;
 }
 
 .dropdown-menu {
-    border-radius:0px
+    border-radius: 0px;
 }
 
 .drop-image {
-    max-width:50px; 
-    max-height:50px;
+    max-width: 50px;
+    max-height: 50px;
     padding: 5px 0;
 }
 
 .drop-item {
-    vertical-align:middle; 
+    vertical-align: middle;
     border-bottom: 1px solid #F2F2F2;
     padding-bottom: 5px;
     padding-top: 5px;
 }
 
-.menuPrincipal{
-    z-index:2;
+.menuPrincipal {
+    z-index: 2;
 }
 
-.menuSecundario{
-    z-index:1;
-    margin-top:60px;
+.menuSecundario {
+    z-index: 1;
+    margin-top: 60px;
 }
 
-.paddingPaginas{
+.paddingPaginas {
     padding-top: 20px;
+}
 
+.breadcrumb {
+        border-radius: 0px;
+}
+
+.breadcrumb > span > span > li {
+    display: inline-block;
+    height:30px;
+}
+
+.breadcrumb > span > span a {
+    text-decoration: none;
+    color: #00a9c6;
+}
+
+    .breadcrumb > span > span a:hover {
+        text-decoration: underline;
+    }
+
+.breadcrumb > span > span.active {
+    color: black;
+}
+
+.breadcrumb > span > span.path {
+    color: #d1d1d1;
+    padding: 0 20px;
 }

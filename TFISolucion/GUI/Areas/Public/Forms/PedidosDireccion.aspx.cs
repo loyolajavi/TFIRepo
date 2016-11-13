@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Services;
 using TFI.CORE.Managers;
@@ -8,10 +9,9 @@ namespace TFI.GUI.Areas.Public.Forms
 {
     public partial class PedidosDireccion : System.Web.UI.Page
     {
-       
-        
         public UsuarioEntidad logueado;
         public DireccionEntidad direccionEnvio;
+        public DireccionEntidad direccionFacturacion;
         public TelefonoEntidad telefonoContacto;
 
         protected UsuarioCore _usuarioManager;
@@ -27,7 +27,16 @@ namespace TFI.GUI.Areas.Public.Forms
 
             if (logueado != null)
             {
-                direccionEnvio = _usuarioManager.FindDireccionPredeterminada(logueado.NombreUsuario);
+                var dirs = _usuarioManager.FindDireccionesPredeterminadas(logueado.NombreUsuario);
+
+                direccionEnvio = dirs
+                    .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Envio)
+                    .FirstOrDefault();
+
+                direccionFacturacion = dirs
+                    .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Facturacion)
+                    .FirstOrDefault();
+
                 telefonoContacto = _usuarioManager.FindTelefonoContacto(logueado.NombreUsuario);
             }
         }
