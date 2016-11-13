@@ -33,13 +33,15 @@ namespace TFI.GUI
                 stringBusqueda = Page.Request.QueryString["search"];
                 stringCategoria = Page.Request.QueryString["Categoria"];
 
+               
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
                 {
 
                     if (stringBusqueda == "*")
                     {
-                        unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                        //unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                        unosProductos = _manager.FindAllByCUIT();
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                     }
@@ -67,6 +69,7 @@ namespace TFI.GUI
                     }
                 }
 
+            
 
                 if (!unosProductos.Any())
                 {
