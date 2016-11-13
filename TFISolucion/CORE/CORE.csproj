@@ -59,6 +59,7 @@
     <Compile Include="Helpers\HelperPedidoDetalle.cs" />
     <Compile Include="Managers\CategoriaCore.cs" />
     <Compile Include="Managers\ComprobanteCore.cs" />
+    <Compile Include="Managers\CondicionFiscalCore.cs" />
     <Compile Include="Managers\DireccionCore.cs" />
     <Compile Include="Managers\EmpresaCore.cs" />
     <Compile Include="Managers\FamiliaCore.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Managers\TarjetaCore.cs" />
     <Compile Include="Managers\UsuarioCore.cs" />
     <Compile Include="Managers\UsuarioFamiliaCore.cs" />
+    <Compile Include="Managers\UsuarioTipoCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\StockCore.cs" />
   </ItemGroup>

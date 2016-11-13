@@ -104,6 +104,22 @@ var updateProductos = function () {
     });
 };
 
+$(function () {
+    $("#ddlTipoUsuario").change(function () {
+        ToggleDropdown();
+    });
+    ToggleDropdown(); // Done to ensure correct hiding/showing on page reloads due to validation errors
+});
+
+function ToggleDropdown() {
+    if ($("#ddlTipoUsuario").val() == "Empleado") {
+        $("#divFiscal").hide();
+
+
+    } else {
+        $("#divFiscal").show();
+    }
+};
 
 
 

@@ -59,7 +59,7 @@
                                         <div class="thumbnail" style="text-align: center;">
                                             <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="IMAGE" />
                                             <div class="caption">
-                                                <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
+                                                <h4><a runat="server" class="responsive" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
                                                 <h5 class="precio"><span>$</span><span><%#Eval("PrecioUnitario")%></span></h5>
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                             </div>
@@ -89,7 +89,7 @@
                                         <div class="thumbnail">
                                             <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
                                             <div class="caption">
-                                                <h4><a runat="server" class="responsive" href="#"><%#Eval("DescripProducto")%></a></h4>
+                                                <h4><a runat="server" class="responsive" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
                                                 <h4>$<%#Eval("PrecioUnitario")%></h4>
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />

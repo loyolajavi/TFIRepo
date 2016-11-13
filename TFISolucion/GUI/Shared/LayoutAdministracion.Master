@@ -244,15 +244,15 @@
     </form>
 
 
-
-    <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="../../../Scripts/thirdparty/jquery-3.1.1.min.js"></script>
+    <%--<script src="../../../LCSK/assets/js/jquery-2.1.1.min.js"></script>--%>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
     <script src="/Scripts/shared/Funciones.js"></script>
 
-    <script src="assets/js/jquery.timeago.js" type="text/javascript"></script>
-    <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>
-    <script src="/signalr/hubs" type="text/javascript"></script>
-    <script src="agent.js" type="text/javascript"></script>
+<%--    <script src="/LCSK/assets/js/jquery.timeago.js" type="text/javascript"></script>
+    <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></scrip--%>t>
+    <%--<script src="/signalr/hubs" type="text/javascript"></script>
+    <script src="/LCSK/agent.js" type="text/javascript"></script>--%>
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
 
 

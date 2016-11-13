@@ -80,6 +80,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Intranet\Forms\AltaUsuario.aspx" />
     <Content Include="Areas\Intranet\Forms\FacturasCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx" />
@@ -237,6 +238,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\FacturasCliente.aspx.designer.cs">
       <DependentUpon>FacturasCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\AltaUsuario.aspx.cs">
+      <DependentUpon>AltaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\AltaUsuario.aspx.designer.cs">
+      <DependentUpon>AltaUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx.cs">
       <DependentUpon>GestionContenidoCategorias.aspx</DependentUpon>
