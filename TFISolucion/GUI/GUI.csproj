@@ -80,12 +80,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Intranet\Forms\FacturasCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoProductos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionPermisos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionStock.aspx" />
+    <Content Include="Areas\Intranet\Forms\NCCliente.aspx" />
+    <Content Include="Areas\Intranet\Forms\NDCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosEmpleados.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateEmpleado.aspx" />
@@ -228,6 +231,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Intranet\Forms\FacturasCliente.aspx.cs">
+      <DependentUpon>FacturasCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\FacturasCliente.aspx.designer.cs">
+      <DependentUpon>FacturasCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx.cs">
       <DependentUpon>GestionContenidoCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,6 +279,20 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionStock.aspx.designer.cs">
       <DependentUpon>GestionStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\NCCliente.aspx.cs">
+      <DependentUpon>NCCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\NCCliente.aspx.designer.cs">
+      <DependentUpon>NCCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\NDCliente.aspx.cs">
+      <DependentUpon>NDCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\NDCliente.aspx.designer.cs">
+      <DependentUpon>NDCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\OrdenesPedido.aspx.cs">
       <DependentUpon>OrdenesPedido.aspx</DependentUpon>

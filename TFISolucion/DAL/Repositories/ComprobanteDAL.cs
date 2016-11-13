@@ -182,6 +182,28 @@ namespace TFI.DAL.DAL
 			}
 		}
 
+
+        /// <summary>
+        /// Selects all records from the Comprobante table by a foreign key.
+        /// </summary>
+        public List<ComprobanteEntidad> ComprobanteSelectAllByCUIT_NroComprobante(string CUIT,int NroComprobante)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", CUIT),
+                new SqlParameter("@NroComprobante", NroComprobante)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT_NroComprobante", parameters))
+            {
+                List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
+
+                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+
+                return comprobanteEntidadList;
+            }
+        }
+
 		/// <summary>
 		/// Selects all records from the Comprobante table by a foreign key.
 		/// </summary>
