@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header">Editar empleado:<small> Empleado</small>
+                <h1 class="page-header">Editar empleado: <small><asp:Label ID="lblEmpleado" runat="server"></asp:Label> </small>
                 </h1>
             </div>
         </div>
@@ -29,15 +29,20 @@
                 <br />
                 <br />
                 <div class="form-group">
-                    <label for="txtClave">Contraseña</label>
-                    <input type="text" class="form-control" id="txtClave" runat="server" clientidmode="static" />
+                    <label for="txtClave">Contraseña</label><br />
+                    <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
+                    <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="Debe ingresar al menos 8 carácteres(Mayúscula, Letras y Números)" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
                 </div>
+
                 <div class="form-group">
-                    <label for="txtClaveRep">Repetir Contraseña</label>
-                    <input type="text" class="form-control" id="txtClaveRep" runat="server" clientidmode="static" />
+                    <label for="txtClaveRep">Repetir Contraseña</label><br />
+                    <input type="password" class="input-sm" id="txtClaveRep" runat="server" clientidmode="static" placeholder="********" />
+                    <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="La contraseñas no coinciden, por favor reingréselas" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
                 </div>
-                <asp:CompareValidator ID="vldClave" runat="server" Text="La contraseñas no coinciden, por favor reingréselas" ControlToValidate="txtClaveRep" ControlToCompare="txtClave" ></asp:CompareValidator>
-                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Contraseña" runat="server" OnClick="btnCambiarClave_Click" />
+                    <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Contraseña" runat="server" OnClick="btnCambiarClave_Click" />
+                
+                <div id="divEspacioModifClave" runat="server"></div>
+                <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">Se modificó la contraseña</div>
                 <h4 class="page-header">Datos personales del Empleado</h4>
                 <div class="form-group">
                     <label for="txtApellido">Apellido</label>

@@ -13,6 +13,15 @@ namespace TFI.GUI.Areas.Intranet.Forms {
     public partial class UpdateEmpleado {
         
         /// <summary>
+        /// Control lblEmpleado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmpleado;
+        
+        /// <summary>
         /// Control txtNombreUsuario.
         /// </summary>
         /// <remarks>
@@ -37,7 +46,16 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtClave;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtClave;
+        
+        /// <summary>
+        /// Control vldTextoClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator vldTextoClave;
         
         /// <summary>
         /// Control txtClaveRep.
@@ -46,7 +64,7 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtClaveRep;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtClaveRep;
         
         /// <summary>
         /// Control vldClave.
@@ -65,6 +83,24 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCambiarClave;
+        
+        /// <summary>
+        /// Control divEspacioModifClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEspacioModifClave;
+        
+        /// <summary>
+        /// Control divAlertaModifClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlertaModifClave;
         
         /// <summary>
         /// Control txtApellido.

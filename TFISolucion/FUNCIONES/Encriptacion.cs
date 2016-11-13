@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TFI.FUNCIONES
 {
-    public class Encriptacion
+    public static class Encriptacion
     {
-        public string ToHash(string clave)
+        public static string ToHash(string clave)
         {
             if (string.IsNullOrEmpty(clave))
                 return "";

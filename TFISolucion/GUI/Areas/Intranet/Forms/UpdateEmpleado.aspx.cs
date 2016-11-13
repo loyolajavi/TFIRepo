@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
+using TFI.FUNCIONES;
+using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -29,14 +31,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             if (!IsPostBack)
             {
                 
-
-                
                 if (!string.IsNullOrEmpty(usuarioString))
                 {
                     cargarPermisos();
                     cargarDatosEmpleado();
-
-
 
                 }
                 else
@@ -64,7 +62,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public void cargarDatosEmpleado(){
             
             unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
-            
+
+            lblEmpleado.Text = unEmpleado.Nombre + " " + unEmpleado.Apellido;
             Session["Empleado"] = (UsuarioEntidad)unEmpleado;
             txtNombreUsuario.Value = unEmpleado.NombreUsuario;
             txtClave.Value = "********";
@@ -101,7 +100,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             if (Page.IsValid)
             {
-                txtNombreUsuario.Value = "HOOOOOOOOOOLA";
+                StringBuilder sb = new StringBuilder();
+                unEmpleado = (UsuarioEntidad)Session["Empleado"];
+                unEmpleado.Clave = Encriptacion.ToHash(txtClave.Value);
+                unManagerUsuario.UpdateUsuarioContraseña(unEmpleado);
+                sb.Append("<br />");
+                divEspacioModifClave.InnerHtml = sb.ToString();
+                divAlertaModifClave.Visible = true;
             }
         }
 
