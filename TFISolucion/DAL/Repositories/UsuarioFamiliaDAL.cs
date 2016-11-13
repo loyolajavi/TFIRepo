@@ -12,6 +12,27 @@ namespace TFI.DAL.DAL
 
 		#region Methods
 
+
+
+
+        public void UsuarioUpdatePermisosFamilia(UsuarioFamiliaEntidad usuarioFamilia)
+        {
+            ValidationUtility.ValidateArgument("usuarioFamilia", usuarioFamilia);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", usuarioFamilia.CUIT),
+                new SqlParameter("@NombreUsuario", usuarioFamilia.NombreUsuario),
+                new SqlParameter("@IdFamilia", usuarioFamilia.IdFamilia)
+				
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdatePermisosFamilia", parameters);
+        }
+
+
+
+
 		/// <summary>
 		/// Saves a record to the UsuarioFamilia table.
 		/// </summary>

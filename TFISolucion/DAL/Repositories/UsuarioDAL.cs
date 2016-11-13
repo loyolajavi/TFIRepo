@@ -55,6 +55,19 @@ namespace TFI.DAL.DAL
         }
 
 
+        public void UsuarioUpdateNombreUsuario(UsuarioEntidad usuario)
+        {
+            ValidationUtility.ValidateArgument("usuario", usuario);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@NombreUsuario", usuario.NombreUsuario),
+                new SqlParameter("@IdUsuario", usuario.IdUsuario)
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateNombreUsuario", parameters);
+        }
+
         public void UpdateUsuarioContraseña(UsuarioEntidad usuario)
         {
             ValidationUtility.ValidateArgument("usuario", usuario);
@@ -68,6 +81,7 @@ namespace TFI.DAL.DAL
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateClave", parameters);
         }
+
 
 
         /// <summary>

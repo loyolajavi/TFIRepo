@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.UI;
 using TFI.FUNCIONES;
 
 namespace TFI.GUI
@@ -13,7 +14,16 @@ namespace TFI.GUI
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.WebForms;
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
+            new ScriptResourceDefinition
+            {
+                Path = "~/Scripts/thirdparty/jquery-3.1.1.min.js",
+                DebugPath = "~/Scripts/thirdparty/jquery-3.1.1.js",
+                CdnPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js",
+                CdnDebugPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.js"
 
+            });
         }
 
         protected void Session_Start(object sender, EventArgs e)

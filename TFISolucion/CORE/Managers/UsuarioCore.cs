@@ -199,5 +199,10 @@ namespace TFI.CORE.Managers
         }
 
 
+        public void UsuarioUpdateNombreUsuario(UsuarioEntidad usuario)
+        {
+            DaldeUsuario.UsuarioUpdateNombreUsuario(usuario);
+        }
+
     }
 }

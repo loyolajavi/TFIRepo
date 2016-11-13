@@ -68,6 +68,7 @@
     <Compile Include="Managers\RecursoCore.cs" />
     <Compile Include="Managers\TarjetaCore.cs" />
     <Compile Include="Managers\UsuarioCore.cs" />
+    <Compile Include="Managers\UsuarioFamiliaCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\StockCore.cs" />
   </ItemGroup>

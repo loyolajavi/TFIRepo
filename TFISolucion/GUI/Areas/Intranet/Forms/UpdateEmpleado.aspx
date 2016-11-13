@@ -25,6 +25,9 @@
                     <label for="txtNombreUsuario">Nombre de Usuario</label>
                     <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
                 </div>
+                <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="Modificar Nombre de Usuario" runat="server" OnClick="btnNombreUsuario_Click" />
+                <br />
+                <br />
                 <div class="form-group">
                     <label for="txtClave">Contraseña</label>
                     <input type="text" class="form-control" id="txtClave" runat="server" clientidmode="static" />
@@ -33,7 +36,8 @@
                     <label for="txtClaveRep">Repetir Contraseña</label>
                     <input type="text" class="form-control" id="txtClaveRep" runat="server" clientidmode="static" />
                 </div>
-                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Cuenta" runat="server" OnClick="btnCambiarClave_Click" />
+                <asp:CompareValidator ID="vldClave" runat="server" Text="La contraseñas no coinciden, por favor reingréselas" ControlToValidate="txtClaveRep" ControlToCompare="txtClave" ></asp:CompareValidator>
+                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Contraseña" runat="server" OnClick="btnCambiarClave_Click" />
                 <h4 class="page-header">Datos personales del Empleado</h4>
                 <div class="form-group">
                     <label for="txtApellido">Apellido</label>

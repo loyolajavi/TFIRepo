@@ -17,6 +17,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
+        public UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
+        HttpContext Current = HttpContext.Current;
 
         private string usuarioString = null;
 
@@ -28,6 +30,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 
 
+                
                 if (!string.IsNullOrEmpty(usuarioString))
                 {
                     cargarPermisos();
@@ -61,6 +64,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public void cargarDatosEmpleado(){
             
             unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
+            
+            Session["Empleado"] = (UsuarioEntidad)unEmpleado;
             txtNombreUsuario.Value = unEmpleado.NombreUsuario;
             txtClave.Value = "********";
             txtClaveRep.Value = "********";
@@ -84,12 +89,27 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnPermisosUsuarioUpdate_Click(object sender, EventArgs e)
         {
-            txtNombreUsuario.Value = "PERMISOS";
+            unEmpleado = (UsuarioEntidad)Session["Empleado"];
+            UsuarioFamiliaEntidad unUsuarioFamilia = new UsuarioFamiliaEntidad();
+            unUsuarioFamilia.NombreUsuario = unEmpleado.NombreUsuario;
+            unUsuarioFamilia.IdFamilia = ddlPermisosUsuarioUpdate.SelectedIndex + 1;
+            unManagerUsuarioFamilia.UsuarioUpdatePermisosFamilia(unUsuarioFamilia);
+            cargarDatosEmpleado();
         }
 
         protected void btnCambiarClave_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+                txtNombreUsuario.Value = "HOOOOOOOOOOLA";
+            }
+        }
 
+        protected void btnNombreUsuario_Click(object sender, EventArgs e)
+        {
+            unEmpleado.NombreUsuario = txtNombreUsuario.Value;
+            unEmpleado.IdUsuario = Int32.Parse(usuarioString);
+            unManagerUsuario.UsuarioUpdateNombreUsuario(unEmpleado);
         }
     }
 }
