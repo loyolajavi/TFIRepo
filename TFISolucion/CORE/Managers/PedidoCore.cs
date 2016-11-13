@@ -54,5 +54,11 @@ namespace TFI.CORE.Managers
         }
 
 
+        public void Create(PedidoEntidad e)
+        {
+            e.FechaPedido = DateTime.Now;
+            PedidoDal.Insert(e);
+        }
+
     }
 }

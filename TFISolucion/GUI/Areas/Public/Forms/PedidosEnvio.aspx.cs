@@ -12,6 +12,7 @@ namespace TFI.GUI.Areas.Public.Forms
         public UsuarioEntidad logueado;
         public List<SucursalEntidad> sucursalesDisponibles;
         public int? seleccionado;
+        public int? formaEnvioId;
 
 
         private SucursalCore _sucursalCore;
@@ -27,7 +28,7 @@ namespace TFI.GUI.Areas.Public.Forms
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
             seleccionado = (int?)Current.Session["Seleccionada"];
-
+            formaEnvioId = (int?)Current.Session["FormaEnvio"];
 
             if (logueado == null)
                 Response.Redirect("Pedidos.aspx");
@@ -39,6 +40,14 @@ namespace TFI.GUI.Areas.Public.Forms
         public static void Seleccionar(int? id)
         {
             HttpContext.Current.Session["Seleccionada"] = id;
+        }
+
+        [WebMethod]
+        public static void FormaEnvio(int id)
+        {
+            HttpContext.Current.Session["FormaEnvio"] = id;
+            if(id == (int)FormaEntregaEntidad.Options.Correo)
+                HttpContext.Current.Session["Seleccionada"] = null;
         }
 
         

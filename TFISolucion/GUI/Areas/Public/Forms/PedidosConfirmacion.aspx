@@ -18,13 +18,41 @@
 
                 <table class="table table-bordered">
                     <thead>
-
+                        <tr>
+                            <th colspan="3">RESUMEN</th>
+                        </tr>
+                        <tr>
+                            <td><%=Resources.Global.Descripcion%></td>
+                            <td class="td-centrado"><%=Resources.Global.Cantidad%></td>
+                            <td class="td-centrado"><%=Resources.Global.Total%></td>
+                        </tr>
                     </thead>
                     <tbody>
-
+                        <%if (lista.Any())
+                          {
+                              foreach (var item in lista)
+                              {%>
+                                <tr>
+                                    <td><%=item.Producto.DescripProducto%></td>
+                                    <td class="td-centrado"><%=item.Cantidad%></td>
+                                    <td class="td-centrado"><%=item.Cantidad * item.Producto.PrecioUnitario%></td>
+                                </tr>
+                            <%}
+                          }%>
+                           
                     </tbody>
                     <tfoot>
-
+                        <% if (FormaEntrega != null) {
+                             %>
+                            <tr>
+                                <td colspan="2">Envio <strong><%=((TFI.Entidades.FormaEntregaEntidad.Options)FormaEntrega).ToString() %></strong></td>
+                                <td class="td-centrado"><%if (FormaEntrega == 1) {%> 200.00 <% }else{ %> Gratis! <%} %></td>
+                            </tr>
+                        <% } %>
+                        <tr>
+                            <td colspan="2"><h4><%=Resources.Global.Total%></h4></td>
+                            <td class="td-centrado"><%=Math.Round(totalizado,2) %></td>
+                        </tr>
                     </tfoot>
                 </table>
 

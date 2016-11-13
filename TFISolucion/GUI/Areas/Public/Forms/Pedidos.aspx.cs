@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using TFI.Entidades;
+using TFI.GUI.Helpers.DTO;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -102,13 +103,6 @@ namespace TFI.GUI.Areas.Public.Forms
                     Current.Session["Pedido"] = lista;
                 }
             }
-        }
-
-        public class PedidoLista
-        {
-            public ProductoEntidad Producto { get; set; }
-            public int Cantidad { get; set; }
-            public bool Stock { get; set; }
         }
     }
 }

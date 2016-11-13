@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cantidad.
+        /// </summary>
+        internal static string Cantidad {
+            get {
+                return ResourceManager.GetString("Cantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirmar Pedido.
         /// </summary>
         internal static string ConfiirmarPedido {
@@ -70,11 +79,56 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Descripcion.
+        /// </summary>
+        internal static string Descripcion {
+            get {
+                return ResourceManager.GetString("Descripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo a todo el Pais.
+        /// </summary>
+        internal static string EnvioTodoPais {
+            get {
+                return ResourceManager.GetString("EnvioTodoPais", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo estimado de entrega 3 a 5 dias..
+        /// </summary>
+        internal static string EstimacionEnvio {
+            get {
+                return ResourceManager.GetString("EstimacionEnvio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Forma de Pago.
         /// </summary>
         internal static string FormaPago {
             get {
                 return ResourceManager.GetString("FormaPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resumen.
+        /// </summary>
+        internal static string Resumen {
+            get {
+                return ResourceManager.GetString("Resumen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
             }
         }
     }

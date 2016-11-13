@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cantidad" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
   <data name="ConfiirmarPedido" xml:space="preserve">
     <value>Confirmar Pedido</value>
   </data>
+  <data name="Descripcion" xml:space="preserve">
+    <value>Descripcion</value>
+  </data>
+  <data name="EnvioTodoPais" xml:space="preserve">
+    <value>Correo a todo el Pais</value>
+  </data>
+  <data name="EstimacionEnvio" xml:space="preserve">
+    <value>Tiempo estimado de entrega 3 a 5 dias.</value>
+  </data>
   <data name="FormaPago" xml:space="preserve">
     <value>Forma de Pago</value>
+  </data>
+  <data name="Resumen" xml:space="preserve">
+    <value>Resumen</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

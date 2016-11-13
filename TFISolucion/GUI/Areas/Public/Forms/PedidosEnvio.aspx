@@ -5,7 +5,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-    <input value="<%=seleccionado%>" id="selId"  hidden="hidden"/>
+    <input value="<%=seleccionado%>" id="selId" hidden="hidden" />
+    <input value="<%=formaEnvioId%>" id="formaEnvioId" hidden="hidden" />
 
     <div>
         <h1>Datos Personales</h1>
@@ -20,7 +21,7 @@
                     <tr>
                         <td style="vertical-align: middle">
                             <div class="td-centrado">
-                                <input type="radio" id="rdCorreo" />
+                                <input type="radio" id="rdCorreo" data-envio="1" />
                             </div>
                         </td>
                         <td style="vertical-align: middle">
@@ -29,8 +30,8 @@
                             </div>
                         </td>
                         <td>
-                            <h4>Correo a todo el Pais</h4>
-                            <h5>Tiempo estimado de entrega 3 a 5 dias.</h5>
+                            <h4><%=Resources.Global.EnvioTodoPais %></h4>
+                            <h5><%=Resources.Global.EstimacionEnvio %></h5>
                         </td>
                         <td style="vertical-align: middle">
                             <div class="td-centrado">
@@ -42,7 +43,7 @@
                     <tr>
                         <td style="vertical-align: middle;">
                             <div class="td-centrado">
-                                <input type="radio" id="rdRetiro" />
+                                <input type="radio" id="rdRetiro" data-envio="2" />
                             </div>
                         </td>
                         <td style="vertical-align: middle; max-width: 60px;">
@@ -68,15 +69,19 @@
                 <hr class="barras" />
                 <table class="table table-bordered">
                     <tr>
-                        <td><h5>Sucursales disponibles:</h5></td>
                         <td>
-                            <select id="sucursalesDisponibles" style="padding:10px; width: 300px;">
+                            <h5>Sucursales disponibles:</h5>
+                        </td>
+                        <td>
+                            <select id="sucursalesDisponibles" style="padding: 10px; width: 400px;">
                                 <option value="">Seleccione...</option>
-                                <% if (sucursalesDisponibles.Any()) {
+                                <% if (sucursalesDisponibles.Any())
+                                   {
                                        foreach (var suc in sucursalesDisponibles)
                                        {%>
-                                        <option value="<%=suc.IdSucursal%>" <%if (suc.IdSucursal == seleccionado) {%> selected="selected"<% } %>><%=suc.DescripSucursal%> | <%=suc.Direccion.Calle%> <%=suc.Direccion.Numero %> </option>
-                                    <%}
+                                <option value="<%=suc.IdSucursal%>" <%if (suc.IdSucursal == seleccionado)
+                                                                      {%> selected="selected" <% } %>><%=suc.DescripSucursal%> | <%=suc.Direccion.Calle%> <%=suc.Direccion.Numero %> | <%=suc.Direccion.Localidad %> </option>
+                                <%}
                                    } %>
                             </select>
                         </td>
@@ -85,41 +90,44 @@
             </div>
         </div>
 
-    <div class="row" style="margin: 20px;">
-        <div class="pasos">
-             <button class="btn btn-lg btn-warning pull-right btn-caja" type="button" id="btnConfirmar">Confirmar Pago</button>
+        <div class="row" style="margin: 20px;">
+            <div class="pasos">
+                <button class="btn btn-lg btn-warning pull-right btn-caja" type="button" id="btnConfirmar">Confirmar Pago</button>
+            </div>
         </div>
     </div>
-
-    </div>
-
-   
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
 
     <script>
 
-        
+        var sel = function () {
+            var formaEnvio = $('#formaEnvioId').val();
 
-        var sel = function() {
-            if ($('#selId').val() != "")
+            if (formaEnvio == 1)
             {
+                $('#rdCorreo').prop('checked', 'true');
+            }
+            else if(formaEnvio == 2) {
                 $('#rdRetiro').prop('checked', 'true');
                 $('#sucursales').removeAttr('hidden');
-            }
+            } 
         };
 
         sel();
 
         $('#rdCorreo').click(function () {
             if ($(this).prop('checked')) {
+                updateFormaEnvio($(this).data('envio'));
                 $('#rdRetiro').prop('checked', false);
                 $('#sucursales').prop('hidden', 'hidden');
             }
         });
 
         $('#rdRetiro').click(function () {
+
             if ($(this).prop('checked')) {
+                updateFormaEnvio($(this).data('envio'));
                 $('#rdCorreo').prop('checked', false);
                 $('#sucursales').removeAttr('hidden');
             }
@@ -133,12 +141,10 @@
             app.redirect('PedidosConfirmacion.aspx');
         });
 
-
-        var seleccionar = function (id) {
-
+        var EjecutarAjax = function (id, accion) {
             $.ajax({
                 type: "POST",
-                url: "PedidosEnvio.aspx/Seleccionar",
+                url: "PedidosEnvio.aspx/" + accion,
                 data: JSON.stringify({
                     id: id
                 }),
@@ -146,11 +152,17 @@
                 dataType: "json",
                 error: function (xhr, status, error) {
                     alert(error);
-                }                
+                }
             });
-
         }
 
+        var seleccionar = function (id) {
+            EjecutarAjax(id, "Seleccionar");
+        }
 
+        var updateFormaEnvio = function (id) {
+            EjecutarAjax(id, "FormaEnvio");
+        
+        }
     </script>
 </asp:Content>

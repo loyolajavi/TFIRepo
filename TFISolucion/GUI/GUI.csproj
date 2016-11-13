@@ -431,6 +431,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DTO\PedidoLista.cs" />
     <Compile Include="LCSK\Agent.aspx.cs">
       <DependentUpon>Agent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
