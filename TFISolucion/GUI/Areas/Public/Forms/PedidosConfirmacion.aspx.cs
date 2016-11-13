@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.Entidades;
@@ -20,6 +21,12 @@ namespace TFI.GUI.Areas.Public.Forms
 
             if (logueado == null)
                 Response.Redirect("Pedidos.aspx");
+        }
+
+        [WebMethod]
+        public static void GenerarPedido()
+        {
+
         }
     }
 }

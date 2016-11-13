@@ -218,6 +218,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Global.en.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx.cs">
       <DependentUpon>GestionContenidoCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -436,7 +446,12 @@
       <DependentUpon>MiCuenta.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Global.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Global.en.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CORE\CORE.csproj">
       <Project>{69fba2ed-4236-4620-b74b-aca63d94777b}</Project>
@@ -450,6 +465,12 @@
       <Project>{258f06bf-b0a8-4b0e-a679-e494112df4a1}</Project>
       <Name>FUNCIONES</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Global.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
