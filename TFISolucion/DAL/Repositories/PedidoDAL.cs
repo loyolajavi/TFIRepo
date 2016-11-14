@@ -12,7 +12,7 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Saves a record to the Pedido table.
         /// </summary>
-        public void Insert(PedidoEntidad pedido)
+        public int Insert(PedidoEntidad pedido)
         {
             ValidationUtility.ValidateArgument("pedido", pedido);
 
@@ -29,7 +29,9 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@NroPedido", pedido.NroPedido)
 			};
 
-            pedido.IdPedido = (int)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoInsert", parameters);
+            var result = (decimal)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoInsert", parameters);
+
+            return Decimal.ToInt32(result);
         }
 
         /// <summary>

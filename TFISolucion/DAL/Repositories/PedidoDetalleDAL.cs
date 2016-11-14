@@ -21,12 +21,12 @@ namespace TFI.DAL.DAL
 
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdPedidoDetalle", pedidoDetalle.IdPedidoDetalle),
 				new SqlParameter("@IdPedido", pedidoDetalle.IdPedido),
 				new SqlParameter("@Cantidad", pedidoDetalle.Cantidad),
 				new SqlParameter("@PrecioUnitario", pedidoDetalle.PrecioUnitario),
 				new SqlParameter("@Descuento", pedidoDetalle.Descuento),
-				new SqlParameter("@IdProducto", pedidoDetalle.IdProducto)
+				new SqlParameter("@IdProducto", pedidoDetalle.IdProducto),
+                new SqlParameter("@CUIT", pedidoDetalle.CUIT)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDetalleInsert", parameters);

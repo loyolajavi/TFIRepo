@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
+<asp:Content ID="Content2" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
     <div>
         <h1>Confirmación Pago</h1>
@@ -97,6 +97,16 @@
     <script>
         $('#btnConfirmar').click(function () {
 
+            $.ajax({
+                type: "POST",
+                url: "PedidosConfirmacion.aspx/GenerarPedido",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function () { app.reload(); }
+            });
         });
     </script>
 

@@ -25,5 +25,10 @@ namespace TFI.CORE.Managers
 
             return sucursales;
         }
+
+        public DireccionEntidad FindDireccionSucursal(int id)
+        {
+            return _direccionCore.DireccionSelect(id);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TFI.DAL.DAL;
 using TFI.Entidades;
 
@@ -53,12 +54,24 @@ namespace TFI.CORE.Managers
             PedidoEstadoDAL.Update(pedidoestado);
         }
 
-
         public void Create(PedidoEntidad e)
         {
-            e.FechaPedido = DateTime.Now;
-            PedidoDal.Insert(e);
+            e.NroPedido = GetLastNroPedido();
+            var idPedido = PedidoDal.Insert(e);
+
+            e.Detalles.ForEach(d => d.IdPedido = idPedido);
+
+            e.Detalles.ForEach(x => PedidoDetalleDAL.Insert(x));
         }
 
+        private long GetLastNroPedido()
+        {
+            long? idAnterior = PedidoDal.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit)
+                .OrderByDescending(x => x.NroPedido)
+                .Select(x => x.NroPedido)
+                .FirstOrDefault();
+
+            return idAnterior.HasValue ? idAnterior.Value + 1 : 1;
+        }
     }
 }

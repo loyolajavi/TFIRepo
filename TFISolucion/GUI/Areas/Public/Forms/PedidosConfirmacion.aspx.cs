@@ -44,9 +44,36 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             var Current = HttpContext.Current;
 
+            var lista = (List<PedidoLista>)Current.Session["Pedido"];
+            var entregaTipo = (int)Current.Session["FormaEnvio"];
+            var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            var sucursalId = (int?)Current.Session["Seleccionada"];
+            var pedidosDetalles = new List<PedidoDetalleEntidad>();
+
+            var usuarioManager = new UsuarioCore();
+            var sucursalManager = new SucursalCore();
+
+            var direccionEnvio = entregaTipo == (int)FormaEntregaEntidad.Options.Correo
+                                ? usuarioManager.FindDireccionEnvioPredeterminada(logueado.NombreUsuario).IdDireccion
+                                : sucursalManager.FindDireccionSucursal(sucursalId.Value).IdDireccion;
+
+            lista.ForEach(x => pedidosDetalles.Add(new PedidoDetalleEntidad()
+            {
+                Cantidad = x.Cantidad,
+                PrecioUnitario = x.Producto.PrecioUnitario,
+                IdProducto = x.Producto.IdProducto,
+                CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit
+            }));
+
             var dal = new PedidoCore();
+
             var pedido = new PedidoEntidad() {
-                
+                FechaPedido = DateTime.Now,
+                IdFormaEntrega = entregaTipo,
+                NombreUsuario = logueado.NombreUsuario,
+                CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit,
+                Detalles = pedidosDetalles,
+                DireccionEntrega = direccionEnvio
             };
 
             dal.Create(pedido);
