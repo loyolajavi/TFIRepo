@@ -74,6 +74,7 @@ namespace TFI.GUI.General
                     usuario.Nombre = RegistroNombre.Value;
                     usuario.NombreUsuario = RegistroUsuario.Value;
                     usuario.IdCondicionFiscal = 1;
+                    usuario.Familia.IdFamilia = 1; //Permisos de Cliente;
 
                     UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
                     UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);

@@ -18,6 +18,7 @@ namespace TFI.CORE.Managers
         private TipoTelDAL DalDeTipoTelefono = new TipoTelDAL();
         private ProvinciaDAL DalDeProvincia = new ProvinciaDAL();
         private TarjetaDAL DalDeTarjetas = new TarjetaDAL();
+        private UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
 
         public UsuarioCore()
         {
@@ -37,12 +38,33 @@ namespace TFI.CORE.Managers
             }
         }
 
-        public void RegistrarUsuario(UsuarioEntidad usuario)
+        public int RegistrarUsuario(UsuarioEntidad usuario)
         {
             try
             {
                 usuario.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
-                _dal.Insert(usuario);
+                UsuarioFamiliaEntidad unUsFamilia = new UsuarioFamiliaEntidad();
+                //Chequea si ya existe ese nombre de usuario
+                UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
+                UsuarioYaRegistrado = Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
+                if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
+                { 
+                    _dal.Insert(usuario); 
+                    unUsFamilia.CUIT = ConfigSection.Default.Site.Cuit;
+                    unUsFamilia.NombreUsuario = usuario.NombreUsuario;
+                    unUsFamilia.IdFamilia = usuario.Familia.IdFamilia;
+                    unManagerUsuarioFamilia.UsuarioFamiliaInsert(unUsFamilia);
+                }
+                else
+                {
+                    return 1;
+                }
+                return 0;
+                
+
+
+
+
             }
             catch (Exception ex)
             {

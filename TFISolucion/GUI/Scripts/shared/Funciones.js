@@ -113,13 +113,18 @@ $(function () {
 
 function ToggleDropdown() {
     if ($("#ddlTipoUsuario").val() == "Empleado") {
-        $("#divFiscal").hide();
-
-
-    } else {
         $("#divFiscal").show();
+        $("#btnAltaEmpleado").show();
+        $("#divDirFacturacion").hide();
+        $("#divDirEnvio").hide();
+
+
+
+    } else if ($("#ddlTipoUsuario").val() == "Cliente") {
+        $("#divFiscal").hide();
+        $("#btnAltaEmpleado").hide();
+        $("#divDirFacturacion").show(); 
+        $("#divDirEnvio").show();
     }
 };
-
-
 

@@ -8,6 +8,7 @@ using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
+using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -21,6 +22,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         public List<UsuarioTipoEntidad> unosTiposUsuarios = new List<UsuarioTipoEntidad>();
         private UsuarioTipoCore unManagerUsuarioTipo = new UsuarioTipoCore();
+        private UsuarioCore unManagerUsuario = new UsuarioCore();
+        public UsuarioEntidad unUsuario = new UsuarioEntidad();
         
 
 
@@ -33,6 +36,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 cargarFiscal();
                 cargarTiposUsuarios();
                 cargarPermisos();
+                if (divDirFacturacion.Visible)
+                {
+                    cargarProvincias();
+                }
 
             }
 
@@ -40,12 +47,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         public void cargarPermisos()
         {
-            ddlPermisosUsuarioUpdate.DataSource = null;
+            ddlPermisosUsuarioAlta.DataSource = null;
             unasFamilias = unManagerFamilia.FamiliaSelectAll();
-            ddlPermisosUsuarioUpdate.DataSource = unasFamilias;
-            ddlPermisosUsuarioUpdate.DataValueField = "NombreFamilia";
+            ddlPermisosUsuarioAlta.DataSource = unasFamilias;
+            ddlPermisosUsuarioAlta.DataValueField = "NombreFamilia";
             //ddlPermisosUsuarioUpdate.SelectedIndex = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
-            ddlPermisosUsuarioUpdate.DataBind();
+            ddlPermisosUsuarioAlta.DataBind();
         }
 
 
@@ -68,6 +75,57 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlTipoUsuario.DataSource = unosTiposUsuarios;
             ddlTipoUsuario.DataValueField = "Descripcion";
             ddlTipoUsuario.DataBind();
+        }
+
+        public void cargarProvincias(){
+            ddlProvincia.DataSource =  unManagerUsuario.SelectALLProvincias();
+            ddlProvincia.DataValueField = "IdProvincia";
+            ddlProvincia.DataTextField = "DescripcionProvincia";
+            ddlProvincia.DataBind();
+
+            ddlProvinciaEnvio.DataSource = unManagerUsuario.SelectALLProvincias();
+            ddlProvinciaEnvio.DataValueField = "IdProvincia";
+            ddlProvinciaEnvio.DataTextField = "DescripcionProvincia";
+            ddlProvinciaEnvio.DataBind();
+            
+        }
+
+        protected void btnAltaUsuario_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                if (ddlTipoUsuario.SelectedItem.Value == "Empleado")
+                {
+                    unUsuario.IdUsuarioTipo = ddlTipoUsuario.SelectedIndex + 1;
+                    unUsuario.NombreUsuario = txtNombreUsuario.Value;
+                    unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
+                    unUsuario.Apellido = txtApellido.Value;
+                    unUsuario.Nombre = txtNombre.Value;
+                    unUsuario.Email = txtMail.Value;
+                    unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
+                    unUsuario.NroIdentificacion = txtDNICUIT.Value;
+                    unUsuario.Familia.IdFamilia = ddlPermisosUsuarioAlta.SelectedIndex + 1;
+
+                    int NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
+                    StringBuilder sb = new StringBuilder();
+                    if (NroRetorno == 0)
+                    {
+                        divAlertaUsCreado.Attributes["class"] = "alert alert-success";
+                        sb.Append("Usuario creado correctamente");
+                    }
+                    else
+                    {
+                        divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
+                        sb.Append("El nombre de usuario ya existe");
+                    }
+                    divAlertaUsCreado.InnerText = sb.ToString();
+                    divAlertaUsCreado.Visible = true;
+
+                }
+                
+                
+            }
+            
         }
 
     }

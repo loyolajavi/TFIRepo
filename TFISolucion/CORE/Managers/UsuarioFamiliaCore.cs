@@ -24,5 +24,12 @@ namespace TFI.CORE.Managers
             unUsuarioFamiliaDAL.UsuarioUpdatePermisosFamilia(elUsuarioFamilia);
         }
 
+
+        public void UsuarioFamiliaInsert(UsuarioFamiliaEntidad elUsuarioFamilia)
+        {
+            elUsuarioFamilia.CUIT = ConfigSection.Default.Site.Cuit;
+            unUsuarioFamiliaDAL.Insert(elUsuarioFamilia);
+        }
+
     }
 }

@@ -4,27 +4,7 @@ namespace TFI.Entidades
 {
 	public class UsuarioFamiliaEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the UsuarioFamiliaEntidad class.
-		/// </summary>
-		public UsuarioFamiliaEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the UsuarioFamiliaEntidad class.
-		/// </summary>
-		public UsuarioFamiliaEntidad(string CUIT, string nombreUsuario, int idFamilia, DateTime? fecBaja)
-		{
-			this.CUIT = CUIT;
-			this.NombreUsuario = nombreUsuario;
-			this.IdFamilia = idFamilia;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
+		
 
 		#region Properties
 		/// <summary>

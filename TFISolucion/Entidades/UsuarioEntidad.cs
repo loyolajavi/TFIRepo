@@ -62,6 +62,24 @@ namespace TFI.Entidades
 
         public string URI { get; set; }
 
+        private FamiliaEntidad _Familia = new FamiliaEntidad();
+
+        public FamiliaEntidad Familia 
+        {
+            get
+            {
+                return _Familia;
+            }
+            set
+            {
+                _Familia = value;
+            }
+        }
+        
+        
+
+         
+
         #endregion
     }
 }
