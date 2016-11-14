@@ -47,6 +47,9 @@
                         <ul class="nav navbar-nav navbar-right">
 
                             <li>
+                                <a href="/Areas/Intranet/Forms/" runat="server" id="LinkIntranet" onclick="return true;"></a>
+                            </li>
+                            <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
                             </li>
                             <li id="LiIdioma" runat="server">

@@ -24,6 +24,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         private void CargarGrillaDeFacturas()
         {
+
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
             List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();

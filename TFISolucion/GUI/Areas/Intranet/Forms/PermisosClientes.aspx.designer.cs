@@ -10,7 +10,7 @@
 namespace TFI.GUI.Areas.Intranet.Forms {
     
     
-    public partial class PermisosEmpleados {
+    public partial class PermisosClientes {
         
         /// <summary>
         /// Control btnEliminarUsuario.
@@ -31,12 +31,12 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox CheckAllUsuarios;
         
         /// <summary>
-        /// Control rptEmpleados.
+        /// Control rptClientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptEmpleados;
+        protected global::System.Web.UI.WebControls.Repeater rptClientes;
     }
 }

@@ -206,10 +206,10 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Clientes</a>
+                                            <a href="PermisosClientes.aspx">Clientes</a>
                                         </li>
                                         <li>
-                                            <a href="#">Empleados</a>
+                                            <a href="PermisosEmpleados.aspx">Empleados</a>
                                         </li>
                                         <li>
                                             <a href="#">Permisos</a>

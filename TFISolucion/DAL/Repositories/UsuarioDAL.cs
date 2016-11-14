@@ -338,7 +338,15 @@ namespace TFI.DAL.DAL
             }
         }
 
+        public void UsuarioDeleteSeleccionadosByIdUsuario(int idUsuario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdUsuario", idUsuario)
+			};
 
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioDeleteSeleccionadosByIdUsuario", parameters);
+        }
 
 
         #endregion

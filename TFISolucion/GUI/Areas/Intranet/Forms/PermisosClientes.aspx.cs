@@ -10,19 +10,17 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class PermisosEmpleados : System.Web.UI.Page
+    public partial class PermisosClientes : System.Web.UI.Page
     {
-
-
-        public List<UsuarioEntidad> unosEmpleados = new List<UsuarioEntidad>();
-        private UsuarioCore managerEmpleado = new UsuarioCore();
+        public List<UsuarioEntidad> unosClientes = new List<UsuarioEntidad>();
+        private UsuarioCore managerCliente = new UsuarioCore();
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!IsPostBack)
             {
-                cargarEmpleados();
+                cargarClientes();
             }
 
         }
@@ -32,10 +30,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (CheckAllUsuarios.Checked && CheckAllUsuarios.Value == "Y")
             {
-                managerEmpleado.DeleteAllByIdUsuarioTipo(2);//Empleados
+                managerCliente.DeleteAllByIdUsuarioTipo(1);//Clientes
             }
 
-            foreach (RepeaterItem item in rptEmpleados.Items)
+            foreach (RepeaterItem item in rptClientes.Items)
             {
 
 
@@ -43,18 +41,20 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 if (unCheckBox.Checked)
                 {
-                    managerEmpleado.UsuarioDeleteSeleccionadosByIdUsuario(Int32.Parse(unCheckBox.Attributes["value"]));
+                    managerCliente.UsuarioDeleteSeleccionadosByIdUsuario(Int32.Parse(unCheckBox.Attributes["value"]));
                 }
             }
-            cargarEmpleados();
+            cargarClientes();
         }
 
-        public void cargarEmpleados()
+
+        public void cargarClientes()
         {
-            unosEmpleados = managerEmpleado.UsuarioSelectAllByIdUsuarioTipo_CUIT(2);
-            rptEmpleados.DataSource = null;
-            rptEmpleados.DataSource = unosEmpleados;
-            rptEmpleados.DataBind();
+            unosClientes = managerCliente.UsuarioSelectAllByIdUsuarioTipo_CUIT(1);
+            rptClientes.DataSource = null;
+            rptClientes.DataSource = unosClientes;
+            rptClientes.DataBind();
         }
+
     }
 }

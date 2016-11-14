@@ -13,7 +13,19 @@ namespace TFI.Entidades
         /// <summary>
         /// Gets or sets the IdCondicionFiscal value.
         /// </summary>
-        public int? IdCondicionFiscal { get; set; }
+        private int? _IdCondicionFiscal = 1;
+        public int? IdCondicionFiscal 
+        {
+            get
+            {
+                return _IdCondicionFiscal;
+            }
+            set
+            {
+                _IdCondicionFiscal = value;
+            }
+        }
+        
 
         /// <summary>
         /// Gets or sets the IdUsuarioTipo value.
@@ -62,9 +74,9 @@ namespace TFI.Entidades
 
         public string URI { get; set; }
 
-        private FamiliaEntidad _Familia = new FamiliaEntidad();
+        private UsuarioFamiliaEntidad _Familia = new UsuarioFamiliaEntidad();
 
-        public FamiliaEntidad Familia 
+        public UsuarioFamiliaEntidad Familia 
         {
             get
             {

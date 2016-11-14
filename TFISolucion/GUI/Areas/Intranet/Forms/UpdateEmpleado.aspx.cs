@@ -76,7 +76,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnDatosUsuarioUpdate_Click(object sender, EventArgs e)
         {
-            //VALIDAR
+            
             unEmpleado.Apellido = txtApellido.Value;
             unEmpleado.Nombre = txtNombre.Value;
             unEmpleado.Email = txtMail.Value;

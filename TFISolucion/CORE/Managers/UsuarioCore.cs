@@ -234,5 +234,24 @@ namespace TFI.CORE.Managers
             DaldeUsuario.UsuarioUpdateNombreUsuario(usuario);
         }
 
+
+        public void UsuarioDeleteSeleccionadosByIdUsuario(int idUsuario)
+        {
+            try
+            {
+                _dal.UsuarioDeleteSeleccionadosByIdUsuario(idUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteAllByIdUsuarioTipo(int elTipoUsuario)
+        {
+            _dal.DeleteAllByIdUsuarioTipo(elTipoUsuario);
+        }
+
+
     }
 }
