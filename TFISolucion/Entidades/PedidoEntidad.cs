@@ -17,6 +17,7 @@ namespace TFI.Entidades
         public DateTime? FecBaja { get; set; }
         public Int64 NroPedido { get; set; }
 
+        public EstadoPedidoEntidad Estado { get; set; }
         public List<PedidoDetalleEntidad> Detalles { get; set; }
     }
 }

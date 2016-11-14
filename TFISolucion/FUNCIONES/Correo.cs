@@ -10,7 +10,15 @@ namespace TFI.FUNCIONES
 {
     public class Correo
     {
-        public void EnviarCorreo(string remitente, string contrasenia, string nombre, string telefono, string destinatario, string nombreEmpresa, string asunto, string cuerpoCorreo)
+        public void EnviarCorreo(
+            string remitente, 
+            string contrasenia, 
+            string nombre, 
+            string telefono, 
+            string destinatario, 
+            string nombreEmpresa, 
+            string asunto, 
+            string cuerpoCorreo)
         {
             string output = null;
             var serverSMTP = new SmtpClient();

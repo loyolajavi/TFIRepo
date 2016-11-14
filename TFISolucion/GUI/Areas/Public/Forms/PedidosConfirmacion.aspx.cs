@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 using TFI.GUI.Helpers.DTO;
@@ -17,11 +15,10 @@ namespace TFI.GUI.Areas.Public.Forms
         public List<PedidoLista> lista;
         public decimal totalizado;
         public int? FormaEntrega;
-
+        public int? pedido;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             var Current = HttpContext.Current;
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
@@ -31,16 +28,15 @@ namespace TFI.GUI.Areas.Public.Forms
             lista = (List<PedidoLista>)Current.Session["Pedido"];
 
             FormaEntrega = (int?)Current.Session["FormaEnvio"];
-
+            pedido = (int?)Current.Session["UltimoPedido"];
             totalizado = lista.Select(x => x.Cantidad * x.Producto.PrecioUnitario).Sum();
             //TODO: sacarle el precio de envio hardcodeado:
             if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
                 totalizado = totalizado + 200;
-
         }
 
         [WebMethod]
-        public static void GenerarPedido()
+        public static int GenerarPedido()
         {
             var Current = HttpContext.Current;
 
@@ -67,7 +63,8 @@ namespace TFI.GUI.Areas.Public.Forms
 
             var dal = new PedidoCore();
 
-            var pedido = new PedidoEntidad() {
+            var pedido = new PedidoEntidad()
+            {
                 FechaPedido = DateTime.Now,
                 IdFormaEntrega = entregaTipo,
                 NombreUsuario = logueado.NombreUsuario,
@@ -76,10 +73,36 @@ namespace TFI.GUI.Areas.Public.Forms
                 DireccionEntrega = direccionEnvio
             };
 
-            dal.Create(pedido);
+            pedido = dal.Create(pedido);
 
+            Current.Session["UltimoPedido"] = pedido.IdPedido;
 
+            return pedido.IdPedido;
+        }
 
+        [WebMethod]
+        public static void EnviarMailTrasnferencia()
+        {
+            var Current = HttpContext.Current;
+            var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            var correManager = new FUNCIONES.Correo();
+
+            correManager.EnviarCorreo(
+                remitente: "francisco.floresfanelli@gmail.com",
+                contrasenia: "Novedad01",
+                nombre: "Scultural",
+                telefono: "12334556",
+                destinatario: logueado.Email,
+                nombreEmpresa: "Scultural",
+                asunto: "Trasnferencia",
+                cuerpoCorreo: "DATOS TRANSFERENCIA");
+        }
+
+        [WebMethod]
+        public static void LimpiarPedido(){
+            var Current = HttpContext.Current;
+            Current.Session["Productos"] = null;
         }
     }
 }
