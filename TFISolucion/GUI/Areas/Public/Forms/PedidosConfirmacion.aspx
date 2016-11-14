@@ -122,8 +122,6 @@
                                 
                                 string preferenceData = "{\"items\":" +
                                                             "[" + list + "]" +
-                                                         "\back_urls\":" +
-                                                            "[" + "{\"success\":\"\\Areas\\Public\\Forms\\Home.aspx\"}]" +
                                                          "}";
 
                                 Hashtable preference = mp.createPreference(preferenceData);
