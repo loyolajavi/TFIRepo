@@ -230,6 +230,20 @@
                                         </li>
                                     </ul>
                                 </li>
+                                  <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comprobantes por cliente<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="FacturasCliente.aspx">Facturas</a>
+                                        </li>
+                                        <li>
+                                            <a href="NCCliente.aspx">Notas de credito</a>
+                                        </li>
+                                        <li>
+                                            <a href="NDCliente.aspx">Notas de debito</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                     </div>

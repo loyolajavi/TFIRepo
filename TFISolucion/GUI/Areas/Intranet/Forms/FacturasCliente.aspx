@@ -79,7 +79,7 @@
           </div>
 
       <div id="currentdetail" class="modal fade">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width:55%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"
@@ -88,7 +88,6 @@
                             <h3 id="myModalLabel">Detalle de factura</h3>
                         </div>
                         <div class="modal-body">
-
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <asp:DetailsView ID="DetailsView1" runat="server"
@@ -103,7 +102,7 @@
                                             <asp:BoundField DataField="NroComprobante" HeaderText="Número de factura" />
                                         </Fields>
                                     </asp:DetailsView>
-                                    <asp:GridView ID="grilladedetallesdefactura" runat="server"></asp:GridView>
+                                    <asp:GridView ID="grilladedetallesdefactura" runat="server" CssClass="table"></asp:GridView>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="grilladefacturas" EventName="RowCommand" />
