@@ -117,6 +117,7 @@ function ToggleDropdown() {
         $("#btnAltaEmpleado").show();
         $("#divDirFacturacion").hide();
         $("#divDirEnvio").hide();
+        $("#btnAltaCliente").hide();
 
 
 
@@ -125,6 +126,7 @@ function ToggleDropdown() {
         $("#btnAltaEmpleado").hide();
         $("#divDirFacturacion").show(); 
         $("#divDirEnvio").show();
+        $("#btnAltaCliente").show();
     }
 };
 

@@ -151,8 +151,8 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnAltaEmpleado" CssClass="btn btn-primary" Text="Registrar Cliente" runat="server" OnClick="btnAltaUsuario_Click" ValidationGroup="AltaEmpleado" />
-                <asp:Button ID="btnAltaCliente" CssClass="btn btn-primary" Text="Registrar Empleado" runat="server" OnClick="btnAltaUsuario_Click" ValidationGroup="AltaCliente" />
+                <asp:Button ID="btnAltaEmpleado" CssClass="btn btn-primary" ClientIDMode="static" Text="Registrar Empleado" runat="server" OnClick="btnAltaUsuario_Click" ValidationGroup="AltaEmpleado" />
+                <asp:Button ID="btnAltaCliente" CssClass="btn btn-primary" ClientIDMode="static" Text="Registrar Cliente" runat="server" OnClick="btnAltaUsuario_Click" ValidationGroup="AltaCliente" />
             </div>
         </div>
     </div>

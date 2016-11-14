@@ -24,7 +24,7 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdDireccion", direccionUsuario.IdDireccion),
-				new SqlParameter("@cuit", direccionUsuario.CUIT),
+				new SqlParameter("@CUIT", direccionUsuario.CUIT),
 				new SqlParameter("@NombreUsuario", direccionUsuario.NombreUsuario),
                 new SqlParameter("@Predeterminada", direccionUsuario.Predeterminada)
 
