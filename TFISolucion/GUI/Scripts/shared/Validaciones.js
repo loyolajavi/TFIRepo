@@ -395,3 +395,21 @@ function onbtnModificarEstado() {
     });
     return true;
 };
+
+
+
+//Para permitir multiple grupos de validación en ASP
+function IsValidationGroupMatch(control, validationGroup) {
+    if ((typeof (validationGroup) == "undefined") || (validationGroup == null)) {
+        return true;
+    }
+    var controlGroup = "";
+    if (typeof (control.validationGroup) == "string") {
+        controlGroup = control.validationGroup;
+    }
+
+    //return (controlGroup == validationGroup);
+
+    var controlValidationGroups = controlGroup.split(",");
+    return (controlValidationGroups.indexOf(validationGroup) > -1);
+}

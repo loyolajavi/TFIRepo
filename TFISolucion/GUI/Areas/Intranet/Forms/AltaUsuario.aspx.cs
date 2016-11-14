@@ -92,6 +92,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
+            StringBuilder sb = new StringBuilder();
+
+            Page.Validate("AltaEmpleado,AltaCliente");
             if (Page.IsValid)
             {
                 if (ddlTipoUsuario.SelectedItem.Value == "Empleado")
@@ -107,7 +110,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     unUsuario.Familia.IdFamilia = ddlPermisosUsuarioAlta.SelectedIndex + 1;
 
                     int NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
-                    StringBuilder sb = new StringBuilder();
+                    
                     if (NroRetorno == 0)
                     {
                         divAlertaUsCreado.Attributes["class"] = "alert alert-success";
@@ -118,14 +121,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
                         divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
                         sb.Append("El nombre de usuario ya existe");
                     }
-                    divAlertaUsCreado.InnerText = sb.ToString();
-                    divAlertaUsCreado.Visible = true;
 
                 }
-                
-                
             }
-            
+            else
+            {
+                divAlertaUsCreado.Attributes["class"] = "alert alert-danger";
+                sb.Append("Error al crear usuario");
+            }
+            divAlertaUsCreado.InnerText = sb.ToString();
+            divAlertaUsCreado.Visible = true;
         }
 
     }
