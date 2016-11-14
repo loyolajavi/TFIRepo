@@ -12,9 +12,6 @@ namespace TFI.DAL.DAL
 
 		#region Methods
 
-		/// <summary>
-		/// Saves a record to the EstadoPedido table.
-		/// </summary>
 		public void Insert(EstadoPedidoEntidad estadoPedido)
 		{
 			ValidationUtility.ValidateArgument("estadoPedido", estadoPedido);
@@ -27,9 +24,6 @@ namespace TFI.DAL.DAL
 			estadoPedido.IdEstadoPedido = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EstadoPedidoInsert", parameters);
 		}
 
-		/// <summary>
-		/// Updates a record in the EstadoPedido table.
-		/// </summary>
 		public void Update(EstadoPedidoEntidad estadoPedido)
 		{
 			ValidationUtility.ValidateArgument("estadoPedido", estadoPedido);
@@ -43,9 +37,6 @@ namespace TFI.DAL.DAL
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EstadoPedidoUpdate", parameters);
 		}
 
-		/// <summary>
-		/// Deletes a record from the EstadoPedido table by its primary key.
-		/// </summary>
 		public void Delete(int idEstadoPedido)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
@@ -56,9 +47,6 @@ namespace TFI.DAL.DAL
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EstadoPedidoDelete", parameters);
 		}
 
-		/// <summary>
-		/// Selects a single record from the EstadoPedido table.
-		/// </summary>
 		public EstadoPedidoEntidad Select(int idEstadoPedido)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
@@ -76,10 +64,6 @@ namespace TFI.DAL.DAL
 			}
 		}
 
-
-		/// <summary>
-		/// Selects all records from the EstadoPedido table.
-		/// </summary>
 		public List<EstadoPedidoEntidad> SelectAll()
 		{
 			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "EstadoPedidoSelectAll"))

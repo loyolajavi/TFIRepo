@@ -1,17 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using TFI.HelperDAL; using TFI.Entidades;
+using TFI.Entidades;
+using TFI.HelperDAL;
 
 namespace TFI.DAL.DAL
 {
-	public class PedidoEstadoPedidoDAL
-	{
-
-        /// <summary>
-        /// Saves a record to the PedidoEstadoPedido table.
-        /// </summary>
+    public class PedidoEstadoPedidoDAL
+    {
         public void Insert(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
         {
             ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
@@ -27,9 +23,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoInsert", parameters);
         }
 
-        /// <summary>
-        /// Updates a record in the PedidoEstadoPedido table.
-        /// </summary>
         public void Update(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
         {
             ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
@@ -43,9 +36,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoUpdate", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the PedidoEstadoPedido table by its primary key.
-        /// </summary>
         public void Delete(int idPedido, int idEstadoPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -57,9 +47,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoDelete", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the PedidoEstadoPedido table by a foreign key.
-        /// </summary>
         public void DeleteAllByIdEstadoPedido(int idEstadoPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -70,9 +57,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoDeleteAllByIdEstadoPedido", parameters);
         }
 
-        /// <summary>
-        /// Deletes a record from the PedidoEstadoPedido table by a foreign key.
-        /// </summary>
         public void DeleteAllByIdPedido(int idPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -83,9 +67,6 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoDeleteAllByIdPedido", parameters);
         }
 
-        /// <summary>
-        /// Selects a single record from the PedidoEstadoPedido table.
-        /// </summary>
         public PedidoEstadoPedidoEntidad Select(int idPedido, int idEstadoPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -104,9 +85,6 @@ namespace TFI.DAL.DAL
             }
         }
 
-        /// <summary>
-        /// Selects a single record from the PedidoEstadoPedido table.
-        /// </summary>
         public PedidoEstadoPedidoEntidad PedidoUltimoEstadoSelect(int idPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -124,10 +102,6 @@ namespace TFI.DAL.DAL
             }
         }
 
-
-        /// <summary>
-        /// Selects all records from the PedidoEstadoPedido table.
-        /// </summary>
         public List<PedidoEstadoPedidoEntidad> SelectAll()
         {
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoSelectAll"))
@@ -140,10 +114,6 @@ namespace TFI.DAL.DAL
             }
         }
 
-
-        /// <summary>
-        /// Selects all records from the PedidoEstadoPedido table by a foreign key.
-        /// </summary>
         public List<PedidoEstadoPedidoEntidad> SelectAllByIdEstadoPedido(int idEstadoPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -161,9 +131,6 @@ namespace TFI.DAL.DAL
             }
         }
 
-        /// <summary>
-        /// Selects all records from the PedidoEstadoPedido table by a foreign key.
-        /// </summary>
         public List<PedidoEstadoPedidoEntidad> SelectAllByIdPedido(int idPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
@@ -180,8 +147,5 @@ namespace TFI.DAL.DAL
                 return pedidoEstadoPedidoEntidadList;
             }
         }
-
-	
-
-	}
+    }
 }

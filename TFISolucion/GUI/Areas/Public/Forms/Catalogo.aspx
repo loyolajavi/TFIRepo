@@ -4,29 +4,6 @@
 
 <asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
-    <%--    <style>
-        .item-toolbar {
-            margin: 10px;
-            text-align: center;
-        }
-
-        .btn {
-            width: 100px;
-        }
-
-        .precio {
-            font: 400 19px/27px "Open Sans", "Roboto", sans-serif;
-            color: #424242;
-        }
-
-        .notification {
-            background-color: #f3d1d1;
-            vertical-align: middle;
-            height: 30px;
-            padding: 5px;
-        }
-    </style>--%>
-
     <div class="container">
 
         <div class="col-md-3">

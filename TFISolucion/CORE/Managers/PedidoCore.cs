@@ -9,9 +9,15 @@ namespace TFI.CORE.Managers
     public class PedidoCore
     {
         private PedidoDAL PedidoDal = new PedidoDAL();
+        private PedidoEstadoPedidoDAL _pedidoEstadoPedidoDal;
         private PedidoEstadoPedidoDAL PedidoEstadoDAL = new PedidoEstadoPedidoDAL();
         private PedidoDetalleDAL PedidoDetalleDAL = new PedidoDetalleDAL();
         private EstadoPedidoDAL EstadoPedidoDal = new EstadoPedidoDAL();
+
+        public PedidoCore()
+        {
+            _pedidoEstadoPedidoDal = new PedidoEstadoPedidoDAL();
+        }
 
         public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
         {
@@ -54,14 +60,23 @@ namespace TFI.CORE.Managers
             PedidoEstadoDAL.Update(pedidoestado);
         }
 
-        public void Create(PedidoEntidad e)
+        public PedidoEntidad Create(PedidoEntidad e)
         {
             e.NroPedido = GetLastNroPedido();
             var idPedido = PedidoDal.Insert(e);
+            e.IdPedido = idPedido;
+            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+            {
+                Fecha = e.FechaPedido,
+                IdEstadoPedido = (int)EstadoPedidoEntidad.Options.PendientePago,
+                IdPedido = idPedido
+            });
 
             e.Detalles.ForEach(d => d.IdPedido = idPedido);
-
             e.Detalles.ForEach(x => PedidoDetalleDAL.Insert(x));
+
+           
+            return e;
         }
 
         private long GetLastNroPedido()
@@ -73,5 +88,8 @@ namespace TFI.CORE.Managers
 
             return idAnterior.HasValue ? idAnterior.Value + 1 : 1;
         }
+
+
+
     }
 }

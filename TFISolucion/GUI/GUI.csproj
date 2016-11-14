@@ -38,6 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="mercadopago, Version=0.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\mercadopago.dll.1.0.0\lib\mercadopago.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
