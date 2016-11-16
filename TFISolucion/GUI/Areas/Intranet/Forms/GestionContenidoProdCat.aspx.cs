@@ -17,9 +17,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
         CategoriaCore CategoriaBLL = new CategoriaCore();
         EmpresaCore EmpresaBLL = new EmpresaCore();
         ProductoCore ProductoBLL = new ProductoCore();
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             if (Consultas.Count > 0)
             {
                 grillacatprod.DataSource = Consultas;

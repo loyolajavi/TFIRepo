@@ -52,7 +52,7 @@ namespace TFI.CORE.Managers
                     _dal.Insert(usuario); 
                     unUsFamilia.CUIT = ConfigSection.Default.Site.Cuit;
                     unUsFamilia.NombreUsuario = usuario.NombreUsuario;
-                    unUsFamilia.IdFamilia = usuario.Familia.IdFamilia;
+                    unUsFamilia.IdFamilia = (int)usuario.Familia.IdFamilia;
                     unManagerUsuarioFamilia.UsuarioFamiliaInsert(unUsFamilia);
                 }
                 else

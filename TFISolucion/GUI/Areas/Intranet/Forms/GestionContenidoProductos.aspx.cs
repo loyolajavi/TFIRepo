@@ -18,9 +18,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
         List<ProductoEntidad> ProductosDeEmpresa = new List<ProductoEntidad>();
         EmpresaCore EmpresaBLL = new EmpresaCore();
         ProductoCore ProductoBLL = new ProductoCore();
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             ProductoCore ProductoBLL = new ProductoCore();
             ProductosDeEmpresa = ProductoBLL.FindAllByCUIT();
 

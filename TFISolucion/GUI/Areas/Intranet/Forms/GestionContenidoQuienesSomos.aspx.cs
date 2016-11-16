@@ -15,9 +15,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
     {
 
         EmpresaCore EmpresaBLL = new EmpresaCore();
-
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
 
             NombreEmpresa.Value = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
 

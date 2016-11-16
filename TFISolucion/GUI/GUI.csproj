@@ -214,7 +214,6 @@
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
     <Content Include="Content\Images\Iconos\Buscar.png" />
-    <Content Include="Areas\Intranet\Forms\GestionClientes.aspx" />
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -489,13 +488,6 @@
     </Compile>
     <Compile Include="Areas\Public\Forms\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.cs">
-      <DependentUpon>GestionClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Areas\Intranet\Forms\GestionClientes.aspx.designer.cs">
-      <DependentUpon>GestionClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\MiCuenta.Master.cs">

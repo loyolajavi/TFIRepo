@@ -15,6 +15,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
     public partial class UpdateCliente : System.Web.UI.Page
     {
         public UsuarioEntidad unCliente = new UsuarioEntidad();
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
@@ -27,6 +28,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+            else if (this.Master.Autenticacion() == FamiliaEntidad.PermisoFamilia.Empleado)
+            {
+                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
+            }
+
             usuarioString = Page.Request.QueryString["Cli"];
 
             if (!IsPostBack)
@@ -56,7 +69,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             unasFamilias = unManagerFamilia.FamiliaSelectAll();
             ddlPermisosUsuarioUpdate.DataSource = unasFamilias;
             ddlPermisosUsuarioUpdate.DataValueField = "NombreFamilia";
-            ddlPermisosUsuarioUpdate.SelectedIndex = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
+            ddlPermisosUsuarioUpdate.SelectedIndex = (int)unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
             ddlPermisosUsuarioUpdate.DataBind();
         }
 

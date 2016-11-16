@@ -19,6 +19,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             CargarGrillaDeFacturas();
         }
 

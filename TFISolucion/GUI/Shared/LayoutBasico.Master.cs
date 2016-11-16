@@ -15,19 +15,15 @@ namespace TFI.GUI.General
         private UsuarioCore _manager;
         private HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
-        public UsuarioFamiliaEntidad unaFamilia { get; set; }
         private int CadenaMaxima = 100;
         private EmpresaCore EmpresaBLL = new EmpresaCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
-        private FamiliaEntidad elPermisoUsuario = new FamiliaEntidad();
 
         public List<ProductoEntidad> productos;
 
         public LayoutBasico()
         {
             _manager = new UsuarioCore();
-            usuario = new UsuarioEntidad();
-            unaFamilia = new UsuarioFamiliaEntidad();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,15 +73,14 @@ namespace TFI.GUI.General
             {
                 case ("Ingreso"):
                     usuario = new UsuarioEntidad();
-                    unaFamilia = new UsuarioFamiliaEntidad();
                     usuario.Clave = Encriptacion.ToHash(IngresoClave.Value);
                     usuario = _manager.loginUsuario(usuario.Clave, IngresoUsuario.Value);
 
                     if (!string.IsNullOrEmpty(usuario.Nombre))
                     {
-                        unaFamilia.IdFamilia = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(usuario.IdUsuario).IdFamilia;
+                        usuario.Familia = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(usuario.IdUsuario);
                         Session["Usuario"] = usuario;
-                        Session["Permiso"] = unaFamilia.IdFamilia;
+                        //Session["Permiso"] = unaFamilia.IdFamilia;
                         SetUsuarioLogueado(usuario.NombreUsuario);
 
                         CargarListaDeseosEnSession();
@@ -120,11 +115,11 @@ namespace TFI.GUI.General
                             Nombre = RegistroNombre.Value,
                             NombreUsuario = RegistroUsuario.Value,
                             IdCondicionFiscal = 1,
-                            Familia = new UsuarioFamiliaEntidad(),
+                            //Familia = new FamiliaEntidad(),
                             
                         };
 
-                        usuario.Familia.IdFamilia = 1;
+                        usuario.Familia.IdFamilia = FamiliaEntidad.PermisoFamilia.Cliente;//////VER ESTO
 
                         _manager.RegistrarUsuario(usuario);
 
@@ -253,5 +248,20 @@ namespace TFI.GUI.General
             ActualizarDeseos();
             //}
         }
+
+
+        public FamiliaEntidad.PermisoFamilia Autenticacion()
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            if (usuarioAutenticado != null)
+            {
+                return usuarioAutenticado.Familia.IdFamilia;
+            }
+            return 0;
+        }
+
+
     }
 }

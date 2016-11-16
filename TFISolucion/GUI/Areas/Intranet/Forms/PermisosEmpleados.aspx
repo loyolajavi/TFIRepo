@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="PermisosEmpleados.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.PermisosEmpleados" EnableEventValidation="false" %>
+<%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

@@ -74,9 +74,9 @@ namespace TFI.Entidades
 
         public string URI { get; set; }
 
-        private UsuarioFamiliaEntidad _Familia = new UsuarioFamiliaEntidad();
+        private FamiliaEntidad _Familia = new FamiliaEntidad();
 
-        public UsuarioFamiliaEntidad Familia 
+        public FamiliaEntidad Familia 
         {
             get
             {

@@ -4,41 +4,14 @@ namespace TFI.Entidades
 {
 	public class FamiliaEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the FamiliaEntidad class.
-		/// </summary>
-		public FamiliaEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the FamiliaEntidad class.
-		/// </summary>
-		public FamiliaEntidad(string nombreFamilia, DateTime? fecBaja)
-		{
-			this.NombreFamilia = nombreFamilia;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the FamiliaEntidad class.
-		/// </summary>
-		public FamiliaEntidad(int idFamilia, string nombreFamilia, DateTime? fecBaja)
-		{
-			this.IdFamilia = idFamilia;
-			this.NombreFamilia = nombreFamilia;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>
 		/// Gets or sets the IdFamilia value.
 		/// </summary>
-		public int IdFamilia { get; set; }
+        public PermisoFamilia IdFamilia { get; set; }
+
+		
 
 		/// <summary>
 		/// Gets or sets the NombreFamilia value.
@@ -49,6 +22,12 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+
+
+        public enum PermisoFamilia : int
+        {
+            Publico = 1, Cliente = 2, Empleado = 3, Admin = 4
+        }
 
 		#endregion
 	}

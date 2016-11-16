@@ -25,6 +25,11 @@ namespace TFI.GUI
             
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
+            if (usuarioentidad == null)
+            {
+                Response.Redirect("Home.aspx");
+            }
+
             CargarGrillaTarjetas();
 
             if (!IsPostBack)

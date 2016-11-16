@@ -26,6 +26,13 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null)
+            {
+                Response.Redirect("Home.aspx");
+            }
+
             CargarGrillaUltimosPedidos();
         }
 

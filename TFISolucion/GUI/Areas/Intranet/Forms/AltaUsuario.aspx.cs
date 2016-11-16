@@ -24,11 +24,22 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private UsuarioTipoCore unManagerUsuarioTipo = new UsuarioTipoCore();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
-
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+            else if (this.Master.Autenticacion() == FamiliaEntidad.PermisoFamilia.Empleado)
+            {
+                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
+            }
 
             if (!IsPostBack)
             {
@@ -112,7 +123,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 unUsuario.Email = txtMail.Value;
                 unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
                 unUsuario.NroIdentificacion = txtDNICUIT.Value;
-                unUsuario.Familia.IdFamilia = ddlPermisosUsuarioAlta.SelectedIndex + 1;
+                unUsuario.Familia.IdFamilia = (FamiliaEntidad.PermisoFamilia)ddlPermisosUsuarioAlta.SelectedIndex + 1;
                 
                 if (ddlTipoUsuario.SelectedItem.Value == "Cliente")
                 {

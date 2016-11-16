@@ -14,9 +14,22 @@ namespace TFI.GUI.Areas.Intranet.Forms
     {
         public List<UsuarioEntidad> unosClientes = new List<UsuarioEntidad>();
         private UsuarioCore managerCliente = new UsuarioCore();
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+            else if (this.Master.Autenticacion() == FamiliaEntidad.PermisoFamilia.Empleado) 
+            {
+                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
+            }
+            
 
             if (!IsPostBack)
             {

@@ -17,9 +17,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
         List<CategoriaEntidad> CategoriasDeEmpresa = new List<CategoriaEntidad>();
         EmpresaCore EmpresaBLL = new EmpresaCore();
         CategoriaCore CategoriaBLL = new CategoriaCore();
+        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             CategoriasDeEmpresa = EmpresaBLL.SeleccionarCategorias(ConfigSection.Default.Site.Cuit);
             grillacategorias.DataSource = CategoriasDeEmpresa;
             grillacategorias.AutoGenerateColumns = false;

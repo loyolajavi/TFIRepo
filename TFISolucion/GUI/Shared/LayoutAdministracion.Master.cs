@@ -12,6 +12,7 @@ namespace TFI.GUI.General
         private UsuarioCore _manager;
         private HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
+        private FamiliaCore unManagerFamilia = new FamiliaCore();
 
         public LayoutAdministracion()
         {
@@ -23,12 +24,17 @@ namespace TFI.GUI.General
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-            if (usuario != null)
+            if (usuario != null && Autenticacion() >= FamiliaEntidad.PermisoFamilia.Empleado)
             {
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
             }
+            else
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
         }
 
         public void SetUsuarioLogueado(string label)
@@ -74,7 +80,7 @@ namespace TFI.GUI.General
                     usuario.Nombre = RegistroNombre.Value;
                     usuario.NombreUsuario = RegistroUsuario.Value;
                     usuario.IdCondicionFiscal = 1;
-                    usuario.Familia.IdFamilia = 1; //Permisos de Cliente;
+                    usuario.Familia.IdFamilia = FamiliaEntidad.PermisoFamilia.Cliente; //Permisos de Cliente;
 
                     UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
                     UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
@@ -96,5 +102,19 @@ namespace TFI.GUI.General
             var searchQuery = Server.UrlEncode(txtSearch.Value);
             Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
         }
+
+
+        public FamiliaEntidad.PermisoFamilia Autenticacion()
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            if (usuarioAutenticado != null)
+            {
+                return usuarioAutenticado.Familia.IdFamilia;
+            }
+            return 0;
+        }
+
     }
 }

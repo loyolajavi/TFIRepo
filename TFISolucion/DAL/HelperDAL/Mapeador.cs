@@ -57,6 +57,10 @@ namespace TFI.HelperDAL
                         prop.SetValue(item, row[prop.Name], null);
                     }
                 }
+                else if (prop.PropertyType.BaseType.Name == "Enum")
+                {
+                    prop.SetValue(item, row[prop.Name], null);
+                }
             }
             return item;
         }

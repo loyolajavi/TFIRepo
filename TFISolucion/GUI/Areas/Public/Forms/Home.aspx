@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="item-toolbar">
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                                <%if (this.Master.usuario != null)
+                                                <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                                   {%>
                                                 <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
                                                 <%}%>
@@ -94,7 +94,7 @@
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                                 <%--<asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />--%>
-                                                <%if (this.Master.usuario != null)
+                                                <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                                   {%>
                                                 <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
                                                 <%}%>

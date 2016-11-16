@@ -23,6 +23,11 @@ namespace TFI.GUI
         {
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
+            if (logueado == null)
+            {
+                Response.Redirect("Home.aspx");
+            }
+
             if (!IsPostBack)
             {
                 cargarListaDeseos();

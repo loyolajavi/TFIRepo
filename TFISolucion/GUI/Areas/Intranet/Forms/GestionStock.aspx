@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="GestionStock.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.GestionStock" EnableEventValidation="false" %>
+<%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">

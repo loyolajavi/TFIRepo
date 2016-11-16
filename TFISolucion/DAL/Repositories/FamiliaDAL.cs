@@ -24,7 +24,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreFamilia", familia.NombreFamilia)
 			};
 
-			familia.IdFamilia = (int) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaInsert", parameters);
+			familia.IdFamilia = (FamiliaEntidad.PermisoFamilia) SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaInsert", parameters);
 		}
 
 		/// <summary>

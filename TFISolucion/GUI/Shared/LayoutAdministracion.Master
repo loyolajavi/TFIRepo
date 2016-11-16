@@ -202,7 +202,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
+                                <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin) 
+                                  {%>
+                                <li id="liAdministracion">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -219,6 +221,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <%} %>
                                 <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<b class="caret"></b></a>
                                     <ul class="dropdown-menu">

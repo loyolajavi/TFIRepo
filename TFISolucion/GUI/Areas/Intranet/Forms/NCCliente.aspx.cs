@@ -27,6 +27,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
             Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
 

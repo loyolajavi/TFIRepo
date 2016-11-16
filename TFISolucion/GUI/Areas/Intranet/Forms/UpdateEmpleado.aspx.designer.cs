@@ -164,5 +164,17 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPermisosUsuarioUpdate;
+        
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new TFI.GUI.General.LayoutAdministracion Master {
+            get {
+                return ((TFI.GUI.General.LayoutAdministracion)(base.Master));
+            }
+        }
     }
 }

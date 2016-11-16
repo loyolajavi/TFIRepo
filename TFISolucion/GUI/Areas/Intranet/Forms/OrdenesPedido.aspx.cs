@@ -21,12 +21,20 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private DireccionCore DireccionCore = new DireccionCore();
         List<PedidoDTO> PedidosaMostrar = new List<PedidoDTO>();
         private List<EstadoPedidoEntidad> listaEstados = new List<EstadoPedidoEntidad>();
+        private HttpContext Current = HttpContext.Current;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (IsPostBack)
-            //{ }
+
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
+
             CargarGrillaUltimosPedidos();
 
             if (!IsPostBack)
@@ -253,6 +261,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
             pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
         }
+
+
 
 
     }
