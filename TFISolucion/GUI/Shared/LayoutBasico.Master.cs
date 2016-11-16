@@ -37,11 +37,15 @@ namespace TFI.GUI.General
             nombreempresa.InnerHtml = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
             TelEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "TelEmpresa", 1).Valor;
             MailEmpresa.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "MailEmpresa", 1).Valor;
+            divLinkIntranet.Visible = false;
 
             if (usuario != null)
             {
 
-
+                if (usuario.IdUsuarioTipo == 2)
+                {
+                    divLinkIntranet.Visible = true;
+                }
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
                 LiDeseos.Visible = true;
@@ -86,6 +90,12 @@ namespace TFI.GUI.General
 
                         CargarListaDeseosEnSession();
 
+                        if (usuario.IdUsuarioTipo == 2)
+                        {
+                            divLinkIntranet.Visible = true;
+                            Response.Redirect("/Areas/Intranet/Forms/ordenespedido.aspx");
+                        }
+
                         Response.Redirect(Request.RawUrl);
                     }
                     else
@@ -103,10 +113,10 @@ namespace TFI.GUI.General
                         usuario = new UsuarioEntidad()
                         {
                             Apellido = RegistroApellido.Value,
-                            Clave = RegistroPassword1.Value,
+                            Clave = Encriptacion.ToHash(RegistroPassword1.Value),
                             NroIdentificacion = "",
                             Email = RegistroEmail.Value,
-                            IdUsuarioTipo = 2,
+                            IdUsuarioTipo = 1,//Cliente
                             Nombre = RegistroNombre.Value,
                             NombreUsuario = RegistroUsuario.Value,
                             IdCondicionFiscal = 1,

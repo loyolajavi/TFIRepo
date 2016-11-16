@@ -46,8 +46,8 @@
                         </div>
                         <ul class="nav navbar-nav navbar-right">
 
-                            <li>
-                                <a href="/Areas/Intranet/Forms/" runat="server" id="LinkIntranet" onclick="return true;"></a>
+                            <li id="divLinkIntranet" runat="server">
+                                <a class="btn btn-sm" href="/Areas/Intranet/Forms/ordenespedido.aspx" runat="server" id="LinkIntranet">Intranet</a>
                             </li>
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
@@ -216,7 +216,7 @@
 
             <ol class="breadcrumb">
                 <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator="/" PathDirection="RootToCurrent" RenderCurrentNodeAsLink="false">
-                    <CurrentNodeStyle  CssClass="active" />
+                    <CurrentNodeStyle CssClass="active" />
                     <PathSeparatorStyle CssClass="path" />
                 </asp:SiteMapPath>
             </ol>

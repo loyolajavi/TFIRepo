@@ -103,6 +103,8 @@ namespace TFI.GUI.Areas.Public.Forms
         public static void LimpiarPedido(){
             var Current = HttpContext.Current;
             Current.Session["Productos"] = null;
+            Current.Session["UltimoPedido"] = null;
+            Current.Session["Pedido"] = null;
         }
     }
 }

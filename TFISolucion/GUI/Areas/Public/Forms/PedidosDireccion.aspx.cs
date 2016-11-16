@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Services;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using TFI.FUNCIONES;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -46,7 +47,7 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             var manager = new UsuarioCore();
 
-            HttpContext.Current.Session["Usuario"] = manager.loginUsuario(pass, user);
+            HttpContext.Current.Session["Usuario"] = manager.loginUsuario(Encriptacion.ToHash(pass), user);
         }
     }
 }
