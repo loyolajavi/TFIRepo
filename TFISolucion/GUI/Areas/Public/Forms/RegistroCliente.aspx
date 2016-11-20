@@ -103,7 +103,7 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnAltaCliente" CssClass="btn btn-primary" ClientIDMode="static" Text="Registrar Cliente" runat="server" OnClick="btnAltaCliente_Click" ValidationGroup="AltaCliente"/>
+                <asp:Button ID="btnAltaCliente" CssClass="btn btn-primary" ClientIDMode="static" Text="Registrarse" runat="server" OnClick="btnAltaCliente_Click" ValidationGroup="AltaCliente"/>
             </div>
         </div>
     </div>
