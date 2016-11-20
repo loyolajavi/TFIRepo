@@ -99,39 +99,7 @@ namespace TFI.GUI.General
                     }
                     break;
 
-                case ("Registrarse"):
-
-                    UsuarioEntidad UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, RegistroUsuario.Value);
-
-                    if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
-                    {
-                        usuario = new UsuarioEntidad()
-                        {
-                            Apellido = RegistroApellido.Value,
-                            Clave = Encriptacion.ToHash(RegistroPassword1.Value),
-                            NroIdentificacion = "",
-                            Email = RegistroEmail.Value,
-                            IdUsuarioTipo = 1,//Cliente
-                            Nombre = RegistroNombre.Value,
-                            NombreUsuario = RegistroUsuario.Value,
-                            IdCondicionFiscal = 1,
-                            //Familia = new FamiliaEntidad(),
-                            
-                        };
-
-                        usuario.Familia.IdFamilia = FamiliaEntidad.PermisoFamilia.Cliente;//////VER ESTO
-
-                        _manager.RegistrarUsuario(usuario);
-
-                        Session["Usuario"] = usuario;
-                        Response.Redirect("Home.aspx");
-                    }
-                    else
-                    {
-                        MensajeErrorRegistro.InnerText = "Usuario ya registrado";
-                    }
-
-                    break;
+               
             }
         }
 

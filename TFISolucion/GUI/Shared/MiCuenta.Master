@@ -136,47 +136,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li runat="server" id="liRegistrarse">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registrarse<b class="caret"></b></a>
-                                <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div>
-
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputEmail2">Nombre</label>
-                                                        <input type="text" runat="server" class="form-control" id="RegistroNombre" placeholder="Nombre" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputEmail2">Apellido</label>
-                                                        <input type="text" runat="server" class="form-control" id="RegistroApellido" placeholder="Apellido" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputEmail2">Usuario</label>
-                                                        <input type="text" runat="server" class="form-control" id="RegistroUsuario" placeholder="Usuario" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                        <input type="password" runat="server" class="form-control" id="RegistroPassword1" placeholder="Password" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Repetir password</label>
-                                                        <input type="password" runat="server" class="form-control" id="RegistroPassword2" placeholder="Repetir password" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Email</label>
-                                                        <input type="email" runat="server" class="form-control" id="RegistroEmail" placeholder="E-Mail" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <asp:Button ID="RegistrarBoton" OnCommand="Boton_Command" CommandName="Registrarse" runat="server" CssClass="btn btn-success btn-block" Text="Registrarse" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </div>
                 </div>

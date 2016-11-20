@@ -27,7 +27,6 @@ namespace TFI.GUI.General
             if (usuario != null && Autenticacion() >= FamiliaEntidad.PermisoFamilia.Empleado)
             {
                 liIngresar.Visible = false;
-                liRegistrarse.Visible = false;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
             }
             else
@@ -70,30 +69,6 @@ namespace TFI.GUI.General
                     }
                     break;
 
-                case ("Registrarse"):
-
-                    usuario.Apellido = RegistroApellido.Value;
-                    usuario.Clave = RegistroPassword1.Value;
-                    usuario.NroIdentificacion = "";
-                    usuario.Email = RegistroEmail.Value;
-                    usuario.IdUsuarioTipo = 1; //Cliente
-                    usuario.Nombre = RegistroNombre.Value;
-                    usuario.NombreUsuario = RegistroUsuario.Value;
-                    usuario.IdCondicionFiscal = 1;
-                    usuario.Familia.IdFamilia = FamiliaEntidad.PermisoFamilia.Cliente; //Permisos de Cliente;
-
-                    UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
-                    UsuarioYaRegistrado = _manager.Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
-
-                    if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
-                    {
-                        _manager.RegistrarUsuario(usuario);
-
-                        Session["Usuario"] = usuario;
-                        Response.Redirect("Home.aspx");
-                    }
-
-                    break;
             }
         }
 
