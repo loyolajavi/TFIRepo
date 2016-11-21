@@ -161,7 +161,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin) 
+                                <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin)
                                   {%>
                                 <li id="liAdministracion">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
@@ -172,27 +172,27 @@
                                         <li>
                                             <a href="PermisosEmpleados.aspx">Empleados</a>
                                         </li>
-                                        <li>
+                                        <%--<li>
                                             <a href="#">Permisos</a>
-                                        </li>
-                                        <li>
+                                        </li>--%>
+                                        <%--<li>
                                             <a href="#">Mail</a>
-                                        </li>
+                                        </li>--%>
                                     </ul>
                                 </li>
                                 <%} %>
                                 <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li>
+                                        <%--<li>
                                             <a href="#">Últimos Pedidos</a>
-                                        </li>
+                                        </li>--%>
                                         <li>
-                                            <a href="#">Pedidos por Cliente</a>
+                                            <a href="ordenespedido.aspx">Pedidos por Cliente</a>
                                         </li>
                                     </ul>
                                 </li>
-                                  <li>
+                                <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comprobantes por cliente<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -206,7 +206,11 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a class="dropdown-toggle" href="../../../LCSK/agent.html">Sesión de Chat</a>
+                                </li>
                             </ul>
+
                         </nav>
                     </div>
                 </nav>
@@ -225,7 +229,7 @@
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
     <script src="/Scripts/shared/Funciones.js"></script>
 
-<%--    <script src="/LCSK/assets/js/jquery.timeago.js" type="text/javascript"></script>
+    <%--    <script src="/LCSK/assets/js/jquery.timeago.js" type="text/javascript"></script>
     <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>--%>
     <%--<script src="/signalr/hubs" type="text/javascript"></script>
     <script src="/LCSK/agent.js" type="text/javascript"></script>--%>
