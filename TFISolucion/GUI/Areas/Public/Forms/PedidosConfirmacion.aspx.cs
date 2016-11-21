@@ -91,16 +91,21 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             var Current = HttpContext.Current;
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            EmpresaEntidad unaEmpresa = new EmpresaEntidad();
+            EmpresaCore unManagerEmpresa = new EmpresaCore();
+
+            unaEmpresa = unManagerEmpresa.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit);
+
 
             var correManager = new FUNCIONES.Correo();
 
             correManager.EnviarCorreo(
-                remitente: "francisco.floresfanelli@gmail.com",
-                contrasenia: "Novedad01",
-                nombre: "Scultural",
+                remitente: "martinez.juan.marcos@gmail.com",
+                contrasenia: "descargas",
+                nombre: unaEmpresa.NombreEmpresa,
                 telefono: "12334556",
                 destinatario: logueado.Email,
-                nombreEmpresa: "Scultural",
+                nombreEmpresa: unaEmpresa.NombreEmpresa,
                 asunto: "Trasnferencia",
                 cuerpoCorreo: "DATOS TRANSFERENCIA");
         }
