@@ -23,6 +23,21 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoInsert", parameters);
         }
 
+
+        public void InsertarFin(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
+        {
+            ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdPedido", pedidoEstadoPedido.IdPedido),
+				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido),
+				new SqlParameter("@Fecha", pedidoEstadoPedido.Fecha),
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoInsertFin", parameters);
+        }
+
         public void Update(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
         {
             ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);

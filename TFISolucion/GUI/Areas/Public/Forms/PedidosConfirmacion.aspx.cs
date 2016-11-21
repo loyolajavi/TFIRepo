@@ -29,7 +29,7 @@ namespace TFI.GUI.Areas.Public.Forms
             lista = (List<PedidoLista>)Current.Session["Pedido"];
 
             FormaEntrega = (int?)Current.Session["FormaEnvio"];
-            pedido = (int?)Current.Session["UltimoPedido"];
+            //pedido = (int?)Current.Session["UltimoPedido"];
             totalizado = lista.Select(x => x.Cantidad * x.Producto.PrecioUnitario).Sum();
             //TODO: sacarle el precio de envio hardcodeado:
             if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
@@ -123,6 +123,8 @@ namespace TFI.GUI.Areas.Public.Forms
             ComprobanteEntidad unComprobante = new ComprobanteEntidad();
             unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
             ComprobanteCore unManagerComprobante = new ComprobanteCore();
+            PedidoCore unManagerPedido = new PedidoCore();
+            PedidoEstadoPedidoEntidad pedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
             //List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
             
             List<PedidoDetalleEntidad> unosDetallesPedido = new List<PedidoDetalleEntidad>();
@@ -168,7 +170,16 @@ namespace TFI.GUI.Areas.Public.Forms
 
                 unManagerComprobante.Create(unComprobante);
 
+                pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
+                pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
+                pedidoEstadoPedido.Fecha = DateTime.Now;
+
+                unManagerPedido.FinalizarPedido(pedidoEstadoPedido);
+
+                
                 LimpiarPedido();
+
+                
 
                 Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
                 

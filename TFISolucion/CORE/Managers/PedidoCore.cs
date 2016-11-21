@@ -91,5 +91,10 @@ namespace TFI.CORE.Managers
 
 
 
+
+        public void FinalizarPedido(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
+        {
+            PedidoEstadoDAL.InsertarFin(pedidoEstadoPedido);
+        }
     }
 }
