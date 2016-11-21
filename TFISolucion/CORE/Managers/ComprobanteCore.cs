@@ -19,9 +19,24 @@ namespace TFI.CORE.Managers
 
         public void Create(ComprobanteEntidad e)
         {
-            e.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
-            var Nro = _dal.Insert(e);
-            var Resultado = Convert.ToInt32(Nro);
+            try
+            {
+                e.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
+                var Nro = _dal.Insert(e);
+                var Resultado = Convert.ToInt32(Nro);
+
+                foreach (ComprobanteDetalleEntidad item in e.Detalles)
+                {
+                    DetalleCreate(item);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+           
+
         }
 
         public void DetalleCreate(ComprobanteDetalleEntidad e)

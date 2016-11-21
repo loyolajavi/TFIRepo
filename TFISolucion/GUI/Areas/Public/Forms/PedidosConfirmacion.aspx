@@ -89,7 +89,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Mercado Pago</td>
+                       <%-- <td>Mercado Pago</td>
                         <td>
 
                             <%@ Import Namespace="mercadopago" %>
@@ -128,7 +128,8 @@
 
                             %>
                             <a class="btn btn-success" href="<%Response.Write(((Hashtable)preference["response"])["init_point"]); %>" id="btnPagarMP">Pagar con MP</a>
-                        </td>
+                        </td>--%>
+                        <td>Tarjeta de Crédito</td>
                         <td>
                             <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Text="Pagar"></asp:Button>
                         </td>

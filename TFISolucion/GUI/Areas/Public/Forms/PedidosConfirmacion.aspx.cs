@@ -6,6 +6,7 @@ using System.Web.Services;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 using TFI.GUI.Helpers.DTO;
+using TFI.CORE.Helpers;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -53,6 +54,9 @@ namespace TFI.GUI.Areas.Public.Forms
                                 ? usuarioManager.FindDireccionEnvioPredeterminada(logueado.NombreUsuario).IdDireccion
                                 : sucursalManager.FindDireccionSucursal(sucursalId.Value).IdDireccion;
 
+
+            
+            
             lista.ForEach(x => pedidosDetalles.Add(new PedidoDetalleEntidad()
             {
                 Cantidad = x.Cantidad,
@@ -61,6 +65,8 @@ namespace TFI.GUI.Areas.Public.Forms
                 CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit
             }));
 
+            Current.Session["DetallesPedido"] = pedidosDetalles;
+            
             var dal = new PedidoCore();
 
             var pedido = new PedidoEntidad()
@@ -110,15 +116,19 @@ namespace TFI.GUI.Areas.Public.Forms
         protected void btnPagar_Click(object sender, EventArgs e)
         {
             ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+            unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
             ComprobanteCore unManagerComprobante = new ComprobanteCore();
-            List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
+            //List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
+            
+            List<PedidoDetalleEntidad> unosDetallesPedido = new List<PedidoDetalleEntidad>();
             var Current = HttpContext.Current;
+            int ContadorDetalle = 0;
 
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
 
+            unosDetallesPedido = (List<PedidoDetalleEntidad>)Current.Session["DetallesPedido"];
             
-
             if (logueado.IdCondicionFiscal == 1){
 
                 //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
@@ -133,8 +143,29 @@ namespace TFI.GUI.Areas.Public.Forms
                 unComprobante.FechaComprobante = DateTime.Now;
                 unComprobante.IdPedido = (int)Current.Session["UltimoPedido"];
 
+                foreach (var item in unosDetallesPedido)
+                {
+                    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                    ContadorDetalle = ContadorDetalle + 1;
+                    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                    unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
+                    unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
+                    unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+                    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                    unDetalleComprobante.IdProducto = item.IdProducto;
+                    unDetalleComprobante.CantidadProducto = item.Cantidad;
+                    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+
+                    unComprobante.Detalles.Add(unDetalleComprobante);
+                    //unosDetallesComprobante.Add(unDetalleComprobante);
+                }
+
+
                 unManagerComprobante.Create(unComprobante);
 
+                LimpiarPedido();
+
+                Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
                 
 
             }

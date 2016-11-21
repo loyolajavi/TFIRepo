@@ -210,6 +210,7 @@
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.js" />
+    <Content Include="Shared\error.aspx" />
     <Content Include="Shared\LayoutBasico.Master" />
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
@@ -468,6 +469,13 @@
     <Compile Include="LCSK\Agent.cs" />
     <Compile Include="LCSK\ChatHub.cs" />
     <Compile Include="LCSK\Startup.cs" />
+    <Compile Include="Shared\error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\LayoutAdministracion.Master.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
