@@ -106,5 +106,42 @@ namespace TFI.GUI.Areas.Public.Forms
             Current.Session["UltimoPedido"] = null;
             Current.Session["Pedido"] = null;
         }
+
+        protected void btnPagar_Click(object sender, EventArgs e)
+        {
+            ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+            ComprobanteCore unManagerComprobante = new ComprobanteCore();
+            List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
+            var Current = HttpContext.Current;
+
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            var sucursalId = (int?)Current.Session["Seleccionada"];
+
+            
+
+            if (logueado.IdCondicionFiscal == 1){
+
+                //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
+                var NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+                var NroCompString = NroComp.ToString();
+                string NroCompSolo = NroCompString.Remove(0, 2);
+                NroComp = int.Parse(NroCompSolo) + 1;
+                unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+
+                unComprobante.IdSucursal = (int)sucursalId;
+                unComprobante.IdTipoComprobante = 2;//Factura B
+                unComprobante.FechaComprobante = DateTime.Now;
+                unComprobante.IdPedido = (int)Current.Session["UltimoPedido"];
+
+                unManagerComprobante.Create(unComprobante);
+
+                
+
+            }
+
+            
+
+
+        }
     }
 }

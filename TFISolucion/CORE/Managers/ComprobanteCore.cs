@@ -2,6 +2,7 @@
 using TFI.DAL.DAL;
 using TFI.Entidades;
 using System.Linq;
+using System;
 
 namespace TFI.CORE.Managers
 {
@@ -18,7 +19,9 @@ namespace TFI.CORE.Managers
 
         public void Create(ComprobanteEntidad e)
         {
-            _dal.Insert(e);
+            e.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
+            var Nro = _dal.Insert(e);
+            var Resultado = Convert.ToInt32(Nro);
         }
 
         public void DetalleCreate(ComprobanteDetalleEntidad e)

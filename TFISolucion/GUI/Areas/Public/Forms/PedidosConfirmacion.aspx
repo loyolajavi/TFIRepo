@@ -129,6 +129,9 @@
                             %>
                             <a class="btn btn-success" href="<%Response.Write(((Hashtable)preference["response"])["init_point"]); %>" id="btnPagarMP">Pagar con MP</a>
                         </td>
+                        <td>
+                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Text="Pagar"></asp:Button>
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -15,7 +15,7 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Saves a record to the Comprobante table.
 		/// </summary>
-		public void Insert(ComprobanteEntidad comprobante)
+		public object Insert(ComprobanteEntidad comprobante)
 		{
 			ValidationUtility.ValidateArgument("comprobante", comprobante);
 
@@ -25,12 +25,12 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdSucursal", comprobante.IdSucursal),
 				new SqlParameter("@CUIT", comprobante.CUIT),
 				new SqlParameter("@IdTipoComprobante", comprobante.IdTipoComprobante),
-				new SqlParameter("@IdComprobante", comprobante.IdComprobante),
 				new SqlParameter("@FechaComprobante", comprobante.FechaComprobante),
 				new SqlParameter("@IdPedido", comprobante.IdPedido)
 			};
 
-			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteInsert", parameters);
+            return SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteInsert", parameters);
+            //SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteInsert", parameters);
 		}
 
 		/// <summary>
