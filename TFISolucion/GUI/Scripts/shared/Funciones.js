@@ -1,4 +1,19 @@
 ﻿//$('#btnDesear').click(function () { onBtnAddClick(this) })
+
+//function onBtnAddClick(btn) {
+//    var control = $(btn);
+//    var idProd = control.data('producto')
+
+//    $.ajax({
+//        type: "POST",
+//        url: "Home.aspx/AgregarDeseo",
+//        data: '{ idProducto: ' + idProd + '}',
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json"
+//    });
+//    return true;
+//};
+
 function onBtnAddClick(btn) {
     var control = $(btn);
     var idProd = control.data('producto')
@@ -8,9 +23,20 @@ function onBtnAddClick(btn) {
         url: "Home.aspx/AgregarDeseo",
         data: '{ idProducto: ' + idProd + '}',
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (result) {
+            updateDeseos();
+
+            //var $modal = $('.modal');
+            //$modal.find('#prod').text(result.d);
+            //$modal.modal("show");
+
+
+        }
     });
-    return true;
 };
 
 
@@ -25,7 +51,7 @@ function onBtnComprar(btn2) {
 
     $.ajax({
         type: "POST",
-        url: "ListaDeDeseos.aspx/ComprarProducto",
+        url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ComprarProducto",
         data: '{ IdProdC: ' + idProdComprar + '}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -33,9 +59,10 @@ function onBtnComprar(btn2) {
             alert(error);
         },
         success: function (result) {
-            var $modal = $('.modal');
-            $modal.find('#prod').text(result.d);
-            $modal.modal("show");
+            //var $modal = $('.modal');
+            //$modal.find('#prod').text(result.d);
+            //$modal.modal("show");
+            updateProductos();
         }
     });
     return true;
@@ -77,6 +104,7 @@ var app = {
 
 };
 
+//Para agregar productos al pedido dropdown
 var updateProductos = function () {
     $.ajax({
         type: "POST",
@@ -99,6 +127,34 @@ var updateProductos = function () {
             console.log(data.d.length);
             container.append(data.d);
             container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>")
+
+        }
+    });
+};
+
+//Para Agregar Deseos al dropdown
+var updateDeseos = function () {
+    $.ajax({
+        type: "POST",
+        url: "/Areas/Public/Forms/Home.aspx/ObtenerProductosDeseos",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            var container = $('#ulDeseos');
+            var cant = data.d.length;
+            //LIMPIO DROP
+            container.empty();
+            //MUESTRO CANTIDAD
+            if (cant > 0)
+                $('#cantDeseos').text('   (' + cant + ')');
+            //REGENERO EL DROP
+            console.log(data.d.length);
+            container.append(data.d);
+            container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>")
 
         }
     });
@@ -129,3 +185,11 @@ function ToggleDropdown() {
         $("#btnAltaCliente").show();
     }
 };
+
+
+
+//Para Mostrar Detalle Productos
+$('.linkProducto').click(function () {
+    var id = $(this).data('producto');
+    app.redirect("Producto.aspx?IdProducto=" + id);
+});

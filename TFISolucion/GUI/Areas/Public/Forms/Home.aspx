@@ -57,7 +57,7 @@
                                 <ItemTemplate>
                                     <div class="col-sm-4 col-lg-4 col-md-4">
                                         <div class="thumbnail" style="text-align: center;">
-                                            <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="IMAGE" />
+                                            <a runat="server" class="linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12 linkProducto" alt="IMAGE" /></a>
                                             <div class="caption">
                                                 <h4><a runat="server" class="responsive" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
                                                 <h5 class="precio"><span>$</span><span><%#Eval("PrecioUnitario")%></span></h5>
@@ -67,7 +67,7 @@
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                                 <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                                   {%>
-                                                <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
+                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
                                                 <%}%>
                                             </div>
                                         </div>
@@ -87,16 +87,15 @@
                                 <ItemTemplate>
                                     <div class="col-sm-4 col-lg-4 col-md-4">
                                         <div class="thumbnail">
-                                            <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="" />
+                                            <a runat="server" class="linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12 linkProducto" alt="IMAGE" /></a>
                                             <div class="caption">
                                                 <h4><a runat="server" class="responsive" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
                                                 <h4>$<%#Eval("PrecioUnitario")%></h4>
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                 <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                                <%--<asp:Button CssClass="btn btn-success" ID="btnComprar" runat="server" Text="Comprar" />--%>
                                                 <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                                   {%>
-                                                <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
+                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
                                                 <%}%>
                                             </div>
                                         </div>

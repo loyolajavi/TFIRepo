@@ -76,15 +76,6 @@ namespace TFI.GUI.Shared {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiDeseos;
         
         /// <summary>
-        /// Control DeseosDropDown.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DeseosDropDown;
-        
-        /// <summary>
         /// Control Salir.
         /// </summary>
         /// <remarks>

@@ -45,7 +45,8 @@ namespace TFI.GUI
             UsuarioEntidad logueadoStatic;
             
             logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
-            var list = (List<ProductoEntidad>)Current.Session["ListaDeseo"];
+            //var list = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+            var list = (List<ProductoEntidad>)Current.Session["Productos"];
 
             if (logueadoStatic != null)
             {
@@ -57,7 +58,10 @@ namespace TFI.GUI
                 else
                 {
                     if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                    {
                         ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+                    }
+                    
                 }
 
 
@@ -130,10 +134,10 @@ namespace TFI.GUI
 
         }
 
-        protected void btnDesear_Click(object sender, EventArgs e)
-        {
-            this.Master.ActualizarDeseos();
-        }
+        //protected void btnDesear_Click(object sender, EventArgs e)
+        //{
+        //    this.Master.ActualizarDeseos();
+        //}
 
 
         

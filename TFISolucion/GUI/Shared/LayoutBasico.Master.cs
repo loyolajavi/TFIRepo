@@ -121,67 +121,32 @@ namespace TFI.GUI.General
             }
         }
 
-        //public void ActualizarPedido()
+        //NO LO USARIA MAS*******************************************************************************************************)))))))))))))))))))))))))0000000000000000000000000000000
+        //public void ActualizarDeseos()
         //{
-        //    UsuarioEntidad UnUsuario = new UsuarioEntidad();
-        //    UnUsuario = (UsuarioEntidad)Session["Usuario"];
-
-        //    List<PedidoDetalleEntidad> ListaPedido = new List<PedidoDetalleEntidad>();
-        //    ListaPedido = (List<PedidoDetalleEntidad>)Session["Prod"];
-
+        //    var Current = HttpContext.Current;
+        //    List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
+        //    listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
         //    StringBuilder sb = new StringBuilder();
 
-        //    if (ListaPedido != null)
+        //    if (listaDeseosSession != null)
         //    {
-        //        foreach (Item in ListaPedido)
+        //        foreach (ProductoEntidad Item in listaDeseosSession)
         //        {
         //            sb.Append("<div class=\"form-group\">");
         //            sb.Append("<span class=\"label label-info\">");
-        //            sb.Append(Item.Cantidad + " " + Item.Producto.DescripProducto + " " + Item.Producto.PrecioUnitario);
+        //            sb.Append(Item.DescripProducto);
         //            sb.Append("</span>");
         //            sb.Append("</div>");
         //        }
         //    }
         //    sb.Append("<br/>");
         //    sb.Append("<br/>");
-        //    sb.Append("<div class=\"form-group\">");
-        //    sb.Append("<button runat=\"server\" class=\"btn btn-success btn-block\" id=\"PagarBoton\"  onserverclick=\"PagarClick\" >");
-        //    sb.Append("Pagar");
-        //    sb.Append("</button>");
-        //    //sb.Append("<asp: ID=\"PagarBoton\" OnCommand=\"Boton_Command\" CommandName=\"Pagar\" runat=\"server\" CssClass=\"btn btn-success btn-block\" Text=\"Pagar\" />");
-        //    sb.Append("</div>");
-        //    PedidoDropDown.InnerHtml = sb.ToString();
-        //    //EtiquetaUsuario.InnerText = label;
-        //    //Salir.Text = "Salir";
-        //    //Salir.CssClass = "btn-danger";
-        //    //EtiquetaUsuario.CssClass = ""
+        //    sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
+        //    sb.Append("Deseos");
+        //    sb.Append("</a>");
+        //    DeseosDropDown.InnerHtml = sb.ToString();
         //}
-
-        public void ActualizarDeseos()
-        {
-            var Current = HttpContext.Current;
-            List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
-            listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-            StringBuilder sb = new StringBuilder();
-
-            if (listaDeseosSession != null)
-            {
-                foreach (ProductoEntidad Item in listaDeseosSession)
-                {
-                    sb.Append("<div class=\"form-group\">");
-                    sb.Append("<span class=\"label label-info\">");
-                    sb.Append(Item.DescripProducto);
-                    sb.Append("</span>");
-                    sb.Append("</div>");
-                }
-            }
-            sb.Append("<br/>");
-            sb.Append("<br/>");
-            sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
-            sb.Append("Deseos");
-            sb.Append("</a>");
-            DeseosDropDown.InnerHtml = sb.ToString();
-        }
 
         protected void VerListaDeseos(object sender, EventArgs e)
         {
@@ -212,8 +177,8 @@ namespace TFI.GUI.General
                 listaDeseos.Add(unProductoEntidad);
             }
 
-            Session["ListaDeseos"] = listaDeseos;
-            ActualizarDeseos();
+            Current.Session["ListaDeseos"] = listaDeseos;
+            //ActualizarDeseos();???????????????????????????????????????????????????????????????????????????????????????????????????????????????????
             //}
         }
 

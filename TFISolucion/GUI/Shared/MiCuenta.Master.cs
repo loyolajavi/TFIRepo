@@ -85,31 +85,31 @@ namespace TFI.GUI.Shared
             Response.Redirect("/Areas/Public/Forms/Catalogo.aspx?search=" + searchQuery);
         }
 
-        public void ActualizarDeseos()
-        {
-            var Current = HttpContext.Current;
-            List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
-            listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-            StringBuilder sb = new StringBuilder();
+        //public void ActualizarDeseos()
+        //{
+        //    var Current = HttpContext.Current;
+        //    List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
+        //    listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+        //    StringBuilder sb = new StringBuilder();
 
-            if (listaDeseosSession != null)
-            {
-                foreach (ProductoEntidad Item in listaDeseosSession)
-                {
-                    sb.Append("<div class=\"form-group\">");
-                    sb.Append("<span class=\"label label-info\">");
-                    sb.Append(Item.DescripProducto);
-                    sb.Append("</span>");
-                    sb.Append("</div>");
-                }
-            }
-            sb.Append("<br/>");
-            sb.Append("<br/>");
-            sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
-            sb.Append("Deseos");
-            sb.Append("</a>");
-            DeseosDropDown.InnerHtml = sb.ToString();
-        }
+        //    if (listaDeseosSession != null)
+        //    {
+        //        foreach (ProductoEntidad Item in listaDeseosSession)
+        //        {
+        //            sb.Append("<div class=\"form-group\">");
+        //            sb.Append("<span class=\"label label-info\">");
+        //            sb.Append(Item.DescripProducto);
+        //            sb.Append("</span>");
+        //            sb.Append("</div>");
+        //        }
+        //    }
+        //    sb.Append("<br/>");
+        //    sb.Append("<br/>");
+        //    sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
+        //    sb.Append("Deseos");
+        //    sb.Append("</a>");
+        //    DeseosDropDown.InnerHtml = sb.ToString();
+        //}
 
         protected void VerListaDeseos(object sender, EventArgs e)
         {
@@ -136,8 +136,8 @@ namespace TFI.GUI.Shared
                 listaDeseos.Add(unProductoEntidad);
             }
 
-            Session["ListaDeseos"] = listaDeseos;
-            ActualizarDeseos();
+            Current.Session["ListaDeseos"] = listaDeseos;
+            //ActualizarDeseos();
         }
     }
 }

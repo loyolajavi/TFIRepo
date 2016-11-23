@@ -148,9 +148,10 @@ namespace TFI.GUI
             }
         }
 
-        protected void btnDesear_Click(object sender, EventArgs e)
-        {
-            this.Master.ActualizarDeseos();
-        }
+        // NO LO USARIA MAS ******************************************************0000000000000000000000000000000000000000000000000000000000000
+        //protected void btnDesear_Click(object sender, EventArgs e)
+        //{
+        //    this.Master.ActualizarDeseos();
+        //}
     }
 }

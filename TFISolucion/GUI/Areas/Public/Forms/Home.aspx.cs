@@ -88,10 +88,11 @@ namespace TFI.GUI
 
         }
 
-        protected void btnDesear_Click(object sender, EventArgs e)
-        {
-            this.Master.ActualizarDeseos();
-        }
+        // NO LO USARIA MAS *************************************************00000000000000000000000000000000000000000000000000000000
+        //protected void btnDesear_Click(object sender, EventArgs e)
+        //{
+        //    this.Master.ActualizarDeseos();
+        //}
 
         protected List<string> CargarRecursos()
         {
@@ -150,6 +151,35 @@ namespace TFI.GUI
 
             return p;
         }
+
+        //PRUEBA****************************************
+
+        [WebMethod]
+        public static List<String> ObtenerProductosDeseos()
+        {
+
+            var template =
+                "<li class=\"row drop-item\">" +
+                        "<div class=\"col-md-4 drop-image-div \">" +
+                            "<img src=\"/Content/Images/Productos/{0}\" class=\"img-responsive drop-image\"/> " +
+                        "</div> " +
+                        "<div style=\"word-wrap:normal;\" class=\"col-md-8\"><h6>{1}</h6></div> " +
+                "</li>";
+
+            var p = new List<String>();
+
+            var productos = (List<ProductoEntidad>)HttpContext.Current.Session["ListaDeseos"];
+
+            if (productos != null && productos.Any())
+            {
+                productos.ForEach(x => p.Add(string.Format(template, x.URL, x.DescripProducto)));
+            }
+
+            return p;
+        }
+
+        //FIN PRUEBA ******************************************
+
 
     }//FIN CLASE
 }

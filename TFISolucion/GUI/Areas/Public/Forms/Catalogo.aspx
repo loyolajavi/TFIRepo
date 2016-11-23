@@ -26,17 +26,18 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail" style="text-align: center;">
-                                <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12" alt="IMAGE" />
+                                <a runat="server" class="linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12 linkProducto" alt="IMAGE" /></a>
                                 <div class="caption">
-                                    <h4><a runat="server" class="responsive" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
+                                    <h4><a runat="server" class="responsive linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>
                                     <h5 class="precio"><span>$</span> <span><%#Eval("PrecioUnitario")%></span></h5>
                                 </div>
                                 <div class="item-toolbar">
                                     <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                     <%--<input type="button" value="Mas" data-producto='<%#Eval("IdProducto")%>' clientidmode="static" class="btn btn-info" runat="server" onclick="btnInfoClick" />--%>
-                                    <%if (this.Master.usuario != null)
+                                    <%if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                       {%>
-                                    <asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />
+                                    <%--<asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />--%>
+                                    <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
                                     <%}%>
                                 </div>
                             </div>
@@ -72,16 +73,4 @@
 </asp:Content>
 
 <asp:Content ID="Scripts" ClientIDMode="Static" ContentPlaceHolderID="ScriptSection" runat="server">
-
-    <script>
-
-        $('.btn-info').click(function () {
-            var id = $(this).data('producto');
-            app.redirect("Producto.aspx?IdProducto=" + id);
-        });
-        $('#btn-pedidos').click(function () {
-            app.redirect('Pedidos.aspx')
-        });
-
-    </script>
 </asp:Content>

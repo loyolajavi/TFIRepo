@@ -238,7 +238,10 @@
 
     <script>
 
-        updateProductos();
+        //updateProductos();
+
+        //Descomentar cuando tenga lo de deseos
+        //updateDeseos();
 
         var obtenerTags = function () {
             var result;
