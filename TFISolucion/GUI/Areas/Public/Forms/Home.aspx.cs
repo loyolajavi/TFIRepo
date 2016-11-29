@@ -80,7 +80,7 @@ namespace TFI.GUI
             {
                 //Agregar el deseo a la sesión actual
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
                 unaListaProductos.Add(unProductoEntidad);
                 Current.Session["ListaDeseos"] = unaListaProductos;
 

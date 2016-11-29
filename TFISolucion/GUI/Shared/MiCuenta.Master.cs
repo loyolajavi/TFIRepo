@@ -132,7 +132,7 @@ namespace TFI.GUI.Shared
             foreach (var item in unasListaDeseoEntidad)
             {
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(item.IdProducto);
+                unProductoEntidad = unProductoCore.Find(item.IdProducto,1);
                 listaDeseos.Add(unProductoEntidad);
             }
 

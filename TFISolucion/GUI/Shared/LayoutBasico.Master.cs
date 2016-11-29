@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Web;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
@@ -37,7 +36,6 @@ namespace TFI.GUI.General
 
             if (usuario != null)
             {
-
                 if (usuario.IdUsuarioTipo == 2)
                 {
                     divLinkIntranet.Visible = true;
@@ -98,8 +96,6 @@ namespace TFI.GUI.General
                         MensajeError.InnerText = "Usuario no registrado!";
                     }
                     break;
-
-               
             }
         }
 
@@ -121,33 +117,6 @@ namespace TFI.GUI.General
             }
         }
 
-        //NO LO USARIA MAS*******************************************************************************************************)))))))))))))))))))))))))0000000000000000000000000000000
-        //public void ActualizarDeseos()
-        //{
-        //    var Current = HttpContext.Current;
-        //    List<ProductoEntidad> listaDeseosSession = new List<ProductoEntidad>();
-        //    listaDeseosSession = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-        //    StringBuilder sb = new StringBuilder();
-
-        //    if (listaDeseosSession != null)
-        //    {
-        //        foreach (ProductoEntidad Item in listaDeseosSession)
-        //        {
-        //            sb.Append("<div class=\"form-group\">");
-        //            sb.Append("<span class=\"label label-info\">");
-        //            sb.Append(Item.DescripProducto);
-        //            sb.Append("</span>");
-        //            sb.Append("</div>");
-        //        }
-        //    }
-        //    sb.Append("<br/>");
-        //    sb.Append("<br/>");
-        //    sb.Append("<a href=\"/Areas/Public/Forms/ListaDeDeseos.aspx\" runat=\"server\" class=\"btn btn-success btn btn-form\" id=\"btnListaDeseos\">");
-        //    sb.Append("Deseos");
-        //    sb.Append("</a>");
-        //    DeseosDropDown.InnerHtml = sb.ToString();
-        //}
-
         protected void VerListaDeseos(object sender, EventArgs e)
         {
             Response.Redirect("ListaDeDeseos.aspx");
@@ -161,27 +130,20 @@ namespace TFI.GUI.General
 
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-            //if (listaDeseos != null)
-            //{
             Current.Session["ListaDeseos"] = new List<ProductoEntidad>();
-            //}
-            //else
-            //{
+
             List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
             unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
 
             foreach (var item in unasListaDeseoEntidad)
             {
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(item.IdProducto);
+                unProductoEntidad = unProductoCore.Find(item.IdProducto, 1);
                 listaDeseos.Add(unProductoEntidad);
             }
 
             Current.Session["ListaDeseos"] = listaDeseos;
-            //ActualizarDeseos();???????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-            //}
         }
-
 
         public FamiliaEntidad.PermisoFamilia Autenticacion()
         {
@@ -194,7 +156,5 @@ namespace TFI.GUI.General
             }
             return 0;
         }
-
-
     }
 }

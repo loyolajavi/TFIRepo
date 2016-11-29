@@ -21,7 +21,7 @@ namespace TFI.GUI
             int IdProducto = Convert.ToInt32(Request.QueryString["IdProducto"]);
             _IdProducto = IdProducto;
 
-            producto = _manager.Find(IdProducto);
+            producto = _manager.Find(IdProducto,1);
 
             Page.Title = producto.DescripProducto;
 

@@ -95,7 +95,7 @@ namespace TFI.GUI
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
-            producto = manager.Find(Int32.Parse(id));
+            producto = manager.Find(Int32.Parse(id),1);
 
             var list = (List<ProductoEntidad>)Current.Session["Productos"];
 
@@ -139,7 +139,7 @@ namespace TFI.GUI
                 //foreach (var item in unasListaDeseoEntidad)
                 //{
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto,1);
                 unaListaProductos.Add(unProductoEntidad);
                 //}
                 //listaDeseosSesion.Add(unaListaDeseo);

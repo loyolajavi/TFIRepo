@@ -40,7 +40,7 @@ namespace TFI.GUI
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
-            producto = manager.Find(Int32.Parse(IdProdC));
+            producto = manager.Find(Int32.Parse(IdProdC), 1);
             List<ProductoEntidad> ListaDeseo = new List<ProductoEntidad>();
             UsuarioEntidad logueadoStatic;
             
@@ -126,7 +126,7 @@ namespace TFI.GUI
             {
                 //Agregar el deseo a la sesión actual
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto);
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto,1);
                 unaListaProductos.Add(unProductoEntidad);
                 Current.Session["ListaDeseos"] = unaListaProductos;
 

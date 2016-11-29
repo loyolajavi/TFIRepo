@@ -17,9 +17,13 @@ namespace TFI.CORE.Managers
             _productoDal = new ProductoDAL();
         }
 
-        public Entidades.ProductoEntidad Find(int id)
+        public Entidades.ProductoEntidad Find(int id, decimal moneda)
         {
-            return _productoDal.Select(ConfigSection.Default.Site.Cuit, id);
+            var p = _productoDal.Select(ConfigSection.Default.Site.Cuit, id); 
+
+            p.PrecioUnitario = p.PrecioUnitario * moneda;
+
+            return p;
         }
 
         public List<Entidades.ProductoEntidad> FindAll()

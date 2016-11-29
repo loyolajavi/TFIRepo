@@ -97,6 +97,7 @@
     <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosClientes.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosEmpleados.aspx" />
+    <Content Include="Areas\Intranet\Forms\Reportes.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateEmpleado.aspx" />
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
@@ -130,6 +131,9 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\bungee.ttf" />
     <Content Include="Content\Images\Empresas\Logo.png" />
+    <Content Include="Content\Images\Iconos\pdf-file.png" />
+    <Content Include="Content\Images\Iconos\pdf.ico" />
+    <Content Include="Content\Images\Iconos\pdf.png" />
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\13.jpg" />
     <Content Include="Content\Images\Productos\bersuitlibertinaje.jpg" />
@@ -335,6 +339,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\PermisosEmpleados.aspx.designer.cs">
       <DependentUpon>PermisosEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\UpdateCliente.aspx.cs">
       <DependentUpon>UpdateCliente.aspx</DependentUpon>
