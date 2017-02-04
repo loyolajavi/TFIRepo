@@ -135,13 +135,30 @@ namespace TFI.GUI.Areas.Public.Forms
             var sucursalId = (int?)Current.Session["Seleccionada"];
 
             unosDetallesPedido = (List<PedidoDetalleEntidad>)Current.Session["DetallesPedido"];
-            
+
+
+            string NroCompSolo = "";
+            int NroComp;
+
+            if (unManagerComprobante.FindAll().Count == 0)
+            {
+                NroCompSolo = "0"; 
+            }
+
             if (logueado.IdCondicionFiscal == 1){
 
                 //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
-                var NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
-                var NroCompString = NroComp.ToString();
-                string NroCompSolo = NroCompString.Remove(0, 2);
+
+                if (NroCompSolo != "0")
+                {
+                    NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+                    var NroCompString = NroComp.ToString();
+                    NroCompSolo = NroCompString.Remove(0, 2);
+                }
+                
+                
+             
+                
                 NroComp = int.Parse(NroCompSolo) + 1;
                 unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
 
