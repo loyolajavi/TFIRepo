@@ -59,9 +59,9 @@ namespace TFI.CORE.Managers
             return _dalTipoComprobante.Select(id);
         }
 
-        public List<ComprobanteDetalleEntidad> DetallesSelectByComprobante(int nrocomprobante,int idtipocomprobante)
+        public List<ComprobanteDetalleEntidad> DetallesSelectByComprobante(int nrocomprobante,int idsucursal,int idtipocomprobante)
         {
-            return _dalDetalleComprobante.SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(nrocomprobante, 1, idtipocomprobante, Helpers.ConfigSection.Default.Site.Cuit);
+            return _dalDetalleComprobante.SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(nrocomprobante, idsucursal, idtipocomprobante, Helpers.ConfigSection.Default.Site.Cuit);
         }
 
         public List<ComprobanteEntidad> ComprobanteSelectByIdPedido(int idpedido)
