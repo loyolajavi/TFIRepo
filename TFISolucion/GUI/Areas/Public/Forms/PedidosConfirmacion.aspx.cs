@@ -145,7 +145,6 @@ namespace TFI.GUI.Areas.Public.Forms
                 NroCompSolo = "0"; 
             }
 
-            if (logueado.IdCondicionFiscal == 1){
 
                 //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
 
@@ -153,17 +152,28 @@ namespace TFI.GUI.Areas.Public.Forms
                 {
                     NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
                     var NroCompString = NroComp.ToString();
-                    NroCompSolo = NroCompString.Remove(0, 2);
+                    NroCompSolo = NroCompString;
+                    //NroCompSolo = NroCompString.Remove(0, 2);
                 }
                 
                 
-             
-                
                 NroComp = int.Parse(NroCompSolo) + 1;
-                unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+
+               // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+
+                unComprobante.NroComprobante = NroComp;
 
                 unComprobante.IdSucursal = (int)sucursalId;
-                unComprobante.IdTipoComprobante = 2;//Factura B
+
+                if (logueado.IdCondicionFiscal == 1)
+                {
+                    unComprobante.IdTipoComprobante = 2;//Factura B
+                }
+                else if (logueado.IdCondicionFiscal == 2)
+                {
+                    unComprobante.IdTipoComprobante = 1; //Factura A
+                }
+                
                 unComprobante.FechaComprobante = DateTime.Now;
                 unComprobante.IdPedido = (int)Current.Session["UltimoPedido"];
 
@@ -201,7 +211,7 @@ namespace TFI.GUI.Areas.Public.Forms
                 Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
                 
 
-            }
+           
 
             
 

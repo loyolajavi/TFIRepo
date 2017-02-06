@@ -62,13 +62,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
             for (int i = 0; i < NDs.Count; i++)
             {
                 NDsDTO NDAMostrar = new NDsDTO();
-                NDAMostrar.NroComprobante = NDs[i].NroComprobante;
+              //  NDAMostrar.NroComprobante = NDs[i].NroComprobante;
                 NDAMostrar.FechaComprobante = NDs[i].FechaComprobante;
                 NDAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NDs[i].IdTipoComprobante).DescripTipoComprobante;
-
+                char TipoNDLetra = NDAMostrar.TipoComprobante[NDAMostrar.TipoComprobante.Length - 1];
+                string Sucursal4caracteres = "";
+                Sucursal4caracteres = NDs[i].IdSucursal.ToString("D4");
+                string NumeroND8Caracteres = "";
+                NumeroND8Caracteres = NDs[i].NroComprobante.ToString("D8");
+                NDAMostrar.NroComprobante = "ND" + TipoNDLetra + "-" + Sucursal4caracteres + "-" + NumeroND8Caracteres;
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdSucursal, NDs[i].IdTipoComprobante);
                 NDAMostrar.Total = MontoTotalPorND(Detalles);
                 NotasDeDebitoAMostrar.Add(NDAMostrar);
 
@@ -89,7 +94,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         public class NDsDTO
         {
-            public int NroComprobante { get; set; }
+            public string NroComprobante { get; set; }
             public DateTime FechaComprobante { get; set; }
             public string TipoComprobante { get; set; }
             public double Total { get; set; }
@@ -101,8 +106,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladend.DataKeys[index].Value.ToString();
-                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(code));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdTipoComprobante);
+                string ultimos8delcode = code.Substring(code.Length - 8);
+                string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
                 grilladedetallesdend.DataSource = ListadeDetalles;
                 grilladedetallesdend.DataBind();
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

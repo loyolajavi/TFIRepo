@@ -64,13 +64,19 @@ namespace TFI.GUI.Areas.Intranet.Forms
             for (int i = 0; i < Facturas.Count; i++)
             {
                 FacturasDTO FacturaAMostrar = new FacturasDTO();
-                FacturaAMostrar.NroComprobante = Facturas[i].NroComprobante;
-                FacturaAMostrar.FechaComprobante = Facturas[i].FechaComprobante;
                 FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].IdTipoComprobante).DescripTipoComprobante;
+                char TipoFacturaLetra = FacturaAMostrar.TipoComprobante[FacturaAMostrar.TipoComprobante.Length - 1];
+                string Sucursal4caracteres = "";
+                Sucursal4caracteres = Facturas[i].IdSucursal.ToString("D4");
+                string NumeroFactura8Caracteres = "";
+                NumeroFactura8Caracteres = Facturas[i].NroComprobante.ToString("D8");
+                FacturaAMostrar.NroComprobante = "FC" + TipoFacturaLetra + "-" + Sucursal4caracteres + "-" + NumeroFactura8Caracteres;
+                FacturaAMostrar.FechaComprobante = Facturas[i].FechaComprobante;
+                
 
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].IdSucursal, Facturas[i].IdTipoComprobante);
                 FacturaAMostrar.Total = MontoTotalPorFactura(Detalles);
                 FacturasAMostrar.Add(FacturaAMostrar);
 
@@ -92,7 +98,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         public class FacturasDTO
         {
-          public  int NroComprobante {get;set;}
+            public string NroComprobante {get;set;}
             public DateTime FechaComprobante {get;set;}
             public string TipoComprobante {get;set;}
             public double Total {get;set;}
@@ -104,8 +110,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladefacturas.DataKeys[index].Value.ToString();
-                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(code));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdTipoComprobante);
+                string ultimos8delcode = code.Substring(code.Length - 8);
+                string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
                 grilladedetallesdefactura.DataSource = ListadeDetalles;
                 grilladedetallesdefactura.DataBind();
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -122,8 +130,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladefacturas.DataKeys[index].Value.ToString();
-                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(code));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdTipoComprobante);
+                string ultimos8delcode = code.Substring(code.Length - 8);
+                string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
 
                 ComprobanteEntidad NotaDeCredito = ComprobanteRow;
                  switch (ComprobanteRow.IdTipoComprobante)
