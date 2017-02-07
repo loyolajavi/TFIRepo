@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -132,10 +133,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string code = grilladefacturas.DataKeys[index].Value.ToString();
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
-                ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+                ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
+                ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
+                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+              
+                ComprobanteEntidad NotaDeCredito = new ComprobanteEntidad();
 
-                ComprobanteEntidad NotaDeCredito = ComprobanteRow;
+                NotaDeCredito = ComprobanteRow;
+
+                NotaDeCredito.Detalles = new List<ComprobanteDetalleEntidad>();
+
                  switch (ComprobanteRow.IdTipoComprobante)
                   {
                 case 1:
@@ -152,16 +160,30 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     break;
                  }
 
-                 ComprobanteBLL.Create(NotaDeCredito);
 
-                 foreach (var detalle in ListadeDetalles)
+                 int ContadorDetalle = 0;
+
+                 foreach (var item in ListadeDetalles)
                  {
-                     ComprobanteDetalleEntidad NCDetalle = detalle;
-                     NCDetalle.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
-                     ComprobanteBLL.DetalleCreate(NCDetalle);
+
+                     ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                     ContadorDetalle = ContadorDetalle + 1;
+                     unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                     unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
+                     unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
+                     unDetalleComprobante.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
+                     unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                     unDetalleComprobante.IdProducto = item.IdProducto;
+                     unDetalleComprobante.CantidadProducto = item.CantidadProducto;
+                     unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
+                     NotaDeCredito.Detalles.Add(unDetalleComprobante);
+                     //ComprobanteDetalleEntidad NCDetalle = detalle;
+                     //NCDetalle.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
+                     //ComprobanteBLL.DetalleCreate(NCDetalle);
                      
                  }
 
+                ComprobanteBLL.Create(NotaDeCredito);
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
