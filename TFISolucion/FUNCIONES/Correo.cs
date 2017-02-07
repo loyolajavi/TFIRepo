@@ -35,7 +35,7 @@ namespace TFI.FUNCIONES
 
             try
             {
-
+                //funca
                 serverSMTP.Send(correo);
                 correo.Dispose();
                 output = "E-Mail enviado correctamente";
