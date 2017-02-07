@@ -53,11 +53,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (NCs.Count == 0)
             {
-                sinnc.InnerHtml = "<strong>Usted no tiene facturas disponibles para consultar. Compre ahora en </strong><a href='http://startbootstrap.com/template-overviews/sb-admin-2' class='alert-link'>nuestra tienda</a>";
+                sinnc.InnerHtml = "<strong>Usted no tiene notas de credito disponibles para consultar.</strong>";
             }
             else
             {
-                sinnc.Visible = false;
+                contenedorsinnc.Visible = false;
             }
 
             for (int i = 0; i < NCs.Count; i++)
@@ -186,5 +186,68 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             }
         }
+
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+
+            List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
+            Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
+
+            List<ComprobanteEntidad> NCsDelCliente = new List<ComprobanteEntidad>();
+            List<NCsDTO> NCsAMostrarDelCliente = new List<NCsDTO>();
+
+            foreach (var pedido in Pedidos)
+            {
+                if (pedido.NombreUsuario == txtClienteBusqueda.Text)
+                {
+
+                    var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
+                    foreach (var comprobante in Comprobantes)
+                    {
+                        if (comprobante.IdTipoComprobante == 5 || comprobante.IdTipoComprobante == 7 || comprobante.IdComprobante == 8)
+                        {
+                            NCsDelCliente.Add(comprobante);
+                        }
+                    }
+                }
+
+                }
+
+                if (NCsDelCliente.Count == 0)
+                {
+                    contenedorsinnc.Visible = true;
+                    sinnc.InnerHtml = "<strong>Este cliente no tiene notas de credito disponibles para consultar.</strong>";
+                }
+                else
+                {
+                    contenedorsinnc.Visible = false;
+                }
+
+                for (int i = 0; i < NCsDelCliente.Count; i++)
+                {
+                    NCsDTO NCAMostrar = new NCsDTO();
+                    //  NCAMostrar.NroComprobante = NCs[i].NroComprobante;
+                    NCAMostrar.FechaComprobante = NCs[i].FechaComprobante;
+                    NCAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NCs[i].IdTipoComprobante).DescripTipoComprobante;
+                    char TipoNCLetra = NCAMostrar.TipoComprobante[NCAMostrar.TipoComprobante.Length - 1];
+                    string Sucursal4caracteres = "";
+                    Sucursal4caracteres = NCs[i].IdSucursal.ToString("D4");
+                    string NumeroNC8Caracteres = "";
+                    NumeroNC8Caracteres = NCs[i].NroComprobante.ToString("D8");
+                    NCAMostrar.NroComprobante = "NC" + TipoNCLetra + "-" + Sucursal4caracteres + "-" + NumeroNC8Caracteres;
+
+                    List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
+
+                    Detalles = ComprobanteBLL.DetallesSelectByComprobante(NCs[i].NroComprobante, NCs[i].IdSucursal, NCs[i].IdTipoComprobante);
+                    NCAMostrar.Total = MontoTotalPorNC(Detalles);
+                    NCsAMostrarDelCliente.Add(NCAMostrar);
+
+                }
+
+                grilladenc.DataSource = NCsAMostrarDelCliente;
+                grilladenc.AutoGenerateColumns = false;
+                grilladenc.DataBind();
+
+            }
+        }
     }
-}

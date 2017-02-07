@@ -59,7 +59,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             else
             {
-                sinfacturas.Visible = false;
+                contenedorsinfacturas.Visible = false;
             }
 
             for (int i = 0; i < Facturas.Count; i++)
@@ -193,6 +193,67 @@ namespace TFI.GUI.Areas.Intranet.Forms
                            "ModalScript", sb.ToString(), false);
 
             }
+        }
+
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+
+            List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
+            Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
+            List<ComprobanteEntidad> FacturasDelCliente = new List<ComprobanteEntidad>();
+            List<FacturasDTO> FacturasAMostrarDelCliente = new List<FacturasDTO>();
+            foreach (var pedido in Pedidos)
+            {
+
+                if (pedido.NombreUsuario == txtClienteBusqueda.Text) { 
+
+                var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
+                foreach (var comprobante in Comprobantes)
+                {
+                    if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
+                    {
+                        FacturasDelCliente.Add(comprobante);
+                    }
+                }
+
+                }
+            }
+
+            if (FacturasDelCliente.Count == 0)
+            {
+                contenedorsinfacturas.Visible = true;
+                sinfacturas.InnerHtml = "<p>Este usuario no tiene facturas disponibles para consultar.</p>";
+            }
+            else
+            {
+                 contenedorsinfacturas.Visible = false;
+            }
+
+            for (int i = 0; i < FacturasDelCliente.Count; i++)
+            {
+                FacturasDTO FacturaAMostrar = new FacturasDTO();
+                FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].IdTipoComprobante).DescripTipoComprobante;
+                char TipoFacturaLetra = FacturaAMostrar.TipoComprobante[FacturaAMostrar.TipoComprobante.Length - 1];
+                string Sucursal4caracteres = "";
+                Sucursal4caracteres = Facturas[i].IdSucursal.ToString("D4");
+                string NumeroFactura8Caracteres = "";
+                NumeroFactura8Caracteres = Facturas[i].NroComprobante.ToString("D8");
+                FacturaAMostrar.NroComprobante = "FC" + TipoFacturaLetra + "-" + Sucursal4caracteres + "-" + NumeroFactura8Caracteres;
+                FacturaAMostrar.FechaComprobante = Facturas[i].FechaComprobante;
+
+
+                List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
+
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].IdSucursal, Facturas[i].IdTipoComprobante);
+                FacturaAMostrar.Total = MontoTotalPorFactura(Detalles);
+                FacturasAMostrarDelCliente.Add(FacturaAMostrar);
+
+            }
+
+            grilladefacturas.DataSource = FacturasAMostrarDelCliente;
+            grilladefacturas.AutoGenerateColumns = false;
+            grilladefacturas.DataBind();
+
         }
 
     }

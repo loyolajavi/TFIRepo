@@ -31,7 +31,7 @@
                     <label for="txtClienteBusqueda" class="control-label">Cliente</label>
 
                     <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
-                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" />
+                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" OnClick="btnBuscarCliente_Click" />
 
                 </div>
 

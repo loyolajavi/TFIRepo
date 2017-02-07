@@ -14,15 +14,16 @@
         </div>
 
 
-          <div class="row" runat="server" id="contenedorsinfacturas">
+          <div class="row" runat="server" ClientIDMode="Static" id="contenedorsinfacturas">
                 <div class="col-md-9">
                     <div class="alert alert-info alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <i class="fa fa-info-circle"></i>
-                        <div id="sinfacturas" runat="server"></div>
+                        <div id="sinfacturas" ClientIDMode="Static" runat="server"></div>
                     </div>
                 </div>
             </div>
+
 
 
           <div class="row">
@@ -31,7 +32,7 @@
                     <label for="txtClienteBusqueda" class="control-label">Cliente</label>
 
                     <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
-                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" />
+                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" OnClick="btnBuscarCliente_Click" />
 
                 </div>
 
