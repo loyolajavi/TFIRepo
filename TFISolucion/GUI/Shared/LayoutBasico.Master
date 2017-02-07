@@ -45,7 +45,9 @@
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
-
+                            <li id="LiMoneda" runat="server">
+                                <asp:DropDownList ID="monedaDRW" runat="server" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;" ClientIDMode="Static" AutoPostBack="true" CssClass="dropdown-toggle" OnSelectedIndexChanged="cambiarSeleccion"></asp:DropDownList>
+                            </li>
                             <li id="divLinkIntranet" runat="server">
                                 <a class="btn btn-sm" href="/Areas/Intranet/Forms/ordenespedido.aspx" runat="server" id="LinkIntranet">Intranet</a>
                             </li>
@@ -89,7 +91,7 @@
                             </li>
 
                             <%--NO LO USARIA MAS *************************************************************0000000000000000000000000000000000000000--%>
-<%--                            <li id="LiDeseos" runat="server">
+                            <%--                            <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deseos <span class="glyphicon glyphicon-heart"></span><b class="caret"></b></a>
                                 <ul class="dropdown-menu" id="ulDeseos" style="padding: 15px; min-width: 250px;">
                                     <li>

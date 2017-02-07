@@ -65,6 +65,7 @@
     <Compile Include="Managers\FamiliaCore.cs" />
     <Compile Include="Managers\LenguajeCore.cs" />
     <Compile Include="Managers\ListaDeseosCore.cs" />
+    <Compile Include="Managers\MonedaCore.cs" />
     <Compile Include="Managers\PedidoCore.cs" />
     <Compile Include="Managers\ProductoCore.cs" />
     <Compile Include="Managers\RecursoCore.cs" />

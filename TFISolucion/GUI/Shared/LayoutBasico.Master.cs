@@ -17,16 +17,72 @@ namespace TFI.GUI.General
         private int CadenaMaxima = 100;
         private EmpresaCore EmpresaBLL = new EmpresaCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
-
+        private MonedaCore _monedaManager;
+        public List<MonedaEntidad> listaMonedas { get; set; }
+        public MonedaEmpresaEntidad cotizacion { get; set; }
+        public DropDownList combo { get; set; }
         public List<ProductoEntidad> productos;
+
+
+        protected void cargarMonedas()
+        {
+
+            monedaDRW.DataSource = _monedaManager.FinAllMonedasByEmpresa();
+            monedaDRW.DataValueField = "IdMoneda";
+            monedaDRW.DataTextField = "Nombre";
+            monedaDRW.DataBind();
+
+        }
+
+
+
+        public Int32 obtenerValorDropDown()
+        {
+            var val = (monedaDRW.SelectedValue);
+            return Convert.ToInt32(val);
+
+        }
+        public void cambiarSeleccion(object sender, EventArgs e)
+        {
+            var valor = monedaDRW.SelectedItem.Text;
+            var IdMoneda = monedaDRW.SelectedValue;
+            Session["Cotizacion"] = devolverCotizacion(Convert.ToInt32(IdMoneda));
+            cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+
+        }
 
         public LayoutBasico()
         {
             _manager = new UsuarioCore();
+            this._monedaManager = new MonedaCore();
+        }
+        protected MonedaEmpresaEntidad devolverCotizacion(int valor)
+        {
+            return _monedaManager.Select(valor);
+
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //AGREGADOS PARA MONEDA/////
+            cotizacion = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+
+            if (!Page.IsPostBack)
+            {
+                if (cotizacion == null)
+                {
+                    Session["Cotizacion"] = devolverCotizacion(1);
+                }
+
+
+                // Session["Cotizacion"] = devolverCotizacion(1);
+                cargarMonedas();
+            }
+
+
+
+
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
             nombreempresa.InnerHtml = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
@@ -134,11 +190,11 @@ namespace TFI.GUI.General
 
             List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
             unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
-
+            var valorMonedaDropDown = Convert.ToInt32(obtenerValorDropDown());
             foreach (var item in unasListaDeseoEntidad)
             {
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(item.IdProducto, 1);
+                unProductoEntidad = unProductoCore.Find(item.IdProducto, valorMonedaDropDown);
                 listaDeseos.Add(unProductoEntidad);
             }
 

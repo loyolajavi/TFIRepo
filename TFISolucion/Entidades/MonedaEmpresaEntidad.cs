@@ -2,45 +2,28 @@ using System;
 
 namespace TFI.Entidades
 {
-	public class MonedaEmpresaEntidad
-	{
-		#region Constructors
+    public class MonedaEmpresaEntidad
+    {
+        #region Properties
+        /// <summary>
+        /// Gets or sets the IdMoneda value.
+        /// </summary>
+        public int IdMoneda { get; set; }
 
-		/// <summary>
-		/// Initializes a new instance of the MonedaEmpresaEntidad class.
-		/// </summary>
-		public MonedaEmpresaEntidad()
-		{
-		}
+        /// <summary>
+        /// Gets or sets the CUIT value.
+        /// </summary>
+        public string CUIT { get; set; }
 
-		/// <summary>
-		/// Initializes a new instance of the MonedaEmpresaEntidad class.
-		/// </summary>
-		public MonedaEmpresaEntidad(int idMoneda, string CUIT, DateTime? fecBaja)
-		{
-			this.IdMoneda = idMoneda;
-			this.CUIT = CUIT;
-			this.FecBaja = fecBaja;
-		}
+        public decimal Cotizacion { get; set; }
 
-		#endregion
+        public DateTime Fecha { get; set; }
 
-		#region Properties
-		/// <summary>
-		/// Gets or sets the IdMoneda value.
-		/// </summary>
-		public int IdMoneda { get; set; }
+        /// <summary>
+        /// Gets or sets the FecBaja value.
+        /// </summary>
+        public DateTime? FecBaja { get; set; }
 
-		/// <summary>
-		/// Gets or sets the CUIT value.
-		/// </summary>
-		public string CUIT { get; set; }
-
-		/// <summary>
-		/// Gets or sets the FecBaja value.
-		/// </summary>
-		public DateTime? FecBaja { get; set; }
-
-		#endregion
-	}
+        #endregion
+    }
 }

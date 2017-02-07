@@ -109,8 +109,40 @@ namespace TFI.DAL.DAL
 			}
 		}
 
-	
 
-		#endregion
-	}
+        public MonedaEmpresaEntidad Select(int idMoneda, string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdMoneda", idMoneda),
+                new SqlParameter("@CUIT", CUIT)
+            };
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaSelect", parameters))
+            {
+                MonedaEmpresaEntidad MonedaEntidad = new MonedaEmpresaEntidad();
+
+                MonedaEntidad = Mapeador.MapearFirst<MonedaEmpresaEntidad>(dt);
+
+                return MonedaEntidad;
+            }
+        }
+
+        public void Update(MonedaEmpresaEntidad monedaEmpresa)
+        {
+            ValidationUtility.ValidateArgument("monedaEmpresa", monedaEmpresa);
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdMoneda", monedaEmpresa.IdMoneda),
+                new SqlParameter("@CUIT", monedaEmpresa.CUIT),
+                new SqlParameter("@Cotizacion",monedaEmpresa.Cotizacion )
+            };
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "MonedaEmpresaUpdate", parameters);
+        }
+
+
+        #endregion
+    }
 }

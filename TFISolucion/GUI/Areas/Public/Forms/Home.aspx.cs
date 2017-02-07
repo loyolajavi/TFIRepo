@@ -21,16 +21,44 @@ namespace TFI.GUI
         public UsuarioEntidad logueado = new UsuarioEntidad();
         private RecursoCore _coreRecurso = new RecursoCore();
         public List<String> listaRecursos;
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coremoneda;
 
+
+        [WebMethod]
+        public decimal devolverCotizacion(string _cotizacion, string _cotizacion2)
+        {
+            var cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
+            cotizacion.Cotizacion = Convert.ToDecimal(_cotizacion);
+            cotizacion.CUIT = _cotizacion2;
+            return cotizacion.Cotizacion;
+
+
+
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            _coremoneda = new MonedaCore();
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
             listaRecursos = CargarRecursos();
+            ProductoCore unProductoCore = new ProductoCore();
 
             if (!IsPostBack)
             {
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
-                ProductoCore unProductoCore = new ProductoCore();
+                if (cotizacion == null)
+                {
+                    cotizacion = new MonedaEmpresaEntidad();
+                    cotizacion.IdMoneda = 1;
+                    Session["Cotizacion"] = cotizacion;
+                }
+
+                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+               // ProductoCore unProductoCore = new ProductoCore();
 
 
                 //**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
@@ -39,19 +67,38 @@ namespace TFI.GUI
 
                 //SI NO
                 //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
-                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT().OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
 
 
                 //**************MOSTRAR PRODUCTOS MAS VENDIDOS (PARA LA SEGUNDA PESTAÑA)**********************************************************************                
-                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit);
+                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda);
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
             }
-            
+            else
+            {
+                //Response.Redirect("LayoutBasico.aspx");
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
 
-        }
+                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                // var miDropMoneda = Master.combo.SelectedItem.Value;
+
+                // Master.FindControl("DRWMoneda");
+                lstProductosDestacados.DataSource = unosProductosDestacados;
+                // cotizacion.Cotizacion = this.Master.cotizacion.Cotizacion;
+                lstProductosDestacados.DataBind();
+                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda);
+                lstMasVendidos.DataSource = unosProductosMasVendidos;
+                lstMasVendidos.DataBind();
+
+            }
+
+
+            }
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
@@ -61,6 +108,7 @@ namespace TFI.GUI
         [WebMethod]
         public static void AgregarDeseo(string idProducto)
         {
+
             var Current = HttpContext.Current;
             var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
             List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
@@ -75,12 +123,14 @@ namespace TFI.GUI
             unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
             unaListaDeseo.IdProducto = Int32.Parse(idProducto);
 
+            var cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
             //Guardar en BD el nuevo deseo
             if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
             {
                 //Agregar el deseo a la sesión actual
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
+                // unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, cotizacionStatic.IdMoneda);
                 unaListaProductos.Add(unProductoEntidad);
                 Current.Session["ListaDeseos"] = unaListaProductos;
 
@@ -103,10 +153,12 @@ namespace TFI.GUI
         [WebMethod]
         public static List<String> ObtenerProductosEmpresa()
         {
+            var cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
             var core = new ProductoCore();
 
 
-            var pedidos = core.FindAllByCUIT();
+            // var pedidos = core.FindAllByCUIT();
+            var pedidos = core.FindAllByCUIT(cotizacion.IdMoneda);
 
             return pedidos.Select(x => x.DescripProducto).ToList();
 
@@ -118,9 +170,11 @@ namespace TFI.GUI
         public static List<String> ObtenerProductos()
         {
             var core = new ProductoCore();
-           // var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
-
-            var productosEmpresa = core.FindAllByCUIT();
+            // var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            var cotizacion = new MonedaEmpresaEntidad();
+            cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
+            var cot2 = Convert.ToInt32(cotizacion.IdMoneda);
+            var productosEmpresa = core.FindAllByCUIT(cot2);
 
             return productosEmpresa.Select(x => x.DescripProducto).ToList();
 

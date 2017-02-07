@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Web.UI;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -19,10 +20,26 @@ namespace TFI.GUI
         private string stringCategoria = null;
         private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
         private List<CategoriaEntidad> unasCategorias = new List<CategoriaEntidad>();
+        private MonedaEmpresaEntidad cotizacion;
+
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
+
+                master = master.Master;
+            }
+            return null;
+        }
 
         public Catalogo()
         {
             _manager = new ProductoCore();
+            cotizacion = new MonedaEmpresaEntidad();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,10 +47,13 @@ namespace TFI.GUI
 
             if (!IsPostBack)
             {
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+
                 stringBusqueda = Page.Request.QueryString["search"];
                 stringCategoria = Page.Request.QueryString["Categoria"];
 
-               
+
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
                 {
@@ -41,13 +61,16 @@ namespace TFI.GUI
                     if (stringBusqueda == "*")
                     {
                         //unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
-                        unosProductos = _manager.FindAllByCUIT();
+                        unosProductos = _manager.FindAllByCUIT(1);
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                     }
                     else
                     {
-                        unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
+                        var cotizacionStatic = new MonedaEmpresaEntidad();
+                        cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+                        //                      unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
+                        unosProductos = _manager.FindAllByDescripProducto(stringBusqueda, cotizacionStatic.IdMoneda);
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                     }
@@ -69,7 +92,7 @@ namespace TFI.GUI
                     }
                 }
 
-            
+
 
                 if (!unosProductos.Any())
                 {
@@ -79,7 +102,11 @@ namespace TFI.GUI
 
             }
 
-
+            else
+            {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
+            }
             //CargarCategorias
 
             unasCategorias = ManagerCategoria.SeleccionarCategorias();
@@ -95,7 +122,7 @@ namespace TFI.GUI
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
-            producto = manager.Find(Int32.Parse(id),1);
+            producto = manager.Find(Int32.Parse(id), 1);
 
             var list = (List<ProductoEntidad>)Current.Session["Productos"];
 
@@ -139,7 +166,7 @@ namespace TFI.GUI
                 //foreach (var item in unasListaDeseoEntidad)
                 //{
                 ProductoEntidad unProductoEntidad = new ProductoEntidad();
-                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto,1);
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
                 unaListaProductos.Add(unProductoEntidad);
                 //}
                 //listaDeseosSesion.Add(unaListaDeseo);

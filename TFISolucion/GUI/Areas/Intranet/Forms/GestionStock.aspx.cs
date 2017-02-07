@@ -42,7 +42,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         private void CargarDropdownProductos()
         {
-            ddlProducto.DataSource = ProductoBLL.FindAllByCUIT();
+            ddlProducto.DataSource = ProductoBLL.FindAllByCUIT(1);
             ddlProducto.DataValueField = "IdProducto";
             ddlProducto.DataTextField = "DescripProducto";
             ddlProducto.DataBind();

@@ -31,7 +31,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
 
             ProductoCore ProductoBLL = new ProductoCore();
-            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT();
+            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT(1);
 
             foreach (var prod in ProductosDeEmpresa)
             {
@@ -74,7 +74,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductosDeEmpresa.Clear();
 
             ProductoCore ProductoBLL = new ProductoCore();
-            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT();
+            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT(1);
 
             foreach (var prod in ProductosDeEmpresa)
             {
