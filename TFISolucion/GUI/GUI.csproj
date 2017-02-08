@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,6 +91,7 @@
     <Content Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoProductos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx" />
+    <Content Include="Areas\Intranet\Forms\GestionMoneda.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionPermisos.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionStock.aspx" />
     <Content Include="Areas\Intranet\Forms\NCCliente.aspx" />
@@ -290,6 +292,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionContenidoQuienesSomos.aspx.designer.cs">
       <DependentUpon>GestionContenidoQuienesSomos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionMoneda.aspx.cs">
+      <DependentUpon>GestionMoneda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\GestionMoneda.aspx.designer.cs">
+      <DependentUpon>GestionMoneda.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\GestionPermisos.aspx.cs">
       <DependentUpon>GestionPermisos.aspx</DependentUpon>
