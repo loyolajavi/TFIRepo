@@ -74,6 +74,11 @@ namespace TFI.CORE.Managers
         {
             return _dal.ComprobanteSelectAllByCUIT_NroComprobante(Helpers.ConfigSection.Default.Site.Cuit, nrocomprobante)[0];
         }
+
+        public List<ComprobanteEntidad> ComprobanteSelectAllListadosByCUIT_NroComprobante(int nrocomprobante)
+        {
+            return _dal.ComprobanteSelectAllByCUIT_NroComprobante(Helpers.ConfigSection.Default.Site.Cuit, nrocomprobante);
+        }
        
     }
 }

@@ -130,6 +130,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string code = grilladenc.DataKeys[index].Value.ToString();
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+                var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                if (comprobantes.Any(c => c.IdTipoComprobante == 6 || c.IdTipoComprobante > 8))
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("alert('Nota de debito ya fue generada previamente');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "ModalScript", sb.ToString(), false);
+                }
+                else { 
                 ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
                  ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
                  List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
@@ -184,6 +195,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                            "ModalScript", sb.ToString(), false);
 
+            }
             }
         }
 
