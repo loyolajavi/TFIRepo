@@ -46,8 +46,14 @@ namespace TFI.GUI.Areas.Public.Forms
         public static void FormaEnvio(int id)
         {
             HttpContext.Current.Session["FormaEnvio"] = id;
-            if(id == (int)FormaEntregaEntidad.Options.Correo)
-                HttpContext.Current.Session["Seleccionada"] = null;
+            if (id == (int)FormaEntregaEntidad.Options.Correo) {
+
+                SucursalCore gestorSucursal = new SucursalCore();
+                var sucursales = gestorSucursal.FindAll();
+                
+                HttpContext.Current.Session["Seleccionada"] = sucursales[0].IdSucursal;
+            }
+               
         }
 
         
