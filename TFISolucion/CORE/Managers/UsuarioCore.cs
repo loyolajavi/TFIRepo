@@ -20,6 +20,11 @@ namespace TFI.CORE.Managers
         private TarjetaDAL DalDeTarjetas = new TarjetaDAL();
         private UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
 
+
+        public List<TipoTelEntidad> RetornaTipoTel()
+        {
+            return DalDeTipoTelefono.SelectAll();
+        }
         public UsuarioCore()
         {
             _dal = new UsuarioDAL();
@@ -30,7 +35,7 @@ namespace TFI.CORE.Managers
         {
             try
             {
-                return _dal.SelectUserByClaveNombreUsuario(clave, nombreUsuario);
+                return _dal.SelectUserByClaveNombreUsuario(clave, nombreUsuario, Helpers.ConfigSection.Default.Site.Cuit);
             }
             catch (Exception ex)
             {
@@ -123,6 +128,14 @@ namespace TFI.CORE.Managers
         public List<ProvinciaEntidad> SelectALLProvincias()
         {
             return DalDeProvincia.SelectAll();
+        }
+
+        public void insertTelefonoUsuario(TelefonoEntidad tel)
+        {
+
+            DaldeTelefono.Insert(tel);
+
+
         }
 
         public void InsertDireccionDeFacturacion(DireccionEntidad direccion, DireccionUsuarioEntidad direcciondeusuario)

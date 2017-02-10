@@ -107,7 +107,7 @@
         <div class="text-center">
 
             <div class="form-group">
-                <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None" BackColor="#CCCCCC" BorderColor="#999999">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
@@ -127,7 +127,7 @@
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
@@ -229,7 +229,7 @@
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
@@ -347,6 +347,46 @@
             </div>
         </div>
     </div>
+    <%--modal telefono inicio--%>
+    <div class="modal fade" id="mdlAgregarTelefono">
+        <div class="modal-dialog">
+
+            <!--Contenido de la ventana Modal-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2>Agregar Telefono</h2>
+                    <div id="notificationTelefono">
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpModalTelefono">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btnGrabarTelefono" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="txtCodigo">Codigo Area</label>
+                                    <input type="text" class="form-control" id="txtCodigo" runat="server" placeholder="Codigo Area" clientidmode="static" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtNumero">Numero</label>
+                                    <input type="text" class="form-control" id="txtNumero" runat="server" placeholder="Numero" clientidmode="static" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="ddlTipoTel">Tipo</label>
+                                    <asp:DropDownList ID="ddlTipoTel" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                </div>
+                            </form>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:Button ID="btnGrabarTelefono" runat="server" ClientIDMode="static" Text="Guardar" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--modal telefono end--%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsSection" runat="server">

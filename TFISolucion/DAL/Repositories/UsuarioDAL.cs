@@ -148,12 +148,13 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Deletes a record from the Usuario table by its primary key.
         /// </summary>
-        public UsuarioEntidad SelectUserByClaveNombreUsuario(string Clave, string nombreUsuario)
+        public UsuarioEntidad SelectUserByClaveNombreUsuario(string Clave, string nombreUsuario, string cuit)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Clave", Clave),
-                new SqlParameter("@NombreUsuario", nombreUsuario)
+                new SqlParameter("@NombreUsuario", nombreUsuario),
+                new SqlParameter("@Cuit", cuit)
             };
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "[UsuarioSelectByNombreUsuarioClave]", parameters))

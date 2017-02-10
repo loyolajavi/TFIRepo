@@ -21,8 +21,8 @@ namespace TFI.GUI
         public List<TelefonoDTO> ListaDeTelefonosDTO = new List<TelefonoDTO>();
         List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
         //Dictionary<int, DireccionEntidad> DiccionarioDeDirecciones = new Dictionary<int, DireccionEntidad>();
-        
-        
+
+
         public string cuit = ConfigSection.Default.Site.Cuit;
         List<DireccionDTO> DireccionesFacturacionDeUsuario = new List<DireccionDTO>();
         List<DireccionDTO> DireccionesEnvioDeUsuario = new List<DireccionDTO>();
@@ -34,14 +34,14 @@ namespace TFI.GUI
             DireccionesFacturacionDeUsuario.Clear();
             DireccionesEnvioDeUsuario.Clear();
             // CargarGrillaDireccionDeFacturacion();
-
+            cargarTipoTel();
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
             if (usuarioentidad == null)
             {
                 Response.Redirect("Home.aspx");
             }
-            
+
             usuario.Value = usuarioentidad.NombreUsuario;
             clave.Value = usuarioentidad.Clave;
             clave.Value = clave.Value.Replace(usuarioentidad.Clave, "*********");
@@ -130,11 +130,11 @@ namespace TFI.GUI
             if (DireccionesFacturacionDeUsuario.Count == 1)
             {
                 DireccionesFacturacionDeUsuario[0].Predeterminada = true;
-                DireccionUsuarioEntidad ActualizarPred =new DireccionUsuarioEntidad();
+                DireccionUsuarioEntidad ActualizarPred = new DireccionUsuarioEntidad();
                 ActualizarPred = DireccionBLL.DireccionUsuarioSelect(DireccionesFacturacionDeUsuario[0].IdDireccion).First();
                 ActualizarPred.Predeterminada = true;
                 UsuarioBLL.DireccionUsuarioUpdate(ActualizarPred);
-                
+
             }
 
             if (DireccionesEnvioDeUsuario.Count == 1)
@@ -194,6 +194,14 @@ namespace TFI.GUI
             public bool Predeterminada { get; set; }
         }
 
+        public void cargarTipoTel()
+        {
+
+            ddlTipoTel.DataSource = UsuarioBLL.RetornaTipoTel();
+            ddlTipoTel.DataValueField = "IdTipoTel";
+            ddlTipoTel.DataTextField = "DescripcionTipoTel";
+            ddlTipoTel.DataBind();
+        }
 
         protected void grillatelefonos_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -344,24 +352,64 @@ namespace TFI.GUI
                     if (grillatelefonos.EditIndex == -1)
                     {
                         Telefono = ((string)e.Row.Cells[1].Text);
+                        var x = ListaDeTelefonosDTO.Where(t => t.Telefono == Telefono).FirstOrDefault().Tipo;
+                        if (x == "Movil") { ddl.SelectedIndex = 1; } else { ddl.SelectedIndex = 0; }
+
+
+
+                     
                     }
-                    else
-                    {
-                        Telefono = ((TextBox)e.Row.Cells[1].Controls[0]).Text;
-                    }
-
-
-                    var x = ListaDeTelefonosDTO.Where(t => t.Telefono == Telefono).FirstOrDefault().Tipo;
-
-                    if (x == "Movil") { ddl.SelectedIndex = 1; } else { ddl.SelectedIndex = 0; }
-
-
-
                     ddl.DataBind();
+                    //else
+                    //{
+
+                    //}
+
+                    //if (grillatelefonos.EditIndex== 0)
+                    //{
+                    //    Telefono = ((TextBox)e.Row.Cells[1].Controls[0]).Text;
+                    //}
+                    //if (grillatelefonos.EditIndex == 1)
+                    //{
+                    //    Telefono = ((TextBox)e.Row.Cells[2].Controls[1]).Text;
+                    //}
+
+
+
 
                 }
             }
         }
+        protected void btnGrabarTelefono_Click(object sender, EventArgs e)
+        {
+            CargarGrillaTelefonos();
+            Response.Redirect(Request.RawUrl);
+        }
+
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [System.Web.Services.WebMethod]
+        public static void GrabarTelefono(string telefono, string tipoTel, string codigo)
+        {
+            var usuariosdad = new UsuarioCore();
+            var Current = HttpContext.Current;
+            var coreUsuario = new UsuarioCore();
+            UsuarioEntidad usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
+
+            var telefonoNuevo = new TelefonoEntidad();
+            telefonoNuevo.NroTelefono = telefono;
+            telefonoNuevo.NombreUsuario = usuarioentidadStatic.NombreUsuario;
+            telefonoNuevo.CodArea = codigo;
+            telefonoNuevo.IdTipoTel = Convert.ToInt32(tipoTel);
+            telefonoNuevo.CUIT = usuarioentidadStatic.CUIT;
+            coreUsuario.insertTelefonoUsuario(telefonoNuevo);
+
+
+
+
+
+        }
+
 
         protected void grilladirecciondefacturacion_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -663,7 +711,7 @@ namespace TFI.GUI
                 {
                     Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
                 }
-                
+
                 var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
 
                 var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
@@ -687,7 +735,7 @@ namespace TFI.GUI
             {
                 var Id = (string)e.Row.Cells[7].Text;
 
-                if (string.IsNullOrEmpty(Id)) 
+                if (string.IsNullOrEmpty(Id))
                 {
                     Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
                 }
@@ -703,7 +751,7 @@ namespace TFI.GUI
                     ddl.DataBind();
 
                 }
-                
+
             }
 
         }
@@ -776,7 +824,7 @@ namespace TFI.GUI
             var usuariosdad = new UsuarioCore();
             var Current = HttpContext.Current;
 
-            UsuarioEntidad usuarioentidadStatic  = (UsuarioEntidad)Current.Session["Usuario"];
+            UsuarioEntidad usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
 
             var password = usuariosdad.Select(usuarioentidadStatic.CUIT, usuarioentidadStatic.NombreUsuario).Clave;
 
@@ -789,7 +837,7 @@ namespace TFI.GUI
 
 
         }
-   
+
 
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
