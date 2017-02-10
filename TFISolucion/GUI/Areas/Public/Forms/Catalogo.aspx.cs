@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -21,7 +22,8 @@ namespace TFI.GUI
         private List<ProductoEntidad> unosProductos = new List<ProductoEntidad>();
         private List<CategoriaEntidad> unasCategorias = new List<CategoriaEntidad>();
         private MonedaEmpresaEntidad cotizacion;
-
+        private MonedaCore _coremoneda;
+        public MonedaEntidad moneda;
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -44,7 +46,8 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            _coremoneda = new MonedaCore();
+            moneda = new MonedaEntidad();
             if (!IsPostBack)
             {
                 cotizacion = new MonedaEmpresaEntidad();
@@ -61,7 +64,7 @@ namespace TFI.GUI
                     if (stringBusqueda == "*")
                     {
                         //unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
-                        unosProductos = _manager.FindAllByCUIT(1);
+                        unosProductos = _manager.FindAllByCUIT(cotizacion.IdMoneda);
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                     }
@@ -99,6 +102,7 @@ namespace TFI.GUI
                     notif.Attributes.Remove("hidden");
                     notif.InnerHtml = string.Format("<span>{0}</span>", "No se encontraron productos, por favor realice otra búsqueda");
                 }
+                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
 
             }
 
@@ -112,7 +116,10 @@ namespace TFI.GUI
             unasCategorias = ManagerCategoria.SeleccionarCategorias();
             rptCategorias.DataSource = unasCategorias;
             rptCategorias.DataBind();
-
+            //seteo el combo de moneda cuando refresco en el elegido sino se pierde
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
 
         }
@@ -122,7 +129,9 @@ namespace TFI.GUI
         {
             var Current = HttpContext.Current;
             var manager = new ProductoCore();
-            producto = manager.Find(Int32.Parse(id), 1);
+            var cotizacionStatic = new MonedaEmpresaEntidad();
+            cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+            producto = manager.Find(Int32.Parse(id), cotizacionStatic.IdMoneda);
 
             var list = (List<ProductoEntidad>)Current.Session["Productos"];
 
@@ -155,7 +164,8 @@ namespace TFI.GUI
             unaListaDeseo.CUIT = logueadoStatic.CUIT;
             unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
             unaListaDeseo.IdProducto = Int32.Parse(idProducto);
-
+            var cotizacion = new MonedaEmpresaEntidad();
+            cotizacion = (MonedaEmpresaEntidad)Current.Session["Productos"];
             //Guardar en BD el nuevo deseo
             if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
             {

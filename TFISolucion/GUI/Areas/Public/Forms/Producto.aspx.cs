@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -10,9 +12,28 @@ namespace TFI.GUI
         public const string IMAGES_CONTAINER = "/Content/Images/Productos/";
         private int _IdProducto;
         protected ProductoEntidad producto;
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coreMoneda;
 
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
+
+                master = master.Master;
+            }
+            return null;
+        }
         public Producto()
         {
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
+            _coreMoneda = new MonedaCore();
             _manager = new ProductoCore();
         }
 
@@ -20,12 +41,26 @@ namespace TFI.GUI
         {
             int IdProducto = Convert.ToInt32(Request.QueryString["IdProducto"]);
             _IdProducto = IdProducto;
+            if (!IsPostBack)
+            {
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
-            producto = _manager.Find(IdProducto,1);
 
+            }
+            else
+            {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
+            }
+            producto = _manager.Find(IdProducto, cotizacion.IdMoneda);
+            moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             Page.Title = producto.DescripProducto;
 
             LoadProducto(IdProducto);
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
         }
 
         private void LoadProducto(int IdProducto)

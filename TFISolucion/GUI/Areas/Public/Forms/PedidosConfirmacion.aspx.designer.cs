@@ -7,7 +7,9 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TFI.GUI.Areas.Public.Forms {
+namespace TFI.GUI.Areas.Public.Forms
+    //namespace TFI.GUI
+{
     
     
     public partial class PedidosConfirmacion {

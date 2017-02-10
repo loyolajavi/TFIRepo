@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="Envio" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="PedidosEnvio.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosEnvio" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 </asp:Content>

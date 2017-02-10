@@ -6,6 +6,7 @@ using TFI.CORE.Managers;
 using TFI.Entidades;
 
 namespace TFI.GUI.Areas.Public.Forms
+    //namespace TFI.GUI
 {
     public partial class PedidosEnvio : System.Web.UI.Page
     {

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="Datos Personales" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="PedidosDireccion.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosDireccion" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 </asp:Content>

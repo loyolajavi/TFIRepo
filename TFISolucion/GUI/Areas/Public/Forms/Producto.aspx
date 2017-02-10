@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="TFI.GUI.Producto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master"  EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="TFI.GUI.Producto" %>
 
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
@@ -56,7 +56,7 @@
 
                 <div class="col-md-3" style="border: #eee 1px solid; background-color: #fafafa; margin-top: 30px;">
                     <div>
-                        <h2 class="title text-center"><strong>$ <%=producto.PrecioUnitario%></strong></h2>
+                        <h2 class="title text-center"><strong><%=moneda.SimboloMoneda%></strong><strong> <%=producto.PrecioUnitario%></strong></h2>
                     </div>
                     <p class="text-center">
 

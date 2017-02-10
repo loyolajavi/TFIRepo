@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Pedido" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="Pedidos.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.Pedidos" %>
 
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
@@ -8,7 +10,7 @@
 
     <style>
         .btn-caja {
-            border-radius:0px;
+            border-radius: 0px;
         }
     </style>
 
@@ -20,7 +22,7 @@
         <hr />
         <div id="test" runat="server">
             <% if (productos != null && productos.Any())
-               {
+                {
             %>
             <table class="table-bordered col-md-12" id="tlbPedido">
                 <thead>
@@ -37,7 +39,7 @@
 
                 <tbody>
                     <% foreach (var p in lista)
-                       {
+                        {
                     %>
                     <tr class="<%=p.Producto.IdProducto%>">
                         <td class="text-center" style="padding: 7px;">
@@ -52,19 +54,19 @@
                         <td class="text-center">
                             <p>
                                 <%if (p.Stock)
-                                  { %><span>En Stock</span><% }
-                                  else
-                                  { %> <span>Sin Stock</span><% } %>
+                                    { %><span>En Stock</span><% }
+                                                                 else
+                                                                 { %> <span>Sin Stock</span><% } %>
                             </p>
                         </td>
                         <td class="text-center">
                             <p>
-                                <span>ARS</span> <span>$</span> <span><%=p.Producto.PrecioUnitario %></span>
+                                <span><%=moneda.SimboloMoneda%></span> <span><%=p.Producto.PrecioUnitario %></span>
                             </p>
                         </td>
                         <td class="text-center">
                             <div class="selection-div">
-                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" disabled/>
+                                <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" disabled />
                                 <div>
                                     <a class="cart btn btn-default btn-resta" href="#" title="Menos">-</a>
                                     <a class="cart btn btn-default btn-agrega" href="#" title="Mas">+</a>
@@ -79,14 +81,14 @@
                         <td class="text-center unitario">
                             <div>
                                 <p>
-                                    <span>$</span> <span id="unitario"><%=p.Producto.PrecioUnitario * p.Cantidad %></span>
+                                    <span><%=moneda.SimboloMoneda%></span> <span id="unitario"><%=p.Producto.PrecioUnitario * p.Cantidad %></span>
                                 </p>
                             </div>
                         </td>
                     </tr>
 
                     <%
-                       } %>
+                        } %>
                 </tbody>
             </table>
 
@@ -95,7 +97,7 @@
             </div>
 
             <%
-               } %>
+                } %>
         </div>
 
         <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
@@ -164,7 +166,7 @@
 
         }
 
-       
+
 
     </script>
 </asp:Content>

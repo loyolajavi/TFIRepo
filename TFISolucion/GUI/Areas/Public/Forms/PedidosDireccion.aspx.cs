@@ -7,6 +7,7 @@ using TFI.Entidades;
 using TFI.FUNCIONES;
 
 namespace TFI.GUI.Areas.Public.Forms
+    //namespace TFI.GUI
 {
     public partial class PedidosDireccion : System.Web.UI.Page
     {

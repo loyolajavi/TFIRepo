@@ -9,6 +9,7 @@ using TFI.GUI.Helpers.DTO;
 using TFI.CORE.Helpers;
 
 namespace TFI.GUI.Areas.Public.Forms
+    //namespace TFI.GUI
 {
     public partial class PedidosConfirmacion : System.Web.UI.Page
     {
