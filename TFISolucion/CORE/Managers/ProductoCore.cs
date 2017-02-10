@@ -203,9 +203,34 @@ namespace TFI.CORE.Managers
         }
 
 
-        public List<ProductoEntidad> ProductoSelectByCategoria(int idCategoria)
+        public List<ProductoEntidad> ProductoSelectByCategoria(int idCategoria, int idMoneda)
         {
-            return _productoDal.ProductoSelectByCategoria(ConfigSection.Default.Site.Cuit, idCategoria);
+            _coreMoneda = new MonedaCore();
+            var lista = new List<ProductoEntidad>();
+            var cotizacion = _coreMoneda.Select(idMoneda);
+            var retornaProductos = new List<ProductoEntidad>();
+            lista = _productoDal.ProductoSelectByCategoria(ConfigSection.Default.Site.Cuit, idCategoria);
+            if (cotizacion.Cotizacion > 1)
+            {
+                foreach (ProductoEntidad p in lista)
+                {
+                    ProductoEntidad nuevo = new ProductoEntidad();
+                    nuevo = p;
+                    nuevo.PrecioUnitario = System.Decimal.Round(p.PrecioUnitario / cotizacion.Cotizacion, 2);
+                    retornaProductos.Add(nuevo);
+
+                }
+            }
+            else
+                foreach (ProductoEntidad p in lista)
+                {
+                    ProductoEntidad nuevo = new ProductoEntidad();
+                    nuevo = p;
+                    nuevo.PrecioUnitario = System.Decimal.Round(p.PrecioUnitario * cotizacion.Cotizacion, 2);
+                    retornaProductos.Add(nuevo);
+
+                }
+            return retornaProductos;
         }
 
 

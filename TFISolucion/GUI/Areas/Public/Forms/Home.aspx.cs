@@ -25,7 +25,19 @@ namespace TFI.GUI
         public MonedaEntidad moneda;
         private MonedaCore _coremoneda;
 
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
 
+                master = master.Master;
+            }
+            return null;
+        }
         [WebMethod]
         public decimal devolverCotizacion(string _cotizacion, string _cotizacion2)
         {
@@ -96,9 +108,11 @@ namespace TFI.GUI
                 lstMasVendidos.DataBind();
 
             }
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
-
-            }
+        }
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
