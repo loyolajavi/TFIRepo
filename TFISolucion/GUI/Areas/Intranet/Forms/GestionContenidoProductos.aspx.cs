@@ -148,6 +148,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductoActualizado.URL = URL;
             ProductoActualizado.DescripLarga = Detalle;
 
+            if (ProductoActualizado.PrecioUnitario > 0) { 
+
             ProductoBLL.ProductoUpdate(ProductoActualizado);
 
             //////Reset the edit index.
@@ -157,6 +159,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grillaproductos.DataBind();
 
             Response.Redirect(Request.RawUrl);
+
+            }
 
         }
 
@@ -249,7 +253,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlivamodal.DataValueField = "IdIvaProducto";
             ddlivamodal.DataTextField = "PorcentajeIvaProd";
             ddlivamodal.DataBind();
-
+    
         }
 
         protected void grillaproductos_RowEditing(object sender, GridViewEditEventArgs e)
@@ -279,6 +283,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             NuevoProducto.URL = url;
             NuevoProducto.DescripLarga = detalle;
 
+            if (NuevoProducto.PrecioUnitario > 0) { 
+
             ProductoCore UnCoreProducto = new ProductoCore();
             int id = UnCoreProducto.ProductoInsert(NuevoProducto);
 
@@ -288,7 +294,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
 
             UnCoreProducto.ProductoCategoriaInsert(NuevaIntermedia);
-
+            }
         }
 
         protected void grillaproductos_PageIndexChanging(object sender, GridViewPageEventArgs e)

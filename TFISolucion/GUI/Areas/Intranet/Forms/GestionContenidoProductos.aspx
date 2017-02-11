@@ -73,6 +73,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2>Agregar Producto</h2>
                     <div id="notificationproducto">
+                        <p id="not" runat="server"></p>
                     </div>
                 </div>
                 <div class="modal-body">

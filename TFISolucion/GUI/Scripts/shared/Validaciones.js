@@ -253,6 +253,7 @@ function onbtnGrabarProducto() {
         categoria: $('#ddlcategoriamodal').val()
     };
 
+    if ($('#preciounitario').val() > 0) {
 
     // Ahora hacemos la llamada tipo AJAX utilizando jQuery
     $.ajax({
@@ -274,6 +275,9 @@ function onbtnGrabarProducto() {
         }
     });
     return true;
+    } else {
+        alert("El producto no puede tenes un precio igual o menor a cero.");
+    }
 };
 
 
