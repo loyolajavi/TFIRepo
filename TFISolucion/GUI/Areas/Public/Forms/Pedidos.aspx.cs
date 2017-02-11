@@ -21,6 +21,7 @@ namespace TFI.GUI.Areas.Public.Forms
         private MonedaCore _coreMoneda;
         public string cotizacionAnterior;
         private ProductoCore _coreProducto;
+        private StockCore _coreStock; 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -41,6 +42,7 @@ namespace TFI.GUI.Areas.Public.Forms
             moneda = new MonedaEntidad();
             _coreMoneda = new MonedaCore();
             _coreProducto = new ProductoCore();
+            _coreStock = new StockCore();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -144,29 +146,106 @@ namespace TFI.GUI.Areas.Public.Forms
         [WebMethod]
         public static Decimal ActualizarCantidad(int id, int cantidad)
         {
-            ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+            StockCore _coreStock = new StockCore();
+            //Boolean Stock = false;
+            var Stocks = _coreStock.SelectByIdProducto(id);
+            int StockAcumulado = 0;
+            if (Stocks.Count > 0)
+            {
+                foreach (var stockdeproducto in Stocks)
+                {
+                    StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+                }
+            }
+            if (StockAcumulado >= cantidad)
+            {
+                var Current = HttpContext.Current;
+                ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+               .Where(x => x.Producto.IdProducto == id)
+               .First().Cantidad = cantidad;
+
+                List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
+                foreach (var producto in lista)
+                {
+                    if (producto.Producto.IdProducto == id)
+                    {
+                        producto.Cantidad = cantidad;
+                        producto.Stock = true;
+                    }
+                }
+               
+            }
+            else
+            {
+                var Current = HttpContext.Current;
+                var ListaActualizada =  ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
                 .Where(x => x.Producto.IdProducto == id)
-                .First().Cantidad = cantidad;
+                .First().Stock = false;
+
+            List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
+            foreach (var producto in lista)
+            {
+                if (producto.Producto.IdProducto == id)
+                {
+                    producto.Cantidad = cantidad;
+                    producto.Stock = false;
+                }
+            }
+
+            Current.Session["Pedido"] = lista;
+
+            }
 
             var precio = ((List<PedidoLista>)HttpContext.Current.Session["Pedido"]).Where(x => x.Producto.IdProducto == id).First().Producto.PrecioUnitario;
 
             return precio * cantidad;
+            
         }
 
         private void CrearPedidoLista()
         {
             var Current = HttpContext.Current;
-
+           
             if (lista == null || !lista.Any())
             {
                 lista = new List<PedidoLista>();
-                productos.ForEach(x =>
-                    lista.Add(new PedidoLista()
-                    {
-                        Producto = x,
-                        Cantidad = 1,
-                        Stock = true
-                    }));
+                foreach (var item in productos)
+                {
+                   Boolean Stock = false;
+                   var Stocks = _coreStock.SelectByIdProducto(item.IdProducto);
+                   int StockAcumulado = 0; 
+                   if (Stocks.Count > 0) { 
+                   foreach(var stockdeproducto in Stocks)
+                   {
+                       StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+                   }
+                   }
+                   if (StockAcumulado > 0) {
+                       Stock = true;
+                   }
+                   else
+                   {
+                       Stock = false;
+                   }
+
+                   PedidoLista nuevoProd = new PedidoLista();
+                   nuevoProd.Producto = item;
+                   nuevoProd.Cantidad = 1;
+                   nuevoProd.Stock = Stock;
+                   lista.Add(nuevoProd);
+               
+
+                  
+                }
+                
+
+                //productos.ForEach(x =>
+                //    lista.Add(new PedidoLista()
+                //    {
+                //        Producto = x,
+                //        Cantidad = 1,
+                //        Stock = false
+                //    }));
 
                 Current.Session["Pedido"] = lista;
             }

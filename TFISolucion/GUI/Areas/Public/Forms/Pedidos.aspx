@@ -114,6 +114,7 @@
 
             parentInput.val(Number(parentInput.val()) + 1);
             actualizarCantidad(idProducto, (Number(parentInput.val())), $(this));
+            window.location.reload(true);
 
         });
 
@@ -125,6 +126,7 @@
             if (Number(parentInput.val() != 1)) {
                 parentInput.val(Number(parentInput.val()) - 1);
                 actualizarCantidad(idProducto, parentInput.val(), $(this));
+                window.location.reload(true);
             };
         });
 
