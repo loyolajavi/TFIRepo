@@ -84,6 +84,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaEntidad.cs" />
     <Compile Include="RecursoEntidad.cs" />
+    <Compile Include="ReportePedidosDeUsuario.cs" />
+    <Compile Include="ReportePedidosPorFechayEstado.cs" />
     <Compile Include="ReservaEntidad.cs" />
     <Compile Include="StockSucursalEntidad.cs" />
     <Compile Include="SucursalEntidad.cs" />

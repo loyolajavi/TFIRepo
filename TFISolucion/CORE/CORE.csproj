@@ -42,6 +42,10 @@
     <OutputPath>bin\ConnectionStrings\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -69,6 +73,7 @@
     <Compile Include="Managers\PedidoCore.cs" />
     <Compile Include="Managers\ProductoCore.cs" />
     <Compile Include="Managers\RecursoCore.cs" />
+    <Compile Include="Managers\ReporteCore.cs" />
     <Compile Include="Managers\SucursalCore.cs" />
     <Compile Include="Managers\TarjetaCore.cs" />
     <Compile Include="Managers\UsuarioCore.cs" />
@@ -86,6 +91,9 @@
       <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

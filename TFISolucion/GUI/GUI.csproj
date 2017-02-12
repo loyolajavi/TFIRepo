@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mercadopago, Version=0.3.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\mercadopago.dll.1.0.0\lib\mercadopago.dll</HintPath>
       <Private>True</Private>

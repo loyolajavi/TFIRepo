@@ -34,7 +34,9 @@
                     </td>
                     <td style="width: 0%; text-align: center;">
                         <a href="#">
-                            <img src="/Content/Images/Iconos/pdf.png" />
+                            <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
+                            <img src="/Content/Images/Iconos/pdf.png"/>
+                            <asp:Button ID="btnReportePxU" runat="server" Text="Obtener" OnClick="btnReportePxU_Click" />
                         </a>
                     </td>
                 </tr>
@@ -44,11 +46,13 @@
                     <td style="width: 0%; text-align: center;">
                         <a href="#">
                             <img src="/Content/Images/Iconos/pdf.png" />
+                            <asp:Button ID="btnReportePxF" runat="server" Text="Obtener" OnClick="btnReportePxF_Click" />
                         </a>
+                        
                     </td>
                 </tr>
-                <tr>
-                    <td class="vertical">Reporte Pedidos  por Estado
+              <%--  <tr>
+                    <td class="vertical">Reporte Pedidos por Estado
                     </td>
                     <td style="width: 0%; text-align: center;">
                         <a href="#">
@@ -64,7 +68,7 @@
                             <img src="/Content/Images/Iconos/pdf.png" />
                         </a>
                     </td>
-                </tr>
+                </tr>--%>
             </tbody>
         </table>
     </div>
