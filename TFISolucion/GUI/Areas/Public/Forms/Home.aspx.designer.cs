@@ -13,6 +13,24 @@ namespace TFI.GUI {
     public partial class Home {
         
         /// <summary>
+        /// Control lbldestacados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbldestacados;
+        
+        /// <summary>
+        /// Control lblmasvendios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblmasvendios;
+        
+        /// <summary>
         /// Control lstProductosDestacados.
         /// </summary>
         /// <remarks>

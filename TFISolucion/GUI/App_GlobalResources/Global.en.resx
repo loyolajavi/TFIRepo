@@ -126,14 +126,26 @@
   <data name="Descripcion" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="Destacados" xml:space="preserve">
+    <value>Highlights of the week</value>
+  </data>
   <data name="EnvioTodoPais" xml:space="preserve">
     <value>Shipping all over the country</value>
+  </data>
+  <data name="Espanol" xml:space="preserve">
+    <value>Spanish</value>
   </data>
   <data name="EstimacionEnvio" xml:space="preserve">
     <value>Estimated delivery time, between two or three days.</value>
   </data>
   <data name="FormaPago" xml:space="preserve">
     <value>Paid Type</value>
+  </data>
+  <data name="Ingles" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="MasVendidos" xml:space="preserve">
+    <value>Producst more sold</value>
   </data>
   <data name="Resumen" xml:space="preserve">
     <value>Resume</value>

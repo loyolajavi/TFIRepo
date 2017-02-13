@@ -88,11 +88,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Destacados de la semana.
+        /// </summary>
+        internal static string Destacados {
+            get {
+                return ResourceManager.GetString("Destacados", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo a todo el Pais.
         /// </summary>
         internal static string EnvioTodoPais {
             get {
                 return ResourceManager.GetString("EnvioTodoPais", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Español.
+        /// </summary>
+        internal static string Espanol {
+            get {
+                return ResourceManager.GetString("Espanol", resourceCulture);
             }
         }
         
@@ -111,6 +129,24 @@ namespace Resources {
         internal static string FormaPago {
             get {
                 return ResourceManager.GetString("FormaPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingles.
+        /// </summary>
+        internal static string Ingles {
+            get {
+                return ResourceManager.GetString("Ingles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Productos mas vendidos.
+        /// </summary>
+        internal static string MasVendidos {
+            get {
+                return ResourceManager.GetString("MasVendidos", resourceCulture);
             }
         }
         

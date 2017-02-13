@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
@@ -65,6 +66,15 @@ namespace TFI.GUI.General
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!this.IsPostBack)
+            {
+                if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
+                {
+                    ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                }
+            }
+
             //AGREGADOS PARA MONEDA/////
             cotizacion = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
 

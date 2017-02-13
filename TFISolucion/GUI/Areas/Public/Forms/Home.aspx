@@ -7,6 +7,7 @@
 
 
 
+
     <div class="row carousel-holder">
 
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -44,10 +45,10 @@
             <div class="tabbable" id="tabs-322426">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#panel-810103" data-toggle="tab">Destacados de la semana</a>
+                        <a href="#panel-810103" data-toggle="tab"><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, Destacados %>"></asp:Label></a>
                     </li>
                     <li>
-                        <a href="#panel-132440" data-toggle="tab">Los más vendidos</a>
+                        <a href="#panel-132440" data-toggle="tab"><asp:Label ID="lblmasvendios" runat="server" Text="<%$Resources:Global, MasVendidos %>"></asp:Label></a>
                     </li>
                 </ul>
                 <div class="tab-content">

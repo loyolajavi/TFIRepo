@@ -54,7 +54,7 @@
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
                             </li>
-                            <li id="LiIdioma" runat="server">
+                      <%--      <li id="LiIdioma" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
@@ -72,8 +72,15 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--%>
+                            <li>
+                            <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;" >
+                                
+                                <asp:ListItem Text="Español" Value="es" />
+                                <asp:ListItem Text="Ingles" Value="en-us" />
 
+                          </asp:DropDownList>
+                            </li>
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">
