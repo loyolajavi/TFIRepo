@@ -69,7 +69,7 @@
                                 <input size="2" type="text" data-prod="<%=p.Producto.IdProducto%>" class="input-cart-cantidad" value="<%=p.Cantidad%>" disabled />
                                 <div>
                                     <a class="cart btn btn-default btn-resta" href="#" title="Menos">-</a>
-                                    <a class="cart btn btn-default btn-agrega" href="#" title="Mas">+</a>
+                                    <a class="cart btn btn-default btn-agrega" id="Mas" href="#" title="Mas">+</a>
                                 </div>
                             </div>
                         </td>
@@ -104,6 +104,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
+<asp:HiddenField ID="SumaResta" ClientIDMode="Static" runat="server" Visible="false" Value="1" />
 
     <script>
 
@@ -112,9 +113,12 @@
             var parentInput = $(this).parents('td').find('input');
             var idProducto = parentInput.data('prod');
 
-            parentInput.val(Number(parentInput.val()) + 1);
-            actualizarCantidad(idProducto, (Number(parentInput.val())), $(this));
-            window.location.reload(true);
+
+            consultarStock(idProducto, (Number(parentInput.val())) + 1, $(this));
+            
+            //window.location.reload(true); BORRAR ESTO SOLUCIONO QUE A VECES SUMABA UNA UNIDAD AL CARRITO Y OTRAS VECES NO LO HACIA
+            parentInput = null;
+            idProducto = null;
 
         });
 
@@ -123,10 +127,15 @@
             var parentInput = $(this).parents('td').find('input');
             var idProducto = parentInput.data('prod');
 
-            if (Number(parentInput.val() != 1)) {
+            //if (Number(parentInput.val() != 1)) {
+            if (Number(parentInput.val() > 1)) {
+                //parentInput.val(Number(parentInput.val()) - 1);
+                consultarStock(idProducto, (Number(parentInput.val())) - 1, $(this));
                 parentInput.val(Number(parentInput.val()) - 1);
-                actualizarCantidad(idProducto, parentInput.val(), $(this));
-                window.location.reload(true);
+                //actualizarCantidad(idProducto, parentInput.val(), $(this));
+                parentInput = null;
+                idProducto = null;
+                //window.location.reload(true);
             };
         });
 
@@ -147,14 +156,15 @@
             });
         });
 
-        var actualizarCantidad = function (id, cantidad, control) {
+        var actualizarCantidad = function (id, cantidad, control, stockActual) {
 
             $.ajax({
                 type: "POST",
                 url: "Pedidos.aspx/ActualizarCantidad",
                 data: JSON.stringify({
                     id: id,
-                    cantidad: cantidad
+                    cantidad: cantidad,
+                    stockActual: stockActual
                 }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -162,7 +172,44 @@
                     alert(error);
                 },
                 success: function (data) {
+                    var parentInput = control.parents('td').find('input');
+                    parentInput.val(Number(parentInput.val()) + 1);
                     control.parents('tr').find('#unitario').text(parseFloat(data.d).toFixed(2));
+                }
+            });
+
+        }
+
+
+
+        var consultarStock = function (id, cantidad, control) {
+
+            $.ajax({
+                type: "POST",
+                url: "Pedidos.aspx/consultarStock",
+                data: JSON.stringify({
+                    id: id,
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    
+                    var stockActual = data.d;
+
+                    //if (data.d > 0) {
+                    if (stockActual >= cantidad) {
+                        actualizarCantidad(id, cantidad, control, stockActual);
+                    }
+                    else {
+                        alert("No hay más stock");
+                    }
+
+                    
+
+                    
                 }
             });
 

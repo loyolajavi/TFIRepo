@@ -31,6 +31,15 @@ namespace TFI.GUI.Areas.Public.Forms {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificacionCarritoVacio;
         
         /// <summary>
+        /// Control SumaResta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SumaResta;
+        
+        /// <summary>
         /// Propiedad Master.
         /// </summary>
         /// <remarks>

@@ -144,20 +144,24 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
         [WebMethod]
-        public static Decimal ActualizarCantidad(int id, int cantidad)
+        public static Decimal ActualizarCantidad(int id, int cantidad, int stockActual)
         {
-            StockCore _coreStock = new StockCore();
-            //Boolean Stock = false;
-            var Stocks = _coreStock.SelectByIdProducto(id);
-            int StockAcumulado = 0;
-            if (Stocks.Count > 0)
-            {
-                foreach (var stockdeproducto in Stocks)
-                {
-                    StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
-                }
-            }
-            if (StockAcumulado >= cantidad)
+            //StockCore _coreStock = new StockCore();
+            ////Boolean Stock = false;
+            //var Stocks = _coreStock.SelectByIdProducto(id);
+            //int StockAcumulado = 0;
+            //if (Stocks.Count > 0)
+            //{
+            //    foreach (var stockdeproducto in Stocks)
+            //    {
+            //        StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+            //    }
+            //}
+
+
+            //if (StockAcumulado >= cantidad)
+
+            if (stockActual >= cantidad)
             {
                 var Current = HttpContext.Current;
                 ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
@@ -281,5 +285,31 @@ namespace TFI.GUI.Areas.Public.Forms
                 }
             }
         }
+
+
+
+        [WebMethod]
+        public static int consultarStock(int id)
+        {
+            StockCore _coreStock = new StockCore();
+            var Stocks = _coreStock.SelectByIdProducto(id);
+            int StockAcumulado = 0;
+            if (Stocks.Count > 0)
+            {
+                foreach (var stockdeproducto in Stocks)
+                {
+                    StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+                }
+                return StockAcumulado;
+            }
+            else
+            {
+                return 0;
+            }
+                
+        }
+
+
+
     }
 }
