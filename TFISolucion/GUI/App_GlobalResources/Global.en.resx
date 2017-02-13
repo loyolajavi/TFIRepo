@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Apellido" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Asunto" xml:space="preserve">
+    <value>Subject</value>
+  </data>
   <data name="Buscar" xml:space="preserve">
     <value>Search</value>
   </data>
@@ -138,6 +144,9 @@
   <data name="Contacto" xml:space="preserve">
     <value>Contact us</value>
   </data>
+  <data name="Correo" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="Descripcion" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -149,6 +158,9 @@
   </data>
   <data name="ElProducto" xml:space="preserve">
     <value>The item</value>
+  </data>
+  <data name="Enviar" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="EnvioTodoPais" xml:space="preserve">
     <value>Shipping all over the country</value>
@@ -180,11 +192,20 @@
   <data name="IrAPedidos" xml:space="preserve">
     <value>Go to Order</value>
   </data>
+  <data name="Limpiar" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="MapaDelSitio" xml:space="preserve">
     <value>Site´s map</value>
   </data>
   <data name="MasVendidos" xml:space="preserve">
     <value>Producst more sold</value>
+  </data>
+  <data name="Mensaje" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Nombre" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NuestrosClientes" xml:space="preserve">
     <value>Customers</value>
