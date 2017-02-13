@@ -72,6 +72,12 @@ function onBtnComprar(btn2) {
 $('.btn-comprar').click(function () {
     var control = $(this);
     var idProducto = control.data('producto');
+
+    if (consultarStockClickComprar()) {
+        alert("Hola");
+    }
+
+
     $.ajax({
         type: "POST",
         url: "Catalogo.aspx/AgregarItem",
@@ -193,3 +199,37 @@ $('.linkProducto').click(function () {
     var id = $(this).data('producto');
     app.redirect("Producto.aspx?IdProducto=" + id);
 });
+
+
+
+
+//PARA CONSULTAR STOCK AL CLICKEAR EN COMPRAR
+function consultarStockClickComprar(id, control) {
+
+    $.ajax({
+        type: "POST",
+        url: "Pedidos.aspx/consultarStock",
+        data: JSON.stringify({
+            id: id,
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+
+            var stockActual = data.d;
+
+            if (stockActual >= 1) {
+                return true;
+                //TMB se podria LLAMAR A LA FUNCION btn-comprar de javascript, pero creo q es mejor devolver un true aca hacia la funcion btn-comprar
+            }
+            else {
+                alert("No se posee stock de este producto");
+                return false;
+            }
+        }
+    });
+
+}

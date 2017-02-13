@@ -144,7 +144,7 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
         [WebMethod]
-        public static Decimal ActualizarCantidad(int id, int cantidad, int stockActual)
+        public static Decimal ActualizarPrecioItem(int id, int cantidad, int stockActual)
         {
             //StockCore _coreStock = new StockCore();
             ////Boolean Stock = false;
@@ -161,44 +161,54 @@ namespace TFI.GUI.Areas.Public.Forms
 
             //if (StockAcumulado >= cantidad)
 
-            if (stockActual >= cantidad)
-            {
-                var Current = HttpContext.Current;
-                ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
-               .Where(x => x.Producto.IdProducto == id)
-               .First().Cantidad = cantidad;
 
-                List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
-                foreach (var producto in lista)
-                {
-                    if (producto.Producto.IdProducto == id)
-                    {
-                        producto.Cantidad = cantidad;
-                        producto.Stock = true;
-                    }
-                }
+            //TODO ESTO QUEDA COMENTADO PRUEBA DE QUE SOLO ACTUALICE LA SESSION pedido
+            //if (stockActual >= cantidad)
+            //{
+            //    var Current = HttpContext.Current;
+            //    ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+            //   .Where(x => x.Producto.IdProducto == id)
+            //   .First().Cantidad = cantidad;
+
+            //    List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
+            //    foreach (var producto in lista)
+            //    {
+            //        if (producto.Producto.IdProducto == id)
+            //        {
+            //            producto.Cantidad = cantidad;
+            //            producto.Stock = true;
+            //        }
+            //    }
                
-            }
-            else
-            {
-                var Current = HttpContext.Current;
-                var ListaActualizada =  ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
-                .Where(x => x.Producto.IdProducto == id)
-                .First().Stock = false;
+            //}
+            //else
+            //{
+            //    var Current = HttpContext.Current;
+            //    var ListaActualizada =  ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+            //    .Where(x => x.Producto.IdProducto == id)
+            //    .First().Stock = false;
 
-            List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
-            foreach (var producto in lista)
-            {
-                if (producto.Producto.IdProducto == id)
-                {
-                    producto.Cantidad = cantidad;
-                    producto.Stock = false;
-                }
-            }
+            //List<PedidoLista> lista = (List<PedidoLista>)Current.Session["Pedido"];
+            //foreach (var producto in lista)
+            //{
+            //    if (producto.Producto.IdProducto == id)
+            //    {
+            //        producto.Cantidad = cantidad;
+            //        producto.Stock = false;
+            //    }
+            //}
 
-            Current.Session["Pedido"] = lista;
+            //Current.Session["Pedido"] = lista;
 
-            }
+            //}
+
+            //ENDTODO ESTO QUEDA COMENTADO 
+
+
+            var Current = HttpContext.Current;
+            ((List<PedidoLista>)HttpContext.Current.Session["Pedido"])
+           .Where(x => x.Producto.IdProducto == id)
+           .First().Cantidad = cantidad;
 
             var precio = ((List<PedidoLista>)HttpContext.Current.Session["Pedido"]).Where(x => x.Producto.IdProducto == id).First().Producto.PrecioUnitario;
 
@@ -242,15 +252,6 @@ namespace TFI.GUI.Areas.Public.Forms
                   
                 }
                 
-
-                //productos.ForEach(x =>
-                //    lista.Add(new PedidoLista()
-                //    {
-                //        Producto = x,
-                //        Cantidad = 1,
-                //        Stock = false
-                //    }));
-
                 Current.Session["Pedido"] = lista;
             }
             else

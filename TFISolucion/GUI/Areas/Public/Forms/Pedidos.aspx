@@ -102,9 +102,10 @@
 
         <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
     </div>
+    <asp:HiddenField ID="SumaResta" ClientIDMode="Static" runat="server" Value="0" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
-<asp:HiddenField ID="SumaResta" ClientIDMode="Static" runat="server" Visible="false" Value="1" />
+
 
     <script>
 
@@ -112,30 +113,23 @@
 
             var parentInput = $(this).parents('td').find('input');
             var idProducto = parentInput.data('prod');
+            var operacion = 1;
 
-
-            consultarStock(idProducto, (Number(parentInput.val())) + 1, $(this));
-            
-            //window.location.reload(true); BORRAR ESTO SOLUCIONO QUE A VECES SUMABA UNA UNIDAD AL CARRITO Y OTRAS VECES NO LO HACIA
+            consultarStock(idProducto, (Number(parentInput.val())) + 1, $(this), operacion);
             parentInput = null;
             idProducto = null;
-
         });
 
         $('.btn-resta').click(function () {
 
             var parentInput = $(this).parents('td').find('input');
             var idProducto = parentInput.data('prod');
+            var operacion = 0;
 
-            //if (Number(parentInput.val() != 1)) {
             if (Number(parentInput.val() > 1)) {
-                //parentInput.val(Number(parentInput.val()) - 1);
-                consultarStock(idProducto, (Number(parentInput.val())) - 1, $(this));
-                parentInput.val(Number(parentInput.val()) - 1);
-                //actualizarCantidad(idProducto, parentInput.val(), $(this));
+                consultarStock(idProducto, (Number(parentInput.val())) - 1, $(this), operacion);
                 parentInput = null;
                 idProducto = null;
-                //window.location.reload(true);
             };
         });
 
@@ -156,33 +150,8 @@
             });
         });
 
-        var actualizarCantidad = function (id, cantidad, control, stockActual) {
 
-            $.ajax({
-                type: "POST",
-                url: "Pedidos.aspx/ActualizarCantidad",
-                data: JSON.stringify({
-                    id: id,
-                    cantidad: cantidad,
-                    stockActual: stockActual
-                }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (data) {
-                    var parentInput = control.parents('td').find('input');
-                    parentInput.val(Number(parentInput.val()) + 1);
-                    control.parents('tr').find('#unitario').text(parseFloat(data.d).toFixed(2));
-                }
-            });
-
-        }
-
-
-
-        var consultarStock = function (id, cantidad, control) {
+        var consultarStock = function (id, cantidad, control, operacion) {
 
             $.ajax({
                 type: "POST",
@@ -196,24 +165,61 @@
                     alert(error);
                 },
                 success: function (data) {
-                    
+
                     var stockActual = data.d;
 
-                    //if (data.d > 0) {
                     if (stockActual >= cantidad) {
-                        actualizarCantidad(id, cantidad, control, stockActual);
+                        $("#SumaResta").val(1);
+                        ActualizarPrecioItem(id, cantidad, control, stockActual, operacion);
                     }
                     else {
+                        $("#SumaResta").val(0);
                         alert("No hay más stock");
                     }
-
-                    
-
-                    
                 }
             });
 
         }
+
+
+        var ActualizarPrecioItem = function (id, cantidad, control, stockActual, operacion) {
+
+            $.ajax({
+                type: "POST",
+                url: "Pedidos.aspx/ActualizarPrecioItem",
+                data: JSON.stringify({
+                    id: id,
+                    cantidad: cantidad,
+                    stockActual: stockActual
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    var parentInput = control.parents('td').find('input');
+
+                    var flagStock = $("#SumaResta").val();
+                    if (flagStock == 1) {
+                        if (operacion == 1) {
+                            parentInput.val(Number(parentInput.val()) + 1);
+                        }
+                        else if (operacion == 0) {
+                            parentInput.val(Number(parentInput.val()) - 1);
+                        }
+                        
+                    }
+                    
+                    control.parents('tr').find('#unitario').text(parseFloat(data.d).toFixed(2));
+                }
+            });
+
+        }
+
+
+
+
 
 
 
