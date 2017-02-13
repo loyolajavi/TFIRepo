@@ -37,7 +37,7 @@
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <asp:Panel runat="server" DefaultButton="btnBuscar">
-                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="<%$Resources:Global, Buscar %>"/>
                                     <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
                                     <img src="/Content/Images/Iconos/Buscar.png" />
                                     </asp:LinkButton>
@@ -54,7 +54,7 @@
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
                             </li>
-                      <%--      <li id="LiIdioma" runat="server">
+                            <%--      <li id="LiIdioma" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
@@ -74,17 +74,17 @@
                                 </ul>
                             </li>--%>
                             <li>
-                            <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;" >
-                                
-                                <asp:ListItem Text="Español" Value="es" />
-                                <asp:ListItem Text="Ingles" Value="en-us" />
+                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
-                          </asp:DropDownList>
+                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
+                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
+
+                                </asp:DropDownList>
                             </li>
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;">Pedido<span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblPedido" runat="server" Text="<%$Resources:Global, Pedido %>"></asp:Label><span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulPedidos">
                                 </ul>
                             </li>
@@ -92,7 +92,7 @@
                             <%-- LISTA DE PEDIDOS END--%>
 
                             <li id="LiDeseos" runat="server">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;">Deseos<span class="glyphicon glyphicon-heart"></span><span id="cantDeseos"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Deseos %>"></asp:Label><span class="glyphicon glyphicon-heart"></span><span id="cantDeseos"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulDeseos">
                                 </ul>
                             </li>
@@ -117,7 +117,7 @@
 
                             <li runat="server" id="liIngresar">
 
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Ingresar %>"></asp:Label><b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
                                         <div class="row">
@@ -125,11 +125,11 @@
                                                 <div>
 
                                                     <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputEmail2">Usuario</label>
+                                                        <label class="sr-only" for="exampleInputEmail2"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Usuario %>"></asp:Label></label>
                                                         <input type="text" runat="server" class="form-control" id="IngresoUsuario" placeholder="Usuario" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Clave</label>
+                                                        <label class="sr-only" for="exampleInputPassword2"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Clave %>"></asp:Label></label>
                                                         <input type="password" runat="server" class="form-control" id="IngresoClave" placeholder="Clave" />
                                                     </div>
                                                     <div class="form-group">
@@ -138,7 +138,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="Ingresar" />
+                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="<%$Resources:Global, Ingresar %>"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +147,7 @@
                                 </ul>
                             </li>
                             <li runat="server" id="liRegistrarse">
-                                <a href="/Areas/Public/Forms/RegistroCliente.aspx" class="navbar-link">Registrarse</a>
+                                <a href="/Areas/Public/Forms/RegistroCliente.aspx" class="navbar-link"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Registrarse %>"></asp:Label></a>
                             </li>
                         </ul>
                     </div>
@@ -168,11 +168,17 @@
                     <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-2" aria-expanded="true">
                         <nav>
                             <ul class="nav navbar-nav nav-links">
-                                <li><a href="Home.aspx">Inicio</a></li>
-                                <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">Quiénes Somos</a></li>
-                                <li><a href="/Areas/Public/Forms/ClientesEmpresa.aspx">Nuestros Clientes</a></li>
-                                <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*">Catálogo</a></li>
-                                <li><a href="/Areas/Public/Forms/Contacto.aspx">Contacto</a></li>
+                                <%--<li><a href="Home.aspx">Inicio</a></li>--%>
+                                <li><a href="Home.aspx">
+                                    <asp:Label ID="lblInicio" runat="server" Text="<%$Resources:Global, Inicio %>"></asp:Label></a></li>
+                                <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">
+                                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a></li>
+                                <li>
+                                    <a href="/Areas/Public/Forms/ClientesEmpresa.aspx">
+                                        <asp:Label ID="lblNuestrosClientes" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label></a></li>
+                                <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*"><asp:Label ID="lblmasvendios" runat="server" Text="<%$Resources:Global, Catalogo %>"></asp:Label></a></li>
+                                <li><a href="/Areas/Public/Forms/Contacto.aspx">
+                                    <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -202,7 +208,7 @@
                                 ID="lnkPage"
                                 Text='<%# Eval("Title") %>'
                                 NavigateUrl='<%# Eval("Url") %>'
-                                ToolTip='<%# Eval("Description") %>'
+                                ToolTip='<%# EvalDescription") %>'
                                 runat="server" />
                         </li>
                     </NodeTemplate>
@@ -220,16 +226,16 @@
                     <section class="col-md-3">
                     </section>
                     <section class="col-md-3">
-                        <h4 class="TextoFooter">Información</h4>
+                        <h4 class="TextoFooter"><asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Informacion %>"></asp:Label></h4>
                         <ul class="footer-navigation">
                             <li class="item">
-                                <a href="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos">Quiénes Somos</a>
+                                <a href="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos"><asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a>
                             </li>
                             <li class="item">
-                                <a href="/Areas/Public/Forms/Contacto.aspx" title="Contacto">Contacto</a>
+                                <a href="/Areas/Public/Forms/Contacto.aspx" title="Contacto"><asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></a>
                             </li>
                             <li>
-                                <a href="/Areas/Public/Forms/MapaSitio.aspx" title="Mapa del sitio">Mapa del sitio</a>
+                                <a href="/Areas/Public/Forms/MapaSitio.aspx" title="Mapa del sitio"><asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, MapaDelSitio %>"></asp:Label></a>
                             </li>
                         </ul>
                     </section>
@@ -239,7 +245,7 @@
                             <ul class="toggle-footer" style="">
                                 <li>
                                     <i class="glyphicon glyphicon-phone-alt TextoFooter"></i>
-                                    <span class="TextoFooter">Teléfono:
+                                    <span class="TextoFooter"><asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Telefono %>">:</asp:Label>
                                     </span>
                                     <p id="TelEmpresa" class="TextoFooter" runat="server"></p>
                                 </li>

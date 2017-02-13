@@ -117,17 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Buscar" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="Cantidad" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="Catalogo" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="Clave" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Comprar" xml:space="preserve">
+    <value>Buy</value>
   </data>
   <data name="ConfiirmarPedido" xml:space="preserve">
     <value>Paid Confirmation</value>
   </data>
+  <data name="Contacto" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
   <data name="Descripcion" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="Deseos" xml:space="preserve">
+    <value>Wishes</value>
+  </data>
   <data name="Destacados" xml:space="preserve">
     <value>Highlights of the week</value>
+  </data>
+  <data name="ElProducto" xml:space="preserve">
+    <value>The item</value>
   </data>
   <data name="EnvioTodoPais" xml:space="preserve">
     <value>Shipping all over the country</value>
@@ -138,19 +159,61 @@
   <data name="EstimacionEnvio" xml:space="preserve">
     <value>Estimated delivery time, between two or three days.</value>
   </data>
+  <data name="Felicitaciones" xml:space="preserve">
+    <value>Congratulations</value>
+  </data>
   <data name="FormaPago" xml:space="preserve">
     <value>Paid Type</value>
+  </data>
+  <data name="Informacion" xml:space="preserve">
+    <value>Information</value>
   </data>
   <data name="Ingles" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Ingresar" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="Inicio" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IrAPedidos" xml:space="preserve">
+    <value>Go to Order</value>
+  </data>
+  <data name="MapaDelSitio" xml:space="preserve">
+    <value>Site´s map</value>
+  </data>
   <data name="MasVendidos" xml:space="preserve">
     <value>Producst more sold</value>
+  </data>
+  <data name="NuestrosClientes" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="Pedido" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="ProductoCorrectamenteAgregadoAlCarrito" xml:space="preserve">
+    <value>  is added to the shopping cart.</value>
+  </data>
+  <data name="QuienesSomos" xml:space="preserve">
+    <value>About us</value>
+  </data>
+  <data name="Registrarse" xml:space="preserve">
+    <value>Register</value>
   </data>
   <data name="Resumen" xml:space="preserve">
     <value>Resume</value>
   </data>
+  <data name="SeguirComprando" xml:space="preserve">
+    <value>Continue Shopping</value>
+  </data>
+  <data name="Telefono" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>

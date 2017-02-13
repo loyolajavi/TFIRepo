@@ -19,7 +19,7 @@ namespace Resources {
     // a través de una herramienta como ResGen o Visual Studio.
     // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
     // con la opción /str o recompile el proyecto de Visual Studio.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "14.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Global {
@@ -61,11 +61,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Buscar.
+        /// </summary>
+        internal static string Buscar {
+            get {
+                return ResourceManager.GetString("Buscar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cantidad.
         /// </summary>
         internal static string Cantidad {
             get {
                 return ResourceManager.GetString("Cantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Catálogo.
+        /// </summary>
+        internal static string Catalogo {
+            get {
+                return ResourceManager.GetString("Catalogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Clave.
+        /// </summary>
+        internal static string Clave {
+            get {
+                return ResourceManager.GetString("Clave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comprar.
+        /// </summary>
+        internal static string Comprar {
+            get {
+                return ResourceManager.GetString("Comprar", resourceCulture);
             }
         }
         
@@ -79,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contacto.
+        /// </summary>
+        internal static string Contacto {
+            get {
+                return ResourceManager.GetString("Contacto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Descripcion.
         /// </summary>
         internal static string Descripcion {
@@ -88,11 +133,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Deseos.
+        /// </summary>
+        internal static string Deseos {
+            get {
+                return ResourceManager.GetString("Deseos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Destacados de la semana.
         /// </summary>
         internal static string Destacados {
             get {
                 return ResourceManager.GetString("Destacados", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El producto.
+        /// </summary>
+        internal static string ElProducto {
+            get {
+                return ResourceManager.GetString("ElProducto", resourceCulture);
             }
         }
         
@@ -124,11 +187,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Felicitaciones.
+        /// </summary>
+        internal static string Felicitaciones {
+            get {
+                return ResourceManager.GetString("Felicitaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Forma de Pago.
         /// </summary>
         internal static string FormaPago {
             get {
                 return ResourceManager.GetString("FormaPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Información.
+        /// </summary>
+        internal static string Informacion {
+            get {
+                return ResourceManager.GetString("Informacion", resourceCulture);
             }
         }
         
@@ -142,11 +223,92 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ingresar.
+        /// </summary>
+        internal static string Ingresar {
+            get {
+                return ResourceManager.GetString("Ingresar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inicio.
+        /// </summary>
+        internal static string Inicio {
+            get {
+                return ResourceManager.GetString("Inicio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ir a Pedidos.
+        /// </summary>
+        internal static string IrAPedidos {
+            get {
+                return ResourceManager.GetString("IrAPedidos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mapa Del Sitio.
+        /// </summary>
+        internal static string MapaDelSitio {
+            get {
+                return ResourceManager.GetString("MapaDelSitio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Productos mas vendidos.
         /// </summary>
         internal static string MasVendidos {
             get {
                 return ResourceManager.GetString("MasVendidos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nuestros Clientes.
+        /// </summary>
+        internal static string NuestrosClientes {
+            get {
+                return ResourceManager.GetString("NuestrosClientes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pedido.
+        /// </summary>
+        internal static string Pedido {
+            get {
+                return ResourceManager.GetString("Pedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a   fue correctamente agregado en tu carrito!.
+        /// </summary>
+        internal static string ProductoCorrectamenteAgregadoAlCarrito {
+            get {
+                return ResourceManager.GetString("ProductoCorrectamenteAgregadoAlCarrito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Quienes Somos.
+        /// </summary>
+        internal static string QuienesSomos {
+            get {
+                return ResourceManager.GetString("QuienesSomos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registrarse.
+        /// </summary>
+        internal static string Registrarse {
+            get {
+                return ResourceManager.GetString("Registrarse", resourceCulture);
             }
         }
         
@@ -160,11 +322,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Seguir Comprando.
+        /// </summary>
+        internal static string SeguirComprando {
+            get {
+                return ResourceManager.GetString("SeguirComprando", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Teléfono.
+        /// </summary>
+        internal static string Telefono {
+            get {
+                return ResourceManager.GetString("Telefono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Total.
         /// </summary>
         internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        internal static string Usuario {
+            get {
+                return ResourceManager.GetString("Usuario", resourceCulture);
             }
         }
     }
