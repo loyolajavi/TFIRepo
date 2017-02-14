@@ -73,9 +73,9 @@ $('.btn-comprar').click(function () {
     var control = $(this);
     var idProducto = control.data('producto');
 
-    if (consultarStockClickComprar()) {
-        alert("Hola");
-    }
+    //if (consultarStockClickComprar()) {
+    //    alert("Hola");
+    //}
 
 
     $.ajax({
