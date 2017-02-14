@@ -11,7 +11,7 @@ using System.Web.Services;
 
 namespace TFI.GUI
 {
-    public partial class ListaDeDeseos : System.Web.UI.Page
+    public partial class ListaDeDeseos : BasePage
     {
 
         HttpContext Current = HttpContext.Current;

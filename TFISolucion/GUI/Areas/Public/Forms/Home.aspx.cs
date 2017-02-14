@@ -112,6 +112,12 @@ namespace TFI.GUI
             if (lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
+            //pruebo lo de idioma para que quede seteado el combo cuando vuelve a home desde cualquier otra pagina
+
+            //DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            //if (lblStatus != null)
+            //    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+
         }
 
         protected void btnComprar_Click(object sender, EventArgs e)

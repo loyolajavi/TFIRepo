@@ -7,7 +7,9 @@
     <div class="container">
 
         <div class="col-md-3">
-            <p class="lead">Categorias</p>
+            <p class="lead">
+                <asp:Label ID="lblCategorias" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label>
+            </p>
             <div class="list-group">
                 <asp:Repeater ID="rptCategorias" runat="server">
                     <ItemTemplate>
@@ -33,12 +35,14 @@
                                     <h5 class="precio"><span><%=moneda.SimboloMoneda%></span><span><%#Eval("PrecioUnitario")%></span></h5>
                                 </div>
                                 <div class="item-toolbar">
-                                    <input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
+                                    <%--<input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />--%>
+                                    <input type="button" value= "<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                     <%--<input type="button" value="Mas" data-producto='<%#Eval("IdProducto")%>' clientidmode="static" class="btn btn-info" runat="server" onclick="btnInfoClick" />--%>
                                     <%if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                         {%>
                                     <%--<asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />--%>
-                                    <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
+                                    <%--<input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />--%>
+                                     <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)"/>
                                     <%}%>
                                 </div>
                             </div>
@@ -55,15 +59,25 @@
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" style="color: #29ab29;">Felicitaciones!</h3>
+                        <%--<h3 class="modal-title" style="color: #29ab29;">Felicitaciones!</h3>--%>
+                        <h3 class="modal-title" style="color: #29ab29;">
+                            <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Felicitaciones %>"></asp:Label></h3>
                     </div>
                     <div class="modal-body text-center">
-                        <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
+                        <%--<h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>--%>
+                        <h4 id="mdl_pedido_titulo" style="color: black;">
+                            <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, ElProducto %>"></asp:Label>
+                            <span id="prod"></span>
+                            <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, ProductoCorrectamenteAgregadoAlCarrito %>"></asp:Label></h4>
                     </div>
                     <div class="modal-footer">
                         <div class="text-center">
-                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>
-                            <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
+                            <%--<button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>--%>
+                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">
+                                <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, IrAPedidos %>"></asp:Label></button>
+                            <%--<button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>--%>
+                            <asp:Button ID="Button1" runat="server" Text="<%$Resources:Global, SeguirComprando %>" class="btn" Style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal" />
+
                         </div>
                     </div>
                 </div>

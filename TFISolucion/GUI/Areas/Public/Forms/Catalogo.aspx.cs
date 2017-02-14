@@ -10,7 +10,7 @@ using TFI.Entidades;
 
 namespace TFI.GUI
 {
-    public partial class Catalogo : System.Web.UI.Page
+    public partial class Catalogo : BasePage
     {
         private ProductoCore _manager;
         public static ProductoEntidad producto;

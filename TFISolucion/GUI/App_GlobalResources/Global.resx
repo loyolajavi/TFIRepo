@@ -120,23 +120,44 @@
   <data name="Apellido" xml:space="preserve">
     <value>Apellido</value>
   </data>
+  <data name="ApellidoVacio" xml:space="preserve">
+    <value>Ingrese un apellido</value>
+  </data>
   <data name="Asunto" xml:space="preserve">
     <value>Asunto</value>
   </data>
   <data name="Buscar" xml:space="preserve">
     <value>Buscar</value>
   </data>
+  <data name="Calle" xml:space="preserve">
+    <value>Calle</value>
+  </data>
   <data name="Cantidad" xml:space="preserve">
     <value>Cantidad</value>
+  </data>
+  <data name="CarritoVacio" xml:space="preserve">
+    <value>Carrito vacio</value>
   </data>
   <data name="Catalogo" xml:space="preserve">
     <value>Catálogo</value>
   </data>
+  <data name="Categorias" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
   <data name="Clave" xml:space="preserve">
     <value>Clave</value>
   </data>
+  <data name="ClaveRepetida" xml:space="preserve">
+    <value>Repetir Contraseña</value>
+  </data>
+  <data name="Clientes" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
   <data name="Comprar" xml:space="preserve">
     <value>Comprar</value>
+  </data>
+  <data name="CondicionFiscal" xml:space="preserve">
+    <value>Condicion Fiscal</value>
   </data>
   <data name="ConfiirmarPedido" xml:space="preserve">
     <value>Confirmar Pedido</value>
@@ -144,17 +165,62 @@
   <data name="Contacto" xml:space="preserve">
     <value>Contacto</value>
   </data>
+  <data name="ContrasenasDistintas" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="ContrasenaSegura" xml:space="preserve">
+    <value>Debe ingresar al menos 8 carácteres(Mayúscula, Letras y Números)</value>
+  </data>
   <data name="Correo" xml:space="preserve">
     <value>Correo</value>
   </data>
+  <data name="CorreoVacio" xml:space="preserve">
+    <value>Ingrese un correo</value>
+  </data>
+  <data name="DatosCuenta" xml:space="preserve">
+    <value>Datos de la Cuenta</value>
+  </data>
+  <data name="DatosPersonales" xml:space="preserve">
+    <value>Datos Personales</value>
+  </data>
+  <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
+    <value>Este campo contiene demasiados caracteres.</value>
+  </data>
+  <data name="Departamento" xml:space="preserve">
+    <value>Departamento</value>
+  </data>
   <data name="Descripcion" xml:space="preserve">
     <value>Descripcion</value>
+  </data>
+  <data name="Desear" xml:space="preserve">
+    <value>Desear</value>
   </data>
   <data name="Deseos" xml:space="preserve">
     <value>Deseos</value>
   </data>
   <data name="Destacados" xml:space="preserve">
     <value>Destacados de la semana</value>
+  </data>
+  <data name="Direccion" xml:space="preserve">
+    <value>Direccion</value>
+  </data>
+  <data name="Disponibilidad" xml:space="preserve">
+    <value>Disponibilidad</value>
+  </data>
+  <data name="DNICUITVacio" xml:space="preserve">
+    <value>Ingrese un DNI o CUIT</value>
+  </data>
+  <data name="DNIOCUIT" xml:space="preserve">
+    <value>DNI o CUIT</value>
+  </data>
+  <data name="EjemploCorreo" xml:space="preserve">
+    <value>ejemplo@gmail.com</value>
+  </data>
+  <data name="EjemploDepto" xml:space="preserve">
+    <value>Ej: Departamento "A"</value>
+  </data>
+  <data name="EjemploPiso" xml:space="preserve">
+    <value>Ej: Primer piso</value>
   </data>
   <data name="ElProducto" xml:space="preserve">
     <value>El producto</value>
@@ -186,6 +252,33 @@
   <data name="Ingresar" xml:space="preserve">
     <value>Ingresar</value>
   </data>
+  <data name="IngresarCalle" xml:space="preserve">
+    <value>Ingresar la calle</value>
+  </data>
+  <data name="IngresarContrasena" xml:space="preserve">
+    <value>Ingrese la contraseña</value>
+  </data>
+  <data name="IngresarLocalidad" xml:space="preserve">
+    <value>Ingrese la localidad</value>
+  </data>
+  <data name="IngresarNumeroCalle" xml:space="preserve">
+    <value>Ingresar el número de la calle</value>
+  </data>
+  <data name="IngresarSoloLetras" xml:space="preserve">
+    <value>Ingrese solo letras</value>
+  </data>
+  <data name="IngresarSoloNumeros" xml:space="preserve">
+    <value>Ingrese solo números</value>
+  </data>
+  <data name="IngresarUsuario" xml:space="preserve">
+    <value>Ingrese nombre de usuario</value>
+  </data>
+  <data name="IngresoMax30" xml:space="preserve">
+    <value>Máximo de 30 caracteres</value>
+  </data>
+  <data name="IngresoSolo8y12" xml:space="preserve">
+    <value>Ingrese entre 8 y 12 números</value>
+  </data>
   <data name="Inicio" xml:space="preserve">
     <value>Inicio</value>
   </data>
@@ -195,32 +288,77 @@
   <data name="Limpiar" xml:space="preserve">
     <value>Limpiar</value>
   </data>
+  <data name="ListaDeseos" xml:space="preserve">
+    <value>Lista de Deseos</value>
+  </data>
+  <data name="Localidad" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
   <data name="MapaDelSitio" xml:space="preserve">
     <value>Mapa Del Sitio</value>
   </data>
   <data name="MasVendidos" xml:space="preserve">
     <value>Productos mas vendidos</value>
   </data>
+  <data name="MejoresClientes" xml:space="preserve">
+    <value>Los mejores clientes que nos eligieron</value>
+  </data>
   <data name="Mensaje" xml:space="preserve">
     <value>Mensaje</value>
+  </data>
+  <data name="MiCuenta" xml:space="preserve">
+    <value>Mi Cuenta</value>
+  </data>
+  <data name="Mision" xml:space="preserve">
+    <value>Mision</value>
   </data>
   <data name="Nombre" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="NombreUsuario" xml:space="preserve">
+    <value>Nombre Usuario</value>
+  </data>
+  <data name="NombreVacio" xml:space="preserve">
+    <value>Ingrese un nombre</value>
+  </data>
   <data name="NuestrosClientes" xml:space="preserve">
     <value>Nuestros Clientes</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>Numero</value>
   </data>
   <data name="Pedido" xml:space="preserve">
     <value>Pedido</value>
   </data>
+  <data name="Piso" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="PrecioUnitario" xml:space="preserve">
+    <value>Precio Unitario</value>
+  </data>
+  <data name="Producto" xml:space="preserve">
+    <value>Producto</value>
+  </data>
   <data name="ProductoCorrectamenteAgregadoAlCarrito" xml:space="preserve">
     <value>  fue correctamente agregado en tu carrito!</value>
+  </data>
+  <data name="ProductosEnSuPedido" xml:space="preserve">
+    <value>Productos en su pedido</value>
+  </data>
+  <data name="Provincia" xml:space="preserve">
+    <value>Provincia</value>
   </data>
   <data name="QuienesSomos" xml:space="preserve">
     <value>Quienes Somos</value>
   </data>
   <data name="Registrarse" xml:space="preserve">
     <value>Registrarse</value>
+  </data>
+  <data name="RegistroCliente" xml:space="preserve">
+    <value>Registro Cliente</value>
+  </data>
+  <data name="RepetirContrasena" xml:space="preserve">
+    <value>Repita la contraseña</value>
   </data>
   <data name="Resumen" xml:space="preserve">
     <value>Resumen</value>
@@ -234,7 +372,16 @@
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="TotalPorProducto" xml:space="preserve">
+    <value>Total por Producto</value>
+  </data>
   <data name="Usuario" xml:space="preserve">
     <value>Usuario</value>
+  </data>
+  <data name="UsuarioCreadoCorrectamente" xml:space="preserve">
+    <value>El usuario se creó correctamente</value>
+  </data>
+  <data name="Vision" xml:space="preserve">
+    <value>Vision</value>
   </data>
 </root>

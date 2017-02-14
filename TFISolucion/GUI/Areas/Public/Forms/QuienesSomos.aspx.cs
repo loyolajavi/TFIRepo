@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace TFI.GUI
 {
-    public partial class QuienesSomos : System.Web.UI.Page
+    public partial class QuienesSomos : BasePage
     {
 
 

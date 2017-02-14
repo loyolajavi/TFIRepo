@@ -22,18 +22,18 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <h2 >Quiénes Somos</h2>
+                <h2 ><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></h2>
                 <p id="quienessomos" runat="server"></p>
             </div>
             <div class="col-sm-4">
-                <h2>Contacto</h2>
+                <h2><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></h2>
                 <address>
                     <strong id="otronombreempresa"></strong>
                 </address>
                 <address>
-                    <abbr title="Teléfono">Tel:</abbr> <p id="TelEmpresa" runat="server"></p>
+                    <abbr title="Teléfono"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Telefono %>"></asp:Label>:</abbr> <p id="TelEmpresa" runat="server"></p>
                     <br>
-                    <abbr title="Email">Email:</abbr> <a href="mailto:#" id="MailEmpresa" runat="server"></a>
+                    <abbr title="Email"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Correo %>"></asp:Label>:</abbr> <a href="mailto:#" id="MailEmpresa" runat="server"></a>
                 </address>
             </div>
         </div>
@@ -43,14 +43,14 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <h2>Misión</h2>
+                <h2><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Mision %>"></asp:Label></h2>
                 <p id="mision" runat="server"></p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <h2>Visión</h2>
+                <h2><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Vision %>"></asp:Label></h2>
                 <p id="vision" runat="server"></p>
                 <p></p>
             </div>

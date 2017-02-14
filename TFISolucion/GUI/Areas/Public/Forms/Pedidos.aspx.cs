@@ -12,7 +12,7 @@ using TFI.GUI.Helpers.DTO;
 namespace TFI.GUI.Areas.Public.Forms
 //namespace TFI.GUI
 {
-    public partial class Pedidos : System.Web.UI.Page
+    public partial class Pedidos : BasePage
     {
         public List<ProductoEntidad> productos;
         public List<PedidoLista> lista;

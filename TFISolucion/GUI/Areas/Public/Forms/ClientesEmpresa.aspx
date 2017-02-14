@@ -7,9 +7,9 @@
         <!-- Introduction Row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Nuestros Clientes
+                <h1 class="page-header"><asp:Label ID="lblCustomers" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label>
                    
-                    <small>Las Empresas que mas compraron</small>
+                    <small><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, MejoresClientes %>"></asp:Label></small>
                 </h1>
 
             </div>

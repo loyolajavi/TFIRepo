@@ -16,7 +16,7 @@
 
     <div>
 
-        <h1>Productos en su pedido</h1>
+        <h1><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ProductosEnSuPedido %>"></asp:Label></h1>
 
 
         <hr />
@@ -27,13 +27,13 @@
             <table class="table-bordered col-md-12" id="tlbPedido">
                 <thead>
                     <tr>
-                        <th class="text-center" id="txtProducto">Producto</th>
-                        <th class="text-center" id="txtDescripcion">Descripción</th>
-                        <th class="text-center" id="txtDiponibilidad">Disponibilidad</th>
-                        <th class="text-center" id="txtPrecioUnitario">Precio Unitario</th>
-                        <th class="text-center" id="txtCantidad">Cant.</th>
+                        <th class="text-center" id="txtProducto"><asp:Label ID="lblApellido" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, Producto %>"></asp:Label></th>
+                        <th class="text-center" id="txtDescripcion"><asp:Label ID="Label1" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, Descripcion %>"></asp:Label></th>
+                        <th class="text-center" id="txtDiponibilidad"><asp:Label ID="Label2" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, Disponibilidad %>"></asp:Label></th>
+                        <th class="text-center" id="txtPrecioUnitario"><asp:Label ID="Label3" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, PrecioUnitario %>"></asp:Label></th>
+                        <th class="text-center" id="txtCantidad"><asp:Label ID="Label5" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, Cantidad %>"></asp:Label>.</th>
                         <th></th>
-                        <th class="text-right" id="txtTotal">Total por Producto</th>
+                        <th class="text-right" id="txtTotal"><asp:Label ID="Label4" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, TotalPorProducto %>"></asp:Label></th>
                     </tr>
                 </thead>
 
@@ -93,14 +93,14 @@
             </table>
 
             <div class="pasos">
-                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx">Datos Personales</a>
+                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx"><asp:Label ID="lblDatosPersonales" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></a>
             </div>
 
             <%
                 } %>
         </div>
 
-        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden">Carrito Vacio</div>
+        <div class="col-lg-12 message" id="notificacionCarritoVacio" runat="server" hidden="hidden"><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, CarritoVacio %>"></asp:Label></div>
     </div>
     <asp:HiddenField ID="SumaResta" ClientIDMode="Static" runat="server" Value="0" />
 </asp:Content>

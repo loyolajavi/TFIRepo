@@ -9,7 +9,7 @@ using TFI.Entidades;
 
 namespace TFI.GUI
 {
-    public partial class ClientesEmpresa : System.Web.UI.Page
+    public partial class ClientesEmpresa : BasePage
     {
         // SOLO FUNCIONA BUSCAR PRODUCTOS PORQUE ESTA HARDCODEADO EL CUIT EN EL WEB CONFIG
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();

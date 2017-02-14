@@ -18,16 +18,17 @@
             </ol>
             <div class="carousel-inner">
                 <% if (listaRecursos != null)
-                   {
-                       bool primero = true;
-                       foreach (var r in listaRecursos)
-                       {%>
+                    {
+                        bool primero = true;
+                        foreach (var r in listaRecursos)
+                        {%>
                         <div class="item <%if (primero)
-                                           {%> active <% } %>">
+                            {%> active <% } %>">
                             <img class="slide-image" src="/Content/Images/Recursos/<%=r %>" alt="CARR" style="max-height:380px;" />
                         </div>
-                        <%primero = false;}
-                  } %>
+                        <%primero = false;
+                    }
+                } %>
             </div>
 
             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -67,8 +68,8 @@
                                             <div class="item-toolbar">
                                                 <input type="button" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                                 <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
-                                                  {%>
-                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
+                                                    {%>
+                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>"  onclick="onBtnAddClick(this)" />
                                                 <%}%>
                                             </div>
                                         </div>
@@ -95,8 +96,9 @@
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                 <input type="button" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                                 <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
-                                                  {%>
-                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />
+                                                    {%>
+                                                <%--<input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />--%>
+                                                <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)"/>
                                                 <%}%>
                                             </div>
                                         </div>

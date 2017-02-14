@@ -120,23 +120,44 @@
   <data name="Apellido" xml:space="preserve">
     <value>Surname</value>
   </data>
+  <data name="ApellidoVacio" xml:space="preserve">
+    <value>Pleasse add a surname.</value>
+  </data>
   <data name="Asunto" xml:space="preserve">
     <value>Subject</value>
   </data>
   <data name="Buscar" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Calle" xml:space="preserve">
+    <value>Street</value>
+  </data>
   <data name="Cantidad" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="CarritoVacio" xml:space="preserve">
+    <value>Cart's empty</value>
   </data>
   <data name="Catalogo" xml:space="preserve">
     <value>Catalog</value>
   </data>
+  <data name="Categorias" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="Clave" xml:space="preserve">
     <value>Key</value>
   </data>
+  <data name="ClaveRepetida" xml:space="preserve">
+    <value>Repeated Key</value>
+  </data>
+  <data name="Clientes" xml:space="preserve">
+    <value>Customers</value>
+  </data>
   <data name="Comprar" xml:space="preserve">
     <value>Buy</value>
+  </data>
+  <data name="CondicionFiscal" xml:space="preserve">
+    <value>Fiscal Condition</value>
   </data>
   <data name="ConfiirmarPedido" xml:space="preserve">
     <value>Paid Confirmation</value>
@@ -144,17 +165,62 @@
   <data name="Contacto" xml:space="preserve">
     <value>Contact us</value>
   </data>
+  <data name="ContrasenasDistintas" xml:space="preserve">
+    <value>Password are not identical. Try again.</value>
+  </data>
+  <data name="ContrasenaSegura" xml:space="preserve">
+    <value>Pleasse add a password with almost 8 characters(Uppers, Chars and Numbers)</value>
+  </data>
   <data name="Correo" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="CorreoVacio" xml:space="preserve">
+    <value>Pleasse add a email.</value>
+  </data>
+  <data name="DatosCuenta" xml:space="preserve">
+    <value>Account Data</value>
+  </data>
+  <data name="DatosPersonales" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
+    <value>This field contains too many characters. Pleasse check it.</value>
+  </data>
+  <data name="Departamento" xml:space="preserve">
+    <value>Apartment</value>
+  </data>
   <data name="Descripcion" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Desear" xml:space="preserve">
+    <value>Wish</value>
   </data>
   <data name="Deseos" xml:space="preserve">
     <value>Wishes</value>
   </data>
   <data name="Destacados" xml:space="preserve">
     <value>Highlights of the week</value>
+  </data>
+  <data name="Direccion" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Disponibilidad" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="DNICUITVacio" xml:space="preserve">
+    <value>Pleasse add a DNI or CUIT.</value>
+  </data>
+  <data name="DNIOCUIT" xml:space="preserve">
+    <value>DNI or CUIT</value>
+  </data>
+  <data name="EjemploCorreo" xml:space="preserve">
+    <value>Example@gmail.com</value>
+  </data>
+  <data name="EjemploDepto" xml:space="preserve">
+    <value>exp. Apartment "A".</value>
+  </data>
+  <data name="EjemploPiso" xml:space="preserve">
+    <value>exp. First Floor</value>
   </data>
   <data name="ElProducto" xml:space="preserve">
     <value>The item</value>
@@ -186,6 +252,33 @@
   <data name="Ingresar" xml:space="preserve">
     <value>Log In</value>
   </data>
+  <data name="IngresarCalle" xml:space="preserve">
+    <value>Pleasse add a street</value>
+  </data>
+  <data name="IngresarContrasena" xml:space="preserve">
+    <value>Pleasse add the password.</value>
+  </data>
+  <data name="IngresarLocalidad" xml:space="preserve">
+    <value>Pleasse add a Town.</value>
+  </data>
+  <data name="IngresarNumeroCalle" xml:space="preserve">
+    <value>Pleasse add a street's number.</value>
+  </data>
+  <data name="IngresarSoloLetras" xml:space="preserve">
+    <value>Pleasse add only letters.</value>
+  </data>
+  <data name="IngresarSoloNumeros" xml:space="preserve">
+    <value>Pleasse add only numbers.</value>
+  </data>
+  <data name="IngresarUsuario" xml:space="preserve">
+    <value>Pleasse add a user's name.</value>
+  </data>
+  <data name="IngresoMax30" xml:space="preserve">
+    <value>Maximum of 30 characters</value>
+  </data>
+  <data name="IngresoSolo8y12" xml:space="preserve">
+    <value>Pleasse add between 8 and 12 numbers.</value>
+  </data>
   <data name="Inicio" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -195,26 +288,65 @@
   <data name="Limpiar" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ListaDeseos" xml:space="preserve">
+    <value>Wishes List</value>
+  </data>
+  <data name="Localidad" xml:space="preserve">
+    <value>Location</value>
+  </data>
   <data name="MapaDelSitio" xml:space="preserve">
     <value>Site´s map</value>
   </data>
   <data name="MasVendidos" xml:space="preserve">
     <value>Producst more sold</value>
   </data>
+  <data name="MejoresClientes" xml:space="preserve">
+    <value>They are the best Companies who choise us</value>
+  </data>
   <data name="Mensaje" xml:space="preserve">
     <value>Message</value>
+  </data>
+  <data name="MiCuenta" xml:space="preserve">
+    <value>My acount</value>
+  </data>
+  <data name="Mision" xml:space="preserve">
+    <value>Mission</value>
   </data>
   <data name="Nombre" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NombreUsuario" xml:space="preserve">
+    <value>User's Name</value>
+  </data>
+  <data name="NombreVacio" xml:space="preserve">
+    <value>Pleasse add a name.</value>
+  </data>
   <data name="NuestrosClientes" xml:space="preserve">
     <value>Customers</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>Number</value>
   </data>
   <data name="Pedido" xml:space="preserve">
     <value>Cart</value>
   </data>
+  <data name="Piso" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="PrecioUnitario" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Producto" xml:space="preserve">
+    <value>Item</value>
+  </data>
   <data name="ProductoCorrectamenteAgregadoAlCarrito" xml:space="preserve">
     <value>  is added to the shopping cart.</value>
+  </data>
+  <data name="ProductosEnSuPedido" xml:space="preserve">
+    <value>Items ordered</value>
+  </data>
+  <data name="Provincia" xml:space="preserve">
+    <value>State</value>
   </data>
   <data name="QuienesSomos" xml:space="preserve">
     <value>About us</value>
@@ -222,11 +354,20 @@
   <data name="Registrarse" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="RegistroCliente" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RepetirContrasena" xml:space="preserve">
+    <value>Pleasse repeat the password.</value>
+  </data>
   <data name="Resumen" xml:space="preserve">
     <value>Resume</value>
   </data>
   <data name="SeguirComprando" xml:space="preserve">
     <value>Continue Shopping</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="Telefono" xml:space="preserve">
     <value>Telephone</value>
@@ -234,7 +375,16 @@
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="TotalPorProducto" xml:space="preserve">
+    <value>Total By Item</value>
+  </data>
   <data name="Usuario" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="UsuarioCreadoCorrectamente" xml:space="preserve">
+    <value>The user has been added on the database</value>
+  </data>
+  <data name="Vision" xml:space="preserve">
+    <value>Overview</value>
   </data>
 </root>

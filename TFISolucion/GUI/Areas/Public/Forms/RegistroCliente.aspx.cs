@@ -12,7 +12,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
-    public partial class RegistroCliente : System.Web.UI.Page
+    public partial class RegistroCliente : BasePage
     {
 
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();

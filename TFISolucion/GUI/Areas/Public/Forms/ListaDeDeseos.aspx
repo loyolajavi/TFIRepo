@@ -22,7 +22,7 @@
 
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
     <div class="col-lg-12">
-        <h1 class="page-header">Lista de deseos <small>Mi Cuenta</small>
+        <h1 class="page-header"><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, ListaDeseos %>"></asp:Label><small><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, MiCuenta %>"></asp:Label></small>
         </h1>
     </div>
 
@@ -33,9 +33,9 @@
         <table class="table-bordered col-md-12" id="tlbPedido">
             <thead>
                 <tr>
-                    <th class="text-center" id="txtProducto">Producto</th>
-                    <th class="text-center" id="txtDescripcion">Descripción</th>
-                    <th class="text-center" id="txtPrecioUnitario">Precio Unitario</th>
+                    <th class="text-center" id="txtProducto"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Producto %>"></asp:Label></th>
+                    <th class="text-center" id="txtDescripcion"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></th>
+                    <th class="text-center" id="txtPrecioUnitario"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, PrecioUnitario %>"></asp:Label></th>
                     <th></th>
                 </tr>
             </thead>
@@ -59,7 +59,8 @@
                                 </p>
                             </td>
                             <td class="text-center">
-                                <asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="Comprar" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />
+                                <%--<asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="Comprar" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />--%>
+                                  <asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="<%$Resources:Global, Comprar %>" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />
                             </td>
                         </tr>
 
@@ -78,10 +79,10 @@
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" style="color: #29ab29;">Felicitaciones!</h3>
+                          <h3 class="modal-title" style="color: #29ab29;"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Felicitaciones %>"></asp:Label></h3>
                     </div>
                     <div class="modal-body text-center">
-                        <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
+                         <h4 id="mdl_pedido_titulo" style="color: black;"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ElProducto %>"></asp:Label> <span id="prod"></span><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, ProductoCorrectamenteAgregadoAlCarrito %>"></asp:Label></h4>
                     </div>
                     <div class="modal-footer">
                         <%--<div class="text-center">
