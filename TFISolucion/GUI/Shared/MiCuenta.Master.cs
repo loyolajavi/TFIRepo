@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -13,12 +14,19 @@ namespace TFI.GUI.Shared
         private UsuarioCore _manager;
         private HttpContext Current = HttpContext.Current;
         private UsuarioEntidad usuario = new UsuarioEntidad();
-
+        private LenguajeEntidad idioma;
         public MiCuenta()
         {
+            idioma = new LenguajeEntidad();
             _manager = new UsuarioCore();
         }
+        public string obtenerIdiomaCombo()
+        {
+            var val = (ddlLanguages.SelectedItem.Value);
+            var val2 = ddlLanguages.SelectedValue;
+            return (val2);
 
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
@@ -34,6 +42,17 @@ namespace TFI.GUI.Shared
             {
                 LiDeseos.Visible = false;
                 Response.Redirect("Home.aspx");
+            }
+            if (!this.IsPostBack)
+            {
+                if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
+                {
+                    ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                }
+                if (idioma == null)
+                {
+                    Session["Idioma"] = obtenerIdiomaCombo();
+                }
             }
         }
 

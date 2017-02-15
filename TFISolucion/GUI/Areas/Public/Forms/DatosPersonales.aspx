@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" CodeBehind="DatosPersonales.aspx.cs" EnableEventValidation="false" Inherits="TFI.GUI.DatosPersonales" %>
 
+<%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -8,40 +9,44 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
 
     <div class="col-lg-12">
-        <h1 class="page-header">Datos Personales <small>Mi Cuenta</small></h1>
+        <h1 class="page-header">
+            <asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label><small><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, MiCuenta %>"></asp:Label></small></h1>
     </div>
 
     <div id="panelDatosPersonales" class="col-lg-12">
-        <h2>Datos de cuenta</h2>
+        <h2>
+            <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, DatosCuenta %>"></asp:Label></h2>
 
         <div class=" col-lg-6 form-group">
-            <label for="usuario">Usuario</label>
+            <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Usuario %>"></asp:Label>
             <input runat="server" id="usuario" class="form-control" type="text" disabled />
         </div>
 
         <div class="col-lg-6 form-group">
-            <label for="clave">Contraseña</label>
+            <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label>
             <input runat="server" id="clave" class="form-control" type="text" disabled />
         </div>
 
         <div class="text-center">
-            <a id="btnLogin" class="btn btn-primary">Modificar Contraseña</a>
+            <a id="btnLogin" class="btn btn-primary">
+                <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></a>
         </div>
 
         <hr />
     </div>
 
     <div id="dpersonales" class="col-lg-12">
-        <h2>Datos Personales</h2>
+        <h2>
+            <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></h2>
 
         <div class="text-center">
             <div class="form-group">
                 <asp:GridView ID="grilladedatospersonales" CssClass="table" runat="server" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" ControlStyle-CssClass="btn btn-warning" />
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                        <asp:BoundField DataField="Email" HeaderText="Email" />
+                        <asp:BoundField DataField="Nombre" HeaderText="<%$Resources:Global, Nombre %>" />
+                        <asp:BoundField DataField="Apellido" HeaderText="<%$Resources:Global, Apellido %>" />
+                        <asp:BoundField DataField="Email" HeaderText="<%$Resources:Global, Correo %>" />
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -67,7 +72,7 @@
                 <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
-                        <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                        <asp:BoundField DataField="Telefono" HeaderText="<%$Resources:Global, Telefono %>" />
 
                         <%-- <asp:BoundField DataField="Tipo" HeaderText="Tipo" />--%>
                         <asp:TemplateField HeaderText="Tipo">
@@ -92,7 +97,8 @@
 
                 <%-- TODO: AGREGAR TELEFONO --%>
 
-                <a href="#mdlAgregarTelefono" class="btn btn-primary" data-toggle="modal">Agregar Teléfono</a>
+                <a href="#mdlAgregarTelefono" class="btn btn-primary" data-toggle="modal">
+                    <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></a>
             </div>
         </div>
         <hr />
@@ -102,7 +108,8 @@
     <%-- FACTURACION --%>
     <div id="ddireccionfacturacion" class="col-lg-12">
 
-        <h2>Direcciones de Facturación</h2>
+        <h2>
+            <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, DireccionDeFacturacion %>"></asp:Label></h2>
 
         <div class="text-center">
 
@@ -112,18 +119,18 @@
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
                         <asp:CommandField ShowDeleteButton="True" />
-                        <asp:BoundField DataField="Calle" HeaderText="Calle" />
-                        <asp:BoundField DataField="Numero" HeaderText="Numero" />
-                        <asp:BoundField DataField="Piso" HeaderText="Piso" />
-                        <asp:BoundField DataField="Departamento" HeaderText="Departamento" />
-                        <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                        <asp:BoundField DataField="IdDireccion" HeaderText="IdDireccion" />
-                        <asp:TemplateField HeaderText="Provincia">
+                        <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
+                        <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
+                        <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
+                        <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
+                        <asp:BoundField DataField="Localidad" HeaderText="<%$Resources:Global, Localidad %>" />
+                        <asp:BoundField DataField="IdDireccion" HeaderText="<%$Resources:Global, Direccion %>" />
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
                             <ItemTemplate>
                                 <asp:DropDownList ID="ddlProvincia" runat="server"></asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="Predeterminada" />
+                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -140,7 +147,8 @@
             <br />
 
             <div class="text-center">
-                <a href="#modalDireccionFacturacion" class="btn btn-primary" data-toggle="modal">Agregar Direccion</a>
+                <a href="#modalDireccionFacturacion" class="btn btn-primary" data-toggle="modal">
+                    <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, AgregarDireccion %>"></asp:Label></a>
             </div>
         </div>
 
@@ -156,7 +164,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Agregar direccion de facturación</h2>
+                    <h2>
+                        <asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, AgregarDireccionDeFacturacion %>"></asp:Label></h2>
                     <div id="notificationdireccion">
                     </div>
                 </div>
@@ -169,34 +178,34 @@
 
                             <form role="form">
                                 <div class="form-group">
-                                    <label for="calle">Calle</label>
+                                    <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
                                     <input type="text" class="form-control" id="calle" placeholder="Ingrese calle de la direccion" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero">Numero</label>
+                                    <asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
                                     <input type="number" class="form-control" id="numero" placeholder="Ingrese el numero de la direccion" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="piso">Piso</label>
+                                    <asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
                                     <input type="text" class="form-control" id="piso" runat="server" placeholder="Ingrese el piso" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="departamento">Departamento</label>
+                                    <asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
                                     <input type="text" class="form-control" id="departamento" runat="server" placeholder="Ingrese el departamento" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="localidad">Localidad</label>
+                                    <asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
                                     <input type="text" class="form-control" id="localidad" runat="server" placeholder="Ingrese la localidad" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="provincia">Provincia</label>
+                                    <asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
                                     <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                    <asp:Button runat="server" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="Guardar" OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
+                    <asp:Button runat="server" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
                 </div>
             </div>
         </div>
@@ -205,7 +214,8 @@
     <%-- ENVIO --%>
     <div id="ddirecciondeenvio" class="col-lg-12">
 
-        <h2>Direcciones de Envio</h2>
+        <h2>
+            <asp:Label ID="Label17" runat="server" Text="<%$Resources:Global, DireccionesDeEnvio %>"></asp:Label></h2>
 
         <div class="text-center">
             <div class="form-group">
@@ -214,18 +224,18 @@
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
                         <asp:CommandField ShowDeleteButton="True" />
-                        <asp:BoundField DataField="Calle" HeaderText="Calle" />
-                        <asp:BoundField DataField="Numero" HeaderText="Numero" />
-                        <asp:BoundField DataField="Piso" HeaderText="Piso" />
-                        <asp:BoundField DataField="Departamento" HeaderText="Departamento" />
-                        <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                        <asp:BoundField DataField="IdDireccion" HeaderText="IdDireccion" />
-                        <asp:TemplateField HeaderText="Provincia">
+                        <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
+                        <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
+                        <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
+                        <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
+                        <asp:BoundField DataField="Localidad" HeaderText="<%$Resources:Global, Localidad %>" />
+                        <asp:BoundField DataField="IdDireccion" HeaderText="<%$Resources:Global, Direccion %>" />
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
                             <ItemTemplate>
                                 <asp:DropDownList ID="ddlProvincia" runat="server"></asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="Predeterminada" />
+                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -243,7 +253,8 @@
             <br />
 
             <div class=" text-center">
-                <a href="#modalDireccionenvio" class="btn btn-primary" data-toggle="modal">Agregar Direccion</a>
+                <a href="#modalDireccionenvio" class="btn btn-primary" data-toggle="modal">
+                    <asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, AgregarDireccion %>"></asp:Label></a>
             </div>
         </div>
 
@@ -259,7 +270,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Agregar direccion de envio</h2>
+                    <h2>
+                        <asp:Label ID="Label19" runat="server" Text="<%$Resources:Global, AgregarDireccionDeEnvio %>"></asp:Label></h2>
                     <div id="notificationdireccionenvio">
                     </div>
                 </div>
@@ -271,34 +283,34 @@
                         <ContentTemplate>
                             <form role="form">
                                 <div class="form-group">
-                                    <label for="calleenvio">Calle</label>
+                                    <asp:Label ID="Label20" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
                                     <input type="text" class="form-control" id="calleenvio" runat="server" placeholder="Ingrese la calle" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="numeroenvio">Numero</label>
+                                    <asp:Label ID="Label21" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
                                     <input type="number" class="form-control" id="numeroenvio" placeholder="Ingrese el numero de la direccion" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="pisoenvio">Piso</label>
+                                    <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
                                     <input type="text" class="form-control" id="pisoenvio" runat="server" placeholder="Ingrese el piso" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="departamentoenvio">Departamento</label>
+                                    <asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
                                     <input type="text" class="form-control" id="departamentoenvio" runat="server" placeholder="Ingrese el departamento" clientidmode="static" />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="localidadenvio">Localidad</label>
+                                    <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
                                     <input type="text" class="form-control" id="localidadenvio" runat="server" placeholder="Ingrese la localidad" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlProvinciaEnvio">Provincia</label>
+                                    <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
                                     <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnGrabarDireccionDeEnvio" runat="server" ClientIDMode="static" Text="Guardar" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarEnvio(this)" OnClick="GrabarDireccionDeEnvio_Click" />
+                    <asp:Button ID="btnGrabarDireccionDeEnvio" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarEnvio(this)" OnClick="GrabarDireccionDeEnvio_Click" />
                 </div>
             </div>
         </div>
@@ -311,7 +323,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" id="btnCerrarModal" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Cambiar Contraseña</h2>
+                    <h2> <asp:Label ID="Label26" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></h2>
                     <div id="notification"></div>
                 </div>
                 <div class="modal-body">
@@ -323,17 +335,17 @@
                             <form role="form" id="formPass">
 
                                 <div class="form-group">
-                                    <label for="passanterior">Contraseña anterior</label>
+                                   <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, ContrasenaAnterior %>"></asp:Label>
                                     <input type="password" class="form-control" id="passanterior" clientidmode="static" placeholder="Ingrese la contraseña anterior" runat="server" maxlength="20" required />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="passnueva">Nueva Contraseña</label>
+                                   <asp:Label ID="Label28" runat="server" Text="<%$Resources:Global, NuevaContrasena %>"></asp:Label>
                                     <input type="password" class="form-control" clientidmode="static" id="passnueva" placeholder="Ingrese la nueva contraseña" runat="server" maxlength="20" />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="passnuevarepetida">Repita Nueva Contraseña</label>
+                                    <asp:Label ID="Label29" runat="server" Text="<%$Resources:Global, RepitaNuevaContrasena %>"></asp:Label>
                                     <input type="password" class="form-control" id="passnuevarepetida" clientidmode="static" runat="server" placeholder="Repita la nueva contraseña" maxlength="20" />
                                 </div>
 
@@ -355,7 +367,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Agregar Telefono</h2>
+                    <h2>  <asp:Label ID="Label30" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></h2>
                     <div id="notificationTelefono">
                     </div>
                 </div>
@@ -367,21 +379,21 @@
                         <ContentTemplate>
                             <form role="form">
                                 <div class="form-group">
-                                    <label for="txtCodigo">Codigo Area</label>
+                                     <asp:Label ID="Label31" runat="server" Text="<%$Resources:Global, CodigoArea %>"></asp:Label>
                                     <input type="text" class="form-control" id="txtCodigo" runat="server" placeholder="Codigo Area" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtNumero">Numero</label>
+                                      <asp:Label ID="Label32" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
                                     <input type="text" class="form-control" id="txtNumero" runat="server" placeholder="Numero" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlTipoTel">Tipo</label>
+                                    <asp:Label ID="Label33" runat="server" Text="<%$Resources:Global, Tipo %>"></asp:Label>
                                     <asp:DropDownList ID="ddlTipoTel" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnGrabarTelefono" runat="server" ClientIDMode="static" Text="Guardar" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
+                    <asp:Button ID="btnGrabarTelefono" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
                 </div>
             </div>
         </div>

@@ -387,4 +387,67 @@
   <data name="Vision" xml:space="preserve">
     <value>Overview</value>
   </data>
+  <data name="AgregarDireccion" xml:space="preserve">
+    <value>Add Address</value>
+  </data>
+  <data name="AgregarDireccionDeEnvio" xml:space="preserve">
+    <value>Add Shipping Address</value>
+  </data>
+  <data name="AgregarDireccionDeFacturacion" xml:space="preserve">
+    <value>Add  Billing's Address</value>
+  </data>
+  <data name="AgregarTelefono" xml:space="preserve">
+    <value>Add Telephone</value>
+  </data>
+  <data name="CambiarContrasena" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="CodigoArea" xml:space="preserve">
+    <value>Area Code</value>
+  </data>
+  <data name="Contrasena" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ContrasenaAnterior" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="DatosDeTarjetas" xml:space="preserve">
+    <value>Card's Data</value>
+  </data>
+  <data name="DireccionDeFacturacion" xml:space="preserve">
+    <value>Billing Address</value>
+  </data>
+  <data name="DireccionesDeEnvio" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="DireccionesDeUsuario" xml:space="preserve">
+    <value>User's Address</value>
+  </data>
+  <data name="Guardar" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ModificarContrasena" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="NuevaContrasena" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="PoliticaDePrivacidad" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Predeterminada" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Recordarme" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="RepitaNuevaContrasena" xml:space="preserve">
+    <value>Repeat the new password</value>
+  </data>
+  <data name="Tipo" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UltimosPedidos" xml:space="preserve">
+    <value>Last Orders</value>
+  </data>
 </root>

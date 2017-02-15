@@ -384,4 +384,67 @@
   <data name="Vision" xml:space="preserve">
     <value>Vision</value>
   </data>
+  <data name="AgregarDireccion" xml:space="preserve">
+    <value>Agregar Dirección</value>
+  </data>
+  <data name="AgregarDireccionDeEnvio" xml:space="preserve">
+    <value>Agregar Direccion de Envio</value>
+  </data>
+  <data name="AgregarDireccionDeFacturacion" xml:space="preserve">
+    <value>Agregar Direccion de Facturacion</value>
+  </data>
+  <data name="AgregarTelefono" xml:space="preserve">
+    <value>Agregar Telefono</value>
+  </data>
+  <data name="CambiarContrasena" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="CodigoArea" xml:space="preserve">
+    <value>Codigo Area</value>
+  </data>
+  <data name="Contrasena" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="ContrasenaAnterior" xml:space="preserve">
+    <value>Contraseña anterior</value>
+  </data>
+  <data name="DatosDeTarjetas" xml:space="preserve">
+    <value>Datos de tarjetas</value>
+  </data>
+  <data name="DireccionDeFacturacion" xml:space="preserve">
+    <value>Direccion de Facturacion</value>
+  </data>
+  <data name="DireccionesDeEnvio" xml:space="preserve">
+    <value>Direcciones de Envio</value>
+  </data>
+  <data name="DireccionesDeUsuario" xml:space="preserve">
+    <value>Direcciones de Usuario</value>
+  </data>
+  <data name="Guardar" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ModificarContrasena" xml:space="preserve">
+    <value>Modificar Contraseña</value>
+  </data>
+  <data name="NuevaContrasena" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="PoliticaDePrivacidad" xml:space="preserve">
+    <value>Politica de Privacidad</value>
+  </data>
+  <data name="Predeterminada" xml:space="preserve">
+    <value>Predeterminada</value>
+  </data>
+  <data name="Recordarme" xml:space="preserve">
+    <value>Recordarme</value>
+  </data>
+  <data name="RepitaNuevaContrasena" xml:space="preserve">
+    <value>Repita nueva contraseña</value>
+  </data>
+  <data name="Tipo" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="UltimosPedidos" xml:space="preserve">
+    <value>Ultimos Pedidos</value>
+  </data>
 </root>
