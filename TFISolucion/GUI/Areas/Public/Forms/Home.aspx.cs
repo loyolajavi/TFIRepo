@@ -8,6 +8,8 @@ using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using System.Web.Services;
+using System.Globalization;
+using System.Threading;
 
 namespace TFI.GUI
 {
@@ -24,6 +26,7 @@ namespace TFI.GUI
         public MonedaEmpresaEntidad cotizacion;
         public MonedaEntidad moneda;
         private MonedaCore _coremoneda;
+        private LenguajeEntidad idioma;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -52,6 +55,7 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
             _coremoneda = new MonedaCore();
             cotizacion = new MonedaEmpresaEntidad();
             moneda = new MonedaEntidad();
@@ -62,6 +66,7 @@ namespace TFI.GUI
             {
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
+                idioma = (LenguajeEntidad)Session["Idioma"];
                 if (cotizacion == null)
                 {
                     cotizacion = new MonedaEmpresaEntidad();
@@ -70,7 +75,16 @@ namespace TFI.GUI
                 }
 
                 moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
-               // ProductoCore unProductoCore = new ProductoCore();
+                // ProductoCore unProductoCore = new ProductoCore();
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
+
+               
 
 
                 //**************MOSTRAR PRODUCTOS DESTACADOS**********************************************************************
@@ -92,6 +106,8 @@ namespace TFI.GUI
             else
             {
                 //Response.Redirect("LayoutBasico.aspx");
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 Session["Cotizacion"] = cotizacion;
 
@@ -108,15 +124,21 @@ namespace TFI.GUI
                 lstMasVendidos.DataBind();
 
             }
+
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
             if (lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
             //pruebo lo de idioma para que quede seteado el combo cuando vuelve a home desde cualquier otra pagina
 
-            //DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
-            //if (lblStatus != null)
-            //    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+                //  lblIdioma.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                //Thread.CurrentThread.CurrentCulture = new CultureInfo(idioma.DescripcionLenguaje);
+                //Thread.CurrentThread.CurrentUICulture = new CultureInfo(idioma.DescripcionLenguaje);
+            }
 
         }
 
@@ -206,14 +228,14 @@ namespace TFI.GUI
         public static List<String> ObtenerProductosPedido()
         {
 
-            var template = 
+            var template =
                 "<li class=\"row drop-item\">" +
                         "<div class=\"col-md-4 drop-image-div \">" +
                             "<img src=\"/Content/Images/Productos/{0}\" class=\"img-responsive drop-image\"/> " +
                         "</div> " +
                         "<div style=\"word-wrap:normal;\" class=\"col-md-8\"><h6>{1}</h6></div> " +
                 "</li>";
-            
+
             var p = new List<String>();
 
             var productos = (List<ProductoEntidad>)HttpContext.Current.Session["Productos"];

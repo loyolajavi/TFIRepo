@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using TFI.Entidades;
 
 namespace TFI.GUI
 {
@@ -11,25 +12,31 @@ namespace TFI.GUI
     {
         protected override void InitializeCulture()
         {
-            string language = "es";
 
-            //Detect User's Language.
-            if (Request.UserLanguages != null)
+            var language = (LenguajeEntidad)HttpContext.Current.Session["Idioma"];
+            //string language = "es";
+            if (language==null)
             {
-                //Set the Language.
-                language = Request.UserLanguages[0];
+                language = new LenguajeEntidad();
+                language.DescripcionLenguaje = "es";
             }
+            //Detect User's Language.
+            //if (Request.UserLanguages != null)
+            //{
+            //    //Set the Language.
+            //    //language.DescripcionLenguaje = Request.UserLanguages[0];
+            //}
 
             //Check if PostBack is caused by Language DropDownList.
             if (Request.Form["__EVENTTARGET"] != null && Request.Form["__EVENTTARGET"].Contains("ddlLanguages"))
             {
                 //Set the Language.
-                language = Request.Form[Request.Form["__EVENTTARGET"]];
+                language.DescripcionLenguaje = Request.Form[Request.Form["__EVENTTARGET"]];
             }
 
             //Set the Culture.
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(language.DescripcionLenguaje);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(language.DescripcionLenguaje);
         }
     }
 }

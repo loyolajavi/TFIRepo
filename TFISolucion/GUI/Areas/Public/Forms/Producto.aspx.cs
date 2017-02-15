@@ -15,7 +15,7 @@ namespace TFI.GUI
         public MonedaEmpresaEntidad cotizacion;
         public MonedaEntidad moneda;
         private MonedaCore _coreMoneda;
-
+        private LenguajeEntidad idioma;
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -35,6 +35,8 @@ namespace TFI.GUI
             moneda = new MonedaEntidad();
             _coreMoneda = new MonedaCore();
             _manager = new ProductoCore();
+            idioma = new LenguajeEntidad();
+            
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace TFI.GUI
             {
                 cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+                idioma = (LenguajeEntidad)Session["Idioma"];
 
 
             }
@@ -52,6 +55,8 @@ namespace TFI.GUI
             {
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 Session["Cotizacion"] = cotizacion;
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
             }
             producto = _manager.Find(IdProducto, cotizacion.IdMoneda);
             moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
@@ -61,6 +66,10 @@ namespace TFI.GUI
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
             if (lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+
+            //DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            //if (lblIdioma != null)
+            //    lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
         }
 
         private void LoadProducto(int IdProducto)

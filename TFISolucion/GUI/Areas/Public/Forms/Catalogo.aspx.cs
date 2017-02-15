@@ -24,6 +24,8 @@ namespace TFI.GUI
         private MonedaEmpresaEntidad cotizacion;
         private MonedaCore _coremoneda;
         public MonedaEntidad moneda;
+        private LenguajeEntidad idioma;
+
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -49,16 +51,25 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
 
             if (!IsPostBack)
             {
+                idioma = (LenguajeEntidad)Session["Idioma"];
                 cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
                 stringBusqueda = Page.Request.QueryString["search"];
                 stringCategoria = Page.Request.QueryString["Categoria"];
-                Session.Add("ProductosEnSesion",unosProductos);
+                Session.Add("ProductosEnSesion", unosProductos);
 
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
                 {
@@ -88,7 +99,7 @@ namespace TFI.GUI
                 {
                     if (Int32.Parse(stringCategoria) > 0 && Int32.Parse(stringCategoria) < 500)
                     {
-                        unosProductos = _manager.ProductoSelectByCategoria(Int32.Parse(stringCategoria),cotizacion.IdMoneda);
+                        unosProductos = _manager.ProductoSelectByCategoria(Int32.Parse(stringCategoria), cotizacion.IdMoneda);
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                         Session["ProductosEnSesion"] = unosProductos;
@@ -113,13 +124,15 @@ namespace TFI.GUI
 
             else
             {
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 unosProductos = (List<ProductoEntidad>)Session["ProductosEnSesion"];
                 cotizacion = _coremoneda.Select(cotizacion.IdMoneda);
                 Session["Cotizacion"] = cotizacion;
                 foreach (var item in unosProductos)
                 {
-                   var item2 = _manager.Find(item.IdProducto, cotizacion.IdMoneda);
+                    var item2 = _manager.Find(item.IdProducto, cotizacion.IdMoneda);
                     //if (cotizacion.Cotizacion >1)
                     //{
                     //    item.PrecioUnitario = item2.PrecioUnitario / cotizacion.Cotizacion;
@@ -127,7 +140,7 @@ namespace TFI.GUI
                     //else
                     //{ item.PrecioUnitario = item2.PrecioUnitario * cotizacion.Cotizacion; }
                     item.PrecioUnitario = decimal.Round(item2.PrecioUnitario, 2);
-                    
+
                 }
                 catalogo.DataSource = unosProductos;
                 catalogo.DataBind();
@@ -135,7 +148,7 @@ namespace TFI.GUI
 
 
             }
-        moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+            moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
             //CargarCategorias
 
             unasCategorias = ManagerCategoria.SeleccionarCategorias();
@@ -143,77 +156,85 @@ namespace TFI.GUI
             rptCategorias.DataBind();
             //seteo el combo de moneda cuando refresco en el elegido sino se pierde
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
-            if (lblStatus != null)
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+                //  lblIdioma.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                //Thread.CurrentThread.CurrentCulture = new CultureInfo(idioma.DescripcionLenguaje);
+                //Thread.CurrentThread.CurrentUICulture = new CultureInfo(idioma.DescripcionLenguaje);
+            }
+           if( lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
 
         }
 
-    [WebMethod]
-    public static string AgregarItem(string id)
-    {
-        var Current = HttpContext.Current;
-        var manager = new ProductoCore();
-        var cotizacionStatic = new MonedaEmpresaEntidad();
-        cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
-        producto = manager.Find(Int32.Parse(id), cotizacionStatic.IdMoneda);
-
-        var list = (List<ProductoEntidad>)Current.Session["Productos"];
-
-        if (list == null || !list.Any())
+        [WebMethod]
+        public static string AgregarItem(string id)
         {
-            Current.Session["Productos"] = new List<ProductoEntidad>();
-            ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-        }
-        else
-        {
-            if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+            var Current = HttpContext.Current;
+            var manager = new ProductoCore();
+            var cotizacionStatic = new MonedaEmpresaEntidad();
+            cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+            producto = manager.Find(Int32.Parse(id), cotizacionStatic.IdMoneda);
+
+            var list = (List<ProductoEntidad>)Current.Session["Productos"];
+
+            if (list == null || !list.Any())
+            {
+                Current.Session["Productos"] = new List<ProductoEntidad>();
                 ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+            }
+            else
+            {
+                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
+            }
+            return producto.DescripProducto;
         }
-        return producto.DescripProducto;
-    }
 
-    [WebMethod]
-    public static void AgregarDeseo(string idProducto)
-    {
-        var Current = HttpContext.Current;
-        var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
-        List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
-        List<ProductoEntidad> unaListaProductos = new List<ProductoEntidad>();
-        ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
-        ListaDeseoEntidad unaListaDeseo = new ListaDeseoEntidad();
-        ProductoCore unProductoCore = new ProductoCore();
-
-        unaListaProductos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-
-        unaListaDeseo.CUIT = logueadoStatic.CUIT;
-        unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
-        unaListaDeseo.IdProducto = Int32.Parse(idProducto);
-        var cotizacion = new MonedaEmpresaEntidad();
-        cotizacion = (MonedaEmpresaEntidad)Current.Session["Productos"];
-        //Guardar en BD el nuevo deseo
-        if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
+        [WebMethod]
+        public static void AgregarDeseo(string idProducto)
         {
-            //Agregar el deseo a la sesión actual
-            //List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
-            //unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueadoStatic.NombreUsuario);
+            var Current = HttpContext.Current;
+            var logueadoStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            List<ListaDeseoEntidad> listaDeseosSesion = new List<ListaDeseoEntidad>();
+            List<ProductoEntidad> unaListaProductos = new List<ProductoEntidad>();
+            ListaDeseosCore unaListaDeseosCore = new ListaDeseosCore();
+            ListaDeseoEntidad unaListaDeseo = new ListaDeseoEntidad();
+            ProductoCore unProductoCore = new ProductoCore();
 
-            //foreach (var item in unasListaDeseoEntidad)
-            //{
-            ProductoEntidad unProductoEntidad = new ProductoEntidad();
-            unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
-            unaListaProductos.Add(unProductoEntidad);
-            //}
-            //listaDeseosSesion.Add(unaListaDeseo);
-            Current.Session["ListaDeseos"] = unaListaProductos;
-            //ActualizarDeseos();
+            unaListaProductos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+
+            unaListaDeseo.CUIT = logueadoStatic.CUIT;
+            unaListaDeseo.NombreUsuario = logueadoStatic.NombreUsuario;
+            unaListaDeseo.IdProducto = Int32.Parse(idProducto);
+            var cotizacion = new MonedaEmpresaEntidad();
+            cotizacion = (MonedaEmpresaEntidad)Current.Session["Productos"];
+            //Guardar en BD el nuevo deseo
+            if (unaListaDeseosCore.ListaDeseosInsert(unaListaDeseo) > 0)
+            {
+                //Agregar el deseo a la sesión actual
+                //List<ListaDeseoEntidad> unasListaDeseoEntidad = new List<ListaDeseoEntidad>();
+                //unasListaDeseoEntidad = unaListaDeseosCore.ListaDeseosSelectAllByCUIT_NombreUsuario(logueadoStatic.NombreUsuario);
+
+                //foreach (var item in unasListaDeseoEntidad)
+                //{
+                ProductoEntidad unProductoEntidad = new ProductoEntidad();
+                unProductoEntidad = unProductoCore.Find(unaListaDeseo.IdProducto, 1);
+                unaListaProductos.Add(unProductoEntidad);
+                //}
+                //listaDeseosSesion.Add(unaListaDeseo);
+                Current.Session["ListaDeseos"] = unaListaProductos;
+                //ActualizarDeseos();
+            }
         }
-    }
 
-    // NO LO USARIA MAS ******************************************************0000000000000000000000000000000000000000000000000000000000000
-    //protected void btnDesear_Click(object sender, EventArgs e)
-    //{
-    //    this.Master.ActualizarDeseos();
-    //}
-}
+        // NO LO USARIA MAS ******************************************************0000000000000000000000000000000000000000000000000000000000000
+        //protected void btnDesear_Click(object sender, EventArgs e)
+        //{
+        //    this.Master.ActualizarDeseos();
+        //}
+    }
 }

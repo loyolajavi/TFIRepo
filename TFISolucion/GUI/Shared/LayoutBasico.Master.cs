@@ -23,6 +23,7 @@ namespace TFI.GUI.General
         public MonedaEmpresaEntidad cotizacion { get; set; }
         public DropDownList combo { get; set; }
         public List<ProductoEntidad> productos;
+        private LenguajeEntidad idioma;
 
 
         protected void cargarMonedas()
@@ -43,6 +44,14 @@ namespace TFI.GUI.General
             return Convert.ToInt32(val);
 
         }
+
+        public string obtenerIdiomaCombo()
+        {
+            var val = (ddlLanguages.SelectedItem.Value);
+            var val2= ddlLanguages.SelectedValue;
+            return (val2);
+
+        }
         public void cambiarSeleccion(object sender, EventArgs e)
         {
             var valor = monedaDRW.SelectedItem.Text;
@@ -56,6 +65,7 @@ namespace TFI.GUI.General
         {
             _manager = new UsuarioCore();
             this._monedaManager = new MonedaCore();
+            idioma = new LenguajeEntidad();
         }
         protected MonedaEmpresaEntidad devolverCotizacion(int valor)
         {
@@ -72,6 +82,10 @@ namespace TFI.GUI.General
                 if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
                 {
                     ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                }
+                if (idioma == null)
+                {
+                    Session["Idioma"] = obtenerIdiomaCombo();
                 }
             }
 

@@ -37,13 +37,13 @@
 
                 <h3>Quienes Somos</h3>
                 <label for="QuienesSomos"></label>
-                <textarea id="QuienesSomos" class="form-control" clientidmode="static" name="QuienesSomos" rows="9" cols="25" maxlength="400" runat="server"></textarea>
+                <textarea id="QuienesSomos" class="form-control" clientidmode="static" name="QuienesSomos" rows="9" cols="25" maxlength="1000" runat="server"></textarea>
 
                 <hr />
 
                 <h3>Mision</h3>
                 <label for="Mision"></label>
-                <textarea id="Mision" class="form-control" clientidmode="static" name="Mision" rows="9" cols="25" maxlength="400" runat="server"></textarea>
+                <textarea id="Mision" class="form-control" clientidmode="static" name="Mision" rows="9" cols="25" maxlength="1000" runat="server"></textarea>
 
                 <hr />
 
