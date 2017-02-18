@@ -49,20 +49,27 @@ function onBtnComprar(btn2) {
     var control = $(btn2);
     var idProdComprar = control.data('producto2');
 
-    $.ajax({
-        type: "POST",
-        url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ComprarProducto",
-        data: '{ IdProdC: ' + idProdComprar + '}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        error: function (xhr, status, error) {
-            alert(error);
-        },
-        success: function (result) {
-            //var $modal = $('.modal');
-            //$modal.find('#prod').text(result.d);
-            //$modal.modal("show");
-            updateProductos();
+    consultarStockClickComprar(idProdComprar, function (flagStock) {
+        if (flagStock) {
+            $.ajax({
+                type: "POST",
+                url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ComprarProducto",
+                data: '{ IdProdC: ' + idProdComprar + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (result) {
+                    //var $modal = $('.modal');
+                    //$modal.find('#prod').text(result.d);
+                    //$modal.modal("show");
+                    //updateProductos();
+                }
+            });
+        }
+        else {
+            alert("NO HAY STOCK");
         }
     });
     return true;
@@ -234,5 +241,5 @@ $('.btn-comprar').click(function () {
                 }
             });
         });
-        return flagStock; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick
+        return flagStock; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
     }

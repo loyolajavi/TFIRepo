@@ -97,7 +97,7 @@ namespace TFI.GUI
 
             unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
             lstProductos.DataSource = null;
-            lstProductos.DataBind();
+            //lstProductos.DataBind();
             lstProductos.DataSource = unosProductosListaDeseo;
             lstProductos.DataBind();
         }
