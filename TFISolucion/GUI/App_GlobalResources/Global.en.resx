@@ -366,9 +366,6 @@
   <data name="SeguirComprando" xml:space="preserve">
     <value>Continue Shopping</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Telefono" xml:space="preserve">
     <value>Telephone</value>
   </data>
@@ -449,5 +446,263 @@
   </data>
   <data name="UltimosPedidos" xml:space="preserve">
     <value>Last Orders</value>
+  </data>
+  <data name="Aceptar" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Actualizar" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Administracion" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="AgregarCategoria" xml:space="preserve">
+    <value>Add Category</value>
+  </data>
+  <data name="AgregarCATPROD" xml:space="preserve">
+    <value>Add category to product</value>
+  </data>
+  <data name="AgregarProducto" xml:space="preserve">
+    <value>Add Product</value>
+  </data>
+  <data name="AgregarStock" xml:space="preserve">
+    <value>Add Stock</value>
+  </data>
+  <data name="AltaUsuario" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="AsociarCategorias" xml:space="preserve">
+    <value>Associate categories</value>
+  </data>
+  <data name="Buscar1" xml:space="preserve">
+    <value>Find...</value>
+  </data>
+  <data name="CambiarEstado" xml:space="preserve">
+    <value>Change State</value>
+  </data>
+  <data name="CaracteresSobrepasado" xml:space="preserve">
+    <value>Number of characters exceeded</value>
+  </data>
+  <data name="CategoriasProductos" xml:space="preserve">
+    <value>Categories - Products</value>
+  </data>
+  <data name="Cerrar" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Cliente" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CodigoProducto" xml:space="preserve">
+    <value>Product Code</value>
+  </data>
+  <data name="ComprobantesPorCliente" xml:space="preserve">
+    <value>Documents per customer</value>
+  </data>
+  <data name="Contenidos" xml:space="preserve">
+    <value>Contents</value>
+  </data>
+  <data name="ContrasenaNoCoincide" xml:space="preserve">
+    <value>Passwords do not match, please re-enter them</value>
+  </data>
+  <data name="Cotizacion" xml:space="preserve">
+    <value>Cotization</value>
+  </data>
+  <data name="CuentaEmpleado" xml:space="preserve">
+    <value>Employee Account</value>
+  </data>
+  <data name="DescripcionCategoria" xml:space="preserve">
+    <value>Category Description</value>
+  </data>
+  <data name="DescripcionProducto" xml:space="preserve">
+    <value>Product Description</value>
+  </data>
+  <data name="Detalle" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="DetalleFactura" xml:space="preserve">
+    <value>Invoice Details</value>
+  </data>
+  <data name="DetalleNC" xml:space="preserve">
+    <value>Credit note detail</value>
+  </data>
+  <data name="DetallePedido" xml:space="preserve">
+    <value>Order detail</value>
+  </data>
+  <data name="EditarCliente" xml:space="preserve">
+    <value>Modified Customer: </value>
+  </data>
+  <data name="EditarEmpleado" xml:space="preserve">
+    <value>Update Employee</value>
+  </data>
+  <data name="EliminarUsuario" xml:space="preserve">
+    <value>Delete User/s</value>
+  </data>
+  <data name="Empleados" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="Estado" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="EstadoPedido" xml:space="preserve">
+    <value>Order State</value>
+  </data>
+  <data name="Facturas" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="FacturasCliente" xml:space="preserve">
+    <value>Customer Invoices</value>
+  </data>
+  <data name="FechaFactura" xml:space="preserve">
+    <value>Invoice Date</value>
+  </data>
+  <data name="FechaNC" xml:space="preserve">
+    <value>CN Date</value>
+  </data>
+  <data name="FechaPedido" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="Generar" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="GenerarNC" xml:space="preserve">
+    <value>New CN</value>
+  </data>
+  <data name="GenerarND" xml:space="preserve">
+    <value>New DN</value>
+  </data>
+  <data name="GestionContenidos" xml:space="preserve">
+    <value>Content Management</value>
+  </data>
+  <data name="GestionPedidos" xml:space="preserve">
+    <value>Order Management</value>
+  </data>
+  <data name="GestionStock" xml:space="preserve">
+    <value>Stock Management -</value>
+  </data>
+  <data name="IdCategoria" xml:space="preserve">
+    <value>Category Id</value>
+  </data>
+  <data name="IdProducto" xml:space="preserve">
+    <value>Product Id</value>
+  </data>
+  <data name="IngreseCalle" xml:space="preserve">
+    <value>Enter the street</value>
+  </data>
+  <data name="IngreseLocalidad" xml:space="preserve">
+    <value>Enter state</value>
+  </data>
+  <data name="IngreseNumero" xml:space="preserve">
+    <value>Enter the street number</value>
+  </data>
+  <data name="MailEmpresa" xml:space="preserve">
+    <value>Organization Mail</value>
+  </data>
+  <data name="Marca" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="ModificarEnvio" xml:space="preserve">
+    <value>Change shipping address</value>
+  </data>
+  <data name="ModificarFacturacion" xml:space="preserve">
+    <value>Change billing address</value>
+  </data>
+  <data name="ModificarNombreUsuario" xml:space="preserve">
+    <value>Modified username</value>
+  </data>
+  <data name="ModificarPermiso" xml:space="preserve">
+    <value>Change Privileges</value>
+  </data>
+  <data name="ModificoContrasena" xml:space="preserve">
+    <value>Password Updated</value>
+  </data>
+  <data name="NCClientes" xml:space="preserve">
+    <value>Customers credits notes</value>
+  </data>
+  <data name="NDClientes" xml:space="preserve">
+    <value>Customers debit notes</value>
+  </data>
+  <data name="NDDetalle" xml:space="preserve">
+    <value>Debit note detail</value>
+  </data>
+  <data name="NDFecha" xml:space="preserve">
+    <value>DN Date</value>
+  </data>
+  <data name="NDNumero" xml:space="preserve">
+    <value>DN Number</value>
+  </data>
+  <data name="NombreEmpresa" xml:space="preserve">
+    <value>Organization Name</value>
+  </data>
+  <data name="NotasDeCredito" xml:space="preserve">
+    <value>Credit Notes</value>
+  </data>
+  <data name="NotasDeDebito" xml:space="preserve">
+    <value>Debit Notes</value>
+  </data>
+  <data name="NumeroFactura" xml:space="preserve">
+    <value>Invoice Number</value>
+  </data>
+  <data name="NumeroNC" xml:space="preserve">
+    <value>CN Number</value>
+  </data>
+  <data name="NumeroPedido" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="Pedidos" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="PedidosPorCliente" xml:space="preserve">
+    <value>Orders by customer</value>
+  </data>
+  <data name="Permisos" xml:space="preserve">
+    <value>Privileges</value>
+  </data>
+  <data name="PermisosUsuario" xml:space="preserve">
+    <value>User Privilege</value>
+  </data>
+  <data name="Productos" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="RegistrarEmpleado" xml:space="preserve">
+    <value>New Employee</value>
+  </data>
+  <data name="Reporte" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="ReportePedidosPorFecha" xml:space="preserve">
+    <value>Report orders by date</value>
+  </data>
+  <data name="ReportePorUsuario" xml:space="preserve">
+    <value>Report for User</value>
+  </data>
+  <data name="Reportes" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Simbolo" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="SoloLetras" xml:space="preserve">
+    <value>Only words, not numbers</value>
+  </data>
+  <data name="SoloNumero" xml:space="preserve">
+    <value>Only numbers, not words</value>
+  </data>
+  <data name="TelefonoEmpresa" xml:space="preserve">
+    <value>Organization Phone</value>
+  </data>
+  <data name="TipoUsuario" xml:space="preserve">
+    <value>User Type</value>
+  </data>
+  <data name="UsuarioCreado" xml:space="preserve">
+    <value>New user succesfully registered</value>
+  </data>
+  <data name="ValidacionContrasena" xml:space="preserve">
+    <value>You must enter at least 8 characters (capital letters, letters and numbers)</value>
+  </data>
+  <data name="VerDetalle" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="Obtener" xml:space="preserve">
+    <value>Download</value>
   </data>
 </root>

@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-header">Productos <small>Gestion de Contenidos</small>
+                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Productos %>"></asp:Label> <small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -24,9 +24,9 @@
                         <Columns>
                             <asp:CommandField ShowEditButton="True" />
                             <asp:CommandField ShowDeleteButton="True" />
-                            <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo de Producto" />
-                            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                            <asp:TemplateField HeaderText="Marca">
+                            <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" />
+                            <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>">
                                 <ItemTemplate>
                                     <asp:DropDownList ID="dropdownMarca" runat="server"></asp:DropDownList>
                                 </ItemTemplate>
@@ -36,9 +36,9 @@
                                     <asp:DropDownList ID="ddlIVA" runat="server"></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="PrecioUnitario" HeaderText="PrecioUnitario" />
+                            <asp:BoundField DataField="PrecioUnitario" HeaderText="<%$Resources:Global, PrecioUnitario %>" />
                             <asp:BoundField DataField="URL" HeaderText="URL" />
-                            <asp:BoundField DataField="DescripLarga" HeaderText="Detalle" />
+                            <asp:BoundField DataField="DescripLarga" HeaderText="<%$Resources:Global, Detalle %>" />
 
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
@@ -57,7 +57,8 @@
                 <br />
 
                 <div class=" text-center">
-                    <a href="#modalProducto" class="btn btn-primary" data-toggle="modal">Agregar Producto</a>
+                    <a href="#modalProducto" class="btn btn-primary" data-toggle="modal">
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
                 </div>
             </div>
         </div>
@@ -71,7 +72,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Agregar Producto</h2>
+                    <h2><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></h2>
                     <div id="notificationproducto">
                         <p id="not" runat="server"></p>
                     </div>
@@ -85,37 +86,37 @@
 
                             <form role="form">
                                 <div class="form-group">
-                                    <label for="codigo">Codigo de Producto</label>
+                                    <label for="codigo"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, CodigoProducto %>"></asp:Label></label>
                                     <input type="text" class="form-control" id="codigo" placeholder="Ingrese codigo de producto" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="descripcion">Descripcion</label>
+                                    <label for="descripcion"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></label>
                                     <input type="text" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlMarcaModal">Marca</label>
+                                    <label for="ddlMarcaModal"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, Marca %>"></asp:Label></label>
                                     <asp:DropDownList ID="ddlmarcamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlCategoriaModal">Categoria</label>
+                                    <label for="ddlCategoriaModal"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
                                     <asp:DropDownList ID="ddlcategoriamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlIVA">Iva Producto</label>
+                                    <label for="ddlIVA">Iva</label>
                                     <asp:DropDownList ID="ddlivamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="preciounitario">Precio Unitario</label>
+                                    <label for="preciounitario"><asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, PrecioUnitario %>"></asp:Label></label>
                                     <input type="number" class="form-control" id="preciounitario" placeholder="Ingrese el precio unitario" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="url">URL Imagen</label>
+                                    <label for="url">URL</label>
                                     <input type="text" class="form-control" id="url" runat="server" placeholder="Ingrese la URL" clientidmode="static" />
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="descriplarga">Detalle</label>
+                                    <label for="descriplarga"><asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, Detalle %>"></asp:Label></label>
                                     <textarea type="text" class="form-control" id="descriplarga" runat="server" placeholder="Ingrese el detalle del producto" clientidmode="static" />
 
                                 </div>
@@ -125,7 +126,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                    <asp:Button runat="server" ID="btnGrabarProducto" ClientIDMode="static" Text="Guardar" OnClientClick="return onbtnGrabarProducto(this)" OnClick="btnGrabarProducto_Click" />
+                    <asp:Button runat="server" ID="btnGrabarProducto" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarProducto(this)" OnClick="btnGrabarProducto_Click" />
                 </div>
             </div>
 

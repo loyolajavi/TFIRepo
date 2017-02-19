@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-header">Gestión de Pedidos
+                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, GestionPedidos %>"></asp:Label>
                 </h1>
             </div>
         </div>
@@ -31,7 +31,8 @@
         <div class="row">
             <div class="list-group col-md-4">
                 <div class="form-group">
-                    <label for="txtClienteBusqueda" class="control-label">Cliente</label>
+                    <label for="txtClienteBusqueda" class="control-label">
+                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Cliente %>"></asp:Label></label>
 
                     <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                     <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="form-control col-md-" />
@@ -56,13 +57,13 @@
                     <ContentTemplate>
                         <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" PageSize="4">
                             <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
-                                <asp:BoundField DataField="NroPedido" HeaderText="Número de Pedido" />
-                                <asp:BoundField DataField="FechaPedido" HeaderText="Fecha de Pedido" />
-                                <asp:BoundField DataField="Estado" HeaderText="Estado" />
-                                <asp:BoundField DataField="NombreUsuario" HeaderText="Cliente" />
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
+                                <asp:BoundField DataField="FechaPedido" HeaderText="<%$Resources:Global, FechaPedido %>" />
+                                <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, Estado %>" />
+                                <asp:BoundField DataField="NombreUsuario" HeaderText="<%$Resources:Global, Cliente %>" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:ButtonField CommandName="CambiarEstado" HeaderText="Cambiar Estado" Text="Cambiar Estado" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:ButtonField CommandName="CambiarEstado" HeaderText="<%$Resources:Global, CambiarEstado %>" Text="<%$Resources:Global, CambiarEstado %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>
@@ -84,7 +85,8 @@
                             <button type="button" class="close" data-dismiss="modal"
                                 aria-hidden="true">
                                 ×</button>
-                            <h3 id="myModalLabel">Detalle de pedido</h3>
+                            <h3 id="myModalLabel">
+                                <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, DetallePedido %>"></asp:Label></h3>
                         </div>
                         <div class="modal-body">
 
@@ -99,7 +101,7 @@
                                         FieldHeaderStyle-ForeColor="Black"
                                         BorderStyle="Groove" AutoGenerateRows="False">
                                         <Fields>
-                                            <asp:BoundField DataField="NroPedido" HeaderText="Número de pedido" />
+                                            <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                                         </Fields>
                                     </asp:DetailsView>
                                     <asp:GridView ID="grilladedetallesdelpedido" runat="server"></asp:GridView>
@@ -111,7 +113,7 @@
                             <div class="modal-footer">
                                 <button class="btn btn-info" data-dismiss="modal"
                                     aria-hidden="true">
-                                    Cerrar</button>
+                                    <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Close %>"></asp:Label></button>
                             </div>
                         </div>
                     </div>
@@ -126,7 +128,7 @@
                             <button type="button" class="close" data-dismiss="modal"
                                 aria-hidden="true">
                                 ×</button>
-                            <h3 id="myModalEstadoLabel">Estado de pedido</h3>
+                            <h3 id="myModalEstadoLabel"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, EstadoPedido %>"></asp:Label></h3>
                         </div>
                         <div class="modal-body">
                            
@@ -141,7 +143,7 @@
                                         FieldHeaderStyle-ForeColor="Black"
                                         BorderStyle="Groove" AutoGenerateRows="False">
                                         <Fields>
-                                            <asp:BoundField DataField="Estado" HeaderText="Estado de pedido" />
+                                            <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, EstadoPedido %>" />
                                         </Fields>
                                     </asp:DetailsView>
                                     <asp:HiddenField id="idpedido" runat="server"  ClientIDMode="static" />
@@ -152,7 +154,7 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <div class="modal-footer">
-                                   <asp:Button CssClass="form-control" runat="server" ID="btnCambiarEstado" ClientIDMode="static" Text="Modificar Estado" OnClientClick="return onbtnModificarEstado(this)" OnClick="btnCambiarEstado_Click" />
+                                   <asp:Button CssClass="form-control" runat="server" ID="btnCambiarEstado" ClientIDMode="static" Text="<%$Resources:Global, CambiarEstado %>" OnClientClick="return onbtnModificarEstado(this)" OnClick="btnCambiarEstado_Click" />
                                     <div id="notificationestado" runat="server"></div> 
                             </div>
                         </div>

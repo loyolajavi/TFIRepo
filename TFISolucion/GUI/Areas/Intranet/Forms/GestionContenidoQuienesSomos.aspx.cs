@@ -11,13 +11,51 @@ using TFI.Entidades;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class GestionContenidoQuienesSomos : System.Web.UI.Page
+    public partial class GestionContenidoQuienesSomos : BasePage
     {
 
         EmpresaCore EmpresaBLL = new EmpresaCore();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
+        private LenguajeEntidad idioma;
+
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
+
+                master = master.Master;
+            }
+            return null;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
+            if (!IsPostBack)
+            {
+                idioma = (LenguajeEntidad)Session["Idioma"];
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
+            }
+            else
+            {
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
+            }
+
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+            }
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 

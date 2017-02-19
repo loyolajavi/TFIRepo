@@ -42,7 +42,7 @@
                         <div class="nav navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <asp:Panel runat="server" DefaultButton="btnBuscar">
-                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="Buscar..." />
+                                    <input type="text" id="txtSearch" maxlength="100" runat="server" class="form-control" placeholder="<%$Resources:Global, Buscar1 %>" />
                                     <asp:LinkButton runat="server" ID="btnBuscar" OnClick="searchButton_Click">
                                     <img src="/Content/Images/Iconos/Buscar.png" />
                                     </asp:LinkButton>
@@ -55,7 +55,7 @@
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
                             </li>
-                            <li id="LiIdioma" runat="server">
+                           <%-- <li id="LiIdioma" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Idioma <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
@@ -73,8 +73,15 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--%>
+                              <li>
+                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
+                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
+                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
+
+                                </asp:DropDownList>
+                            </li>
 
 
                             <li>
@@ -85,7 +92,8 @@
 
                             <li runat="server" id="liIngresar">
 
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Ingresar %>"></asp:Label> <b class="caret"></b></a>
                                 <ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
                                     <li>
                                         <div class="row">
@@ -93,11 +101,11 @@
                                                 <div>
 
                                                     <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputEmail2">Usuario</label>
+                                                        <label class="sr-only" for="exampleInputEmail2"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Usuario %>"></asp:Label></label>
                                                         <input type="text" runat="server" class="form-control" id="IngresoUsuario" placeholder="Usuario" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Clave</label>
+                                                        <label class="sr-only" for="exampleInputPassword2"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label>
                                                         <input type="password" runat="server" class="form-control" id="IngresoClave" placeholder="Clave" />
                                                     </div>
                                                     <div class="form-group">
@@ -109,12 +117,12 @@
                                                         <div class="checkbox">
                                                             <label>
                                                                 <input type="checkbox" />
-                                                                Recordarme
+                                                                <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Recordarme %>"></asp:Label>
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="Ingresar" />
+                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="<%$Resources:Global, Ingresar %>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,32 +153,33 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="/Areas/Public/Forms/Home.aspx"><span class="glyphicon glyphicon-home"></span></a></li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contenidos<b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Contenidos %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="GestionContenidoProductos.aspx">Productos</a>
+                                            <a href="GestionContenidoProductos.aspx"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Productos %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="GestionContenidoProdCat.aspx">Asociar Categorías</a>
+                                            <a href="GestionContenidoProdCat.aspx"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AsociarCategorias %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="GestionContenidoCategorias.aspx">Categorías</a>
+                                            <a href="GestionContenidoCategorias.aspx"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="GestionContenidoQuienesSomos.aspx">Quiénes Somos</a>
+                                            <a href="GestionContenidoQuienesSomos.aspx"><asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin)
                                   {%>
                                 <li id="liAdministracion">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, Administracion %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="PermisosClientes.aspx">Clientes</a>
+                                            <a href="PermisosClientes.aspx"><asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Clientes %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="PermisosEmpleados.aspx">Empleados</a>
+                                            <a href="PermisosEmpleados.aspx"><asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, Empleados %>"></asp:Label></a>
                                         </li>
                                         <%--<li>
                                             <a href="#">Permisos</a>
@@ -182,32 +191,32 @@
                                 </li>
                                 <%} %>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Pedidos %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <%--<li>
                                             <a href="#">Últimos Pedidos</a>
                                         </li>--%>
                                         <li>
-                                            <a href="ordenespedido.aspx">Pedidos por Cliente</a>
+                                            <a href="ordenespedido.aspx"><asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, PedidosPorCliente %>"></asp:Label></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comprobantes por cliente<b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, ComprobantesPorCliente %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="FacturasCliente.aspx">Facturas</a>
+                                            <a href="FacturasCliente.aspx"><asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Facturas %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="NCCliente.aspx">Notas de credito</a>
+                                            <a href="NCCliente.aspx"><asp:Label ID="Label17" runat="server" Text="<%$Resources:Global, NotasDeCredito %>"></asp:Label></a>
                                         </li>
                                         <li>
-                                            <a href="NDCliente.aspx">Notas de debito</a>
+                                            <a href="NDCliente.aspx"><asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, NotasDeDebito %>"></asp:Label></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" href="../../../LCSK/agent.html">Sesión de Chat</a>
+                                    <a class="dropdown-toggle" href="../../../LCSK/agent.html">Chat</a>
                                 </li>
                             </ul>
 

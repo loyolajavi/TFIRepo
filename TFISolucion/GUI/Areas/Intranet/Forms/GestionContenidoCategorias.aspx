@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header">Categorias <small>Gestion de Contenidos</small>
+                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label><small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -24,8 +24,8 @@
                         <Columns>
                             <asp:CommandField ShowEditButton="True" />
                             <asp:CommandField ShowDeleteButton="True" />
-                            <asp:BoundField DataField="IdCategoria" HeaderText="Id de Categoria" />
-                            <asp:BoundField DataField="DescripCategoria" HeaderText="Descripcion" />
+                            <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" />
+                            <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, Descripcion %>" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -55,7 +55,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h2>Agregar Categoria</h2>
+                            <h2><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
                             <div id="notificationcategoria">
                             </div>
                         </div>
@@ -68,14 +68,14 @@
 
                                     <form role="form">
                                         <div class="form-group">
-                                            <label for="descripcion">Descripcion</label>
+                                            <label for="descripcion"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></label>
                                             <input type="text" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" clientidmode="static" />
                                         </div>
                                     </form>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                            <asp:Button runat="server" ID="btnGrabarCategoria" ClientIDMode="static" Text="Aceptar" OnClientClick="return onbtnGrabarCategoria(this)" OnClick="btnGrabarCategoria_Click" />
+                            <asp:Button runat="server" ID="btnGrabarCategoria" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarCategoria(this)" OnClick="btnGrabarCategoria_Click" />
                         </div>
                     </div>
 

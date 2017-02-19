@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="GestionMoneda.aspx.cs" Inherits="TFI.CORE.Areas.Intranet.Forms.GestionMoneda" %>
-
+<%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
@@ -10,10 +10,10 @@
             <asp:GridView ID="grillaCotizacion" CssClass="table" runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                 <Columns>
                     <asp:CommandField ControlStyle-ForeColor="BurlyWood" ShowEditButton="True" />
-                    <asp:BoundField DataField="IdMoneda" HeaderText="ID" />
-                    <asp:BoundField DataField="Nombre" HeaderText="ISOCODE" />
-                    <asp:BoundField DataField="Cotizacion" HeaderText="Cotizacion" />
-                    <asp:BoundField DataField="SimboloMoneda" HeaderText="Simbolo" />
+                    <asp:BoundField DataField="IdMoneda" HeaderText="Id" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Iso Code" />
+                    <asp:BoundField DataField="Cotizacion" HeaderText="<%$Resources:Global, Cotizacion %>" />
+                    <asp:BoundField DataField="SimboloMoneda" HeaderText="<%$Resources:Global, Simbolo %>" />
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

@@ -11,7 +11,8 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header">Editar cliente: <small>
+                <h1 class="page-header">
+                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, EditarCliente %>"> </asp:Label> <small>
                     <asp:Label ID="lblCliente" runat="server"></asp:Label>
                 </small>
                 </h1>
@@ -21,36 +22,39 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                <h4 class="page-header">Cuenta del Cliente</h4>
+                <h4 class="page-header">
+                    <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, DatosCuenta %>"></asp:Label></h4>
                 <div class="form-group">
-                    <label for="txtNombreUsuario">Nombre de Usuario</label>
+                    <label for="txtNombreUsuario">
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></label>
                     <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
                 </div>
-                <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="Modificar Nombre de Usuario" runat="server" OnClick="btnNombreUsuario_Click" />
+                <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" />
                 <br />
                 <br />
                 <div class="form-group">
-                    <label for="txtClave">Contraseña</label><br />
+                    <label for="txtClave"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label><br />
                     <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
-                    <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="Debe ingresar al menos 8 carácteres(Mayúscula, Letras y Números)" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
                 </div>
 
                 <div class="form-group">
-                    <label for="txtClaveRep">Repetir Contraseña</label><br />
+                    <label for="txtClaveRep"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, RepetirContrasena %>"></asp:Label></label><br />
                     <input type="password" class="input-sm" id="txtClaveRep" runat="server" clientidmode="static" placeholder="********" />
-                    <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="La contraseñas no coinciden, por favor reingréselas" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
+                    <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
                 </div>
-                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="Modificar Contraseña" runat="server" OnClick="btnCambiarClave_Click" />
+                <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarContrasena %>" runat="server" OnClick="btnCambiarClave_Click" />
 
                 <div id="divEspacioModifClave" runat="server"></div>
-                <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">Se modificó la contraseña</div>
-                <h4 class="page-header">Datos personales del Cliente</h4>
+                <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">
+                    <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ModificoContrasena %>"></asp:Label></div>
+                <h4 class="page-header"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></h4>
                 <div class="form-group">
-                    <label for="txtApellido">Apellido</label>
+                    <label for="txtApellido"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></label>
                     <input type="text" class="form-control" id="txtApellido" runat="server" clientidmode="static" />
                 </div>
                 <div class="form-group">
-                    <label for="txtNombre">Nombre</label>
+                    <label for="txtNombre"><asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></label>
                     <input type="text" class="form-control" id="txtNombre" runat="server" clientidmode="static" />
                 </div>
                 <div class="form-group">
@@ -58,7 +62,7 @@
                     <input type="text" class="form-control" id="txtMail" runat="server" clientidmode="static" />
                 </div>
                 <div id="divFiscal" class="form-group">
-                    <label id="lblFiscal" for="ddlFiscalCliente">Condición Fiscal</label><br />
+                    <label id="lblFiscal" for="ddlFiscalCliente"><asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, CondicionFiscal %>"></asp:Label></label><br />
                     <asp:DropDownList ID="ddlFiscalCliente" runat="server"></asp:DropDownList>
                 </div>
                 <div class="form-group">
@@ -67,10 +71,10 @@
                 </div>
                 <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
                 <div class="form-group">
-                    <h4 class="page-header">Permisos del empleado</h4>
+                    <h4 class="page-header"><asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Permisos %>"></asp:Label></h4>
                     <asp:DropDownList ID="ddlPermisosUsuarioUpdate" CssClass="list-group" runat="server"></asp:DropDownList>
                 </div>
-                <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="Modificar Permiso" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
+                <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
 
 
 
@@ -127,79 +131,79 @@
 
                 <%--Direccion de Facturación--%>
                 <div id="divDirFacturacion" role="form" clientidmode="static" runat="server">
-                    <h4 class="page-header">Dirección de Facturación</h4>
+                    <h4 class="page-header"><asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, DireccionDeFacturacion %>"></asp:Label></h4>
                     <div class="form-group">
-                        <label for="calle">Calle</label><br />
+                        <label for="calle"><asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtCalle" runat="server" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" Display="Dynamic" runat="server" ControlToValidate="txtCalle" CssClass="alert alert-warning" Text="Deben ser solo letras" ValidationExpression="([a-z]+)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese la calle" ControlToValidate="txtCalle" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" Display="Dynamic" runat="server" ControlToValidate="txtCalle" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloLetras %>" ValidationExpression="([a-z]+)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseCalle %>" ControlToValidate="txtCalle" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="numero">Número</label><br />
+                        <label for="numero"><asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label></label><br />
                         <input type="number" class="input-sm" id="txtNumero" runat="server" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" Display="Dynamic" runat="server" ControlToValidate="txtNumero" CssClass="alert alert-warning" Text="Ingrese solo números" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese el número de la calle" ControlToValidate="txtNumero" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" Display="Dynamic" runat="server" ControlToValidate="txtNumero" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseNumero %>" ControlToValidate="txtNumero" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="piso">Piso</label><br />
+                        <label for="piso"><asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtPiso" runat="server" placeholder="Ej para el primer piso: 1" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtPiso" CssClass="alert alert-warning" Text="Ingrese solo números" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtPiso" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
                     <div class="form-group">
-                        <label for="departamento">Departamento</label><br />
+                        <label for="departamento"><asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtDpartamento" runat="server" placeholder="Ej para el dpto A: A" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" Display="Dynamic" runat="server" ControlToValidate="txtDpartamento" CssClass="alert alert-warning" Text="Cantidad de caracteres sobrepasada" ValidationExpression="([A-Za-z0-9]{0,20})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" Display="Dynamic" runat="server" ControlToValidate="txtDpartamento" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,20})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
                     <div class="form-group">
-                        <label for="localidad">Localidad</label><br />
+                        <label for="localidad"><asp:Label ID="Label17" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtLocalidad" runat="server" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" Display="Dynamic" runat="server" ControlToValidate="txtLocalidad" CssClass="alert alert-warning" Text="Cantidad de caracteres sobrepasada" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese la localidad" ControlToValidate="txtLocalidad" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" Display="Dynamic" runat="server" ControlToValidate="txtLocalidad" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseLocalidad %>" ControlToValidate="txtLocalidad" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="provincia">Provincia</label><br />
+                        <label for="provincia"><asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
                         <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static"></asp:DropDownList>
                     </div>
-                    <asp:Button ID="btnUpdateFacturacion" CssClass="btn btn-default" runat="server" Text="Modificar Dirección Facturación" OnClick="btnUpdateFacturacion_Click" />
+                    <asp:Button ID="btnUpdateFacturacion" CssClass="btn btn-default" runat="server" Text="<%$Resources:Global, ModificarFacturacion %>" OnClick="btnUpdateFacturacion_Click" />
                 </div>
 
                 <%--Direccion de Envío--%>
                 <div id="divDirEnvio" role="form" clientidmode="static" runat="server">
-                    <h4 class="page-header">Dirección de Envío</h4>
+                    <h4 class="page-header"><asp:Label ID="Label19" runat="server" Text="<%$Resources:Global, DireccionDeEnvio %>"></asp:Label></h4>
                     <div class="form-group">
-                        <label for="calleenvio">Calle</label><br />
+                        <label for="calleenvio"><asp:Label ID="Label20" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtCalleEnvio" runat="server" clientidmode="static" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator9" Display="Dynamic" runat="server" ControlToValidate="txtCalleEnvio" CssClass="alert alert-warning" Text="Deben ser solo letras" ValidationExpression="([a-z]+)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese la calle" ControlToValidate="txtCalleEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseCalle %>" ControlToValidate="txtCalleEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="numeroenvio">Número</label><br />
+                        <label for="numeroenvio"><asp:Label ID="Label21" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label></label><br />
                         <input type="number" class="input-sm" id="txtNumeroEnvio" runat="server" clientidmode="static" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator10" Display="Dynamic" runat="server" ControlToValidate="txtNumeroEnvio" CssClass="alert alert-warning" Text="Ingrese solo números" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese el número de la calle" ControlToValidate="txtNumeroEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseNumero %>" ControlToValidate="txtNumeroEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="pisoenvio">Piso</label><br />
+                        <label for="pisoenvio"><asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtPisoEnvio" runat="server" placeholder="Ej para el primer piso: 1" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator11" Display="Dynamic" runat="server" ControlToValidate="txtPisoEnvio" CssClass="alert alert-warning" Text="Ingrese solo números" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator11" Display="Dynamic" runat="server" ControlToValidate="txtPisoEnvio" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
                     <div class="form-group">
-                        <label for="departamentoenvio">Departamento</label><br />
+                        <label for="departamentoenvio"><asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtDepartamentoEnvio" runat="server" placeholder="Ej para el dpto A: A" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator12" Display="Dynamic" runat="server" ControlToValidate="txtDepartamentoEnvio" CssClass="alert alert-warning" Text="Cantidad de caracteres sobrepasada" ValidationExpression="([A-Za-z0-9]{0,20})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator12" Display="Dynamic" runat="server" ControlToValidate="txtDepartamentoEnvio" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,20})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
 
                     <div class="form-group">
-                        <label for="localidadenvio">Localidad</label><br />
+                        <label for="localidadenvio"><asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtLocalidadEnvio" runat="server" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator13" Display="Dynamic" runat="server" ControlToValidate="txtLocalidadEnvio" CssClass="alert alert-warning" Text="Cantidad de caracteres sobrepasada" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingrese la localidad" ControlToValidate="txtLocalidadEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator13" Display="Dynamic" runat="server" ControlToValidate="txtLocalidadEnvio" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseLocalidad %>" ControlToValidate="txtLocalidadEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label for="ddlProvinciaEnvio">Provincia</label><br />
+                        <label for="ddlProvinciaEnvio"><asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
                         <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" ClientIDMode="static"></asp:DropDownList>
                     </div>
-                    <asp:Button ID="btnUpdateEnvio" CssClass="btn btn-default" runat="server" Text="Modificar Dirección Envío" OnClick="btnUpdateEnvio_Click" />
+                    <asp:Button ID="btnUpdateEnvio" CssClass="btn btn-default" runat="server" Text="<%$Resources:Global, ModificarEnvio %>" OnClick="btnUpdateEnvio_Click" />
                 </div>
 
             </div>

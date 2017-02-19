@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
@@ -13,14 +14,34 @@ namespace TFI.GUI.General
         private HttpContext Current = HttpContext.Current;
         public UsuarioEntidad usuario { get; set; }
         private FamiliaCore unManagerFamilia = new FamiliaCore();
+        private LenguajeEntidad idioma;
 
         public LayoutAdministracion()
         {
             _manager = new UsuarioCore();
+            idioma = new LenguajeEntidad();
         }
+        public string obtenerIdiomaCombo()
+        {
+            var val = (ddlLanguages.SelectedItem.Value);
+            var val2 = ddlLanguages.SelectedValue;
+            return (val2);
 
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
+                if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
+                {
+                    ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                }
+                if (idioma == null)
+                {
+                    Session["Idioma"] = obtenerIdiomaCombo();
+                }
+            }
+
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 

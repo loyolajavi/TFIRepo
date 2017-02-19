@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header">Categorias - <small>Gestion de Contenidos</small>
+                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, CategoriasProductos %>"></asp:Label><small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <asp:TextBox ID="txtProductoaBuscar" CssClass="form-control" placeholder="Ingreso codigo de producto" runat="server"></asp:TextBox>
                     <br />
-                    <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="Consultar" OnClick="btnConsultar_Click" />
+                    <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
 
 
                     <div class="col-lg-6">
@@ -30,10 +30,10 @@
                             <asp:GridView ID="grillacatprod" CssClass="table" runat="server" OnRowDeleting="grillacatprod_RowDeleting">
                                 <Columns>
                                     <asp:CommandField ShowDeleteButton="True" />
-                                    <asp:BoundField DataField="IdProducto" HeaderText="Id de Producto" />
-                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripcion de Producto" />
-                                    <asp:BoundField DataField="IdCategoria" HeaderText="Id de Categoria" />
-                                    <asp:BoundField DataField="DescripCategoria" HeaderText="Descripcion de Categoria" />
+                                    <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
+                                    <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
+                                    <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" />
+                                    <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, DescripcionCategoria %>" />
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />
                                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -51,7 +51,8 @@
                         <br />
 
                         <div class=" text-center">
-                            <a href="#modalProdCategoria" class="btn btn-primary" data-toggle="modal">Agregar Categoria a Producto</a>
+                            <a href="#modalProdCategoria" class="btn btn-primary" data-toggle="modal">
+                                <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2>Agregar Categoria</h2>
+                                <h2><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
                                 <div id="notificationprodcategoria">
                                 </div>
                             </div>
@@ -76,18 +77,18 @@
 
                                         <form role="form">
                                             <div class="form-group">
-                                                <label for="ddlProducto">Producto</label>
+                                                <label for="ddlProducto"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Producto %>"></asp:Label></label>
                                                 <asp:DropDownList ID="ddlProducto" runat="server" ClientIDMode="static"></asp:DropDownList>
                                             </div>
                                             <div class="form-group">
-                                                <label for="ddlCategoria">Categoria</label>
+                                                <label for="ddlCategoria"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
                                                 <asp:DropDownList ID="ddlCategoria" runat="server" ClientIDMode="static"></asp:DropDownList>
                                             </div>
                                         </form>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                                 <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                                <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" Text="Aceptar" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
+                                <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
                             </div>
                         </div>
                     </div>
