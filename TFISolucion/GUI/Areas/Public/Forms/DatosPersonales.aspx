@@ -179,23 +179,23 @@
                             <form role="form">
                                 <div class="form-group">
                                     <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
-                                    <input type="text" class="form-control" id="calle" placeholder="Ingrese calle de la direccion" runat="server" clientidmode="static" />
+                                    <input type="text" class="form-control" id="calle" placeholder="<%$Resources:Global, IngresarCalle %>" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
-                                    <input type="number" class="form-control" id="numero" placeholder="Ingrese el numero de la direccion" runat="server" clientidmode="static" />
+                                    <input type="number" class="form-control" id="numero" placeholder="<%$Resources:Global, IngresarNumero %>" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
-                                    <input type="text" class="form-control" id="piso" runat="server" placeholder="Ingrese el piso" clientidmode="static" />
+                                    <input type="text" class="form-control" id="piso" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
-                                    <input type="text" class="form-control" id="departamento" runat="server" placeholder="Ingrese el departamento" clientidmode="static" />
+                                    <input type="text" class="form-control" id="departamento" runat="server" placeholder="<%$Resources:Global, IngresarDepartamento %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
-                                    <input type="text" class="form-control" id="localidad" runat="server" placeholder="Ingrese la localidad" clientidmode="static" />
+                                    <input type="text" class="form-control" id="localidad" runat="server" placeholder="<%$Resources:Global, IngresarLocalidad %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
@@ -284,24 +284,24 @@
                             <form role="form">
                                 <div class="form-group">
                                     <asp:Label ID="Label20" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
-                                    <input type="text" class="form-control" id="calleenvio" runat="server" placeholder="Ingrese la calle" clientidmode="static" />
+                                    <input type="text" class="form-control" id="calleenvio" runat="server" placeholder="<%$Resources:Global, IngresarCalle %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label21" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
-                                    <input type="number" class="form-control" id="numeroenvio" placeholder="Ingrese el numero de la direccion" runat="server" clientidmode="static" />
+                                    <input type="number" class="form-control" id="numeroenvio" placeholder="<%$Resources:Global, IngresarNumeroCalle %>" runat="server" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
-                                    <input type="text" class="form-control" id="pisoenvio" runat="server" placeholder="Ingrese el piso" clientidmode="static" />
+                                    <input type="text" class="form-control" id="pisoenvio" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
-                                    <input type="text" class="form-control" id="departamentoenvio" runat="server" placeholder="Ingrese el departamento" clientidmode="static" />
+                                    <input type="text" class="form-control" id="departamentoenvio" runat="server" placeholder="<%$Resources:Global, IngresarDepartamento %>" clientidmode="static" />
                                 </div>
 
                                 <div class="form-group">
                                     <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
-                                    <input type="text" class="form-control" id="localidadenvio" runat="server" placeholder="Ingrese la localidad" clientidmode="static" />
+                                    <input type="text" class="form-control" id="localidadenvio" runat="server" placeholder="<%$Resources:Global, IngresarLocalidad %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
@@ -336,17 +336,17 @@
 
                                 <div class="form-group">
                                    <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, ContrasenaAnterior %>"></asp:Label>
-                                    <input type="password" class="form-control" id="passanterior" clientidmode="static" placeholder="Ingrese la contraseña anterior" runat="server" maxlength="20" required />
+                                    <input type="password" class="form-control" id="passanterior" clientidmode="static" placeholder="<%$Resources:Global, IngresarContrasenaAnterior %>" runat="server" maxlength="20" required />
                                 </div>
 
                                 <div class="form-group">
                                    <asp:Label ID="Label28" runat="server" Text="<%$Resources:Global, NuevaContrasena %>"></asp:Label>
-                                    <input type="password" class="form-control" clientidmode="static" id="passnueva" placeholder="Ingrese la nueva contraseña" runat="server" maxlength="20" />
+                                    <input type="password" class="form-control" clientidmode="static" id="passnueva" placeholder="<%$Resources:Global, IngresarContrasenaNueva %>" runat="server" maxlength="20" />
                                 </div>
 
                                 <div class="form-group">
                                     <asp:Label ID="Label29" runat="server" Text="<%$Resources:Global, RepitaNuevaContrasena %>"></asp:Label>
-                                    <input type="password" class="form-control" id="passnuevarepetida" clientidmode="static" runat="server" placeholder="Repita la nueva contraseña" maxlength="20" />
+                                    <input type="password" class="form-control" id="passnuevarepetida" clientidmode="static" runat="server" placeholder="<%$Resources:Global, RepetirNuevaContrasena %>" maxlength="20" />
                                 </div>
 
                                 <%-- <button type="button" id="btnCambiarContra" runat="server"="btnCambiarContra_Click">Cambiar</button>--%>
@@ -354,7 +354,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--agrege onsubmit--%>
-                    <asp:Button ID="btnCambiarClave" runat="server" ClientIDMode="static" onsubmit="return validateForm(this);" CssClass="btn btn-primary btn-block" Text="Cambiar" />
+                    <asp:Button ID="btnCambiarClave" runat="server" ClientIDMode="static" onsubmit="return validateForm(this);" CssClass="btn btn-primary btn-block" Text="<%$Resources:Global, Cambiar %>"/>
                 </div>
             </div>
         </div>
@@ -380,11 +380,11 @@
                             <form role="form">
                                 <div class="form-group">
                                      <asp:Label ID="Label31" runat="server" Text="<%$Resources:Global, CodigoArea %>"></asp:Label>
-                                    <input type="text" class="form-control" id="txtCodigo" runat="server" placeholder="Codigo Area" clientidmode="static" />
+                                    <input type="text" class="form-control" id="txtCodigo" runat="server" placeholder="<%$Resources:Global, CodigoArea %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                       <asp:Label ID="Label32" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
-                                    <input type="text" class="form-control" id="txtNumero" runat="server" placeholder="Numero" clientidmode="static" />
+                                    <input type="text" class="form-control" id="txtNumero" runat="server" placeholder="<%$Resources:Global, Numero %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label33" runat="server" Text="<%$Resources:Global, Tipo %>"></asp:Label>

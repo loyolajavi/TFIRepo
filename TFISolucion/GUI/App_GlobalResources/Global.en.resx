@@ -181,7 +181,7 @@
     <value>Account Data</value>
   </data>
   <data name="DatosPersonales" xml:space="preserve">
-    <value>Personal Information</value>
+    <value>Personal Information  </value>
   </data>
   <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
     <value>This field contains too many characters. Pleasse check it.</value>
@@ -289,7 +289,7 @@
     <value>Clear</value>
   </data>
   <data name="ListaDeseos" xml:space="preserve">
-    <value>Wishes List</value>
+    <value>Wishes List  </value>
   </data>
   <data name="Localidad" xml:space="preserve">
     <value>Location</value>
@@ -445,7 +445,7 @@
     <value>Type</value>
   </data>
   <data name="UltimosPedidos" xml:space="preserve">
-    <value>Last Orders</value>
+    <value>Last Orders  </value>
   </data>
   <data name="Aceptar" xml:space="preserve">
     <value>Ok</value>
@@ -704,5 +704,134 @@
   </data>
   <data name="Obtener" xml:space="preserve">
     <value>Download</value>
+  </data>
+  <data name="ActualizarDireccion" xml:space="preserve">
+    <value>Update Address</value>
+  </data>
+  <data name="AgregarAFavoritos" xml:space="preserve">
+    <value>Add to Favorites</value>
+  </data>
+  <data name="AgregarTarjeta" xml:space="preserve">
+    <value>Add a Card</value>
+  </data>
+  <data name="CodigoSeguridad" xml:space="preserve">
+    <value>Code of Security</value>
+  </data>
+  <data name="CompletarRegistroParaSeguir" xml:space="preserve">
+    <value>Pleasse complete the registration process to proceed:</value>
+  </data>
+  <data name="ConfirmacionPago" xml:space="preserve">
+    <value>Confirmation of the Payment</value>
+  </data>
+  <data name="Continuar" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="CorreoEnviadoConDatosDeTransferencia" xml:space="preserve">
+    <value>A mail has been send with transfer's data.</value>
+  </data>
+  <data name="CrearUnaCuenta" xml:space="preserve">
+    <value>Add Account</value>
+  </data>
+  <data name="Destinatario" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Enviado" xml:space="preserve">
+    <value>Send!</value>
+  </data>
+  <data name="EnviarDatos" xml:space="preserve">
+    <value>Send Data</value>
+  </data>
+  <data name="FechaExpiracion" xml:space="preserve">
+    <value>Expiration Date</value>
+  </data>
+  <data name="FormaDeEnvio" xml:space="preserve">
+    <value>Shipping Method</value>
+  </data>
+  <data name="IniciarSesion" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="MediosDePago" xml:space="preserve">
+    <value>Payment Method</value>
+  </data>
+  <data name="NoExisteDireccionDeEnvio" xml:space="preserve">
+    <value>The shipping address does not exist. Pleasse add one and try again.</value>
+  </data>
+  <data name="NoExisteDireccionDeFacturacion" xml:space="preserve">
+    <value>The billing address does not exist. Pleass add one and try again.</value>
+  </data>
+  <data name="NombreTitular" xml:space="preserve">
+    <value>Name's Owner</value>
+  </data>
+  <data name="NumeroTarjeta" xml:space="preserve">
+    <value>Card's number</value>
+  </data>
+  <data name="OlvidoContrasena" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="Pagar" xml:space="preserve">
+    <value>Pay</value>
+  </data>
+  <data name="PedidoCorrectamenteAgregado" xml:space="preserve">
+    <value>The order was generated successfully,</value>
+  </data>
+  <data name="RegistrarseComoCliente" xml:space="preserve">
+    <value>Registering as a Customer</value>
+  </data>
+  <data name="Registro" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RetiroPorSucursal" xml:space="preserve">
+    <value>Branch withdrawals</value>
+  </data>
+  <data name="SeleccionaFormadePago" xml:space="preserve">
+    <value>Pleasse Select a Method Payment</value>
+  </data>
+  <data name="SeleccionaMetodoDeRetiro" xml:space="preserve">
+    <value>Pleasse select a delivery method:</value>
+  </data>
+  <data name="Seleccione" xml:space="preserve">
+    <value>Pleasse Choice one....</value>
+  </data>
+  <data name="Sucursal" xml:space="preserve">
+    <value>Local Branch</value>
+  </data>
+  <data name="SucursalDisponibles" xml:space="preserve">
+    <value>Available branches</value>
+  </data>
+  <data name="TiempoEntregaSucursal" xml:space="preserve">
+    <value>RAPID DELIVERY! only need  the card-issuing with ID card.</value>
+  </data>
+  <data name="TipoTarjeta" xml:space="preserve">
+    <value>Card's Type</value>
+  </data>
+  <data name="Titular" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Transferencia" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Cambiar" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="IngresarContrasenaAnterior" xml:space="preserve">
+    <value>Pleasse add last password</value>
+  </data>
+  <data name="IngresarContrasenaNueva" xml:space="preserve">
+    <value>Pleasse add the new password</value>
+  </data>
+  <data name="IngresarDepartamento" xml:space="preserve">
+    <value>Add Apartment</value>
+  </data>
+  <data name="IngresarNumero" xml:space="preserve">
+    <value>Pleasse add a number</value>
+  </data>
+  <data name="IngresarPiso" xml:space="preserve">
+    <value>Add Floor</value>
+  </data>
+  <data name="RepetirNuevaContrasena" xml:space="preserve">
+    <value>Pleasse repeat the new password</value>
   </data>
 </root>

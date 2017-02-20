@@ -21,7 +21,8 @@ namespace TFI.GUI.Areas.Public.Forms
         private MonedaCore _coreMoneda;
         public string cotizacionAnterior;
         private ProductoCore _coreProducto;
-        private StockCore _coreStock; 
+        private StockCore _coreStock;
+        private LenguajeEntidad idioma;
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -38,6 +39,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
         public Pedidos()
         {
+            idioma = new LenguajeEntidad();
             cotizacion = new MonedaEmpresaEntidad();
             moneda = new MonedaEntidad();
             _coreMoneda = new MonedaCore();
@@ -47,8 +49,17 @@ namespace TFI.GUI.Areas.Public.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
             if (!IsPostBack)
             {
+                idioma = (LenguajeEntidad)Session["Idioma"];
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
                 cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
                 Session.Add("cotizacionAnterior", "");
@@ -59,13 +70,17 @@ namespace TFI.GUI.Areas.Public.Forms
             {
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 Session["Cotizacion"] = cotizacion;
-
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
             }
             moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
-            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
-            if (lblStatus != null)
-                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+            }
+
 
             var Current = HttpContext.Current;
 

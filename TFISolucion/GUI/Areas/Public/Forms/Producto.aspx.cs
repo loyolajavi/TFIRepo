@@ -6,7 +6,7 @@ using TFI.Entidades;
 
 namespace TFI.GUI
 {
-    public partial class Producto : System.Web.UI.Page
+    public partial class Producto : BasePage
     {
         private ProductoCore _manager;
         public const string IMAGES_CONTAINER = "/Content/Images/Productos/";
@@ -41,6 +41,7 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
             int IdProducto = Convert.ToInt32(Request.QueryString["IdProducto"]);
             _IdProducto = IdProducto;
             if (!IsPostBack)
@@ -49,6 +50,13 @@ namespace TFI.GUI
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
                 idioma = (LenguajeEntidad)Session["Idioma"];
 
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
 
             }
             else
@@ -67,9 +75,12 @@ namespace TFI.GUI
             if (lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
-            //DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
-            //if (lblIdioma != null)
-            //    lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+                
+            }
         }
 
         private void LoadProducto(int IdProducto)

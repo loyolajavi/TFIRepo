@@ -1,5 +1,6 @@
-﻿7<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="ClientesEmpresa.aspx.cs" Inherits="TFI.GUI.ClientesEmpresa" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="ClientesEmpresa.aspx.cs" Inherits="TFI.GUI.ClientesEmpresa" %>
 
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
     <!-- Page Content -->
     <div class="container">
@@ -7,9 +8,11 @@
         <!-- Introduction Row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><asp:Label ID="lblCustomers" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label>
-                   
-                    <small><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, MejoresClientes %>"></asp:Label></small>
+                <h1 class="page-header">
+                    <asp:Label ID="lblCustomers" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label>
+
+                    <small>
+                        <asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, MejoresClientes %>"></asp:Label></small>
                 </h1>
 
             </div>

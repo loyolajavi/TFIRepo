@@ -86,6 +86,11 @@ namespace TFI.GUI
                 }
                 grilladedatospersonales.DataBind();
             }
+            else
+            {
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
+            }
 
 
             List<TelefonoEntidad> TelefonosDelUsuario = new List<TelefonoEntidad>();
@@ -186,10 +191,12 @@ namespace TFI.GUI
             {
                 CargarDropdownProvincias();
             }
-            else
+           
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
             {
-                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
-                Session["Idioma"] = idioma;
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+
             }
 
         }

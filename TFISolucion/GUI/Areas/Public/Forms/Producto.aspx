@@ -47,7 +47,7 @@
                     <h2><%=producto.DescripProducto %></h2>
                     <h5><%=producto.CodigoProducto %></h5>
                     <br />
-                    <h5>Descripción:</h5>
+                    <h5> <%=Resources.Global.Descripcion%></h5>
                     <br />
                     <div>
                         <h6><%=producto.DescripLarga%></h6>
@@ -60,18 +60,18 @@
                     </div>
                     <p class="text-center">
 
-                        <button type="button" id="btnComprar" class="btn btn-comprar" data-producto="<%=producto.IdProducto%>">COMPRAR</button>
+                        <button type="button" id="btnComprar" class="btn btn-comprar" data-producto="<%=producto.IdProducto%>"><%=Resources.Global.Comprar%></button>
                         <br />
                         <br />
                         <button class="btn btn-success"><i class="glyphicon glyphicon-heart" style="padding: 5px; padding-left: 2px; padding-right: 2px;"></i></button>
-                        Agregar a Favoritos
+                       <%=Resources.Global.AgregarAFavoritos%>
                     </p>
                     <p>
                     </p>
 
                     <div class="bg-info inner">
                         <div>
-                            <label>Medios de Pago</label>
+                            <label> <%=Resources.Global.MediosDePago%></label>
                             <i class="glyphicon glyphicon-credit-card"></i>
                             <br />
                             <span>
@@ -96,15 +96,15 @@
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" style="color: #29ab29;">Felicitaciones!</h3>
+                        <h3 class="modal-title" style="color: #29ab29;"> <%=Resources.Global.Felicitaciones%></h3>
                     </div>
                     <div class="modal-body text-center">
-                        <h4 id="mdl_pedido_titulo" style="color: black;">El producto <span id="prod"></span>fue correctamente agregado en tu carrito!</h4>
+                        <h4 id="mdl_pedido_titulo" style="color: black;"> <%=Resources.Global.ElProducto%><span id="prod"></span> <%=Resources.Global.ProductoCorrectamenteAgregadoAlCarrito%></h4>
                     </div>
                     <div class="modal-footer">
                         <div class="text-center">
-                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;">Ir a Pedidos</button>
-                            <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Seguir Comprado</button>
+                            <button type="button" id="btn-pedidos" class="btn btn-warning" style="width: 200px;"> <%=Resources.Global.IrAPedidos%></button>
+                            <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal"> <%=Resources.Global.SeguirComprando%></button>
                         </div>
                     </div>
                 </div>

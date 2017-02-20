@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" EnableEventValidation="false"  CodeBehind="Tarjetas.aspx.cs" Inherits="TFI.GUI.Tarjetas" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Tarjetas.aspx.cs" Inherits="TFI.GUI.Tarjetas" %>
+<%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -7,85 +7,85 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <div class="col-lg-12">
-            <h1 class="page-header">Datos de tarjetas <small>Mi Cuenta</small>
-            </h1>
+    <div class="col-lg-12">
+        <h1 class="page-header"><%=Resources.Global.DatosDeTarjetas%> <small><%=Resources.Global.MiCuenta%></small>
+        </h1>
+    </div>
+
+    <div class="col-lg-12">
+
+        <div class="table-responsive">
+
+
+            <asp:GridView CssClass="table" ID="grilladetarjetas" runat="server" OnRowDeleting="grilladetarjetas_RowDeleting" OnRowDataBound="grilladetarjetas_RowDataBound">
+                <Columns>
+                    <asp:CommandField ShowDeleteButton="True" />
+                    <asp:BoundField DataField="NumeroTarjeta" HeaderText="<%$Resources:Global, NumeroTarjeta %>" />
+                    <asp:TemplateField HeaderText="<%$Resources:Global, Tipo %>">
+                        <ItemTemplate>
+                            <asp:DropDownList ID="ddlTipoDeTarjeta" runat="server"></asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Titular" HeaderText="<%$Resources:Global, Titular %>" />
+                    <asp:BoundField DataField="FechaExpiracion" HeaderText="<%$Resources:Global, FechaExpiracion %>" />
+                    <asp:BoundField DataField="CodigoSeguridad" HeaderText="<%$Resources:Global, CodigoSeguridad %>"  />
+                </Columns>
+            </asp:GridView>
+
         </div>
 
-        <div class="col-lg-12">
-
-            <div class="table-responsive">
 
 
-                <asp:GridView CssClass="table" ID="grilladetarjetas" runat="server"  OnRowDeleting="grilladetarjetas_RowDeleting" OnRowDataBound="grilladetarjetas_RowDataBound">
-                    <Columns>
-                        <asp:CommandField ShowDeleteButton="True" />
-                        <asp:BoundField DataField="NumeroTarjeta" HeaderText="Numero de tarjeta" />
-                        <asp:TemplateField HeaderText="Tipo">
-                                <ItemTemplate>
-                                    <asp:DropDownList ID="ddlTipoDeTarjeta" runat="server"></asp:DropDownList>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        <asp:BoundField DataField="Titular" HeaderText="Titular" />
-                        <asp:BoundField DataField="FechaExpiracion" HeaderText="Fecha de Expiracion" />
-                        <asp:BoundField DataField="CodigoSeguridad" HeaderText="Codigo de seguridad" />
-                    </Columns>
-                </asp:GridView>
-
-            </div>
-
-
-
-            <div class="col-md-6 text-center">
-                <a href="#modalAltaTarjeta" class="btn btn-primary" data-toggle="modal">Agregar Tarjeta</a>
-            </div>
-
-            <br />
+        <div class="col-md-6 text-center">
+            <a href="#modalAltaTarjeta" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.AgregarTarjeta%></a>
         </div>
 
         <br />
+    </div>
+
+    <br />
 
 
 
-            <!--MODAL Alta Tarjeta-->
-            <div class="modal fade" id="modalAltaTarjeta">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h2>Agregar Tarjeta</h2>
-                            <div id="notificationTarjeta">
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
+    <!--MODAL Alta Tarjeta-->
+    <div class="modal fade" id="modalAltaTarjeta">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2><%=Resources.Global.AgregarTarjeta%></h2>
+                    <div id="notificationTarjeta">
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="btnGrabarTarjeta" />
                         </Triggers>
                         <ContentTemplate>
                             <form role="form" id="formPass">
                                 <div class="form-group">
-                                    <label for="tipoTarjeta">Tipo Tarjeta</label>
+                                    <label for="tipoTarjeta"><%=Resources.Global.TipoTarjeta%></label>
                                     <asp:DropDownList ID="tipoTarjeta" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="txtNumeroTarjeta">Numero de tarjeta</label>
-                                    <input type="text" class="form-control" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="Numero de tarjeta"/>
+                                    <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>
+                                    <input type="text" class="form-control" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" />
                                 </div>
                                 <div class="form-group">
-        <label class="col-sm-3 control-label" for="card-holder-name">Titular</label>
-          <input type="text" class="form-control" name="card-holder-name" id="txtTitular" runat="server" placeholder="Nombre del titular"/>
-      </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="txtCodigoSeguridad">Codigo de seguridad</label>
-                                        <input type="text" runat="server" class="form-control" name="txtCodigoSeguridad" id="txtCodigoSeguridad" placeholder="Codigo de seguridad">
+                                    <label class="col-sm-3 control-label" for="card-holder-name"><%=Resources.Global.Titular%></label>
+                                    <input type="text" class="form-control" name="card-holder-name" id="txtTitular" runat="server" placeholder="<%$Resources:Global, NombreTitular %>" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="expiry-month">Fecha de Expiracion</label>
+                                    <label class="col-sm-3 control-label" for="txtCodigoSeguridad"><%=Resources.Global.CodigoSeguridad%></label>
+                                    <input type="text" runat="server" class="form-control" name="txtCodigoSeguridad" id="txtCodigoSeguridad" placeholder="<%$Resources:Global, CodigoSeguridad %>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="expiry-month"><%=Resources.Global.FechaExpiracion%></label>
                                     <div class="col-sm-9">
                                         <div class="row">
-                                            <div class="col-xs-3">
-                                                <select runat="server" class="form-control col-sm-2" name="expiry-month" id="expiryMes">
+                                            <div class="col-xs-4">
+                                                <select runat="server" class="form-control col-sm-3" name="expiry-month" id="expiryMes">
                                                     <option runat="server" value="01">Jan (01)</option>
                                                     <option value="02">Feb (02)</option>
                                                     <option value="03">Mar (03)</option>
@@ -100,7 +100,7 @@
                                                     <option value="12">Dec (12)</option>
                                                 </select>
                                             </div>
-                                            <div class="col-xs-3">
+                                            <div class="col-xs-4">
                                                 <select runat="server" class="form-control" id="expiryYear" name="expiryYear">
                                                     <option runat="server" value="2016">2016</option>
                                                     <option value="2017">2017</option>
@@ -123,28 +123,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                   </form>
+                            </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                                <button type="button" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block">Aceptar</button>
-                        </div>
-                    </div>
+                    <button type="button" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>
                 </div>
             </div>
-            <br />
+        </div>
+    </div>
+    <br />
 
 
-            <%--<div class="form-group">
+    <%--<div class="form-group">
                 <label class="col-sm-3 control-label" for="card-holder-name">Titular</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Nombre del titular">
                 </div>
             </div>--%>
-
-    
-
-
-
 </asp:Content>
 
 

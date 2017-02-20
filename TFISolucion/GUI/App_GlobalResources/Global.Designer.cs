@@ -19,7 +19,7 @@ namespace Resources {
     // a través de una herramienta como ResGen o Visual Studio.
     // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
     // con la opción /str o recompile el proyecto de Visual Studio.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "14.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Global {
@@ -403,6 +403,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Confirmacion Pago.
+        /// </summary>
+        internal static string ConfirmacionPago {
+            get {
+                return ResourceManager.GetString("ConfirmacionPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contacto.
         /// </summary>
         internal static string Contacto {
@@ -781,6 +790,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enviar Datos.
+        /// </summary>
+        internal static string EnviarDatos {
+            get {
+                return ResourceManager.GetString("EnviarDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo a todo el Pais.
         /// </summary>
         internal static string EnvioTodoPais {
@@ -876,6 +894,15 @@ namespace Resources {
         internal static string Felicitaciones {
             get {
                 return ResourceManager.GetString("Felicitaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Forma de Envio.
+        /// </summary>
+        internal static string FormaDeEnvio {
+            get {
+                return ResourceManager.GetString("FormaDeEnvio", resourceCulture);
             }
         }
         
@@ -1186,6 +1213,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Medios de Pago:.
+        /// </summary>
+        internal static string MediosDePago {
+            get {
+                return ResourceManager.GetString("MediosDePago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Los mejores clientes que nos eligieron.
         /// </summary>
         internal static string MejoresClientes {
@@ -1438,6 +1474,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Pagar.
+        /// </summary>
+        internal static string Pagar {
+            get {
+                return ResourceManager.GetString("Pagar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Pedido.
         /// </summary>
         internal static string Pedido {
@@ -1677,6 +1722,15 @@ namespace Resources {
         internal static string SeguirComprando {
             get {
                 return ResourceManager.GetString("SeguirComprando", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Selecciona Forma de Pago.
+        /// </summary>
+        internal static string SeleccionaFormadePago {
+            get {
+                return ResourceManager.GetString("SeleccionaFormadePago", resourceCulture);
             }
         }
         

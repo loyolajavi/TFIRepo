@@ -181,7 +181,7 @@
     <value>Datos de la Cuenta</value>
   </data>
   <data name="DatosPersonales" xml:space="preserve">
-    <value>Datos Personales</value>
+    <value>Datos Personales  </value>
   </data>
   <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
     <value>Este campo contiene demasiados caracteres.</value>
@@ -289,7 +289,7 @@
     <value>Limpiar</value>
   </data>
   <data name="ListaDeseos" xml:space="preserve">
-    <value>Lista de Deseos</value>
+    <value>Lista de Deseos  </value>
   </data>
   <data name="Localidad" xml:space="preserve">
     <value>Localidad</value>
@@ -445,7 +445,7 @@
     <value>Tipo</value>
   </data>
   <data name="UltimosPedidos" xml:space="preserve">
-    <value>Ultimos Pedidos</value>
+    <value>Ultimos Pedidos  </value>
   </data>
   <data name="Aceptar" xml:space="preserve">
     <value>Aceptar</value>
@@ -704,5 +704,131 @@
   </data>
   <data name="Obtener" xml:space="preserve">
     <value>Obtener</value>
+  </data>
+  <data name="ActualizarDireccion" xml:space="preserve">
+    <value>Actualizar Direccion</value>
+  </data>
+  <data name="AgregarAFavoritos" xml:space="preserve">
+    <value>Agregar a Favoritos</value>
+  </data>
+  <data name="AgregarTarjeta" xml:space="preserve">
+    <value>Agregar Tarjeta</value>
+  </data>
+  <data name="CodigoSeguridad" xml:space="preserve">
+    <value>Codigo de Seguridad</value>
+  </data>
+  <data name="CompletarRegistroParaSeguir" xml:space="preserve">
+    <value>Por favor completar registro para poder continuar:</value>
+  </data>
+  <data name="ConfirmacionPago" xml:space="preserve">
+    <value>Confirmacion Pago</value>
+  </data>
+  <data name="Continuar" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="CorreoEnviadoConDatosDeTransferencia" xml:space="preserve">
+    <value>El correo se ha enviado con los datos de transferencia</value>
+  </data>
+  <data name="CrearUnaCuenta" xml:space="preserve">
+    <value>Crear una Cuenta</value>
+  </data>
+  <data name="Destinatario" xml:space="preserve">
+    <value>Destinatario</value>
+  </data>
+  <data name="Enviado" xml:space="preserve">
+    <value>Enviado</value>
+  </data>
+  <data name="EnviarDatos" xml:space="preserve">
+    <value>Enviar Datos</value>
+  </data>
+  <data name="FechaExpiracion" xml:space="preserve">
+    <value>Fecha de expiracion</value>
+  </data>
+  <data name="FormaDeEnvio" xml:space="preserve">
+    <value>Forma de Envio</value>
+  </data>
+  <data name="IniciarSesion" xml:space="preserve">
+    <value>Ingresar</value>
+  </data>
+  <data name="MediosDePago" xml:space="preserve">
+    <value>Medios de Pago:</value>
+  </data>
+  <data name="NoExisteDireccionDeEnvio" xml:space="preserve">
+    <value>No existe una direccion de envio. Por favor agregue una.</value>
+  </data>
+  <data name="NoExisteDireccionDeFacturacion" xml:space="preserve">
+    <value>No existe direccion de facturacion. Por favor agregue una.</value>
+  </data>
+  <data name="NombreTitular" xml:space="preserve">
+    <value>Nombre Titular</value>
+  </data>
+  <data name="NumeroTarjeta" xml:space="preserve">
+    <value>Numero de tarjeta</value>
+  </data>
+  <data name="OlvidoContrasena" xml:space="preserve">
+    <value>Olvido contraseña?</value>
+  </data>
+  <data name="Pagar" xml:space="preserve">
+    <value>Pagar</value>
+  </data>
+  <data name="PedidoCorrectamenteAgregado" xml:space="preserve">
+    <value>El pedido se ha generado correctamente.</value>
+  </data>
+  <data name="RegistrarseComoCliente" xml:space="preserve">
+    <value>Registrarse como cliente</value>
+  </data>
+  <data name="Registro" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="RetiroPorSucursal" xml:space="preserve">
+    <value>Retiro por sucursal</value>
+  </data>
+  <data name="SeleccionaFormadePago" xml:space="preserve">
+    <value>Selecciona Forma de Pago</value>
+  </data>
+  <data name="SeleccionaMetodoDeRetiro" xml:space="preserve">
+    <value>Seleccione forma de retiro</value>
+  </data>
+  <data name="Seleccione" xml:space="preserve">
+    <value>Seleccione...</value>
+  </data>
+  <data name="Sucursal" xml:space="preserve">
+    <value>Sucursal</value>
+  </data>
+  <data name="SucursalDisponibles" xml:space="preserve">
+    <value>Sucursales Disponibles</value>
+  </data>
+  <data name="TiempoEntregaSucursal" xml:space="preserve">
+    <value>Tiempo de entrega: INMEDIATA, solo titular de tarjeta de crédito con DNI.</value>
+  </data>
+  <data name="TipoTarjeta" xml:space="preserve">
+    <value>Tipo Tarjeta</value>
+  </data>
+  <data name="Titular" xml:space="preserve">
+    <value>Titular</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="Cambiar" xml:space="preserve">
+    <value>Cambiar</value>
+  </data>
+  <data name="IngresarContrasenaAnterior" xml:space="preserve">
+    <value>Ingresar contraseña anterior</value>
+  </data>
+  <data name="IngresarContrasenaNueva" xml:space="preserve">
+    <value>Ingresar nueva contraseña</value>
+  </data>
+  <data name="IngresarDepartamento" xml:space="preserve">
+    <value>Ingresar Departamento</value>
+  </data>
+  <data name="IngresarNumero" xml:space="preserve">
+    <value>Ingresar Numero</value>
+  </data>
+  <data name="IngresarPiso" xml:space="preserve">
+    <value>Ingresar Piso</value>
+  </data>
+  <data name="RepetirNuevaContrasena" xml:space="preserve">
+    <value>Repita la nueva contraseña</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" CodeBehind="UltimosPedidos.aspx.cs" Inherits="TFI.GUI.UltimosPedidos" %>
+<%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -6,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
 
     <div class="col-lg-12">
-        <h1 class="page-header">Ultimos pedidos <small>Mi Cuenta</small>
+        <h1 class="page-header"><%=Resources.Global.UltimosPedidos%><small><%=Resources.Global.MiCuenta%></small>
         </h1>
     </div>
 
@@ -31,10 +32,10 @@
             <ContentTemplate>
                 <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand">
                     <Columns>
-                        <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="Ver Detalle" ButtonType="Button" ControlStyle-CssClass="btn-info" />
-                        <asp:BoundField DataField="NroPedido" HeaderText="Número de Pedido" />
-                        <asp:BoundField DataField="FechaPedido" HeaderText="Fecha de Pedido" />
-                        <asp:BoundField DataField="Estado" HeaderText="Estado" />
+                        <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>"  Text="<%$Resources:Global, VerDetalle %>"  ButtonType="Button" ControlStyle-CssClass="btn-info" />
+                        <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
+                        <asp:BoundField DataField="FechaPedido" HeaderText="<%$Resources:Global, FechaPedido %>" />
+                        <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, Estado %>" />
                     </Columns>
                 </asp:GridView>
             </ContentTemplate>
@@ -50,7 +51,7 @@
             <button type="button" class="close" data-dismiss="modal"
                 aria-hidden="true">
                 ×</button>
-            <h3 id="myModalLabel">Detalle de pedido</h3>
+            <h3 id="myModalLabel"><%=Resources.Global.DetallePedido%></h3>
         </div>
         <div class="modal-body">
            
@@ -65,7 +66,7 @@
                         FieldHeaderStyle-ForeColor="Black"
                         BorderStyle="Groove" AutoGenerateRows="False">
                         <Fields>
-                            <asp:BoundField DataField="NroPedido" HeaderText="Número de pedido" />
+                            <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         </Fields>
                     </asp:DetailsView>
                     <asp:GridView id="grilladedetallesdelpedido" runat="server"></asp:GridView>
@@ -77,7 +78,7 @@
             <div class="modal-footer">
                 <button class="btn btn-info" data-dismiss="modal"
                     aria-hidden="true">
-                    Cerrar</button>
+                    <%=Resources.Global.Cerrar%></button>
             </div>
         </div>
                 </div>

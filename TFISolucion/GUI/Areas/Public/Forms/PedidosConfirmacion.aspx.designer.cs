@@ -7,12 +7,28 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TFI.GUI.Areas.Public.Forms
-    //namespace TFI.GUI
-{
+namespace TFI.GUI.Areas.Public.Forms {
     
     
     public partial class PedidosConfirmacion {
+        
+        /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Control Label3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// Control btnConfirmar.
@@ -24,6 +40,24 @@ namespace TFI.GUI.Areas.Public.Forms
         protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmar;
         
         /// <summary>
+        /// Control Label6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// Control btnPagar.
         /// </summary>
         /// <remarks>
@@ -31,5 +65,17 @@ namespace TFI.GUI.Areas.Public.Forms
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPagar;
+        
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new TFI.GUI.General.LayoutBasico Master {
+            get {
+                return ((TFI.GUI.General.LayoutBasico)(base.Master));
+            }
+        }
     }
 }

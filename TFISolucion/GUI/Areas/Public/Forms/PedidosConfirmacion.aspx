@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Pago" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="PedidosConfirmacion.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.PedidosConfirmacion" %>
+
 <%--<%@ Page Title="Pago" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="PedidosConfirmacion.aspx.cs" Inherits="TFI.GUI.PedidosConfirmacion" %>--%>
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
@@ -9,20 +11,22 @@
     <input type="text" id="pedidoId" value="<%=pedido%>" hidden="hidden" />
 
     <div>
-        <h1>Confirmación Pago</h1>
+        <h1>
+            <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, ConfirmacionPago%>"></asp:Label></h1>
         <hr />
     </div>
 
     <div class="col-md-12 col-sm-6">
         <div class="box" id="resumenBox" style="padding-bottom: 70px;">
-            <h4 class="box-title">Selección forma de Pago:</h4>
+            <h4 class="box-title"><%=Resources.Global.SeleccionaFormadePago%></h4>
             <hr class="barras" />
             <div>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="3">RESUMEN</th>
+                            <th colspan="3">
+                                <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Resumen%>"></asp:Label></th>
                         </tr>
                         <tr>
                             <td><%=Resources.Global.Descripcion%></td>
@@ -32,27 +36,27 @@
                     </thead>
                     <tbody>
                         <%if (lista.Any())
-                          {
-                              foreach (var item in lista)
-                              {%>
+                            {
+                                foreach (var item in lista)
+                                {%>
                         <tr>
                             <td><%=item.Producto.DescripProducto%></td>
                             <td class="td-centrado"><%=item.Cantidad%></td>
                             <td class="td-centrado"><%=item.Cantidad * item.Producto.PrecioUnitario%></td>
                         </tr>
                         <%}
-                          }%>
+                            }%>
                     </tbody>
                     <tfoot>
                         <% if (FormaEntrega != null)
-                           {
+                            {
                         %>
                         <tr>
-                            <td colspan="2">Envio <strong><%=((TFI.Entidades.FormaEntregaEntidad.Options)FormaEntrega).ToString() %></strong></td>
+                            <td colspan="2"><%=Resources.Global.FormaDeEnvio%> <strong><%=((TFI.Entidades.FormaEntregaEntidad.Options)FormaEntrega).ToString() %></strong></td>
                             <td class="td-centrado"><%if (FormaEntrega == 1)
-                                                      {%> 200.00 <% }
-                                                      else
-                                                      { %> Gratis! <%} %></td>
+                                                        {%> 200.00 <% }
+                                                                     else
+                                                                     { %> Gratis! <%} %></td>
                         </tr>
                         <% } %>
                         <tr>
@@ -79,18 +83,20 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2" class="text-center">Medios de Pago:
+                            <th colspan="2" class="text-center">
+                                <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, MediosDePago%>"></asp:Label>
                             </th>
                         </tr>
                     </thead>
                     <tr>
-                        <td>Transferencia</td>
                         <td>
-                            <button type="button" class="btn btn-success" id="btTrasnferencia">Enviar Datos</button>
+                            <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Transferencia%>"></asp:Label></td>
+                        <td>
+                            <button type="button" class="btn btn-success" id="btTrasnferencia" value="<%$Resources:Global, EnviarDatos%>"></button>
                         </td>
                     </tr>
                     <tr>
-                       <%-- <td>Mercado Pago</td>
+                        <%-- <td>Mercado Pago</td>
                         <td>
 
                             <%@ Import Namespace="mercadopago" %>
@@ -132,7 +138,7 @@
                         </td>--%>
                         <td>Tarjeta de Crédito</td>
                         <td>
-                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Text="Pagar"></asp:Button>
+                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Text="<%$Resources:Global, Pagar%>"></asp:Button>
                         </td>
                     </tr>
                 </table>
@@ -146,15 +152,15 @@
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" style="color: #de5900;">Felicitaciones!</h3>
+                    <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.Felicitaciones%></h3>
                 </div>
                 <div class="modal-body text-center">
-                    <h4 id="mdl_pedido_titulo" style="color: black;">El pedido N° : <span id="prod"></span>fue correctamente generado!</h4>
-                    <h4>Por favor seleccione una la forma de pago que desee.</h4>
+                    <h4 id="mdl_pedido_titulo" style="color: black;"><%=Resources.Global.Pedido%><span id="prod"></span><%=Resources.Global.PedidoCorrectamenteAgregado%></h4>
+                    <h4><%=Resources.Global.SeleccionaFormadePago%></h4>
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal">Continuar</button>
+                        <button type="button" class="btn" style="width: 200px; background-color: black; color: #fff;" data-dismiss="modal"><%=Resources.Global.Continuar%></button>
                     </div>
                 </div>
             </div>
@@ -168,14 +174,14 @@
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
-                    <h3 class="modal-title" style="color: #de5900;">Enviado!</h3>
+                    <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.Enviado%></h3>
                 </div>
                 <div class="modal-body text-center">
-                    <h4>Mail con datos transferencia enviado satisfactoriamente.</h4>
+                    <h4><%=Resources.Global.CorreoEnviadoConDatosDeTransferencia%></h4>
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnContinuarCierre">Continuar</a>
+                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnContinuarCierre"><%=Resources.Global.Continuar%></a>
                     </div>
                 </div>
             </div>

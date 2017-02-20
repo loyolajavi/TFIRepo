@@ -18,16 +18,59 @@ namespace TFI.GUI
         public UsuarioEntidad logueado;
         public List<ProductoEntidad> unosProductosListaDeseo = new List<ProductoEntidad>();
         public static ProductoEntidad producto;
+        private LenguajeEntidad idioma;
 
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
+
+                master = master.Master;
+            }
+            return null;
+        }
+        public ListaDeDeseos()
+        {
+            idioma = new LenguajeEntidad();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            idioma = new LenguajeEntidad();
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
             if (logueado == null)
             {
                 Response.Redirect("Home.aspx");
             }
+            if (!IsPostBack)
+            {
 
+                idioma = (LenguajeEntidad)Session["Idioma"];
+
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
+
+            }
+            else
+            {
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+                Session["Idioma"] = idioma;
+            }
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
+
+            }
             //if (!IsPostBack)
             //{
             //    cargarListaDeseos();
