@@ -40,8 +40,8 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <asp:Repeater ID="lstProductos" runat="server">
+            <tbody id="cuerpoTablaDeseos">
+<%--                <asp:Repeater ID="lstProductos" runat="server">
                     <ItemTemplate>
                         <tr class=<%#Eval("IdProducto")%>>
                             <td class="text-center" style="padding: 7px;">
@@ -59,13 +59,36 @@
                                 </p>
                             </td>
                             <td class="text-center">
-                                <%--<asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="Comprar" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />--%>
-                                  <asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="<%$Resources:Global, Comprar %>" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />
-                            </td>
+                                  <asp:button CssClass="btn btn-info" ID="btnComprar2" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="<%$Resources:Global, Comprar %>" OnClientClick="onBtnComprar(this)" />--%>
+                                <%--<asp:button CssClass="btn btn-info" ID="Button1" runat="server" data-producto2='<%#Eval("IdProducto")%>' Text="<%$Resources:Global, Comprar %>" OnClientClick="return onBtnComprar(this)" onClick="ComprarListaDeseos" />--%>
+   <%--                         </td>
                         </tr>
-
                     </ItemTemplate>
-                </asp:Repeater>
+                </asp:Repeater>--%>
+
+                <%--//PRUEBA - COMENTAR AL EJECUTAR--%>
+<%--                "<tr class="\{0}\">" +
+                            "<td class=\"text-center\" style=\"padding: 7px;\">" + 
+                                "<div class=\"img-thumbnail img-thumbnail-cart\">" + 
+                                    "<img class=\"img-responsive\" src=\"/Content/Images/Productos/{1}\" style=\"vertical-align: middle;\" />" + 
+                                "</div>" + 
+                            "</td>" + 
+                            "<td class=\"product-descripcion\">" + 
+                                "<h4>{2}</h4>" + 
+                                "<small>SKU: {3}</small>" + 
+                            "</td>" + 
+                            "<td class="\text-center\">" + 
+                                "<p>" + 
+                                    "<span>ARS</span> <span>$</span> <span>{4}</span>" + 
+                                "</p>" + 
+                            "</td>" + 
+                            "<td class=\"text-center\">" + 
+                                  "<asp:button CssClass=\"btn btn-info\" ID=\"btnComprar2\" runat=\"server\" data-producto2='{5}' Text=\"Comprar\" OnClientClick=\"return onBtnComprar(this)\" />" + 
+                            "</td>" + 
+                        "</tr>";--%>
+                <%--ENDPRUEBA--%>
+
+
             </tbody>
             <tfoot>
             </tfoot>
@@ -109,4 +132,13 @@
 
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsSection" runat="server">
+
+
+    <script>
+
+        actualizarDeseos();
+        //updateDeseos();
+        //updateProductos();
+    </script>
+
 </asp:Content>

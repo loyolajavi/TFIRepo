@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
@@ -15,6 +17,7 @@ namespace TFI.GUI.Shared
         private HttpContext Current = HttpContext.Current;
         private UsuarioEntidad usuario = new UsuarioEntidad();
         private LenguajeEntidad idioma;
+        public List<ProductoEntidad> AuxDeseos;
         public MiCuenta()
         {
             idioma = new LenguajeEntidad();
@@ -36,7 +39,14 @@ namespace TFI.GUI.Shared
                 liIngresar.Visible = false;
                 LiDeseos.Visible = true;
                 SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
-                CargarListaDeseosEnSession();
+
+                AuxDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+
+
+                if (AuxDeseos == null || !AuxDeseos.Any())
+                {
+                    CargarListaDeseosEnSession();
+                }
             }
             else
             {

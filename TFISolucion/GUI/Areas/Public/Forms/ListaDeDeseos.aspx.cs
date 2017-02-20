@@ -28,10 +28,11 @@ namespace TFI.GUI
                 Response.Redirect("Home.aspx");
             }
 
-            if (!IsPostBack)
-            {
-                cargarListaDeseos();
-            }
+            //if (!IsPostBack)
+            //{
+            //    cargarListaDeseos();
+            //}
+            //cargarListaDeseos();
         }
 
         
@@ -87,20 +88,6 @@ namespace TFI.GUI
             return producto.DescripProducto;
         }
 
-        protected void ComprarListaDeseos(object sender, EventArgs e)
-        {
-            cargarListaDeseos();
-        }
-
-        public void cargarListaDeseos()
-        {
-
-            unosProductosListaDeseo = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
-            lstProductos.DataSource = null;
-            //lstProductos.DataBind();
-            lstProductos.DataSource = unosProductosListaDeseo;
-            lstProductos.DataBind();
-        }
 
 
 
@@ -134,10 +121,47 @@ namespace TFI.GUI
 
         }
 
-        //protected void btnDesear_Click(object sender, EventArgs e)
-        //{
-        //    this.Master.ActualizarDeseos();
-        //}
+
+
+        [WebMethod]
+        public static List<String> ObtenerDeseosSession()
+        {
+
+            var Current = HttpContext.Current;
+
+            var plantilla = 
+                    "<tr class=\"{0}\">" +
+                        "<td class=\"text-center\" style=\"padding: 7px;\">" + 
+                            "<div class=\"img-thumbnail img-thumbnail-cart\">" + 
+                                "<img class=\"img-responsive\" src=\"/Content/Images/Productos/{1}\" style=\"vertical-align: middle;\" />" + 
+                            "</div>" + 
+                        "</td>" + 
+                        "<td class=\"product-descripcion\">" + 
+                            "<h4>{2}</h4>" + 
+                            "<small>SKU: {3}</small>" + 
+                        "</td>" + 
+                        "<td class=\"text-center\">" + 
+                            "<p>" + 
+                                "<span>ARS</span> <span>$</span> <span>{4}</span>" + 
+                            "</p>" + 
+                        "</td>" + 
+                        "<td class=\"text-center\">" +
+                                "<button class=\"btn btn-info\" id=\"btnComprar2\" data-producto2=\"{5}\" onclick=\"onBtnComprar(this)\">Comprar</button>" + 
+                          "</td>" + 
+                  "</tr>"; //FIN Plantilla
+
+            var pl = new List<String>();
+
+            var unosDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+
+            if (unosDeseos != null && unosDeseos.Any())
+            {
+                unosDeseos.ForEach(x => pl.Add(string.Format(plantilla, x.IdProducto, x.URL, x.DescripProducto, x.CodigoProducto, x.PrecioUnitario, x.IdProducto)));
+            }
+
+            return pl;
+
+        }
 
 
         

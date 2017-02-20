@@ -65,6 +65,7 @@ function onBtnComprar(btn2) {
                     //$modal.find('#prod').text(result.d);
                     //$modal.modal("show");
                     //updateProductos();
+                    actualizarDeseos();
                 }
             });
         }
@@ -72,7 +73,11 @@ function onBtnComprar(btn2) {
             alert("NO HAY STOCK");
         }
     });
-    return true;
+    //return true;
+    actualizarDeseos();
+    updateDeseos();
+    updateProductos();
+    app.reload();
 };
 
 
@@ -142,7 +147,7 @@ $('.btn-comprar').click(function () {
                 //REGENERO EL DROP
                 console.log(data.d.length);
                 container.append(data.d);
-                container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>")
+                container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>");
 
             }
         });
@@ -170,7 +175,7 @@ $('.btn-comprar').click(function () {
                 //REGENERO EL DROP
                 console.log(data.d.length);
                 container.append(data.d);
-                container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>")
+                container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>");
 
             }
         });
@@ -243,3 +248,31 @@ $('.btn-comprar').click(function () {
         });
         return flagStock; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
     }
+
+
+
+
+
+    var actualizarDeseos = function () {
+        $.ajax({
+            type: "POST",
+            url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ObtenerDeseosSession",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                var container = $('#cuerpoTablaDeseos');
+                var cant = data.d.length;
+                //LIMPIO DROP
+                container.empty();
+                //REGENERO EL DROP
+                console.log(data.d.length);
+                container.append(data.d);
+                
+
+            }
+        });
+    };
