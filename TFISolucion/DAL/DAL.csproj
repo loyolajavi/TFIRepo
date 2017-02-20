@@ -71,6 +71,7 @@
     <Compile Include="Repositories\FamiliaDAL.cs" />
     <Compile Include="Repositories\FormaEntregaDAL.cs" />
     <Compile Include="Repositories\FormaPagoDAL.cs" />
+    <Compile Include="Repositories\GraficoDAL.cs" />
     <Compile Include="Repositories\IvaProductoDAL.cs" />
     <Compile Include="Repositories\LenguajeControlDAL.cs" />
     <Compile Include="Repositories\LenguajeDAL.cs" />

@@ -46,6 +46,10 @@
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -67,6 +71,7 @@
     <Compile Include="Managers\DireccionCore.cs" />
     <Compile Include="Managers\EmpresaCore.cs" />
     <Compile Include="Managers\FamiliaCore.cs" />
+    <Compile Include="Managers\GraficoCore.cs" />
     <Compile Include="Managers\LenguajeCore.cs" />
     <Compile Include="Managers\ListaDeseosCore.cs" />
     <Compile Include="Managers\MonedaCore.cs" />

@@ -65,6 +65,10 @@
     <Compile Include="FamiliaEntidad.cs" />
     <Compile Include="FormaEntregaEntidad.cs" />
     <Compile Include="FormaPagoEntidad.cs" />
+    <Compile Include="GraficoMontoVentas.cs" />
+    <Compile Include="GraficoProductoPorCategoria.cs" />
+    <Compile Include="Graficos5Productosmasvendidos.cs" />
+    <Compile Include="GraficoVentasPeriodo.cs" />
     <Compile Include="IvaProductoEntidad.cs" />
     <Compile Include="LenguajeControlEntidad.cs" />
     <Compile Include="LenguajeEntidad.cs" />
