@@ -91,5 +91,12 @@ namespace TFI.GUI.Areas.Public.Forms
 
             HttpContext.Current.Session["Usuario"] = manager.loginUsuario(Encriptacion.ToHash(pass), user);
         }
+
+        protected void btnRegistro_Click(object sender, EventArgs e)
+        {
+            Master.RealizarLogueo(txtUsuario.Value, txtClave.Value);
+        }
+
+
     }
 }

@@ -39,18 +39,16 @@
                 <div class="clearfix">
                     <label for="box-registro"><%=Resources.Global.Usuario%></label>
                     <br />
-                    <input type="text" name="name" id="txtUser" />
-                    <br />
-                    <br />
+                    <%--<input type="text" name="name" id="txtUser" />--%>
+                    <input type="text" runat="server" class="form-control" id="txtUsuario" placeholder="Usuario" />
                     <label for="box-registro"><%=Resources.Global.Contrasena%></label>
                     <br />
-                    <input type="password" id="txtPass" name="name" />
-                    <br />
-                    <a class="link" href="#"><%=Resources.Global.OlvidoContrasena%></a>
-                    <br />
+                    <%--<input type="password" id="txtPass" name="name" />--%>
+                    <input type="password" runat="server" class="form-control" id="txtClave" placeholder="Clave" />
                     <br />
                     <div>
-                        <a class="btn btn-success btn-box-registro" id="btnRegistro" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;<%=Resources.Global.IniciarSesion%></a>
+                        <%--<i class="glyphicon glyphicon-user"></i>&nbsp;<%=Resources.Global.IniciarSesion%>--%>
+                        <asp:Button CssClass="btn btn-success btn-box-registro" ID="btnRegistro" OnClick="btnRegistro_Click" runat="server" Text="<%$Resources:Global, IniciarSesion %>" ></asp:Button>
                     </div>
                 </div>
             </div>
@@ -179,25 +177,25 @@
 
     <script>
 
-        $('#btnRegistro').click(function () {
+        //$('#btnRegistro').click(function () {
 
-            var user = $('#txtUser').val();
-            var pass = $('#txtPass').val();
+        //    var elUsuario = $('#txtUser').val();
+        //    var laClave = $('#txtPass').val();
 
-            $.ajax({
-                type: "POST",
-                url: "PedidosDireccion.aspx/Login",
-                data: JSON.stringify({
-                    user: user,
-                    pass: pass
-                }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function () { app.reload(); }
-            });
-        });
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "LayoutBasico.master/RealizarLogueo",
+        //        data: JSON.stringify({
+        //            elUsuario: elUsuario,
+        //            laClave: laClave
+        //        }),
+        //        contentType: "application/json; charset=utf-8",
+        //        dataType: "json",
+        //        error: function (xhr, status, error) {
+        //            alert(error);
+        //        },
+        //        success: function () { app.reload(); }
+        //    });
+        //});
     </script>
 </asp:Content>

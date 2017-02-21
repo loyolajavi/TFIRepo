@@ -145,39 +145,6 @@ namespace TFI.GUI.General
             Response.Redirect("Home.aspx");
         }
 
-        protected void Boton_Command(object sender, CommandEventArgs e)
-        {
-            switch (e.CommandName)
-            {
-                case ("Ingreso"):
-                    usuario = new UsuarioEntidad();
-                    usuario.Clave = Encriptacion.ToHash(IngresoClave.Value);
-                    usuario = _manager.loginUsuario(usuario.Clave, IngresoUsuario.Value);
-
-                    if (!string.IsNullOrEmpty(usuario.Nombre))
-                    {
-                        usuario.Familia = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(usuario.IdUsuario);
-                        Session["Usuario"] = usuario;
-                        //Session["Permiso"] = unaFamilia.IdFamilia;
-                        SetUsuarioLogueado(usuario.NombreUsuario);
-
-                        CargarListaDeseosEnSession();
-
-                        if (usuario.IdUsuarioTipo == 2)
-                        {
-                            divLinkIntranet.Visible = true;
-                            Response.Redirect("/Areas/Intranet/Forms/ordenespedido.aspx");
-                        }
-
-                        Response.Redirect(Request.RawUrl);
-                    }
-                    else
-                    {
-                        MensajeError.InnerText = "Usuario no registrado!";
-                    }
-                    break;
-            }
-        }
 
         protected void searchButton_Click(object sender, EventArgs e)
         {
@@ -236,5 +203,40 @@ namespace TFI.GUI.General
             }
             return 0;
         }
+
+        public void RealizarLogueo(string elUsuario, string laClave)
+        {
+            usuario = new UsuarioEntidad();
+            usuario.Clave = Encriptacion.ToHash(laClave);
+            usuario = _manager.loginUsuario(usuario.Clave, elUsuario);
+
+            if (!string.IsNullOrEmpty(usuario.Nombre))
+            {
+                usuario.Familia = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(usuario.IdUsuario);
+                Session["Usuario"] = usuario;
+                //Session["Permiso"] = unaFamilia.IdFamilia;
+                SetUsuarioLogueado(usuario.NombreUsuario);
+
+                CargarListaDeseosEnSession();
+
+                if (usuario.IdUsuarioTipo == 2)
+                {
+                    divLinkIntranet.Visible = true;
+                    Response.Redirect("/Areas/Intranet/Forms/ordenespedido.aspx");
+                }
+
+                Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
+                MensajeError.InnerText = "Usuario no registrado!";
+            }
+        }
+
+        protected void Loguear(object sender, EventArgs e)
+        {
+            RealizarLogueo(IngresoUsuario.Value, IngresoClave.Value);
+        }
+
     }
 }

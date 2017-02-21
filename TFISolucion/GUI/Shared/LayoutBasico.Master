@@ -138,7 +138,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <asp:Button ID="IngresoBoton" OnCommand="Boton_Command" CommandName="Ingreso" runat="server" CssClass="btn btn-success btn-block" Text="<%$Resources:Global, Ingresar %>"/>
+                                                        <asp:Button ID="IngresoBoton" OnClick="Loguear" runat="server" CssClass="btn btn-success btn-block" Text="<%$Resources:Global, Ingresar %>"/>
                                                     </div>
                                                 </div>
                                             </div>
