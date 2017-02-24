@@ -60,7 +60,6 @@ namespace TFI.GUI.General
         public void SetUsuarioLogueado(string label)
         {
             EtiquetaUsuario.InnerText = label;
-            Salir.Text = "Salir";
             Salir.CssClass = "btn-danger";
         }
 

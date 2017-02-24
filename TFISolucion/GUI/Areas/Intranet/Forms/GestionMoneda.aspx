@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="margin-top:40px; margin-left:100px;">
         <div class="form-group">
             <label for="grillaMoneda"></label>
             <asp:GridView ID="grillaCotizacion" CssClass="table" runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
@@ -70,6 +70,7 @@
             </div>
         </div>
     </div>--%>
+        </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
     <script src="/Scripts/shared/Validaciones.js"></script>

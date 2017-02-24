@@ -10,7 +10,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class PermisosEmpleados : System.Web.UI.Page
+    public partial class PermisosEmpleados : BasePage
     {
 
 

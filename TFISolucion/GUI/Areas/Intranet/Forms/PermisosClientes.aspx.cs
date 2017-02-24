@@ -10,7 +10,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class PermisosClientes : System.Web.UI.Page
+    public partial class PermisosClientes : BasePage
     {
         public List<UsuarioEntidad> unosClientes = new List<UsuarioEntidad>();
         private UsuarioCore managerCliente = new UsuarioCore();

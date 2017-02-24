@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, CategoriasProductos %>"></asp:Label><small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
+                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, CategoriasProductos %>"> </asp:Label> <small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="form-group">
-                    <asp:TextBox ID="txtProductoaBuscar" CssClass="form-control" placeholder="Ingreso codigo de producto" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtProductoaBuscar" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server"></asp:TextBox>
                     <br />
                     <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
 

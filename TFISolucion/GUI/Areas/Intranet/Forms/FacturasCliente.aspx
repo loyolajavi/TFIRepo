@@ -53,12 +53,12 @@
                     <ContentTemplate>
                         <asp:GridView ID="grilladefacturas" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand" PageSize="4">
                             <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="Ver Detalle" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" />
                                 <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" />
                                 <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:ButtonField CommandName="GenerarNC" HeaderText="<%$Resources:Global, Generar NC %>" Text="<%$Resources:Global, Generar NC %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:ButtonField CommandName="GenerarNC" HeaderText="<%$Resources:Global, GenerarNC %>" Text="<%$Resources:Global, GenerarNC %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>

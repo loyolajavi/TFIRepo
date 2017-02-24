@@ -12,7 +12,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class UpdateEmpleado : System.Web.UI.Page
+    public partial class UpdateEmpleado : BasePage
     {
 
         public UsuarioEntidad unEmpleado = new UsuarioEntidad();

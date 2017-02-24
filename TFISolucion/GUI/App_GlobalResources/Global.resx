@@ -831,4 +831,13 @@
   <data name="RepetirNuevaContrasena" xml:space="preserve">
     <value>Repita la nueva contraseña</value>
   </data>
+  <data name="Categoria" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="IngresoCodigoProducto" xml:space="preserve">
+    <value>Ingrese el codigo del producto</value>
+  </data>
+  <data name="Salir" xml:space="preserve">
+    <value>Salir</value>
+  </data>
 </root>

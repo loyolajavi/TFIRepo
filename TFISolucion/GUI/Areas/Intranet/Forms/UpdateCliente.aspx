@@ -169,7 +169,7 @@
 
                 <%--Direccion de Envío--%>
                 <div id="divDirEnvio" role="form" clientidmode="static" runat="server">
-                    <h4 class="page-header"><asp:Label ID="Label19" runat="server" Text="<%$Resources:Global, DireccionDeEnvio %>"></asp:Label></h4>
+                    <h4 class="page-header"><asp:Label ID="Label19" runat="server" Text="<%$Resources:Global, DireccionesDeEnvio %>"></asp:Label></h4>
                     <div class="form-group">
                         <label for="calleenvio"><asp:Label ID="Label20" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label></label><br />
                         <input type="text" class="input-sm" id="txtCalleEnvio" runat="server" clientidmode="static" />

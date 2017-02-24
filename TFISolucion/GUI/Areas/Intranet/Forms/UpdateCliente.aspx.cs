@@ -12,7 +12,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class UpdateCliente : System.Web.UI.Page
+    public partial class UpdateCliente : BasePage
     {
         public UsuarioEntidad unCliente = new UsuarioEntidad();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
