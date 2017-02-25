@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
 {
-    public partial class PedidosConfirmacion : System.Web.UI.Page
+    public partial class PedidosConfirmacion : BasePage
     {
         public UsuarioEntidad logueado;
         public List<PedidoLista> lista;

@@ -11,7 +11,7 @@
     <input value="<%=formaEnvioId%>" id="formaEnvioId" hidden="hidden" />
 
     <div>
-        <h1><%=Resources.Global.DatosPersonales%>/h1>
+        <h1><%=Resources.Global.DatosPersonales%></h1>
         <hr />
     </div>
     <div class="col-md-12 col-sm-6">

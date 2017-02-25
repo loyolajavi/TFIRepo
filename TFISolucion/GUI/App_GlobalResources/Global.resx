@@ -840,4 +840,7 @@
   <data name="Salir" xml:space="preserve">
     <value>Salir</value>
   </data>
+  <data name="Transferencia" xml:space="preserve">
+    <value>Transferencia</value>
+  </data>
 </root>

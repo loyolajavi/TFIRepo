@@ -84,15 +84,16 @@
                     <thead>
                         <tr>
                             <th colspan="2" class="text-center">
-                                <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, MediosDePago%>"></asp:Label>
+                                <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, MediosDePago %>"></asp:Label>
                             </th>
                         </tr>
                     </thead>
                     <tr>
                         <td>
-                            <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Transferencia%>"></asp:Label></td>
+                            <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Transferencia %>"></asp:Label></td>
                         <td>
-                            <button type="button" class="btn btn-success" id="btTrasnferencia" value="<%$Resources:Global, EnviarDatos%>"></button>
+                            <button type="button" class="btn btn-success" id="btTrasnferencia"  value=">
+                                <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, EnviarDatos %>"></asp:Label></button>
                         </td>
                     </tr>
                     <tr>
