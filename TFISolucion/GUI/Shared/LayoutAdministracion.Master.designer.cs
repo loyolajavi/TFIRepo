@@ -40,15 +40,6 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.WebControls.LinkButton btnBuscar;
         
         /// <summary>
-        /// Control EtiquetaUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor EtiquetaUsuario;
-        
-        /// <summary>
         /// Control ddlLanguages.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace TFI.GUI.General {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLanguages;
+        
+        /// <summary>
+        /// Control EtiquetaUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor EtiquetaUsuario;
         
         /// <summary>
         /// Control Salir.

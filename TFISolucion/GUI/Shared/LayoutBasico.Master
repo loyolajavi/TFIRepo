@@ -48,6 +48,14 @@
                             <li id="LiMoneda" runat="server">
                                 <asp:DropDownList ID="monedaDRW" runat="server" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;" ClientIDMode="Static" AutoPostBack="true" CssClass="dropdown-toggle" OnSelectedIndexChanged="cambiarSeleccion"></asp:DropDownList>
                             </li>
+                             <li>
+                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
+
+                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
+                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
+
+                                </asp:DropDownList>
+                            </li>
                             <li id="divLinkIntranet" runat="server">
                                 <a class="btn btn-sm" href="/Areas/Intranet/Forms/ordenespedido.aspx" runat="server" id="LinkIntranet">Intranet</a>
                             </li>
@@ -73,14 +81,7 @@
                                     </li>
                                 </ul>
                             </li>--%>
-                            <li>
-                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
-                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
-                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
-
-                                </asp:DropDownList>
-                            </li>
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">

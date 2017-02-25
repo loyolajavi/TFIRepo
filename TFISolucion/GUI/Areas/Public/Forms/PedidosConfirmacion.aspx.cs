@@ -128,6 +128,31 @@ namespace TFI.GUI.Areas.Public.Forms
 
             Current.Session["UltimoPedido"] = pedido.IdPedido;
 
+
+            //AGREGADO PARA QUE DESCUENTE STOCK AL GENERAR PEDIDO
+            foreach(var item in lista){ StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
+            NuevoStock.IdProducto = item.Producto.IdProducto;
+            NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
+            NuevoStock.IdSucursal = (int)sucursalId;
+
+            StockCore StockBLL = new StockCore();
+
+            List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
+            StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
+
+
+
+            if (StockDeProducto.Count > 0)
+            {
+                NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto - item.Cantidad;
+                StockBLL.Update(NuevoStock);
+            }
+           
+}
+           
+
+            //HASTA ACA LO DE STOCK
+
             return pedido.IdPedido;
         }
 

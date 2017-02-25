@@ -35,7 +35,7 @@
                         </button>
                         <div style="vertical-align: middle;" id="idlogoempresa">
                             <a href="/Areas/Public/Forms/Home.aspx">
-                                <img class="img-responsive" src="/Content/Images/Empresas/Logo.png" alt="Empresa"  style="height: 40px;"/></a>
+                                <img class="img-responsive img-logo" src="/Content/Images/Empresas/Logo.png" alt="Empresa"  style="height: 40px;"/></a>
                         </div>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,6 +51,14 @@
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
+                           <li>
+                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
+
+                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
+                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
+
+                                </asp:DropDownList>
+                            </li>
 
                             <li>
                                 <a href="/Areas/Public/Forms/DatosPersonales.aspx" runat="server" id="EtiquetaUsuario" onclick="return true;"></a>
@@ -74,14 +82,7 @@
                                     </li>
                                 </ul>
                             </li>--%>
-                              <li>
-                                <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
-                                    <asp:ListItem Text="<%$Resources:Global, Espanol %>" Value="es" />
-                                    <asp:ListItem Text="<%$Resources:Global, Ingles %>" Value="en-us" />
-
-                                </asp:DropDownList>
-                            </li>
 
 
                             <li>

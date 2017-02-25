@@ -130,11 +130,14 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 }
                 else
                 {
+                    SucursalCore coreSucursal = new SucursalCore();
+                    var listSucursales = coreSucursal.FindAll();
+
                     StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
                     NuevoStock.IdProducto = item.IdProducto;
                     NuevoStock.CantidadProducto = 0;
                     NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
-                    NuevoStock.IdSucursal = 1;
+                    NuevoStock.IdSucursal = listSucursales[0].IdSucursal; ;
 
                     StockCore StockBLL = new StockCore();
                     StockBLL.Insert(NuevoStock);
@@ -156,12 +159,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
             var usuarioEntity = new UsuarioEntidad();
             var Current = HttpContext.Current;
 
+            SucursalCore coreSucursal = new SucursalCore();
+            var listSucursales = coreSucursal.FindAll();
+
             usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
 
             StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
             NuevoStock.IdProducto = producto;
             NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
-            NuevoStock.IdSucursal = 1;
+            NuevoStock.IdSucursal = listSucursales[0].IdSucursal;
+            NuevoStock.CantidadProducto = stock;
 
             StockCore StockBLL = new StockCore();
 
