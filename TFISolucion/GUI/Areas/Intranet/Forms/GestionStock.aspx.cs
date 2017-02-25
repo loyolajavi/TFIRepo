@@ -175,24 +175,49 @@ namespace TFI.GUI.Areas.Intranet.Forms
             List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
             StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
 
-           
+
 
             if (StockDeProducto.Count > 0)
             {
-
-                NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
-                StockBLL.Update(NuevoStock);
-
+                if (stock < 0)
+                {
+                    int debesermayora0;
+                    debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
+                    if (debesermayora0 >= 0)
+                    {
+                        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+                        StockBLL.Update(NuevoStock);
+                    }
+                }
+                else
+                {
+                    NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+                    StockBLL.Update(NuevoStock);
+                }
             }
             else
             {
-                StockBLL.Insert(NuevoStock);
+                if (stock < 0)
+                {
+                    int debesermayora0;
+                    debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
+                    if (debesermayora0 >= 0)
+                    {
+                        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+                        StockBLL.Insert(NuevoStock);
+                    }
+                    else
+                    {
+                        StockBLL.Insert(NuevoStock);
+                    }
+
+
+                }
+
+
+
+
             }
-
-        
-            
-
         }
-
     }
 }
