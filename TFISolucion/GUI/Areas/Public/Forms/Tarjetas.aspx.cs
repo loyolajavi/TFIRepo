@@ -226,16 +226,60 @@ namespace TFI.GUI
             NuevaTarjeta.CodSeguridad = Convert.ToInt32(txtCodigoSeguridad.Value);
             NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
 
-            TarjetaBLL.InsertTarjeta(NuevaTarjeta);
+            bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
+
+            if (TarjetaValida == true)
+            {
+
+                if (NuevaTarjeta.Vencimiento.Date >= DateTime.Now.Date) { 
+
+                TarjetaBLL.InsertTarjeta(NuevaTarjeta);
+
+                CargarGrillaTarjetas();
+
+                Response.Redirect(Request.RawUrl);
+
+                }
+                else
+                {
+                    NotificationFechaInvalida();
+                }
+            }
+            else
+            {
+                NotificationTarjetaInvalida();
+            }
 
             
-            CargarGrillaTarjetas();
-
-            Response.Redirect(Request.RawUrl);
 
 
         }
 
+        private void NotificationTarjetaInvalida()
+        {
+            //notificationTarjeta.InnerHtml = "El Numero de tarjeta es invalido";
+            //notificationTarjeta.Visible = true;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("alert('Numero de Tarjeta Invalido');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                       "ModalScript", sb.ToString(), false);
+        }
+
+        private void NotificationFechaInvalida()
+        {
+            //notificationTarjeta.InnerHtml = "La fecha de expiracion de tarjeta es invalida";
+            //notificationTarjeta.Visible = true;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("alert('Fecha de expiracion Invalida');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                       "ModalScript", sb.ToString(), false);
+        }
         protected void grilladetarjetas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)

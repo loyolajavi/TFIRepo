@@ -23,7 +23,7 @@
                     <asp:BoundField DataField="NumeroTarjeta" HeaderText="<%$Resources:Global, NumeroTarjeta %>" />
                     <asp:TemplateField HeaderText="<%$Resources:Global, Tipo %>">
                         <ItemTemplate>
-                            <asp:DropDownList ID="ddlTipoDeTarjeta" runat="server"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlTipoDeTarjeta" runat="server" disabled="true"></asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="Titular" HeaderText="<%$Resources:Global, Titular %>" />
@@ -54,7 +54,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2><%=Resources.Global.AgregarTarjeta%></h2>
-                    <div id="notificationTarjeta">
+                    <div id="notificationTarjeta" runat="server" ClientIdMode="Static">
                     </div>
                 </div>
                 <div class="modal-body">
