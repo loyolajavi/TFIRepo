@@ -843,4 +843,7 @@
   <data name="Transferencia" xml:space="preserve">
     <value>Transferencia</value>
   </data>
+  <data name="Graficos" xml:space="preserve">
+    <value>Gráficos</value>
+  </data>
 </root>
