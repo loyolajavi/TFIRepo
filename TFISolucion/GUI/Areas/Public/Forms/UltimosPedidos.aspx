@@ -32,7 +32,7 @@
             <ContentTemplate>
                 <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand">
                     <Columns>
-                        <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>"  Text="<%$Resources:Global, VerDetalle %>"  ButtonType="Button" ControlStyle-CssClass="btn-info" />
+                        <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>"  Text="<%$Resources:Global, VerDetalle %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />
                         <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         <asp:BoundField DataField="FechaPedido" HeaderText="<%$Resources:Global, FechaPedido %>" />
                         <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, Estado %>" />

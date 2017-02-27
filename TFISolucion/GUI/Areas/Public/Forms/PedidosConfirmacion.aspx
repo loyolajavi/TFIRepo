@@ -139,7 +139,7 @@
                         </td>--%>
                         <td>Tarjeta de Crédito</td>
                         <td>
-                          <%--  <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Text="<%$Resources:Global, Pagar%>"></asp:Button>--%>
+                          <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" style="display:none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
                              <a href="#mdl_tarjeta" class="btn btn-success" data-toggle="modal">Pagar</a>
                         </td>
                     </tr>
@@ -266,7 +266,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnSalir"><%=Resources.Global.Continuar%></a>
+                      <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnSalir"><%=Resources.Global.Continuar%></a>
                     </div>
                 </div>
             </div>
@@ -370,7 +370,10 @@
         });
 
         $('#btnpagarmodal').click(function () {
-            limpiarPedido();
+            var button = $('#btnPagar');
+            button.click();
+            var $modal = $('#mdl_tarjeta');
+            $modal.modal("hide");
         });
 
     </script>

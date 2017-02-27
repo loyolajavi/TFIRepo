@@ -181,15 +181,36 @@ namespace TFI.GUI
 
         }
 
+        public class DetalleDTO
+        {
+            public string Producto { get; set; }
+            public int Cantidad { get; set; }
+            public decimal PrecioUnitario { get; set; }
+            public decimal Total { get; set; }
+        }
+
         protected void grilladeultimospedidos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            ProductoCore coreProducto = new ProductoCore();
+
             if (e.CommandName.Equals("VerDetalle"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
                 PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
                 List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
-                grilladedetallesdelpedido.DataSource = ListadeDetalles;
+                List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
+                foreach (var item in ListadeDetalles)
+                {
+                    DetalleDTO NuevoDetalle = new DetalleDTO();
+                    NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
+                    NuevoDetalle.Cantidad = item.Cantidad;
+                    NuevoDetalle.PrecioUnitario = item.PrecioUnitario;
+                    NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
+
+                    ListaDetallesDTO.Add(NuevoDetalle);
+                }
+                grilladedetallesdelpedido.DataSource = ListaDetallesDTO;
                 grilladedetallesdelpedido.DataBind();
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");

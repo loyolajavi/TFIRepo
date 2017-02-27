@@ -288,7 +288,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
                 
 
-                Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
+                //Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
                 
 
            
