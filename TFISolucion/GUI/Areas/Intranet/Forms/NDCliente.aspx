@@ -124,4 +124,38 @@
             </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
+      <script src="../../../Scripts/shared/Validaciones.js"></script>
+
+    <script>
+        var obtenerTags = function () {
+            var result;
+            $.ajax({
+                type: "POST",
+                url: "OrdenesPedido.aspx/ObtenerClientes",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+
+            return result;
+        }
+
+        var availableTags = obtenerTags();
+
+        //$("#txtClienteBusqueda").change(function () {
+        //    $(this).autocomplete({
+        //        source: availableTags
+        //    });
+        //});
+
+        $("#txtClienteBusqueda").autocomplete({
+            source: availableTags
+        });
+    </script>
 </asp:Content>

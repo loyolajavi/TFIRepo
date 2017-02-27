@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="GestionContenidoCategorias.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.GestionContenidoCategorias" EnableEventValidation="false" %>
+
 <%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -11,7 +12,9 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Categorias %>"> </asp:Label><small> <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
+                <h1 class="page-header">
+                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Categorias %>"> </asp:Label><small>
+                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -47,43 +50,47 @@
                         <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></a>
                 </div>
             </div>
-            </div>
+        </div>
 
-            <div class="modal fade" id="modalCategoria">
-                <div class="modal-dialog">
-                    <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
-                    <%--<ContentTemplate>--%>
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h2><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
-                            <div id="notificationcategoria">
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upModalProducto">
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="btnGrabarCategoria" />
-                                </Triggers>
-                                <ContentTemplate>
-
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label for="descripcion"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></label>
-                                            <input type="text" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" clientidmode="static" />
-                                        </div>
-                                    </form>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                            <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                            <asp:Button runat="server" ID="btnGrabarCategoria" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarCategoria(this)" OnClick="btnGrabarCategoria_Click" />
+        <div class="modal fade" id="modalCategoria">
+            <div class="modal-dialog">
+                <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
+                <%--<ContentTemplate>--%>
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2>
+                            <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
+                        <div id="notificationcategoria">
                         </div>
                     </div>
+                    <div class="modal-body">
+                        <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upModalProducto">
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btnGrabarCategoria" />
+                            </Triggers>
+                            <ContentTemplate>
 
-
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="descripcion">
+                                            <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></label>
+                                        <input type="text" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" clientidmode="static" />
+                                    </div>
+                                </form>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
+                        <div class="text-center">
+                            <asp:Button runat="server" CssClass="btn btn-primary" ID="btnGrabarCategoria" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarCategoria(this)" OnClick="btnGrabarCategoria_Click" />
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
     <script src="../../../Scripts/shared/Validaciones.js"></script>

@@ -70,7 +70,7 @@
             <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
             <%--<ContentTemplate>--%>
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></h2>
                     <div id="notificationproducto">

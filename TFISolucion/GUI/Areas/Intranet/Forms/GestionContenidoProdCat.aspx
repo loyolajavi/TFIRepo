@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="GestionContenidoProdCat.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.GestionContenidoProdCat" EnableEventValidation="false" %>
+
 <%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -11,7 +12,10 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-header"><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, CategoriasProductos %>"> </asp:Label> <small><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
+                <h1 class="page-header">
+                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, CategoriasProductos %>"> </asp:Label>
+                    <small>
+                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
@@ -49,10 +53,11 @@
                         </div>
 
                         <br />
-
-                        <div class=" text-center">
-                            <a href="#modalProdCategoria" class="btn btn-primary" data-toggle="modal">
-                                <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class=" form-group">
+                                <a href="#modalProdCategoria" class="btn btn-primary " data-toggle="modal">
+                                    <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,9 +67,10 @@
                         <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
                         <%--<ContentTemplate>--%>
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header text-center">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
+                                <h2>
+                                    <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
                                 <div id="notificationprodcategoria">
                                 </div>
                             </div>
@@ -75,28 +81,30 @@
                                     </Triggers>
                                     <ContentTemplate>
 
-                                        <form role="form">
+                                        <form role="form" class=" col-xs-8">
                                             <div class="form-group">
-                                                <label for="ddlProducto"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Producto %>"></asp:Label></label>
-                                                <asp:DropDownList ID="ddlProducto" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                                <label for="ddlProducto">
+                                                    <asp:Label ID="Label5" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Producto %>"></asp:Label></label>
+                                                <asp:DropDownList ID="ddlProducto" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
                                             </div>
                                             <div class="form-group">
-                                                <label for="ddlCategoria"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
-                                                <asp:DropDownList ID="ddlCategoria" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                                <label for="ddlCategoria">
+                                                    <asp:Label ID="Label6" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
+                                                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
                                             </div>
                                         </form>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                                 <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                              <div style="text-align:center;">
-                                  <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
-                           
-                                  </div>
-                                   </div>
+                                <div style="text-align: center;" class="form-group">
+                                    <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" class="btn btn-primary "  Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 

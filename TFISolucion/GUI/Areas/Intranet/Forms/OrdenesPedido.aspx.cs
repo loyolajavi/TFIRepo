@@ -231,7 +231,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
                 List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
                 grilladedetallesdelpedido.DataSource = ListadeDetalles;
-                grilladedetallesdelpedido.DataBind();
+                grilladedetallesdelpedido.DataBind(); 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
                 sb.Append("$('#currentdetail').modal('show');");
