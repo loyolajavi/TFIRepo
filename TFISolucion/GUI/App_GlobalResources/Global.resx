@@ -882,4 +882,7 @@
   <data name="CorreoEnviadoCorrectamente" xml:space="preserve">
     <value>El correo se ha enviado correctamente.Aguarde y su consulta sera respondida en breve.</value>
   </data>
+  <data name="GestionStockMenu" xml:space="preserve">
+    <value>Gestión Stock</value>
+  </data>
 </root>

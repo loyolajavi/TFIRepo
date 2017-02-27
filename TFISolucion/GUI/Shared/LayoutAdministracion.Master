@@ -174,7 +174,7 @@
                                         </li>
                                         <li>
                                             <a href="GestionStock.aspx">
-                                                <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, GestionStock %>"></asp:Label></a>
+                                                <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, GestionStockMenu %>"></asp:Label></a>
                                         </li>
                                         <li>
                                             <a href="GestionContenidoQuienesSomos.aspx">

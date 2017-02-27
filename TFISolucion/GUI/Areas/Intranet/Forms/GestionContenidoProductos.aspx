@@ -95,15 +95,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlMarcaModal"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, Marca %>"></asp:Label></label>
-                                    <asp:DropDownList ID="ddlmarcamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlmarcamodal" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlCategoriaModal"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
-                                    <asp:DropDownList ID="ddlcategoriamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlcategoriamodal" runat="server" ClientIDMode="static" CssClass="form-control"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlIVA">Iva</label>
-                                    <asp:DropDownList ID="ddlivamodal" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlivamodal" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
                                 </div>
 
                                 <div class="form-group">

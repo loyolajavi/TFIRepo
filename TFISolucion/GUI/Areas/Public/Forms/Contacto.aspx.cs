@@ -34,10 +34,11 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            notificacion.Visible = false;
+            contenedorsinpedidos.Visible = false;
             if (!IsPostBack)
             {
-                notificacion.Visible = false;
-
+               
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 if (idioma == null)
                 {
@@ -67,11 +68,15 @@ namespace TFI.GUI
             notificacion.Visible = true;
             Correo manager = new Correo();
             manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", txtNombre.Value, txtTelefono.Value,
-               "martinez.juan.marcos@gmail.com", txtApellido.Value + " "+   txtNombre.Value +"-"+ txtCorreo.Value, txtAsunto.Value , txtMensaje.Value);
+               "martinez.juan.marcos@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
             {
-                notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
-                // notificacion.InnerHtml = <%$Resources:Global, Correo %>;
-                //notificacion.InnerText = Resources.Global.Correo;
+                idioma = (LenguajeEntidad)Session["Idioma"];
+                if (idioma.DescripcionLenguaje == "es")
+                    notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
+                else
+                    notificacion.InnerHtml = "<strong>The message has been send!</strong>";
+                // notificacion.InnerHtml = <%$Resources:Global, co %>;
+                //notificacion.InnerText = Resources.Global.correo;
                 //notificacion.InnerHtml = "Resources:Global,
                 //CorreoEnviadoCorrectamente";
                 txtNombre.Value = "";

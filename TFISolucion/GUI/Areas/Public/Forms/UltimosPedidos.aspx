@@ -45,9 +45,9 @@
    
 
     <div id="currentdetail" class="modal fade" >
-        <div class="modal-dialog"  style="width: 650px">
+        <div class="modal-dialog"  style="width: 550px; text-align:center" >
             <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-center">
             <button type="button" class="close" data-dismiss="modal"
                 aria-hidden="true">
                 ×</button>
@@ -69,7 +69,7 @@
                             <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         </Fields>
                     </asp:DetailsView>
-                    <asp:GridView id="grilladedetallesdelpedido" runat="server" ></asp:GridView>
+                    <asp:GridView id="grilladedetallesdelpedido" runat="server" CssClass="tablesorter table table-striped table-hover table-users" ></asp:GridView>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="grilladeultimospedidos" EventName="RowCommand" />

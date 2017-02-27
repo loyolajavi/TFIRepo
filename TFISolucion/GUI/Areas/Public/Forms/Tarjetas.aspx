@@ -51,7 +51,7 @@
     <div class="modal fade" id="modalAltaTarjeta">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2><%=Resources.Global.AgregarTarjeta%></h2>
                     <div id="notificationTarjeta" runat="server" ClientIdMode="Static">
@@ -66,7 +66,7 @@
                             <form role="form" id="formPass">
                                 <div class="form-group">
                                     <label for="tipoTarjeta"><%=Resources.Global.TipoTarjeta%></label>
-                                    <asp:DropDownList ID="tipoTarjeta" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="tipoTarjeta" runat="server" CssClass="form-control"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>

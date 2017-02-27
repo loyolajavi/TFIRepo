@@ -162,7 +162,7 @@
             <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
             <%--<ContentTemplate>--%>
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2>
                         <asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, AgregarDireccionDeFacturacion %>"></asp:Label></h2>
@@ -199,13 +199,13 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
-                                    <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                    <asp:Button runat="server" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-primary btn-block" ID="btnGrabarDireccionDeFacturacion" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" OnClientClick="return onBtnGrabarClick(this)" OnClick="GrabarDireccionDeFacturacion_Click" />
                 </div>
             </div>
         </div>
@@ -268,7 +268,7 @@
 
             <!--Contenido de la ventana Modal-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2>
                         <asp:Label ID="Label19" runat="server" Text="<%$Resources:Global, AgregarDireccionDeEnvio %>"></asp:Label></h2>
@@ -305,7 +305,7 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
-                                    <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProvinciaEnvio" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
@@ -321,7 +321,7 @@
         <div class="modal-dialog">
 
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" id="btnCerrarModal" class="close" data-dismiss="modal">&times;</button>
                     <h2> <asp:Label ID="Label26" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></h2>
                     <div id="notification"></div>
@@ -365,7 +365,7 @@
 
             <!--Contenido de la ventana Modal-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2>  <asp:Label ID="Label30" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></h2>
                     <div id="notificationTelefono">
@@ -388,7 +388,7 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label33" runat="server" Text="<%$Resources:Global, Tipo %>"></asp:Label>
-                                    <asp:DropDownList ID="ddlTipoTel" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipoTel" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
                                 </div>
                             </form>
                         </ContentTemplate>
