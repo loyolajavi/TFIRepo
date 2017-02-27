@@ -44,8 +44,8 @@
 
    
 
-    <div id="currentdetail" class="modal fade">
-        <div class="modal-dialog">
+    <div id="currentdetail" class="modal fade" >
+        <div class="modal-dialog"  style="width: 650px">
             <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"
@@ -53,12 +53,12 @@
                 ×</button>
             <h3 id="myModalLabel"><%=Resources.Global.DetallePedido%></h3>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" >
            
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
                     <asp:DetailsView ID="DetailsView1" runat="server"
-                        CssClass="table table-bordered table-hover"
+                        CssClass="table-striped" 
                         BackColor="White" ForeColor="Black"
                         FieldHeaderStyle-Wrap="false"
                         FieldHeaderStyle-Font-Bold="true"
@@ -69,7 +69,7 @@
                             <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         </Fields>
                     </asp:DetailsView>
-                    <asp:GridView id="grilladedetallesdelpedido" runat="server"></asp:GridView>
+                    <asp:GridView id="grilladedetallesdelpedido" runat="server" ></asp:GridView>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="grilladeultimospedidos" EventName="RowCommand" />

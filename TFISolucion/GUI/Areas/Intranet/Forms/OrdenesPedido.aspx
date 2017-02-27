@@ -55,7 +55,7 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
                     <ContentTemplate>
-                        <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" PageSize="4">
+                        <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand">
                             <Columns>
                                 <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
@@ -79,7 +79,7 @@
     </div>
 
     <div id="currentdetail" class="modal fade">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width: 650px">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"

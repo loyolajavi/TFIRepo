@@ -287,10 +287,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
 
             var pedidos = core.SelectAllByCUIT(usuarioentidad.CUIT);
-
-            return pedidos.Select(x => x.NombreUsuario).ToList();
-
-
+            
+            /*para evitar duplicados*/
+            var result = pedidos.GroupBy(test => test.NombreUsuario)
+                   .Select(grp => grp.First())
+                   .ToList();
+            // return pedidos.Select(x => x.NombreUsuario).ToList();
+            return result.Select(x => x.NombreUsuario).ToList();
         }
 
         protected void btnCambiarEstado_Click(object sender, EventArgs e)
