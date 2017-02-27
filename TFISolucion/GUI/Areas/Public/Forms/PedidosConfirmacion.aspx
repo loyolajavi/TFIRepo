@@ -156,7 +156,7 @@
                     <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.Felicitaciones%></h3>
                 </div>
                 <div class="modal-body text-center">
-                    <h4 id="mdl_pedido_titulo" style="color: black;"><%=Resources.Global.Pedido%><span id="prod"></span><%=Resources.Global.PedidoCorrectamenteAgregado%></h4>
+                    <h4 id="mdl_pedido_titulo" style="color: black;"><%=Resources.Global.Pedido %><span id="prod"></span><%=Resources.Global.PedidoCorrectamenteAgregado%></h4>
                     <h4><%=Resources.Global.SeleccionaFormadePago%></h4>
                 </div>
                 <div class="modal-footer">

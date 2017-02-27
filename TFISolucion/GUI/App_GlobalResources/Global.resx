@@ -328,7 +328,7 @@
     <value>Numero</value>
   </data>
   <data name="Pedido" xml:space="preserve">
-    <value>Pedido</value>
+    <value>Pedido </value>
   </data>
   <data name="Piso" xml:space="preserve">
     <value>Piso</value>
@@ -845,5 +845,8 @@
   </data>
   <data name="Graficos" xml:space="preserve">
     <value>Gráficos</value>
+  </data>
+  <data name="Pago" xml:space="preserve">
+    <value>Pago</value>
   </data>
 </root>

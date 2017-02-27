@@ -23,7 +23,7 @@
                     <tr>
                         <td style="vertical-align: middle">
                             <div class="td-centrado">
-                                <input type="radio" id="rdCorreo" data-envio="1" />
+                                <input type="radio" id="rdCorreo" data-envio="1" checked="checked" />
                             </div>
                         </td>
                         <td style="vertical-align: middle">

@@ -46,10 +46,6 @@
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
-
-                            <li>
-                                <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
-                            </li>
                             <li>
                                 <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
@@ -58,7 +54,9 @@
 
                                 </asp:DropDownList>
                             </li>
-
+                             <li>
+                                <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
+                            </li>
                             <%-- LISTA DE PEDIDOS --%>
 
                             <li id="pedidosDrop">

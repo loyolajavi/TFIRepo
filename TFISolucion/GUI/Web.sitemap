@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<siteMap>
+<siteMap enableLocalization="true">
   <siteMapNode url="/Areas/Public/Forms/Home.aspx" title="Inicio" description="Ir al Inicio">
     <siteMapNode url="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos" description="Quiénes Somos" />
     <siteMapNode url="/Areas/Public/Forms/ClientesEmpresa.aspx" title="Clientes" description="Nuestros Clientes" />
@@ -9,7 +9,7 @@
     <siteMapNode url="/Areas/Public/Forms/Pedidos.aspx" title="Resumen de Pedido" description="Orden de Pedido">
       <siteMapNode url="/Areas/Public/Forms/PedidosDireccion.aspx" title="Datos de Pedido" description="Datos Personales">
         <siteMapNode url="/Areas/Public/Forms/PedidosEnvio.aspx" title="Datos de Envio" description="Selección Envio">
-          <siteMapNode url="/Areas/Public/Forms/PedidosConfirmacion.aspx" title="Pago" description="Selección Pago" />
+          <siteMapNode url="/Areas/Public/Forms/PedidosConfirmacion.aspx" title="$Resources:Global, Pago" description="Selección Pago" />
         </siteMapNode> />
       </siteMapNode> />
     </siteMapNode>
