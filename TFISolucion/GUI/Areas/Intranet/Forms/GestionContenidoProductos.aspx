@@ -28,12 +28,12 @@
                             <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" />
                             <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="dropdownMarca" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="dropdownMarca" runat="server" ></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="IVA">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlIVA" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlIVA" runat="server" disabled="true"></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="PrecioUnitario" HeaderText="<%$Resources:Global, PrecioUnitario %>" />
@@ -126,8 +126,10 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                    <asp:Button runat="server" ID="btnGrabarProducto" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarProducto(this)" OnClick="btnGrabarProducto_Click" />
-                </div>
+                    <div style="text-align:center;">
+                    <asp:Button runat="server" class="btn btn-success" ID="btnGrabarProducto" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnGrabarProducto(this)" OnClick="btnGrabarProducto_Click" />
+                    </div>                
+                    </div>
             </div>
 
 

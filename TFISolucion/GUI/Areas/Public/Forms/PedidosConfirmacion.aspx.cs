@@ -17,6 +17,7 @@ namespace TFI.GUI.Areas.Public.Forms
     {
         public UsuarioEntidad logueado;
         public List<PedidoLista> lista;
+        public TarjetaEntidad MiTarjeta;
         public decimal totalizado;
         public int? FormaEntrega;
         public int? pedido;
@@ -83,6 +84,11 @@ namespace TFI.GUI.Areas.Public.Forms
             //TODO: sacarle el precio de envio hardcodeado:
             if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
                 totalizado = totalizado + 200;
+
+            TarjetaCore coreTarjeta = new TarjetaCore();
+            MiTarjeta = coreTarjeta.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, logueado.NombreUsuario)[0];
+ 
+
         }
 
         [WebMethod]

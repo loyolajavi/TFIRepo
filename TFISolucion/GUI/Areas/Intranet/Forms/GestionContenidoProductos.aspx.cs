@@ -296,6 +296,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void grillaproductos_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            
             grillaproductos.EditIndex = e.NewEditIndex;
             grillaproductos.DataBind();
         }

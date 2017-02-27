@@ -88,8 +88,11 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                                 <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                                <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
-                            </div>
+                              <div style="text-align:center;">
+                                  <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
+                           
+                                  </div>
+                                   </div>
                         </div>
                     </div>
                 </div>
