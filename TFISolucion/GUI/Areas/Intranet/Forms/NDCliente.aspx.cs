@@ -138,8 +138,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
             public double Total { get; set; }
         }
 
+        public class NCDetalleDTO
+        {
+            public string Producto { get; set; }
+            public int Cantidad { get; set; }
+            public decimal PrecioUnitario { get; set; }
+            public decimal Total { get; set; }
+        }
+
         protected void grilladend_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            ProductoCore coreProducto = new ProductoCore();
+
             if (e.CommandName.Equals("VerDetalle"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
@@ -148,7 +158,20 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
                 ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
                 List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
-                grilladedetallesdend.DataSource = ListadeDetalles;
+
+                List<NCDetalleDTO> ListaDetallesDTO = new List<NCDetalleDTO>();
+                foreach (var item in ListadeDetalles)
+                {
+                    NCDetalleDTO NuevoDetalle = new NCDetalleDTO();
+                    NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
+                    NuevoDetalle.Cantidad = item.CantidadProducto;
+                    NuevoDetalle.PrecioUnitario = item.PrecioUnitarioFact;
+                    NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
+
+                    ListaDetallesDTO.Add(NuevoDetalle);
+                }
+
+                grilladedetallesdend.DataSource = ListaDetallesDTO;
                 grilladedetallesdend.DataBind();
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
