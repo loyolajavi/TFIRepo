@@ -40,6 +40,10 @@ namespace TFI.GUI.Areas.Public.Forms
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            SucursalCore coreSucursal = new SucursalCore();
+            Session["FormaEnvio"] = 1;
+            Session["Seleccionada"] = coreSucursal.FindAll()[0].IdSucursal;
+
             idioma = new LenguajeEntidad();
             var Current = HttpContext.Current;
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
