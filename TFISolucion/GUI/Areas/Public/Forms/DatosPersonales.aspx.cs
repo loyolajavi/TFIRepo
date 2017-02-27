@@ -895,7 +895,9 @@ namespace TFI.GUI
             {
                 NuevaDireccion.Calle = calle;
             }
-
+            else
+               // NotificacionCalleVacia();
+            
             if (!string.IsNullOrEmpty(departamento))
             {
                 NuevaDireccion.Departamento = departamento;
@@ -929,6 +931,18 @@ namespace TFI.GUI
         {
             CargarGrillaDireccionDeEnvio();
             Response.Redirect(Request.RawUrl);
+        }
+        private void NotificacionCalleVacia()
+        {
+            //notificationTarjeta.InnerHtml = "El Numero de tarjeta es invalido";
+            //notificationTarjeta.Visible = true;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("alert('Ingrese Calle');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, GetType(),
+                       "ModalScript", sb.ToString(), false);
         }
 
     }

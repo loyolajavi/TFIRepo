@@ -12,6 +12,7 @@ namespace TFI.GUI
     public partial class Contacto : BasePage
     {
         private LenguajeEntidad idioma;
+
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -25,14 +26,17 @@ namespace TFI.GUI
             }
             return null;
         }
+
         public Contacto()
         {
             idioma = new LenguajeEntidad();
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                notificacion.Visible = false;
 
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 if (idioma == null)
@@ -59,10 +63,21 @@ namespace TFI.GUI
 
         protected void EnviarCorreo(object sender, EventArgs e)
         {
+            contenedorsinpedidos.Visible = true;
+            notificacion.Visible = true;
             Correo manager = new Correo();
-            manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", txtNombre.Value, txtTelefono.Value, txtCorreo.Value, "MascoTrans", txtAsunto.Value, txtMensaje.Value);
+            manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", txtNombre.Value, txtTelefono.Value,
+                txtCorreo.Value, "MascoTrans", txtAsunto.Value, txtMensaje.Value);
+            {
+                notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
+                txtNombre.Value = "";
+                txtApellido.Value = "";
+                txtAsunto.Value = "";
+                txtCorreo.Value = "";
+                txtMensaje.Value = "";
+                txtTelefono.Value = "";
 
-
+            }
         }
     }
 }

@@ -95,11 +95,12 @@
 
 .g-recaptcha {
     margin-bottom: 300px;
-    margin-left: 300px;
+    margin-left: 315px;
 }
 
 #btnsContacto {
     margin-bottom: 60px;
+    margin-left: 300px;
 }
 
 #txtSearch {

@@ -864,4 +864,19 @@
   <data name="ResumenDePedido" xml:space="preserve">
     <value>Resumen de Pedido</value>
   </data>
+  <data name="AsuntoVacio" xml:space="preserve">
+    <value>Asunto vacio</value>
+  </data>
+  <data name="IngresarMensaje" xml:space="preserve">
+    <value>Ingrese mensaje del correo</value>
+  </data>
+  <data name="IngresarNombre" xml:space="preserve">
+    <value>Ingrese un nombre</value>
+  </data>
+  <data name="IngresoMax1000" xml:space="preserve">
+    <value>Ingrese 1000 caracteres como maximo</value>
+  </data>
+  <data name="IngresarTelefono" xml:space="preserve">
+    <value>Inserte un telefono</value>
+  </data>
 </root>

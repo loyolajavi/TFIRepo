@@ -166,7 +166,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2>
                         <asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, AgregarDireccionDeFacturacion %>"></asp:Label></h2>
-                    <div id="notificationdireccion">
+                    <div id="notificationdireccionFacturacion" runat="server" clientidmode="Static">
                     </div>
                 </div>
                 <div class="modal-body">

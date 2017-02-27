@@ -11,13 +11,13 @@ namespace TFI.FUNCIONES
     public class Correo
     {
         public void EnviarCorreo(
-            string remitente, 
-            string contrasenia, 
-            string nombre, 
-            string telefono, 
-            string destinatario, 
-            string nombreEmpresa, 
-            string asunto, 
+            string remitente,
+            string contrasenia,
+            string nombre,
+            string telefono,
+            string destinatario,
+            string nombreEmpresa,
+            string asunto,
             string cuerpoCorreo)
         {
             string output = null;
@@ -39,12 +39,13 @@ namespace TFI.FUNCIONES
                 serverSMTP.Send(correo);
                 correo.Dispose();
                 output = "E-Mail enviado correctamente";
+                
             }
             catch (Exception ex)
             {
                 output = "Error enviando el E-Mail, por favor reitente nuevamente";
             }
-
+            //return true;
         }
     }
 }
