@@ -849,4 +849,10 @@
   <data name="Pago" xml:space="preserve">
     <value>Pago</value>
   </data>
+  <data name="IrAlInicio" xml:space="preserve">
+    <value>Ir al Inicio</value>
+  </data>
+  <data name="MisTarjetas" xml:space="preserve">
+    <value>Mis Tarjetas</value>
+  </data>
 </root>

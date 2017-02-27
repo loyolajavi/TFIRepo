@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap enableLocalization="true">
-  <siteMapNode url="/Areas/Public/Forms/Home.aspx" title="Inicio" description="Ir al Inicio">
-    <siteMapNode url="/Areas/Public/Forms/QuienesSomos.aspx" title="Quiénes Somos" description="Quiénes Somos" />
-    <siteMapNode url="/Areas/Public/Forms/ClientesEmpresa.aspx" title="Clientes" description="Nuestros Clientes" />
-    <siteMapNode url="/Areas/Public/Forms/Catalogo.aspx" title="Catalogo" description="Nuestros Productos" />
-    <siteMapNode url="/Areas/Public/Forms/Contacto.aspx" title="Contacto" description="Contáctenos" />
-    <siteMapNode url="/Areas/Public/Forms/Producto.aspx" title="Producto" description="Contáctenos" />
+  <siteMapNode url="/Areas/Public/Forms/Home.aspx" title="$Resources:Global, Inicio" description="Ir al Inicio">
+    <siteMapNode url="/Areas/Public/Forms/QuienesSomos.aspx" title="$Resources:Global, QuienesSomos" description="Quiénes Somos" />
+    <siteMapNode url="/Areas/Public/Forms/ClientesEmpresa.aspx" title="$Resources:Global, Clientes" description="Nuestros Clientes" />
+    <siteMapNode url="/Areas/Public/Forms/Catalogo.aspx" title="$Resources:Global, Catalogo" description="Nuestros Productos" />
+    <siteMapNode url="/Areas/Public/Forms/Contacto.aspx" title="$Resources:Global, Contacto" description="Contáctenos" />
+    <siteMapNode url="/Areas/Public/Forms/Producto.aspx" title="$Resources:Global, Producto" description="Contáctenos" />
     <siteMapNode url="/Areas/Public/Forms/Pedidos.aspx" title="Resumen de Pedido" description="Orden de Pedido">
-      <siteMapNode url="/Areas/Public/Forms/PedidosDireccion.aspx" title="Datos de Pedido" description="Datos Personales">
-        <siteMapNode url="/Areas/Public/Forms/PedidosEnvio.aspx" title="Datos de Envio" description="Selección Envio">
+      <siteMapNode url="/Areas/Public/Forms/PedidosDireccion.aspx" title="$Resources:Global, DatosDePedido" description="Datos Personales">
+        <siteMapNode url="/Areas/Public/Forms/PedidosEnvio.aspx" title="$Resources:Global, DatosDeEnvio" description="Selección Envio">
           <siteMapNode url="/Areas/Public/Forms/PedidosConfirmacion.aspx" title="$Resources:Global, Pago" description="Selección Pago" />
         </siteMapNode> />
       </siteMapNode> />
     </siteMapNode>
-    <siteMapNode url="/Areas/Public/Forms/DatosPersonales.aspx" title="Datos Personales" description="Datos Personales" />
-    <siteMapNode url="/Areas/Public/Forms/UltimosPedidos.aspx" title="Pedidos" description="Pedidos" />
-    <siteMapNode url="/Areas/Public/Forms/Tarjetas.aspx" title="Mis Tarjetas" description="Mis Tarjetas" />
-    <siteMapNode url="/Areas/Public/Forms/ListaDeDeseos.aspx" title="Deseos" description="Lista de Deseos" />
+    <siteMapNode url="/Areas/Public/Forms/DatosPersonales.aspx" title="$Resources:Global, DatosPersonales" description="Datos Personales" />
+    <siteMapNode url="/Areas/Public/Forms/UltimosPedidos.aspx" title="$Resources:Global, Pedidos" description="Pedidos" />
+    <siteMapNode url="/Areas/Public/Forms/Tarjetas.aspx" title="$Resources:Global, Mistarjetas" description="Mis Tarjetas" />
+    <siteMapNode url="/Areas/Public/Forms/ListaDeDeseos.aspx" title="$Resources:Global, Deseos" description="Lista de Deseos" />
   </siteMapNode>
 </siteMap>

@@ -849,4 +849,16 @@
   <data name="Pago" xml:space="preserve">
     <value>Pay</value>
   </data>
+  <data name="DatosDeEnvio" xml:space="preserve">
+    <value>Shipping Data</value>
+  </data>
+  <data name="DatosDePedido" xml:space="preserve">
+    <value>Order Data</value>
+  </data>
+  <data name="IrAlInicio" xml:space="preserve">
+    <value>Go Home</value>
+  </data>
+  <data name="MisTarjetas" xml:space="preserve">
+    <value>My Credit Cards</value>
+  </data>
 </root>
