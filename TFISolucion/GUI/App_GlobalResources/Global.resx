@@ -855,4 +855,13 @@
   <data name="MisTarjetas" xml:space="preserve">
     <value>Mis Tarjetas</value>
   </data>
+  <data name="DatosDeEnvio" xml:space="preserve">
+    <value>Datos de Envio</value>
+  </data>
+  <data name="DatosDePedido" xml:space="preserve">
+    <value>Datos de Pedido</value>
+  </data>
+  <data name="ResumenDePedido" xml:space="preserve">
+    <value>Resumen de Pedido</value>
+  </data>
 </root>

@@ -861,4 +861,7 @@
   <data name="MisTarjetas" xml:space="preserve">
     <value>My Credit Cards</value>
   </data>
+  <data name="ResumenDePedido" xml:space="preserve">
+    <value>Sales Order</value>
+  </data>
 </root>

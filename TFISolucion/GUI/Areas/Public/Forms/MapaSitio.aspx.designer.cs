@@ -29,5 +29,17 @@ namespace TFI.GUI.Areas.Public.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SiteMapDataSource SiteMapDataSource1;
+        
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new TFI.GUI.General.LayoutBasico Master {
+            get {
+                return ((TFI.GUI.General.LayoutBasico)(base.Master));
+            }
+        }
     }
 }

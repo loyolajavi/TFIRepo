@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" CodeBehind="MapaSitio.aspx.cs" Inherits="TFI.GUI.Areas.Public.Forms.MapaSitio" %>
+<%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
