@@ -879,4 +879,7 @@
   <data name="IngresarTelefono" xml:space="preserve">
     <value>Inserte un telefono</value>
   </data>
+  <data name="CorreoEnviadoCorrectamente" xml:space="preserve">
+    <value>El correo se ha enviado correctamente.Aguarde y su consulta sera respondida en breve.</value>
+  </data>
 </root>

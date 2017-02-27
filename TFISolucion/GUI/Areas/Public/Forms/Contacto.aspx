@@ -10,7 +10,9 @@
                 <div class="alert alert-info alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <i class="fa fa-info-circle"></i>
-                    <div id="notificacion" runat="server"></div>
+                    <div id="notificacion" runat="server">
+                        <asp:Label ID="Label4" runat="server" Font-Bold="true" class="control-label col-xs-2" Text="<%$Resources:Global, CorreoEnviadoCorrectamente %>"></asp:Label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,7 +26,7 @@
                     <input type="text" class="form-control" id="txtNombre" placeholder="<%$Resources:Global, Nombre %>" runat="server" />
                 </div>
                 <div class="col-xs-4">
-                    <asp:RegularExpressionValidator ID="vldExpNombreUsuario" Display="Dynamic" runat="server" ControlToValidate="txtNombre" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="vldExpNombreUsuario" Display="Dynamic" runat="server" ControlToValidate="txtNombre" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z\s]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="vldReqNombreUsuario" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarNombre %>" ControlToValidate="txtNombre" ValidationGroup="Correo"></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -38,7 +40,7 @@
                     <input type="text" class="form-control" id="txtApellido" placeholder="<%$Resources:Global, Apellido %>" runat="server" />
                 </div>
                 <div class="col-xs-4">
-                    <asp:RegularExpressionValidator ID="vldExpApellido" Display="Dynamic" runat="server" ControlToValidate="txtApellido" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="vldExpApellido" Display="Dynamic" runat="server" ControlToValidate="txtApellido" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z\s]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="vldReqApellido" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ApellidoVacio %>" ControlToValidate="txtApellido" ValidationGroup="Correo"></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -76,7 +78,7 @@
                     <input type="text" id="txtAsunto" runat="server" class="form-control" placeholder="<%$Resources:Global, Asunto %>" />
                 </div>
                 <div class="col-xs-4">
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server" ControlToValidate="txtAsunto" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server" ControlToValidate="txtAsunto" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([A-Za-z\s]+)" ValidationGroup="Correo"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, AsuntoVacio %>" ControlToValidate="txtAsunto" ValidationGroup="Correo"></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -89,7 +91,7 @@
                     <textarea rows="3" runat="server" id="txtMensaje" class="form-control" placeholder="<%$Resources:Global, Mensaje %>"></textarea>
                 </div>
                 <div class="col-xs-5">
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" Display="Dynamic" runat="server" ControlToValidate="txtMensaje" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresoMax1000 %>" ValidationExpression="([a-zA-Z0-9]{3,1000})" ValidationGroup="Correo"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" Display="Dynamic" runat="server" ControlToValidate="txtMensaje" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresoMax1000 %>" ValidationExpression="([a-zA-Z0-9\s]{3,1000})" ValidationGroup="Correo"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarMensaje %>" ControlToValidate="txtMensaje" ValidationGroup="Correo"></asp:RequiredFieldValidator>
                 </div>
             </div>

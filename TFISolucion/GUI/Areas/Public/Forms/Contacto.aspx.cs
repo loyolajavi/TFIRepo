@@ -67,9 +67,13 @@ namespace TFI.GUI
             notificacion.Visible = true;
             Correo manager = new Correo();
             manager.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", txtNombre.Value, txtTelefono.Value,
-                txtCorreo.Value, "MascoTrans", txtAsunto.Value, txtMensaje.Value);
+               "martinez.juan.marcos@gmail.com", txtApellido.Value + " "+   txtNombre.Value +"-"+ txtCorreo.Value, txtAsunto.Value , txtMensaje.Value);
             {
                 notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
+                // notificacion.InnerHtml = <%$Resources:Global, Correo %>;
+                //notificacion.InnerText = Resources.Global.Correo;
+                //notificacion.InnerHtml = "Resources:Global,
+                //CorreoEnviadoCorrectamente";
                 txtNombre.Value = "";
                 txtApellido.Value = "";
                 txtAsunto.Value = "";
