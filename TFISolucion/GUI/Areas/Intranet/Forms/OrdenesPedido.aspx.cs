@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using TFI.CORE.Helpers;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -81,11 +82,22 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         private void CargarDropdownEstados()
         {
-            listaEstados = pedidoCore.EstadoPedidoSelectAll();
-            ddlestados.DataSource = listaEstados;
-            ddlestados.DataTextField = "DescripcionEstadoPedido";
-            ddlestados.DataValueField = "IdEstadoPedido";
-            ddlestados.DataBind();
+            if (!Page.IsPostBack)
+            {
+
+                listaEstados = pedidoCore.EstadoPedidoSelectAll();
+                ddlestados.DataSource = listaEstados;
+                ddlestados.DataTextField = "DescripcionEstadoPedido";
+                ddlestados.DataValueField = "IdEstadoPedido";
+                ddlestados.DataBind();
+
+                ddlEstadoPedido.DataSource = listaEstados;
+                ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
+                ddlEstadoPedido.DataValueField = "IdEstadoPedido";
+                ddlEstadoPedido.DataBind();
+
+            }
+           
         }
 
         private void CargarGrillaUltimosPedidos()
@@ -97,7 +109,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (PedidosEntidad.Count == 0)
             {
-                sinpedidos.InnerHtml = "<strong>Usted no realizó pedidos aún. Compre ahora en </strong><a href='http://startbootstrap.com/template-overviews/sb-admin-2' class='alert-link'>nuestra tienda</a>";
+                sinpedidos.InnerHtml = "<strong>No existen pedidos.</a>";
             }
             else
             {
@@ -130,11 +142,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grilladeultimospedidos.DataSource = PedidosaMostrar;
             grilladeultimospedidos.AutoGenerateColumns = false;
             grilladeultimospedidos.DataBind();
-            ddlEstadoPedido.DataSource = pedidoCore.EstadoPedidoSelectAll();
+            //ddlEstadoPedido.DataSource = pedidoCore.EstadoPedidoSelectAll();
 
-            ddlEstadoPedido.DataValueField = "IdEstadoPedido";
-            ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
-            ddlEstadoPedido.DataBind();
+            //ddlEstadoPedido.DataValueField = "IdEstadoPedido";
+            //ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
+            //ddlEstadoPedido.DataBind();
 
 
         }
@@ -296,6 +308,66 @@ namespace TFI.GUI.Areas.Intranet.Forms
             EstadoActualizado.IdPedido = pedido;
             EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
             pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
+        }
+
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            grilladeultimospedidos.DataSource = null;
+
+            List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
+            Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
+
+            List<PedidoEntidad> PedidosDeCliente = new List<PedidoEntidad>();
+            List<PedidoDTO> PedidosAMostrarDelCliente = new List<PedidoDTO>();
+
+            foreach (var pedido in Pedidos)
+            {
+
+                PedidoEstadoPedidoEntidad PedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
+                PedidoEstadoPedido = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
+                EstadoPedidoEntidad EstadoDelPedido = new EstadoPedidoEntidad();
+                EstadoDelPedido = pedidoCore.EstadoPedidoSelect(PedidoEstadoPedido.IdEstadoPedido);
+                int ddlEstadoInt = Convert.ToInt32(ddlEstadoPedido.SelectedIndex + 1);
+                if (pedido.NombreUsuario == txtClienteBusqueda.Text && EstadoDelPedido.DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
+                {
+
+                    PedidoDTO PedidoAMostrar = new PedidoDTO();
+                    PedidoAMostrar.cuit = pedido.CUIT;
+                    DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(pedido.DireccionEntrega);
+                    PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
+                    PedidoAMostrar.FechaPedido = pedido.FechaPedido;
+                    PedidoAMostrar.IdPedido = pedido.IdPedido;
+                    PedidoAMostrar.NombreUsuario = pedido.NombreUsuario;
+                    PedidoAMostrar.NroPedido = pedido.NroPedido;
+
+                    PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
+                    EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
+
+                    PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
+                    PedidosDetalle = pedidoCore.PedidosDetalleSelect(pedido.IdPedido);
+                    PedidoAMostrar.Total = MontoTotalPorPedido(PedidosDetalle);
+
+                    PedidosAMostrarDelCliente.Add(PedidoAMostrar);
+
+                }
+
+            }
+
+            if (PedidosAMostrarDelCliente.Count == 0)
+            {
+                contenedorsinpedidos.Visible = true;
+                sinpedidos.InnerHtml = "<strong>No existen pedidos para este Cliente con el estado seleccionado.</a>";
+            }
+            else
+            {
+                contenedorsinpedidos.Visible = false;
+
+                grilladeultimospedidos.DataSource = PedidosAMostrarDelCliente;
+                grilladeultimospedidos.AutoGenerateColumns = false;
+                grilladeultimospedidos.DataBind();
+            }
+
+
         }
 
 
