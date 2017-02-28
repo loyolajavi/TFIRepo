@@ -331,6 +331,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
             EstadoActualizado.IdPedido = pedido;
             EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
+            EstadoActualizado.Fecha = DateTime.Now;
             pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
         }
 

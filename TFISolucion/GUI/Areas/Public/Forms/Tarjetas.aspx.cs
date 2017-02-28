@@ -230,7 +230,7 @@ namespace TFI.GUI
 
            List<TarjetaEntidad> TarjetasDelUser = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, usuarioentidad.NombreUsuario);
 
-           if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = false; } else { NuevaTarjeta.Predeterminada = true; }
+           if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = true; } else { NuevaTarjeta.Predeterminada = false; }
 
             bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
 

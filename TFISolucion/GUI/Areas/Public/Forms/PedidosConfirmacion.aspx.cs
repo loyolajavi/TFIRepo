@@ -166,6 +166,8 @@ namespace TFI.GUI.Areas.Public.Forms
 
             //HASTA ACA LO DE STOCK
 
+            Current.Session.Add("IdPedido", pedido.IdPedido.ToString());
+
             return pedido.IdPedido;
         }
 
@@ -298,6 +300,49 @@ namespace TFI.GUI.Areas.Public.Forms
 
             
 
+
+        }
+
+        [WebMethod]
+        public static void CambiarTarjeta()
+        {
+           
+            //Cancelo el pedido, dps se vuelve a generar con la nueva tarjeta
+            var Current = HttpContext.Current;
+            string IdPedido = Current.Session["IdPedido"].ToString();
+
+            if (IdPedido != "")
+            {
+                PedidoCore pedidoCore = new PedidoCore();
+                PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
+                EstadoActualizado.IdPedido = Convert.ToInt32(IdPedido);
+                EstadoActualizado.IdEstadoPedido = 2; //CANCELADO
+                EstadoActualizado.Fecha = DateTime.Now;
+                pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
+            }
+            var lista = (List<PedidoLista>)Current.Session["Pedido"];
+            foreach (var item in lista)
+            {
+                StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
+                NuevoStock.IdProducto = item.Producto.IdProducto;
+                NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
+                var sucursalId = (int?)Current.Session["Seleccionada"];
+                NuevoStock.IdSucursal = (int)sucursalId;
+
+                StockCore StockBLL = new StockCore();
+
+                List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
+                StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
+
+
+
+                if (StockDeProducto.Count > 0)
+                {
+                    NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + item.Cantidad;
+                    StockBLL.Update(NuevoStock);
+                }
+            }
+           
 
         }
 

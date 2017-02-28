@@ -772,7 +772,7 @@
     <value>Pagar</value>
   </data>
   <data name="PedidoCorrectamenteAgregado" xml:space="preserve">
-    <value>El pedido se ha generado correctamente.</value>
+    <value>. El pedido se ha generado correctamente.</value>
   </data>
   <data name="RegistrarseComoCliente" xml:space="preserve">
     <value>Registrarse como cliente</value>

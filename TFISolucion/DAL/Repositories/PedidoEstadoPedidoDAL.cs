@@ -41,11 +41,11 @@ namespace TFI.DAL.DAL
         public void Update(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
         {
             ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
-
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdPedido", pedidoEstadoPedido.IdPedido),
-				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido)
+				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido),
+                new SqlParameter("@Fecha", pedidoEstadoPedido.Fecha)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoUpdate", parameters);

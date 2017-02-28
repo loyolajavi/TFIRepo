@@ -240,7 +240,7 @@
                 </div>
                 <%} %>
                 <div style="margin-top: 40px;">
-                    <a class="btn btn-warning" href="Tarjetas.aspx">Elegir otra Tarjeta</a>
+                    <a class="btn btn-warning" id="cambiartarjeta" href="Tarjetas.aspx">Elegir otra Tarjeta</a>
                 </div>
             </div>
                 <div class="modal-footer">
@@ -385,6 +385,21 @@
             var $modal = $('#mdl_tarjeta');
             $modal.modal("hide");
            
+        });
+
+        $('#cambiartarjeta').click(function () {
+            //var button = $('#btnPagar');
+            //button.click();
+            $.ajax({
+                type: "POST",
+                url: "PedidosConfirmacion.aspx/CambiarTarjeta",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+            });
+
         });
 
     </script>
