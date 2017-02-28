@@ -81,7 +81,7 @@
                                 <img src="/Content/Images/Iconos/master.png" alt="" style="width: 40px;" />
                             </span>
                             <span>
-                                <img src="/Content/Images/Iconos/paypal.png" alt="" style="width: 70px;" />
+                                <img src="/Content/Images/Iconos/mercadopago.png" alt="" style="width: 40px;" />
                             </span>
                         </div>
                     </div>
