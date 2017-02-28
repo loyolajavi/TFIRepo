@@ -104,7 +104,7 @@
                                             <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                                         </Fields>
                                     </asp:DetailsView>
-                                    <asp:GridView ID="grilladedetallesdelpedido" runat="server"></asp:GridView>
+                                    <asp:GridView ID="grilladedetallesdelpedido" CssClass="tablesorter table table-striped table-hover table-users" runat="server"></asp:GridView>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="grilladeultimospedidos" EventName="RowCommand" />
