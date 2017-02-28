@@ -98,6 +98,7 @@ namespace TFI.GUI
             public string Titular { get; set; }
             public string FechaExpiracion { get; set; }
             public string CodigoSeguridad { get; set; }
+            public bool Predeterminada { get; set; }
 
         }
 
@@ -140,6 +141,7 @@ namespace TFI.GUI
                 TarjetaAMostrar.Titular = t.Titular;
                 TipoTarjetaEntidad TipoTarjeta = TarjetaBLL.ObtenerTipoTarjeta(t);
                 TarjetaAMostrar.TipoDeTarjeta = TipoTarjeta.Descripcion;
+                TarjetaAMostrar.Predeterminada = t.Predeterminada;
 
                 TarjetasDTO.Add(TarjetaAMostrar);
             }
@@ -225,6 +227,10 @@ namespace TFI.GUI
             NuevaTarjeta.Numero = Convert.ToInt64(txtNumeroTarjeta.Value);
             NuevaTarjeta.CodSeguridad = Convert.ToInt32(txtCodigoSeguridad.Value);
             NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
+
+           List<TarjetaEntidad> TarjetasDelUser = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, usuarioentidad.NombreUsuario);
+
+           if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = false; } else { NuevaTarjeta.Predeterminada = true; }
 
             bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
 

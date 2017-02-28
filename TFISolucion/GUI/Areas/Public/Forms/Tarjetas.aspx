@@ -29,6 +29,7 @@
                     <asp:BoundField DataField="Titular" HeaderText="<%$Resources:Global, Titular %>" />
                     <asp:BoundField DataField="FechaExpiracion" HeaderText="<%$Resources:Global, FechaExpiracion %>" />
                     <asp:BoundField DataField="CodigoSeguridad" HeaderText="<%$Resources:Global, CodigoSeguridad %>"  />
+                    <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
                 </Columns>
             </asp:GridView>
 

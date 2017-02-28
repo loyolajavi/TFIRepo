@@ -51,6 +51,8 @@ namespace TFI.Entidades
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
 
+        public bool Predeterminada { get; set; }
+
 		#endregion
 	}
 }

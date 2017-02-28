@@ -361,19 +361,30 @@
             limpiarPedido();
         })
 
-        $('#mdl_pagocompletado').on('hidden.bs.modal', function () {
-            limpiarPedido();
-        })
+        //$('#mdl_pagocompletado').on('hidden.bs.modal', function () {
+        //    limpiarPedido();
+        //})
 
         $('#btnContinuarCierre').click(function () {
             limpiarPedido();
         });
 
         $('#btnpagarmodal').click(function () {
-            var button = $('#btnPagar');
-            button.click();
+            //var button = $('#btnPagar');
+            //button.click();
+            $.ajax({
+                type: "POST",
+                url: "PedidosConfirmacion.aspx/PagarWebMethod",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+            });
+
             var $modal = $('#mdl_tarjeta');
             $modal.modal("hide");
+           
         });
 
     </script>

@@ -26,7 +26,8 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Vencimiento", tarjeta.Vencimiento),
 				new SqlParameter("@Numero", tarjeta.Numero),
 				new SqlParameter("@CodSeguridad", tarjeta.CodSeguridad),
-				new SqlParameter("@FecBaja", tarjeta.FecBaja)
+				new SqlParameter("@FecBaja", tarjeta.FecBaja),
+                new SqlParameter("@Predeterminada", tarjeta.Predeterminada)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaInsert", parameters);
