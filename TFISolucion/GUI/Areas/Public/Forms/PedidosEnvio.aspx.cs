@@ -69,9 +69,10 @@ namespace TFI.GUI.Areas.Public.Forms
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
+
             seleccionado = (int?)Current.Session["Seleccionada"];
             formaEnvioId = (int?)Current.Session["FormaEnvio"];
-
+            Current.Session["FormaEnvio"] = 1;
             if (logueado == null)
                 Response.Redirect("Pedidos.aspx");
 

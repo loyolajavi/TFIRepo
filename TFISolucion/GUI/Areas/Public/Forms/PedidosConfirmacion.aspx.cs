@@ -42,7 +42,7 @@ namespace TFI.GUI.Areas.Public.Forms
         protected void Page_Load(object sender, EventArgs e)
         {
             SucursalCore coreSucursal = new SucursalCore();
-            Session["FormaEnvio"] = 1;
+            //Session["FormaEnvio"] = 1;
             Session["Seleccionada"] = coreSucursal.FindAll()[0].IdSucursal;
 
             idioma = new LenguajeEntidad();
@@ -167,8 +167,10 @@ namespace TFI.GUI.Areas.Public.Forms
             //HASTA ACA LO DE STOCK
 
             Current.Session.Add("IdPedido", pedido.IdPedido.ToString());
-
+            Current.Session["FormaEnvio"] = pedido.IdPedido;
             return pedido.IdPedido;
+
+       
         }
 
         [WebMethod]
