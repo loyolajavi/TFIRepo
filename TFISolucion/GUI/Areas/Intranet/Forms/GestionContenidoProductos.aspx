@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="grillaproductos"></label>
-                    <asp:GridView ID="grillaproductos" CssClass="table" runat="server" OnRowCancelingEdit="grillaproductos_RowCancelingEdit" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnRowUpdating="grillaproductos_RowUpdating" OnRowEditing="grillaproductos_RowEditing" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" PageSize="8">
+                    <asp:GridView ID="grillaproductos" CssClass="table" runat="server" OnRowCancelingEdit="grillaproductos_RowCancelingEdit" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnRowUpdating="grillaproductos_RowUpdating" OnRowEditing="grillaproductos_RowEditing" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true">
                         <Columns>
                             <asp:CommandField ShowEditButton="True" />
                             <asp:CommandField ShowDeleteButton="True" />
@@ -44,6 +44,7 @@
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerSettings  Mode="NextPreviousFirstLast" FirstPageText=" First > " PreviousPageText=" Previous > " NextPageText=" Next > " LastPageText=" Last " />
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />

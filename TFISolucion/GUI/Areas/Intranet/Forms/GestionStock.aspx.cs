@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
@@ -218,6 +219,26 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
 
             }
+        }
+        [WebMethod]
+        public static List<String> ObtenerProductos()
+        {
+            var core = new ProductoCore();
+            // var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+           // var cotizacion = new MonedaEmpresaEntidad();
+           // cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
+           // var cot2 = Convert.ToInt32(cotizacion.IdMoneda);
+            var productosEmpresa = core.FindAllByCUIT(1);
+
+            return productosEmpresa.Select(x => x.DescripProducto).ToList();
+
+
+        }
+        protected void grillastock_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grillastock.PageIndex = e.NewPageIndex;
+            CargarGrillaStock();
+
         }
     }
 }
