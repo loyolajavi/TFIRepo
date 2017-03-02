@@ -185,16 +185,16 @@
                     <h4>Información</h4>
                     <ul class="footer-navigation">
                         <li class="item">
-                            <a href="#" title="Quiénes Somos"><asp:Label ID="Label15"  runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a>
+                            <a href="/Areas/Public/Forms/QuienesSomos.aspx"><asp:Label ID="Label15"  runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a>
                         </li>
                         <li class="item">
-                            <a href="#" title="Contacto"><asp:Label ID="Label16"  runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></a>
+                            <a href="/Areas/Public/Forms/Contacto.aspx"><asp:Label ID="Label16"  runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></a>
                         </li>
-                        <li class="item">
+                        <%--<li class="item">
                             <a href="#" title="Politicas de Privacidad"><asp:Label ID="Label17"  runat="server" Text="<%$Resources:Global, PoliticaDePrivacidad %>"></asp:Label></a>
-                        </li>
+                        </li>--%>
                         <li>
-                            <a href="#" title="Mapa del sitio"><asp:Label ID="Label18"  runat="server" Text="<%$Resources:Global, MapaDelSitio %>"></asp:Label></a>
+                            <a href="/Areas/Public/Forms/MapaSitio.aspx" title="Mapa del sitio"><asp:Label ID="Label18"  runat="server" Text="<%$Resources:Global, MapaDelSitio %>"></asp:Label></a>
                         </li>
                     </ul>
                 </section>

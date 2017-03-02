@@ -319,15 +319,6 @@ namespace TFI.GUI.Shared {
         protected global::System.Web.UI.WebControls.Label Label16;
         
         /// <summary>
-        /// Control Label17.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
-        
-        /// <summary>
         /// Control Label18.
         /// </summary>
         /// <remarks>

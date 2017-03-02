@@ -138,9 +138,12 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\bungee.ttf" />
     <Content Include="Content\Images\Empresas\Logo.png" />
+    <Content Include="Content\Images\Iconos\master.png" />
+    <Content Include="Content\Images\Iconos\mercadopago.png" />
     <Content Include="Content\Images\Iconos\pdf-file.png" />
     <Content Include="Content\Images\Iconos\pdf.ico" />
     <Content Include="Content\Images\Iconos\pdf.png" />
+    <Content Include="Content\Images\Iconos\visa_xs.png" />
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\13.jpg" />
     <Content Include="Content\Images\Productos\AlimentoGreenLine.jpg" />

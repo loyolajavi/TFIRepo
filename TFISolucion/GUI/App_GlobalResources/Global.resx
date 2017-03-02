@@ -885,4 +885,25 @@
   <data name="GestionStockMenu" xml:space="preserve">
     <value>Gestión Stock</value>
   </data>
+  <data name="ElegirOtraTarjeta" xml:space="preserve">
+    <value>Elegir otra tarjeta</value>
+  </data>
+  <data name="MuchasGraciasPorSuCompra" xml:space="preserve">
+    <value>Muchas gracias por su compra!</value>
+  </data>
+  <data name="NoPoseeTarjetaRegistrada" xml:space="preserve">
+    <value>Usted no posee tarjeta registrada. Registre una para continuar el proceso.</value>
+  </data>
+  <data name="PagarConTarjeta" xml:space="preserve">
+    <value>Pagar con tarjeta</value>
+  </data>
+  <data name="PagoRegistrado" xml:space="preserve">
+    <value>Pago registrado</value>
+  </data>
+  <data name="TarjetaDeCredito" xml:space="preserve">
+    <value>Tarjeta de Credito</value>
+  </data>
+  <data name="TarjetaSeleccionada" xml:space="preserve">
+    <value>Tarjeta seleccionada</value>
+  </data>
 </root>
