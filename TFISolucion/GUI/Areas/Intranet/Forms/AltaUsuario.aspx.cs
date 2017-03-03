@@ -96,7 +96,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             ddlPermisosUsuarioAlta.DataSource = null;
             unasFamilias = unManagerFamilia.FamiliaSelectAll();
-            ddlPermisosUsuarioAlta.DataSource = unasFamilias;
+          
+            ddlPermisosUsuarioAlta.DataSource = unasFamilias.Where(o=> (o.IdFamilia == FamiliaEntidad.PermisoFamilia.Empleado || o.IdFamilia==FamiliaEntidad.PermisoFamilia.Admin|| o.IdFamilia== FamiliaEntidad.PermisoFamilia.Supervisor));
             ddlPermisosUsuarioAlta.DataValueField = "NombreFamilia";
             //ddlPermisosUsuarioUpdate.SelectedIndex = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
             ddlPermisosUsuarioAlta.DataBind();
@@ -150,7 +151,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             Page.Validate("AltaEmpleado,AltaCliente");
             if (Page.IsValid)
             {
-                
+
                 unUsuario.IdUsuarioTipo = ddlTipoUsuario.SelectedIndex + 1;
                 unUsuario.NombreUsuario = txtNombreUsuario.Value;
                 unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
@@ -159,13 +160,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 unUsuario.Email = txtMail.Value;
                 unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
                 unUsuario.NroIdentificacion = txtDNICUIT.Value;
-                unUsuario.Familia.IdFamilia = (FamiliaEntidad.PermisoFamilia)ddlPermisosUsuarioAlta.SelectedIndex + 1;
-                
+                unUsuario.Familia.IdFamilia = (FamiliaEntidad.PermisoFamilia)ddlPermisosUsuarioAlta.SelectedIndex + 3;
+
                 if (ddlTipoUsuario.SelectedItem.Value == "Cliente")
                 {
                     //SOLO DEL CLIENTE
                     //FACTURACION
-                    
+
                     NuevaDireccion.IdTipoDireccion = 1;//Facturacion
                     NuevaDireccion.Calle = txtCalle.Value;
                     NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
@@ -185,7 +186,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     NuevaIntermedia.Predeterminada = true;
 
                     //ENVIO
-                   
+
 
                     DireccionEnvio.IdTipoDireccion = 2;//Envio
                     DireccionEnvio.Calle = txtCalleEnvio.Value;
@@ -214,7 +215,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                     unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, DireIntermediaEnvio);
                 }
-                
+
                 if (NroRetorno == 0)
                 {
                     divAlertaUsCreado.Attributes["class"] = "alert alert-success";

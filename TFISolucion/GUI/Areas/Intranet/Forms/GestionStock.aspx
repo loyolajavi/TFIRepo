@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="grillastock"></label>
                             <asp:GridView ID="grillastock" OnPageIndexChanging="grillastock_PageIndexChanging" CssClass="table" runat="server" AllowPaging="True" PageSize="4" >
-                                <Columns4
+                                <Columns>
                                     <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
                                     <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
                                     <asp:BoundField DataField="CantidadEnStock" HeaderText="Stock" />

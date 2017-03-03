@@ -61,7 +61,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h2>
                             <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
-                        <div id="notificationcategoria">
+                        <div id="notificationcategoria" runat="server"  ClientIdMode="Static">
                         </div>
                     </div>
                     <div class="modal-body">

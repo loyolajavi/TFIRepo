@@ -909,4 +909,22 @@
   <data name="TarjetaSeleccionada" xml:space="preserve">
     <value>Selected card</value>
   </data>
+  <data name="ContrasenasDistintasCorta" xml:space="preserve">
+    <value>The password dont match</value>
+  </data>
+  <data name="DemasiadosCaracteres" xml:space="preserve">
+    <value>There are too many characters</value>
+  </data>
+  <data name="IngresarApellido" xml:space="preserve">
+    <value>Please add a surname</value>
+  </data>
+  <data name="IngresarCorreo" xml:space="preserve">
+    <value>Plase add a email.</value>
+  </data>
+  <data name="IngresarDNIoCUIT" xml:space="preserve">
+    <value>Please add  DNI/CUIT</value>
+  </data>
+  <data name="IngresoEntre8-15Caracteres" xml:space="preserve">
+    <value>Please add 8 between 15 characters</value>
+  </data>
 </root>

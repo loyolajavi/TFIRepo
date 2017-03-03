@@ -122,8 +122,7 @@ $('#btnCambiarClave').click(function (e) {
 /**************Ajax para Agregar direccion de facturacion*******/
 //$('#btnGrabarDireccionDeFacturacion').click(function (e) { onBtnGrabarClick(this) })
 
-function onBtnGrabarClick()
-{
+function onBtnGrabarClick() {
     //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
 
     var parametros = {
@@ -163,9 +162,9 @@ function onBtnGrabarClick()
 
 /**************Ajax para Agregar direccion de facturacion*******/
 //$('#btnGrabarDireccionDeEnvio').click(function (e) {
-    //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+//e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
 
-function onbtnGrabarEnvio (){
+function onbtnGrabarEnvio() {
 
     var parametros = {
         calleEnvio: $('#calleenvio').val(),
@@ -255,26 +254,26 @@ function onbtnGrabarProducto() {
 
     if ($('#preciounitario').val() > 0) {
 
-    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
-    $.ajax({
-        type: 'POST',                               // tipo de llamada (POST, GET)
-        url: 'GestionContenidoProductos.aspx/GrabarProducto',
-        dataType: "json",  // el URL del método que vamos a llamar
-        // los parámetros en formato JSON
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
-        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
-            // $('#notification').text('La información ha sido guardada exitosamente.');
-            //window.location.reload();
-            //Exito("Se ha cambiado la contraseña con exito");
-        },
-        error: function (data) {          // función que se va a ejecutar si el pedido falla
-            alert("ERROR ");
-            //  Error("No se ha podido realizar la consulta");
+        // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+        $.ajax({
+            type: 'POST',                               // tipo de llamada (POST, GET)
+            url: 'GestionContenidoProductos.aspx/GrabarProducto',
+            dataType: "json",  // el URL del método que vamos a llamar
+            // los parámetros en formato JSON
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+            success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+                // $('#notification').text('La información ha sido guardada exitosamente.');
+                //window.location.reload();
+                //Exito("Se ha cambiado la contraseña con exito");
+            },
+            error: function (data) {          // función que se va a ejecutar si el pedido falla
+                alert("ERROR ");
+                //  Error("No se ha podido realizar la consulta");
 
-        }
-    });
-    return true;
+            }
+        });
+        return true;
     } else {
         alert("El producto no puede tenes un precio igual o menor a cero.");
     }
@@ -287,27 +286,31 @@ function onbtnGrabarCategoria() {
         descripcion: $('#descripcion').val()
     };
 
+    if ($('#descripcion').val() != '') {
 
-    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
-    $.ajax({
-        type: 'POST',                               // tipo de llamada (POST, GET)
-        url: 'GestionContenidoCategorias.aspx/GrabarCategoria',
-        dataType: "json",  // el URL del método que vamos a llamar
-        // los parámetros en formato JSON
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
-        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
-            // $('#notification').text('La información ha sido guardada exitosamente.');
-            //window.location.reload();
-            //Exito("Se ha cambiado la contraseña con exito");
-        },
-        error: function (data) {          // función que se va a ejecutar si el pedido falla
-            alert("ERROR ");
-            //  Error("No se ha podido realizar la consulta");
+        // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+        $.ajax({
+            type: 'POST', // tipo de llamada (POST, GET)
+            url: 'GestionContenidoCategorias.aspx/GrabarCategoria',
+            dataType: "json", // el URL del método que vamos a llamar
+            // los parámetros en formato JSON
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(parametros), // tipo de datos enviados al servidor
+            success: function (data) { // función que se va a ejecutar si el pedido resulta exitoso
+                // $('#notification').text('La información ha sido guardada exitosamente.');
+                //window.location.reload();
+                //Exito("Se ha cambiado la contraseña con exito");
+            },
+            error: function (data) { // función que se va a ejecutar si el pedido falla
+                alert("ERROR ");
+                //  Error("No se ha podido realizar la consulta");
 
-        }
-    });
-    return true;
+            }
+        });
+        return true;
+    } else
+   return alert("Complete la categoria");
+   
 };
 
 function onbtnAsociarCategoria() {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -8,6 +9,7 @@ using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using TFI.Entidades;
 using System.Web.Script.Services;
+using System.Web.UI.HtmlControls;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -18,6 +20,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         EmpresaCore EmpresaBLL = new EmpresaCore();
         CategoriaCore CategoriaBLL = new CategoriaCore();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
+        private GestionContenidoCategorias gcat;
         private LenguajeEntidad idioma;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
@@ -35,6 +38,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            notificationcategoria.Visible = false;
             idioma = new LenguajeEntidad();
             if (!IsPostBack)
             {
@@ -145,6 +149,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public static void GrabarCategoria(string descripcion)
         {
 
+            var formulario= new GestionContenidoCategorias();
+            
             var usuarioEntity = new UsuarioEntidad();
             var Current = HttpContext.Current;
 
@@ -153,11 +159,30 @@ namespace TFI.GUI.Areas.Intranet.Forms
             CategoriaEntidad NuevaCategoria = new CategoriaEntidad();
 
             NuevaCategoria.CUIT = ConfigSection.Default.Site.Cuit;
-            NuevaCategoria.DescripCategoria = descripcion;
+            if (descripcion == "")
+            {
+                
+               formulario.ValidaDescripcionCategoria();
+            }
+            else { NuevaCategoria.DescripCategoria = descripcion;
 
             CategoriaCore UnCoreCat = new CategoriaCore();
             UnCoreCat.CategoriaInsert(NuevaCategoria);
+            }
+        }
+        private  void ValidaDescripcionCategoria()
+        {
+            notificationcategoria= new HtmlGenericControl();
+            notificationcategoria.Visible = true;
+            notificationcategoria.InnerHtml = "Ingrese una categoria valida";
+           
 
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("alert('Ingrese una categoria');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                       "ModalScript", sb.ToString(), false);
         }
     }
 }

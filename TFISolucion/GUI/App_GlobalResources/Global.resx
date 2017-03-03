@@ -906,4 +906,22 @@
   <data name="TarjetaSeleccionada" xml:space="preserve">
     <value>Tarjeta seleccionada</value>
   </data>
+  <data name="ContrasenasDistintasCorta" xml:space="preserve">
+    <value>Contraseñas distintas</value>
+  </data>
+  <data name="DemasiadosCaracteres" xml:space="preserve">
+    <value>Demasiados caracteres</value>
+  </data>
+  <data name="IngresarApellido" xml:space="preserve">
+    <value>Ingresar apellido</value>
+  </data>
+  <data name="IngresarCorreo" xml:space="preserve">
+    <value>Ingrese correo</value>
+  </data>
+  <data name="IngresarDNIoCUIT" xml:space="preserve">
+    <value>Ingrese DNI/CUIT</value>
+  </data>
+  <data name="IngresoEntre8-15Caracteres" xml:space="preserve">
+    <value>Ingrese entre 8 y 15 caracteres</value>
+  </data>
 </root>
