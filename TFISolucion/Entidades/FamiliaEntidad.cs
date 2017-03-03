@@ -26,7 +26,7 @@ namespace TFI.Entidades
 
         public enum PermisoFamilia : int
         {
-            Publico = 1, Cliente = 2, Empleado = 3,Supervisor=4, Admin = 5
+            Publico = 1, Cliente = 2, Empleado = 3,Admin = 4
         }
 
 		#endregion

@@ -97,7 +97,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlPermisosUsuarioAlta.DataSource = null;
             unasFamilias = unManagerFamilia.FamiliaSelectAll();
           
-            ddlPermisosUsuarioAlta.DataSource = unasFamilias.Where(o=> (o.IdFamilia == FamiliaEntidad.PermisoFamilia.Empleado || o.IdFamilia==FamiliaEntidad.PermisoFamilia.Admin|| o.IdFamilia== FamiliaEntidad.PermisoFamilia.Supervisor));
+            ddlPermisosUsuarioAlta.DataSource = unasFamilias.Where(o=> (o.IdFamilia == FamiliaEntidad.PermisoFamilia.Empleado || o.IdFamilia==FamiliaEntidad.PermisoFamilia.Admin));
             ddlPermisosUsuarioAlta.DataValueField = "NombreFamilia";
             //ddlPermisosUsuarioUpdate.SelectedIndex = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
             ddlPermisosUsuarioAlta.DataBind();

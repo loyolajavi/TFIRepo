@@ -127,7 +127,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 Consulta.Descripcion = item.DescripProducto;
                 if (StockDeProducto.Count > 0)
                 {
-                Consulta.CantidadEnStock = StockDeProducto[0].CantidadProducto;
+                    Consulta.CantidadEnStock = StockDeProducto[0].CantidadProducto;
                 }
                 else
                 {
@@ -225,20 +225,15 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             var core = new ProductoCore();
             // var usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
-           // var cotizacion = new MonedaEmpresaEntidad();
-           // cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
-           // var cot2 = Convert.ToInt32(cotizacion.IdMoneda);
+            // var cotizacion = new MonedaEmpresaEntidad();
+            // cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
+            // var cot2 = Convert.ToInt32(cotizacion.IdMoneda);
             var productosEmpresa = core.FindAllByCUIT(1);
 
             return productosEmpresa.Select(x => x.DescripProducto).ToList();
 
 
         }
-        protected void grillastock_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            grillastock.PageIndex = e.NewPageIndex;
-            CargarGrillaStock();
 
-        }
     }
 }

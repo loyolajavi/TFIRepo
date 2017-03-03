@@ -75,6 +75,21 @@ namespace TFI.GUI.Areas.Intranet.Forms
             Response.BinaryWrite(managerReportes.ReportePedidosDeUsuario(txtUsuario.Text));
             Response.End();
             }
+            else
+
+            NotificacionNombreUsuario();
+        }
+        private void NotificacionNombreUsuario()
+        {
+            notificationTarjeta.InnerHtml = "La fecha de expiracion de tarjeta es invalida";
+            //notificationTarjeta.Visible = true;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("alert('Ingrese el Nombre de Usuario');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                       "ModalScript", sb.ToString(), false);
         }
     }
 }

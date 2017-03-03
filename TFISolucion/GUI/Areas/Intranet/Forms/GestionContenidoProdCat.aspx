@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="form-group">
-                    <asp:TextBox ID="txtProductoaBuscar" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server"></asp:TextBox>
                     <br />
                     <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
 
@@ -111,5 +111,38 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
-    <script src="../../../Scripts/shared/Validaciones.js"></script>
+      <script src="../../../Scripts/shared/Validaciones.js"></script>
+    <script>
+        var obtenerTags = function () {
+            var result;
+            $.ajax({
+                type: "POST",
+                url: "GestionStock.aspx/ObtenerProductos",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, error) {
+                    alert(error);
+                },
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+
+            return result;
+        }
+
+        var availableTags = obtenerTags();
+
+        //$("#txtClienteBusqueda").change(function () {
+        //    $(this).autocomplete({
+        //        source: availableTags
+        //    });
+        //});
+
+        $("#txtProductoaBuscar").autocomplete({
+            source: availableTags
+
+        });
+    </script>
 </asp:Content>
