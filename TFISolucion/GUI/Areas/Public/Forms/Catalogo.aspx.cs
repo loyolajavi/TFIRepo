@@ -55,6 +55,8 @@ namespace TFI.GUI
 
             if (!IsPostBack)
             {
+                cargarFiltros();
+
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
@@ -167,7 +169,48 @@ namespace TFI.GUI
            if( lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
+           var valordropdown = Session["ValorDrop"];
+           if (valordropdown != null) {
+               if (Convert.ToInt32(valordropdown) == 0)
+           {
+               catalogo.DataSource = unosProductos.OrderByDescending(x => x.PrecioUnitario);;
+               catalogo.DataBind();
+           }
+            else if (Convert.ToInt32(valordropdown) == 1)
+           {
+               catalogo.DataSource = unosProductos.OrderBy(x => x.PrecioUnitario);;
+               catalogo.DataBind();
+           }
+               else if (Convert.ToInt32(valordropdown) == 2)
+               {
+                   catalogo.DataSource = unosProductos.OrderByDescending(x => x.DescripProducto); ;
+                   catalogo.DataBind();
+               }
+               else if (Convert.ToInt32(valordropdown) == 3)
+               {
+                   catalogo.DataSource = unosProductos.OrderBy(x => x.DescripProducto); ;
+                   catalogo.DataBind();
+               } 
+           }
 
+        }
+
+        public void cargarFiltros()
+        {
+           var valordropdown = Session["ValorDrop"];
+        
+               dropdownfiltro.Items.Add("Mayor Precio");
+               dropdownfiltro.Items.Add("Menor Precio");
+               dropdownfiltro.Items.Add("Z - A");
+               dropdownfiltro.Items.Add("A - Z");
+               dropdownfiltro.DataBind();
+               if (valordropdown != null)
+               {
+                   if (Convert.ToInt32(valordropdown) == 0) { dropdownfiltro.SelectedIndex = 0; }
+                   else if (Convert.ToInt32(valordropdown) == 1) { dropdownfiltro.SelectedIndex = 1; }
+                   else if (Convert.ToInt32(valordropdown) == 2) { dropdownfiltro.SelectedIndex = 2; }
+                   else if (Convert.ToInt32(valordropdown) == 3) { dropdownfiltro.SelectedIndex = 3; }
+               }
         }
 
         [WebMethod]
@@ -229,6 +272,34 @@ namespace TFI.GUI
                 Current.Session["ListaDeseos"] = unaListaProductos;
                 //ActualizarDeseos();
             }
+        }
+
+        protected void dropdownfiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dropdownfiltro.SelectedIndex == 0)
+            {
+                catalogo.DataSource = unosProductos.OrderByDescending(x => x.PrecioUnitario);
+                catalogo.DataBind();
+            }
+            else if (dropdownfiltro.SelectedIndex == 1)
+            {
+                catalogo.DataSource = unosProductos.OrderBy(x => x.PrecioUnitario);
+                catalogo.DataBind();
+            }
+            else if (dropdownfiltro.SelectedIndex == 2)
+            {
+                catalogo.DataSource = unosProductos.OrderByDescending(x => x.DescripProducto); 
+                catalogo.DataBind();
+            }
+            else if (dropdownfiltro.SelectedIndex == 3)
+            {
+                catalogo.DataSource = unosProductos.OrderBy(x => x.DescripProducto); 
+                catalogo.DataBind();
+            }
+            
+            
+            Session["ValorDrop"] = dropdownfiltro.SelectedIndex;
+            Response.Redirect(Request.RawUrl);
         }
 
         // NO LO USARIA MAS ******************************************************0000000000000000000000000000000000000000000000000000000000000

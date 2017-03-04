@@ -71,7 +71,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>
-                                    <input type="text" class="form-control" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" />
+                                    <input type="text" class="form-control" clientidmode="static" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" />
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="Altatarjeta"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingresar numero de tarjeta" ControlToValidate="txtNumeroTarjeta" ValidationGroup="Altatarjeta"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="card-holder-name"><%=Resources.Global.Titular%></label>
@@ -127,7 +129,8 @@
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <button type="button" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>
+             <asp:Button ID="btnGrabarTarjeta" CssClass="btn btn-primary btn-block" ClientIDMode="static" Text="<%=Resources.Global.Aceptar%>" runat="server" OnClick="btnGrabarTarjeta_Click" ValidationGroup="Altatarjeta" />
+                        <%--   <button type="button" ValidationGroup="Altatarjeta" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>--%>
                 </div>
             </div>
         </div>

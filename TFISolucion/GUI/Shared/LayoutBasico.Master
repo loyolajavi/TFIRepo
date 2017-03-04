@@ -174,9 +174,9 @@
                                     <asp:Label ID="lblInicio" runat="server" Text="<%$Resources:Global, Inicio %>"></asp:Label></a></li>
                                 <li><a href="/Areas/Public/Forms/QuienesSomos.aspx">
                                     <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a></li>
-                                <li>
+                               <%-- <li>
                                     <a href="/Areas/Public/Forms/ClientesEmpresa.aspx">
-                                        <asp:Label ID="lblNuestrosClientes" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label></a></li>
+                                        <asp:Label ID="lblNuestrosClientes" runat="server" Text="<%$Resources:Global, NuestrosClientes %>"></asp:Label></a></li>--%>
                                 <li><a href="/Areas/Public/Forms/Catalogo.aspx?search=*"><asp:Label ID="lblmasvendios" runat="server" Text="<%$Resources:Global, Catalogo %>"></asp:Label></a></li>
                                 <li><a href="/Areas/Public/Forms/Contacto.aspx">
                                     <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Contacto %>"></asp:Label></a></li>

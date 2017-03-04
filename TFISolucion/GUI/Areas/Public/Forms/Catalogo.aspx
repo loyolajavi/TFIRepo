@@ -5,7 +5,7 @@
 <asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
     <div class="container">
-
+  
         <div class="col-md-3">
             <p class="lead">
                 <asp:Label ID="lblCategorias" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label>
@@ -17,7 +17,21 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
+            <div class="list-group">
+                  <p class="lead">
+                               <asp:Label ID="Label5" runat="server" Text="Filtrar Por"></asp:Label>
+                  </p>
+                <div class="col-xs-8" style="text-align:left;">
+                <asp:DropDownList CssClass="form-control" ID="dropdownfiltro" AutoPostBack="true" runat="server" OnSelectedIndexChanged="dropdownfiltro_SelectedIndexChanged"></asp:DropDownList>
+               </div>
+                </div>
         </div>
+
+        <div class="col-md-3" style="">
+          
+            
+        </div>
+
         <div class="col-md-9">
 
             <div id="notif" class="notification text-center" runat="server" hidden="hidden"></div>

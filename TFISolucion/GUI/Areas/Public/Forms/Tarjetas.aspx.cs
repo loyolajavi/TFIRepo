@@ -217,9 +217,9 @@ namespace TFI.GUI
 
         protected void btnGrabarTarjeta_Click(object sender, EventArgs e)
         {
-
+            Page.Validate("Altatarjeta");
+            if (Page.IsValid) { 
             TarjetaEntidad NuevaTarjeta = new TarjetaEntidad();
-
             NuevaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
             NuevaTarjeta.CUIT = usuarioentidad.CUIT;
             NuevaTarjeta.Vencimiento = new DateTime(Convert.ToInt32(expiryYear.Value), Convert.ToInt32(expiryMes.Value), 1);
@@ -256,9 +256,18 @@ namespace TFI.GUI
                 NotificationTarjetaInvalida();
             }
 
+
+            }
+            else { limpiarCampos(); }
+
+        }
+
+        private void limpiarCampos()
+        {
+            txtCodigoSeguridad.Value = string.Empty;
+            txtNumeroTarjeta.Value = string.Empty;
+            txtTitular.Value = string.Empty;
             
-
-
         }
 
         private void NotificationTarjetaInvalida()

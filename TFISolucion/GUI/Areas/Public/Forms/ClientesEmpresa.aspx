@@ -21,7 +21,6 @@
         <div class="tab-pane" id="panel-132440">
             <%--tab2 MAS VENDIDOS--%>
             <div class="row">
-
                 <asp:Repeater ID="lstClientesConMasCompras" ClientIDMode="Static" runat="server">
                     <ItemTemplate>
                         <div class="col-sm-2 col-lg-2 col-md-2">
