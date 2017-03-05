@@ -927,4 +927,7 @@
   <data name="IngresoEntre8-15Caracteres" xml:space="preserve">
     <value>Please add 8 between 15 characters</value>
   </data>
+  <data name="String2" xml:space="preserve">
+    <value />
+  </data>
 </root>

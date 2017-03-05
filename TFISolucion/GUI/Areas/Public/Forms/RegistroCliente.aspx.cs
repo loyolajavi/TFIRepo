@@ -14,22 +14,57 @@ namespace TFI.GUI.Areas.Public.Forms
 {
     public partial class RegistroCliente : BasePage
     {
-
+        private LenguajeEntidad idioma;
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
-        
+        protected T FindControlFromMaster<T>(string name) where T : Control
+        {
+            MasterPage master = this.Master;
+            while (master != null)
+            {
+                T control = master.FindControl(name) as T;
+                if (control != null)
+                    return control;
+
+                master = master.Master;
+            }
+            return null;
+        }
+        public RegistroCliente()
+        {
+            idioma = new LenguajeEntidad();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                idioma = (LenguajeEntidad)Session["Idioma"];
                 cargarFiscal();
                 cargarProvincias();
 
+
+                if (idioma == null)
+                {
+                    idioma = new LenguajeEntidad();
+                    idioma.DescripcionLenguaje = "es";
+                    Session["Idioma"] = idioma;
+
+                }
+            }
+            else
+            {
+                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
+            }
+            DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
+            if (lblIdioma != null)
+            {
+                lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
             }
         }
+
 
 
         public void cargarFiscal()
@@ -100,9 +135,9 @@ namespace TFI.GUI.Areas.Public.Forms
                 //Envio
                 NuevaDireccion.IdTipoDireccion = 2;//Envío
                 unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
-            
 
-             if (NroRetorno == 0)
+
+                if (NroRetorno == 0)
                 {
                     Session["Usuario"] = unUsuario;
                     Response.Redirect("Home.aspx");
@@ -145,6 +180,6 @@ namespace TFI.GUI.Areas.Public.Forms
 
 
 
-        
+
     }
 }
