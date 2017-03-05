@@ -83,7 +83,7 @@ namespace TFI.GUI.Areas.Public.Forms
             totalizado = lista.Select(x => x.Cantidad * x.Producto.PrecioUnitario).Sum();
             //TODO: sacarle el precio de envio hardcodeado:
             if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
-                totalizado = totalizado + 200;
+                totalizado = totalizado + 100;
 
             TarjetaCore coreTarjeta = new TarjetaCore();
             List<TarjetaEntidad> MisTarjetas = coreTarjeta.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, logueado.NombreUsuario);

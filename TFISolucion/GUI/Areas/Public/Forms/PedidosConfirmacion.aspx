@@ -54,7 +54,7 @@
                         <tr>
                             <td colspan="2"><%=Resources.Global.FormaDeEnvio%> <strong><%=((TFI.Entidades.FormaEntregaEntidad.Options)FormaEntrega).ToString() %></strong></td>
                             <td class="td-centrado"><%if (FormaEntrega == 1)
-                                                        {%> 200.00 <% }
+                                                        {%> 100.00 <% }
                                                                      else
                                                                      { %> Gratis! <%} %></td>
                         </tr>
@@ -228,7 +228,7 @@
                         </tr>
                         <tr>
                             <td id="lblFechaExpiracion" class="td-lbl"><%=Resources.Global.FechaExpiracion%> : </td>
-                            <td><%=MiTarjeta.Vencimiento %></td>
+                            <td><%=MiTarjeta.Vencimiento.Date %></td>
                         </tr>
                     </table>
                 </div>
@@ -253,7 +253,7 @@
         </div>
     </div>
 
-    <div id="mdl_pagocompletado" class="modal fade" tabindex="-1" role="dialog">
+    <div id="mdl_pagocompletado" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">

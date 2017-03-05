@@ -37,7 +37,7 @@
                         </td>
                         <td style="vertical-align: middle">
                             <div class="td-centrado">
-                                <span class="precio">$ 200</span>
+                                <span class="precio">$ 100</span>
                             </div>
                         </td>
                     </tr>
