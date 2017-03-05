@@ -135,7 +135,7 @@ namespace TFI.GUI.General
         public void SetUsuarioLogueado(string label)
         {
             EtiquetaUsuario.InnerText = label;
-          
+            Salir.Visible = true;
             Salir.CssClass = "btn-danger";
         }
 

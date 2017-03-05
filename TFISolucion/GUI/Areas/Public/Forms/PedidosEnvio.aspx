@@ -76,7 +76,7 @@
                         </td>
                         <td>
                             <select id="sucursalesDisponibles" style="padding: 10px; width: 400px;">
-                                <option value=""><%=Resources.Global.Seleccione%></option>
+                                <%--<option value=""><%=Resources.Global.Seleccione%></option>--%>
                                 <% if (sucursalesDisponibles.Any())
                                     {
                                         foreach (var suc in sucursalesDisponibles)
