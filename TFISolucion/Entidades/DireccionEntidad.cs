@@ -24,7 +24,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the Piso value.
 		/// </summary>
-		public int? Piso { get; set; }
+		public int Piso { get; set; }
 
 		/// <summary>
 		/// Gets or sets the Departamento value.

@@ -91,7 +91,8 @@
                             <td id="lblTelefono" class="td-lbl"><%=Resources.Global.Telefono%> </td>
                             <td><%if (telefonoContacto != null)
                                     { %> <%=telefonoContacto.NroTelefono%>
-                                <% }
+                                <% 
+                                    }
                                 else
                                 { %> 
                                 Sin teléfono
@@ -103,9 +104,9 @@
                     else
                     {%>
                 <div>
-                    <p><%=Resources.Global.NoExisteDireccionDeEnvio%> </p>
+                    <p><%=Resources.Global.NoExisteDireccionDeEnvio%></p>
                 </div>
-                <%} %>
+                <%} btnEnviar.Visible = false; %>
                 <div style="margin-top: 40px;">
                     <a class="btn btn-warning" href="DatosPersonales.aspx"><%=Resources.Global.ActualizarDireccion%></a>
                 </div>
@@ -126,7 +127,7 @@
                         </tr>
                         <tr>
                             <td id="lblFacturacioncalle" class="td-lbl"><%=Resources.Global.Calle%> </td>
-                            <td><%=direccionFacturacion.Calle %>  <%=direccionEnvio.Numero %></td>
+                            <td><%=direccionFacturacion.Calle %>  <%=direccionFacturacion.Numero %></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionProvincia" class="td-lbl"><%=Resources.Global.Provincia%> </td>
@@ -140,7 +141,8 @@
                             <td id="lblFacturacionTelefono" class="td-lbl"><%=Resources.Global.Telefono%> </td>
                             <td><%if (telefonoContacto != null)
                                     { %> <%=telefonoContacto.NroTelefono%>
-                                <% }
+                                <% 
+                                    }
                                 else
                                 { %> 
                                 Sin teléfono
@@ -154,7 +156,7 @@
                 <div>
                     <p><%=Resources.Global.NoExisteDireccionDeFacturacion%></p>
                 </div>
-                <%} %>
+                <%} btnEnviar.Visible = false; %>
                 <div style="margin-top: 40px;">
                     <a class="btn btn-warning" href="DatosPersonales.aspx"><%=Resources.Global.ActualizarDireccion%></a>
                 </div>
@@ -168,7 +170,8 @@
 
     <div class="row" style="margin-bottom: 50px;">
         <div class="pasos">
-            <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosEnvio.aspx"><%=Resources.Global.Enviar%></a>
+                        <% if (direccionEnvio != null && direccionFacturacion != null) { btnEnviar.Visible = true; } %>
+            <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnEnviar" runat="server" href="PedidosEnvio.aspx"><%=Resources.Global.Enviar%></a>
         </div>
     </div>
 

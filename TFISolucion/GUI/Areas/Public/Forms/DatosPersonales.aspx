@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
-                                    <input type="text" class="form-control" id="piso" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
+                                    <input type="number" class="form-control" id="piso" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
@@ -292,7 +292,7 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label>
-                                    <input type="text" class="form-control" id="pisoenvio" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
+                                    <input type="number" class="form-control" id="pisoenvio" runat="server" placeholder="<%$Resources:Global, IngresarPiso %>" clientidmode="static" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>

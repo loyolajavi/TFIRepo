@@ -235,7 +235,7 @@ namespace TFI.GUI {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText piso;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl piso;
         
         /// <summary>
         /// Control Label14.
@@ -397,7 +397,7 @@ namespace TFI.GUI {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText pisoenvio;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl pisoenvio;
         
         /// <summary>
         /// Control Label23.

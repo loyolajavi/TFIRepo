@@ -895,9 +895,7 @@ namespace TFI.GUI
             {
                 NuevaDireccion.Calle = calle;
             }
-            else
-               // NotificacionCalleVacia();
-            
+
             if (!string.IsNullOrEmpty(departamento))
             {
                 NuevaDireccion.Departamento = departamento;
