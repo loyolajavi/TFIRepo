@@ -12,7 +12,7 @@ using TFI.CORE.Helpers;
 
 namespace TFI.GUI
 {
-    public partial class DatosPersonales :BasePage
+    public partial class DatosPersonales : BasePage
     {
         private UsuarioCore UsuarioBLL = new UsuarioCore();
         private DireccionCore DireccionBLL = new DireccionCore();
@@ -191,7 +191,7 @@ namespace TFI.GUI
             {
                 CargarDropdownProvincias();
             }
-           
+
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
@@ -390,7 +390,7 @@ namespace TFI.GUI
 
 
 
-                     
+
                     }
                     ddl.DataBind();
                     //else
@@ -428,15 +428,17 @@ namespace TFI.GUI
             var Current = HttpContext.Current;
             var coreUsuario = new UsuarioCore();
             UsuarioEntidad usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            if (!string.IsNullOrEmpty(telefono))
+            {
+                var telefonoNuevo = new TelefonoEntidad();
 
-            var telefonoNuevo = new TelefonoEntidad();
-            telefonoNuevo.NroTelefono = telefono;
-            telefonoNuevo.NombreUsuario = usuarioentidadStatic.NombreUsuario;
-            telefonoNuevo.CodArea = codigo;
-            telefonoNuevo.IdTipoTel = Convert.ToInt32(tipoTel);
-            telefonoNuevo.CUIT = usuarioentidadStatic.CUIT;
-            coreUsuario.insertTelefonoUsuario(telefonoNuevo);
-
+                telefonoNuevo.NroTelefono = telefono;
+                telefonoNuevo.NombreUsuario = usuarioentidadStatic.NombreUsuario;
+                telefonoNuevo.CodArea = codigo;
+                telefonoNuevo.IdTipoTel = Convert.ToInt32(tipoTel);
+                telefonoNuevo.CUIT = usuarioentidadStatic.CUIT;
+                coreUsuario.insertTelefonoUsuario(telefonoNuevo);
+            }
 
 
 

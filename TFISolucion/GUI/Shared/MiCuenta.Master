@@ -78,7 +78,7 @@
 
 
                             <li>
-                                <asp:LinkButton ID="Salir" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
+                                <asp:LinkButton ID="Salir" Text="<%$Resources:Global, Salir %>" runat="server" OnClick="Salir_Click" ForeColor="White"></asp:LinkButton>
                             </li>
 
                             <li runat="server" id="liIngresar">

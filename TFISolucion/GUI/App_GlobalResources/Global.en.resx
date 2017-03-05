@@ -930,4 +930,7 @@
   <data name="String2" xml:space="preserve">
     <value />
   </data>
+  <data name="OrdenarPor" xml:space="preserve">
+    <value>Order By</value>
+  </data>
 </root>

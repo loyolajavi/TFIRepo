@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/MiCuenta.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Tarjetas.aspx.cs" Inherits="TFI.GUI.Tarjetas" %>
+
 <%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -28,7 +29,7 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="Titular" HeaderText="<%$Resources:Global, Titular %>" />
                     <asp:BoundField DataField="FechaExpiracion" HeaderText="<%$Resources:Global, FechaExpiracion %>" />
-                    <asp:BoundField DataField="CodigoSeguridad" HeaderText="<%$Resources:Global, CodigoSeguridad %>"  />
+                    <asp:BoundField DataField="CodigoSeguridad" HeaderText="<%$Resources:Global, CodigoSeguridad %>" />
                     <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
                 </Columns>
             </asp:GridView>
@@ -37,8 +38,10 @@
 
 
 
-        <div class="col-md-6 text-center">
-            <a href="#modalAltaTarjeta" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.AgregarTarjeta%></a>
+        <div class="col-md-6 text-center" style="margin-left: 150px;">
+            <p>
+                <a href="#modalAltaTarjeta" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.AgregarTarjeta%></a>
+            </p>
         </div>
 
         <br />
@@ -55,7 +58,7 @@
                 <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2><%=Resources.Global.AgregarTarjeta%></h2>
-                    <div id="notificationTarjeta" runat="server" ClientIdMode="Static">
+                    <div id="notificationTarjeta" runat="server" clientidmode="Static">
                     </div>
                 </div>
                 <div class="modal-body">
@@ -72,7 +75,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>
                                     <input type="number" class="form-control" clientidmode="static" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" />
-                                   <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="Altatarjeta"></asp:RegularExpressionValidator>
+                                    <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="Altatarjeta"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingresar numero de tarjeta" ControlToValidate="txtNumeroTarjeta" ValidationGroup="Altatarjeta"></asp:RequiredFieldValidator>--%>
                                 </div>
                                 <div class="form-group">
@@ -129,8 +132,8 @@
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-             <asp:Button ID="btnGrabarTarjeta" CssClass="btn btn-primary btn-block" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" runat="server" OnClick="btnGrabarTarjeta_Click" ValidationGroup="Altatarjeta" />
-                        <%--   <button type="button" ValidationGroup="Altatarjeta" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>--%>
+                    <asp:Button ID="btnGrabarTarjeta" CssClass="btn btn-primary btn-block" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" runat="server" OnClick="btnGrabarTarjeta_Click" ValidationGroup="Altatarjeta" />
+                    <%--   <button type="button" ValidationGroup="Altatarjeta" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>--%>
                 </div>
             </div>
         </div>

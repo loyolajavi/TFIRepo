@@ -5,7 +5,7 @@
 <asp:Content ID="ContenidoCuerpo" ClientIDMode="Static" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
     <div class="container">
-  
+
         <div class="col-md-3">
             <p class="lead">
                 <asp:Label ID="lblCategorias" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label>
@@ -18,18 +18,17 @@
                 </asp:Repeater>
             </div>
             <div class="list-group">
-                  <p class="lead">
-                               <asp:Label ID="Label5" runat="server" Text="Filtrar Por"></asp:Label>
-                  </p>
-                <div class="col-xs-8" style="text-align:left;">
-                <asp:DropDownList CssClass="form-control" ID="dropdownfiltro" AutoPostBack="true" runat="server" OnSelectedIndexChanged="dropdownfiltro_SelectedIndexChanged"></asp:DropDownList>
-               </div>
-                </div>
+                <p class="lead">
+                    <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, OrdenarPor %>"></asp:Label>
+
+                    <div class="col-xs-9">
+                        <asp:DropDownList CssClass="form-control" ID="dropdownfiltro" AutoPostBack="true" runat="server" OnSelectedIndexChanged="dropdownfiltro_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
+                </p>
+            </div>
         </div>
 
         <div class="col-md-3" style="">
-          
-            
         </div>
 
         <div class="col-md-9">
@@ -50,13 +49,13 @@
                                 </div>
                                 <div class="item-toolbar">
                                     <%--<input type="button" value="Comprar" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />--%>
-                                    <input type="button" value= "<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
+                                    <input type="button" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
                                     <%--<input type="button" value="Mas" data-producto='<%#Eval("IdProducto")%>' clientidmode="static" class="btn btn-info" runat="server" onclick="btnInfoClick" />--%>
                                     <%if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
                                         {%>
                                     <%--<asp:Button CssClass="btn btn-info" ID="btnDesear" runat="server" data-producto='<%#Eval("IdProducto")%>' Text="Desear" OnClientClick="return onBtnAddClick(this)" OnClick="btnDesear_Click" />--%>
                                     <%--<input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />--%>
-                                     <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)"/>
+                                    <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)" />
                                     <%}%>
                                 </div>
                             </div>

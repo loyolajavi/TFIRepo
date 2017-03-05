@@ -165,7 +165,7 @@
                         <asp:Label ID="lblPiso" for="txtPiso" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Piso %>"></asp:Label><br />
                         <div class="col-xs-9">
                             <div class="col-xs-5">
-                                <input type="text" class="form-control" id="txtPiso" runat="server" placeholder="<%$Resources:Global, EjemploPiso %>" clientidmode="static" />
+                                <input type="number" class="form-control" id="txtPiso" runat="server" value="0" placeholder="<%$Resources:Global, EjemploPiso %>" clientidmode="static" />
                             </div>
                             <div class="col-xs-7">
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtPiso" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>

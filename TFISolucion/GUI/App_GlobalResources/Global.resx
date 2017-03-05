@@ -924,4 +924,7 @@
   <data name="IngresoEntre8-15Caracteres" xml:space="preserve">
     <value>Ingrese entre 8 y 15 caracteres</value>
   </data>
+  <data name="OrdenarPor" xml:space="preserve">
+    <value>Ordenar Por</value>
+  </data>
 </root>

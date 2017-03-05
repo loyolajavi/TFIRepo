@@ -27,14 +27,14 @@
                 <div class="form-group">
                     <label for="txtNombreUsuario">
                         <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></label>
-                    <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
+                    <input type="text" class="form-control" id="txtNombreUsuario" runat="server" ClientIDMode="static" />
                 </div>
                 <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" />
                 <br />
                 <br />
                 <div class="form-group">
                     <label for="txtClave"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label><br />
-                    <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
+                    <input type="password" class=" input-sm" id="txtClave" runat="server" ClientIDMode="static" placeholder="********" />
                     <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
                 </div>
 
