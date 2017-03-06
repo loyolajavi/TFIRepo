@@ -97,7 +97,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <%-- <td>Mercado Pago</td>
+                        <td>Mercado Pago</td>
                         <td>
 
                             <%@ Import Namespace="mercadopago" %>
@@ -135,8 +135,10 @@
                                 Hashtable preference = mp.createPreference(preferenceData);
 
                             %>
-                            <a class="btn btn-success" href="<%Response.Write(((Hashtable)preference["response"])["init_point"]); %>" id="btnPagarMP">Pagar con MP</a>
-                        </td>--%>
+                            <a class="btn btn-success" target="_blank" href="<%Response.Write(((Hashtable)preference["response"])["init_point"]); %>" id="btnPagarMP">Mercado Pago</a>
+                        </td>
+                      </tr>
+                    <tr>
                         <td><%=Resources.Global.TarjetaDeCredito%></td>
                         <td>
                           <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" style="display:none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
@@ -353,9 +355,9 @@
             });
         }
 
-        $('#btnPagarMP').click(function () {
-            limpiarPedido();
-        })
+        //$('#btnPagarMP').click(function () {
+        //    limpiarPedido();
+        //})
 
         $('#mdl_transferencia').on('hidden.bs.modal', function () {
             limpiarPedido();
