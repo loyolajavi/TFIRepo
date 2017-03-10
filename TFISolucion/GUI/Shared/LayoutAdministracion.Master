@@ -180,6 +180,10 @@
                                             <a href="GestionContenidoQuienesSomos.aspx">
                                                 <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></a>
                                         </li>
+                                        <li>
+                                            <a href="GestionMoneda.aspx">
+                                                <asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, GestionMoneda %>"></asp:Label></a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin)

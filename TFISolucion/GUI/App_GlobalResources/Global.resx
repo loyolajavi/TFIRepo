@@ -927,4 +927,10 @@
   <data name="OrdenarPor" xml:space="preserve">
     <value>Ordenar Por</value>
   </data>
+  <data name="GestionMoneda" xml:space="preserve">
+    <value>Gestion Moneda</value>
+  </data>
+  <data name="IngreseEntre7y12Numeros" xml:space="preserve">
+    <value>Ingrese entre 7 y 12 numeros.</value>
+  </data>
 </root>

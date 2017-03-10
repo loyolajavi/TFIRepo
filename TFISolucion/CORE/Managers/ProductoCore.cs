@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TFI.DAL.DAL;
 using TFI.CORE.Helpers;
 using TFI.Entidades;

@@ -80,7 +80,9 @@ namespace TFI.GUI.Areas.Public.Forms
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
-
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
             var Current = HttpContext.Current;
 

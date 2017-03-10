@@ -323,7 +323,8 @@
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <button type="button" id="btnCerrarModal" class="close" data-dismiss="modal">&times;</button>
-                    <h2> <asp:Label ID="Label26" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></h2>
+                    <h2>
+                        <asp:Label ID="Label26" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></h2>
                     <div id="notification"></div>
                 </div>
                 <div class="modal-body">
@@ -335,12 +336,12 @@
                             <form role="form" id="formPass">
 
                                 <div class="form-group">
-                                   <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, ContrasenaAnterior %>"></asp:Label>
+                                    <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, ContrasenaAnterior %>"></asp:Label>
                                     <input type="password" class="form-control" id="passanterior" clientidmode="static" placeholder="<%$Resources:Global, IngresarContrasenaAnterior %>" runat="server" maxlength="20" required />
                                 </div>
 
                                 <div class="form-group">
-                                   <asp:Label ID="Label28" runat="server" Text="<%$Resources:Global, NuevaContrasena %>"></asp:Label>
+                                    <asp:Label ID="Label28" runat="server" Text="<%$Resources:Global, NuevaContrasena %>"></asp:Label>
                                     <input type="password" class="form-control" clientidmode="static" id="passnueva" placeholder="<%$Resources:Global, IngresarContrasenaNueva %>" runat="server" maxlength="20" />
                                 </div>
 
@@ -354,7 +355,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--agrege onsubmit--%>
-                    <asp:Button ID="btnCambiarClave" runat="server" ClientIDMode="static" onsubmit="return validateForm(this);" CssClass="btn btn-primary btn-block" Text="<%$Resources:Global, Cambiar %>"/>
+                    <asp:Button ID="btnCambiarClave" runat="server" ClientIDMode="static" onsubmit="return validateForm(this);" CssClass="btn btn-primary btn-block" Text="<%$Resources:Global, Cambiar %>" />
                 </div>
             </div>
         </div>
@@ -367,7 +368,8 @@
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>  <asp:Label ID="Label30" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></h2>
+                    <h2>
+                        <asp:Label ID="Label30" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></h2>
                     <div id="notificationTelefono">
                     </div>
                 </div>
@@ -377,14 +379,16 @@
                             <asp:AsyncPostBackTrigger ControlID="btnGrabarTelefono" />
                         </Triggers>
                         <ContentTemplate>
-                            <form role="form">
+                            <form role="form" data-toggle="validator" id="form">
                                 <div class="form-group">
-                                     <asp:Label ID="Label31" runat="server" Text="<%$Resources:Global, CodigoArea %>"></asp:Label>
-                                    <input type="text" class="form-control" id="txtCodigo" runat="server" placeholder="<%$Resources:Global, CodigoArea %>" clientidmode="static" />
+                                    <asp:Label ID="Label31" runat="server" Text="<%$Resources:Global, CodigoArea %>"></asp:Label>
+                                    <input type="number"  class="form-control" id="txtCodigo" runat="server" placeholder="<%$Resources:Global, CodigoArea %>" clientidmode="static" required="" />
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                      <asp:Label ID="Label32" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
-                                    <input type="text" class="form-control" id="txtNumero" runat="server" placeholder="<%$Resources:Global, Numero %>" clientidmode="static" />
+                                    <asp:Label ID="Label32" runat="server" Text="<%$Resources:Global, Numero %>"></asp:Label>
+                                    <input type="number" pattern="^[0-9]{1,10}$" class="form-control" id="txtNumero" runat="server" placeholder="<%$Resources:Global, Numero %>" clientidmode="static" required="" />
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="Label33" runat="server" Text="<%$Resources:Global, Tipo %>"></asp:Label>
@@ -393,7 +397,7 @@
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnGrabarTelefono" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
+                    <asp:Button ID="btnGrabarTelefono" CausesValidation="True" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
                 </div>
             </div>
         </div>

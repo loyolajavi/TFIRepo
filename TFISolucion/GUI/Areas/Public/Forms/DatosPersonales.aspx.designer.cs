@@ -577,7 +577,7 @@ namespace TFI.GUI {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCodigo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtCodigo;
         
         /// <summary>
         /// Control Label32.
@@ -595,7 +595,7 @@ namespace TFI.GUI {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNumero;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtNumero;
         
         /// <summary>
         /// Control Label33.

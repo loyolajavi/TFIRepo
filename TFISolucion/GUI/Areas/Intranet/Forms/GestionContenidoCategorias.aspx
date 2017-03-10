@@ -71,11 +71,12 @@
                             </Triggers>
                             <ContentTemplate>
 
-                                <form role="form">
+                                <form role="form" id="form" data-toggle="validator">
                                     <div class="form-group">
                                         <label for="descripcion">
                                             <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></label>
-                                        <input type="text" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" clientidmode="static" />
+                                        <input type="text" title="Ingrese solo letras y menos de 20 letras" pattern="^[_A-z\s]{1,20}$" class="form-control" id="descripcion" runat="server" placeholder="Ingrese la descripcion" required="" clientidmode="static" />
+                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </form>
                             </ContentTemplate>

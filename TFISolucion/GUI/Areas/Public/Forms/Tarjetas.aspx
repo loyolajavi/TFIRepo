@@ -67,24 +67,27 @@
                             <asp:AsyncPostBackTrigger ControlID="btnGrabarTarjeta" />
                         </Triggers>
                         <ContentTemplate>
-                            <form role="form" id="formPass">
+                            <form role="form" id="form" data-toggle="validator">
                                 <div class="form-group">
                                     <label for="tipoTarjeta"><%=Resources.Global.TipoTarjeta%></label>
                                     <asp:DropDownList ID="tipoTarjeta" runat="server" CssClass="form-control"></asp:DropDownList>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>
-                                    <input type="number" class="form-control" clientidmode="static" name="txtNumeroTarjeta" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" />
-                                    <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator7" Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationExpression="^\d{1,5}$" ValidationGroup="Altatarjeta"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="Ingresar numero de tarjeta" ControlToValidate="txtNumeroTarjeta" ValidationGroup="Altatarjeta"></asp:RequiredFieldValidator>--%>
+                                    <input type="number" class="form-control" clientidmode="static" id="txtNumeroTarjeta" runat="server" max="999999999999" placeholder="<%$Resources:Global, NumeroTarjeta %>" required="" data-minlength="5" />
+                                    <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator7" ErrorMessage="Email is required." Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationGroup="Altatarjeta" ValidationExpression="^\d{1,5}$"></asp:RegularExpressionValidator>--%>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" ErrorMessage="Email is required." CssClass="alert alert-warning" runat="server" Text="Ingresar numero de tarjeta" ControlToValidate="txtNumeroTarjeta" ValidationGroup="Altatarjeta"></asp:RequiredFieldValidator>--%>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="card-holder-name"><%=Resources.Global.Titular%></label>
-                                    <input type="text" class="form-control" name="card-holder-name" id="txtTitular" runat="server" placeholder="<%$Resources:Global, NombreTitular %>" />
+                                    <input type="text" class="form-control" name="card-holder-name" title="Solo letras" pattern="^[_A-z\s]{1,20}$" id="txtTitular" runat="server" placeholder="<%$Resources:Global, NombreTitular %>" required="" />
+                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtCodigoSeguridad"><%=Resources.Global.CodigoSeguridad%></label>
-                                    <input type="number" runat="server" class="form-control" name="txtCodigoSeguridad" id="txtCodigoSeguridad" placeholder="<%$Resources:Global, CodigoSeguridad %>" />
+                                    <input type="number" runat="server" class="form-control" name="txtCodigoSeguridad" id="txtCodigoSeguridad" placeholder="<%$Resources:Global, CodigoSeguridad %>" required=""/>
+                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="expiry-month"><%=Resources.Global.FechaExpiracion%></label>
@@ -132,7 +135,7 @@
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnGrabarTarjeta" CssClass="btn btn-primary btn-block" ClientIDMode="static" Text="<%$Resources:Global, Aceptar %>" runat="server" OnClick="btnGrabarTarjeta_Click" ValidationGroup="Altatarjeta" />
+                    <asp:Button ID="btnGrabarTarjeta" CausesValidation="True" CssClass="btn btn-primary btn-block" ValidationGroup="Altatarjeta" Text="<%$Resources:Global, Aceptar %>" runat="server" OnClick="btnGrabarTarjeta_Click" />
                     <%--   <button type="button" ValidationGroup="Altatarjeta" id="btnGrabarTarjeta" onserverclick="btnGrabarTarjeta_Click" runat="server" class="btn btn-primary btn-block"><%=Resources.Global.Aceptar%></button>--%>
                 </div>
             </div>

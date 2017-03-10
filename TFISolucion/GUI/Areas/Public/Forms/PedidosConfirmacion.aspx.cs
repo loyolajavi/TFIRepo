@@ -187,10 +187,10 @@ namespace TFI.GUI.Areas.Public.Forms
             var correManager = new FUNCIONES.Correo();
 
             correManager.EnviarCorreo(
-                remitente: "martinez.juan.marcos@gmail.com",
-                contrasenia: "descargas",
+                remitente: "mascoshopp@gmail.com",
+                contrasenia: "Descargas123",
                 nombre: unaEmpresa.NombreEmpresa,
-                telefono: "12334556",
+                telefono: "011-4853340",
                 destinatario: logueado.Email,
                 nombreEmpresa: unaEmpresa.NombreEmpresa,
                 asunto: "Trasnferencia",

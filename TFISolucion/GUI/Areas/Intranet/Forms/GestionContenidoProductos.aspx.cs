@@ -112,7 +112,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductosDeEmpresa.Clear();
 
             ProductoCore ProductoBLL = new ProductoCore();
-            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT(1);
+            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT(1).Where(o => o.FecBaja == null).ToList();
 
             foreach (var prod in ProductosDeEmpresa)
             {

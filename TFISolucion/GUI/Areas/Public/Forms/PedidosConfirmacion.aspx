@@ -55,8 +55,8 @@
                             <td colspan="2"><%=Resources.Global.FormaDeEnvio%> <strong><%=((TFI.Entidades.FormaEntregaEntidad.Options)FormaEntrega).ToString() %></strong></td>
                             <td class="td-centrado"><%if (FormaEntrega == 1)
                                                         {%> 100.00 <% }
-                                                                     else
-                                                                     { %> Gratis! <%} %></td>
+                                                                       else
+                                                                       { %> Gratis! <%} %></td>
                         </tr>
                         <% } %>
                         <tr>
@@ -92,11 +92,11 @@
                         <td>
                             <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Transferencia %>"></asp:Label></td>
                         <td>
-                            <button type="button" class="btn btn-success" id="btTrasnferencia"  value=">
+                            <button type="button" class="btn btn-success" id="btTrasnferencia" value="">
                                 <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, EnviarDatos %>"></asp:Label></button>
                         </td>
                     </tr>
-                    <tr>
+                    <%--  <tr>
                         <td>Mercado Pago</td>
                         <td>
 
@@ -137,12 +137,12 @@
                             %>
                             <a class="btn btn-success" target="_blank" href="<%Response.Write(((Hashtable)preference["response"])["init_point"]); %>" id="btnPagarMP">Mercado Pago</a>
                         </td>
-                      </tr>
+                      </tr>--%>
                     <tr>
                         <td><%=Resources.Global.TarjetaDeCredito%></td>
                         <td>
-                          <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" style="display:none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
-                             <a href="#mdl_tarjeta" class="btn btn-success" data-toggle="modal"><%=Resources.Global.Pagar%></a>
+                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Style="display: none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
+                            <a href="#mdl_tarjeta" class="btn btn-success" data-toggle="modal"><%=Resources.Global.Pagar%></a>
                         </td>
                     </tr>
                 </table>
@@ -192,7 +192,7 @@
         </div>
     </div>
 
-      <div id="mdl_tarjeta" class="modal fade" tabindex="-1" role="dialog">
+    <div id="mdl_tarjeta" class="modal fade" tabindex="-1" role="dialog">
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -201,56 +201,59 @@
                     <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.PagarConTarjeta%></h3>
                 </div>
                 <div class="modal-body text-center">
-                <h4 class="box-title"><%=Resources.Global.TarjetaSeleccionada%></h4>
-                <hr class="barras" />
-                <%if (MiTarjeta != null)
-                    { %>
-                <div class="modal-body text-center">
-                    <table>
-                        <tr>
-                            <td id="lblTitular" class="td-lbl"><%=Resources.Global.Titular%> : </td>
-                            <td><%=MiTarjeta.Titular%></td>
-                        </tr>
-                           <tr>
-                            <td id="lblTipo" class="td-lbl"><%=Resources.Global.Tipo%> : </td>
-                            <td>
-                                <%if (MiTarjeta.IdTipoTarjeta == 1)
-                                    { %> 
+                    <h4 class="box-title"><%=Resources.Global.TarjetaSeleccionada%></h4>
+                    <hr class="barras" />
+                    <%if (MiTarjeta != null)
+                        { %>
+                    <div class="modal-body text-center">
+                        <table>
+                            <tr>
+                                <td id="lblTitular" class="td-lbl"><%=Resources.Global.Titular%> : </td>
+                                <td><%=MiTarjeta.Titular%></td>
+                            </tr>
+                            <tr>
+                                <td id="lblTipo" class="td-lbl"><%=Resources.Global.Tipo%> : </td>
+                                <td>
+                                    <%if (MiTarjeta.IdTipoTarjeta == 1)
+                                        { %> 
                                 Visa
                                 <%  }
-                                else
-                                { %> 
+                                    else
+                                    { %> 
                                 Master Card
                                 <%} %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="lblNumero" class="td-lbl"><%=Resources.Global.Numero%> : </td>
-                            <td><%=MiTarjeta.Numero %></td>
-                        </tr>
-                        <tr>
-                            <td id="lblFechaExpiracion" class="td-lbl"><%=Resources.Global.FechaExpiracion%> : </td>
-                            <td><%=MiTarjeta.Vencimiento.Date %></td>
-                        </tr>
-                    </table>
-                </div>
-                <% }
-                    else
-                    {%>
-                <div>
-                    <p><%=Resources.Global.NoPoseeTarjetaRegistrada%> </p>
-                </div>
-                <%} %>
-                <div style="margin-top: 40px;">
-                    <a class="btn btn-warning" id="cambiartarjeta" href="Tarjetas.aspx"><%=Resources.Global.ElegirOtraTarjeta%> </a>
-                </div>
-            </div>
-                <div class="modal-footer">
-                    <div class="text-center">
-                       <a href="#mdl_pagocompletado" id="btnpagarmodal" clientidmode="static" style="width: 200px; background-color: black; color: #fff;" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.Pagar%></a>
-                       <%--  <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="#mdl_pagocompletado" id="btnPagoDefinitivo">Pagar</a>--%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="lblNumero" class="td-lbl"><%=Resources.Global.Numero%> : </td>
+                                <td><%=MiTarjeta.Numero %></td>
+                            </tr>
+                            <tr>
+                                <td id="lblFechaExpiracion" class="td-lbl"><%=Resources.Global.FechaExpiracion%> : </td>
+                                <td><%=MiTarjeta.Vencimiento.Date %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <% }
+                        else
+                        {%>
+                    <div>
+                        <p><%=Resources.Global.NoPoseeTarjetaRegistrada%> </p>
+                    </div>
+                    <%} %>
+                    <div style="margin-top: 40px;">
+                        <a class="btn btn-warning" id="cambiartarjeta" href="Tarjetas.aspx"><%=Resources.Global.ElegirOtraTarjeta%> </a>
                     </div>
                 </div>
+                <%if (MiTarjeta != null)
+                    { %>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <a href="#mdl_pagocompletado" id="btnpagarmodal" clientidmode="static" style="width: 200px; background-color: black; color: #fff;" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.Pagar%></a>
+                        <%--  <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="#mdl_pagocompletado" id="btnPagoDefinitivo">Pagar</a>--%>
+                    </div>
+                </div>
+                <% }%>
             </div>
         </div>
     </div>
@@ -268,7 +271,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                      <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnSalir"><%=Resources.Global.Continuar%></a>
+                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnSalir"><%=Resources.Global.Continuar%></a>
                     </div>
                 </div>
             </div>
@@ -386,7 +389,7 @@
 
             var $modal = $('#mdl_tarjeta');
             $modal.modal("hide");
-           
+
         });
 
         $('#cambiartarjeta').click(function () {

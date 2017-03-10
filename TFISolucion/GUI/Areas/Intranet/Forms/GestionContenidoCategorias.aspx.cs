@@ -10,6 +10,7 @@ using TFI.CORE.Helpers;
 using TFI.Entidades;
 using System.Web.Script.Services;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -149,33 +150,48 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public static void GrabarCategoria(string descripcion)
         {
 
-            var formulario= new GestionContenidoCategorias();
-            
+            var formulario = new GestionContenidoCategorias();
+
             var usuarioEntity = new UsuarioEntidad();
             var Current = HttpContext.Current;
 
             usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
+            Regex reg = new Regex("[0-9]"); //Expresión que solo acepta números.
+
+            bool b = reg.IsMatch(descripcion);
 
             CategoriaEntidad NuevaCategoria = new CategoriaEntidad();
-
             NuevaCategoria.CUIT = ConfigSection.Default.Site.Cuit;
-            if (descripcion == "")
+            if (descripcion == "" || b)
             {
-                
-               formulario.ValidaDescripcionCategoria();
-            }
-            else { NuevaCategoria.DescripCategoria = descripcion;
 
-            CategoriaCore UnCoreCat = new CategoriaCore();
-            UnCoreCat.CategoriaInsert(NuevaCategoria);
+                //formulario.ValidaDescripcionCategoria();
+            }
+            else
+            {
+                NuevaCategoria.DescripCategoria = descripcion;
+
+
+                CategoriaCore UnCoreCat = new CategoriaCore();
+                var categorias = UnCoreCat.SeleccionarCategorias();
+                var q = from cat in categorias
+                        where cat.DescripCategoria == NuevaCategoria.DescripCategoria
+                        select cat;
+                var qr = categorias.FirstOrDefault(x => x.DescripCategoria == NuevaCategoria.DescripCategoria);
+                if (qr == null)
+                { UnCoreCat.CategoriaInsert(NuevaCategoria); }
+                else
+                {
+                    formulario.ValidaDescripcionCategoria();
+                }
             }
         }
-        private  void ValidaDescripcionCategoria()
+        private void ValidaDescripcionCategoria()
         {
-            notificationcategoria= new HtmlGenericControl();
+            notificationcategoria = new HtmlGenericControl();
             notificationcategoria.Visible = true;
             notificationcategoria.InnerHtml = "Ingrese una categoria valida";
-           
+
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -184,5 +200,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                        "ModalScript", sb.ToString(), false);
         }
+
     }
 }

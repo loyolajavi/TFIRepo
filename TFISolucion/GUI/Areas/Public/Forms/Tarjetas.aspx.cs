@@ -10,7 +10,7 @@ using TFI.CORE.Helpers;
 
 namespace TFI.GUI
 {
-    public partial class Tarjetas :BasePage
+    public partial class Tarjetas : BasePage
     {
 
         private UsuarioCore UsuarioBLL = new UsuarioCore();
@@ -121,7 +121,7 @@ namespace TFI.GUI
 
             CargarGrillaTarjetas();
         }
-         
+
         private void CargarGrillaTarjetas()
         {
 
@@ -217,48 +217,49 @@ namespace TFI.GUI
 
         protected void btnGrabarTarjeta_Click(object sender, EventArgs e)
         {
-            Page.Validate("Altatarjeta");
-            if (Page.IsValid) { 
-            TarjetaEntidad NuevaTarjeta = new TarjetaEntidad();
-            NuevaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
-            NuevaTarjeta.CUIT = usuarioentidad.CUIT;
-            NuevaTarjeta.Vencimiento = new DateTime(Convert.ToInt32(expiryYear.Value), Convert.ToInt32(expiryMes.Value), 1);
-            NuevaTarjeta.Titular = txtTitular.Value;
-            NuevaTarjeta.Numero = Convert.ToInt64(txtNumeroTarjeta.Value);
-            NuevaTarjeta.CodSeguridad = Convert.ToInt32(txtCodigoSeguridad.Value);
-            NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
-
-           List<TarjetaEntidad> TarjetasDelUser = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, usuarioentidad.NombreUsuario);
-
-           if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = true; } else { NuevaTarjeta.Predeterminada = false; }
-
-            bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
-
-            if (TarjetaValida == true)
+            if (Page.IsValid)
             {
+                TarjetaEntidad NuevaTarjeta = new TarjetaEntidad();
+                NuevaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
+                NuevaTarjeta.CUIT = usuarioentidad.CUIT;
+                NuevaTarjeta.Vencimiento = new DateTime(Convert.ToInt32(expiryYear.Value), Convert.ToInt32(expiryMes.Value), 1);
+                NuevaTarjeta.Titular = txtTitular.Value;
+                NuevaTarjeta.Numero = Convert.ToInt64(txtNumeroTarjeta.Value);
+                NuevaTarjeta.CodSeguridad = Convert.ToInt32(txtCodigoSeguridad.Value);
+                NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
 
-                if (NuevaTarjeta.Vencimiento.Date >= DateTime.Now.Date) { 
+                List<TarjetaEntidad> TarjetasDelUser = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, usuarioentidad.NombreUsuario);
 
-                TarjetaBLL.InsertTarjeta(NuevaTarjeta);
+                if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = true; } else { NuevaTarjeta.Predeterminada = false; }
 
-                CargarGrillaTarjetas();
+                bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
 
-                Response.Redirect(Request.RawUrl);
+                if (TarjetaValida == true)
+                {
 
+                    if (NuevaTarjeta.Vencimiento.Date >= DateTime.Now.Date)
+                    {
+
+                        TarjetaBLL.InsertTarjeta(NuevaTarjeta);
+                        limpiarCampos();
+                        CargarGrillaTarjetas();
+
+                        Response.Redirect(Request.RawUrl);
+
+                    }
+                    else
+                    {
+                        NotificationFechaInvalida();
+                    }
                 }
                 else
                 {
-                    NotificationFechaInvalida();
+                    NotificationTarjetaInvalida();
                 }
-            }
-            else
-            {
-                NotificationTarjetaInvalida();
-            }
 
 
             }
-            else { limpiarCampos(); }
+            
 
         }
 
@@ -267,7 +268,7 @@ namespace TFI.GUI
             txtCodigoSeguridad.Value = string.Empty;
             txtNumeroTarjeta.Value = string.Empty;
             txtTitular.Value = string.Empty;
-            
+
         }
 
         private void NotificationTarjetaInvalida()

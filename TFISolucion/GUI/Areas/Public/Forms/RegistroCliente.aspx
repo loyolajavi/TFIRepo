@@ -44,7 +44,7 @@
                             <input type="password" class="form-control" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
                         </div>
                         <div class="col-xs-7">
-                            <asp:RegularExpressionValidator ID="vldTextoClave" Display="Dynamic" runat="server" Text="<%$Resources:Global, IngresoEntre8-15Caracteres %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="vldTextoClave" Display="Dynamic" runat="server" Text="<%$Resources:Global, IngresoEntre8-15Caracteres %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="([a-zA-Z0-9]{8,15}$)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarContrasena %>" ControlToValidate="txtClave" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                         </div>
 
@@ -123,7 +123,7 @@
                                 <input type="text" class="form-control" id="txtDNICUIT" runat="server" clientidmode="static" placeholder="20222333 o 20334446668" />
                             </div>
                             <div class="col-xs-7">
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" Display="Dynamic" runat="server" ControlToValidate="txtDNICUIT" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresoSolo8y12 %>" ValidationExpression="^\d{8,12}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" Display="Dynamic" runat="server" ControlToValidate="txtDNICUIT" CssClass="alert alert-warning" Text="<%$Resources:Global, IngreseEntre7y12Numeros %>" ValidationExpression="^\d{7,12}$" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarDNIoCUIT %>" ControlToValidate="txtDNICUIT" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
             </div>
         </div>
         <%--Direccion de Facturación y Envío--%>
-        <div class="row">
+        <%--<div class="row">
             <div class="col-md-9 col-md-offset-2">
                 <div id="divDirFacturacion" role="form" clientidmode="static" runat="server">
                     <h4 class="page-header">
@@ -206,7 +206,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
             <div class="form-group">

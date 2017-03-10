@@ -205,7 +205,7 @@ namespace TFI.CORE.Areas.Intranet.Forms
         protected void grillaCotizacion_RowEditing(object sender, GridViewEditEventArgs e)
         {
             grillaCotizacion.EditIndex = e.NewEditIndex;
-            ((BoundField)grillaCotizacion.Columns[1]).ReadOnly = true;
+           // ((BoundField)grillaCotizacion.Columns[1]).ReadOnly = true;
             grillaCotizacion.DataBind();
 
         }
@@ -230,7 +230,7 @@ namespace TFI.CORE.Areas.Intranet.Forms
             // var fechaCotizacion = ((TextBox)row.Cells[4].Controls[0]).Text;
             var simbolo = ((TextBox)row.Cells[4].Controls[0]).Text;
 
-            //moneda.IdMoneda = Convert.ToInt32(IdMoneda);
+            moneda.IdMoneda = Convert.ToInt32(IdMoneda);
             moneda.Cotizacion = Convert.ToDecimal(cotizacion);
             _managerMoneda.MonedaEmpresaUpdate(moneda);
 

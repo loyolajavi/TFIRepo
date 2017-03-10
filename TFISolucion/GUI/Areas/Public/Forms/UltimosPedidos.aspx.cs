@@ -87,7 +87,7 @@ namespace TFI.GUI
 
             if (PedidosEntidad.Count == 0)
             {
-                sinpedidos.InnerHtml = "<strong>Usted no realizó pedidos aún. Compre ahora en </strong><a href='http://startbootstrap.com/template-overviews/sb-admin-2' class='alert-link'>nuestra tienda</a>";
+                sinpedidos.InnerHtml = "<strong>Usted no realizó pedidos </strong>";
             }
             else
             {
