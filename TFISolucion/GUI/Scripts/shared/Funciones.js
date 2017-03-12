@@ -181,31 +181,31 @@ $('.btn-comprar').click(function () {
         });
     };
 
-    $(function () {
-        $("#ddlTipoUsuario").change(function () {
-            ToggleDropdown();
-        });
-        ToggleDropdown(); // Done to ensure correct hiding/showing on page reloads due to validation errors
-    });
+    //$(function () {
+    //    $("#ddlTipoUsuario").change(function () {
+    //        ToggleDropdown();
+    //    });
+    //    ToggleDropdown(); // Done to ensure correct hiding/showing on page reloads due to validation errors
+    //});
 
-    function ToggleDropdown() {
-        if ($("#ddlTipoUsuario").val() == "Empleado") {
-            $("#divFiscal").show();
-            $("#btnAltaEmpleado").show();
-            $("#divDirFacturacion").hide();
-            $("#divDirEnvio").hide();
-            $("#btnAltaCliente").hide();
+    //function ToggleDropdown() {
+    //    if ($("#ddlTipoUsuario").val() == "Empleado") {
+    //        $("#divFiscal").show();
+    //        $("#btnAltaEmpleado").show();
+    //        $("#divDirFacturacion").hide();
+    //        $("#divDirEnvio").hide();
+    //        $("#btnAltaCliente").hide();
 
 
 
-        } else if ($("#ddlTipoUsuario").val() == "Cliente") {
-            $("#divFiscal").hide();
-            $("#btnAltaEmpleado").hide();
-            $("#divDirFacturacion").show(); 
-            $("#divDirEnvio").show();
-            $("#btnAltaCliente").show();
-        }
-    };
+    //    } else if ($("#ddlTipoUsuario").val() == "Cliente") {
+    //        $("#divFiscal").hide();
+    //        $("#btnAltaEmpleado").hide();
+    //        $("#divDirFacturacion").show(); 
+    //        $("#divDirEnvio").show();
+    //        $("#btnAltaCliente").show();
+    //    }
+    //};
 
 
 
