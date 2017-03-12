@@ -16,8 +16,8 @@
                 <h1 class="page-header">
                     <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Permisos %>"> </asp:Label> <small>
                         <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Clientes %>"></asp:Label></small>
-                    <span><a class="btn btn-info" href="AltaUsuario.aspx">
-                        <asp:Label ID="Label3" runat="server" Text="AltaUsuario"></asp:Label></a></span>
+                    <%--<span><a class="btn btn-info" href="AltaUsuario.aspx">
+                        <asp:Label ID="Label3" runat="server" Text="AltaUsuario"></asp:Label></a></span>--%>
                 </h1>
                 <asp:Button ID="btnEliminarUsuario" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" /><p>Eliminar los usuarios seleccionados</p>
             </div>
