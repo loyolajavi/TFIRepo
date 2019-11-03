@@ -939,4 +939,7 @@
   <data name="IngreseEntre7y12Numeros" xml:space="preserve">
     <value>Please add 7 between 12 characters</value>
   </data>
+  <data name="Nopuedemodificarleelestadoaunpedidofinalizado" xml:space="preserve">
+    <value>Can't change the status of a completed order</value>
+  </data>
 </root>

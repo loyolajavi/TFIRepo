@@ -933,4 +933,7 @@
   <data name="IngreseEntre7y12Numeros" xml:space="preserve">
     <value>Ingrese entre 7 y 12 numeros.</value>
   </data>
+  <data name="Nopuedemodificarleelestadoaunpedidofinalizado" xml:space="preserve">
+    <value>No puede modificarle el estado a un pedido finalizado</value>
+  </data>
 </root>

@@ -202,7 +202,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     sb.Append("alert('Nota de credito ya fue generada previamente');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                               "ModalScript", sb.ToString(), false);
+                               "ModalScript2", sb.ToString(), false);
                 }
                 else { 
                 ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
@@ -263,7 +263,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 sb.Append("alert('Nota de credito generada');");
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                           "ModalScript", sb.ToString(), false);
+                           "ModalScript3", sb.ToString(), false);
 
             }
             }

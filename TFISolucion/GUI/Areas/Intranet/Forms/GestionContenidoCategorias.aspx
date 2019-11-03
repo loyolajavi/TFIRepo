@@ -27,7 +27,7 @@
                         <Columns>
                             <asp:CommandField ShowEditButton="True" />
                             <asp:CommandField ShowDeleteButton="True" />
-                            <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" />
+                            <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" Visible="false" />
                             <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, Descripcion %>" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />

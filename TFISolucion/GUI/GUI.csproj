@@ -214,6 +214,7 @@
     <Content Include="LCSK\assets\css\bootstrap.min.css" />
     <Content Include="LCSK\assets\js\bootstrap.min.js" />
     <Content Include="LCSK\assets\js\jquery-2.1.1.min.js" />
+    <Content Include="LCSK\assets\js\jquery-3.1.1.min.js" />
     <Content Include="LCSK\assets\js\jquery.signalR-2.1.1.min.js" />
     <Content Include="LCSK\assets\js\jquery.timeago.js" />
     <Content Include="LCSK\assets\sounds\newchat.mp3" />
@@ -226,6 +227,11 @@
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\shared\Funciones.js" />
@@ -259,6 +265,8 @@
     <None Include="Properties\PublishProfiles\miperfil.pubxml" />
     <None Include="Properties\PublishProfiles\tfimerchot.pubxml" />
     <None Include="Properties\PublishProfiles\tfimerchot1.pubxml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.js" />
     <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />

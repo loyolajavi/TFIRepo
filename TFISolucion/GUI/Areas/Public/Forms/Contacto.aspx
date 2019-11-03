@@ -97,10 +97,10 @@
             </div>
         </div>
 
-        <!-- Elemento captcha !-->
+<%--        <!-- Elemento captcha !-->
         <div class="form-group">
             <div class="g-recaptcha" data-sitekey="6LcVDAgUAAAAALQy6qd89Iv0odFUDnrsVR1FGMWX"></div>
-        </div>
+        </div>--%>
         <div class="form-group">
             <div class="col-xs-offset-3 col-xs-8" id="btnsContacto">
                 <asp:Button ID="btnEnviarCorreo" OnClick="EnviarCorreo" CssClass="btn btn-primary" runat="server" Text="<%$Resources:Global, Enviar %>" ValidationGroup="Correo" />

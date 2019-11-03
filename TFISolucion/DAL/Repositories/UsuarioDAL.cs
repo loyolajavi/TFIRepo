@@ -24,16 +24,25 @@ namespace TFI.DAL.DAL
         {
             ValidationUtility.ValidateArgument("usuario", usuario);
 
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@Nombre", usuario.Nombre),
-				new SqlParameter("@Apellido", usuario.Apellido),
-				new SqlParameter("@cuit", usuario.CUIT),
-				new SqlParameter("@Email", usuario.Email),
-				new SqlParameter("@NombreUsuario", usuario.NombreUsuario)
-			};
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+				    new SqlParameter("@Nombre", usuario.Nombre),
+				    new SqlParameter("@Apellido", usuario.Apellido),
+				    new SqlParameter("@CUIT", usuario.CUIT),
+				    new SqlParameter("@Email", usuario.Email),
+				    new SqlParameter("@NombreUsuario", usuario.NombreUsuario)
+			    };
 
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateDatosPersonales", parameters);
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdateDatosPersonales", parameters);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+
         }
 
 

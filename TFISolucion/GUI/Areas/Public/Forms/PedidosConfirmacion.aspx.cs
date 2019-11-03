@@ -187,8 +187,8 @@ namespace TFI.GUI.Areas.Public.Forms
             var correManager = new FUNCIONES.Correo();
 
             correManager.EnviarCorreo(
-                remitente: "mascoshopp@gmail.com",
-                contrasenia: "Descargas123",
+                remitente: "egenloys@gmail.com",
+                contrasenia: "Pass123*",
                 nombre: unaEmpresa.NombreEmpresa,
                 telefono: "011-4853340",
                 destinatario: logueado.Email,

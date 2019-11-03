@@ -351,7 +351,7 @@ namespace TFI.GUI.LCSK
         public void SendEmail(string from, string message)
         {
             Correo manager = new Correo();
-            manager.EnviarCorreo("mascoshopp@gmail.com", "Descargas123", from, "", "mascoshopp@gmail.com", "", "Consulta Chat: " + from, message);
+            manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", from, "", "egenloys@gmail.com", "", "Consulta Chat: " + from, message);
             //var msg = new MailMessage();
             //msg.To.Add(new MailAddress(from));
             //msg.Subject = "LCSK - Offline Contact";

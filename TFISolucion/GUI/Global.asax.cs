@@ -18,10 +18,10 @@ namespace TFI.GUI
             ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
             new ScriptResourceDefinition
             {
-                Path = "~/Scripts/thirdparty/jquery-3.1.1.min.js",
-                DebugPath = "~/Scripts/thirdparty/jquery-3.1.1.js",
-                CdnPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js",
-                CdnDebugPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.js"
+                Path = "~/Scripts/thirdparty/jquery-3.4.1.min.js",
+                DebugPath = "~/Scripts/thirdparty/jquery-3.4.1.js",
+                CdnPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js",
+                CdnDebugPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.js"
 
             });
         }

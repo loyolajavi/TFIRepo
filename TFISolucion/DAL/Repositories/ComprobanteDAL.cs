@@ -264,6 +264,29 @@ namespace TFI.DAL.DAL
 			}
 		}
 
+
+        /// <summary>
+        /// Crea una Nota de débito
+        /// </summary>
+        public object InsertND(ComprobanteEntidad comprobante)
+        {
+            ValidationUtility.ValidateArgument("comprobante", comprobante);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@NroComprobante", comprobante.NroComprobante),
+				new SqlParameter("@IdSucursal", comprobante.IdSucursal),
+				new SqlParameter("@CUIT", comprobante.CUIT),
+				new SqlParameter("@IdTipoComprobante", comprobante.IdTipoComprobante),
+				new SqlParameter("@FechaComprobante", comprobante.FechaComprobante),
+				new SqlParameter("@IdPedido", comprobante.IdPedido),
+                new SqlParameter("@Ajuste", comprobante.Ajuste)
+			};
+
+            return SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteNDInsert", parameters);
+            //SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteInsert", parameters);
+        }
+
 	
 		#endregion
 	}

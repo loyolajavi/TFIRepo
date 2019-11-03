@@ -278,7 +278,7 @@
     </form>
 
 
-    <script src="../../../Scripts/thirdparty/jquery-3.1.1.min.js"></script>
+    <script src="../../../Scripts/thirdparty/jquery-3.4.1.min.js"></script>
     <%--<script src="../../../LCSK/assets/js/jquery-2.1.1.min.js"></script>--%>
     <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
     <script src="/Scripts/shared/Funciones.js"></script>

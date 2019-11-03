@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="txtNumeroTarjeta"><%=Resources.Global.NumeroTarjeta%></label>
-                                    <input type="number" class="form-control" clientidmode="static" id="txtNumeroTarjeta" runat="server" max="999999999999" placeholder="<%$Resources:Global, NumeroTarjeta %>" required="" data-minlength="5" />
+                                    <input type="number" class="form-control" clientidmode="static" id="txtNumeroTarjeta" runat="server" placeholder="<%$Resources:Global, NumeroTarjeta %>" required="" data-minlength="5" />
                                     <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator7" ErrorMessage="Email is required." Display="Dynamic" runat="server" ControlToValidate="txtNumeroTarjeta" CssClass="alert alert-warning" Text="<%$Resources:Global, SoloNumero %>" ValidationGroup="Altatarjeta" ValidationExpression="^\d{1,5}$"></asp:RegularExpressionValidator>--%>
                                     <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" ErrorMessage="Email is required." CssClass="alert alert-warning" runat="server" Text="Ingresar numero de tarjeta" ControlToValidate="txtNumeroTarjeta" ValidationGroup="Altatarjeta"></asp:RequiredFieldValidator>--%>
                                     <div class="help-block with-errors"></div>

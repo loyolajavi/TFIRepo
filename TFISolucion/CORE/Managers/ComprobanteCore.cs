@@ -22,7 +22,11 @@ namespace TFI.CORE.Managers
             try
             {
                 e.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
-                var Nro = _dal.Insert(e);
+                decimal Nro = 0;
+                if(e.Ajuste != null && e.Ajuste > 0)
+                    Nro = (decimal)_dal.InsertND(e);
+                else
+                    Nro = (decimal)_dal.Insert(e);
                 var Resultado = Convert.ToInt32(Nro);
 
                 foreach (ComprobanteDetalleEntidad item in e.Detalles)

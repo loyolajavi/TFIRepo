@@ -67,8 +67,8 @@ namespace TFI.GUI
             contenedorsinpedidos.Visible = true;
             notificacion.Visible = true;
             Correo manager = new Correo();
-            manager.EnviarCorreo("mascoshopp@gmail.com", "Descargas123", txtNombre.Value, txtTelefono.Value,
-               "mascoshopp@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
+            manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", txtNombre.Value, txtTelefono.Value,
+               "egenloys@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
             {
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 if (idioma.DescripcionLenguaje == "es")

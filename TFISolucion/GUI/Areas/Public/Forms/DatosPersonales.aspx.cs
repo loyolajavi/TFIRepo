@@ -48,7 +48,7 @@ namespace TFI.GUI
             DireccionesEnvioDeUsuario.Clear();
             // CargarGrillaDireccionDeFacturacion();
             cargarTipoTel();
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
 
             if (usuarioentidad == null)
             {
@@ -272,6 +272,9 @@ namespace TFI.GUI
             UsuarioActualizado.NombreUsuario = usuarioentidad.NombreUsuario;
 
             UsuarioBLL.UpdateDatosPersonales(UsuarioActualizado);
+            usuarioentidad.Email = UsuarioActualizado.Email;
+            usuarioentidad.Nombre = UsuarioActualizado.Nombre;
+            usuarioentidad.Apellido = UsuarioActualizado.Apellido;
 
             //Reset the edit index.
             grilladedatospersonales.EditIndex = -1;
@@ -696,7 +699,7 @@ namespace TFI.GUI
         private void CargarGrillaDireccionDeFacturacion()
         {
 
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
             DireccionesFacturacionDeUsuario.Clear();
 
 

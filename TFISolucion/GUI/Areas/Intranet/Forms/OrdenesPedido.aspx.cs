@@ -103,7 +103,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private void CargarGrillaUltimosPedidos()
         {
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
-
+            PedidosaMostrar.Clear();
            
             PedidosEntidad = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
 
@@ -139,8 +139,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             }
 
+            grilladeultimospedidos.DataSource = null;
+            PedidosaMostrar = (List<PedidoDTO>)PedidosaMostrar.OrderByDescending(X => X.NroPedido).ToList();
             grilladeultimospedidos.DataSource = PedidosaMostrar;
-            grilladeultimospedidos.AutoGenerateColumns = false;
             grilladeultimospedidos.DataBind();
             //ddlEstadoPedido.DataSource = pedidoCore.EstadoPedidoSelectAll();
 
@@ -232,66 +233,77 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void grilladeultimospedidos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            ProductoCore coreProducto = new ProductoCore();
-            if (e.CommandName.Equals("VerDetalle"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
-                List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
-                List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
-                foreach (var item in ListadeDetalles)
+
+                ProductoCore coreProducto = new ProductoCore();
+                if (e.CommandName.Equals("VerDetalle"))
                 {
-                    DetalleDTO NuevoDetalle = new DetalleDTO();
-                    NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
-                    NuevoDetalle.Cantidad = item.Cantidad;
-                    NuevoDetalle.PrecioUnitario = item.PrecioUnitario;
-                    NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
+                    PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
+                    List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
+                    List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
+                    foreach (var item in ListadeDetalles)
+                    {
+                        DetalleDTO NuevoDetalle = new DetalleDTO();
+                        NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
+                        NuevoDetalle.Cantidad = item.Cantidad;
+                        NuevoDetalle.PrecioUnitario = item.PrecioUnitario;
+                        NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
 
-                    ListaDetallesDTO.Add(NuevoDetalle);
-                }
+                        ListaDetallesDTO.Add(NuevoDetalle);
+                    }
 
-                grilladedetallesdelpedido.DataSource = ListaDetallesDTO;
-                grilladedetallesdelpedido.DataBind(); 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#currentdetail').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                           "ModalScript", sb.ToString(), false);
-
-            }
-
-            if (e.CommandName.Equals("CambiarEstado"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
-                PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(Convert.ToInt32(code));
-                idpedido.Value =  PedidoRow.IdPedido.ToString();
-                if (PedidoEstadoRow.IdEstadoPedido == 6)
-                {
-
-                    notificationestado.InnerHtml = "No puede modificarle el estado a un pedido finalizado.";
-                    ddlEstadoPedido.Visible = false;
-                    btnCambiarEstado.Visible = false;
+                    grilladedetallesdelpedido.DataSource = ListaDetallesDTO;
+                    grilladedetallesdelpedido.DataBind();
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#currentdetail').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "ModalScript", sb.ToString(), false);
 
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#currentestado').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                           "ModalScript", sb.ToString(), false);
-                
+                if (e.CommandName.Equals("CambiarEstado"))
+                {
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
+                    PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
+                    PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(PedidoRow.IdPedido);
+                    idpedido.Value = PedidoRow.IdPedido.ToString();
+                    if (PedidoEstadoRow.IdEstadoPedido == 6)
+                    {
 
-            }
+                        //notificationestado.InnerHtml = "No puede modificarle el estado a un pedido finalizado.";
+                        //ddlEstadoPedido.Visible = false;
+                        //btnCambiarEstado.Visible = false;
+
+                        System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
+                        sb2.Append(@"<script type='text/javascript'>");
+                        sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
+                        sb2.Append(@"</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                   "ModalScript2", sb2.ToString(), false);
+
+                    }
+                    else
+                    {
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        sb.Append(@"<script type='text/javascript'>");
+                        sb.Append("$('#currentestado').modal('show');");
+                        sb.Append(@"</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                   "ModalScript3", sb.ToString(), false);
+                    }
+                    
+
+
+                }
         }
 
         protected void grilladeultimospedidos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            grilladedetallesdelpedido.PageIndex = e.NewPageIndex;
+            grilladeultimospedidos.PageIndex = e.NewPageIndex;
             CargarGrillaUltimosPedidos();
         }
 

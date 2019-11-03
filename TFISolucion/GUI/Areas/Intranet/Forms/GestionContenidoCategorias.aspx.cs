@@ -107,7 +107,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
 
             GridViewRow row = grillacategorias.Rows[e.RowIndex];
-            var IdCategoria = ((TextBox)row.Cells[2].Controls[0]).Text;
+            //var IdCategoria = ((TextBox)row.Cells[2].Controls[0]).Text;
+            //var IdCategoria = CategoriasDeEmpresa.Where(x => x.IdCategoria == Int32.Parse().First().IdCategoria;
+            var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
             var Descripcion = ((TextBox)row.Cells[3].Controls[0]).Text;
 
             CategoriaActualizada.IdCategoria = Convert.ToInt32(IdCategoria);
@@ -130,8 +132,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             CategoriaEntidad CategoriaAEliminar = new CategoriaEntidad();
             GridViewRow row = (GridViewRow)grillacategorias.Rows[e.RowIndex];
-            var IdCategoria = ((string)row.Cells[2].Text);
-            CategoriaAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
+            //var IdCategoria = ((string)row.Cells[2].Text);
+            var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
+            //CategoriaAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
+            CategoriaAEliminar.IdCategoria = IdCategoria;
             CategoriaBLL.CategoriaDelete(CategoriaAEliminar.IdCategoria);
 
             Response.Redirect(Request.RawUrl);
