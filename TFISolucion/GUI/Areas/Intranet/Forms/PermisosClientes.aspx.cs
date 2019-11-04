@@ -78,23 +78,51 @@ namespace TFI.GUI.Areas.Intranet.Forms
         protected void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
 
-            if (CheckAllUsuarios.Checked && CheckAllUsuarios.Value == "Y")
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //sb.Append(@"<script type='text/javascript'>");
+            //sb.Append("$('#ConfirmarDelete').modal('show');");
+            //sb.Append(@"</script>");
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                       //"ModalScript", sb.ToString(), true);
+
+            //if (CheckAllUsuarios.Checked && CheckAllUsuarios.Value == "Y")
+            //{
+            //    managerCliente.DeleteAllByIdUsuarioTipo(1);//Clientes
+            //}
+
+            //foreach (RepeaterItem item in rptClientes.Items)
+            //{
+
+
+            //    var unCheckBox = (System.Web.UI.HtmlControls.HtmlInputCheckBox)item.FindControl("chbIdUsuarios");
+
+            //    if (unCheckBox.Checked)
+            //    {
+            //        managerCliente.UsuarioDeleteSeleccionadosByIdUsuario(Int32.Parse(unCheckBox.Attributes["value"]));
+            //    }
+            //}
+            //cargarClientes();
+        }
+
+        protected void Decision_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName.Equals("Yes"))
             {
-                managerCliente.DeleteAllByIdUsuarioTipo(1);//Clientes
-            }
-
-            foreach (RepeaterItem item in rptClientes.Items)
-            {
-
-
-                var unCheckBox = (System.Web.UI.HtmlControls.HtmlInputCheckBox)item.FindControl("chbIdUsuarios");
-
-                if (unCheckBox.Checked)
+                if (CheckAllUsuarios.Checked && CheckAllUsuarios.Value == "Y")
                 {
-                    managerCliente.UsuarioDeleteSeleccionadosByIdUsuario(Int32.Parse(unCheckBox.Attributes["value"]));
+                    managerCliente.DeleteAllByIdUsuarioTipo(1);//Clientes
                 }
+
+                foreach (RepeaterItem item in rptClientes.Items)
+                {
+                    var unCheckBox = (System.Web.UI.HtmlControls.HtmlInputCheckBox)item.FindControl("chbIdUsuarios");
+                    if (unCheckBox.Checked)
+                    {
+                        managerCliente.UsuarioDeleteSeleccionadosByIdUsuario(Int32.Parse(unCheckBox.Attributes["value"]));
+                    }
+                }
+                cargarClientes();
             }
-            cargarClientes();
         }
 
 

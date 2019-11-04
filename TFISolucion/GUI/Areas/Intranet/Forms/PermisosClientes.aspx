@@ -19,7 +19,11 @@
                     <%--<span><a class="btn btn-info" href="AltaUsuario.aspx">
                         <asp:Label ID="Label3" runat="server" Text="AltaUsuario"></asp:Label></a></span>--%>
                 </h1>
-                <asp:Button ID="btnEliminarUsuario" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" /><p>Eliminar los usuarios seleccionados</p>
+                <%--<asp:Button ID="btnEliminarUsuario" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" />--%><p>Eliminar los usuarios seleccionados</p>
+                                <div class=" text-center">
+                    <a href="#ConfirmarDelete" class="btn btn-primary" data-toggle="modal">
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, EliminarUsuario %>"></asp:Label></a>
+                </div>
             </div>
         </div>
 
@@ -67,6 +71,26 @@
             </div>
         </div>
     </div>
+
+
+        <div id="ConfirmarDelete" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Confirma la operación?</h3>
+                        <asp:Button ID="btnYes" runat="server" Text="Yes" OnCommand="Decision_Command" CommandName="Yes" />
+                        <asp:Button ID="btnNo" runat="server" Text="No" OnCommand="Decision_Command" CommandName="No" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 </asp:Content>
 
