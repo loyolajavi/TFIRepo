@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.FUNCIONES;
 using TFI.Entidades;
+using TFI.CORE;
 
 namespace TFI.GUI
 {
@@ -66,9 +67,16 @@ namespace TFI.GUI
         {
             contenedorsinpedidos.Visible = true;
             notificacion.Visible = true;
-            Correo manager = new Correo();
-            manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", txtNombre.Value, txtTelefono.Value,
-               "egenloys@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
+
+            //Obtener host servicio Mail
+            TFI.CORE.Services.ServicioMailCore.CargarMailConfig();
+
+            TFI.FUNCIONES.ServicioMail.EnviarCorreo("egenloys@gmail.com", txtNombre.Value + txtApellido.Value, txtAsunto.Value, txtMensaje.Value + " " + txtCorreo.Value + " " + txtTelefono.Value);
+            //Correo manager = new Correo();
+            //manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", txtNombre.Value, txtTelefono.Value,
+            //   "egenloys@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
+            
+
             {
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 if (idioma.DescripcionLenguaje == "es")

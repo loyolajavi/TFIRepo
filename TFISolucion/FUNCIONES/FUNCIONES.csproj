@@ -58,11 +58,16 @@
     <Compile Include="IdiomaManager.cs" />
     <Compile Include="LenguajeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicioMail.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
       <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SEGURIDAD\SEGURIDAD.csproj">
+      <Project>{35b8fc6e-bb13-406e-9c98-b0b533c7c6d3}</Project>
+      <Name>SEGURIDAD</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

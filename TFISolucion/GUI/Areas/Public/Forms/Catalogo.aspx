@@ -41,7 +41,7 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail" style="text-align: center;">
-                                <a runat="server" class="linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'>
+                                <a runat="server" class="responsive linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'>
                                     <img src='/Content/Images/Productos/<%#Eval("URL")%>' class="img-responsive col-md-12 linkProducto" alt="IMAGE" /></a>
                                 <div class="caption">
                                     <h4><a runat="server" class="responsive linkProducto" href='<%#Eval("IdProducto","Producto.aspx?IdProducto={0}")%>'><%#Eval("DescripProducto")%></a></h4>

@@ -104,12 +104,21 @@
     <Compile Include="Repositories\UsuarioFamiliaDAL.cs" />
     <Compile Include="Repositories\UsuarioPatenteDAL.cs" />
     <Compile Include="Repositories\UsuarioTipoDAL.cs" />
+    <Compile Include="Services\ServicioMailDAL.cs" />
     <Compile Include="SQLServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{c261fc7a-9bc6-46ab-ae20-0a7c45ac04ac}</Project>
       <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FUNCIONES\FUNCIONES.csproj">
+      <Project>{258f06bf-b0a8-4b0e-a679-e494112df4a1}</Project>
+      <Name>FUNCIONES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SEGURIDAD\SEGURIDAD.csproj">
+      <Project>{35b8fc6e-bb13-406e-9c98-b0b533c7c6d3}</Project>
+      <Name>SEGURIDAD</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
