@@ -132,7 +132,7 @@
             </div>
         </div>
         <%--Direccion de Facturación y Envío--%>
-        <%--<div class="row">
+        <div class="row">
             <div class="col-md-9 col-md-offset-2">
                 <div id="divDirFacturacion" role="form" clientidmode="static" runat="server">
                     <h4 class="page-header">
@@ -206,13 +206,13 @@
                 </div>
             </div>
         </div>
-    </div>--%>
+    </div>
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
             <div class="form-group">
                 <asp:Label CssClass="control-label col-xs-3" runat="server"></asp:Label>
                 <div class="col-xs-9">
-                    <div class="col-xs-5" style="margin-left: 18px">
+                    <div class="col-xs-5" style="margin-left: 1px">
                         <asp:Button ID="btnAltaCliente" CssClass="btn btn-primary form-control" ClientIDMode="static" Text="<%$Resources:Global, Registrarse %>" runat="server" OnClick="btnAltaCliente_Click" ValidationGroup="AltaCliente" />
                     </div>
                 </div>

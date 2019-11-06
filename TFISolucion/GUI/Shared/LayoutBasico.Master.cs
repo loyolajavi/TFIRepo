@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
@@ -229,7 +230,10 @@ namespace TFI.GUI.General
             }
             else
             {
-                MensajeError.InnerText = "Usuario no registrado!";
+                //Asociado al UpdatePanel1 y al modal fade Id=LogueoFallido para emitir un msj cuando el login falla
+                ScriptManager.RegisterClientScriptBlock(UpdatePanel1, this.GetType(),
+                           UpdatePanel1.UniqueID, "$('#LogueoFallido').modal('show');", true);
+                
             }
         }
 
@@ -237,6 +241,7 @@ namespace TFI.GUI.General
         {
             RealizarLogueo(IngresoUsuario.Value, IngresoClave.Value);
         }
+
 
     }
 }

@@ -180,22 +180,13 @@ namespace TFI.GUI.Areas.Public.Forms
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
             EmpresaEntidad unaEmpresa = new EmpresaEntidad();
             EmpresaCore unManagerEmpresa = new EmpresaCore();
-
             unaEmpresa = unManagerEmpresa.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit);
 
-
-            var correManager = new FUNCIONES.Correo();
-
-            correManager.EnviarCorreo(
-                remitente: "egenloys@gmail.com",
-                contrasenia: "Pass123*",
-                nombre: unaEmpresa.NombreEmpresa,
-                telefono: "011-4853340",
-                destinatario: logueado.Email,
-                nombreEmpresa: unaEmpresa.NombreEmpresa,
-                asunto: "Trasnferencia",
-                cuerpoCorreo: "DATOS TRANSFERENCIA");
+            //Obtener host servicio Mail
+            TFI.CORE.Services.ServicioMailCore.CargarMailConfig();
+            TFI.FUNCIONES.ServicioMail.EnviarCorreo(logueado.Email, unaEmpresa.NombreEmpresa, "Datos para la Transferencia", unaEmpresa.CUIT);
         }
+
 
         [WebMethod]
         public static void LimpiarPedido(){

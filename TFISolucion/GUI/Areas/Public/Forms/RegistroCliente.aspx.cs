@@ -43,7 +43,7 @@ namespace TFI.GUI.Areas.Public.Forms
             {
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 cargarFiscal();
-           //     cargarProvincias();
+                cargarProvincias();
 
 
                 if (idioma == null)
@@ -77,14 +77,14 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
 
-        //public void cargarProvincias()
-        //{
-        //    ddlProvincia.DataSource = null;
-        //    ddlProvincia.DataSource = unManagerUsuario.SelectALLProvincias();
-        //    ddlProvincia.DataValueField = "IdProvincia";
-        //    ddlProvincia.DataTextField = "DescripcionProvincia";
-        //    ddlProvincia.DataBind();
-        //}
+        public void cargarProvincias()
+        {
+            ddlProvincia.DataSource = null;
+            ddlProvincia.DataSource = unManagerUsuario.SelectALLProvincias();
+            ddlProvincia.DataValueField = "IdProvincia";
+            ddlProvincia.DataTextField = "DescripcionProvincia";
+            ddlProvincia.DataBind();
+        }
 
 
         protected void btnAltaCliente_Click(object sender, EventArgs e)
@@ -92,8 +92,8 @@ namespace TFI.GUI.Areas.Public.Forms
 
             var NroRetorno = 0;
             StringBuilder sb = new StringBuilder();
-            //DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            //DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
+            DireccionEntidad NuevaDireccion = new DireccionEntidad();
+            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
 
             if (Page.IsValid)
             {
@@ -112,29 +112,29 @@ namespace TFI.GUI.Areas.Public.Forms
                 NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
 
                 //Direccion
-                //NuevaDireccion.IdTipoDireccion = 1;//Facturacion
-                //NuevaDireccion.Calle = txtCalle.Value;
-                //NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
-                //if (!string.IsNullOrEmpty(txtPiso.Value))
-                //{
-                //    NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
-                //}
-                //if (!string.IsNullOrEmpty(txtDpartamento.Value))
-                //{
-                //    NuevaDireccion.Departamento = txtDpartamento.Value;
-                //}
-                //NuevaDireccion.Localidad = txtLocalidad.Value;
-                //NuevaDireccion.IdProvincia = ddlProvincia.SelectedIndex + 1;
+                NuevaDireccion.IdTipoDireccion = 1;//Facturacion
+                NuevaDireccion.Calle = txtCalle.Value;
+                NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
+                if (!string.IsNullOrEmpty(txtPiso.Value))
+                {
+                    NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
+                }
+                if (!string.IsNullOrEmpty(txtDpartamento.Value))
+                {
+                    NuevaDireccion.Departamento = txtDpartamento.Value;
+                }
+                NuevaDireccion.Localidad = txtLocalidad.Value;
+                NuevaDireccion.IdProvincia = ddlProvincia.SelectedIndex + 1;
 
-                //NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
-                //NuevaIntermedia.NombreUsuario = txtNombreUsuario.Value;
-                //NuevaIntermedia.Predeterminada = true;
+                NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
+                NuevaIntermedia.NombreUsuario = txtNombreUsuario.Value;
+                NuevaIntermedia.Predeterminada = true;
 
                 //Facturacion
-                //unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
                 //Envio
-                //NuevaDireccion.IdTipoDireccion = 2;//Envío
-                //unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+                NuevaDireccion.IdTipoDireccion = 2;//Envío
+                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
 
 
                 if (NroRetorno == 0)
@@ -171,13 +171,13 @@ namespace TFI.GUI.Areas.Public.Forms
             txtMail.Value = string.Empty;
             txtDNICUIT.Value = string.Empty;
             ddlFiscal.SelectedIndex = 0;
-            //ddlProvincia.SelectedIndex = 0;
+            ddlProvincia.SelectedIndex = 0;
 
-            //txtCalle.Value = string.Empty;
-            //txtNumero.Value = string.Empty;
-            //txtPiso.Value = string.Empty;
-            //txtDpartamento.Value = string.Empty;
-            //txtLocalidad.Value = string.Empty;
+            txtCalle.Value = string.Empty;
+            txtNumero.Value = string.Empty;
+            txtPiso.Value = string.Empty;
+            txtDpartamento.Value = string.Empty;
+            txtLocalidad.Value = string.Empty;
         }
 
 
