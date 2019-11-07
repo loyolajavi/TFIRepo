@@ -91,6 +91,7 @@
     <Compile Include="ReportePedidosDeUsuario.cs" />
     <Compile Include="ReportePedidosPorFechayEstado.cs" />
     <Compile Include="ReservaEntidad.cs" />
+    <Compile Include="StatePedido.cs" />
     <Compile Include="StockSucursalEntidad.cs" />
     <Compile Include="SucursalEntidad.cs" />
     <Compile Include="TarjetaEntidad.cs" />

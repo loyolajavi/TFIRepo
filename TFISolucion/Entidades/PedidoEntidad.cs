@@ -19,5 +19,55 @@ namespace TFI.Entidades
 
         public EstadoPedidoEntidad Estado { get; set; }
         public List<PedidoDetalleEntidad> Detalles { get; set; }
+
+
+        #region PatronState
+        private StatePedido _statePedido;
+
+        //public void PedidoEntidad()
+        //{
+            //Toma el estado actual del pedido, para empezar pongo PendientedePago, pero hay que tomarlo de la BD
+            //_statePedido = StatePendienteDePago.Instanciar();
+        //}
+
+        public void CambiarEstado(StatePedido elEstado)
+        {
+            _statePedido = elEstado;
+        }
+
+        public void HaciaPendienteDePago()
+        {
+            _statePedido.HaciaPendienteDePago(this);
+        }
+
+        public void HaciaPago()
+        {
+            _statePedido.HaciaPago(this);
+        }
+
+
+        public void HaciaEnCamino()
+        {
+            _statePedido.HaciaEnCamino(this);
+        }
+
+        public void HaciaListoParaRetirar()
+        {
+            _statePedido.HaciaListoParaRetirar(this);
+        }
+
+        public void HaciaCancelado()
+        {
+            _statePedido.HaciaCancelado(this);
+        }
+
+        public void HaciaEntregado()
+        {
+            _statePedido.HaciaEntregado(this);
+        }
+
+
+        #endregion
+
     }
 }
