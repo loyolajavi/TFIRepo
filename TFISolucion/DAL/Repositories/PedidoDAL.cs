@@ -145,16 +145,63 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@NroPedido", nropedido)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectByCUIT_NroPedido", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectByCUIT_NroPedido", parameters))
             {
                 PedidoEntidad PedidoEntidad = new PedidoEntidad();
 
-                PedidoEntidad = Mapeador.MapearFirst<PedidoEntidad>(dt);
+                //PedidoEntidad = Mapeador.MapearFirst<PedidoEntidad>(dt);
+                PedidoEntidad = MapearPedidoEntidad(ds);
 
                 return PedidoEntidad;
             }
         }
 
+        private PedidoEntidad MapearPedidoEntidad(DataSet ds)
+        {
+            PedidoEntidad unPedido = new PedidoEntidad();
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                unPedido.IdPedido = (int)row["IdPedido"];
+                unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
+                if (row["FechaFinPedido"].ToString() != "")
+                    unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
+                unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                if (row["PlazoEntrega"].ToString() != "")
+                    unPedido.PlazoEntrega = (int?)row["PlazoEntrega"];
+                unPedido.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                unPedido.CUIT = row["CUIT"].ToString();
+                unPedido.NumeroTracking = row["NumeroTracking"].ToString();
+                unPedido.DireccionEntrega = (int)row["DireccionEntrega"];
+                if (row["FecBaja"].ToString() != "")
+                    unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                unPedido.NroPedido = (Int64)row["NroPedido"];
+                switch ((int)row["IdEstadoPedido2"])
+                {
+                    case 1:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StatePendientePago.Instanciar());
+                        break;
+                    case 2:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StatePago.Instanciar());
+                        break;
+                    case 3:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateEnCamino.Instanciar());
+                        break;
+                    case 4:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateListoParaRetirar.Instanciar());
+                        break;
+                    case 5:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateEntregado.Instanciar());
+                        break;
+                    case 6:
+                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateCancelado.Instanciar());
+                        break;
+                }
+
+
+            }
+            return unPedido;
+        }
 
         /// <summary>
         /// Selects all records from the Pedido table.

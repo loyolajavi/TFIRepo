@@ -91,6 +91,12 @@
     <Compile Include="ReportePedidosDeUsuario.cs" />
     <Compile Include="ReportePedidosPorFechayEstado.cs" />
     <Compile Include="ReservaEntidad.cs" />
+    <Compile Include="StatePatron\StateCancelado.cs" />
+    <Compile Include="StatePatron\StateEnCamino.cs" />
+    <Compile Include="StatePatron\StateEntregado.cs" />
+    <Compile Include="StatePatron\StateListoParaRetirar.cs" />
+    <Compile Include="StatePatron\StatePago.cs" />
+    <Compile Include="StatePatron\StatePendientePago.cs" />
     <Compile Include="StatePedido.cs" />
     <Compile Include="StockSucursalEntidad.cs" />
     <Compile Include="SucursalEntidad.cs" />

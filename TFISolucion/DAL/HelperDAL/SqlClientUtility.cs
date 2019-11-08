@@ -54,6 +54,55 @@ namespace TFI.HelperDAL
                 }
             }
 
+            public static DataSet ExecuteDataSet(string connectionStringName, CommandType commandType, string commandText, params SqlParameter[] parameters)
+            {
+                DataSet result;
+
+                try
+                {
+                    //si este codigo queda por las dudas.
+                    connection = new SqlConnection(connectionStringName);
+
+                    if (connection != null && connection.State == ConnectionState.Closed)
+                    {
+                        connection.Open();
+                    }
+
+                    tr = connection.BeginTransaction();
+
+                    using (command = CreateCommand(connection, commandType, commandText, parameters))
+                    {
+                        //TRANSACCIONES
+                        result = CrearDataSet(command);
+                        tr.Commit();
+                        return result;
+                    }
+                }
+                catch (Exception es)
+                {
+
+                    tr.Rollback();
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            private static DataSet CrearDataSet(SqlCommand unComando)
+            {
+                DataSet ResultadoDataSet;
+                using (SqlDataAdapter dataAdapter = new SqlDataAdapter(unComando))
+                {
+                    DataSet unDataSet = new DataSet();
+                    dataAdapter.Fill(unDataSet);
+                    unDataSet.Tables[0].TableName = "tResultado";
+                    ResultadoDataSet = unDataSet;
+                }
+                return ResultadoDataSet;
+            }
+
             private static SqlCommand CreateCommand(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] parameters)
             {
                 SqlCommand command = new SqlCommand();

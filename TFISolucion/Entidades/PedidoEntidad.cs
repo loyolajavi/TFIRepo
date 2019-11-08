@@ -24,11 +24,19 @@ namespace TFI.Entidades
         #region PatronState
         private StatePedido _statePedido;
 
-        //public void PedidoEntidad()
-        //{
+        public StatePedido EstadoPedido2
+        {
+            get { return _statePedido; }
+            set { _statePedido = value; }
+        }
+        
+
+
+        public PedidoEntidad()
+        {
             //Toma el estado actual del pedido, para empezar pongo PendientedePago, pero hay que tomarlo de la BD
-            //_statePedido = StatePendienteDePago.Instanciar();
-        //}
+            _statePedido = StatePatron.StatePendientePago.Instanciar();
+        }
 
         public void CambiarEstado(StatePedido elEstado)
         {

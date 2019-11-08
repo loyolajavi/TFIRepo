@@ -9,7 +9,7 @@ namespace TFI.Entidades
     public abstract class StatePedido
     {
 
-        //protected void StatePedido(){}
+        protected StatePedido(){}
 
         public abstract void HaciaPendienteDePago(PedidoEntidad elPedido);
         public abstract void HaciaPago(PedidoEntidad elPedido);
