@@ -180,8 +180,8 @@
   <data name="DatosCuenta" xml:space="preserve">
     <value>Datos de la Cuenta</value>
   </data>
-  <data name="DatosPersonales" xml:space="preserve">
-    <value>Datos Personales  </value>
+  <data name="ContinuarDatosPersonales" xml:space="preserve">
+    <value>Continuar a Datos Personales  </value>
   </data>
   <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
     <value>Este campo contiene demasiados caracteres.</value>
@@ -921,7 +921,7 @@
   <data name="IngresarDNIoCUIT" xml:space="preserve">
     <value>Ingrese DNI/CUIT</value>
   </data>
-  <data name="IngresoEntre8-15Caracteres" xml:space="preserve">
+  <data name="IngresoEntre815Caracteres" xml:space="preserve">
     <value>Ingrese entre 8 y 15 caracteres</value>
   </data>
   <data name="OrdenarPor" xml:space="preserve">
@@ -935,5 +935,8 @@
   </data>
   <data name="Nopuedemodificarleelestadoaunpedidofinalizado" xml:space="preserve">
     <value>No puede modificarle el estado a un pedido finalizado</value>
+  </data>
+  <data name="DatosPersonales" xml:space="preserve">
+    <value>Datos Personales</value>
   </data>
 </root>

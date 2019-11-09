@@ -8,6 +8,7 @@ using TFI.CORE.Managers;
 using TFI.Entidades;
 using TFI.CORE.Helpers;
 using System.Configuration;
+using System.Web.Services;
 
 namespace TFI.GUI
 {
@@ -32,6 +33,14 @@ namespace TFI.GUI
         public QuienesSomos()
         {
             idioma = new LenguajeEntidad();
+        }
+
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
         }
 
         protected void Page_Load(object sender, EventArgs e)

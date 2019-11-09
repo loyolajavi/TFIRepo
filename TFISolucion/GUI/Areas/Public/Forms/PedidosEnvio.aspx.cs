@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using TFI.GUI.Helpers.DTO;
 
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
@@ -17,6 +18,8 @@ namespace TFI.GUI.Areas.Public.Forms
         public int? seleccionado;
         public int? formaEnvioId;
         private LenguajeEntidad idioma;
+        public List<PedidoLista> ProdCantEnPedido;
+        public List<PedidoDetalleEntidad> unosPedidosDetalles;//Para guardar los productos y consultar las sucursales con stock
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -39,11 +42,35 @@ namespace TFI.GUI.Areas.Public.Forms
             _sucursalCore = new SucursalCore();
         }
 
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
             var Current = HttpContext.Current;
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            //Para armar lista PedidosDetalles y enviarlo como param a la BLL y obtener sucursales con stock suficiente
+            ProdCantEnPedido = (List<PedidoLista>)Current.Session["Pedido"];
+            if (ProdCantEnPedido != null && ProdCantEnPedido.Count > 0)
+            {
+                unosPedidosDetalles = new List<PedidoDetalleEntidad>();
+                PedidoDetalleEntidad unPedDet;
+                //Para armar lista PedidosDetalles y enviarlo como param a la BLL y obtener sucursales con stock suficiente
+                foreach (PedidoLista UnProdCant in ProdCantEnPedido)
+                {
+                    unPedDet = new PedidoDetalleEntidad();
+                    unPedDet.IdProducto = UnProdCant.Producto.IdProducto;
+                    unPedDet.Cantidad = UnProdCant.Cantidad;
+                    unosPedidosDetalles.Add(unPedDet);
+                }
+            }
+            //Fin: //Para armar lista PedidosDetalles y enviarlo como param a la BLL y obtener sucursales con stock suficiente
+
             if (!IsPostBack)
             {
 
@@ -70,13 +97,16 @@ namespace TFI.GUI.Areas.Public.Forms
 
             }
 
-            seleccionado = (int?)Current.Session["Seleccionada"];
+            seleccionado = (int?)Current.Session["Seleccionada"]; //Sucursal seleccionada, en caso de elegir forma envío sucursal
             formaEnvioId = (int?)Current.Session["FormaEnvio"];
-            Current.Session["FormaEnvio"] = 1;
+            Current.Session["FormaEnvio"] = 1;//REVISAR
             if (logueado == null)
                 Response.Redirect("Pedidos.aspx");
+            //Antes obtenía todas las sucursales
+            //sucursalesDisponibles = _sucursalCore.FindAll();
+            //Ahora se obtienen las que poseen stock unicamente
+            sucursalesDisponibles = _sucursalCore.TraerSucursalesConStock(unosPedidosDetalles);
 
-            sucursalesDisponibles = _sucursalCore.FindAll();
         }
 
         [WebMethod]

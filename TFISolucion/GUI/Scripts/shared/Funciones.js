@@ -14,6 +14,21 @@
 //    return true;
 //};
 
+//************PARA MANTENER SESION ACTIVA*****************
+var HeartBeatTimer;
+
+function StartHeartBeat() {
+    // pulse every 10 seconds
+    if (HeartBeatTimer == null)
+        HeartBeatTimer = setInterval("HeartBeat()", 114000 * 10);
+}
+
+function HeartBeat() {
+    // note: ScriptManger must have: EnablePageMethods="true"
+    PageMethods.MantenerSesion();
+}
+//************FIN:PARA MANTENER SESION ACTIVA*****************
+
 function onBtnAddClick(btn) {
     var control = $(btn);
     var idProd = control.data('producto');
@@ -49,8 +64,8 @@ function onBtnComprar(btn2) {
     var control = $(btn2);
     var idProdComprar = control.data('producto2');
 
-    consultarStockClickComprar(idProdComprar, function (flagStock) {
-        if (flagStock) {
+    consultarStockClickComprar(idProdComprar, function (stockActual) {
+        if (stockActual > 0) {
             $.ajax({
                 type: "POST",
                 url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ComprarProducto",
@@ -80,23 +95,23 @@ function onBtnComprar(btn2) {
     app.reload();
 };
 
-
+//Todos los class="btn-comprar" vienen primero aca
 $('.btn-comprar').click(function () {
     var control = $(this);
-    var idProducto = control.data('producto');
-
-    consultarStockClickComprar(idProducto, function(flagStock) {
-        if (flagStock) {
+    var idProducto = control.data('producto');//Viene desde el .aspx propiedad: data-producto
+    //Llama a la función
+    consultarStockClickComprar(idProducto, function (stockActual) {
+        if (stockActual > 0) {
             $.ajax({
                 type: "POST",
-                url: "Catalogo.aspx/AgregarItem",
+                url: "Pedidos.aspx/AgregarItem",//Ingresa en AgregarItem de Pedidos.aspx.cs y retorna el nombre del producto
                 data: '{ id: ' + idProducto + '}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 error: function (xhr, status, error) {
                     alert(error);
                 },
-                success: function (result) {
+                success: function (result) { //result es el nombre del producto agregado
                     updateProductos();
 
                     var $modal = $('.modal');
@@ -129,7 +144,7 @@ $('.btn-comprar').click(function () {
     var updateProductos = function () {
         $.ajax({
             type: "POST",
-            url: "/Areas/Public/Forms/Home.aspx/ObtenerProductosPedido",
+            url: "Pedidos.aspx/ObtenerProductosPedido",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
@@ -215,15 +230,15 @@ $('.btn-comprar').click(function () {
         app.redirect("Producto.aspx?IdProducto=" + id);
     });
 
-
-
     //PARA CONSULTAR STOCK AL CLICKEAR EN COMPRAR
     function consultarStockClickComprar(id, my_callback) {
-        var flagStock = false;
+        var stockActual = 0;
+        //Para consultar el stock va a codigo Producto.aspx.cs método consultarStock (que es un webMethod, ..
+        //..no lee las variables locales de la clase Producto.aspx.cs), osea al server
         $(document).ready(function () {
             $.ajax({
                 type: "POST",
-                url: "Pedidos.aspx/consultarStock",
+                url: "Producto.aspx/consultarStock",
                 data: JSON.stringify({
                     id: id,
                 }),
@@ -236,17 +251,18 @@ $('.btn-comprar').click(function () {
 
                     var stockActual = data.d;
 
-                    if (stockActual >= 1) {
-                        flagStock = true;
-                    }
-                    else {
-                        flagStock = false;
-                    }
-                    my_callback(flagStock);
+                    //if (stockActual >= 1) {
+                    //    flagStock = true;
+                    //}
+                    //else {
+                    //    flagStock = false;
+                    //}
+                    //my_callback(flagStock);
+                    my_callback(stockActual);
                 }
             });
         });
-        return flagStock; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
+        return stockActual; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
     }
 
 

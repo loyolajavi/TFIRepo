@@ -166,7 +166,7 @@
     </div>
 
 
-    <% } %>
+    
 
     <div class="row" style="margin-bottom: 50px;">
         <div class="pasos">
@@ -174,6 +174,8 @@
             <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnEnviar" runat="server" href="PedidosEnvio.aspx"><%=Resources.Global.Enviar%></a>
         </div>
     </div>
+
+    <% } %>
 
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="ScriptSection" runat="server">

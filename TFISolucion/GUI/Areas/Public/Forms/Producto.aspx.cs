@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
@@ -38,6 +40,14 @@ namespace TFI.GUI
             idioma = new LenguajeEntidad();
             
         }
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -110,5 +120,28 @@ namespace TFI.GUI
         //        //no puede comprar, debe estar registrado y haber iniciado sesion
         //    }
         //}
+
+
+        [WebMethod]
+        public static int consultarStock(int id)
+        {
+            StockCore _coreStock = new StockCore();
+            List<StockSucursalEntidad> Stocks = _coreStock.SelectByIdProducto(id);
+            int StockAcumulado = 0;
+            if (Stocks.Count > 0)
+            {
+                foreach (var stockdeproducto in Stocks)
+                {
+                    StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+                }
+                return StockAcumulado;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
     }
 }

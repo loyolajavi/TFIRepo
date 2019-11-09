@@ -18,8 +18,10 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body id="MyBody"  onload="StartHeartBeat();">
     <form id="frmLayoutConBarra" runat="server">
+        <asp:ScriptManager ID="ScriptManagerMantenerSesion" runat="server" EnablePageMethods="true">
+        </asp:ScriptManager>
         <!-- Menu -->
         <div class="container" style="margin-bottom: 20px;">
             <nav class="navbar navbar-inverse navbar-fixed-top menuPrincipal">
@@ -144,12 +146,25 @@
                                                     <div class="form-group">
                                                         <div>
                                                             <%--ScriptManager y UpdatePanel para emerger un modal para cuando falla el login--%>
-                                                            <asp:ScriptManager ID="ScriptManager1" runat="server" />
-                                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                                <ContentTemplate>
+                                                            <%--<asp:ScriptManager ID="ScriptManager1" runat="server" />--%>
+                                                            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">--%>
+                                                                <%--<ContentTemplate>--%>
                                                                     <asp:Button ID="IngresoBoton" OnClick="Loguear" runat="server" CssClass="btn btn-success btn-block" Text="<%$Resources:Global, Ingresar %>"/>
-                                                                </ContentTemplate>
-                                                            </asp:UpdatePanel>
+                                                                <%--</ContentTemplate>--%>
+                                                                    <%--Modal para cuando falla logueo, se relaciona con el updatepanel del boton de Login--%>
+                                                            <%--</asp:UpdatePanel>--%>
+                                                            <%--<div id="LogueoFallido" class="modal">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" 
+                                                                                aria-hidden="true">
+                                                                                ×</button>
+                                                                            <h3 id="myModalEstadoFinalizadoLabel"><asp:Label ID="Label7" runat="server" Text="Hola"></asp:Label></h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>--%>
                                                         </div>
 
                                                         
@@ -234,19 +249,7 @@
             </asp:ContentPlaceHolder>
             <%--FIN Cuerpo de la pagina--%>
             
-            <%--Modal para cuando falla logueo, se relaciona con el updatepanel del boton de Login--%>
-            <div id="LogueoFallido" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" 
-                                aria-hidden="true">
-                                ×</button>
-                            <h3 id="myModalEstadoFinalizadoLabel"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, Nopuedemodificarleelestadoaunpedidofinalizado %>"></asp:Label></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="container">
             <footer class="footer">

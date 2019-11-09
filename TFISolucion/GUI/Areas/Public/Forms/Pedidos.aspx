@@ -93,7 +93,7 @@
             </table>
 
             <div class="pasos">
-                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx"><asp:Label ID="lblDatosPersonales" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></a>
+                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx"><asp:Label ID="lblDatosPersonales" runat="server" Text="<%$Resources:Global, ContinuarDatosPersonales %>"></asp:Label></a>
             </div>
 
             <%
@@ -155,7 +155,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Pedidos.aspx/consultarStock",
+                url: "Producto.aspx/consultarStock",
                 data: JSON.stringify({
                     id: id,
                 }),

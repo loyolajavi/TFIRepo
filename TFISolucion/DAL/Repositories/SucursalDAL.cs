@@ -167,8 +167,24 @@ namespace TFI.DAL.DAL
 			}
 		}
 
-	
 
+        public List<StockSucursalEntidad> TraerSucursalesConStock(int IdProducto, int CantidadProd, string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdProducto", IdProducto),
+                new SqlParameter("@CantidadProd", CantidadProd),
+				new SqlParameter("@CUIT", CUIT)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TraerSucursalesConStock", parameters))
+            {
+                List<StockSucursalEntidad> lista = new List<StockSucursalEntidad>();
+                lista = Mapeador.Mapear<StockSucursalEntidad>(dt);
+
+                return lista;
+            }
+        }
 	
 
 		

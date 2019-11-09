@@ -23,6 +23,7 @@ namespace TFI.GUI.Areas.Public.Forms
         private ProductoCore _coreProducto;
         private StockCore _coreStock;
         private LenguajeEntidad idioma;
+        public static ProductoEntidad producto;
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -47,10 +48,17 @@ namespace TFI.GUI.Areas.Public.Forms
             _coreStock = new StockCore();
         }
 
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
-            if (!IsPostBack)
+            if (!IsPostBack)//Si es la primera vez
             {
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 if (idioma == null)
@@ -66,7 +74,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
 
             }
-            else
+            else //Si esta recargando
             {
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 Session["Cotizacion"] = cotizacion;
@@ -86,8 +94,10 @@ namespace TFI.GUI.Areas.Public.Forms
 
             var Current = HttpContext.Current;
 
+            //Son los productos que hay en el Pedido actual, sin cantidades
             productos = (List<ProductoEntidad>)Current.Session["Productos"];
 
+            //Es el detale del Pedido, Productos y cantidades
             lista = (List<PedidoLista>)Current.Session["Pedido"];
 
 
@@ -305,28 +315,50 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
 
-
+        //Agrega Producto a los Pedidos de la Sesión (se eliminan al cerrar la sesión y borrar las cookies)
         [WebMethod]
-        public static int consultarStock(int id)
+        public static string AgregarItem(string id)
         {
-            StockCore _coreStock = new StockCore();
-            var Stocks = _coreStock.SelectByIdProducto(id);
-            int StockAcumulado = 0;
-            if (Stocks.Count > 0)
+            var Current = HttpContext.Current;
+            var manager = new ProductoCore();
+            var cotizacionStatic = new MonedaEmpresaEntidad();
+            cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+            producto = manager.Find(Int32.Parse(id), cotizacionStatic.IdMoneda);
+
+            var list = (List<ProductoEntidad>)Current.Session["Productos"];
+
+            if (list == null || !list.Any())
             {
-                foreach (var stockdeproducto in Stocks)
-                {
-                    StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
-                }
-                return StockAcumulado;
+                Current.Session["Productos"] = new List<ProductoEntidad>();
+                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
             }
             else
             {
-                return 0;
+                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
+                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
             }
-                
+            return producto.DescripProducto;
         }
 
+        //Para obtener los productos del pedido actual y actualizar la lista de productos en el pedido dropdown
+        //Este método es llamado por la funcion updateProductos de AJAX
+        [WebMethod]
+        public static List<String> ObtenerProductosPedido()
+        {
+            var template =
+                "<li class=\"row drop-item\">" +
+                        "<div class=\"col-md-4 drop-image-div \">" +
+                            "<img src=\"/Content/Images/Productos/{0}\" class=\"img-responsive drop-image\"/> " +
+                        "</div> " +
+                        "<div style=\"word-wrap:normal;\" class=\"col-md-8\"><h6>{1}</h6></div> " +
+                "</li>";
+
+            var p = new List<String>();
+            var productos = (List<ProductoEntidad>)HttpContext.Current.Session["Productos"];
+            if (productos != null && productos.Any())
+                productos.ForEach(x => p.Add(string.Format(template, x.URL, x.DescripProducto)));
+            return p;
+        }
 
 
     }

@@ -39,6 +39,14 @@ namespace TFI.GUI.Areas.Public.Forms
             _usuarioManager = new UsuarioCore();
         }
 
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             logueado = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];

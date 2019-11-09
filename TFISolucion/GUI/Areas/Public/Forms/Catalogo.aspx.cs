@@ -13,7 +13,7 @@ namespace TFI.GUI
     public partial class Catalogo : BasePage
     {
         private ProductoCore _manager;
-        public static ProductoEntidad producto;
+        
         private CategoriaCore ManagerCategoria = new CategoriaCore();
         HttpContext Current = HttpContext.Current;
 
@@ -47,6 +47,13 @@ namespace TFI.GUI
             _coremoneda = new MonedaCore();
             _manager = new ProductoCore();
             cotizacion = new MonedaEmpresaEntidad();
+        }
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -213,29 +220,7 @@ namespace TFI.GUI
                }
         }
 
-        [WebMethod]
-        public static string AgregarItem(string id)
-        {
-            var Current = HttpContext.Current;
-            var manager = new ProductoCore();
-            var cotizacionStatic = new MonedaEmpresaEntidad();
-            cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
-            producto = manager.Find(Int32.Parse(id), cotizacionStatic.IdMoneda);
 
-            var list = (List<ProductoEntidad>)Current.Session["Productos"];
-
-            if (list == null || !list.Any())
-            {
-                Current.Session["Productos"] = new List<ProductoEntidad>();
-                ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-            }
-            else
-            {
-                if (!list.Where(x => x.IdProducto == producto.IdProducto).Any())
-                    ((List<ProductoEntidad>)Current.Session["Productos"]).Add(producto);
-            }
-            return producto.DescripProducto;
-        }
 
         [WebMethod]
         public static void AgregarDeseo(string idProducto)

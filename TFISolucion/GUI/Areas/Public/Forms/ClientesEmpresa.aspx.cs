@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
@@ -41,6 +42,14 @@ namespace TFI.GUI
         {
             idioma = new LenguajeEntidad();
         }
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();

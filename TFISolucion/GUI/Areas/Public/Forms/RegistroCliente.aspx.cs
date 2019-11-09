@@ -9,6 +9,7 @@ using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
 using System.Text;
+using System.Web.Services;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -35,6 +36,13 @@ namespace TFI.GUI.Areas.Public.Forms
         public RegistroCliente()
         {
             idioma = new LenguajeEntidad();
+        }
+
+        //Para mantener la sesión activa
+        [WebMethod(EnableSession = true)]
+        public static void MantenerSesion()
+        {
+
         }
 
         protected void Page_Load(object sender, EventArgs e)

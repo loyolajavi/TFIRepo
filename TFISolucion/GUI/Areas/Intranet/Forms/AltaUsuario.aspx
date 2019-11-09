@@ -55,7 +55,7 @@
                             <input type="password" class="form-control" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
                         </div>
                         <div class="col-xs-7">
-                            <asp:RegularExpressionValidator ID="vldTextoClave" Display="Dynamic" runat="server" Text="<%$Resources:Global, IngresoEntre8-15Caracteres%>" ControlToValidate="txtClave" ValidationGroup="AltaEmpleado" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="vldTextoClave" Display="Dynamic" runat="server" Text="<%$Resources:Global, IngresoEntre815Caracteres%>" ControlToValidate="txtClave" ValidationGroup="AltaEmpleado" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarContrasena %>" ControlToValidate="txtClave" ValidationGroup="AltaEmpleado"></asp:RequiredFieldValidator>
                         </div>
 
