@@ -74,7 +74,7 @@
                     runat="server"
                     id="btnConfirmar"
                     style="margin-bottom: 30px;">
-                    <%=Resources.Global.ConfiirmarPedido%>
+                    <%=Resources.Global.ConfirmarPedido%>
                 </button>
             </div>
         </div>
@@ -286,6 +286,7 @@
         function redimensionar() {
             $('#resumenBox').removeAttr("style");
             $('#pagos').removeAttr('hidden');
+            $('#siteMapMaster').attr("hidden", "hidden");
         };
 
         function Validar() {

@@ -52,7 +52,7 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             SucursalCore coreSucursal = new SucursalCore();
             //Session["FormaEnvio"] = 1;
-            Session["Seleccionada"] = coreSucursal.FindAll()[0].IdSucursal;
+            //Session["Seleccionada"] = coreSucursal.FindAll()[0].IdSucursal;
 
             idioma = new LenguajeEntidad();
             var Current = HttpContext.Current;
@@ -107,10 +107,12 @@ namespace TFI.GUI.Areas.Public.Forms
         public static int GenerarPedido()
         {
             var Current = HttpContext.Current;
+            PedidoCore ManagerPedido = new PedidoCore();
 
             var lista = (List<PedidoLista>)Current.Session["Pedido"];
             var entregaTipo = (int)Current.Session["FormaEnvio"];
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            var sucursalesDisponibles = HttpContext.Current.Session["SucursalesDisponibles"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
             var pedidosDetalles = new List<PedidoDetalleEntidad>();
 
@@ -134,7 +136,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
             Current.Session["DetallesPedido"] = pedidosDetalles;
             
-            var dal = new PedidoCore();
+            
 
             var pedido = new PedidoEntidad()
             {
@@ -146,37 +148,19 @@ namespace TFI.GUI.Areas.Public.Forms
                 DireccionEntrega = direccionEnvio
             };
 
-            pedido = dal.Create(pedido);
+            //Crea el Pedido y descuenta stock de los productos
+            pedido = ManagerPedido.Create(pedido, sucursalId);
 
             Current.Session["UltimoPedido"] = pedido.IdPedido;
-
-
-            //AGREGADO PARA QUE DESCUENTE STOCK AL GENERAR PEDIDO
-            foreach(var item in lista){ StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
-            NuevoStock.IdProducto = item.Producto.IdProducto;
-            NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
-            NuevoStock.IdSucursal = (int)sucursalId;
-
-            StockCore StockBLL = new StockCore();
-
-            List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
-            StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
-
-
-
-            if (StockDeProducto.Count > 0)
-            {
-                NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto - item.Cantidad;
-                StockBLL.Update(NuevoStock);
-            }
-           
-}
-           
-
-            //HASTA ACA LO DE STOCK
+            Current.Session.Add("Compras", Current.Session["DetallesPedido"]); //Reemplazar el valor por la lista de pedidos en bd entre 
+                                                                                //"Pendientes de pago" y "EnCamino y/o ListoparaRetirar"
+            
+            //Eliminar las variables de sesión que tenían el pedido en memoria sin confirmar
+            //Revisar si hay q eliminar otras
+            Current.Session["Pedido"] = null;
+            Current.Session["DetallesPedido"] = null;
 
             Current.Session.Add("IdPedido", pedido.IdPedido.ToString());
-            Current.Session["FormaEnvio"] = pedido.IdPedido;
             return pedido.IdPedido;
 
        

@@ -95,7 +95,8 @@
 
         <div class="row" style="margin: 20px;">
             <div class="pasos">
-                <button class="btn btn-lg btn-warning pull-right btn-caja" type="button" id="btnConfirmar"><%=Resources.Global.ConfirmacionPago%></button>
+                <%--<button class="btn btn-lg btn-warning pull-right btn-caja" type="button" id="btnConfirmar"><%=Resources.Global.ConfirmacionPago%></button>--%>
+                <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnConfirmar" runat="server" href="PedidosConfirmacion.aspx"><%=Resources.Global.ConfirmarPedido%></a>
             </div>
         </div>
     </div>
@@ -139,9 +140,9 @@
             seleccionar($(this).val());
         })
 
-        $('#btnConfirmar').click(function () {
-            app.redirect('PedidosConfirmacion.aspx');
-        });
+        //$('#btnConfirmar').click(function () {
+        //    app.redirect('PedidosConfirmacion.aspx');
+        //});
 
         var EjecutarAjax = function (id, accion) {
             $.ajax({

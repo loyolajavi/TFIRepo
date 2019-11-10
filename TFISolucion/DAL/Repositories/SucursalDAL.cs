@@ -189,5 +189,26 @@ namespace TFI.DAL.DAL
 
 		
 		#endregion
-	}
+
+        public void DescontarStockSucursal(PedidoDetalleEntidad unPedidoDetalle, int? IdSucursal, string elCUIT)
+        {
+            try 
+	        {	        
+		        ValidationUtility.ValidateArgument("unPedidoDetalle", unPedidoDetalle);
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+				    new SqlParameter("@IdSucursal", IdSucursal),
+				    new SqlParameter("@IdProducto", unPedidoDetalle.IdProducto),
+				    new SqlParameter("@CantDescontar", unPedidoDetalle.Cantidad),
+				    new SqlParameter("@CUIT", elCUIT)
+			    };
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DescontarStockSucursal", parameters);
+	        }
+	        catch (Exception es)
+	        {
+		        throw;
+	        }
+
+        }
+    }
 }

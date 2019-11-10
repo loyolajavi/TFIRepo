@@ -65,5 +65,25 @@ namespace TFI.CORE.Managers
             return sucursalesRetorno;
         }
 
+
+
+
+
+        public void DescontarStockSucursal(List<PedidoDetalleEntidad> unosPedidosDetalles, int? IdSucursal)
+        {
+            try
+            {
+                foreach (PedidoDetalleEntidad unPedDet in unosPedidosDetalles)
+                {
+                    _dal.DescontarStockSucursal(unPedDet, IdSucursal, Helpers.ConfigSection.Default.Site.Cuit);    
+                }
+                
+            }
+            catch (System.Exception es)
+            {
+                throw;
+            }
+            
+        }
     }
 }

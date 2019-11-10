@@ -60,23 +60,25 @@ namespace TFI.CORE.Managers
             PedidoEstadoDAL.Update(pedidoestado);
         }
 
-        public PedidoEntidad Create(PedidoEntidad e)
+        public PedidoEntidad Create(PedidoEntidad unPedido, int? IdSucursal)
         {
-            e.NroPedido = GetLastNroPedido();
-            var idPedido = PedidoDal.Insert(e);
-            e.IdPedido = idPedido;
+            unPedido.NroPedido = GetLastNroPedido();
+            var idPedido = PedidoDal.Insert(unPedido);
+            unPedido.IdPedido = idPedido;
             _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
             {
-                Fecha = e.FechaPedido,
+                Fecha = unPedido.FechaPedido,
                 IdEstadoPedido = (int)EstadoPedidoEntidad.Options.PendientePago,
                 IdPedido = idPedido
             });
 
-            e.Detalles.ForEach(d => d.IdPedido = idPedido);
-            e.Detalles.ForEach(x => PedidoDetalleDAL.Insert(x));
+            unPedido.Detalles.ForEach(d => d.IdPedido = idPedido);
+            unPedido.Detalles.ForEach(x => PedidoDetalleDAL.Insert(x));
 
+            SucursalCore ManagerSucursal = new SucursalCore();
+            ManagerSucursal.DescontarStockSucursal(unPedido.Detalles, IdSucursal);
            
-            return e;
+            return unPedido;
         }
 
         private long GetLastNroPedido()

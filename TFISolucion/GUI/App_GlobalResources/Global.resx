@@ -159,7 +159,7 @@
   <data name="CondicionFiscal" xml:space="preserve">
     <value>Condicion Fiscal</value>
   </data>
-  <data name="ConfiirmarPedido" xml:space="preserve">
+  <data name="ConfirmarPedido" xml:space="preserve">
     <value>Confirmar Pedido</value>
   </data>
   <data name="Contacto" xml:space="preserve">

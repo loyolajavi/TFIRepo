@@ -97,7 +97,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
             }
 
-            seleccionado = (int?)Current.Session["Seleccionada"]; //Sucursal seleccionada, en caso de elegir forma envío sucursal
+            
             formaEnvioId = (int?)Current.Session["FormaEnvio"];
             Current.Session["FormaEnvio"] = 1;//REVISAR
             if (logueado == null)
@@ -106,13 +106,17 @@ namespace TFI.GUI.Areas.Public.Forms
             //sucursalesDisponibles = _sucursalCore.FindAll();
             //Ahora se obtienen las que poseen stock unicamente
             sucursalesDisponibles = _sucursalCore.TraerSucursalesConStock(unosPedidosDetalles);
+            Session.Add("SucursalesDisponibles", sucursalesDisponibles); //Guardo en Sesión las sucursales disponibles para tomarlas en WebMethod "FormaEnvio"
+            HttpContext.Current.Session["Seleccionada"] = sucursalesDisponibles[0].IdSucursal;//Sucursal seleccionada, en este momento la primera que tiene stock
+            seleccionado = sucursalesDisponibles[0].IdSucursal; //Sucursal seleccionada, en este momento la primera que tiene stock, por si no hago click y queda
+                                                                //seleccionado Envío por correo
 
         }
 
         [WebMethod]
         public static void Seleccionar(int? id)
         {
-            HttpContext.Current.Session["Seleccionada"] = id;
+            HttpContext.Current.Session["Seleccionada"] = id;//Sucursal seleccionada
         }
 
         [WebMethod]
@@ -120,11 +124,11 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             HttpContext.Current.Session["FormaEnvio"] = id;
             if (id == (int)FormaEntregaEntidad.Options.Correo) {
-
-                SucursalCore gestorSucursal = new SucursalCore();
-                var sucursales = gestorSucursal.FindAll();
-                
-                HttpContext.Current.Session["Seleccionada"] = sucursales[0].IdSucursal;
+                //SucursalCore gestorSucursal = new SucursalCore();
+                //var sucursales = gestorSucursal.FindAll();
+                List<SucursalEntidad> sucursalesDisponibles = HttpContext.Current.Session["SucursalesDisponibles"] as List<SucursalEntidad>;
+                //if (sucursales.Exists(X=>X.IdSucursal == sucursales[0].IdSucursal))
+                HttpContext.Current.Session["Seleccionada"] = sucursalesDisponibles[0].IdSucursal;
             }
                
         }

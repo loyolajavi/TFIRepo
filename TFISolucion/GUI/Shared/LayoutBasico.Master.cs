@@ -232,8 +232,8 @@ namespace TFI.GUI.General
             else
             {
                 //Asociado al UpdatePanel1 y al modal fade Id=LogueoFallido para emitir un msj cuando el login falla
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
-                           "ModalLogueo", "$('#LogueoFallido').modal('show');", true);
+                //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+                //           "ModalLogueo", "$('#LogueoFallido').modal('show');", true);
                 
             }
         }

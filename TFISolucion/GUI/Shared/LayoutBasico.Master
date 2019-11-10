@@ -216,7 +216,7 @@
 
             <ol class="breadcrumb">
                 <asp:SiteMapPath ID="siteMapMaster" runat="server" PathSeparator="/" PathDirection="RootToCurrent" RenderCurrentNodeAsLink="false">
-                    <CurrentNodeStyle CssClass="active" />
+                    <CurrentNodeStyle CssClass="bg-primary" />
                     <PathSeparatorStyle CssClass="path" />
                 </asp:SiteMapPath>
             </ol>
