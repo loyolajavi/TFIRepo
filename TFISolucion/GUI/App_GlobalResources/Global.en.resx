@@ -183,6 +183,9 @@
   <data name="ContinuarDatosPersonales" xml:space="preserve">
     <value>Continue to Personal Information </value>
   </data>
+  <data name="ContinuarFormaEnvio" xml:space="preserve">
+    <value>Continue to Shipping Method</value>
+  </data>
   <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
     <value>This field contains too many characters. Please check it.</value>
   </data>
@@ -944,5 +947,8 @@
   </data>
   <data name="DatosPersonales" xml:space="preserve">
     <value>Personal Information</value>
+  </data>
+  <data name="ContinuarResumenPedido" xml:space="preserve">
+    <value>Continue to Sales Order</value>
   </data>
 </root>

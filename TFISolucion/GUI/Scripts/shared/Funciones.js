@@ -292,3 +292,10 @@ $('.btn-comprar').click(function () {
             }
         });
     };
+
+
+    //Ocultar Breadcumb curso del Pedido
+    function OcultarBreadcrumb() {
+        $('.breadcrumb').attr("hidden", "hidden");
+    };
+    

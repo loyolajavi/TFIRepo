@@ -183,6 +183,9 @@
   <data name="ContinuarDatosPersonales" xml:space="preserve">
     <value>Continuar a Datos Personales  </value>
   </data>
+  <data name="ContinuarFormaEnvio" xml:space="preserve">
+    <value>Continuar a Forma de Envío</value>
+  </data>
   <data name="DemasiadosCaracteresIngresados" xml:space="preserve">
     <value>Este campo contiene demasiados caracteres.</value>
   </data>
@@ -938,5 +941,8 @@
   </data>
   <data name="DatosPersonales" xml:space="preserve">
     <value>Datos Personales</value>
+  </data>
+  <data name="ContinuarResumenPedido" xml:space="preserve">
+    <value>Continuar al Resumen del Pedido</value>
   </data>
 </root>

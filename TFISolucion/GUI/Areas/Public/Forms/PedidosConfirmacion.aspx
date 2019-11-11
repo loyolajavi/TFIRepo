@@ -12,7 +12,7 @@
 
     <div>
         <h1>
-            <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, ConfirmacionPago%>"></asp:Label></h1>
+            <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, ResumenDePedido%>"></asp:Label></h1>
         <hr />
     </div>
 
@@ -286,7 +286,7 @@
         function redimensionar() {
             $('#resumenBox').removeAttr("style");
             $('#pagos').removeAttr('hidden');
-            $('#siteMapMaster').attr("hidden", "hidden");
+            OcultarBreadcrumb();
         };
 
         function Validar() {

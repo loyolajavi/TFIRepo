@@ -221,28 +221,6 @@
                 </asp:SiteMapPath>
             </ol>
 
-            <%-- Ver si se si utiliza (al final) --%>
-            <%--<div class="breadcrumb">
-                <asp:SiteMapPath ID="SiteMap1"
-                    runat="server"
-                    PathSeparator=" / "
-                    ParentLevelsDisplayed="1"
-                    PathDirection="RootToCurrent"
-                    ShowToolTips="true"
-                    RenderCurrentNodeAsLink="false">
-                    <CurrentNodeStyle CssClass="current-node"></CurrentNodeStyle>
-                    <NodeTemplate>
-                        <li>
-                            <asp:HyperLink
-                                ID="lnkPage"
-                                Text='<%# Eval("Title") %>'
-                                NavigateUrl='<%# Eval("Url") %>'
-                                ToolTip='<%# EvalDescription") %>'
-                                runat="server" />
-                        </li>
-                    </NodeTemplate>
-                </asp:SiteMapPath>
-            </div>--%>
 
             <%--Cuerpo de la Pagina--%>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderCuerpo" runat="server">

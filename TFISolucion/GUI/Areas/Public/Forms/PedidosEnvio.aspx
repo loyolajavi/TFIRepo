@@ -11,7 +11,7 @@
     <input value="<%=formaEnvioId%>" id="formaEnvioId" hidden="hidden" />
 
     <div>
-        <h1><%=Resources.Global.DatosPersonales%></h1>
+        <h1><%=Resources.Global.FormaDeEnvio%></h1>
         <hr />
     </div>
     <div class="col-md-12 col-sm-6">
@@ -96,7 +96,7 @@
         <div class="row" style="margin: 20px;">
             <div class="pasos">
                 <%--<button class="btn btn-lg btn-warning pull-right btn-caja" type="button" id="btnConfirmar"><%=Resources.Global.ConfirmacionPago%></button>--%>
-                <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnConfirmar" runat="server" href="PedidosConfirmacion.aspx"><%=Resources.Global.ConfirmarPedido%></a>
+                <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnConfirmar" runat="server" href="PedidosConfirmacion.aspx"><%=Resources.Global.ContinuarResumenPedido%></a>
             </div>
         </div>
     </div>

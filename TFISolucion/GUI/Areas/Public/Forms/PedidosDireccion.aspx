@@ -171,7 +171,7 @@
     <div class="row" style="margin-bottom: 50px;">
         <div class="pasos">
                         <% if (direccionEnvio != null && direccionFacturacion != null) { btnEnviar.Visible = true; } %>
-            <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnEnviar" runat="server" href="PedidosEnvio.aspx"><%=Resources.Global.Enviar%></a>
+            <a class="btn btn-lg btn-warning pull-right btn-caja" id="btnEnviar" runat="server" href="PedidosEnvio.aspx"><%=Resources.Global.ContinuarFormaEnvio%></a>
         </div>
     </div>
 
