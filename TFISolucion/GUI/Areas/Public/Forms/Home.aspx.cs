@@ -232,7 +232,6 @@ namespace TFI.GUI
 
 
 
-        //PRUEBA****************************************
 
         [WebMethod]
         public static List<String> ObtenerProductosDeseos()
@@ -258,7 +257,6 @@ namespace TFI.GUI
             return p;
         }
 
-        //FIN PRUEBA ******************************************
 
 
     }//FIN CLASE

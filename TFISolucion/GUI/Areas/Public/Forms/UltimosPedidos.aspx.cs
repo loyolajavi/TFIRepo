@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
@@ -83,7 +84,7 @@ namespace TFI.GUI
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(usuarioentidad.NombreUsuario);
 
             if (PedidosEntidad.Count == 0)
             {
@@ -221,6 +222,31 @@ namespace TFI.GUI
 
             }
         }
+
+
+        [WebMethod]
+        public static int ObtenerComprasDrop()
+        {
+
+            //Session["Compras"] va a estar cargado desde MasterBasico en CargarComprasEnSession()
+            UsuarioEntidad unUsuario = new UsuarioEntidad();
+            
+            
+
+            List<PedidoEntidad> unosPedidosRealizados = new List<PedidoEntidad>();
+            PedidoCore ManagerPedidos = new PedidoCore();
+            if (HttpContext.Current.Session["Usuario"] != null)
+            {
+                unUsuario = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+                unosPedidosRealizados = ManagerPedidos.SelectAllByCUIT_NombreUsuario(unUsuario.NombreUsuario);
+                unosPedidosRealizados.RemoveAll(X => X.Estado.IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
+                HttpContext.Current.Session.Add("Compras", unosPedidosRealizados);
+            }
+                
+            return unosPedidosRealizados.Count();
+
+        }
+
 
     }
 }

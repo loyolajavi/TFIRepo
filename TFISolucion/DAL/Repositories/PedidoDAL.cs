@@ -303,5 +303,23 @@ namespace TFI.DAL.DAL
             }
         }
 
+
+        public EstadoPedidoEntidad PedidoTraerEstadoActual(int IdPedido)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdPedido", IdPedido)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoTraerEstadoActual", parameters))
+            {
+                EstadoPedidoEntidad elEstado = new EstadoPedidoEntidad();
+
+                elEstado = Mapeador.MapearFirst<EstadoPedidoEntidad>(dt);
+
+                return elEstado;
+            }
+        }
+
 	}
 }

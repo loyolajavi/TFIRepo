@@ -945,4 +945,10 @@
   <data name="ContinuarResumenPedido" xml:space="preserve">
     <value>Continuar al Resumen del Pedido</value>
   </data>
+  <data name="PedidosRealizados" xml:space="preserve">
+    <value>Pedidos Realizados</value>
+  </data>
+  <data name="Compras" xml:space="preserve">
+    <value>Compras</value>
+  </data>
 </root>

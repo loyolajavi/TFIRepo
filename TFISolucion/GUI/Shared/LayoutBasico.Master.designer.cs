@@ -121,6 +121,24 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.WebControls.Label lblPedido;
         
         /// <summary>
+        /// Control ComprasDrop.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ComprasDrop;
+        
+        /// <summary>
+        /// Control lblCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCompras;
+        
+        /// <summary>
         /// Control LiDeseos.
         /// </summary>
         /// <remarks>

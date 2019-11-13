@@ -951,4 +951,7 @@
   <data name="ContinuarResumenPedido" xml:space="preserve">
     <value>Continue to Sales Order</value>
   </data>
+  <data name="Compras" xml:space="preserve">
+    <value>Purchases</value>
+  </data>
 </root>

@@ -14,6 +14,17 @@
 //    return true;
 //};
 
+//*********Load de MasterBasic en Cliente****************
+function LoadMasterBasic() {
+    StartHeartBeat();
+    updateProductos();
+    updateCompras();
+    updateDeseos();
+};
+
+
+//END*********Load de MasterBasic en Cliente****************END
+
 //************PARA MANTENER SESION ACTIVA*****************
 var HeartBeatTimer;
 
@@ -21,14 +32,15 @@ function StartHeartBeat() {
     // pulse every 10 seconds
     if (HeartBeatTimer == null)
         HeartBeatTimer = setInterval("HeartBeat()", 114000 * 10);
-}
+};
 
 function HeartBeat() {
     // note: ScriptManger must have: EnablePageMethods="true"
     PageMethods.MantenerSesion();
-}
-//************FIN:PARA MANTENER SESION ACTIVA*****************
+};
+//END************PARA MANTENER SESION ACTIVA*****************END
 
+//Para agregar un Deseo
 function onBtnAddClick(btn) {
     var control = $(btn);
     var idProd = control.data('producto');
@@ -60,6 +72,7 @@ $('#btn-pedidos').click(function () {
 });
 
 
+//******Para colocar producto de lista deseos en Pedidos al hacer click en Comprar en un produto Deseado*********
 function onBtnComprar(btn2) {
     var control = $(btn2);
     var idProdComprar = control.data('producto2');
@@ -89,11 +102,14 @@ function onBtnComprar(btn2) {
         }
     });
     //return true;
+
     actualizarDeseos();
-    updateDeseos();
-    updateProductos();
+    updateDeseos(); //Para cargar los deseos al inicial la página
+    updateProductos();//Para cargar los productos en el pedido al inicial la página
     app.reload();
 };
+//END******Para colocar producto de lista deseos en Pedidos al hacer click en Comprar en un produto Deseado*********END
+
 
 //Todos los class="btn-comprar" vienen primero aca
 $('.btn-comprar').click(function () {
@@ -140,61 +156,87 @@ $('.btn-comprar').click(function () {
 
     };
 
-    //Para agregar productos al pedido dropdown
-    var updateProductos = function () {
-        $.ajax({
-            type: "POST",
-            url: "Pedidos.aspx/ObtenerProductosPedido",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: false,
-            error: function (xhr, status, error) {
-                alert(error);
-            },
-            success: function (data) {
-                var container = $('#ulPedidos');
-                var cant = data.d.length;
-                //LIMPIO DROP
-                container.empty();
-                //MUESTRO CANTIDAD
-                if (cant > 0)
-                    $('#cantProd').text('   (' + cant + ')');
-                //REGENERO EL DROP
-                console.log(data.d.length);
-                container.append(data.d);
-               container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>");
-               // container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\"><%=Resources.Global.MiCuenta%></a></div></li>");
-            }
-        });
-    };
 
-    //Para Agregar Deseos al dropdown
-    var updateDeseos = function () {
-        $.ajax({
-            type: "POST",
-            url: "/Areas/Public/Forms/Home.aspx/ObtenerProductosDeseos",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: false,
-            error: function (xhr, status, error) {
-                alert(error);
-            },
-            success: function (data) {
-                var container = $('#ulDeseos');
-                var cant = data.d.length;
-                //LIMPIO DROP
-                container.empty();
-                //MUESTRO CANTIDAD
-                if (cant > 0)
-                    $('#cantDeseos').text('   (' + cant + ')');
-                //REGENERO EL DROP
-                console.log(data.d.length);
-                container.append(data.d);
-                container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>");
+//********Para agregar productos al pedido dropdown (en el Load por ej)*************
+var updateProductos = function () {
+    $.ajax({
+        type: "POST",
+        url: "Pedidos.aspx/ObtenerProductosPedido",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            var container = $('#ulPedidos');
+            var cant = data.d.length;
+            //LIMPIO DROP
+            container.empty();
+            //MUESTRO CANTIDAD
+            if (cant > 0)
+                $('#cantProd').text('   (' + cant + ')');
+            //REGENERO EL DROP
+            console.log(data.d.length);
+            container.append(data.d);
+            container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>");
+            // container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\"><%=Resources.Global.MiCuenta%></a></div></li>");
+        }
+    });
+};
+//END********Para agregar productos al pedido dropdown (en el Load por ej)*************END
 
-            }
-        });
-    };
+
+
+//*********Para Agregar Deseos al dropdown******************
+var updateDeseos = function () {
+    $.ajax({
+        type: "POST",
+        url: "/Areas/Public/Forms/Home.aspx/ObtenerProductosDeseos",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            var container = $('#ulDeseos');
+            var cant = data.d.length;
+            //LIMPIO DROP
+            container.empty();
+            //MUESTRO CANTIDAD
+            if (cant > 0)
+                $('#cantDeseos').text('   (' + cant + ')');
+            //REGENERO EL DROP
+            console.log(data.d.length);
+            container.append(data.d);
+            container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>");
+
+        }
+    });
+};
+//END*********Para Agregar Deseos al dropdown******************END
+
+//*********Para Agregar las Compras al dropdown******************
+var updateCompras = function () {
+    $.ajax({
+        type: "POST",
+        url: "/Areas/Public/Forms/UltimosPedidos.aspx/ObtenerComprasDrop",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            //MUESTRO CANTIDAD
+            if (data.d > 0)
+                $('#cantComprasPagar').text('   (' + data.d + ')');
+            console.log(data);
+        }
+    });
+};
+//END*********Para Agregar las Compras al dropdown******************END
 
     //$(function () {
     //    $("#ddlTipoUsuario").change(function () {
@@ -263,7 +305,7 @@ $('.btn-comprar').click(function () {
             });
         });
         return stockActual; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
-    }
+    };
 
 
 

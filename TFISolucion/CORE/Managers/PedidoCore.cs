@@ -19,9 +19,15 @@ namespace TFI.CORE.Managers
             _pedidoEstadoPedidoDal = new PedidoEstadoPedidoDAL();
         }
 
-        public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
+        public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string nombreUsuario)
         {
-            return PedidoDal.SelectAllByCUIT_NombreUsuario(cuit, nombreUsuario);
+            List<PedidoEntidad> unosPedidos = new List<PedidoEntidad>();
+            unosPedidos = PedidoDal.SelectAllByCUIT_NombreUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario);
+            foreach (PedidoEntidad unPedido in unosPedidos)
+            {
+                unPedido.Estado = PedidoDal.PedidoTraerEstadoActual(unPedido.IdPedido);
+            }
+            return unosPedidos;
         }
 
         public PedidoEstadoPedidoEntidad PedidoUltimoEstadoSelect(int idPedido)

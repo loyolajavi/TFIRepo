@@ -18,7 +18,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body id="MyBody"  onload="StartHeartBeat();">
+<body id="MyBody"  onload="LoadMasterBasic();">
     <form id="frmLayoutConBarra" runat="server">
         <asp:ScriptManager ID="ScriptManagerMantenerSesion" runat="server" EnablePageMethods="true">
         </asp:ScriptManager>
@@ -88,20 +88,26 @@
                             </li>--%>
 
                             <%-- LISTA DE PEDIDOS --%>
-
                             <li id="pedidosDrop">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblPedido" runat="server" Text="<%$Resources:Global, Pedido %>"></asp:Label><span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulPedidos">
                                 </ul>
                             </li>
-
                             <%-- LISTA DE PEDIDOS END--%>
 
+                            <%-- LISTA DE PEDIDOS --%>
+                            <li id="ComprasDrop" runat="server">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblCompras" runat="server" Text="<%$Resources:Global, Compras %>"></asp:Label><span class="glyphicon glyphicon-gift"></span><span id="cantComprasPagar"></span></a>
+                            </li>
+                            <%-- LISTA DE PEDIDOS END--%>
+
+                            <%-- LISTA DE DESEOS--%>
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Deseos %>"></asp:Label><span class="glyphicon glyphicon-heart"></span><span id="cantDeseos"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulDeseos">
                                 </ul>
                             </li>
+                            <%-- LISTA DE DESEOS END--%>
 
                             <%--NO LO USARIA MAS *************************************************************0000000000000000000000000000000000000000--%>
                             <%--                            <li id="LiDeseos" runat="server">
@@ -293,10 +299,6 @@
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
 
     <script>
-
-        updateProductos();
-
-        updateDeseos();
 
         var obtenerTags = function () {
             var result;

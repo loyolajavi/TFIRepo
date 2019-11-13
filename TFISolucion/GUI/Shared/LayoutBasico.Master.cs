@@ -76,6 +76,11 @@ namespace TFI.GUI.General
 
         }
 
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -125,12 +130,15 @@ namespace TFI.GUI.General
                 liIngresar.Visible = false;
                 liRegistrarse.Visible = false;
                 LiDeseos.Visible = true;
+                ComprasDrop.Visible = true;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
                 CargarListaDeseosEnSession();
+                CargarComprasEnSession();
             }
             else
             {
                 LiDeseos.Visible = false;
+                ComprasDrop.Visible = false;
             }
         }
 
@@ -193,6 +201,17 @@ namespace TFI.GUI.General
 
             Current.Session["ListaDeseos"] = listaDeseos;
         }
+
+        public void CargarComprasEnSession()
+        {
+            List<PedidoEntidad> unosPedidosRealizados = new List<PedidoEntidad>();
+            PedidoCore ManagerPedidos = new PedidoCore();
+            usuario = (UsuarioEntidad)Current.Session["Usuario"];
+            unosPedidosRealizados = ManagerPedidos.SelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
+            unosPedidosRealizados.RemoveAll(X => X.Estado.IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
+            Session.Add("Compras", unosPedidosRealizados); 
+        }
+
 
         public FamiliaEntidad.PermisoFamilia Autenticacion()
         {
