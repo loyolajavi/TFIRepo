@@ -130,6 +130,15 @@ namespace TFI.GUI.General {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ComprasDrop;
         
         /// <summary>
+        /// Control LinkCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor LinkCompras;
+        
+        /// <summary>
         /// Control lblCompras.
         /// </summary>
         /// <remarks>

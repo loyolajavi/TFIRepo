@@ -62,7 +62,6 @@ namespace TFI.GUI.Areas.Public.Forms
                 Response.Redirect("Pedidos.aspx");
             if (!IsPostBack)
             {
-
                 idioma = (LenguajeEntidad)Session["Idioma"];
 
                 if (idioma == null)
@@ -115,6 +114,7 @@ namespace TFI.GUI.Areas.Public.Forms
             var sucursalesDisponibles = HttpContext.Current.Session["SucursalesDisponibles"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
             var pedidosDetalles = new List<PedidoDetalleEntidad>();
+            List<PedidoEntidad> unasCompras = new List<PedidoEntidad>();
 
             var usuarioManager = new UsuarioCore();
             var sucursalManager = new SucursalCore();
@@ -145,20 +145,26 @@ namespace TFI.GUI.Areas.Public.Forms
                 NombreUsuario = logueado.NombreUsuario,
                 CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit,
                 Detalles = pedidosDetalles,
-                DireccionEntrega = direccionEnvio
+                DireccionEntrega = direccionEnvio,
+                Estado = new EstadoPedidoEntidad()
             };
+            pedido.Estado.IdEstadoPedido = (int)EstadoPedidoEntidad.Options.PendientePago;
 
             //Crea el Pedido y descuenta stock de los productos
             pedido = ManagerPedido.Create(pedido, sucursalId);
 
+            //Agrega a "Compras" el pedido generado
             Current.Session["UltimoPedido"] = pedido.IdPedido;
-            Current.Session.Add("Compras", Current.Session["DetallesPedido"]); //Reemplazar el valor por la lista de pedidos en bd entre 
-                                                                                //"Pendientes de pago" y "EnCamino y/o ListoparaRetirar"
+            if (Current.Session["Compras"] != null)
+                unasCompras = Current.Session["Compras"] as List<PedidoEntidad>;
+            unasCompras.Add(pedido);
+            Current.Session["Compras"] = unasCompras;
             
             //Eliminar las variables de sesión que tenían el pedido en memoria sin confirmar
             //Revisar si hay q eliminar otras
             Current.Session["Pedido"] = null;
             Current.Session["DetallesPedido"] = null;
+            Current.Session["Productos"] = null;
 
             Current.Session.Add("IdPedido", pedido.IdPedido.ToString());
             return pedido.IdPedido;

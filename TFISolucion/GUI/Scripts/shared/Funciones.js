@@ -176,6 +176,8 @@ var updateProductos = function () {
             //MUESTRO CANTIDAD
             if (cant > 0)
                 $('#cantProd').text('   (' + cant + ')');
+            else
+                $('#cantProd').empty();
             //REGENERO EL DROP
             console.log(data.d.length);
             container.append(data.d);
@@ -341,3 +343,55 @@ var updateCompras = function () {
         $('.breadcrumb').attr("hidden", "hidden");
     };
     
+
+//*************PedidosConfirmacion.aspx**********************************************************************************************************************************************************
+//***********************************************************************************************************************************************************************************************
+//*********Boton Confirmar Pedido en PedidosConfirmación.aspx****************
+    $('#btnConfirmar').click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "PedidosConfirmacion.aspx/GenerarPedido",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                $('#pagos').removeAttr('hidden');
+                $('.pasos').hide();
+                $('#pedidoId').val(data.d);
+                redimensionar();
+                updateCompras();
+                updateProductos();
+                showSuccess(data.d);
+            }
+        });
+    });
+//END*********Boton Confirmar Pedido en PedidosConfirmación.aspx****************END
+
+//*********Mostrar modal de Pedido realizado correctamente (llamada por #btnConfirmarClick)****************
+    var showSuccess = function (id) {
+        var $modal = $('#mdl_pedido');
+        $modal.find('#prod').text(id);
+        $modal.modal("show");
+    };
+//END*********Mostrar modal de Pedido realizado correctamente (llamada por #btnConfirmarClick)****************END
+
+    function redimensionar() {
+        $('#resumenBox').removeAttr("style");
+        $('#pagos').removeAttr('hidden');
+        OcultarBreadcrumb();
+    };
+
+    function Validar() {
+        if ($('#pedidoId').val() != "") {
+            $('.pasos').hide();
+            redimensionar();
+        }
+
+    };
+
+
+//END*************PedidosConfirmacion.aspx*******************
+//END********************************************************

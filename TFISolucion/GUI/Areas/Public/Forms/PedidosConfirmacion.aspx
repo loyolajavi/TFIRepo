@@ -283,52 +283,14 @@
 
     <script>
 
-        function redimensionar() {
-            $('#resumenBox').removeAttr("style");
-            $('#pagos').removeAttr('hidden');
-            OcultarBreadcrumb();
-        };
 
-        function Validar() {
-            if ($('#pedidoId').val() != "") {
-                $('.pasos').hide();
-                redimensionar();
-            }
+        Validar();//Está en Funciones.js
 
-        };
-
-        Validar();
-
-        $('#btnConfirmar').click(function () {
-
-            $.ajax({
-                type: "POST",
-                url: "PedidosConfirmacion.aspx/GenerarPedido",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (data) {
-                    $('#pagos').removeAttr('hidden');
-                    $('.pasos').hide();
-                    $('#pedidoId').val(data.d);
-                    redimensionar();
-                    showSuccess(data.d);
-                }
-            });
-        });
-
-        var showSuccess = function (id) {
-            var $modal = $('#mdl_pedido');
-            $modal.find('#prod').text(id);
-            $modal.modal("show");
-        };
 
         var showComplete = function () {
             var $modal = $('#mdl_transferencia');
             $modal.modal("show");
-        }
+        };
 
         $('#btTrasnferencia').click(function () {
             $.ajax({
@@ -357,7 +319,7 @@
                 },
 
             });
-        }
+        };
 
         //$('#btnPagarMP').click(function () {
         //    limpiarPedido();
@@ -365,7 +327,7 @@
 
         $('#mdl_transferencia').on('hidden.bs.modal', function () {
             limpiarPedido();
-        })
+        });
 
         //$('#mdl_pagocompletado').on('hidden.bs.modal', function () {
         //    limpiarPedido();
