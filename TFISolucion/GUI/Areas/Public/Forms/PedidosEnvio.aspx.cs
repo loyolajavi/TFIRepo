@@ -51,8 +51,12 @@ namespace TFI.GUI.Areas.Public.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idioma = new LenguajeEntidad();
+            //En caso de no tener un Pedido vigente redirige a home
             var Current = HttpContext.Current;
+            if (Current.Session["Productos"] == null)
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
+            idioma = new LenguajeEntidad();
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
             //Para armar lista PedidosDetalles y enviarlo como param a la BLL y obtener sucursales con stock suficiente
             ProdCantEnPedido = (List<PedidoLista>)Current.Session["Pedido"];

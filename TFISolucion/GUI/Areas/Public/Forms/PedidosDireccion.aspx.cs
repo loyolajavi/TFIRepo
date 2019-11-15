@@ -49,7 +49,12 @@ namespace TFI.GUI.Areas.Public.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            logueado = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            //En caso de no tener un Pedido vigente redirige a home
+            var Current = HttpContext.Current;
+            if (Current.Session["Productos"] == null)
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
             idioma = new LenguajeEntidad();
             if (!IsPostBack)
             {

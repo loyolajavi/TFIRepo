@@ -141,7 +141,8 @@
                     <tr>
                         <td><%=Resources.Global.TarjetaDeCredito%></td>
                         <td>
-                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server" OnClick="btnPagar_Click" Style="display: none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
+                            <asp:Button CssClass="btn btn-success" ID="btnPagar" runat="server"  Style="display: none" Text="<%$Resources:Global, Pagar%>"></asp:Button>
+                            <%--Lo quite del asp:button para probar y que solo funcione el pagarwebmethodOnClick="btnPagar_Click"--%>
                             <a href="#mdl_tarjeta" class="btn btn-success" data-toggle="modal"><%=Resources.Global.Pagar%></a>
                         </td>
                     </tr>

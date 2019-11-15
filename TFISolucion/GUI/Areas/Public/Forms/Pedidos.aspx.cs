@@ -57,6 +57,12 @@ namespace TFI.GUI.Areas.Public.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //En caso de no tener un Pedido vigente redirige a home
+            var Current = HttpContext.Current;
+            if (Current.Session["Productos"] == null)
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
+
             idioma = new LenguajeEntidad();
             if (!IsPostBack)//Si es la primera vez
             {
@@ -92,7 +98,6 @@ namespace TFI.GUI.Areas.Public.Forms
             if (lblStatus != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
-            var Current = HttpContext.Current;
 
             //Son los productos que hay en el Pedido actual, sin cantidades
             productos = (List<ProductoEntidad>)Current.Session["Productos"];

@@ -89,7 +89,7 @@
 
                             <%-- LISTA DE PEDIDOS --%>
                             <li id="pedidosDrop">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblPedido" runat="server" Text="<%$Resources:Global, Pedido %>"></asp:Label><span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
+                                <a id="LinkUlPedido" href="#" class="dropdown-toggle" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblPedido" runat="server" Text="<%$Resources:Global, Pedido %>"></asp:Label><span class="glyphicon glyphicon-shopping-cart"></span><span id="cantProd"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulPedidos">
                                 </ul>
                             </li>
@@ -103,7 +103,7 @@
 
                             <%-- LISTA DE DESEOS--%>
                             <li id="LiDeseos" runat="server">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Deseos %>"></asp:Label><span class="glyphicon glyphicon-heart"></span><span id="cantDeseos"></span></a>
+                                <a id="LinkUlDeseos" href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Deseos %>"></asp:Label><span class="glyphicon glyphicon-heart"></span><span id="cantDeseos"></span></a>
                                 <ul class="dropdown-menu container col-sm-12" style="padding: 15px; min-width: 250px; padding-top: 5px;" id="ulDeseos">
                                 </ul>
                             </li>

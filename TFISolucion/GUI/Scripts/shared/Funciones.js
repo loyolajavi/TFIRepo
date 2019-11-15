@@ -170,18 +170,23 @@ var updateProductos = function () {
         },
         success: function (data) {
             var container = $('#ulPedidos');
+            var containerLink = $('#LinkUlPedido');
             var cant = data.d.length;
             //LIMPIO DROP
             container.empty();
             //MUESTRO CANTIDAD
-            if (cant > 0)
+            if (cant > 0) {
                 $('#cantProd').text('   (' + cant + ')');
-            else
+                //REGENERO EL DROP
+                console.log(data.d.length);
+                containerLink.attr("data-toggle", "dropdown");
+                container.append(data.d);
+                container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>");
+            }
+            else {
                 $('#cantProd').empty();
-            //REGENERO EL DROP
-            console.log(data.d.length);
-            container.append(data.d);
-            container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\">Ir a pedidos</a></div></li>");
+                containerLink.removeAttr("data-toggle");
+            }
             // container.append("<li><div class=\"text-center drop-btn\"><a href=\"Pedidos.aspx\" class=\"btn btn-primary\"><%=Resources.Global.MiCuenta%></a></div></li>");
         }
     });
@@ -203,17 +208,23 @@ var updateDeseos = function () {
         },
         success: function (data) {
             var container = $('#ulDeseos');
+            var containerLink = $('#LinkUlDeseos');
             var cant = data.d.length;
             //LIMPIO DROP
             container.empty();
             //MUESTRO CANTIDAD
-            if (cant > 0)
+            if (cant > 0) {
                 $('#cantDeseos').text('   (' + cant + ')');
-            //REGENERO EL DROP
-            console.log(data.d.length);
-            container.append(data.d);
-            container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>");
-
+                //REGENERO EL DROP
+                console.log(data.d.length);
+                containerLink.attr("data-toggle", "dropdown");
+                container.append(data.d);
+                container.append("<li><div class=\"text-center drop-btn\"><a href=\"ListaDeDeseos.aspx\" class=\"btn btn-primary\">Ver los Deseos</a></div></li>");
+            }
+            else {
+                $('#cantDeseos').empty();
+                containerLink.removeAttr("data-toggle");
+            }
         }
     });
 };
