@@ -118,7 +118,6 @@ namespace TFI.GUI
             }
 
             grilladeultimospedidos.DataSource = PedidosaMostrar;
-            grilladeultimospedidos.AutoGenerateColumns = false;
             grilladeultimospedidos.DataBind();
         }
 
@@ -247,6 +246,32 @@ namespace TFI.GUI
 
         }
 
+
+        protected Boolean EstaPendientePago(string elEstado)
+        {
+            return elEstado == "Pendiente de pago";
+        }
+
+        protected override void OnInit(EventArgs e)
+        {
+            grilladeultimospedidos.RowDataBound += new GridViewRowEventHandler(grilladeultimospedidos_RowDataBound);
+            base.OnInit(e);
+        }
+
+        protected void grilladeultimospedidos_RowDataBound(Object sender, GridViewRowEventArgs e)
+        {
+            if(e.Row.RowType != DataControlRowType.DataRow) return;
+
+            // Hide the edit button when some condition is true
+            // for example, the row contains a certain property
+            string AUX;
+            AUX = e.Row.Cells[3].Text;
+            if (AUX != "Pendiente de pago")
+            {
+                Button btnPagar = (Button)e.Row.FindControl("btnPagarPedido");
+                btnPagar.Visible = false;
+            }
+        }
 
     }
 }

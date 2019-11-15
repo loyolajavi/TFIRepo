@@ -37,6 +37,7 @@
                     <th class="text-center" id="txtDescripcion"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Descripcion %>"></asp:Label></th>
                     <th class="text-center" id="txtPrecioUnitario"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, PrecioUnitario %>"></asp:Label></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
 

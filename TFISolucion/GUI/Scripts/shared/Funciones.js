@@ -66,9 +66,32 @@ function onBtnAddClick(btn) {
     });
 };
 
+//********Para quitar productos de Lista Deseos*************
+function onbtnEliminarDeseo(lapagina) {
+    var control = $(lapagina);
+    var idProd = control.data('prodeliminar');
+
+    $.ajax({
+        type: "POST",
+        url: "ListaDeDeseos.aspx/QuitarDeseo",
+        data: '{ idProducto: ' + idProd + '}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (result) {
+            updateDeseos();
+            //var $modal = $('.modal');
+            //$modal.find('#prod').text(result.d);
+            //$modal.modal("show");
+        }
+    });
+};
+//END********Para quitar productos de Lista Deseos*************END
 
 $('#btn-pedidos').click(function () {
-    app.redirect('Pedidos.aspx')
+    app.redirect('Pedidos.aspx');
 });
 
 

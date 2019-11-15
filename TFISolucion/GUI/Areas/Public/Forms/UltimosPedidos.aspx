@@ -30,12 +30,18 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
             <ContentTemplate>
-                <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand">
+                <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" AutoGenerateColumns="false">
                     <Columns>
                         <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>"  Text="<%$Resources:Global, VerDetalle %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />
                         <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         <asp:BoundField DataField="FechaPedido" HeaderText="<%$Resources:Global, FechaPedido %>" />
                         <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, Estado %>" />
+                        <%--<asp:ButtonField CommandName="PagarPedido" HeaderText="<%$Resources:Global, Pagar %>"  Text="<%$Resources:Global, Pagar %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />--%>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Button ID="btnPagarPedido" runat="server" Text="<%$Resources:Global, Pagar %>" CssClass="btn btn-success center-block" CommandName="PagarPedido"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </ContentTemplate>
