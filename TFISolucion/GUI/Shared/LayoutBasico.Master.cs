@@ -208,7 +208,7 @@ namespace TFI.GUI.General
             PedidoCore ManagerPedidos = new PedidoCore();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
             unosPedidosRealizados = ManagerPedidos.SelectAllByCUIT_NombreUsuario(usuario.NombreUsuario);
-            unosPedidosRealizados.RemoveAll(X => X.Estado.IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
+            unosPedidosRealizados.RemoveAll(X => X.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
             Session.Add("Compras", unosPedidosRealizados); 
         }
 

@@ -203,7 +203,7 @@ namespace TFI.CORE.Managers
 
             var dirs = new List<DireccionEntidad>();
             direccionUsurio.ForEach(x => dirs.Add(DaldeDireccion.Select(x.IdDireccion)));
-            dirs.ForEach(x => x.Provincia = _dalProvicia.Select(x.IdProvincia));
+            dirs.ForEach(x => x.miProvincia = _dalProvicia.Select(x.IdProvincia));
 
             return dirs;
         }

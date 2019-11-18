@@ -8,11 +8,11 @@ namespace TFI.CORE.Managers
 {
     public class PedidoCore
     {
-        private PedidoDAL PedidoDal = new PedidoDAL();
+        private PedidoDAL GestorPedido = new PedidoDAL();
         private PedidoEstadoPedidoDAL _pedidoEstadoPedidoDal;
         private PedidoEstadoPedidoDAL PedidoEstadoDAL = new PedidoEstadoPedidoDAL();
         private PedidoDetalleDAL PedidoDetalleDAL = new PedidoDetalleDAL();
-        private EstadoPedidoDAL EstadoPedidoDal = new EstadoPedidoDAL();
+        private EstadoPedidoDAL GestorEstadoPedido = new EstadoPedidoDAL();
 
         public PedidoCore()
         {
@@ -22,28 +22,49 @@ namespace TFI.CORE.Managers
         public List<PedidoEntidad> SelectAllByCUIT_NombreUsuario(string nombreUsuario)
         {
             List<PedidoEntidad> unosPedidos = new List<PedidoEntidad>();
-            unosPedidos = PedidoDal.SelectAllByCUIT_NombreUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario);
+            unosPedidos = GestorPedido.SelectAllByCUIT_NombreUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario);
             foreach (PedidoEntidad unPedido in unosPedidos)
             {
-                unPedido.Estado = PedidoDal.PedidoTraerEstadoActual(unPedido.IdPedido);
+                PedidoTraerEstadoActual(unPedido);
+                //unPedido.Estado = GestorPedido.PedidoTraerEstadoActual(unPedido.IdPedido);
             }
             return unosPedidos;
         }
+        //public PedidoEstadoPedidoEntidad PedidoUltimoEstadoSelect(int idPedido)
+        //{
+        //    return PedidoEstadoDAL.PedidoUltimoEstadoSelect(idPedido);
+        //}
 
-        public PedidoEstadoPedidoEntidad PedidoUltimoEstadoSelect(int idPedido)
+        public void PedidoTraerEstadoActual(PedidoEntidad elPedido)
         {
-            return PedidoEstadoDAL.PedidoUltimoEstadoSelect(idPedido);
+            GestorPedido.PedidoTraerEstadoActual(elPedido);
         }
+
+        //public PedidoEntidad PedidoTraerEstadoActual(int IdPedido)
+        //{
+        //    return PedidoSelectByCUIT_IDPedido(IdPedido);
+        //}
 
         //Para obtener la descripcion del estado a partir del id
         public EstadoPedidoEntidad EstadoPedidoSelect(int idEstadoPedido)
         {
-            return EstadoPedidoDal.Select(idEstadoPedido);
+            return GestorEstadoPedido.Select(idEstadoPedido);
         }
 
         public PedidoEntidad PedidoSelectByCUIT_NroPedido(string cuit, Int64 nropedido)
         {
-            return PedidoDal.SelectByCUIT_NroPedido(cuit, nropedido);
+            PedidoEntidad unPedido = new PedidoEntidad();
+            unPedido = GestorPedido.SelectByCUIT_NroPedido(cuit, nropedido);
+            PedidoTraerEstadoActual(unPedido);
+            return unPedido;
+        }
+
+        public PedidoEntidad PedidoSelectByCUIT_IDPedido(Int64 elIdPedido)
+        {
+            PedidoEntidad unPedido = new PedidoEntidad();
+            unPedido = GestorPedido.PedidoSelectByCUIT_IDPedido(Helpers.ConfigSection.Default.Site.Cuit, elIdPedido);
+            PedidoTraerEstadoActual(unPedido);
+            return unPedido;
         }
 
         public List<PedidoDetalleEntidad> PedidosDetalleSelect(int idPedido)
@@ -53,24 +74,28 @@ namespace TFI.CORE.Managers
 
         public List<PedidoEntidad> SelectAllByCUIT(string CUIT)
         {
-            return PedidoDal.SelectAllByCUIT(CUIT);
+            List<PedidoEntidad> unosPedidos = new List<PedidoEntidad>();
+            unosPedidos = GestorPedido.SelectAllByCUIT(CUIT);
+            foreach (PedidoEntidad unPedido in unosPedidos)
+            {
+                PedidoTraerEstadoActual(unPedido);
+            }
+            return unosPedidos;
         }
 
         public List<EstadoPedidoEntidad> EstadoPedidoSelectAll()
         {
-            return EstadoPedidoDal.SelectAll();
+            return GestorEstadoPedido.SelectAll();
         }
 
-        public void PedidoEstadoPedidoUpdate(PedidoEstadoPedidoEntidad pedidoestado)
-        {
-            PedidoEstadoDAL.Update(pedidoestado);
-        }
+
 
         public PedidoEntidad Create(PedidoEntidad unPedido, int? IdSucursal)
         {
             unPedido.NroPedido = GetLastNroPedido();
-            var idPedido = PedidoDal.Insert(unPedido);
+            var idPedido = GestorPedido.Insert(unPedido);
             unPedido.IdPedido = idPedido;
+            //Esto esta OK para grabar el estado del pedido incluso ya con lo de StatePedido
             _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
             {
                 Fecha = unPedido.FechaPedido,
@@ -89,7 +114,7 @@ namespace TFI.CORE.Managers
 
         private long GetLastNroPedido()
         {
-            long? idAnterior = PedidoDal.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit)
+            long? idAnterior = GestorPedido.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit)
                 .OrderByDescending(x => x.NroPedido)
                 .Select(x => x.NroPedido)
                 .FirstOrDefault();
@@ -98,11 +123,68 @@ namespace TFI.CORE.Managers
         }
 
 
-
-
-        public void FinalizarPedido(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
+        public void AvanzarPaso(PedidoEntidad elPedido, ComprobanteEntidad elComprobante)
         {
-            PedidoEstadoDAL.InsertarFin(pedidoEstadoPedido);
+            elPedido.Avanzar(false, elPedido.miFormaEntrega.IdFormaEntrega);
+            PedidoSetearEstadoDescripEnMemoria(elPedido);
+
+            //Si se pagó
+            if (elPedido.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago)
+            {
+                //Generar factura
+                ComprobanteCore unManagerComprobante = new ComprobanteCore();
+                unManagerComprobante.Create(elComprobante);
+
+                //Insertar nuevo estado
+                _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+                {
+                    Fecha = DateTime.Now,
+                    IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                    IdPedido = elPedido.IdPedido
+                });
+
+            }
+
+            //if (elPedido.VerEstadoActual().GetType() == typeof(Entidades.StatePatron.StatePendientePago))
+            //    PedidoEstadoDAL.SelectAll();
+            //else if(elPedido.VerEstadoActual().GetType() == typeof(Entidades.StatePatron.StatePago))
+            //    PedidoEstadoDAL.SelectAll();
+
+            //Podría llegar a usar este código
+            //pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
+            //pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
+            //pedidoEstadoPedido.Fecha = DateTime.Now;
+
         }
+
+        public void PedidoSetearEstadoDescripEnMemoria(PedidoEntidad elPedido)
+        {
+            EstadoPedidoEntidad unEstadoPedido = new EstadoPedidoEntidad();
+            switch ((string)elPedido.VerEstadoActual().GetType().Name)
+            {
+                case "StatePendientePago":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.PendientePago);
+                    break;
+                case "StatePago":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.Pago);
+                    break;
+                case "StateEnCamino":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.EnCamino);
+                    break;
+                case "StateListoParaRetirar":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.ListoRetirar);
+                    break;
+                case "StateEntregado":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.Entregado);
+                    break;
+                case "StateCancelado":
+                    unEstadoPedido = GestorEstadoPedido.Select((int)EstadoPedidoEntidad.Options.Cancelado);
+                    break;
+            }
+            elPedido.VerEstadoActual().IdEstadoPedido = unEstadoPedido.IdEstadoPedido;
+            elPedido.VerEstadoActual().DescripcionEstadoPedido = unEstadoPedido.DescripcionEstadoPedido;
+        }
+
+
     }
 }

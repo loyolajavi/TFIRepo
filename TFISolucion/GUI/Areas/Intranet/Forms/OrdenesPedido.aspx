@@ -150,11 +150,12 @@
                                     <asp:DropDownList ID="ddlestados" runat="server"  ClientIDMode="static" CssClass="form-control"></asp:DropDownList>
                                 </ContentTemplate>
                                 <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="btnCambiarEstado"/>
+                                    <asp:AsyncPostBackTrigger ControlID="btnAvanzar"/>
                                 </Triggers>
                             </asp:UpdatePanel>
                             <div class="modal-footer">
-                                   <asp:Button CssClass="form-control" runat="server" ID="btnCambiarEstado" ClientIDMode="static" Text="<%$Resources:Global, CambiarEstado %>" OnClientClick="return onbtnModificarEstado(this)" OnClick="btnCambiarEstado_Click" />
+                                   <asp:Button CssClass="form-control" runat="server" ID="btnAvanzar" ClientIDMode="static" Text="<%$Resources:Global, CambiarEstado %>" />
+                                <%--<asp:Button CssClass="form-control" runat="server" ID="Button1" ClientIDMode="static" Text="<%$Resources:Global, CambiarEstado %>" OnClientClick="return onbtnModificarEstado(this)" OnClick="btnCambiarEstado_Click" />--%>
                                     <div id="notificationestado" runat="server"></div> 
                             </div>
                         </div>

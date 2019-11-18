@@ -2,6 +2,7 @@ using System;
 
 namespace TFI.Entidades
 {
+    [Serializable]
     public class PedidoDetalleEntidad
     {
         public int IdPedidoDetalle { get; set; }

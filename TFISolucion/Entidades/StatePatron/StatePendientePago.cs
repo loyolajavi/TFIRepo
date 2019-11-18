@@ -6,46 +6,25 @@ using System.Threading.Tasks;
 
 namespace TFI.Entidades.StatePatron
 {
+    [Serializable]
     public class StatePendientePago : StatePedido
     {
-        private static StatePedido _State = new StatePendientePago();
+        //private static StatePedido _State = new StatePendientePago();
 
-        private StatePendientePago() { }
+        //private StatePendientePago() { }
 
 
-        public static StatePedido Instanciar()
+        //public static StatePedido Instanciar()
+        //{
+        //    return _State;
+        //}
+
+        public override void SiguientePaso(PedidoEntidad unPedido, bool Cancela, int laFormaEnvio)
         {
-            return _State;
-        }
-
-        public override void HaciaPendienteDePago(PedidoEntidad elPedido)
-        {
-            
-        }
-
-        public override void HaciaPago(PedidoEntidad elPedido)
-        {
-            base.CambiarEstado(elPedido, StatePago.Instanciar());
-        }
-
-        public override void HaciaEnCamino(PedidoEntidad elPedido)
-        {
-            
-        }
-
-        public override void HaciaListoParaRetirar(PedidoEntidad elPedido)
-        {
-            
-        }
-
-        public override void HaciaEntregado(PedidoEntidad elPedido)
-        {
-            
-        }
-
-        public override void HaciaCancelado(PedidoEntidad elPedido)
-        {
-            base.CambiarEstado(elPedido, StateCancelado.Instanciar());
+            if(Cancela)
+                unPedido.DefinirEstado(new StateCancelado());
+            else
+                unPedido.DefinirEstado(new StatePago());
         }
     }
 }

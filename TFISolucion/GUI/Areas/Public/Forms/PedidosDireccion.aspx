@@ -81,7 +81,7 @@
                         </tr>
                         <tr>
                             <td id="lblProvincia" class="td-lbl"><%=Resources.Global.Provincia%> </td>
-                            <td><%=direccionEnvio.Provincia.DescripcionProvincia%></td>
+                            <td><%=direccionEnvio.miProvincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblLocalidad" class="td-lbl"><%=Resources.Global.Localidad%> </td>
@@ -131,7 +131,7 @@
                         </tr>
                         <tr>
                             <td id="lblFacturacionProvincia" class="td-lbl"><%=Resources.Global.Provincia%> </td>
-                            <td><%=direccionFacturacion.Provincia.DescripcionProvincia%></td>
+                            <td><%=direccionFacturacion.miProvincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionLocalidad" class="td-lbl"><%=Resources.Global.Localidad%> </td>

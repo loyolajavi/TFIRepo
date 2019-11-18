@@ -101,17 +101,18 @@ namespace TFI.GUI
             {
                 PedidoDTO PedidoAMostrar = new PedidoDTO();
                 PedidoAMostrar.cuit = PedidosEntidad[i].CUIT;
-                DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].DireccionEntrega);
+                DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].miDireccionEntrega.IdDireccion);
                 PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                 PedidoAMostrar.FechaPedido = PedidosEntidad[i].FechaPedido;
                 PedidoAMostrar.IdPedido = PedidosEntidad[i].IdPedido;
                 PedidoAMostrar.NombreUsuario = PedidosEntidad[i].NombreUsuario;
                 PedidoAMostrar.NroPedido = PedidosEntidad[i].NroPedido;
 
-                PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);
-                EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
+                //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);
+                //EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
 
-                PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
+                PedidoAMostrar.Estado = PedidosEntidad[i].VerEstadoActual().DescripcionEstadoPedido;
+                //PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
 
                 PedidosaMostrar.Add(PedidoAMostrar);
 
@@ -141,10 +142,7 @@ namespace TFI.GUI
             /// </summary>
             public string NombreUsuario { get; set; }
 
-            /// <summary>
-            /// Gets or sets the PlazoEntrega value.
-            /// </summary>
-            public int? PlazoEntrega { get; set; }
+
 
             /// <summary>
             /// Gets or sets the IdFormaEntrega value.
@@ -238,7 +236,7 @@ namespace TFI.GUI
             {
                 unUsuario = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
                 unosPedidosRealizados = ManagerPedidos.SelectAllByCUIT_NombreUsuario(unUsuario.NombreUsuario);
-                unosPedidosRealizados.RemoveAll(X => X.Estado.IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
+                unosPedidosRealizados.RemoveAll(X => X.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago);
                 HttpContext.Current.Session.Add("Compras", unosPedidosRealizados);
             }
                 

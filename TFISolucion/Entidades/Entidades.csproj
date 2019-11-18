@@ -97,7 +97,7 @@
     <Compile Include="StatePatron\StateListoParaRetirar.cs" />
     <Compile Include="StatePatron\StatePago.cs" />
     <Compile Include="StatePatron\StatePendientePago.cs" />
-    <Compile Include="StatePedido.cs" />
+    <Compile Include="StatePatron\StatePedido.cs" />
     <Compile Include="StockSucursalEntidad.cs" />
     <Compile Include="SucursalEntidad.cs" />
     <Compile Include="TarjetaEntidad.cs" />

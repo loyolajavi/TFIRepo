@@ -8,6 +8,8 @@ namespace TFI.DAL.DAL
 {
     public class PedidoEstadoPedidoDAL
     {
+
+        //ESTE METODO ES OK QUE ESTE INCLUSO YA CON STATEPEDIDO
         public void Insert(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
         {
             ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
@@ -24,32 +26,6 @@ namespace TFI.DAL.DAL
         }
 
 
-        public void InsertarFin(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
-        {
-            ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
-
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdPedido", pedidoEstadoPedido.IdPedido),
-				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido),
-				new SqlParameter("@Fecha", pedidoEstadoPedido.Fecha),
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoInsertFin", parameters);
-        }
-
-        public void Update(PedidoEstadoPedidoEntidad pedidoEstadoPedido)
-        {
-            ValidationUtility.ValidateArgument("pedidoEstadoPedido", pedidoEstadoPedido);
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdPedido", pedidoEstadoPedido.IdPedido),
-				new SqlParameter("@IdEstadoPedido", pedidoEstadoPedido.IdEstadoPedido),
-                new SqlParameter("@Fecha", pedidoEstadoPedido.Fecha)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoEstadoPedidoUpdate", parameters);
-        }
 
         public void Delete(int idPedido, int idEstadoPedido)
         {

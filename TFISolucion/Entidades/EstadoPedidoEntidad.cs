@@ -2,16 +2,17 @@ using System;
 
 namespace TFI.Entidades
 {
+    [Serializable]
 	public class EstadoPedidoEntidad
 	{
         public enum Options
         {
             PendientePago = 1,
-            Cancelado = 2,
-            Aprobado = 3,
-            Autorizado = 4,
-            Rechazado = 5,
-            Finalizado = 6
+            Pago = 2,
+            EnCamino = 3,
+            ListoRetirar = 4,
+            Entregado = 5,
+            Cancelado = 6
         }
 
 

@@ -6,47 +6,55 @@ using System.Threading.Tasks;
 
 namespace TFI.Entidades.StatePatron
 {
-
+    [Serializable]
     public class StateCancelado : StatePedido
     {
-        private static StatePedido _State = new StateCancelado();
-
-        private StateCancelado() { }
-
-
-        public static StatePedido Instanciar()
+        
+        public override void SiguientePaso(PedidoEntidad unPedido, bool Cancela, int laFormaEnvio)
         {
-            return _State;
+            throw new NotImplementedException();
         }
 
-        public override void HaciaPendienteDePago(PedidoEntidad elPedido)
-        {
+
+        //private static StatePedido _State = new StateCancelado();
+
+        //private StateCancelado() { }
+
+
+        //public static StatePedido Instanciar()
+        //{
+        //    return _State;
+        //}
+
+        //public override void HaciaPendienteDePago(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
 
-        public override void HaciaPago(PedidoEntidad elPedido)
-        {
+        //public override void HaciaPago(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
 
-        public override void HaciaEnCamino(PedidoEntidad elPedido)
-        {
+        //public override void HaciaEnCamino(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
 
-        public override void HaciaListoParaRetirar(PedidoEntidad elPedido)
-        {
+        //public override void HaciaListoParaRetirar(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
 
-        public override void HaciaEntregado(PedidoEntidad elPedido)
-        {
+        //public override void HaciaEntregado(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
 
-        public override void HaciaCancelado(PedidoEntidad elPedido)
-        {
+        //public override void HaciaCancelado(PedidoEntidad elPedido)
+        //{
             
-        }
+        //}
+
     }
 }

@@ -21,11 +21,10 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@FechaPedido", pedido.FechaPedido),
 				new SqlParameter("@FechaFinPedido", pedido.FechaFinPedido),
 				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
-				new SqlParameter("@PlazoEntrega", pedido.PlazoEntrega),
-				new SqlParameter("@IdFormaEntrega", pedido.IdFormaEntrega),
+				new SqlParameter("@IdFormaEntrega", pedido.miFormaEntrega.IdFormaEntrega),
 				new SqlParameter("@CUIT", pedido.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
-				new SqlParameter("@DireccionEntrega", pedido.DireccionEntrega),
+				new SqlParameter("@DireccionEntrega", pedido.miDireccionEntrega.IdDireccion),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
 			};
 
@@ -47,11 +46,10 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@FechaPedido", pedido.FechaPedido),
 				new SqlParameter("@FechaFinPedido", pedido.FechaFinPedido),
 				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
-				new SqlParameter("@PlazoEntrega", pedido.PlazoEntrega),
-				new SqlParameter("@IdFormaEntrega", pedido.IdFormaEntrega),
+				new SqlParameter("@IdFormaEntrega", pedido.miFormaEntrega.IdFormaEntrega),
 				new SqlParameter("@CUIT", pedido.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
-				new SqlParameter("@DireccionEntrega", pedido.DireccionEntrega),
+				new SqlParameter("@DireccionEntrega", pedido.miDireccionEntrega.IdDireccion),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
 			};
 
@@ -71,48 +69,8 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDelete", parameters);
         }
 
+        
 
-
-        /// <summary>
-        /// Deletes a record from the Pedido table by a foreign key.
-        /// </summary>
-        public void DeleteAllByCUIT(string cuit)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@CUIT", cuit)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT", parameters);
-        }
-
-
-        /// <summary>
-        /// Deletes a record from the Pedido table by a foreign key.
-        /// </summary>
-        public void DeleteAllByIdFormaEntrega(int idFormaEntrega)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdFormaEntrega", idFormaEntrega)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByIdFormaEntrega", parameters);
-        }
-
-        /// <summary>
-        /// Deletes a record from the Pedido table by a foreign key.
-        /// </summary>
-        public void DeleteAllByCUIT_NombreUsuario(string cuit, string nombreUsuario)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@CUIT", cuit),
-				new SqlParameter("@NombreUsuario", nombreUsuario)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDeleteAllByCUIT_NombreUsuario", parameters);
-        }
 
         /// <summary>
         /// Selects a single record from the Pedido table.
@@ -124,12 +82,10 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", idPedido)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelect", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelect", parameters))
             {
                 PedidoEntidad PedidoEntidad = new PedidoEntidad();
-
-                PedidoEntidad = Mapeador.MapearFirst<PedidoEntidad>(dt);
-
+                PedidoEntidad = MapearPedidoEntidad(dt);
                 return PedidoEntidad;
             }
         }
@@ -148,10 +104,23 @@ namespace TFI.DAL.DAL
             using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectByCUIT_NroPedido", parameters))
             {
                 PedidoEntidad PedidoEntidad = new PedidoEntidad();
-
-                //PedidoEntidad = Mapeador.MapearFirst<PedidoEntidad>(dt);
                 PedidoEntidad = MapearPedidoEntidad(ds);
+                return PedidoEntidad;
+            }
+        }
 
+        public PedidoEntidad PedidoSelectByCUIT_IDPedido(string elCuit, Int64 elIdPedido)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@elCuit", elCuit),
+                new SqlParameter("@elIdPedido", elIdPedido)
+			};
+
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectByCUIT_IDPedido", parameters))
+            {
+                PedidoEntidad PedidoEntidad = new PedidoEntidad();
+                PedidoEntidad = MapearPedidoEntidad(ds);
                 return PedidoEntidad;
             }
         }
@@ -167,78 +136,57 @@ namespace TFI.DAL.DAL
                 if (row["FechaFinPedido"].ToString() != "")
                     unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
                 unPedido.NombreUsuario = row["NombreUsuario"].ToString();
-                if (row["PlazoEntrega"].ToString() != "")
-                    unPedido.PlazoEntrega = (int?)row["PlazoEntrega"];
-                unPedido.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                unPedido.miFormaEntrega = new FormaEntregaEntidad();
+                unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
                 unPedido.CUIT = row["CUIT"].ToString();
                 unPedido.NumeroTracking = row["NumeroTracking"].ToString();
-                unPedido.DireccionEntrega = (int)row["DireccionEntrega"];
+                unPedido.miDireccionEntrega = new DireccionEntidad();
+                unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
                 if (row["FecBaja"].ToString() != "")
                     unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
                 unPedido.NroPedido = (Int64)row["NroPedido"];
-                switch ((int)row["IdEstadoPedido2"])
-                {
-                    case 1:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StatePendientePago.Instanciar());
-                        break;
-                    case 2:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StatePago.Instanciar());
-                        break;
-                    case 3:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateEnCamino.Instanciar());
-                        break;
-                    case 4:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateListoParaRetirar.Instanciar());
-                        break;
-                    case 5:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateEntregado.Instanciar());
-                        break;
-                    case 6:
-                        unPedido.CambiarEstado(TFI.Entidades.StatePatron.StateCancelado.Instanciar());
-                        break;
-                }
-
-
             }
             return unPedido;
         }
 
-        /// <summary>
-        /// Selects all records from the Pedido table.
-        /// </summary>
-        public List<PedidoEntidad> SelectAll()
+        private List<PedidoEntidad> MapearMuchosPedidoEntidad(DataSet ds)
         {
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAll"))
+            List<PedidoEntidad> ResUnosPedidos = new List<PedidoEntidad>();
+
+            try
             {
-                List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    PedidoEntidad unPedido = new PedidoEntidad();
 
-                pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
+                    unPedido.IdPedido = (int)row["IdPedido"];
+                    unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
+                    if (row["FechaFinPedido"].ToString() != "")
+                        unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
+                    unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                    unPedido.miFormaEntrega = new FormaEntregaEntidad();
+                    unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                    unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
+                    unPedido.CUIT = row["CUIT"].ToString();
+                    unPedido.NumeroTracking = row["NumeroTracking"].ToString();
+                    unPedido.miDireccionEntrega = new DireccionEntidad();
+                    unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
+                    if (row["FecBaja"].ToString() != "")
+                        unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                    unPedido.NroPedido = (Int64)row["NroPedido"];
 
-                return pedidoEntidadList;
+                    ResUnosPedidos.Add(unPedido);
+                }
+                return ResUnosPedidos;
             }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
 
-
-
-        /// <summary>
-        /// Selects all records from the Pedido table by a foreign key.
-        /// </summary>
-        public List<PedidoEntidad> SelectAllByDireccionEntrega(int direccionEntrega)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@DireccionEntrega", direccionEntrega)
-			};
-
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByDireccionEntrega", parameters))
-            {
-                List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
-
-                pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
-
-                return pedidoEntidadList;
-            }
-        }
 
         /// <summary>
         /// Selects all records from the Pedido table by a foreign key.
@@ -250,37 +198,35 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", cuit)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT", parameters))
             {
                 List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
-
-                pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
-
+                pedidoEntidadList = MapearMuchosPedidoEntidad(dt);
                 return pedidoEntidadList;
             }
         }
 
 
 
-        /// <summary>
-        /// Selects all records from the Pedido table by a foreign key.
-        /// </summary>
-        public List<PedidoEntidad> SelectAllByIdFormaEntrega(int idFormaEntrega)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdFormaEntrega", idFormaEntrega)
-			};
+        ///// <summary>
+        ///// Selects all records from the Pedido table by a foreign key.
+        ///// </summary>
+        //public List<PedidoEntidad> SelectAllByIdFormaEntrega(int idFormaEntrega)
+        //{
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@IdFormaEntrega", idFormaEntrega)
+        //    };
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByIdFormaEntrega", parameters))
-            {
-                List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
+        //    using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByIdFormaEntrega", parameters))
+        //    {
+        //        List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
 
-                pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
+        //        pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
 
-                return pedidoEntidadList;
-            }
-        }
+        //        return pedidoEntidadList;
+        //    }
+        //}
 
         /// <summary>
         /// Selects all records from the Pedido table by a foreign key.
@@ -293,31 +239,58 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT_NombreUsuario", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoSelectAllByCUIT_NombreUsuario", parameters))
             {
                 List<PedidoEntidad> pedidoEntidadList = new List<PedidoEntidad>();
-
-                pedidoEntidadList = Mapeador.Mapear<PedidoEntidad>(dt);
-
+                pedidoEntidadList = MapearMuchosPedidoEntidad(dt);
                 return pedidoEntidadList;
             }
         }
 
 
-        public EstadoPedidoEntidad PedidoTraerEstadoActual(int IdPedido)
+        public void PedidoTraerEstadoActual(PedidoEntidad elPedido)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdPedido", IdPedido)
+				new SqlParameter("@IdPedido", elPedido.IdPedido)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoTraerEstadoActual", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoTraerEstadoActual", parameters))
             {
-                EstadoPedidoEntidad elEstado = new EstadoPedidoEntidad();
+                MapearEstadoActualPedido(elPedido, ds);
+            }
+        }
 
-                elEstado = Mapeador.MapearFirst<EstadoPedidoEntidad>(dt);
 
-                return elEstado;
+        private void MapearEstadoActualPedido(PedidoEntidad elPedido, DataSet ds)
+        {
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                switch ((int)row["IdEstadoPedido"])
+                {
+                    case 1:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StatePendientePago());
+
+                        //.CambiarEstado(TFI.Entidades.StatePatron.StatePendientePago.Instanciar());
+                        break;
+                    case 2:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StatePago());
+                        break;
+                    case 3:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StateEnCamino());
+                        break;
+                    case 4:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StateListoParaRetirar());
+                        break;
+                    case 5:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StateEntregado());
+                        break;
+                    case 6:
+                        elPedido.DefinirEstado(new Entidades.StatePatron.StateCancelado());
+                        break;
+                }
+                elPedido.VerEstadoActual().DescripcionEstadoPedido = row["DescripcionEstadoPedido"].ToString();
+                elPedido.VerEstadoActual().IdEstadoPedido = (int)row["IdEstadoPedido"];
             }
         }
 

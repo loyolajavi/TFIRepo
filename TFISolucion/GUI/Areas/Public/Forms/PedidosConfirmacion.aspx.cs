@@ -9,6 +9,8 @@ using TFI.GUI.Helpers.DTO;
 using TFI.CORE.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Text;
 
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
@@ -145,14 +147,18 @@ namespace TFI.GUI.Areas.Public.Forms
             var pedido = new PedidoEntidad()
             {
                 FechaPedido = DateTime.Now,
-                IdFormaEntrega = entregaTipo,
                 NombreUsuario = logueado.NombreUsuario,
                 CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit,
                 Detalles = pedidosDetalles,
-                DireccionEntrega = direccionEnvio,
-                Estado = new EstadoPedidoEntidad()
+                
             };
-            pedido.Estado.IdEstadoPedido = (int)EstadoPedidoEntidad.Options.PendientePago;
+
+            pedido.miFormaEntrega = new FormaEntregaEntidad();
+            pedido.miFormaEntrega.IdFormaEntrega = entregaTipo;
+            pedido.miDireccionEntrega = new DireccionEntidad();
+            pedido.miDireccionEntrega.IdDireccion = direccionEnvio;
+            pedido.DefinirEstado(new Entidades.StatePatron.StatePendientePago());
+            ManagerPedido.PedidoSetearEstadoDescripEnMemoria(pedido);
 
             //Crea el Pedido y descuenta stock de los productos
             pedido = ManagerPedido.Create(pedido, sucursalId);
@@ -301,7 +307,8 @@ namespace TFI.GUI.Areas.Public.Forms
                 EstadoActualizado.IdPedido = Convert.ToInt32(IdPedido);
                 EstadoActualizado.IdEstadoPedido = 2; //CANCELADO
                 EstadoActualizado.Fecha = DateTime.Now;
-                pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
+                //REVISAR SI ES QUE SE PAGA CON CREDITO
+                //pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
             }
             var lista = (List<PedidoLista>)Current.Session["Pedido"];
             foreach (var item in lista)
@@ -338,6 +345,8 @@ namespace TFI.GUI.Areas.Public.Forms
             PedidoCore unManagerPedido = new PedidoCore();
             PedidoEstadoPedidoEntidad pedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
             //List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
+            PedidoEntidad unPedido = new PedidoEntidad();
+            int IdPedidoActual;
 
             List<PedidoDetalleEntidad> unosDetallesPedido = new List<PedidoDetalleEntidad>();
             var Current = HttpContext.Current;
@@ -345,6 +354,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
+            IdPedidoActual = (int)Current.Session["UltimoPedido"];
 
             unosDetallesPedido = (List<PedidoDetalleEntidad>)Current.Session["DetallesPedido"];
 
@@ -406,19 +416,21 @@ namespace TFI.GUI.Areas.Public.Forms
                 //unosDetallesComprobante.Add(unDetalleComprobante);
             }
 
+            //Lo hago en la BLL ahora
+            //unManagerComprobante.Create(unComprobante);
 
-            unManagerComprobante.Create(unComprobante);
+            //pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
+            //pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
+            //pedidoEstadoPedido.Fecha = DateTime.Now;
 
-            pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
-            pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
-            pedidoEstadoPedido.Fecha = DateTime.Now;
-
-            unManagerPedido.FinalizarPedido(pedidoEstadoPedido);
-
+            //unManagerPedido.FinalizarPedido(pedidoEstadoPedido);
+            //unosPedidosFiltro = (List<PedidoEntidad>)Current.Session["Compras"];
+            
+            PedidoEntidad unPedidoPagar = new PedidoEntidad();
+            unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_IDPedido(IdPedidoActual);
+            unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
 
             LimpiarPedido();
-
-
 
             //Response.Redirect("/Areas/Public/Forms/UltimosPedidos.aspx");
         }

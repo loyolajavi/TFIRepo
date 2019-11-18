@@ -97,7 +97,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 ddlEstadoPedido.DataBind();
 
             }
-           
+
         }
 
         private void CargarGrillaUltimosPedidos()
@@ -122,17 +122,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 PedidoDTO PedidoAMostrar = new PedidoDTO();
                 PedidoAMostrar.cuit = PedidosEntidad[i].CUIT;
-                DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].DireccionEntrega);
+                DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].miDireccionEntrega.IdDireccion);
                 PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                 PedidoAMostrar.FechaPedido = PedidosEntidad[i].FechaPedido;
                 PedidoAMostrar.IdPedido = PedidosEntidad[i].IdPedido;
                 PedidoAMostrar.NombreUsuario = PedidosEntidad[i].NombreUsuario;
                 PedidoAMostrar.NroPedido = PedidosEntidad[i].NroPedido;
 
-                PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);
-                EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
+                //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);
+                //EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
 
-                PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
+                PedidoAMostrar.Estado = PedidosEntidad[i].VerEstadoActual().DescripcionEstadoPedido;
+                //PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
                 PedidosDetalle = pedidoCore.PedidosDetalleSelect(PedidosEntidad[i].IdPedido);
                 PedidoAMostrar.Total = MontoTotalPorPedido(PedidosDetalle);
                 PedidosaMostrar.Add(PedidoAMostrar);
@@ -172,10 +173,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             /// </summary>
             public string NombreUsuario { get; set; }
 
-            /// <summary>
-            /// Gets or sets the PlazoEntrega value.
-            /// </summary>
-            public int? PlazoEntrega { get; set; }
+
 
             /// <summary>
             /// Gets or sets the IdFormaEntrega value.
@@ -269,9 +267,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     int index = Convert.ToInt32(e.CommandArgument);
                     string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
                     PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
-                    PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(PedidoRow.IdPedido);
+                    //PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(PedidoRow.IdPedido);
                     idpedido.Value = PedidoRow.IdPedido.ToString();
-                    if (PedidoEstadoRow.IdEstadoPedido == 6)
+                    if (PedidoRow.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
                     {
 
                         //notificationestado.InnerHtml = "No puede modificarle el estado a un pedido finalizado.";
@@ -329,23 +327,25 @@ namespace TFI.GUI.Areas.Intranet.Forms
             return result.Select(x => x.NombreUsuario).ToList();
         }
 
-        protected void btnCambiarEstado_Click(object sender, EventArgs e)
-        {
-            CargarGrillaUltimosPedidos();
-            Response.Redirect(Request.RawUrl);
-        }
+        //Comentado a partir del uso de StatePedido
+        //protected void btnCambiarEstado_Click(object sender, EventArgs e)
+        //{
+        //    CargarGrillaUltimosPedidos();
+        //    Response.Redirect(Request.RawUrl);
+        //}
 
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        [System.Web.Services.WebMethod]
-        public static void CambiarEstado(int pedido,string estado)
-        {
-            PedidoCore pedidoCore = new PedidoCore();
-            PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
-            EstadoActualizado.IdPedido = pedido;
-            EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
-            EstadoActualizado.Fecha = DateTime.Now;
-            pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
-        }
+        //Comentado a partir del uso de StatePedido
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //[System.Web.Services.WebMethod]
+        //public static void CambiarEstado(int pedido,string estado)
+        //{
+        //    PedidoCore pedidoCore = new PedidoCore();
+        //    PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
+        //    EstadoActualizado.IdPedido = pedido;
+        //    EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
+        //    EstadoActualizado.Fecha = DateTime.Now;
+        //    pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
+        //}
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -360,27 +360,28 @@ namespace TFI.GUI.Areas.Intranet.Forms
             foreach (var pedido in Pedidos)
             {
 
-                PedidoEstadoPedidoEntidad PedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
-                PedidoEstadoPedido = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
-                EstadoPedidoEntidad EstadoDelPedido = new EstadoPedidoEntidad();
-                EstadoDelPedido = pedidoCore.EstadoPedidoSelect(PedidoEstadoPedido.IdEstadoPedido);
+                //PedidoEstadoPedidoEntidad PedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
+                //PedidoEstadoPedido = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
+                //EstadoPedidoEntidad EstadoDelPedido = new EstadoPedidoEntidad();
+                //EstadoDelPedido = pedidoCore.EstadoPedidoSelect(PedidoEstadoPedido.IdEstadoPedido);
                 int ddlEstadoInt = Convert.ToInt32(ddlEstadoPedido.SelectedIndex + 1);
-                if (pedido.NombreUsuario == txtClienteBusqueda.Text && EstadoDelPedido.DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
+                if (pedido.NombreUsuario == txtClienteBusqueda.Text && pedido.VerEstadoActual().DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
                 {
 
                     PedidoDTO PedidoAMostrar = new PedidoDTO();
                     PedidoAMostrar.cuit = pedido.CUIT;
-                    DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(pedido.DireccionEntrega);
+                    DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(pedido.miDireccionEntrega.IdDireccion);
                     PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                     PedidoAMostrar.FechaPedido = pedido.FechaPedido;
                     PedidoAMostrar.IdPedido = pedido.IdPedido;
                     PedidoAMostrar.NombreUsuario = pedido.NombreUsuario;
                     PedidoAMostrar.NroPedido = pedido.NroPedido;
 
-                    PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
-                    EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
+                    //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
+                    //EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
 
-                    PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
+                    PedidoAMostrar.Estado = pedido.VerEstadoActual().DescripcionEstadoPedido;
+                    //PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
                     PedidosDetalle = pedidoCore.PedidosDetalleSelect(pedido.IdPedido);
                     PedidoAMostrar.Total = MontoTotalPorPedido(PedidosDetalle);
 
