@@ -40,7 +40,8 @@
                         <%--<asp:ButtonField CommandName="PagarPedido" HeaderText="<%$Resources:Global, Pagar %>"  Text="<%$Resources:Global, Pagar %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" Visible="<% If(Eval("Status").ToString() = "A", true, false) %>" />--%>
                         <asp:TemplateField HeaderText="<%$Resources:Global, Pagar %>">
                             <ItemTemplate>
-                                <asp:Button CommandName="PagarPedido" runat="server" Text="<%$Resources:Global, Pagar %>" CssClass="btn btn-success center-block" CommandArgument="<%# Container.DataItemIndex %>" Visible='<%# ((int)Eval("IdEstadoPedido") == 1) ? true : false %>'/>
+                                <%--<asp:Button runat="server" Text="<%$Resources:Global, Pagar %>" CssClass="btn btn-success center-block" CommandArgument="<%# Container.DataItemIndex %>" Visible='<%# ((int)Eval("IdEstadoPedido") == 1) ? true : false %>'/>--%>
+                                <a href='<%#Eval("NroPedido", "/Areas/Public/Forms/PedidoRealizadoPagar.aspx?NroPedDUltPed={0}") %>' class="btn btn-success" runat="server" visible='<%# ((int)Eval("IdEstadoPedido") == 1) ? true : false %>'><%=Resources.Global.Pagar%></a>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

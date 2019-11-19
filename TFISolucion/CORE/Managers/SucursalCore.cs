@@ -40,7 +40,7 @@ namespace TFI.CORE.Managers
             bool flag = false;
             foreach (PedidoDetalleEntidad unPedDet in unosPedidosDetalles)
             {
-                sucursalesPorProducto = GestorSucursal.TraerSucursalesConStock(unPedDet.IdProducto, unPedDet.Cantidad, Helpers.ConfigSection.Default.Site.Cuit);
+                sucursalesPorProducto = GestorSucursal.TraerSucursalesConStock(unPedDet.miProducto.IdProducto, unPedDet.Cantidad, Helpers.ConfigSection.Default.Site.Cuit);
 
                 if (sucursalesPorProducto != null && sucursalesPorProducto.Count > 0)
                 {

@@ -199,7 +199,7 @@ namespace TFI.DAL.DAL
                 SqlParameter[] parameters = new SqlParameter[]
 			    {
 				    new SqlParameter("@IdSucursal", IdSucursal),
-				    new SqlParameter("@IdProducto", unPedidoDetalle.IdProducto),
+				    new SqlParameter("@IdProducto", unPedidoDetalle.miProducto.IdProducto),
 				    new SqlParameter("@CantDescontar", unPedidoDetalle.Cantidad),
 				    new SqlParameter("@CUIT", elCUIT)
 			    };

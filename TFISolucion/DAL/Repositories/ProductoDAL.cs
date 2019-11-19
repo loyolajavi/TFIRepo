@@ -269,6 +269,68 @@ namespace TFI.DAL.DAL
 
 
 
+        private PedidoEntidad MapearPedidoEntidad(DataSet ds)
+        {
+            PedidoEntidad unPedido = new PedidoEntidad();
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                unPedido.IdPedido = (int)row["IdPedido"];
+                unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
+                if (row["FechaFinPedido"].ToString() != "")
+                    unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
+                unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                unPedido.miFormaEntrega = new FormaEntregaEntidad();
+                unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
+                unPedido.CUIT = row["CUIT"].ToString();
+                unPedido.NumeroTracking = row["NumeroTracking"].ToString();
+                unPedido.miDireccionEntrega = new DireccionEntidad();
+                unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
+                if (row["FecBaja"].ToString() != "")
+                    unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                unPedido.NroPedido = (Int64)row["NroPedido"];
+            }
+            return unPedido;
+        }
+
+        private List<PedidoEntidad> MapearMuchosPedidoEntidad(DataSet ds)
+        {
+            List<PedidoEntidad> ResUnosPedidos = new List<PedidoEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    PedidoEntidad unPedido = new PedidoEntidad();
+
+                    unPedido.IdPedido = (int)row["IdPedido"];
+                    unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
+                    if (row["FechaFinPedido"].ToString() != "")
+                        unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
+                    unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                    unPedido.miFormaEntrega = new FormaEntregaEntidad();
+                    unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
+                    unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
+                    unPedido.CUIT = row["CUIT"].ToString();
+                    unPedido.NumeroTracking = row["NumeroTracking"].ToString();
+                    unPedido.miDireccionEntrega = new DireccionEntidad();
+                    unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
+                    if (row["FecBaja"].ToString() != "")
+                        unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                    unPedido.NroPedido = (Int64)row["NroPedido"];
+
+                    ResUnosPedidos.Add(unPedido);
+                }
+                return ResUnosPedidos;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
 
 
         #endregion

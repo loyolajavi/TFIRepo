@@ -65,7 +65,7 @@ namespace TFI.GUI.Areas.Public.Forms
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
             if (logueado == null)
-                Response.Redirect("Pedidos.aspx");
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
             if (!IsPostBack)
             {
                 idioma = (LenguajeEntidad)Session["Idioma"];
@@ -132,15 +132,25 @@ namespace TFI.GUI.Areas.Public.Forms
             unaDireccion = ManagerDireccion.TraerDireccionPorIdSucursal(sucursalId.Value);
 
 
-            
-            
-            lista.ForEach(x => pedidosDetalles.Add(new PedidoDetalleEntidad()
+
+            foreach (PedidoLista item in lista)
             {
-                Cantidad = x.Cantidad,
-                PrecioUnitario = x.Producto.PrecioUnitario,
-                IdProducto = x.Producto.IdProducto,
-                CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit
-            }));
+                PedidoDetalleEntidad unPedDet = new PedidoDetalleEntidad();
+                unPedDet.Cantidad = item.Cantidad;
+                unPedDet.PrecioUnitario = item.Producto.PrecioUnitario;
+                unPedDet.miProducto = new ProductoEntidad();
+                unPedDet.miProducto.IdProducto = item.Producto.IdProducto;
+                unPedDet.CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit;
+                pedidosDetalles.Add(unPedDet);
+            }
+            
+            //lista.ForEach(x => pedidosDetalles.Add(new PedidoDetalleEntidad()
+            //{
+            //    Cantidad = x.Cantidad,
+            //    PrecioUnitario = x.Producto.PrecioUnitario,
+            //    IdProducto = x.Producto.IdProducto,
+            //    CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit
+            //}));
 
             Current.Session["DetallesPedido"] = pedidosDetalles;
             
@@ -297,43 +307,43 @@ namespace TFI.GUI.Areas.Public.Forms
         [WebMethod]
         public static void CambiarTarjeta()
         {
-           
-            //Cancelo el pedido, dps se vuelve a generar con la nueva tarjeta
-            var Current = HttpContext.Current;
-            string IdPedido = Current.Session["IdPedido"].ToString();
+           //REVISAR
+            ////Cancelo el pedido, dps se vuelve a generar con la nueva tarjeta
+            //var Current = HttpContext.Current;
+            //string IdPedido = Current.Session["IdPedido"].ToString();
 
-            if (IdPedido != "")
-            {
-                PedidoCore pedidoCore = new PedidoCore();
-                PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
-                EstadoActualizado.IdPedido = Convert.ToInt32(IdPedido);
-                EstadoActualizado.IdEstadoPedido = 2; //CANCELADO
-                EstadoActualizado.Fecha = DateTime.Now;
-                //REVISAR SI ES QUE SE PAGA CON CREDITO
-                //pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
-            }
-            var lista = (List<PedidoLista>)Current.Session["Pedido"];
-            foreach (var item in lista)
-            {
-                StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
-                NuevoStock.IdProducto = item.Producto.IdProducto;
-                NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
-                var sucursalId = (int?)Current.Session["Seleccionada"];
-                NuevoStock.IdSucursal = (int)sucursalId;
+            //if (IdPedido != "")
+            //{
+            //    PedidoCore pedidoCore = new PedidoCore();
+            //    PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
+            //    EstadoActualizado.IdPedido = Convert.ToInt32(IdPedido);
+            //    EstadoActualizado.IdEstadoPedido = 2; //CANCELADO
+            //    EstadoActualizado.Fecha = DateTime.Now;
+            //    //REVISAR SI ES QUE SE PAGA CON CREDITO
+            //    //pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
+            //}
+            //var lista = (List<PedidoLista>)Current.Session["Pedido"];
+            //foreach (var item in lista)
+            //{
+            //    StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
+            //    NuevoStock.IdProducto = item.Producto.IdProducto;
+            //    NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
+            //    var sucursalId = (int?)Current.Session["Seleccionada"];
+            //    NuevoStock.IdSucursal = (int)sucursalId;
 
-                StockCore StockBLL = new StockCore();
+            //    StockCore StockBLL = new StockCore();
 
-                List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
-                StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
+            //    List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
+            //    StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
 
 
 
-                if (StockDeProducto.Count > 0)
-                {
-                    NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + item.Cantidad;
-                    StockBLL.Update(NuevoStock);
-                }
-            }
+            //    if (StockDeProducto.Count > 0)
+            //    {
+            //        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + item.Cantidad;
+            //        StockBLL.Update(NuevoStock);
+            //    }
+            //}
            
 
         }
@@ -410,7 +420,7 @@ namespace TFI.GUI.Areas.Public.Forms
                 unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
                 unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
                 unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                unDetalleComprobante.IdProducto = item.IdProducto;
+                unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
                 unDetalleComprobante.CantidadProducto = item.Cantidad;
                 unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
 

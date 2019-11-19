@@ -68,7 +68,8 @@ namespace TFI.GUI.Areas.Public.Forms
                 foreach (PedidoLista UnProdCant in ProdCantEnPedido)
                 {
                     unPedDet = new PedidoDetalleEntidad();
-                    unPedDet.IdProducto = UnProdCant.Producto.IdProducto;
+                    unPedDet.miProducto = new ProductoEntidad();
+                    unPedDet.miProducto.IdProducto = UnProdCant.Producto.IdProducto;
                     unPedDet.Cantidad = UnProdCant.Cantidad;
                     unosPedidosDetalles.Add(unPedDet);
                 }

@@ -25,7 +25,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Cantidad", pedidoDetalle.Cantidad),
 				new SqlParameter("@PrecioUnitario", pedidoDetalle.PrecioUnitario),
 				new SqlParameter("@Descuento", pedidoDetalle.Descuento),
-				new SqlParameter("@IdProducto", pedidoDetalle.IdProducto),
+				new SqlParameter("@IdProducto", pedidoDetalle.miProducto.IdProducto),
                 new SqlParameter("@CUIT", pedidoDetalle.CUIT)
 			};
 
@@ -46,7 +46,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Cantidad", pedidoDetalle.Cantidad),
 				new SqlParameter("@PrecioUnitario", pedidoDetalle.PrecioUnitario),
 				new SqlParameter("@Descuento", pedidoDetalle.Descuento),
-				new SqlParameter("@IdProducto", pedidoDetalle.IdProducto)
+				new SqlParameter("@IdProducto", pedidoDetalle.miProducto.IdProducto)
 			};
 
 			SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDetalleUpdate", parameters);
@@ -141,11 +141,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", idPedido)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDetalleSelectAllByIdPedido", parameters))
+			using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoDetalleSelectAllByIdPedido", parameters))
 			{
 				List<PedidoDetalleEntidad> pedidoDetalleEntidadList = new List<PedidoDetalleEntidad>();
 
-                pedidoDetalleEntidadList = Mapeador.Mapear<PedidoDetalleEntidad>(dt);
+                pedidoDetalleEntidadList = Mapeador.MapearAlt<PedidoDetalleEntidad>(dt);
 
 				return pedidoDetalleEntidadList;
 			}

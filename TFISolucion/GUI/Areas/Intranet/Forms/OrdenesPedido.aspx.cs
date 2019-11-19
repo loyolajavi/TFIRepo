@@ -243,7 +243,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     foreach (var item in ListadeDetalles)
                     {
                         DetalleDTO NuevoDetalle = new DetalleDTO();
-                        NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
+                        NuevoDetalle.Producto = coreProducto.Find(item.miProducto.IdProducto, 1).DescripProducto;
                         NuevoDetalle.Cantidad = item.Cantidad;
                         NuevoDetalle.PrecioUnitario = item.PrecioUnitario;
                         NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
