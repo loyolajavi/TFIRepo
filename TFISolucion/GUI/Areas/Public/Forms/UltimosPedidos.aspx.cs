@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 
@@ -15,7 +16,7 @@ namespace TFI.GUI
     {
 
         private UsuarioCore UsuarioBLL = new UsuarioCore();
-        UsuarioEntidad usuarioentidad = new UsuarioEntidad();
+        UsuarioEntidad logueado = new UsuarioEntidad();
         List<PedidoEntidad> PedidosEntidad = new List<PedidoEntidad>();
         List<PedidoDetalleEntidad> PedidosDetalle = new List<PedidoDetalleEntidad>();
         private PedidoCore pedidoCore = new PedidoCore();
@@ -45,9 +46,9 @@ namespace TFI.GUI
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
-
-            if (usuarioentidad == null)
+            logueado = (UsuarioEntidad)Session["Usuario"];
+            
+            if (logueado == null)
             {
                 Response.Redirect("Home.aspx");
             }
@@ -63,7 +64,7 @@ namespace TFI.GUI
                     Session["Idioma"] = idioma;
 
                 }
-
+                CargarGrillaUltimosPedidos();
             }
             else
             {
@@ -76,15 +77,15 @@ namespace TFI.GUI
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
-            CargarGrillaUltimosPedidos();
+            
         }
 
         private void CargarGrillaUltimosPedidos()
         {
 
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            logueado = (UsuarioEntidad)Session["Usuario"];
 
-            PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(usuarioentidad.NombreUsuario);
+            PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(logueado.NombreUsuario);
 
             if (PedidosEntidad.Count == 0)
             {
@@ -112,12 +113,13 @@ namespace TFI.GUI
                 //EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
 
                 PedidoAMostrar.Estado = PedidosEntidad[i].VerEstadoActual().DescripcionEstadoPedido;
+                PedidoAMostrar.IdEstadoPedido = PedidosEntidad[i].VerEstadoActual().IdEstadoPedido;
                 //PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
 
                 PedidosaMostrar.Add(PedidoAMostrar);
 
             }
-
+            grilladeultimospedidos.DataSource = null;
             grilladeultimospedidos.DataSource = PedidosaMostrar;
             grilladeultimospedidos.DataBind();
         }
@@ -171,6 +173,7 @@ namespace TFI.GUI
 
             public Int64 NroPedido { get; set; }
 
+            public int IdEstadoPedido { get; set; }
             public string Estado { get; set; }
 
             List<PedidoDetalleEntidad> Detalles = new List<PedidoDetalleEntidad>();
@@ -195,7 +198,7 @@ namespace TFI.GUI
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
+                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(logueado.CUIT, Convert.ToInt64(code));
                 List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
                 List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
                 foreach (var item in ListadeDetalles)
@@ -218,7 +221,72 @@ namespace TFI.GUI
                            "ModalScript", sb.ToString(), false);
 
             }
-        }
+            if (e.CommandName.Equals("PagarPedido"))
+            {
+                //Obtener IdPedido seleccionado
+                int index = Convert.ToInt32(e.CommandArgument);
+                Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+                //Preparar variables para generar factura
+                ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+                unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
+                ComprobanteCore unManagerComprobante = new ComprobanteCore();
+                PedidoCore unManagerPedido = new PedidoCore();
+                var Current = HttpContext.Current;
+                int ContadorDetalle = 0;
+                PedidoEntidad unPedidoPagar = new PedidoEntidad();
+                SucursalCore ManagerSucursal = new SucursalCore();
+
+                logueado = (UsuarioEntidad)Current.Session["Usuario"];
+                
+                unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
+                unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+                SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+
+                string NroCompSolo = "";
+                int NroComp;
+                if (unManagerComprobante.FindAll().Count == 0)
+                    NroCompSolo = "0";
+                //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
+                if (NroCompSolo != "0")
+                {
+                    NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+                    var NroCompString = NroComp.ToString();
+                    NroCompSolo = NroCompString;
+                    //NroCompSolo = NroCompString.Remove(0, 2);
+                }
+                NroComp = int.Parse(NroCompSolo) + 1;
+                // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+                unComprobante.NroComprobante = NroComp;
+                unComprobante.IdSucursal = unaSucursal.IdSucursal;
+                if (logueado.IdCondicionFiscal == 1)
+                    unComprobante.IdTipoComprobante = 2;//Factura B
+                else if (logueado.IdCondicionFiscal == 2)
+                    unComprobante.IdTipoComprobante = 1; //Factura A
+
+                unComprobante.FechaComprobante = DateTime.Now;
+                unComprobante.IdPedido = unPedidoPagar.IdPedido;
+
+                foreach (var item in unPedidoPagar.misDetalles)
+                {
+                    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                    ContadorDetalle = ContadorDetalle + 1;
+                    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                    unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
+                    unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
+                    unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+                    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                    unDetalleComprobante.IdProducto = item.IdProducto;
+                    unDetalleComprobante.CantidadProducto = item.Cantidad;
+                    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+
+                    unComprobante.Detalles.Add(unDetalleComprobante);
+                }
+                unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
+                CargarGrillaUltimosPedidos();
+                Response.Redirect(Request.RawUrl);
+                //LimpiarPedido();
+            }//END Pagar
+        }//END GrillaMetodos
 
 
         [WebMethod]
@@ -245,31 +313,95 @@ namespace TFI.GUI
         }
 
 
-        protected Boolean EstaPendientePago(string elEstado)
-        {
-            return elEstado == "Pendiente de pago";
-        }
+        //protected override void OnInit(EventArgs e)
+        //{
+        //    grilladeultimospedidos.RowDataBound += new GridViewRowEventHandler(grilladeultimospedidos_RowDataBound);
+        //    base.OnInit(e);
+        //}
 
-        protected override void OnInit(EventArgs e)
-        {
-            grilladeultimospedidos.RowDataBound += new GridViewRowEventHandler(grilladeultimospedidos_RowDataBound);
-            base.OnInit(e);
-        }
+        //protected void grilladeultimospedidos_RowDataBound(Object sender, GridViewRowEventArgs e)
+        //{
+        //    if(e.Row.RowType != DataControlRowType.DataRow) return;
 
-        protected void grilladeultimospedidos_RowDataBound(Object sender, GridViewRowEventArgs e)
-        {
-            if(e.Row.RowType != DataControlRowType.DataRow) return;
+        //    // Hide the edit button when some condition is true
+        //    // for example, the row contains a certain property
+        //    string AUX;
+        //    AUX = e.Row.Cells[3].Text;
+        //    //REVISAR: Que no compare el string, sino el RESOURCE O EL IDDELPEDIDO
+        //    if (AUX != "Pendiente de pago")
+        //    {
+        //        Button btnPagar = (Button)e.Row.FindControl("btnPagarPedido");
+        //        btnPagar.Visible = false;
+        //    }
+        //}
 
-            // Hide the edit button when some condition is true
-            // for example, the row contains a certain property
-            string AUX;
-            AUX = e.Row.Cells[3].Text;
-            if (AUX != "Pendiente de pago")
-            {
-                Button btnPagar = (Button)e.Row.FindControl("btnPagarPedido");
-                btnPagar.Visible = false;
-            }
-        }
+
+        //protected void PagarPedido(object sender, EventArgs e)
+        //{
+            
+        //    //Obtener IdPedido seleccionado
+        //    int index = Convert.ToInt32((e as GridViewCommandEventArgs).CommandArgument);
+        //    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+        //    //Preparar variables para generar factura
+        //    ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+        //    unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
+        //    ComprobanteCore unManagerComprobante = new ComprobanteCore();
+        //    PedidoCore unManagerPedido = new PedidoCore();
+        //    var Current = HttpContext.Current;
+        //    int ContadorDetalle = 0;
+        //    PedidoEntidad unPedidoPagar = new PedidoEntidad();
+        //    SucursalCore ManagerSucursal = new SucursalCore();
+
+        //    logueado = (UsuarioEntidad)Current.Session["Usuario"];
+
+        //    unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
+        //    unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+        //    SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+
+        //    string NroCompSolo = "";
+        //    int NroComp;
+        //    if (unManagerComprobante.FindAll().Count == 0)
+        //        NroCompSolo = "0";
+        //    //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
+        //    if (NroCompSolo != "0")
+        //    {
+        //        NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+        //        var NroCompString = NroComp.ToString();
+        //        NroCompSolo = NroCompString;
+        //        //NroCompSolo = NroCompString.Remove(0, 2);
+        //    }
+        //    NroComp = int.Parse(NroCompSolo) + 1;
+        //    // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+        //    unComprobante.NroComprobante = NroComp;
+        //    unComprobante.IdSucursal = unaSucursal.IdSucursal;
+        //    if (logueado.IdCondicionFiscal == 1)
+        //        unComprobante.IdTipoComprobante = 2;//Factura B
+        //    else if (logueado.IdCondicionFiscal == 2)
+        //        unComprobante.IdTipoComprobante = 1; //Factura A
+
+        //    unComprobante.FechaComprobante = DateTime.Now;
+        //    unComprobante.IdPedido = unPedidoPagar.IdPedido;
+
+        //    foreach (var item in unPedidoPagar.misDetalles)
+        //    {
+        //        ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+        //        ContadorDetalle = ContadorDetalle + 1;
+        //        unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+        //        unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
+        //        unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
+        //        unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+        //        unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+        //        unDetalleComprobante.IdProducto = item.IdProducto;
+        //        unDetalleComprobante.CantidadProducto = item.Cantidad;
+        //        unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+
+        //        unComprobante.Detalles.Add(unDetalleComprobante);
+        //    }
+        //    unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
+        //    //LimpiarPedido();
+        //}
+
+
 
     }
 }

@@ -119,15 +119,17 @@ namespace TFI.GUI.Areas.Public.Forms
             var logueado = (UsuarioEntidad)Current.Session["Usuario"];
             var sucursalesDisponibles = HttpContext.Current.Session["SucursalesDisponibles"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
-            var pedidosDetalles = new List<PedidoDetalleEntidad>();
+            List<PedidoDetalleEntidad> pedidosDetalles = new List<PedidoDetalleEntidad>();
             List<PedidoEntidad> unasCompras = new List<PedidoEntidad>();
+            DireccionEntidad unaDireccion;
+            UsuarioCore usuarioManager = new UsuarioCore();
+            DireccionCore ManagerDireccion = new DireccionCore();
 
-            var usuarioManager = new UsuarioCore();
-            var sucursalManager = new SucursalCore();
+            //var direccionEnvio = entregaTipo == (int)FormaEntregaEntidad.Options.Correo
+            //                    ? usuarioManager.FindDireccionEnvioPredeterminada(logueado.NombreUsuario).IdDireccion
+            //                    : sucursalManager.FindDireccionSucursal(sucursalId.Value).IdDireccion;
 
-            var direccionEnvio = entregaTipo == (int)FormaEntregaEntidad.Options.Correo
-                                ? usuarioManager.FindDireccionEnvioPredeterminada(logueado.NombreUsuario).IdDireccion
-                                : sucursalManager.FindDireccionSucursal(sucursalId.Value).IdDireccion;
+            unaDireccion = ManagerDireccion.TraerDireccionPorIdSucursal(sucursalId.Value);
 
 
             
@@ -149,14 +151,14 @@ namespace TFI.GUI.Areas.Public.Forms
                 FechaPedido = DateTime.Now,
                 NombreUsuario = logueado.NombreUsuario,
                 CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit,
-                Detalles = pedidosDetalles,
+                misDetalles = pedidosDetalles,
                 
             };
 
             pedido.miFormaEntrega = new FormaEntregaEntidad();
             pedido.miFormaEntrega.IdFormaEntrega = entregaTipo;
             pedido.miDireccionEntrega = new DireccionEntidad();
-            pedido.miDireccionEntrega.IdDireccion = direccionEnvio;
+            pedido.miDireccionEntrega.IdDireccion = unaDireccion.IdDireccion;
             pedido.DefinirEstado(new Entidades.StatePatron.StatePendientePago());
             ManagerPedido.PedidoSetearEstadoDescripEnMemoria(pedido);
 
@@ -343,9 +345,9 @@ namespace TFI.GUI.Areas.Public.Forms
             unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
             ComprobanteCore unManagerComprobante = new ComprobanteCore();
             PedidoCore unManagerPedido = new PedidoCore();
-            PedidoEstadoPedidoEntidad pedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
+            //PedidoEstadoPedidoEntidad pedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
             //List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
-            PedidoEntidad unPedido = new PedidoEntidad();
+            //PedidoEntidad unPedido = new PedidoEntidad();
             int IdPedidoActual;
 
             List<PedidoDetalleEntidad> unosDetallesPedido = new List<PedidoDetalleEntidad>();

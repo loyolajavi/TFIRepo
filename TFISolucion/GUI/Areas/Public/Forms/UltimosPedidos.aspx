@@ -36,10 +36,11 @@
                         <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />
                         <asp:BoundField DataField="FechaPedido" HeaderText="<%$Resources:Global, FechaPedido %>" />
                         <asp:BoundField DataField="Estado" HeaderText="<%$Resources:Global, Estado %>" />
-                        <%--<asp:ButtonField CommandName="PagarPedido" HeaderText="<%$Resources:Global, Pagar %>"  Text="<%$Resources:Global, Pagar %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />--%>
-                        <asp:TemplateField>
+                        <asp:BoundField DataField="IdEstadoPedido" Visible="false" />
+                        <%--<asp:ButtonField CommandName="PagarPedido" HeaderText="<%$Resources:Global, Pagar %>"  Text="<%$Resources:Global, Pagar %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" Visible="<% If(Eval("Status").ToString() = "A", true, false) %>" />--%>
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Pagar %>">
                             <ItemTemplate>
-                                <asp:Button ID="btnPagarPedido" runat="server" Text="<%$Resources:Global, Pagar %>" CssClass="btn btn-success center-block" CommandName="PagarPedido"/>
+                                <asp:Button CommandName="PagarPedido" runat="server" Text="<%$Resources:Global, Pagar %>" CssClass="btn btn-success center-block" CommandArgument="<%# Container.DataItemIndex %>" Visible='<%# ((int)Eval("IdEstadoPedido") == 1) ? true : false %>'/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

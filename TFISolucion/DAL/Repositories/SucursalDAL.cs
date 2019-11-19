@@ -130,19 +130,20 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects all records from the Sucursal table by a foreign key.
 		/// </summary>
-		public List<SucursalEntidad> SelectAllByDireccionSucursal(int direccionSucursal)
+        public SucursalEntidad SucursalTraerPorDireccionSucursal(string CUIT, int direccionSucursal)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@DireccionSucursal", direccionSucursal)
+				new SqlParameter("@DireccionSucursal", direccionSucursal),
+                new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalSelectAllByDireccionSucursal", parameters))
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalTraerPorDireccionSucursal", parameters))
 			{
-                List<SucursalEntidad> lista = new List<SucursalEntidad>();
-                lista = Mapeador.Mapear<SucursalEntidad>(dt);
+                SucursalEntidad unaRes = new SucursalEntidad();
+                unaRes = Mapeador.MapearFirst<SucursalEntidad>(dt);
 
-                return lista;
+                return unaRes;
 
 				
 			}

@@ -93,6 +93,20 @@ namespace TFI.DAL.DAL
             }
         }
 
+        public DireccionEntidad TraerDireccionPorIdSucursal(int elIdSucursal)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@elIdSucursal", elIdSucursal)
+			};
+
+            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TraerDireccionPorIdSucursal", parameters))
+            {
+                DireccionEntidad DireccionEntidad = new DireccionEntidad();
+                DireccionEntidad = Mapeador.MapearFirst<DireccionEntidad>(dt);
+                return DireccionEntidad;
+            }
+        }
 
 
         /// <summary>

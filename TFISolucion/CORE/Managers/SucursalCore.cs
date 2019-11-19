@@ -7,18 +7,18 @@ namespace TFI.CORE.Managers
 {
     public class SucursalCore
     {
-        private SucursalDAL _dal;
+        private SucursalDAL GestorSucursal;
         private DireccionCore _direccionCore;
 
         public SucursalCore()
         {
-            _dal = new SucursalDAL();
+            GestorSucursal = new SucursalDAL();
             _direccionCore = new DireccionCore();
         }
 
         public List<SucursalEntidad> FindAll()
         {
-            var sucursales = _dal.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit);
+            var sucursales = GestorSucursal.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit);
             var direcciones = _direccionCore.FindAll();
 
             sucursales.ForEach(x => x.Direccion = direcciones.Where(d => d.IdDireccion == x.DireccionSucursal).FirstOrDefault());
@@ -26,10 +26,6 @@ namespace TFI.CORE.Managers
             return sucursales;
         }
 
-        public DireccionEntidad FindDireccionSucursal(int id)
-        {
-            return _direccionCore.DireccionSelect(id);
-        }
 
 
         public List<SucursalEntidad> TraerSucursalesConStock(List<PedidoDetalleEntidad> unosPedidosDetalles)
@@ -44,7 +40,7 @@ namespace TFI.CORE.Managers
             bool flag = false;
             foreach (PedidoDetalleEntidad unPedDet in unosPedidosDetalles)
             {
-                sucursalesPorProducto = _dal.TraerSucursalesConStock(unPedDet.IdProducto, unPedDet.Cantidad, Helpers.ConfigSection.Default.Site.Cuit);
+                sucursalesPorProducto = GestorSucursal.TraerSucursalesConStock(unPedDet.IdProducto, unPedDet.Cantidad, Helpers.ConfigSection.Default.Site.Cuit);
 
                 if (sucursalesPorProducto != null && sucursalesPorProducto.Count > 0)
                 {
@@ -75,15 +71,31 @@ namespace TFI.CORE.Managers
             {
                 foreach (PedidoDetalleEntidad unPedDet in unosPedidosDetalles)
                 {
-                    _dal.DescontarStockSucursal(unPedDet, IdSucursal, Helpers.ConfigSection.Default.Site.Cuit);    
+                    GestorSucursal.DescontarStockSucursal(unPedDet, IdSucursal, Helpers.ConfigSection.Default.Site.Cuit);    
                 }
-                
+            }
+            catch (System.Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public SucursalEntidad SucursalTraerPorDireccionSucursal(int laDireccionSucursal)
+        {
+            try
+            {
+                return GestorSucursal.SucursalTraerPorDireccionSucursal(Helpers.ConfigSection.Default.Site.Cuit, laDireccionSucursal);
             }
             catch (System.Exception es)
             {
                 throw;
             }
             
+
+            
         }
+
+
     }
 }

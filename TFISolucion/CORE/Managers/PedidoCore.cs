@@ -59,6 +59,14 @@ namespace TFI.CORE.Managers
             return unPedido;
         }
 
+        public PedidoEntidad PedidoSelectByCUIT_NroPedido(Int64 nropedido)
+        {
+            PedidoEntidad unPedido = new PedidoEntidad();
+            unPedido = GestorPedido.SelectByCUIT_NroPedido(Helpers.ConfigSection.Default.Site.Cuit, nropedido);
+            PedidoTraerEstadoActual(unPedido);
+            return unPedido;
+        }
+
         public PedidoEntidad PedidoSelectByCUIT_IDPedido(Int64 elIdPedido)
         {
             PedidoEntidad unPedido = new PedidoEntidad();
@@ -103,11 +111,11 @@ namespace TFI.CORE.Managers
                 IdPedido = idPedido
             });
 
-            unPedido.Detalles.ForEach(d => d.IdPedido = idPedido);
-            unPedido.Detalles.ForEach(x => PedidoDetalleDAL.Insert(x));
+            unPedido.misDetalles.ForEach(d => d.IdPedido = idPedido);
+            unPedido.misDetalles.ForEach(x => PedidoDetalleDAL.Insert(x));
 
             SucursalCore ManagerSucursal = new SucursalCore();
-            ManagerSucursal.DescontarStockSucursal(unPedido.Detalles, IdSucursal);
+            ManagerSucursal.DescontarStockSucursal(unPedido.misDetalles, IdSucursal);
            
             return unPedido;
         }
