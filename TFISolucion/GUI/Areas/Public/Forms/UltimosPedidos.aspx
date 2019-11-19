@@ -30,7 +30,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
             <ContentTemplate>
-                <asp:GridView ID="grilladeultimospedidos" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" AutoGenerateColumns="false">
+                <asp:GridView ID="grilladeultimospedidos" AllowPaging="true" PageSize="10" OnPageIndexChanging="grilladeultimospedidos_PageIndexChanging" class="table table-striped table-hover table-users" DataKeyNames="NroPedido" runat="server" OnRowCommand="grilladeultimospedidos_RowCommand" AutoGenerateColumns="false">
                     <Columns>
                         <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>"  Text="<%$Resources:Global, VerDetalle %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />
                         <asp:BoundField DataField="NroPedido" HeaderText="<%$Resources:Global, NumeroPedido %>" />

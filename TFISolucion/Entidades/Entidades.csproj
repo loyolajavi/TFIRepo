@@ -90,7 +90,6 @@
     <Compile Include="RecursoEntidad.cs" />
     <Compile Include="ReportePedidosDeUsuario.cs" />
     <Compile Include="ReportePedidosPorFechayEstado.cs" />
-    <Compile Include="ReservaEntidad.cs" />
     <Compile Include="StatePatron\StateCancelado.cs" />
     <Compile Include="StatePatron\StateEnCamino.cs" />
     <Compile Include="StatePatron\StateEntregado.cs" />
