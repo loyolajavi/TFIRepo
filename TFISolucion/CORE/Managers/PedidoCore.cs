@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TFI.CORE.Helpers;
 using TFI.DAL.DAL;
 using TFI.Entidades;
 
@@ -51,7 +52,7 @@ namespace TFI.CORE.Managers
             return GestorEstadoPedido.Select(idEstadoPedido);
         }
 
-        public PedidoEntidad PedidoSelectByCUIT_NroPedido(string cuit, Int64 nropedido)
+        public PedidoEntidad PedidoSelectByCUIT_NroPedidoCliente(string cuit, Int64 nropedido)
         {
             PedidoEntidad unPedido = new PedidoEntidad();
             unPedido = GestorPedido.SelectByCUIT_NroPedido(cuit, nropedido);
@@ -131,39 +132,136 @@ namespace TFI.CORE.Managers
         }
 
 
-        public void AvanzarPaso(PedidoEntidad elPedido, ComprobanteEntidad elComprobante)
+        
+        //Si esta en Pendiente y pasa a Pago (llamada por estado==Pendiente)
+        public void AvanzarPaso(PedidoEntidad elPedido, SucursalEntidad laSucursal, UsuarioEntidad elCliente)
         {
+            ComprobanteEntidad unComprobante = new ComprobanteEntidad();//
+            unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();//
+            ComprobanteCore unManagerComprobante = new ComprobanteCore();//
+            int ContadorDetalle = 0;//
+
+            string NroCompSolo = "";
+            int NroComp;
+            if (unManagerComprobante.FindAll().Count == 0)
+                NroCompSolo = "0";
+            //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
+            if (NroCompSolo != "0")
+            {
+                NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+                var NroCompString = NroComp.ToString();
+                NroCompSolo = NroCompString;
+                //NroCompSolo = NroCompString.Remove(0, 2);
+            }
+            NroComp = int.Parse(NroCompSolo) + 1;
+            // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+            unComprobante.NroComprobante = NroComp;
+            unComprobante.IdSucursal = laSucursal.IdSucursal;
+            if (elCliente.IdCondicionFiscal == 1)
+                unComprobante.IdTipoComprobante = 2;//Factura B
+            else if (elCliente.IdCondicionFiscal == 2)
+                unComprobante.IdTipoComprobante = 1; //Factura A
+
+            unComprobante.FechaComprobante = DateTime.Now;
+            unComprobante.IdPedido = elPedido.IdPedido;
+
+            foreach (var item in elPedido.misDetalles)
+            {
+                ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                ContadorDetalle = ContadorDetalle + 1;
+                unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
+                unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
+                unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+                unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
+                unDetalleComprobante.CantidadProducto = item.Cantidad;
+                unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+
+                unComprobante.Detalles.Add(unDetalleComprobante);
+            }
+
+            //Cambiar Estado del Pedido en memoria a Pago
             elPedido.Avanzar(false, elPedido.miFormaEntrega.IdFormaEntrega);
             PedidoSetearEstadoDescripEnMemoria(elPedido);
 
-            //Si se pagó
-            if (elPedido.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago)
+            //Generar factura
+            unManagerComprobante.Create(unComprobante);
+
+            //Insertar nuevo estado en BD
+            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
             {
-                //Generar factura
-                ComprobanteCore unManagerComprobante = new ComprobanteCore();
-                unManagerComprobante.Create(elComprobante);
-
-                //Insertar nuevo estado
-                _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
-                {
-                    Fecha = DateTime.Now,
-                    IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
-                    IdPedido = elPedido.IdPedido
-                });
-
-            }
-
-            //if (elPedido.VerEstadoActual().GetType() == typeof(Entidades.StatePatron.StatePendientePago))
-            //    PedidoEstadoDAL.SelectAll();
-            //else if(elPedido.VerEstadoActual().GetType() == typeof(Entidades.StatePatron.StatePago))
-            //    PedidoEstadoDAL.SelectAll();
-
-            //Podría llegar a usar este código
-            //pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
-            //pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
-            //pedidoEstadoPedido.Fecha = DateTime.Now;
-
+                Fecha = DateTime.Now,
+                IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                IdPedido = elPedido.IdPedido
+            });
         }
+
+
+        //Si estaba en pago y pasó a EnCamino (llamada por estado==Pago)
+        public void AvanzarPaso(PedidoEntidad elPedido, string elNroTracking)
+        {
+            //Cambiar Estado del Pedido en memoria a EnCamino
+            elPedido.Avanzar(false, elPedido.miFormaEntrega.IdFormaEntrega);
+            PedidoSetearEstadoDescripEnMemoria(elPedido);
+
+            //Actualizar Nro de Tracking del pedido
+            GestorPedido.PedidoActualizarNroTracking(elPedido.IdPedido, elNroTracking);
+
+            //Insertar nuevo estado
+            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+            {
+                Fecha = DateTime.Now,
+                IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                IdPedido = elPedido.IdPedido
+            });
+        }
+
+        //Si estaba en pago y pasó a ListoRetirar (llamada por estado==Pago)
+        //TMB es para cuando estaba en EnCamino o ListoRetirar y pasa e Entregado (llamada por EnCamino y/o ListoRetirar)
+        public void AvanzarPaso(PedidoEntidad elPedido)
+        {
+            //Cambiar Estado del Pedido en memoria a ListoRetirar/Entregado segun corresponda
+            elPedido.Avanzar(false, elPedido.miFormaEntrega.IdFormaEntrega);
+            PedidoSetearEstadoDescripEnMemoria(elPedido);
+
+            //Insertar nuevo estado
+            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+            {
+                Fecha = DateTime.Now,
+                IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                IdPedido = elPedido.IdPedido
+            });
+        }
+
+        public void CancelarPedido(PedidoEntidad elPedido)
+        {
+            //Cambiar Estado del Pedido en memoria a ListoRetirar/Entregado segun corresponda
+            elPedido.Avanzar(true, elPedido.miFormaEntrega.IdFormaEntrega);
+            PedidoSetearEstadoDescripEnMemoria(elPedido);
+
+            //Devolución del stock
+
+            //Nota de crédido en caso de estar en estado > a Pendiente de Pago
+
+            //Insertar nuevo estado
+            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+            {
+                Fecha = DateTime.Now,
+                IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                IdPedido = elPedido.IdPedido
+            });
+        }
+
+
+
+        public void PedidoActualizarNroTracking(PedidoEntidad elPedido, string elNroTracking)
+        {
+            //Actualizar Nro de Tracking del pedido
+            GestorPedido.PedidoActualizarNroTracking(elPedido.IdPedido, elNroTracking);
+        }
+
+
 
         public void PedidoSetearEstadoDescripEnMemoria(PedidoEntidad elPedido)
         {

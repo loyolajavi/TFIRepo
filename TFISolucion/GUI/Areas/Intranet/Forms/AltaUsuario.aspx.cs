@@ -20,8 +20,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
-        public List<UsuarioTipoEntidad> unosTiposUsuarios = new List<UsuarioTipoEntidad>();
-        private UsuarioTipoCore unManagerUsuarioTipo = new UsuarioTipoCore();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();

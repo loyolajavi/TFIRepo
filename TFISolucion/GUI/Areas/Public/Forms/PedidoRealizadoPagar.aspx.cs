@@ -198,11 +198,7 @@ namespace TFI.GUI.Areas.Public.Forms
             var Current = HttpContext.Current;
             Int64 unNroPedido = Int64.Parse(Current.Session["NroPedidoDesdeUltimosPedidos"].ToString());
             //Preparar variables para generar factura
-            ComprobanteEntidad unComprobante = new ComprobanteEntidad();
-            unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
-            ComprobanteCore unManagerComprobante = new ComprobanteCore();
             PedidoCore unManagerPedido = new PedidoCore();
-            int ContadorDetalle = 0;
             PedidoEntidad unPedidoPagar = new PedidoEntidad();
             SucursalCore ManagerSucursal = new SucursalCore();
             UsuarioEntidad logueado = new UsuarioEntidad();
@@ -212,47 +208,8 @@ namespace TFI.GUI.Areas.Public.Forms
             unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
             unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
             SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
-
-            string NroCompSolo = "";
-            int NroComp;
-            if (unManagerComprobante.FindAll().Count == 0)
-                NroCompSolo = "0";
-            //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
-            if (NroCompSolo != "0")
-            {
-                NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
-                var NroCompString = NroComp.ToString();
-                NroCompSolo = NroCompString;
-                //NroCompSolo = NroCompString.Remove(0, 2);
-            }
-            NroComp = int.Parse(NroCompSolo) + 1;
-            // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
-            unComprobante.NroComprobante = NroComp;
-            unComprobante.IdSucursal = unaSucursal.IdSucursal;
-            if (logueado.IdCondicionFiscal == 1)
-                unComprobante.IdTipoComprobante = 2;//Factura B
-            else if (logueado.IdCondicionFiscal == 2)
-                unComprobante.IdTipoComprobante = 1; //Factura A
-
-            unComprobante.FechaComprobante = DateTime.Now;
-            unComprobante.IdPedido = unPedidoPagar.IdPedido;
-
-            foreach (var item in unPedidoPagar.misDetalles)
-            {
-                ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                ContadorDetalle = ContadorDetalle + 1;
-                unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
-                unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
-                unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
-                unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
-                unDetalleComprobante.CantidadProducto = item.Cantidad;
-                unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
-
-                unComprobante.Detalles.Add(unDetalleComprobante);
-            }
-            unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
+            
+            unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
             //LimpiarPedido();
         }
 

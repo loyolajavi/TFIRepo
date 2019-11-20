@@ -936,8 +936,8 @@
   <data name="IngreseEntre7y12Numeros" xml:space="preserve">
     <value>Ingrese entre 7 y 12 numeros.</value>
   </data>
-  <data name="Nopuedemodificarleelestadoaunpedidofinalizado" xml:space="preserve">
-    <value>No puede modificarle el estado a un pedido finalizado</value>
+  <data name="Nopuedemodificarleelestadoaunpedidocancelado" xml:space="preserve">
+    <value>No puede modificarle el estado a un pedido Cancelado</value>
   </data>
   <data name="DatosPersonales" xml:space="preserve">
     <value>Datos Personales</value>
@@ -950,5 +950,11 @@
   </data>
   <data name="Compras" xml:space="preserve">
     <value>Compras</value>
+  </data>
+  <data name="EstaSeguro" xml:space="preserve">
+    <value>Está seguro?</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
 </root>

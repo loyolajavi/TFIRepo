@@ -148,7 +148,7 @@ namespace TFI.GUI.Areas.Public.Forms
                 if (NroRetorno == 0)
                 {
                     Session["Usuario"] = unUsuario;
-                    Response.Redirect("Home.aspx");
+                    Response.Redirect("/Areas/Public/Forms/Home.aspx");
                     limpiarCampos();
                 }
                 else

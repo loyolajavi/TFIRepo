@@ -152,7 +152,7 @@ namespace TFI.GUI.General
         protected void Salir_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            Response.Redirect("Home.aspx");
+            Response.Redirect("/Areas/Public/Forms/Home.aspx");
         }
 
 
@@ -176,7 +176,7 @@ namespace TFI.GUI.General
 
         protected void VerListaDeseos(object sender, EventArgs e)
         {
-            Response.Redirect("ListaDeDeseos.aspx");
+            Response.Redirect("/Areas/Public/Forms/ListaDeDeseos.aspx");
         }
 
         public void CargarListaDeseosEnSession()

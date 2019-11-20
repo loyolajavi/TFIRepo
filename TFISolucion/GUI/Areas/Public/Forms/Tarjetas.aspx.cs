@@ -46,7 +46,7 @@ namespace TFI.GUI
 
             if (usuarioentidad == null)
             {
-                Response.Redirect("Home.aspx");
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
             if (!IsPostBack)
             {

@@ -127,7 +127,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 Consulta.Descripcion = item.DescripProducto;
                 if (StockDeProducto.Count > 0)
                 {
-                    Consulta.CantidadEnStock = StockDeProducto[0].CantidadProducto;
+                    foreach (StockSucursalEntidad unProdSucStock in StockDeProducto)
+                    {
+                        Consulta.CantidadEnStock += unProdSucStock.CantidadProducto;
+                    }
+                    //Consulta.CantidadEnStock = StockDeProducto[0].CantidadProducto;
                 }
                 else
                 {

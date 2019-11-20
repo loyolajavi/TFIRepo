@@ -18,9 +18,9 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body id="MyBody"  onload="LoadMasterBasic();">
+<body id="MyBody">
     <form id="frmLayoutConBarra" runat="server">
-        <asp:ScriptManager ID="ScriptManagerMantenerSesion" runat="server" EnablePageMethods="true">
+        <asp:ScriptManager ID="ScriptManagerMantenerSesion" runat="server" >
         </asp:ScriptManager>
         <!-- Menu -->
         <div class="container" style="margin-bottom: 20px;">
@@ -299,6 +299,8 @@
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
 
     <script>
+
+        LoadMasterBasic();
 
         var obtenerTags = function () {
             var result;

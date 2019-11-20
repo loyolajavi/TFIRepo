@@ -23,6 +23,7 @@ namespace TFI.GUI
         private DireccionCore DireccionCore = new DireccionCore();
         List<PedidoDTO> PedidosaMostrar = new List<PedidoDTO>();
         private LenguajeEntidad idioma;
+        private HttpContext Current = HttpContext.Current;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -46,22 +47,22 @@ namespace TFI.GUI
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
-            logueado = (UsuarioEntidad)Session["Usuario"];
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
             
             if (logueado == null)
             {
-                Response.Redirect("Home.aspx");
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
             if (!IsPostBack)
             {
 
-                idioma = (LenguajeEntidad)Session["Idioma"];
+                idioma = (LenguajeEntidad)Current.Session["Idioma"];
 
                 if (idioma == null)
                 {
                     idioma = new LenguajeEntidad();
                     idioma.DescripcionLenguaje = "es";
-                    Session["Idioma"] = idioma;
+                    Current.Session["Idioma"] = idioma;
 
                 }
                 CargarGrillaUltimosPedidos();
@@ -69,7 +70,7 @@ namespace TFI.GUI
             else
             {
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
-                Session["Idioma"] = idioma;
+                Current.Session["Idioma"] = idioma;
             }
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
@@ -83,7 +84,7 @@ namespace TFI.GUI
         private void CargarGrillaUltimosPedidos()
         {
 
-            logueado = (UsuarioEntidad)Session["Usuario"];
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
             PedidosEntidad = pedidoCore.SelectAllByCUIT_NombreUsuario(logueado.NombreUsuario);
 
@@ -199,7 +200,7 @@ namespace TFI.GUI
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(logueado.CUIT, Convert.ToInt64(code));
+                PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(logueado.CUIT, Convert.ToInt64(code));
                 List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
                 List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
                 foreach (var item in ListadeDetalles)
@@ -227,62 +228,60 @@ namespace TFI.GUI
                 //Obtener IdPedido seleccionado
                 int index = Convert.ToInt32(e.CommandArgument);
                 Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
-                //Preparar variables para generar factura
-                ComprobanteEntidad unComprobante = new ComprobanteEntidad();
-                unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
-                ComprobanteCore unManagerComprobante = new ComprobanteCore();
+                //variables
                 PedidoCore unManagerPedido = new PedidoCore();
                 var Current = HttpContext.Current;
-                int ContadorDetalle = 0;
                 PedidoEntidad unPedidoPagar = new PedidoEntidad();
                 SucursalCore ManagerSucursal = new SucursalCore();
 
+                //Preparar parámetros a enviar a Avanzar()
                 logueado = (UsuarioEntidad)Current.Session["Usuario"];
-                
                 unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
                 unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
                 SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
 
-                string NroCompSolo = "";
-                int NroComp;
-                if (unManagerComprobante.FindAll().Count == 0)
-                    NroCompSolo = "0";
-                //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
-                if (NroCompSolo != "0")
-                {
-                    NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
-                    var NroCompString = NroComp.ToString();
-                    NroCompSolo = NroCompString;
-                    //NroCompSolo = NroCompString.Remove(0, 2);
-                }
-                NroComp = int.Parse(NroCompSolo) + 1;
-                // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
-                unComprobante.NroComprobante = NroComp;
-                unComprobante.IdSucursal = unaSucursal.IdSucursal;
-                if (logueado.IdCondicionFiscal == 1)
-                    unComprobante.IdTipoComprobante = 2;//Factura B
-                else if (logueado.IdCondicionFiscal == 2)
-                    unComprobante.IdTipoComprobante = 1; //Factura A
+                unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
 
-                unComprobante.FechaComprobante = DateTime.Now;
-                unComprobante.IdPedido = unPedidoPagar.IdPedido;
+                //string NroCompSolo = "";
+                //int NroComp;
+                //if (unManagerComprobante.FindAll().Count == 0)
+                //    NroCompSolo = "0";
+                ////Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
+                //if (NroCompSolo != "0")
+                //{
+                //    NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
+                //    var NroCompString = NroComp.ToString();
+                //    NroCompSolo = NroCompString;
+                //    //NroCompSolo = NroCompString.Remove(0, 2);
+                //}
+                //NroComp = int.Parse(NroCompSolo) + 1;
+                //// unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
+                //unComprobante.NroComprobante = NroComp;
+                //unComprobante.IdSucursal = unaSucursal.IdSucursal;
+                //if (logueado.IdCondicionFiscal == 1)
+                //    unComprobante.IdTipoComprobante = 2;//Factura B
+                //else if (logueado.IdCondicionFiscal == 2)
+                //    unComprobante.IdTipoComprobante = 1; //Factura A
 
-                foreach (var item in unPedidoPagar.misDetalles)
-                {
-                    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                    ContadorDetalle = ContadorDetalle + 1;
-                    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                    unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
-                    unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
-                    unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
-                    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                    unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
-                    unDetalleComprobante.CantidadProducto = item.Cantidad;
-                    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+                //unComprobante.FechaComprobante = DateTime.Now;
+                //unComprobante.IdPedido = unPedidoPagar.IdPedido;
 
-                    unComprobante.Detalles.Add(unDetalleComprobante);
-                }
-                unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
+                //foreach (var item in unPedidoPagar.misDetalles)
+                //{
+                //    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                //    ContadorDetalle = ContadorDetalle + 1;
+                //    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                //    unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
+                //    unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
+                //    unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+                //    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                //    unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
+                //    unDetalleComprobante.CantidadProducto = item.Cantidad;
+                //    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
+
+                //    unComprobante.Detalles.Add(unDetalleComprobante);
+                //}
+                //unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
                 CargarGrillaUltimosPedidos();
                 Response.Redirect(Request.RawUrl);
                 //LimpiarPedido();

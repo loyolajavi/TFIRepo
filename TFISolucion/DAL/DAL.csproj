@@ -102,7 +102,6 @@
     <Compile Include="Repositories\UsuarioDAL.cs" />
     <Compile Include="Repositories\UsuarioFamiliaDAL.cs" />
     <Compile Include="Repositories\UsuarioPatenteDAL.cs" />
-    <Compile Include="Repositories\UsuarioTipoDAL.cs" />
     <Compile Include="Services\ServicioMailDAL.cs" />
     <Compile Include="SQLServer.cs" />
   </ItemGroup>

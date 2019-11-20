@@ -65,10 +65,10 @@
     <Compile Include="FamiliaEntidad.cs" />
     <Compile Include="FormaEntregaEntidad.cs" />
     <Compile Include="FormaPagoEntidad.cs" />
-    <Compile Include="GraficoMontoVentas.cs" />
-    <Compile Include="GraficoProductoPorCategoria.cs" />
-    <Compile Include="Graficos5Productosmasvendidos.cs" />
-    <Compile Include="GraficoVentasPeriodo.cs" />
+    <Compile Include="Servicios\GraficoMontoVentas.cs" />
+    <Compile Include="Servicios\GraficoProductoPorCategoria.cs" />
+    <Compile Include="Servicios\Graficos5Productosmasvendidos.cs" />
+    <Compile Include="Servicios\GraficoVentasPeriodo.cs" />
     <Compile Include="IvaProductoEntidad.cs" />
     <Compile Include="LenguajeControlEntidad.cs" />
     <Compile Include="LenguajeEntidad.cs" />
@@ -88,8 +88,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaEntidad.cs" />
     <Compile Include="RecursoEntidad.cs" />
-    <Compile Include="ReportePedidosDeUsuario.cs" />
-    <Compile Include="ReportePedidosPorFechayEstado.cs" />
+    <Compile Include="Servicios\ReportePedidosDeUsuario.cs" />
+    <Compile Include="Servicios\ReportePedidosPorFechayEstado.cs" />
     <Compile Include="StatePatron\StateCancelado.cs" />
     <Compile Include="StatePatron\StateEnCamino.cs" />
     <Compile Include="StatePatron\StateEntregado.cs" />
@@ -108,7 +108,6 @@
     <Compile Include="UsuarioEntidad.cs" />
     <Compile Include="UsuarioFamiliaEntidad.cs" />
     <Compile Include="UsuarioPatenteEntidad.cs" />
-    <Compile Include="UsuarioTipoEntidad.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

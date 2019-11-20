@@ -16,6 +16,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
     {
         private UsuarioCore UsuarioBLL = new UsuarioCore();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
+        UsuarioEntidad logueado = new UsuarioEntidad();
         List<PedidoEntidad> PedidosEntidad = new List<PedidoEntidad>();
         List<PedidoDetalleEntidad> PedidosDetalle = new List<PedidoDetalleEntidad>();
         private PedidoCore pedidoCore = new PedidoCore();
@@ -42,21 +43,27 @@ namespace TFI.GUI.Areas.Intranet.Forms
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
+            logueado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            if (logueado == null)
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
             if (!IsPostBack)
             {
-                idioma = (LenguajeEntidad)Session["Idioma"];
+                idioma = (LenguajeEntidad)Current.Session["Idioma"];
                 if (idioma == null)
                 {
                     idioma = new LenguajeEntidad();
                     idioma.DescripcionLenguaje = "es";
-                    Session["Idioma"] = idioma;
+                    Current.Session["Idioma"] = idioma;
 
                 }
             }
             else
             {
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
-                Session["Idioma"] = idioma;
+                Current.Session["Idioma"] = idioma;
             }
 
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
@@ -64,7 +71,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
             }
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
 
             if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
             {
@@ -86,10 +93,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
 
                 listaEstados = pedidoCore.EstadoPedidoSelectAll();
-                ddlestados.DataSource = listaEstados;
-                ddlestados.DataTextField = "DescripcionEstadoPedido";
-                ddlestados.DataValueField = "IdEstadoPedido";
-                ddlestados.DataBind();
+                //ddlestados.DataSource = listaEstados;
+                //ddlestados.DataTextField = "DescripcionEstadoPedido";
+                //ddlestados.DataValueField = "IdEstadoPedido";
+                //ddlestados.DataBind();
 
                 ddlEstadoPedido.DataSource = listaEstados;
                 ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
@@ -102,7 +109,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         private void CargarGrillaUltimosPedidos()
         {
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
             PedidosaMostrar.Clear();
            
             PedidosEntidad = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
@@ -237,7 +244,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 {
                     int index = Convert.ToInt32(e.CommandArgument);
                     string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                    PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
+                    PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, Convert.ToInt64(code));
                     List<PedidoDetalleEntidad> ListadeDetalles = pedidoCore.PedidosDetalleSelect(PedidoRow.IdPedido);
                     List<DetalleDTO> ListaDetallesDTO = new List<DetalleDTO>();
                     foreach (var item in ListadeDetalles)
@@ -264,40 +271,115 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 if (e.CommandName.Equals("CambiarEstado"))
                 {
+                    //variables
+                    PedidoCore unManagerPedido = new PedidoCore();
+                    var Current = HttpContext.Current;
+                    PedidoEntidad unPedidoPagar = new PedidoEntidad();
+                    SucursalCore ManagerSucursal = new SucursalCore();
+
+                    //Inicializacion
                     int index = Convert.ToInt32(e.CommandArgument);
-                    string code = grilladeultimospedidos.DataKeys[index].Value.ToString();
-                    PedidoEntidad PedidoRow = pedidoCore.PedidoSelectByCUIT_NroPedido(usuarioentidad.CUIT, Convert.ToInt64(code));
-                    //PedidoEstadoPedidoEntidad PedidoEstadoRow = pedidoCore.PedidoUltimoEstadoSelect(PedidoRow.IdPedido);
-                    idpedido.Value = PedidoRow.IdPedido.ToString();
-                    if (PedidoRow.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
+                    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+
+                    //Preparar parámetros a enviar a Avanzar()
+                    logueado = (UsuarioEntidad)Current.Session["Usuario"];
+                    unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
+                    unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+                    SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+
+                    //No se puede descancelar un Pedido
+                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
                     {
-
-                        //notificationestado.InnerHtml = "No puede modificarle el estado a un pedido finalizado.";
-                        //ddlEstadoPedido.Visible = false;
-                        //btnCambiarEstado.Visible = false;
-
                         System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
                         sb2.Append(@"<script type='text/javascript'>");
                         sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
                         sb2.Append(@"</script>");
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                                    "ModalScript2", sb2.ToString(), false);
-
                     }
+
+                    //Pendiente hacia Pago
+                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.PendientePago)
+                    {
+                        unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+                    }
+
+                    //Pago Hacia EnCamino
+                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
+                    {
+                        //Obtener el nro de tracking ingresado en el modal
+                        //El mismo es obtenido por una funcion jquery que se ejecuta por la clase del commandname actual, 
+                        //..muestra el modal 'modaltracking' y al hacer click en 'Aceptar' del modal, se llama al webmethod "ObtenerTracking"
+                        // y en backend se lo coloca en Session["tracking"] NO FUNCIONA
+                        string unNroTracking = "TNK9966784523234";
+                        //string unNroTracking = hdnfilename.Value.ToString();
+                        //string unNroTracking = Current.Session["tracking"].ToString();
+                        unManagerPedido.AvanzarPaso(unPedidoPagar, unNroTracking);
+                    }
+
+                    //Pago Hacia ListoRetirar
+                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Sucursal)
+                    {
+                        unManagerPedido.AvanzarPaso(unPedidoPagar);
+                    }
+
+                    //EnCamino y/o ListoRetirar hacia Entregado
+                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.EnCamino | unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.ListoRetirar)
+                    {
+                        unManagerPedido.AvanzarPaso(unPedidoPagar);
+                    }
+
+
+
+                    //Era para seleccionar y modificar el estado a mano, ya no utilizado
+                    //else
+                    //{
+                    //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    //    sb.Append(@"<script type='text/javascript'>");
+                    //    sb.Append("$('#currentestado').modal('show');");
+                    //    sb.Append(@"</script>");
+                    //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    //               "ModalScript3", sb.ToString(), false);
+                    //}//Abrir Modal que servía para el estado, pero ya no utilizado a partir del StatePatron
+                    //CargarGrillaUltimosPedidos();
+                    //Response.Redirect(Request.RawUrl);
+                }
+
+                if (e.CommandName.Equals("CancelarPedido"))
+                {
+                    //variables
+                    PedidoCore unManagerPedido = new PedidoCore();
+                    var Current = HttpContext.Current;
+                    PedidoEntidad unPedidoPagar = new PedidoEntidad();
+                    SucursalCore ManagerSucursal = new SucursalCore();
+
+                    //Inicializacion
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+
+                    //Preparar parámetros a enviar a Avanzar()
+                    logueado = (UsuarioEntidad)Current.Session["Usuario"];
+                    unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
+
+                    //Cancelar
+                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.Cancelado)
+                    {
+                        unManagerPedido.CancelarPedido(unPedidoPagar);
+                    }
+                    //No se puede descancelar un pedido
                     else
                     {
-                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                        sb.Append(@"<script type='text/javascript'>");
-                        sb.Append("$('#currentestado').modal('show');");
-                        sb.Append(@"</script>");
+                        System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
+                        sb2.Append(@"<script type='text/javascript'>");
+                        sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
+                        sb2.Append(@"</script>");
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                                   "ModalScript3", sb.ToString(), false);
+                                   "ModalScript7", sb2.ToString(), false);
                     }
-                    
-
-
                 }
+                CargarGrillaUltimosPedidos();
         }
+
 
         protected void grilladeultimospedidos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -305,11 +387,15 @@ namespace TFI.GUI.Areas.Intranet.Forms
             CargarGrillaUltimosPedidos();
         }
 
-        protected void ModificarEstado_Click(object sender, EventArgs e)
-        {
-            CargarGrillaUltimosPedidos();
-            Response.Redirect(Request.RawUrl);
-        }
+
+        //[WebMethod(EnableSession = true)]
+        //public static void ObtenerTracking(string elNroTracking)
+        //{
+        //    HttpContext Current = HttpContext.Current;
+        //    Current.Session["tracking"] = elNroTracking;
+        //}
+
+
 
         [WebMethod]
         public static List<String> ObtenerClientes()
@@ -327,25 +413,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             return result.Select(x => x.NombreUsuario).ToList();
         }
 
-        //Comentado a partir del uso de StatePedido
-        //protected void btnCambiarEstado_Click(object sender, EventArgs e)
-        //{
-        //    CargarGrillaUltimosPedidos();
-        //    Response.Redirect(Request.RawUrl);
-        //}
 
-        //Comentado a partir del uso de StatePedido
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //[System.Web.Services.WebMethod]
-        //public static void CambiarEstado(int pedido,string estado)
-        //{
-        //    PedidoCore pedidoCore = new PedidoCore();
-        //    PedidoEstadoPedidoEntidad EstadoActualizado = new PedidoEstadoPedidoEntidad();
-        //    EstadoActualizado.IdPedido = pedido;
-        //    EstadoActualizado.IdEstadoPedido = Convert.ToInt32(estado);
-        //    EstadoActualizado.Fecha = DateTime.Now;
-        //    pedidoCore.PedidoEstadoPedidoUpdate(EstadoActualizado);
-        //}
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -360,10 +428,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
             foreach (var pedido in Pedidos)
             {
 
-                //PedidoEstadoPedidoEntidad PedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
-                //PedidoEstadoPedido = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
-                //EstadoPedidoEntidad EstadoDelPedido = new EstadoPedidoEntidad();
-                //EstadoDelPedido = pedidoCore.EstadoPedidoSelect(PedidoEstadoPedido.IdEstadoPedido);
                 int ddlEstadoInt = Convert.ToInt32(ddlEstadoPedido.SelectedIndex + 1);
                 if (pedido.NombreUsuario == txtClienteBusqueda.Text && pedido.VerEstadoActual().DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
                 {
@@ -377,11 +441,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     PedidoAMostrar.NombreUsuario = pedido.NombreUsuario;
                     PedidoAMostrar.NroPedido = pedido.NroPedido;
 
-                    //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(pedido.IdPedido);
-                    //EstadoPedidoEntidad EstadoPedido = pedidoCore.EstadoPedidoSelect(Estado.IdEstadoPedido);
-
                     PedidoAMostrar.Estado = pedido.VerEstadoActual().DescripcionEstadoPedido;
-                    //PedidoAMostrar.Estado = EstadoPedido.DescripcionEstadoPedido;
                     PedidosDetalle = pedidoCore.PedidosDetalleSelect(pedido.IdPedido);
                     PedidoAMostrar.Total = MontoTotalPorPedido(PedidosDetalle);
 
@@ -407,6 +467,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
 
         }
+
 
 
 

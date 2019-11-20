@@ -942,8 +942,8 @@
   <data name="IngreseEntre7y12Numeros" xml:space="preserve">
     <value>Please add 7 between 12 characters</value>
   </data>
-  <data name="Nopuedemodificarleelestadoaunpedidofinalizado" xml:space="preserve">
-    <value>Can't change the status of a completed order</value>
+  <data name="Nopuedemodificarleelestadoaunpedidocancelado" xml:space="preserve">
+    <value>Can't change the status of a Cancelled order</value>
   </data>
   <data name="DatosPersonales" xml:space="preserve">
     <value>Personal Information</value>
@@ -953,5 +953,11 @@
   </data>
   <data name="Compras" xml:space="preserve">
     <value>Purchases</value>
+  </data>
+  <data name="EstaSeguro" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>

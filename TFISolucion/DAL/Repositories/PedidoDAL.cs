@@ -294,5 +294,19 @@ namespace TFI.DAL.DAL
             }
         }
 
+
+
+        public void PedidoActualizarNroTracking(int elIdPedido, string elNroTracking)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@elIdPedido", elIdPedido),
+                new SqlParameter("@elNroTracking", elNroTracking)
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PedidoActualizarNroTracking", parameters);
+        }
+
+
 	}
 }

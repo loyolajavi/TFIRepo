@@ -65,7 +65,6 @@ namespace TFI.GUI
                 cargarFiltros();
 
                 idioma = (LenguajeEntidad)Session["Idioma"];
-                cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
                 stringBusqueda = Page.Request.QueryString["search"];

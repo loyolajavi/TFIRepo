@@ -44,7 +44,7 @@ namespace TFI.GUI
 
             if (logueado == null)
             {
-                Response.Redirect("Home.aspx");
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
             if (!IsPostBack)
             {

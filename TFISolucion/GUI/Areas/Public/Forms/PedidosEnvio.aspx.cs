@@ -106,7 +106,7 @@ namespace TFI.GUI.Areas.Public.Forms
             formaEnvioId = (int?)Current.Session["FormaEnvio"];
             Current.Session["FormaEnvio"] = 1;//REVISAR
             if (logueado == null)
-                Response.Redirect("Pedidos.aspx");
+                Response.Redirect("/Areas/Public/Forms/Pedidos.aspx");
             //Antes obtenía todas las sucursales
             //sucursalesDisponibles = _sucursalCore.FindAll();
             //Ahora se obtienen las que poseen stock unicamente

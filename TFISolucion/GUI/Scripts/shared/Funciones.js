@@ -16,7 +16,6 @@
 
 //*********Load de MasterBasic en Cliente****************
 function LoadMasterBasic() {
-    StartHeartBeat();
     updateProductos();
     updateCompras();
     updateDeseos();
@@ -26,18 +25,18 @@ function LoadMasterBasic() {
 //END*********Load de MasterBasic en Cliente****************END
 
 //************PARA MANTENER SESION ACTIVA*****************
-var HeartBeatTimer;
+//var HeartBeatTimer;
 
-function StartHeartBeat() {
-    // pulse every 10 seconds
-    if (HeartBeatTimer == null)
-        HeartBeatTimer = setInterval("HeartBeat()", 114000 * 10);
-};
+//function StartHeartBeat() {
+//    // pulse every 10 seconds
+//    if (HeartBeatTimer == null)
+//        HeartBeatTimer = setInterval("HeartBeat()", 114000 * 10);
+//};
 
-function HeartBeat() {
-    // note: ScriptManger must have: EnablePageMethods="true"
-    PageMethods.MantenerSesion();
-};
+//function HeartBeat() {
+//    // note: ScriptManger must have: EnablePageMethods="true"
+//    PageMethods.MantenerSesion();
+//};
 //END************PARA MANTENER SESION ACTIVA*****************END
 
 //Para agregar un Deseo
@@ -266,8 +265,12 @@ var updateCompras = function () {
         },
         success: function (data) {
             //MUESTRO CANTIDAD
-            if (data.d > 0)
+            if (data.d > 0) {
                 $('#cantComprasPagar').text('   (' + data.d + ')');
+            }
+            else {
+                $('#cantComprasPagar').empty();
+            }
             console.log(data);
         }
     });

@@ -24,7 +24,6 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", pedidoDetalle.IdPedido),
 				new SqlParameter("@Cantidad", pedidoDetalle.Cantidad),
 				new SqlParameter("@PrecioUnitario", pedidoDetalle.PrecioUnitario),
-				new SqlParameter("@Descuento", pedidoDetalle.Descuento),
 				new SqlParameter("@IdProducto", pedidoDetalle.miProducto.IdProducto),
                 new SqlParameter("@CUIT", pedidoDetalle.CUIT)
 			};
@@ -45,7 +44,6 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", pedidoDetalle.IdPedido),
 				new SqlParameter("@Cantidad", pedidoDetalle.Cantidad),
 				new SqlParameter("@PrecioUnitario", pedidoDetalle.PrecioUnitario),
-				new SqlParameter("@Descuento", pedidoDetalle.Descuento),
 				new SqlParameter("@IdProducto", pedidoDetalle.miProducto.IdProducto)
 			};
 
@@ -145,11 +143,47 @@ namespace TFI.DAL.DAL
 			{
 				List<PedidoDetalleEntidad> pedidoDetalleEntidadList = new List<PedidoDetalleEntidad>();
 
-                pedidoDetalleEntidadList = Mapeador.MapearAlt<PedidoDetalleEntidad>(dt);
+                pedidoDetalleEntidadList = MapearMuchosPedidosDetalles(dt);
 
 				return pedidoDetalleEntidadList;
 			}
 		}
+
+
+
+        private List<PedidoDetalleEntidad> MapearMuchosPedidosDetalles(DataSet ds)
+        {
+            List<PedidoDetalleEntidad> ResUnosPedidosDetalles = new List<PedidoDetalleEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    PedidoDetalleEntidad unPedDet = new PedidoDetalleEntidad();
+
+                    unPedDet.IdPedidoDetalle = (int)row["IdPedidoDetalle"];
+                    unPedDet.IdPedido = (int)row["IdPedido"];
+                    unPedDet.Cantidad = (int)row["Cantidad"];
+                    unPedDet.PrecioUnitario = (decimal)row["PrecioUnitario"];
+                    if (row["FecBaja"].ToString() != "")
+                        unPedDet.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                    unPedDet.CUIT = row["CUIT"].ToString();
+                    unPedDet.miProducto = new ProductoEntidad();
+                    unPedDet.miProducto.IdProducto = (int)row["IdProducto"];
+                    unPedDet.miProducto.CodigoProducto = row["CodigoProducto"].ToString();
+                    unPedDet.miProducto.DescripProducto = row["DescripProducto"].ToString();
+
+                    ResUnosPedidosDetalles.Add(unPedDet);
+                }
+                return ResUnosPedidosDetalles;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
 
 		/// <summary>
 		/// Selects all records from the PedidoDetalle table by a foreign key.

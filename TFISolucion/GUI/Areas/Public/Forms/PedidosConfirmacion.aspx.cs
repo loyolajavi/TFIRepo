@@ -355,92 +355,24 @@ namespace TFI.GUI.Areas.Public.Forms
             unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
             ComprobanteCore unManagerComprobante = new ComprobanteCore();
             PedidoCore unManagerPedido = new PedidoCore();
-            //PedidoEstadoPedidoEntidad pedidoEstadoPedido = new PedidoEstadoPedidoEntidad();
-            //List<ComprobanteDetalleEntidad> unosDetallesComprobante = new List<ComprobanteDetalleEntidad>();
-            //PedidoEntidad unPedido = new PedidoEntidad();
+            SucursalCore ManagerSucursal = new SucursalCore();
             int IdPedidoActual;
 
             List<PedidoDetalleEntidad> unosDetallesPedido = new List<PedidoDetalleEntidad>();
             var Current = HttpContext.Current;
-            int ContadorDetalle = 0;
 
-            var logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            UsuarioEntidad logueado = (UsuarioEntidad)Current.Session["Usuario"];
             var sucursalId = (int?)Current.Session["Seleccionada"];
             IdPedidoActual = (int)Current.Session["UltimoPedido"];
 
             unosDetallesPedido = (List<PedidoDetalleEntidad>)Current.Session["DetallesPedido"];
-
-
-            string NroCompSolo = "";
-            int NroComp;
-
-            if (unManagerComprobante.FindAll().Count == 0)
-            {
-                NroCompSolo = "0";
-            }
-
-
-            //Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
-
-            if (NroCompSolo != "0")
-            {
-                NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
-                var NroCompString = NroComp.ToString();
-                NroCompSolo = NroCompString;
-                //NroCompSolo = NroCompString.Remove(0, 2);
-            }
-
-
-            NroComp = int.Parse(NroCompSolo) + 1;
-
-            // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
-
-            unComprobante.NroComprobante = NroComp;
-
-            unComprobante.IdSucursal = (int)sucursalId;
-
-            if (logueado.IdCondicionFiscal == 1)
-            {
-                unComprobante.IdTipoComprobante = 2;//Factura B
-            }
-            else if (logueado.IdCondicionFiscal == 2)
-            {
-                unComprobante.IdTipoComprobante = 1; //Factura A
-            }
-
-            unComprobante.FechaComprobante = DateTime.Now;
-            unComprobante.IdPedido = (int)Current.Session["UltimoPedido"];
-
-            foreach (var item in unosDetallesPedido)
-            {
-                ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                ContadorDetalle = ContadorDetalle + 1;
-                unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
-                unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
-                unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
-                unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
-                unDetalleComprobante.CantidadProducto = item.Cantidad;
-                unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
-
-                unComprobante.Detalles.Add(unDetalleComprobante);
-                //unosDetallesComprobante.Add(unDetalleComprobante);
-            }
-
-            //Lo hago en la BLL ahora
-            //unManagerComprobante.Create(unComprobante);
-
-            //pedidoEstadoPedido.IdPedido = (int)Current.Session["UltimoPedido"];
-            //pedidoEstadoPedido.IdEstadoPedido = 6;//Finalizado
-            //pedidoEstadoPedido.Fecha = DateTime.Now;
-
-            //unManagerPedido.FinalizarPedido(pedidoEstadoPedido);
-            //unosPedidosFiltro = (List<PedidoEntidad>)Current.Session["Compras"];
             
             PedidoEntidad unPedidoPagar = new PedidoEntidad();
             unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_IDPedido(IdPedidoActual);
-            unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
+            unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+            SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+
+            unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
 
             LimpiarPedido();
 
