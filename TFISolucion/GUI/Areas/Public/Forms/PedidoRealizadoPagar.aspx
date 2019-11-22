@@ -177,7 +177,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="Home.aspx" id="btnContinuarCierre"><%=Resources.Global.Continuar%></a>
+                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="#" id="btnContinuarCierre"><%=Resources.Global.Continuar%></a>
                     </div>
                 </div>
             </div>
@@ -303,7 +303,7 @@
         var limpiarPedido = function () {
             $.ajax({
                 type: "POST",
-                url: "PedidosConfirmacion.aspx/LimpiarPedido",
+                url: "PedidoRealizadoPagar.aspx/LimpiarPedido",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 error: function (xhr, status, error) {
@@ -319,6 +319,7 @@
 
         $('#mdl_transferencia').on('hidden.bs.modal', function () {
             limpiarPedido();
+            app.redirect('UltimosPedidos.aspx');
         });
 
         //$('#mdl_pagocompletado').on('hidden.bs.modal', function () {
@@ -327,6 +328,7 @@
 
         $('#btnContinuarCierre').click(function () {
             limpiarPedido();
+            app.redirect('UltimosPedidos.aspx');
         });
 
         $('#btnpagarmodal').click(function () {

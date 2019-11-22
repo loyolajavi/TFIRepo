@@ -143,14 +143,15 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
 
-        //[WebMethod]
-        //public static void LimpiarPedido(){
-        //    var Current = HttpContext.Current;
-        //    Current.Session["Productos"] = null;
-        //    Current.Session["UltimoPedido"] = null;
-        //    Current.Session["Pedido"] = null;
-        //    Current.Session["DetallesPedido"] = null;
-        //}
+        [WebMethod]
+        public static void LimpiarPedido()
+        {
+            var Current = HttpContext.Current;
+            Current.Session["Productos"] = null;
+            Current.Session["UltimoPedido"] = null;
+            Current.Session["Pedido"] = null;
+            Current.Session["DetallesPedido"] = null;
+        }
 
         [WebMethod]
         public static void CambiarTarjeta()

@@ -16,7 +16,7 @@ namespace TFI.GUI
     public partial class Home : BasePage
     {
 
-        //SOLO FUNCIONA BUSCAR PRODUCTOS PORQUE ESTA HARDCODEADO EL CUIT EN EL WEB CONFIG
+        
         List<ProductoEntidad> unosProductosDestacados = new List<ProductoEntidad>();
         List<ProductoEntidad> unosProductosMasVendidos = new List<ProductoEntidad>();
         HttpContext Current = HttpContext.Current;

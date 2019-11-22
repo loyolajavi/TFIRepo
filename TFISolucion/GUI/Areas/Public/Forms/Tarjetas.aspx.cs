@@ -232,7 +232,7 @@ namespace TFI.GUI
 
                 if (TarjetasDelUser.Count == 0) { NuevaTarjeta.Predeterminada = true; } else { NuevaTarjeta.Predeterminada = false; }
 
-                bool TarjetaValida = true;//TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
+                bool TarjetaValida = TarjetaBLL.Mod10Check(txtNumeroTarjeta.Value);
 
                 if (TarjetaValida == true)
                 {

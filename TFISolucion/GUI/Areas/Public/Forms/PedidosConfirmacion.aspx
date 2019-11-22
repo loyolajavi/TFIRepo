@@ -328,6 +328,7 @@
 
         $('#mdl_transferencia').on('hidden.bs.modal', function () {
             limpiarPedido();
+            app.redirect('UltimosPedidos.aspx');
         });
 
         //$('#mdl_pagocompletado').on('hidden.bs.modal', function () {
@@ -336,6 +337,7 @@
 
         $('#btnContinuarCierre').click(function () {
             limpiarPedido();
+            app.redirect('UltimosPedidos.aspx');
         });
 
         $('#btnpagarmodal').click(function () {

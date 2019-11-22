@@ -110,5 +110,51 @@ namespace TFI.CORE.Managers
             return sumOfDigits % 10 == 0;
         }
 
+
+        public bool CheckCC(string CardNumber)
+        {
+            //ReturnIndicator ri = new ReturnIndicator();
+            bool valida = false;
+
+            byte[] number = new byte[16]; // number to validate
+
+            // Remove non-digits
+            int len = 0;
+            for (int i = 0; i < CardNumber.Length; i++)
+            {
+                if (char.IsDigit(CardNumber, i))
+                {
+                    if (len == 16) return valida; // number has too many digits
+                    number[len++] = byte.Parse(CardNumber[i].ToString());
+                }
+            }
+
+            // Use Luhn Algorithm to validate
+            int sum = 0;
+            for (int i = len - 1; i >= 0; i--)
+            {
+                if (i % 2 == len % 2)
+                {
+                    int n = number[i] * 2;
+                    sum += (n / 10) + (n % 10);
+                }
+                else
+                    sum += number[i];
+            }
+
+            return (bool) (sum % 10 == 0);
+            
+            
+        }
+        
+
+
     }
 }
+
+
+   //    public class ReturnIndicator
+   //{
+   //    public string CardType;
+   //    public bool CardValid;
+   //}
