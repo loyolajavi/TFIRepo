@@ -42,12 +42,12 @@ namespace TFI.GUI.Areas.Public.Forms
             idioma = new LenguajeEntidad();
         }
 
-        //Para mantener la sesión activa
-        [WebMethod(EnableSession = true)]
-        public static void MantenerSesion()
-        {
+        ////Para mantener la sesión activa
+        //[WebMethod(EnableSession = true)]
+        //public static void MantenerSesion()
+        //{
 
-        }
+        //}
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -57,8 +57,7 @@ namespace TFI.GUI.Areas.Public.Forms
             //Session["FormaEnvio"] = 1;
             //Session["Seleccionada"] = coreSucursal.FindAll()[0].IdSucursal;
 
-            if (Current.Session["Productos"] == null)
-                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            
 
             idioma = new LenguajeEntidad();
             
@@ -90,15 +89,19 @@ namespace TFI.GUI.Areas.Public.Forms
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
-            lista = (List<PedidoLista>)Current.Session["Pedido"];
+            if (!IsPostBack)
+            {
+                if (Current.Session["Productos"] == null)
+                    Response.Redirect("/Areas/Public/Forms/Home.aspx");
+                lista = (List<PedidoLista>)Current.Session["Pedido"];
 
-            FormaEntrega = (int?)Current.Session["FormaEnvio"];
-            //pedido = (int?)Current.Session["UltimoPedido"];
-            totalizado = lista.Select(x => x.Cantidad * x.Producto.PrecioUnitario).Sum();
-            //TODO: sacarle el precio de envio hardcodeado:
-            if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
-                totalizado = totalizado + 100;
-
+                FormaEntrega = (int?)Current.Session["FormaEnvio"];
+                //pedido = (int?)Current.Session["UltimoPedido"];
+                totalizado = lista.Select(x => x.Cantidad * x.Producto.PrecioUnitario).Sum();
+                //TODO: sacarle el precio de envio hardcodeado:
+                if (FormaEntrega != null && FormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
+                    totalizado = totalizado + 100;
+            }
             TarjetaCore coreTarjeta = new TarjetaCore();
             List<TarjetaEntidad> MisTarjetas = coreTarjeta.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, logueado.NombreUsuario);
             foreach(var t in MisTarjetas){

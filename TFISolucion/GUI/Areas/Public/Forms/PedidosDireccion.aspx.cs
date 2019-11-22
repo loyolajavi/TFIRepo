@@ -40,12 +40,12 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
 
-        //Para mantener la sesión activa
-        [WebMethod(EnableSession = true)]
-        public static void MantenerSesion()
-        {
+        ////Para mantener la sesión activa
+        //[WebMethod(EnableSession = true)]
+        //public static void MantenerSesion()
+        //{
 
-        }
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {

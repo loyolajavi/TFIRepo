@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace TFI.GUI.Areas.Public.Forms {
-
-
-    public partial class PedidosConfirmacion
-    {
+    
+    
+    public partial class PedidosConfirmacion {
         
         /// <summary>
         /// Control Label2.
