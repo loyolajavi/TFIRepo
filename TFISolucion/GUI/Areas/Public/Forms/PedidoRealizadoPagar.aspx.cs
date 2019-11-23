@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Text;
+using System.Web.Script.Services;
 
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
@@ -192,8 +193,9 @@ namespace TFI.GUI.Areas.Public.Forms
             //}
         }
 
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [WebMethod]
-        public static void PagarWebMethod()
+        public static bool PagarWebMethod()
         {
             //Obtener NroPedido seleccionado
             var Current = HttpContext.Current;
@@ -209,8 +211,25 @@ namespace TFI.GUI.Areas.Public.Forms
             unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
             unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
             SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
-            
-            unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+
+            TarjetaEntidad unaTarjeta = new TarjetaEntidad();
+            TarjetaCore coreTarjeta = new TarjetaCore();
+            List<TarjetaEntidad> MisTarjetas = coreTarjeta.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, logueado.NombreUsuario);
+            foreach (var t in MisTarjetas)
+            {
+                if (t.Predeterminada == true)
+                {
+                    unaTarjeta = t;
+                }
+            }
+
+            if (unManagerPedido.PagarPedido(unaTarjeta.Numero.ToString(), unaTarjeta.CodSeguridad, (decimal)unPedidoPagar.misDetalles.Select(x => x.Cantidad * x.miProducto.PrecioUnitario).Sum()))
+            {
+                unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+                return true;
+            }
+            return false;
+                
             //LimpiarPedido();
         }
 

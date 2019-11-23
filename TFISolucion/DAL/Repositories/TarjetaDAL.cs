@@ -33,6 +33,17 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaInsert", parameters);
         }
 
+        public void TarjetaSetearPredeterminada(int elIdTarjeta)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@elIdTarjeta", elIdTarjeta)
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSetearPredeterminada", parameters);
+        }
+
+
         /// <summary>
         /// Updates a record in the Tarjeta table.
         /// </summary>

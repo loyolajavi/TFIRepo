@@ -857,7 +857,7 @@ namespace TFI.GUI
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void CambiarClave(string passVieja, string passNueva, string passRepetida)
+        public static bool CambiarClave(string passVieja, string passNueva, string passRepetida)
         {
             var usuariosdad = new UsuarioCore();
             var Current = HttpContext.Current;
@@ -866,13 +866,20 @@ namespace TFI.GUI
 
             var password = usuariosdad.Select(usuarioentidadStatic.CUIT, usuarioentidadStatic.NombreUsuario).Clave;
 
+            passVieja = TFI.SEGURIDAD.ServicioSecurizacion.AplicarHash(passVieja);
+            passNueva = TFI.SEGURIDAD.ServicioSecurizacion.AplicarHash(passNueva);
+            passRepetida = TFI.SEGURIDAD.ServicioSecurizacion.AplicarHash(passRepetida);
+
             if (password == passVieja)
             {
-                usuarioentidadStatic.Clave = passRepetida;
-                usuariosdad.UpdateUsuarioContraseña(usuarioentidadStatic);
-
+                if (passNueva == passRepetida)
+                {
+                    usuarioentidadStatic.Clave = passRepetida;
+                    usuariosdad.UpdateUsuarioContraseña(usuarioentidadStatic);
+                    return true;
+                }
             }
-
+            return false;
 
         }
 

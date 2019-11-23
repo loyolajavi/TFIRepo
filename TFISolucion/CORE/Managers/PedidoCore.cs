@@ -292,5 +292,17 @@ namespace TFI.CORE.Managers
         }
 
 
+
+        public bool PagarPedido(string elNroTarjeta, int elCodSeg, decimal elMonto)
+        {
+            using (SWTarjeta.ServicioPagoClient unServicioPago = new SWTarjeta.ServicioPagoClient())
+            {
+                return unServicioPago.ProcesarPago(elNroTarjeta, elMonto);
+            }
+            
+        }
+
+
+
     }
 }

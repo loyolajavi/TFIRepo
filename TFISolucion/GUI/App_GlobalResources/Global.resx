@@ -957,4 +957,10 @@
   <data name="Cancelar" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Seleccionar" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="PagoFallo" xml:space="preserve">
+    <value>El pago no pudo realizarse, por favor reintente</value>
+  </data>
 </root>

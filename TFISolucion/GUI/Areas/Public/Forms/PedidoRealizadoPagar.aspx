@@ -241,7 +241,7 @@
                     { %>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <a href="#mdl_pagocompletado" id="btnpagarmodal" clientidmode="static" style="width: 200px; background-color: black; color: #fff;" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.Pagar%></a>
+                        <a href="#" id="btnpagarmodal" clientidmode="static" style="width: 200px; background-color: black; color: #fff;" class="btn btn-primary" data-toggle="modal"><%=Resources.Global.Pagar%></a>
                         <%--  <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="#mdl_pagocompletado" id="btnPagoDefinitivo">Pagar</a>--%>
                     </div>
                 </div>
@@ -264,6 +264,26 @@
                 <div class="modal-footer">
                     <div class="text-center">
                         <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="UltimosPedidos.aspx" id="btnSalir"><%=Resources.Global.Continuar%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mdl_PagoFallo" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+                    <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.Pago%></h3>
+                </div>
+                <div class="modal-body text-center">
+                    <h4><%=Resources.Global.PagoFallo%></h4>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <a class="btn" style="width: 200px; background-color: black; color: #fff;" href="UltimosPedidos.aspx" id="btnContinuarPagloFallo"><%=Resources.Global.Continuar%></a>
                     </div>
                 </div>
             </div>
@@ -339,15 +359,26 @@
                 url: "PedidoRealizadoPagar.aspx/PagarWebMethod",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+                    // $('#notification').text('La información ha sido guardada exitosamente.');
+                    if (data.d == true) {
+                        var $modalpagoListo = $('#mdl_pagocompletado');
+                        $modalpagoListo.modal("show");
+                    }
+                    else {
+                        var $modalPagoFallo = $('#mdl_PagoFallo');
+                        $modalPagoFallo.modal("show");
+                    }
+                },
                 error: function (xhr, status, error) {
                     alert(error);
-                },
+                }
             });
-
-            var $modal = $('#mdl_tarjeta');
-            $modal.modal("hide");
-
+            var $modalTar = $('#mdl_tarjeta');
+            $modalTar.modal("hide");
         });
+
+
 
         $('#cambiartarjeta').click(function () {
             //var button = $('#btnPagar');

@@ -316,7 +316,7 @@
         </div>
     </div>
 
-    <!--MODAL LOGIN-->
+    <!--MODAL Password-->
     <div class="modal fade" id="modalLogin" role="dialog">
         <div class="modal-dialog">
 

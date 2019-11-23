@@ -960,4 +960,10 @@
   <data name="Cancelar" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Seleccionar" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="PagoFallo" xml:space="preserve">
+    <value>The payment could not be made, retry please</value>
+  </data>
 </root>

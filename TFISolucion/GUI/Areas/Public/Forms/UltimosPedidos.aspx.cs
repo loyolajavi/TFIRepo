@@ -223,69 +223,45 @@ namespace TFI.GUI
                            "ModalScript", sb.ToString(), false);
 
             }
-            if (e.CommandName.Equals("PagarPedido"))
-            {
-                //Obtener IdPedido seleccionado
-                int index = Convert.ToInt32(e.CommandArgument);
-                Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
-                //variables
-                PedidoCore unManagerPedido = new PedidoCore();
-                var Current = HttpContext.Current;
-                PedidoEntidad unPedidoPagar = new PedidoEntidad();
-                SucursalCore ManagerSucursal = new SucursalCore();
+            //if (e.CommandName.Equals("PagarPedido"))
+            //{
+            //    //Obtener IdPedido seleccionado
+            //    int index = Convert.ToInt32(e.CommandArgument);
+            //    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+            //    //variables
+            //    PedidoCore unManagerPedido = new PedidoCore();
+            //    var Current = HttpContext.Current;
+            //    PedidoEntidad unPedidoPagar = new PedidoEntidad();
+            //    SucursalCore ManagerSucursal = new SucursalCore();
 
-                //Preparar parámetros a enviar a Avanzar()
-                logueado = (UsuarioEntidad)Current.Session["Usuario"];
-                unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
-                unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
-                SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+            //    //Preparar parámetros a enviar a Avanzar()
+            //    logueado = (UsuarioEntidad)Current.Session["Usuario"];
+            //    unPedidoPagar = unManagerPedido.PedidoSelectByCUIT_NroPedido(unNroPedido);
+            //    unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+            //    SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
 
-                unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+            //    TarjetaEntidad unaTarjeta = new TarjetaEntidad();
+            //    TarjetaCore coreTarjeta = new TarjetaCore();
+            //    List<TarjetaEntidad> MisTarjetas = coreTarjeta.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, logueado.NombreUsuario);
+            //    foreach (var t in MisTarjetas)
+            //    {
+            //        if (t.Predeterminada == true)
+            //        {
+            //            unaTarjeta = t;
+            //        }
+            //    }
 
-                //string NroCompSolo = "";
-                //int NroComp;
-                //if (unManagerComprobante.FindAll().Count == 0)
-                //    NroCompSolo = "0";
-                ////Toma el nro de comprobante y lo desglosa para formar el nuevo nro de comprobante
-                //if (NroCompSolo != "0")
-                //{
-                //    NroComp = unManagerComprobante.FindAll().LastOrDefault().NroComprobante;
-                //    var NroCompString = NroComp.ToString();
-                //    NroCompSolo = NroCompString;
-                //    //NroCompSolo = NroCompString.Remove(0, 2);
-                //}
-                //NroComp = int.Parse(NroCompSolo) + 1;
-                //// unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
-                //unComprobante.NroComprobante = NroComp;
-                //unComprobante.IdSucursal = unaSucursal.IdSucursal;
-                //if (logueado.IdCondicionFiscal == 1)
-                //    unComprobante.IdTipoComprobante = 2;//Factura B
-                //else if (logueado.IdCondicionFiscal == 2)
-                //    unComprobante.IdTipoComprobante = 1; //Factura A
-
-                //unComprobante.FechaComprobante = DateTime.Now;
-                //unComprobante.IdPedido = unPedidoPagar.IdPedido;
-
-                //foreach (var item in unPedidoPagar.misDetalles)
-                //{
-                //    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                //    ContadorDetalle = ContadorDetalle + 1;
-                //    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                //    unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
-                //    unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
-                //    unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
-                //    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                //    unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
-                //    unDetalleComprobante.CantidadProducto = item.Cantidad;
-                //    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
-
-                //    unComprobante.Detalles.Add(unDetalleComprobante);
-                //}
-                //unManagerPedido.AvanzarPaso(unPedidoPagar, unComprobante);
-                CargarGrillaUltimosPedidos();
-                Response.Redirect(Request.RawUrl);
-                //LimpiarPedido();
-            }//END Pagar
+            //    if (unManagerPedido.PagarPedido(unaTarjeta.Numero.ToString(), unaTarjeta.CodSeguridad, (decimal)unPedidoPagar.misDetalles.Select(x => x.Cantidad * x.miProducto.PrecioUnitario).Sum()))
+            //    {
+            //        unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+            //        return true;
+            //    }
+            //    return false;
+                
+            //    CargarGrillaUltimosPedidos();
+            //    Response.Redirect(Request.RawUrl);
+                
+            //}//END Pagar
         }//END GrillaMetodos
 
 

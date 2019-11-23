@@ -71,6 +71,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -619,6 +620,10 @@
     <ProjectReference Include="..\FUNCIONES\FUNCIONES.csproj">
       <Project>{258f06bf-b0a8-4b0e-a679-e494112df4a1}</Project>
       <Name>FUNCIONES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SEGURIDAD\SEGURIDAD.csproj">
+      <Project>{35b8fc6e-bb13-406e-9c98-b0b533c7c6d3}</Project>
+      <Name>SEGURIDAD</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

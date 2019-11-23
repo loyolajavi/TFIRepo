@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WebServiceTar.SWTarjeta" CodeBehind="SWTarjeta.svc.cs" %>

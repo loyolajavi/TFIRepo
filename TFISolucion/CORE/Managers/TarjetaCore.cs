@@ -87,6 +87,19 @@ namespace TFI.CORE.Managers
 
         }
 
+        public void TarjetaSetearPredeterminada(int elIdTarjeta)
+        {
+            try
+            {
+                DalDeTarjetas.TarjetaSetearPredeterminada(elIdTarjeta);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public bool Mod10Check(string creditCardNumber)
         {
             //// check whether input string is null or empty

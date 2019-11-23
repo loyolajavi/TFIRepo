@@ -18,7 +18,7 @@
         <div class="table-responsive">
 
 
-            <asp:GridView CssClass="table" ID="grilladetarjetas" runat="server" OnRowDeleting="grilladetarjetas_RowDeleting" OnRowDataBound="grilladetarjetas_RowDataBound">
+            <asp:GridView CssClass="table" ID="grilladetarjetas" runat="server" OnRowDeleting="grilladetarjetas_RowDeleting" OnRowDataBound="grilladetarjetas_RowDataBound"  DataKeyNames="NumeroTarjeta" OnRowCommand="grilladetarjetas_RowCommand">
                 <Columns>
                     <asp:CommandField ShowDeleteButton="True" />
                     <asp:BoundField DataField="NumeroTarjeta" HeaderText="<%$Resources:Global, NumeroTarjeta %>" />
@@ -31,6 +31,7 @@
                     <asp:BoundField DataField="FechaExpiracion" HeaderText="<%$Resources:Global, FechaExpiracion %>" />
                     <asp:BoundField DataField="CodigoSeguridad" HeaderText="<%$Resources:Global, CodigoSeguridad %>" />
                     <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
+                    <asp:ButtonField CommandName="CambiarPredeterminada"  HeaderText="<%$Resources:Global, Seleccionar %>"  Text="<%$Resources:Global, Seleccionar %>"  ButtonType="Button" ControlStyle-CssClass="btn btn-success center-block" />
                 </Columns>
             </asp:GridView>
 

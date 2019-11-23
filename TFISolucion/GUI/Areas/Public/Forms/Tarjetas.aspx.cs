@@ -122,6 +122,25 @@ namespace TFI.GUI
             CargarGrillaTarjetas();
         }
 
+
+        protected void grilladetarjetas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            TarjetaEntidad unaTarjeta = new TarjetaEntidad();
+            unaTarjeta.CUIT = usuarioentidad.CUIT;
+            unaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
+            //GridViewRow row = (GridViewRow)grilladetarjetas.Rows[e.RowIndex];
+            //var numerodetarjeta = ((string)row.Cells[1].Text);
+            if (e.CommandName.Equals("CambiarPredeterminada"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string unNroTarjeta = grilladetarjetas.DataKeys[index].Value.ToString();
+                int unIdTarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(unNroTarjeta), unaTarjeta.CUIT).IdTarjeta;
+                TarjetaBLL.TarjetaSetearPredeterminada(unIdTarjeta);
+            }
+            CargarGrillaTarjetas();
+        }
+
+
         private void CargarGrillaTarjetas()
         {
 
@@ -327,6 +346,8 @@ namespace TFI.GUI
 
             }
         }
+
+
 
 
     }

@@ -8,6 +8,7 @@ var $passConf = $('#passnuevarepetida');
 $('#btnLogin').on("click", function () {
 
     ClearModal();
+    ClearNotifications();
     $("#modalLogin").modal("show");
     $passVieja.focus;
 });
@@ -53,7 +54,7 @@ function ValidarVacio(control, campo) {
 }
 
 function ClearModal() {
-    ClearNotifications();
+    
     $('#passanterior').val('');
     $('#passnuevarepetida').val('');
     $('#passnueva').val('');
@@ -89,34 +90,53 @@ function Exito(mensaje) {
 
 $('#btnCambiarClave').click(function (e) {
     //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
-
+    var passnueva = $("#passnueva").val();
+    var passRepetida = $("#passnuevarepetida").val();
     var parametros = {
         passVieja: $('#passanterior').val(),
         passNueva: $('#passnueva').val(),
         passRepetida: $('#passnuevarepetida').val()
     };
+    if (passnueva == passRepetida) {
+        // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+        $.ajax({
+            type: 'POST',                               // tipo de llamada (POST, GET)
+            url: 'DatosPersonales.aspx/CambiarClave',
+            dataType: "json",  // el URL del método que vamos a llamar
+            // los parámetros en formato JSON
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+            success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+                // $('#notification').text('La información ha sido guardada exitosamente.');
 
-    // Ahora hacemos la llamada tipo AJAX utilizando jQuery
-    $.ajax({
-        type: 'POST',                               // tipo de llamada (POST, GET)
-        url: 'DatosPersonales.aspx/CambiarClave',
-        dataType: "json",  // el URL del método que vamos a llamar
-        // los parámetros en formato JSON
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
-        success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
-            // $('#notification').text('La información ha sido guardada exitosamente.');
+                //window.location.reload();
+                if (data.d == true)
+                {
+                    ClearNotifications();
+                    Exito("Se ha cambiado la contraseña con exito");
+                    ClearModal();
+                }
+                else
+                {
+                    ClearNotifications();
+                    Error("La contraseña actual no es correcta")
+                }
+                
+                
+            },
+            error: function (data) {          // función que se va a ejecutar si el pedido falla
 
-            //window.location.reload();
-            ClearModal();
-            Exito("Se ha cambiado la contraseña con exito");
-        },
-        error: function (data) {          // función que se va a ejecutar si el pedido falla
+                Error("No se ha podido realizar la consulta");
 
-            Error("No se ha podido realizar la consulta");
-
-        }
-    });
+            }
+        });
+    }
+    else
+    {
+        ClearNotifications();
+        Error("Las contraseñas no coinciden")
+    }
+    
 });
 
 /**************Ajax para Agregar direccion de facturacion*******/
