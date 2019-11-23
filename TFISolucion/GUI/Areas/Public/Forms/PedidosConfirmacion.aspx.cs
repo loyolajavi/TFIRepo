@@ -388,9 +388,9 @@ namespace TFI.GUI.Areas.Public.Forms
                 }
             }
 
-            if (unManagerPedido.PagarPedido(unaTarjeta.Numero.ToString(), unaTarjeta.CodSeguridad, (decimal)unPedidoPagar.misDetalles.Select(x => x.Cantidad * x.miProducto.PrecioUnitario).Sum()))
+            if (unManagerPedido.PagarPedido(unaTarjeta.Numero.ToString(), unaTarjeta.CodSeguridad, (decimal)unPedidoPagar.misDetalles.Select(x => x.Cantidad * x.PrecioUnitario).Sum()))
             {
-                unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+                unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado, (int)FormaPagoEntidad.Options.ECommerce);
                 LimpiarPedido();
                 return true;
             }

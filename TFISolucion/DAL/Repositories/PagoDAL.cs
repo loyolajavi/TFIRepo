@@ -21,17 +21,14 @@ namespace TFI.DAL.DAL
 
 			SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@FechaPago", pago.FechaPago),
-				new SqlParameter("@IdFormaPago", pago.IdFormaPago),
+				new SqlParameter("@IdPedido", pago.IdPedido),
+                new SqlParameter("@FechaPago", pago.FechaPago),
+				new SqlParameter("@IdFormaPago", pago.miFormaPago.IdFormaPago),
 				new SqlParameter("@MontoPago", pago.MontoPago),
-				new SqlParameter("@NroComprobante", pago.NroComprobante),
-				new SqlParameter("@IdSucursal", pago.IdSucursal),
-				new SqlParameter("@IdTipoComprobante", pago.IdTipoComprobante),
-				new SqlParameter("@CUIT", pago.CUIT),
-				new SqlParameter("@IdTarjeta", pago.IdTarjeta)
+				new SqlParameter("@CUIT", pago.CUIT)
 			};
 
-            pago.IdPago = (int)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoInsert", parameters);
+            SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoInsert", parameters);
 		}
 
 		/// <summary>
@@ -45,13 +42,9 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@IdPedido", pago.IdPedido),
 				new SqlParameter("@FechaPago", pago.FechaPago),
-				new SqlParameter("@IdFormaPago", pago.IdFormaPago),
+				new SqlParameter("@IdFormaPago", pago.miFormaPago.IdFormaPago),
 				new SqlParameter("@MontoPago", pago.MontoPago),
-				new SqlParameter("@NroComprobante", pago.NroComprobante),
-				new SqlParameter("@IdSucursal", pago.IdSucursal),
-				new SqlParameter("@IdTipoComprobante", pago.IdTipoComprobante),
-				new SqlParameter("@CUIT", pago.CUIT),
-				new SqlParameter("@IdTarjeta", pago.IdTarjeta)
+				new SqlParameter("@CUIT", pago.CUIT)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoUpdate", parameters);
@@ -70,50 +63,7 @@ namespace TFI.DAL.DAL
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDelete", parameters);
 		}
 
-		/// <summary>
-		/// Deletes a record from the Pago table by a foreign key.
-		/// </summary>
-		public void DeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
-		{
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@NroComprobante", nroComprobante),
-				new SqlParameter("@IdSucursal", idSucursal),
-				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", CUIT)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDeleteAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters);
-		}
-
-		/// <summary>
-		/// Deletes a record from the Pago table by a foreign key.
-		/// </summary>
-		public void DeleteAllByCUIT(string CUIT)
-		{
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@CUIT", CUIT)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDeleteAllByCUIT", parameters);
-		}
-
-	
-
-		/// <summary>
-		/// Deletes a record from the Pago table by a foreign key.
-		/// </summary>
-		public void DeleteAllByIdFormaPago(int idFormaPago)
-		{
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdFormaPago", idFormaPago)
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoDeleteAllByIdFormaPago", parameters);
-		}
-
+		
 		/// <summary>
 		/// Deletes a record from the Pago table by a foreign key.
 		/// </summary>
@@ -165,29 +115,6 @@ namespace TFI.DAL.DAL
 		}
 
 
-
-		/// <summary>
-		/// Selects all records from the Pago table by a foreign key.
-		/// </summary>
-		public List<PagoEntidad> SelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT(int nroComprobante, int idSucursal, int idTipoComprobante, string CUIT)
-		{
-			SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@NroComprobante", nroComprobante),
-				new SqlParameter("@IdSucursal", idSucursal),
-				new SqlParameter("@IdTipoComprobante", idTipoComprobante),
-				new SqlParameter("@CUIT", CUIT)
-			};
-
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "PagoSelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters))
-			{
-				List<PagoEntidad> pagoEntidadList = new List<PagoEntidad>();
-
-                pagoEntidadList = Mapeador.Mapear<PagoEntidad>(dt);
-
-				return pagoEntidadList;
-			}
-		}
 
 		/// <summary>
 		/// Selects all records from the Pago table by a foreign key.

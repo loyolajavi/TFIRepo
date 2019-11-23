@@ -301,7 +301,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     //Pendiente hacia Pago
                     if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.PendientePago)
                     {
-                        unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado);
+                        unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado, (int)FormaPagoEntidad.Options.Externa);
                     }
 
                     //Pago Hacia EnCamino

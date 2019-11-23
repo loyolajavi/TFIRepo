@@ -134,8 +134,18 @@ namespace TFI.CORE.Managers
 
         
         //Si esta en Pendiente y pasa a Pago (llamada por estado==Pendiente)
-        public void AvanzarPaso(PedidoEntidad elPedido, SucursalEntidad laSucursal, UsuarioEntidad elCliente)
+        public void AvanzarPaso(PedidoEntidad elPedido, SucursalEntidad laSucursal, UsuarioEntidad elCliente, int elIdFormaPago)
         {
+            PagoEntidad unPago = new PagoEntidad();
+            unPago.IdPedido = elPedido.IdPedido;
+            unPago.miFormaPago = new FormaPagoEntidad();
+            unPago.miFormaPago.IdFormaPago = elIdFormaPago;
+            unPago.MontoPago = (decimal)elPedido.misDetalles.Select(x => x.Cantidad * x.PrecioUnitario).Sum();
+            unPago.CUIT = elPedido.CUIT;
+            unPago.FechaPago = DateTime.Now;
+
+            RegistrarPago(unPago);
+
             ComprobanteEntidad unComprobante = new ComprobanteEntidad();//
             unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();//
             ComprobanteCore unManagerComprobante = new ComprobanteCore();//
@@ -302,6 +312,12 @@ namespace TFI.CORE.Managers
             
         }
 
+
+        public void RegistrarPago(PagoEntidad elPago)
+        {
+            PagoDAL GestorPago = new PagoDAL();
+            GestorPago.Insert(elPago);
+        }
 
 
     }
