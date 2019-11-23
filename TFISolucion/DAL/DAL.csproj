@@ -66,7 +66,6 @@
     <Compile Include="Repositories\DireccionDAL.cs" />
     <Compile Include="Repositories\DireccionUsuarioDAL.cs" />
     <Compile Include="Repositories\EmpresaDAL.cs" />
-    <Compile Include="Repositories\EstadoPagoDAL.cs" />
     <Compile Include="Repositories\EstadoPedidoDAL.cs" />
     <Compile Include="Repositories\FamiliaDAL.cs" />
     <Compile Include="Repositories\FormaEntregaDAL.cs" />
@@ -80,7 +79,6 @@
     <Compile Include="Repositories\MonedaDAL.cs" />
     <Compile Include="Repositories\MonedaEmpresaDAL.cs" />
     <Compile Include="Repositories\PagoDAL.cs" />
-    <Compile Include="Repositories\PagoEstadoPagoDAL.cs" />
     <Compile Include="Repositories\PatenteDAL.cs" />
     <Compile Include="Repositories\PatenteFamiliaDAL.cs" />
     <Compile Include="Repositories\PedidoDAL.cs" />

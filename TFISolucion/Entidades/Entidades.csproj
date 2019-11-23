@@ -60,7 +60,6 @@
     <Compile Include="DireccionEntidad.cs" />
     <Compile Include="DireccionUsuarioEntidad.cs" />
     <Compile Include="EmpresaEntidad.cs" />
-    <Compile Include="EstadoPagoEntidad.cs" />
     <Compile Include="EstadoPedidoEntidad.cs" />
     <Compile Include="FamiliaEntidad.cs" />
     <Compile Include="FormaEntregaEntidad.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="MonedaEmpresaEntidad.cs" />
     <Compile Include="MonedaEntidad.cs" />
     <Compile Include="PagoEntidad.cs" />
-    <Compile Include="PagoEstadoPagoEntidad.cs" />
     <Compile Include="PatenteEntidad.cs" />
     <Compile Include="PatenteFamiliaEntidad.cs" />
     <Compile Include="PedidoDetalleEntidad.cs" />
