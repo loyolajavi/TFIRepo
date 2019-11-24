@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
@@ -47,6 +49,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     Session["Idioma"] = idioma;
 
                 }
+                CargarGrillaDeFacturas();
             }
             else
             {
@@ -66,31 +69,40 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
 
-            CargarGrillaDeFacturas();
+            
         }
 
         private void CargarGrillaDeFacturas()
         {
+            
+            
+            //usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            
+            //List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
+            //Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
 
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+           //foreach (var pedido in Pedidos)
+           //{
 
-            List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
-            Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
+           //    var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
+           //    foreach (var comprobante in Comprobantes)
+           //    {
+           //        if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
+           //        {
+           //            Facturas.Add(comprobante);
+           //        }
+           //    }
+           //}
 
-           foreach (var pedido in Pedidos)
-           {
+            var Comprobantes = ComprobanteBLL.ComprobanteSelectAllByCUIT();
+            foreach (var comprobante in Comprobantes)
+            {
+                if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
+                {
+                    Facturas.Add(comprobante);
+                }
+            }
 
-               var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
-               foreach (var comprobante in Comprobantes)
-               {
-                   if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
-                   {
-                       Facturas.Add(comprobante);
-                   }
-               }
-              
-
-           }
 
             if (Facturas.Count == 0)
             {
@@ -122,8 +134,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             }
 
+            grilladefacturas.DataSource = null;
+            FacturasAMostrar = (List<FacturasDTO>)FacturasAMostrar.OrderByDescending(X => X.FechaComprobante).ToList();
             grilladefacturas.DataSource = FacturasAMostrar;
-            grilladefacturas.AutoGenerateColumns = false;
             grilladefacturas.DataBind();
 
         }
@@ -188,84 +201,37 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
 
 
-            if (e.CommandName.Equals("GenerarNC"))
+            if (e.CommandName.Equals("GenerarNDeb"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string code = grilladefacturas.DataKeys[index].Value.ToString();
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
                 var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                if (comprobantes.Any(c => c.IdTipoComprobante > 3))
+                if (comprobantes.Any(c => c.IdTipoComprobante > 4 && c.IdTipoComprobante < 8))
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(@"<script type='text/javascript'>");
-                    sb.Append("alert('Nota de credito ya fue generada previamente');");
+                    sb.Append("alert('No es posible de realizar, la factura posee una Nota de crédito');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                                "ModalScript2", sb.ToString(), false);
                 }
-                else { 
-                ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
-                ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
-                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
-              
-                ComprobanteEntidad NotaDeCredito = new ComprobanteEntidad();
-
-                NotaDeCredito = ComprobanteRow;
-                NotaDeCredito.FechaComprobante = DateTime.Now;
-
-                NotaDeCredito.Detalles = new List<ComprobanteDetalleEntidad>();
-
-                 switch (ComprobanteRow.IdTipoComprobante)
-                  {
-                case 1:
-                    NotaDeCredito.IdTipoComprobante = 5;
-                    break;
-                case 2:
-                    NotaDeCredito.IdTipoComprobante = 7;
-                    break;
-                case 3:
-                    NotaDeCredito.IdTipoComprobante = 8;
-                    break;
-                default:
-                     NotaDeCredito.IdTipoComprobante = 5;
-                    break;
-                 }
+                else 
+                {
+                    //NroFactAsocND.Value = code;
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#NroFactAsocND').val('");
+                    sb.Append(code);
+                    sb.Append("');");
+                    sb.Append("$('#mdl_MontoNotaDebito').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "ModalScript3", sb.ToString(), false);
 
 
-                 int ContadorDetalle = 0;
-
-                 foreach (var item in ListadeDetalles)
-                 {
-
-                     ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                     ContadorDetalle = ContadorDetalle + 1;
-                     unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                     unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
-                     unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
-                     unDetalleComprobante.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
-                     unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                     unDetalleComprobante.IdProducto = item.IdProducto;
-                     unDetalleComprobante.CantidadProducto = item.CantidadProducto;
-                     unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
-                     NotaDeCredito.Detalles.Add(unDetalleComprobante);
-                     //ComprobanteDetalleEntidad NCDetalle = detalle;
-                     //NCDetalle.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
-                     //ComprobanteBLL.DetalleCreate(NCDetalle);
-                     
-                 }
-
-                ComprobanteBLL.Create(NotaDeCredito);
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("alert('Nota de credito generada');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                           "ModalScript3", sb.ToString(), false);
-
-            }
+                }
             }
         }
 
@@ -274,8 +240,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             List<PedidoEntidad> Pedidos = new List<PedidoEntidad>();
             Pedidos = pedidoCore.SelectAllByCUIT(usuarioentidad.CUIT);
-            List<ComprobanteEntidad> FacturasDelCliente = new List<ComprobanteEntidad>();
+            //List<ComprobanteEntidad> FacturasDelCliente = new List<ComprobanteEntidad>();
             List<FacturasDTO> FacturasAMostrarDelCliente = new List<FacturasDTO>();
+            Facturas.Clear();
             foreach (var pedido in Pedidos)
             {
 
@@ -286,14 +253,14 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 {
                     if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
                     {
-                        FacturasDelCliente.Add(comprobante);
+                        Facturas.Add(comprobante);
                     }
                 }
 
                 }
             }
 
-            if (FacturasDelCliente.Count == 0)
+            if (Facturas.Count == 0)
             {
                 contenedorsinfacturas.Visible = true;
                 sinfacturas.InnerHtml = "<p>Este usuario no tiene facturas disponibles para consultar.</p>";
@@ -303,7 +270,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                  contenedorsinfacturas.Visible = false;
             }
 
-            for (int i = 0; i < FacturasDelCliente.Count; i++)
+            for (int i = 0; i < Facturas.Count; i++)
             {
                 FacturasDTO FacturaAMostrar = new FacturasDTO();
                 FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].IdTipoComprobante).DescripTipoComprobante;
@@ -329,6 +296,97 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grilladefacturas.DataBind();
 
         }
+
+        protected void grilladefacturas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grilladefacturas.PageIndex = e.NewPageIndex;
+            CargarGrillaDeFacturas();
+        }
+
+
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public static bool GenerarNotaDebWebMethod(string MontoNotaDebito, string NroFactAsocND)
+        {
+            ComprobanteCore ComprobanteBLL = new ComprobanteCore();
+            ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
+
+            try
+            {
+                string ultimos8delcode = NroFactAsocND.Substring(NroFactAsocND.Length - 8);
+                string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+                //var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+
+                ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+                List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
+                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+
+                ComprobanteEntidad unaNotaDebito = new ComprobanteEntidad();
+
+                unaNotaDebito = ComprobanteRow;
+                unaNotaDebito.FechaComprobante = DateTime.Now;
+
+                unaNotaDebito.Detalles = new List<ComprobanteDetalleEntidad>();
+
+                switch (ComprobanteRow.IdTipoComprobante)
+                {
+                    case 1:
+                        unaNotaDebito.IdTipoComprobante = 8;
+                        break;
+                    case 2:
+                        unaNotaDebito.IdTipoComprobante = 9;
+                        break;
+                    case 3:
+                        unaNotaDebito.IdTipoComprobante = 10;
+                        break;
+                    default:
+                        unaNotaDebito.IdTipoComprobante = 8;
+                        break;
+                }
+
+
+                int ContadorDetalle = 0;
+
+                foreach (var item in ListadeDetalles)
+                {
+
+                    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+                    ContadorDetalle = ContadorDetalle + 1;
+                    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+                    unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
+                    unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
+                    unDetalleComprobante.IdTipoComprobante = unaNotaDebito.IdTipoComprobante;
+                    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+                    unDetalleComprobante.IdProducto = item.IdProducto;
+                    unDetalleComprobante.CantidadProducto = item.CantidadProducto;
+                    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
+                    unaNotaDebito.Detalles.Add(unDetalleComprobante);
+                    //ComprobanteDetalleEntidad NCDetalle = detalle;
+                    //NCDetalle.IdTipoComprobante = NotaDeCredito.IdTipoComprobante;
+                    //ComprobanteBLL.DetalleCreate(NCDetalle);
+                }
+
+                unaNotaDebito.Ajuste = int.Parse(MontoNotaDebito);
+
+                ComprobanteBLL.Create(unaNotaDebito);
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //sb.Append(@"<script type='text/javascript'>");
+            //sb.Append("alert('Nota de credito generada');");
+            //sb.Append(@"</script>");
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+            //           "ModalScript3", sb.ToString(), false);
+        }
+
 
     }
 }

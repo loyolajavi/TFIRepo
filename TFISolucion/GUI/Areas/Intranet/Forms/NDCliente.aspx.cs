@@ -75,11 +75,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             foreach (var pedido in Pedidos)
             {
-
                 var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                 foreach (var comprobante in Comprobantes)
                 {
-                    if (comprobante.IdTipoComprobante == 6 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
+                    if (comprobante.IdTipoComprobante == 8 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
                     {
                         NDs.Add(comprobante);
                     }
@@ -112,11 +111,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
                 Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdSucursal, NDs[i].IdTipoComprobante);
-                NDAMostrar.Total = MontoTotalPorND(Detalles);
+                NDAMostrar.Total = NDs[i].Ajuste;
                 NotasDeDebitoAMostrar.Add(NDAMostrar);
 
             }
 
+            grilladend.DataSource = null;
+            NotasDeDebitoAMostrar = (List<NDsDTO>)NotasDeDebitoAMostrar.OrderByDescending(X => X.FechaComprobante).ToList();
             grilladend.DataSource = NotasDeDebitoAMostrar;
             grilladend.AutoGenerateColumns = false;
             grilladend.DataBind();
@@ -135,7 +136,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             public string NroComprobante { get; set; }
             public DateTime FechaComprobante { get; set; }
             public string TipoComprobante { get; set; }
-            public double Total { get; set; }
+            public decimal? Total { get; set; }
         }
 
         public class NCDetalleDTO
@@ -200,7 +201,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                     foreach (var comprobante in Comprobantes)
                     {
-                        if (comprobante.IdTipoComprobante == 6 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
+                        if (comprobante.IdTipoComprobante == 8 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
                         {
                             NDsDelCliente.Add(comprobante);
                         }
@@ -234,7 +235,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
                 Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdSucursal, NDs[i].IdTipoComprobante);
-                NDAMostrar.Total = MontoTotalPorND(Detalles);
+                NDAMostrar.Total = NDsDelCliente[i].Ajuste;
                 NDsAMostrarDelCliente.Add(NDAMostrar);
 
             }
@@ -242,6 +243,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grilladend.DataSource = NDsAMostrarDelCliente;
             grilladend.AutoGenerateColumns = false;
             grilladend.DataBind();
+        }
+
+        protected void grilladend_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grilladend.PageIndex = e.NewPageIndex;
+            CargarGrilladeNd();
         }
     }
 }

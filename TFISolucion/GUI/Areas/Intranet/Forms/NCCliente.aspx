@@ -51,14 +51,14 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
                     <ContentTemplate>
-                        <asp:GridView ID="grilladenc" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladenc_RowCommand" PageSize="4">
+                        <asp:GridView ID="grilladenc" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladenc_RowCommand" AllowPaging="true" OnPageIndexChanging="grilladenc_PageIndexChanging" PageSize="10" AutoGenerateColumns="false">
                             <Columns>
                                 <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroNC %>" />
                                 <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaNC %>" />
                                 <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:ButtonField CommandName="GenerarND" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <%--<asp:ButtonField CommandName="GenerarND" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>

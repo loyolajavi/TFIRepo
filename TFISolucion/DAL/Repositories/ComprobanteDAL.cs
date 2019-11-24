@@ -135,11 +135,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelect", parameters))
+			using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelect", parameters))
 			{
                 ComprobanteEntidad ComprobanteEntidad = new ComprobanteEntidad();
 
-                ComprobanteEntidad = Mapeador.MapearFirst<ComprobanteEntidad>(dt);
+                ComprobanteEntidad = MapearUno(ds);
 
                 return ComprobanteEntidad;
 			}
@@ -151,11 +151,11 @@ namespace TFI.DAL.DAL
 		/// </summary>
 		public List<ComprobanteEntidad> SelectAll()
 		{
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAll"))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAll"))
 			{
 				List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
 				return comprobanteEntidadList;
 			}
@@ -172,11 +172,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT", parameters))
+			using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT", parameters))
 			{
 				List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
 				return comprobanteEntidadList;
 			}
@@ -194,11 +194,11 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@NroComprobante", NroComprobante)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT_NroComprobante", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByCUIT_NroComprobante", parameters))
             {
                 List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
                 return comprobanteEntidadList;
             }
@@ -214,11 +214,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", idPedido)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdPedido", parameters))
+			using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdPedido", parameters))
 			{
 				List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
 				return comprobanteEntidadList;
 			}
@@ -234,11 +234,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdSucursal", idSucursal)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdSucursal", parameters))
+			using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdSucursal", parameters))
 			{
 				List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
 				return comprobanteEntidadList;
 			}
@@ -254,11 +254,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdTipoComprobante", idTipoComprobante)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdTipoComprobante", parameters))
+			using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdTipoComprobante", parameters))
 			{
 				List<ComprobanteEntidad> comprobanteEntidadList = new List<ComprobanteEntidad>();
 
-                comprobanteEntidadList = Mapeador.Mapear<ComprobanteEntidad>(dt);
+                comprobanteEntidadList = MapearMuchos(ds);
 
 				return comprobanteEntidadList;
 			}
@@ -287,7 +287,64 @@ namespace TFI.DAL.DAL
             //SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteInsert", parameters);
         }
 
-	
+
+        private ComprobanteEntidad MapearUno(DataSet ds)
+        {
+            ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                unComprobante.IdComprobante = (int)row["IdComprobante"];
+                unComprobante.IdPedido = (int)row["IdPedido"];
+                if (row["Ajuste"] != null)
+                    unComprobante.Ajuste = (decimal)row["Ajuste"];
+                unComprobante.CUIT = row["CUIT"].ToString();
+                unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
+                unComprobante.FechaComprobante = DateTime.Parse(row["FechaComprobante"].ToString());
+                unComprobante.IdSucursal = (int)row["IdSucursal"];
+                unComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
+                unComprobante.NroComprobante = (int)row["NroComprobante"];
+                if (row["FecBaja"].ToString() != "")
+                    unComprobante.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+            }
+            return unComprobante;
+        }
+
+        private List<ComprobanteEntidad> MapearMuchos(DataSet ds)
+        {
+            List<ComprobanteEntidad> ResUnosComprobantes = new List<ComprobanteEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    ComprobanteEntidad unComprobante = new ComprobanteEntidad();
+
+                    unComprobante.IdComprobante = (int)row["IdComprobante"];
+                    unComprobante.IdPedido = (int)row["IdPedido"];
+                    unComprobante.Ajuste = (decimal)row["Ajuste"];
+                    unComprobante.CUIT = row["CUIT"].ToString();
+                    unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
+                    unComprobante.FechaComprobante = DateTime.Parse(row["FechaComprobante"].ToString());
+                    unComprobante.IdSucursal = (int)row["IdSucursal"];
+                    unComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
+                    unComprobante.NroComprobante = (int)row["NroComprobante"];
+                    if (row["FecBaja"].ToString() != "")
+                        unComprobante.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+
+                    ResUnosComprobantes.Add(unComprobante);
+                }
+                return ResUnosComprobantes;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+
 		#endregion
 	}
 }

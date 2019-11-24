@@ -14,7 +14,7 @@ namespace TFI.Entidades
         public int IdPedido { get; set; }
         public DateTime? FecBaja { get; set; }
 
-        public decimal? Ajuste { get; set; }
+        public decimal Ajuste { get; set; }
 
         public List<ComprobanteDetalleEntidad> Detalles { get; set; }
     }

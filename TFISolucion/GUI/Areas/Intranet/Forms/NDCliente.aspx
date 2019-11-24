@@ -51,7 +51,7 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
                     <ContentTemplate>
-                        <asp:GridView ID="grilladend" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladend_RowCommand" PageSize="4">
+                        <asp:GridView ID="grilladend" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladend_RowCommand" AllowPaging="true" OnPageIndexChanging="grilladend_PageIndexChanging" PageSize="10" AutoGenerateColumns="false">
                             <Columns>
                                 <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NDNumero %>" />

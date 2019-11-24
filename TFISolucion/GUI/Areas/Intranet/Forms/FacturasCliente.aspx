@@ -53,14 +53,19 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
                     <ContentTemplate>
-                        <asp:GridView ID="grilladefacturas" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand" PageSize="4">
+                        <asp:GridView ID="grilladefacturas" AllowPaging="true" OnPageIndexChanging="grilladefacturas_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand">
                             <Columns>
                                 <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
                                 <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" />
                                 <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" />
                                 <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:ButtonField CommandName="GenerarNC" HeaderText="<%$Resources:Global, GenerarNC %>" Text="<%$Resources:Global, GenerarNC %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--<asp:ButtonField CommandName="GenerarNDeb" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>
@@ -124,6 +129,31 @@
             </div>
         </div>
     </div>
+
+
+    <div id="mdl_MontoNotaDebito" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+                    <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.GenerarND%></h3>
+                </div>
+                <div class="modal-body text-center">
+                    <input type="text" class="form-control" clientidmode="static" id="NroFactAsocND" runat="server" maxlength="50" />
+                    <input type="text" class="form-control" clientidmode="static" id="MontoNotaDebito" runat="server" maxlength="20" />
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <a class="btn btn-success" style="width: 200px; background-color: black; color: #fff;" href="#" id="btnGenerarNotaDeb"><%=Resources.Global.Continuar%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
 

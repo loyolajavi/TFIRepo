@@ -432,3 +432,40 @@ var updateCompras = function () {
 
 //END*************PedidosConfirmacion.aspx*******************
 //END********************************************************
+
+
+//*********FacturasCliente.aspx get montoNotaDebito y generarla por webmethod****************
+    $('#btnGenerarNotaDeb').click(function () {
+        //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+        var parametros = {
+            MontoNotaDebito: $('#MontoNotaDebito').val(),
+            NroFactAsocND: $('#NroFactAsocND').val()
+        };
+            // Ahora hacemos la llamada tipo AJAX utilizando jQuery
+            $.ajax({
+                type: 'POST',                               // tipo de llamada (POST, GET)
+                url: 'FacturasCliente.aspx/GenerarNotaDebWebMethod',
+                dataType: "json",  // el URL del método que vamos a llamar
+                // los parámetros en formato JSON
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
+                success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+                    // $('#notification').text('La información ha sido guardada exitosamente.');
+
+                    //window.location.reload();
+                    if (data.d == true) {
+                        alert('Nota de debito generada');
+                        $('#mdl_MontoNotaDebito').modal('hide');
+                    }
+                    else {
+                        alert('Ocurrió un error al intentar generar la Nota de crédito');
+                        $('#mdl_MontoNotaDebito').modal('hide');
+                    }
+                },
+                error: function (data) {          // función que se va a ejecutar si el pedido falla
+
+                    Alert("No se ha podido realizar la nota de crédito");
+                    $('#mdl_MontoNotaDebito').modal('hide');
+                }
+            });
+    });

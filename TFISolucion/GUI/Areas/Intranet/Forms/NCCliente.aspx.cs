@@ -78,11 +78,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             foreach (var pedido in Pedidos)
             {
-
                 var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                 foreach (var comprobante in Comprobantes)
                 {
-                    if (comprobante.IdTipoComprobante == 5 || comprobante.IdTipoComprobante == 7 || comprobante.IdComprobante == 8)
+                    if (comprobante.IdTipoComprobante == 5 || comprobante.IdTipoComprobante == 6 || comprobante.IdTipoComprobante == 7)
                     {
                         NCs.Add(comprobante);
                     }
@@ -121,8 +120,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             }
 
+            grilladenc.DataSource = null;
+            NotasDeCreditoAMostrar = (List<NCsDTO>)NotasDeCreditoAMostrar.OrderByDescending(X => X.FechaComprobante).ToList();
             grilladenc.DataSource = NotasDeCreditoAMostrar;
-            grilladenc.AutoGenerateColumns = false;
             grilladenc.DataBind();
         }
 
@@ -186,80 +186,80 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
 
 
-            if (e.CommandName.Equals("GenerarND"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                string code = grilladenc.DataKeys[index].Value.ToString();
-                string ultimos8delcode = code.Substring(code.Length - 8);
-                string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
-                var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                if (comprobantes.Any(c => c.IdTipoComprobante == 6 || c.IdTipoComprobante > 8))
-                {
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append(@"<script type='text/javascript'>");
-                    sb.Append("alert('Nota de debito ya fue generada previamente');");
-                    sb.Append(@"</script>");
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                               "ModalScript", sb.ToString(), false);
-                }
-                else { 
-                ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
-                 ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                 List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
-                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+            //if (e.CommandName.Equals("GenerarND"))
+            //{
+            //    int index = Convert.ToInt32(e.CommandArgument);
+            //    string code = grilladenc.DataKeys[index].Value.ToString();
+            //    string ultimos8delcode = code.Substring(code.Length - 8);
+            //    string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
+            //    var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+            //    if (comprobantes.Any(c => c.IdTipoComprobante == 6 || c.IdTipoComprobante > 8))
+            //    {
+            //        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //        sb.Append(@"<script type='text/javascript'>");
+            //        sb.Append("alert('Nota de debito ya fue generada previamente');");
+            //        sb.Append(@"</script>");
+            //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+            //                   "ModalScript", sb.ToString(), false);
+            //    }
+            //    else { 
+            //        ComprobanteEntidad ComprobanteRow = new ComprobanteEntidad();
+            //         ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
+            //         List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
+            //        ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
 
-                ComprobanteEntidad Notadedebito = new ComprobanteEntidad();
-                    Notadedebito = ComprobanteRow;
-                    Notadedebito.FechaComprobante = DateTime.Now;
-                    Notadedebito.Detalles = new List<ComprobanteDetalleEntidad>();
-                switch (ComprobanteRow.IdTipoComprobante)
-                {
-                    case 1:
-                        Notadedebito.IdTipoComprobante = 6;
-                        break;
-                    case 2:
-                        Notadedebito.IdTipoComprobante = 9;
-                        break;
-                    case 3:
-                        Notadedebito.IdTipoComprobante = 10;
-                        break;
-                    default:
-                        Notadedebito.IdTipoComprobante = 6;
-                        break;
-                }
-
-
-                int ContadorDetalle = 0;
-
-                foreach (var item in ListadeDetalles)
-                {
-
-                    ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
-                    ContadorDetalle = ContadorDetalle + 1;
-                    unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
-                    unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
-                    unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
-                    unDetalleComprobante.IdTipoComprobante = Notadedebito.IdTipoComprobante;
-                    unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                    unDetalleComprobante.IdProducto = item.IdProducto;
-                    unDetalleComprobante.CantidadProducto = item.CantidadProducto;
-                    unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
-                    Notadedebito.Detalles.Add(unDetalleComprobante);
-
-                }
-
-                ComprobanteBLL.Create(Notadedebito);
+            //        ComprobanteEntidad Notadedebito = new ComprobanteEntidad();
+            //            Notadedebito = ComprobanteRow;
+            //            Notadedebito.FechaComprobante = DateTime.Now;
+            //            Notadedebito.Detalles = new List<ComprobanteDetalleEntidad>();
+            //        switch (ComprobanteRow.IdTipoComprobante)
+            //        {
+            //            case 1:
+            //                Notadedebito.IdTipoComprobante = 6;
+            //                break;
+            //            case 2:
+            //                Notadedebito.IdTipoComprobante = 9;
+            //                break;
+            //            case 3:
+            //                Notadedebito.IdTipoComprobante = 10;
+            //                break;
+            //            default:
+            //                Notadedebito.IdTipoComprobante = 6;
+            //                break;
+            //        }
 
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("alert('Nota de debito generada');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                           "ModalScript", sb.ToString(), false);
+            //        int ContadorDetalle = 0;
 
-            }
-            }
+            //        foreach (var item in ListadeDetalles)
+            //        {
+
+            //            ComprobanteDetalleEntidad unDetalleComprobante = new ComprobanteDetalleEntidad();
+            //            ContadorDetalle = ContadorDetalle + 1;
+            //            unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
+            //            unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
+            //            unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
+            //            unDetalleComprobante.IdTipoComprobante = Notadedebito.IdTipoComprobante;
+            //            unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
+            //            unDetalleComprobante.IdProducto = item.IdProducto;
+            //            unDetalleComprobante.CantidadProducto = item.CantidadProducto;
+            //            unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
+            //            Notadedebito.Detalles.Add(unDetalleComprobante);
+
+            //        }
+
+            //        ComprobanteBLL.Create(Notadedebito);
+
+
+            //        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //        sb.Append(@"<script type='text/javascript'>");
+            //        sb.Append("alert('Nota de debito generada');");
+            //        sb.Append(@"</script>");
+            //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+            //                   "ModalScript", sb.ToString(), false);
+
+            //    }
+            //}
         }
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
@@ -279,7 +279,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                     foreach (var comprobante in Comprobantes)
                     {
-                        if (comprobante.IdTipoComprobante == 5 || comprobante.IdTipoComprobante == 7 || comprobante.IdComprobante == 8)
+                        if (comprobante.IdTipoComprobante == 5 || comprobante.IdTipoComprobante == 6 || comprobante.IdComprobante == 7)
                         {
                             NCsDelCliente.Add(comprobante);
                         }
@@ -324,5 +324,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 grilladenc.DataBind();
 
             }
+
+        protected void grilladenc_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grilladenc.PageIndex = e.NewPageIndex;
+            CargarGrilladeNc();
+        }
         }
     }
