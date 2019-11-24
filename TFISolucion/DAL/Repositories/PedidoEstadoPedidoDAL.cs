@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using TFI.Entidades;
-using TFI.HelperDAL;
+using TFI.FUNCIONES.Persistencia;
 
 namespace TFI.DAL.DAL
 {

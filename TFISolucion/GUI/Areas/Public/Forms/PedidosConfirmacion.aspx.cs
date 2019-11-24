@@ -208,7 +208,7 @@ namespace TFI.GUI.Areas.Public.Forms
             unaEmpresa = unManagerEmpresa.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit);
 
             //Obtener host servicio Mail
-            TFI.CORE.Services.ServicioMailCore.CargarMailConfig();
+            TFI.CORE.Servicios.ServicioMailCore.CargarMailConfig();
             TFI.FUNCIONES.ServicioMail.EnviarCorreo(logueado.Email, unaEmpresa.NombreEmpresa, "Datos para la Transferencia", unaEmpresa.CUIT);
         }
 

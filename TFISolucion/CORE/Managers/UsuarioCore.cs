@@ -4,6 +4,8 @@ using System.Linq;
 using TFI.CORE.Helpers;
 using TFI.DAL.DAL;
 using TFI.Entidades;
+using TFI.Entidades.Servicios.Permisos;
+using TFI.SEGURIDAD;
 
 namespace TFI.CORE.Managers
 {
@@ -263,6 +265,29 @@ namespace TFI.CORE.Managers
         public void DeleteAllByIdUsuarioTipo(int elTipoUsuario)
         {
             _dal.DeleteAllByIdUsuarioTipo(elTipoUsuario);
+        }
+
+
+        public List<IFamPat> UsuarioTraerPermisos(string elNomUsuario, string elCUIT)
+        {
+
+            Servicios.BLLFamilia ManagerFamilia = new Servicios.BLLFamilia();
+
+            try
+            {
+                List<IFamPat> unasFamilias;
+                //Primero traigo los permisos directos que tiene usuario (Familias y Patentes)
+                unasFamilias = _dal.UsuarioTraerPermisos(elNomUsuario, elCUIT);
+                //Segundo veo si aquellos permisos (1), tienen subpermisos (Familias y/o Patentes) y los agrego. La variable unasFamilias se modifica en las funciones de la BLL y DAL directamente.
+                ManagerFamilia.FamiliaTraerSubPermisos(unasFamilias);
+                return unasFamilias;
+
+            }
+            catch (Exception es)
+            {
+                ServicioLog.CrearLog(es, "UsuarioTraerPermisos", elNomUsuario, elCUIT);
+                throw;
+            }
         }
 
 

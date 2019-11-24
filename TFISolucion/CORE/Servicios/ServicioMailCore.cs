@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TFI.DAL;
 
-namespace TFI.CORE.Services
+namespace TFI.CORE.Servicios
 {
     public class ServicioMailCore
     {

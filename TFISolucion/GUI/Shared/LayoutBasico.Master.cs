@@ -8,7 +8,9 @@ using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using TFI.Entidades.Servicios.Permisos;
 using TFI.FUNCIONES;
+using System.Linq;
 
 namespace TFI.GUI.General
 {
@@ -151,6 +153,7 @@ namespace TFI.GUI.General
 
         protected void Salir_Click(object sender, EventArgs e)
         {
+            TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
             Session.Abandon();
             Response.Redirect("/Areas/Public/Forms/Home.aspx");
         }
@@ -225,6 +228,23 @@ namespace TFI.GUI.General
             return 0;
         }
 
+        public bool Autenticacion2(string elPermiso)
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            string[] PermisosPagina = { elPermiso };
+
+            if (usuarioAutenticado != null)
+            {
+                if (CORE.Servicios.BLLFamilia.BuscarPermiso(usuarioAutenticado.Permisos, PermisosPagina))
+                    return true;
+                //return usuarioAutenticado.Permisos.Any(X => X.NombreIFamPat == elPermiso);
+            }
+            return false;
+
+        }
+
         public void RealizarLogueo(string elUsuario, string laClave)
         {
             usuario = new UsuarioEntidad();
@@ -234,6 +254,7 @@ namespace TFI.GUI.General
             if (!string.IsNullOrEmpty(usuario.Nombre))
             {
                 usuario.Familia = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(usuario.IdUsuario);
+                usuario.Permisos = _manager.UsuarioTraerPermisos(usuario.NombreUsuario, usuario.CUIT);
                 Session["Usuario"] = usuario;
                 //Session["Permiso"] = unaFamilia.IdFamilia;
                 SetUsuarioLogueado(usuario.NombreUsuario);

@@ -5,9 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace TFI.HelperDAL
+namespace TFI.FUNCIONES.Persistencia
 {
-    internal class Mapeador
+    public static class Mapeador
     {
         public static List<T> Mapear<T>(DataTable table) where T : new()
         {

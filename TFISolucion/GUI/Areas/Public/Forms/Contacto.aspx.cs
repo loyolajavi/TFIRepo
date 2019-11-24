@@ -77,7 +77,7 @@ namespace TFI.GUI
             notificacion.Visible = true;
 
             //Obtener host servicio Mail
-            TFI.CORE.Services.ServicioMailCore.CargarMailConfig();
+            TFI.CORE.Servicios.ServicioMailCore.CargarMailConfig();
 
             TFI.FUNCIONES.ServicioMail.EnviarCorreo("egenloys@gmail.com", txtNombre.Value + txtApellido.Value, txtAsunto.Value, txtMensaje.Value + " " + txtCorreo.Value + " " + txtTelefono.Value);
             //Correo manager = new Correo();

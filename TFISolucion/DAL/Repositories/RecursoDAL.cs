@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TFI.Entidades;
-using TFI.HelperDAL;
+using TFI.FUNCIONES.Persistencia;
 
 namespace TFI.DAL.DAL
 {

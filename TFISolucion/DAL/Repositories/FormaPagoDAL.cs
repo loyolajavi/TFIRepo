@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TFI.HelperDAL; using TFI.Entidades;
+using TFI.FUNCIONES.Persistencia; using TFI.Entidades;
 
 
 namespace TFI.DAL.DAL

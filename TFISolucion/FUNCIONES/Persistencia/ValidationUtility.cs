@@ -6,9 +6,9 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace TFI.HelperDAL
+namespace TFI.FUNCIONES.Persistencia
 {
-    static class ValidationUtility
+    public static class ValidationUtility
     {
 
             public static void ValidateArgument<T>(string name, T value) where T : new()

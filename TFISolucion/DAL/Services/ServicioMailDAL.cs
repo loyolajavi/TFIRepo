@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
-using TFI.HelperDAL;
+using TFI.FUNCIONES.Persistencia;
 
 
 namespace TFI.DAL.Services

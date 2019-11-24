@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using TFI.Entidades.Servicios.Permisos;
 
 namespace TFI.Entidades
 {
@@ -87,8 +89,15 @@ namespace TFI.Entidades
                 _Familia = value;
             }
         }
-        
-        
+
+
+        private List<IFamPat> _Permisos = new List<IFamPat>();
+
+        public List<IFamPat> Permisos
+        {
+            get { return _Permisos; }
+            set { _Permisos = value; }
+        }
 
          
 

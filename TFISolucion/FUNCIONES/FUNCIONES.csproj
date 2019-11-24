@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -57,7 +58,12 @@
     <Compile Include="Encriptacion.cs" />
     <Compile Include="IdiomaManager.cs" />
     <Compile Include="LenguajeManager.cs" />
+    <Compile Include="Persistencia\Mapeador.cs" />
+    <Compile Include="Persistencia\SqlClientUtility.cs" />
+    <Compile Include="Persistencia\ValidationUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seguridad\ServicioLog.cs" />
+    <Compile Include="Seguridad\ServicioSecurizacion.cs" />
     <Compile Include="ServicioMail.cs" />
     <Compile Include="ServicioSerializadorXML.cs" />
   </ItemGroup>

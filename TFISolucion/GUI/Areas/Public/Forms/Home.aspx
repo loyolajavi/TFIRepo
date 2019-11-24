@@ -67,7 +67,8 @@
                                             </div>
                                             <div class="item-toolbar">
                                                 <input type="button" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                                <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
+                                               <%-- <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)--%>
+                                                <% if (this.Master.Autenticacion2("Desear"))
                                                     {%>
                                                 <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>"  onclick="onBtnAddClick(this)" />
                                                 <%}%>
@@ -95,7 +96,8 @@
                                                <h5 class="precio"><span><%=moneda.SimboloMoneda%></span><span><%#Eval("PrecioUnitario")%></span></h5>
                                                 <%--ESTO HAY QUE CORREGIRLO PARA QUE LA MONEDA PUEDA SER OTRA Y NO ESTE HARDCOREADA--%>
                                                 <input type="button" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" data-producto='<%#Eval("IdProducto")%>' />
-                                                <% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)
+                                                <%--<% if (this.Master.Autenticacion() > TFI.Entidades.FamiliaEntidad.PermisoFamilia.Publico)--%>
+                                                <% if (this.Master.Autenticacion2("Desear"))
                                                     {%>
                                                 <%--<input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value="Desear" onclick="onBtnAddClick(this)" />--%>
                                                 <input type="button" class="btn btn-info" clientidmode="static" runat="server" data-producto='<%#Eval("IdProducto")%>' value= "<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)"/>

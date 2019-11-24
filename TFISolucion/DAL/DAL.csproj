@@ -52,12 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelperDAL\Mapeador.cs" />
-    <Compile Include="HelperDAL\SqlClientUtility.cs" />
-    <Compile Include="HelperDAL\ValidationUtility.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BitacoraLogDAL.cs" />
     <Compile Include="Repositories\CategoriaDAL.cs" />
     <Compile Include="Repositories\ComprobanteDAL.cs" />
     <Compile Include="Repositories\ComprobanteDetalleDAL.cs" />
@@ -100,6 +96,7 @@
     <Compile Include="Repositories\UsuarioDAL.cs" />
     <Compile Include="Repositories\UsuarioFamiliaDAL.cs" />
     <Compile Include="Repositories\UsuarioPatenteDAL.cs" />
+    <Compile Include="Services\DALFamilia.cs" />
     <Compile Include="Services\ServicioMailDAL.cs" />
     <Compile Include="SQLServer.cs" />
   </ItemGroup>
@@ -116,6 +113,9 @@
       <Project>{35b8fc6e-bb13-406e-9c98-b0b533c7c6d3}</Project>
       <Name>SEGURIDAD</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HelperDAL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

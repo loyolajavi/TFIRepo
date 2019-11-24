@@ -3,9 +3,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace TFI.HelperDAL
+namespace TFI.FUNCIONES.Persistencia
 {
-        internal static class SqlClientUtility
+        public static class SqlClientUtility
         {
             public static string connectionStringName
             {
@@ -17,6 +17,13 @@ namespace TFI.HelperDAL
             private static SqlTransaction tr;
             private static SqlCommand command;
             private static SqlConnection connection;
+
+            public static bool ConexionGetEstado()
+            {
+                if (connection != null && connection.State == ConnectionState.Open)
+                    return true;
+                return false;
+            }
 
             public static DataTable ExecuteDataTable(string connectionStringName, CommandType commandType, string commandText, params SqlParameter[] parameters)
             {
