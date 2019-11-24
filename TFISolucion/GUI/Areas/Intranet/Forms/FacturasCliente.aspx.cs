@@ -49,7 +49,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     Session["Idioma"] = idioma;
 
                 }
-                CargarGrillaDeFacturas();
+               
             }
             else
             {
@@ -68,7 +68,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
-
+            CargarGrillaDeFacturas();
             
         }
 
@@ -93,6 +93,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
            //        }
            //    }
            //}
+            Facturas.Clear();
+            FacturasAMostrar.Clear();
 
             var Comprobantes = ComprobanteBLL.ComprobanteSelectAllByCUIT();
             foreach (var comprobante in Comprobantes)
@@ -212,10 +214,19 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(@"<script type='text/javascript'>");
-                    sb.Append("alert('No es posible de realizar, la factura posee una Nota de crédito');");
+                    sb.Append("alert('No es posible de realizar, la factura posee una Nota de crédito asociada');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                                "ModalScript2", sb.ToString(), false);
+                }
+                else if(comprobantes.Any(c => c.IdTipoComprobante >= 8))
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("alert('No es posible de realizar, la factura ya posee una Nota de débito asociada');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "ModalScript4", sb.ToString(), false);
                 }
                 else 
                 {

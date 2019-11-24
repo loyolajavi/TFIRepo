@@ -437,10 +437,12 @@ var updateCompras = function () {
 //*********FacturasCliente.aspx get montoNotaDebito y generarla por webmethod****************
     $('#btnGenerarNotaDeb').click(function () {
         //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
+        var MontoNotaDebito = $('#MontoNotaDebito').val();
         var parametros = {
             MontoNotaDebito: $('#MontoNotaDebito').val(),
             NroFactAsocND: $('#NroFactAsocND').val()
         };
+        if (MontoNotaDebito != '') {
             // Ahora hacemos la llamada tipo AJAX utilizando jQuery
             $.ajax({
                 type: 'POST',                               // tipo de llamada (POST, GET)
@@ -464,8 +466,12 @@ var updateCompras = function () {
                 },
                 error: function (data) {          // función que se va a ejecutar si el pedido falla
 
-                    Alert("No se ha podido realizar la nota de crédito");
+                    alert("No se ha podido realizar la nota de crédito");
                     $('#mdl_MontoNotaDebito').modal('hide');
                 }
             });
+        }
+        else {
+            alert("Ingrese el monto del ajuste a aplicar");
+        }
     });

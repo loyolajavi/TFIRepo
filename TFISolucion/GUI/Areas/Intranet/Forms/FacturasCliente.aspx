@@ -141,8 +141,8 @@
                     <h3 class="modal-title" style="color: #de5900;"><%=Resources.Global.GenerarND%></h3>
                 </div>
                 <div class="modal-body text-center">
-                    <input type="text" class="form-control" clientidmode="static" id="NroFactAsocND" runat="server" maxlength="50" />
-                    <input type="text" class="form-control" clientidmode="static" id="MontoNotaDebito" runat="server" maxlength="20" />
+                    <input type="text" readonly="readonly" class="form-control" clientidmode="static" id="NroFactAsocND" runat="server" maxlength="50" />
+                    <nav><b><asp:Label CssClass="" runat="server" Text="<%$Resources:Global, Ajuste%>" ></asp:Label></b></nav><input type="number" class="form-control" clientidmode="static" id="MontoNotaDebito" runat="server" maxlength="20" />
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">

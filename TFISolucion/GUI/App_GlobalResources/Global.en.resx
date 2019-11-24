@@ -966,4 +966,7 @@
   <data name="PagoFallo" xml:space="preserve">
     <value>The payment could not be made, retry please</value>
   </data>
+  <data name="Ajuste" xml:space="preserve">
+    <value>Adjustment</value>
+  </data>
 </root>

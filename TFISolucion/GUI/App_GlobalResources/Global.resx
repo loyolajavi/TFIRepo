@@ -963,4 +963,7 @@
   <data name="PagoFallo" xml:space="preserve">
     <value>El pago no pudo realizarse, por favor reintente</value>
   </data>
+  <data name="Ajuste" xml:space="preserve">
+    <value>Ajuste</value>
+  </data>
 </root>
