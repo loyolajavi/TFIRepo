@@ -215,7 +215,7 @@
                             <tr>
                                 <td id="lblTipo" class="td-lbl"><%=Resources.Global.Tipo%> : </td>
                                 <td>
-                                    <%if (MiTarjeta.IdTipoTarjeta == 1)
+                                    <%if (MiTarjeta.miTipoTarjeta.IdTipoTarjeta == 1)
                                         { %> 
                                 Visa
                                 <%  }

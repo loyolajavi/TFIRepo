@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\BLLBitacora.cs" />
     <Compile Include="Servicios\BLLFamilia.cs" />
     <Compile Include="Servicios\ServicioMailCore.cs" />
   </ItemGroup>

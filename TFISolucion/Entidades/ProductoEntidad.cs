@@ -34,7 +34,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the IdIvaProducto value.
 		/// </summary>
-		public int IdIvaProducto { get; set; }
+        public IvaProductoEntidad miIvaProducto { get; set; }
 
 		/// <summary>
 		/// Gets or sets the DescripProducto value.
@@ -51,6 +51,7 @@ namespace TFI.Entidades
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
 
+        public StockSucursalEntidad miStock { get; set; }
         public string DescripLarga { get; set; }
 
 		#endregion

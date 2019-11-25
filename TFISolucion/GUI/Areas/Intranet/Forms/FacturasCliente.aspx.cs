@@ -100,7 +100,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             var Comprobantes = ComprobanteBLL.ComprobanteSelectAllByCUIT();
             foreach (var comprobante in Comprobantes)
             {
-                if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
+                if (comprobante.miTipoComprobante.IdTipoComprobante == 1 || comprobante.miTipoComprobante.IdTipoComprobante == 2 || comprobante.miTipoComprobante.IdTipoComprobante == 3)
                 {
                     Facturas.Add(comprobante);
                 }
@@ -119,10 +119,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             for (int i = 0; i < Facturas.Count; i++)
             {
                 FacturasDTO FacturaAMostrar = new FacturasDTO();
-                FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].IdTipoComprobante).DescripTipoComprobante;
+                FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].miTipoComprobante.IdTipoComprobante).DescripTipoComprobante;
                 char TipoFacturaLetra = FacturaAMostrar.TipoComprobante[FacturaAMostrar.TipoComprobante.Length - 1];
                 string Sucursal4caracteres = "";
-                Sucursal4caracteres = Facturas[i].IdSucursal.ToString("D4");
+                Sucursal4caracteres = Facturas[i].miSucursal.IdSucursal.ToString("D4");
                 string NumeroFactura8Caracteres = "";
                 NumeroFactura8Caracteres = Facturas[i].NroComprobante.ToString("D8");
                 FacturaAMostrar.NroComprobante = "FC" + TipoFacturaLetra + "-" + Sucursal4caracteres + "-" + NumeroFactura8Caracteres;
@@ -131,7 +131,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].IdSucursal, Facturas[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].miSucursal.IdSucursal, Facturas[i].miTipoComprobante.IdTipoComprobante);
                 FacturaAMostrar.Total = MontoTotalPorFactura(Detalles);
                 FacturasAMostrar.Add(FacturaAMostrar);
 
@@ -179,12 +179,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
                 ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.miSucursal.IdSucursal, ComprobanteRow.miTipoComprobante.IdTipoComprobante);
                 List<FacturasDetalleDTO> ListaDetallesDTO = new List<FacturasDetalleDTO>();
                 foreach (var item in ListadeDetalles)
                 {
                     FacturasDetalleDTO NuevoDetalle = new FacturasDetalleDTO();
-                    NuevoDetalle.Producto =coreProducto.Find(item.IdProducto,1).DescripProducto;
+                    NuevoDetalle.Producto = coreProducto.Find(item.miProducto.IdProducto, 1).DescripProducto;
                     NuevoDetalle.Cantidad = item.CantidadProducto;
                     NuevoDetalle.PrecioUnitario = item.PrecioUnitarioFact;
                     NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
@@ -211,7 +211,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
                 var comprobantes = ComprobanteBLL.ComprobanteSelectAllListadosByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                if (comprobantes.Any(c => c.IdTipoComprobante > 4 && c.IdTipoComprobante < 8))
+                if (comprobantes.Any(c => c.miTipoComprobante.IdTipoComprobante > 4 && c.miTipoComprobante.IdTipoComprobante < 8))
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(@"<script type='text/javascript'>");
@@ -220,7 +220,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                                "ModalScript2", sb.ToString(), false);
                 }
-                else if(comprobantes.Any(c => c.IdTipoComprobante >= 8))
+                else if (comprobantes.Any(c => c.miTipoComprobante.IdTipoComprobante >= 8))
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(@"<script type='text/javascript'>");
@@ -258,12 +258,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             foreach (var pedido in Pedidos)
             {
 
-                if (pedido.NombreUsuario == txtClienteBusqueda.Text) { 
+                if (pedido.miUsuario.NombreUsuario == txtClienteBusqueda.Text)
+                { 
 
                 var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                 foreach (var comprobante in Comprobantes)
                 {
-                    if (comprobante.IdTipoComprobante == 1 || comprobante.IdTipoComprobante == 2 || comprobante.IdComprobante == 3)
+                    if (comprobante.miTipoComprobante.IdTipoComprobante == 1 || comprobante.miTipoComprobante.IdTipoComprobante == 2 || comprobante.miTipoComprobante.IdTipoComprobante == 3)
                     {
                         Facturas.Add(comprobante);
                     }
@@ -285,10 +286,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             for (int i = 0; i < Facturas.Count; i++)
             {
                 FacturasDTO FacturaAMostrar = new FacturasDTO();
-                FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].IdTipoComprobante).DescripTipoComprobante;
+                FacturaAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(Facturas[i].miTipoComprobante.IdTipoComprobante).DescripTipoComprobante;
                 char TipoFacturaLetra = FacturaAMostrar.TipoComprobante[FacturaAMostrar.TipoComprobante.Length - 1];
                 string Sucursal4caracteres = "";
-                Sucursal4caracteres = Facturas[i].IdSucursal.ToString("D4");
+                Sucursal4caracteres = Facturas[i].miSucursal.IdSucursal.ToString("D4");
                 string NumeroFactura8Caracteres = "";
                 NumeroFactura8Caracteres = Facturas[i].NroComprobante.ToString("D8");
                 FacturaAMostrar.NroComprobante = "FC" + TipoFacturaLetra + "-" + Sucursal4caracteres + "-" + NumeroFactura8Caracteres;
@@ -297,7 +298,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].IdSucursal, Facturas[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(Facturas[i].NroComprobante, Facturas[i].miSucursal.IdSucursal, Facturas[i].miTipoComprobante.IdTipoComprobante);
                 FacturaAMostrar.Total = MontoTotalPorFactura(Detalles);
                 FacturasAMostrarDelCliente.Add(FacturaAMostrar);
 
@@ -332,7 +333,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
                 List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
-                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+                ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.miSucursal.IdSucursal, ComprobanteRow.miTipoComprobante.IdTipoComprobante);
 
                 ComprobanteEntidad unaNotaDebito = new ComprobanteEntidad();
 
@@ -341,19 +342,19 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 unaNotaDebito.Detalles = new List<ComprobanteDetalleEntidad>();
 
-                switch (ComprobanteRow.IdTipoComprobante)
+                switch (ComprobanteRow.miTipoComprobante.IdTipoComprobante)
                 {
                     case 1:
-                        unaNotaDebito.IdTipoComprobante = 8;
+                        unaNotaDebito.miTipoComprobante.IdTipoComprobante = 8;
                         break;
                     case 2:
-                        unaNotaDebito.IdTipoComprobante = 9;
+                        unaNotaDebito.miTipoComprobante.IdTipoComprobante = 9;
                         break;
                     case 3:
-                        unaNotaDebito.IdTipoComprobante = 10;
+                        unaNotaDebito.miTipoComprobante.IdTipoComprobante = 10;
                         break;
                     default:
-                        unaNotaDebito.IdTipoComprobante = 8;
+                        unaNotaDebito.miTipoComprobante.IdTipoComprobante = 8;
                         break;
                 }
 
@@ -367,10 +368,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     ContadorDetalle = ContadorDetalle + 1;
                     unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
                     unDetalleComprobante.NroComprobante = ComprobanteRow.NroComprobante;
-                    unDetalleComprobante.IdSucursal = ComprobanteRow.IdSucursal;
-                    unDetalleComprobante.IdTipoComprobante = unaNotaDebito.IdTipoComprobante;
+                    unDetalleComprobante.IdSucursal = ComprobanteRow.miSucursal.IdSucursal;
+                    unDetalleComprobante.IdTipoComprobante = unaNotaDebito.miTipoComprobante.IdTipoComprobante;
                     unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                    unDetalleComprobante.IdProducto = item.IdProducto;
+                    unDetalleComprobante.miProducto = new ProductoEntidad();
+                    unDetalleComprobante.miProducto.IdProducto = item.miProducto.IdProducto;
                     unDetalleComprobante.CantidadProducto = item.CantidadProducto;
                     unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitarioFact;
                     unaNotaDebito.Detalles.Add(unDetalleComprobante);

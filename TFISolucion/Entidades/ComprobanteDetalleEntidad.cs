@@ -9,7 +9,7 @@ namespace TFI.Entidades
         public int IdSucursal { get; set; }
         public int IdTipoComprobante { get; set; }
         public string CUIT { get; set; }
-        public int IdProducto { get; set; }
+        public ProductoEntidad miProducto { get; set; }
         public int CantidadProducto { get; set; }
         public decimal PrecioUnitarioFact { get; set; }
         public DateTime? FecBaja { get; set; }

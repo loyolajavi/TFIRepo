@@ -102,12 +102,12 @@ namespace TFI.GUI
             for (int i = 0; i < PedidosEntidad.Count; i++)
             {
                 PedidoDTO PedidoAMostrar = new PedidoDTO();
-                PedidoAMostrar.cuit = PedidosEntidad[i].CUIT;
+                PedidoAMostrar.cuit = PedidosEntidad[i].miUsuario.CUIT;
                 DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].miDireccionEntrega.IdDireccion);
                 PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                 PedidoAMostrar.FechaPedido = PedidosEntidad[i].FechaPedido;
                 PedidoAMostrar.IdPedido = PedidosEntidad[i].IdPedido;
-                PedidoAMostrar.NombreUsuario = PedidosEntidad[i].NombreUsuario;
+                PedidoAMostrar.NombreUsuario = PedidosEntidad[i].miUsuario.NombreUsuario;
                 PedidoAMostrar.NroPedido = PedidosEntidad[i].NroPedido;
 
                 //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);

@@ -26,7 +26,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdSucursal", comprobanteDetalle.IdSucursal),
 				new SqlParameter("@IdTipoComprobante", comprobanteDetalle.IdTipoComprobante),
 				new SqlParameter("@CUIT", comprobanteDetalle.CUIT),
-				new SqlParameter("@IdProducto", comprobanteDetalle.IdProducto),
+				new SqlParameter("@IdProducto", comprobanteDetalle.miProducto.IdProducto),
 				new SqlParameter("@CantidadProducto", comprobanteDetalle.CantidadProducto),
 				new SqlParameter("@PrecioUnitarioFact", comprobanteDetalle.PrecioUnitarioFact)
 			};
@@ -48,7 +48,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdSucursal", comprobanteDetalle.IdSucursal),
 				new SqlParameter("@IdTipoComprobante", comprobanteDetalle.IdTipoComprobante),
 				new SqlParameter("@CUIT", comprobanteDetalle.CUIT),
-				new SqlParameter("@IdProducto", comprobanteDetalle.IdProducto),
+				new SqlParameter("@IdProducto", comprobanteDetalle.miProducto.IdProducto),
 				new SqlParameter("@CantidadProducto", comprobanteDetalle.CantidadProducto),
 				new SqlParameter("@PrecioUnitarioFact", comprobanteDetalle.PrecioUnitarioFact)
 			};
@@ -157,11 +157,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-			using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteDetalleSelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters))
+			using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteDetalleSelectAllByNroComprobante_IdSucursal_IdTipoComprobante_CUIT", parameters))
 			{
 				List<ComprobanteDetalleEntidad> comprobanteDetalleEntidadList = new List<ComprobanteDetalleEntidad>();
 
-                comprobanteDetalleEntidadList = Mapeador.Mapear<ComprobanteDetalleEntidad>(dt);
+                comprobanteDetalleEntidadList = MapearMuchos(dt);
 				return comprobanteDetalleEntidadList;
 			}
 		}
@@ -186,6 +186,37 @@ namespace TFI.DAL.DAL
 			}
 		}
 
+        private List<ComprobanteDetalleEntidad> MapearMuchos(DataSet ds)
+        {
+            List<ComprobanteDetalleEntidad> ResUnosItem = new List<ComprobanteDetalleEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    ComprobanteDetalleEntidad unItem = new ComprobanteDetalleEntidad();
+
+
+                    unItem.IdComprobanteDetalle = (int)row["IdComprobanteDetalle"];
+                    unItem.NroComprobante = (int)row["NroComprobante"];
+                    unItem.IdSucursal = (int)row["IdSucursal"];
+                    unItem.IdTipoComprobante = (int)row["IdTipoComprobante"];
+                    unItem.CUIT = row["CUIT"].ToString();
+                    unItem.miProducto = new ProductoEntidad();
+                    unItem.miProducto.IdProducto = (int)row["IdProducto"];
+                    unItem.CantidadProducto = (int)row["CantidadProducto"];
+                    unItem.PrecioUnitarioFact = (decimal)row["PrecioUnitarioFact"];
+
+                    ResUnosItem.Add(unItem);
+                }
+                return ResUnosItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
 		
 
 		#endregion

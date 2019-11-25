@@ -183,7 +183,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductoActualizado.DescripProducto = Descripcion;
             ProductoActualizado.miMarca = new MarcaEntidad();
             ProductoActualizado.miMarca.IdMarca = Convert.ToInt32(Marca);
-            ProductoActualizado.IdIvaProducto = Convert.ToInt32(IVA);
+            ProductoActualizado.miIvaProducto = new IvaProductoEntidad();
+            ProductoActualizado.miIvaProducto.IdIvaProducto = Convert.ToInt32(IVA);
             ProductoActualizado.PrecioUnitario = Convert.ToDecimal(PrecioUnitario);
             ProductoActualizado.URL = URL;
             ProductoActualizado.DescripLarga = Detalle;
@@ -255,7 +256,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     ddlIVA.DataSource = EmpresaBLL.SeleccionarIvaProducto();
                     ddlIVA.DataValueField = "IdIvaProducto";
                     ddlIVA.DataTextField = "PorcentajeIvaProd";
-                    ddlIVA.SelectedValue = ProductoE.IdIvaProducto.ToString();
+                    ddlIVA.SelectedValue = ProductoE.miIvaProducto.IdIvaProducto.ToString();
                     ddlIVA.DataBind();
 
                 }
@@ -320,7 +321,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             NuevoProducto.DescripProducto = descripcion;
             NuevoProducto.miMarca = new MarcaEntidad();
             NuevoProducto.miMarca.IdMarca = marca;
-            NuevoProducto.IdIvaProducto = iva;
+            NuevoProducto.miIvaProducto = new IvaProductoEntidad();
+            NuevoProducto.miIvaProducto.IdIvaProducto = iva;
             NuevoProducto.PrecioUnitario = Convert.ToDecimal(precio);
             NuevoProducto.URL = url;
             NuevoProducto.DescripLarga = detalle;

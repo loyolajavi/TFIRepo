@@ -91,6 +91,7 @@
     <Compile Include="Repositories\TipoTarjetaDAL.cs" />
     <Compile Include="Repositories\TipoTelDAL.cs" />
     <Compile Include="Repositories\UsuarioDAL.cs" />
+    <Compile Include="Services\DALBitacora.cs" />
     <Compile Include="Services\DALFamilia.cs" />
     <Compile Include="Services\ServicioMailDAL.cs" />
     <Compile Include="SQLServer.cs" />

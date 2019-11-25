@@ -141,12 +141,14 @@ namespace TFI.CORE.Managers
             unPago.miFormaPago = new FormaPagoEntidad();
             unPago.miFormaPago.IdFormaPago = elIdFormaPago;
             unPago.MontoPago = (decimal)elPedido.misDetalles.Select(x => x.Cantidad * x.PrecioUnitario).Sum();
-            unPago.CUIT = elPedido.CUIT;
+            unPago.CUIT = elPedido.miUsuario.CUIT;
             unPago.FechaPago = DateTime.Now;
 
             RegistrarPago(unPago);
 
             ComprobanteEntidad unComprobante = new ComprobanteEntidad();//
+            unComprobante.miTipoComprobante = new TipoComprobanteEntidad();
+            unComprobante.miSucursal = new SucursalEntidad();
             unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();//
             ComprobanteCore unManagerComprobante = new ComprobanteCore();//
             int ContadorDetalle = 0;//
@@ -166,11 +168,11 @@ namespace TFI.CORE.Managers
             NroComp = int.Parse(NroCompSolo) + 1;
             // unComprobante.NroComprobante = int.Parse(logueado.IdCondicionFiscal.ToString() + sucursalId.ToString() + NroComp.ToString());
             unComprobante.NroComprobante = NroComp;
-            unComprobante.IdSucursal = laSucursal.IdSucursal;
+            unComprobante.miSucursal.IdSucursal = laSucursal.IdSucursal;
             if (elCliente.IdCondicionFiscal == 1)
-                unComprobante.IdTipoComprobante = 2;//Factura B
+                unComprobante.miTipoComprobante.IdTipoComprobante = 2;//Factura B
             else if (elCliente.IdCondicionFiscal == 2)
-                unComprobante.IdTipoComprobante = 1; //Factura A
+                unComprobante.miTipoComprobante.IdTipoComprobante = 1; //Factura A
 
             unComprobante.FechaComprobante = DateTime.Now;
             unComprobante.IdPedido = elPedido.IdPedido;
@@ -181,10 +183,11 @@ namespace TFI.CORE.Managers
                 ContadorDetalle = ContadorDetalle + 1;
                 unDetalleComprobante.IdComprobanteDetalle = ContadorDetalle;
                 unDetalleComprobante.NroComprobante = unComprobante.NroComprobante;
-                unDetalleComprobante.IdSucursal = unComprobante.IdSucursal;
-                unDetalleComprobante.IdTipoComprobante = unComprobante.IdTipoComprobante;
+                unDetalleComprobante.IdSucursal = unComprobante.miSucursal.IdSucursal;
+                unDetalleComprobante.IdTipoComprobante = unComprobante.miTipoComprobante.IdTipoComprobante;
                 unDetalleComprobante.CUIT = ConfigSection.Default.Site.Cuit;
-                unDetalleComprobante.IdProducto = item.miProducto.IdProducto;
+                unDetalleComprobante.miProducto = new ProductoEntidad();
+                unDetalleComprobante.miProducto.IdProducto = item.miProducto.IdProducto;
                 unDetalleComprobante.CantidadProducto = item.Cantidad;
                 unDetalleComprobante.PrecioUnitarioFact = item.PrecioUnitario;
 

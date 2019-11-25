@@ -20,9 +20,9 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@FechaPedido", pedido.FechaPedido),
 				new SqlParameter("@FechaFinPedido", pedido.FechaFinPedido),
-				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
+				new SqlParameter("@NombreUsuario", pedido.miUsuario.NombreUsuario),
 				new SqlParameter("@IdFormaEntrega", pedido.miFormaEntrega.IdFormaEntrega),
-				new SqlParameter("@CUIT", pedido.CUIT),
+				new SqlParameter("@CUIT", pedido.miUsuario.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
 				new SqlParameter("@DireccionEntrega", pedido.miDireccionEntrega.IdDireccion),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
@@ -45,9 +45,9 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdPedido", pedido.IdPedido),
 				new SqlParameter("@FechaPedido", pedido.FechaPedido),
 				new SqlParameter("@FechaFinPedido", pedido.FechaFinPedido),
-				new SqlParameter("@NombreUsuario", pedido.NombreUsuario),
+				new SqlParameter("@NombreUsuario", pedido.miUsuario.NombreUsuario),
 				new SqlParameter("@IdFormaEntrega", pedido.miFormaEntrega.IdFormaEntrega),
-				new SqlParameter("@CUIT", pedido.CUIT),
+				new SqlParameter("@CUIT", pedido.miUsuario.CUIT),
 				new SqlParameter("@NumeroTracking", pedido.NumeroTracking),
 				new SqlParameter("@DireccionEntrega", pedido.miDireccionEntrega.IdDireccion),
                 new SqlParameter("@NroPedido", pedido.NroPedido)
@@ -135,11 +135,12 @@ namespace TFI.DAL.DAL
                 unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
                 if (row["FechaFinPedido"].ToString() != "")
                     unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
-                unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                unPedido.miUsuario = new UsuarioEntidad();
+                unPedido.miUsuario.NombreUsuario = row["NombreUsuario"].ToString();
                 unPedido.miFormaEntrega = new FormaEntregaEntidad();
                 unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
                 unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
-                unPedido.CUIT = row["CUIT"].ToString();
+                unPedido.miUsuario.CUIT = row["CUIT"].ToString();
                 unPedido.NumeroTracking = row["NumeroTracking"].ToString();
                 unPedido.miDireccionEntrega = new DireccionEntidad();
                 unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
@@ -164,11 +165,12 @@ namespace TFI.DAL.DAL
                     unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
                     if (row["FechaFinPedido"].ToString() != "")
                         unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
-                    unPedido.NombreUsuario = row["NombreUsuario"].ToString();
+                    unPedido.miUsuario = new UsuarioEntidad();
+                    unPedido.miUsuario.NombreUsuario = row["NombreUsuario"].ToString();
                     unPedido.miFormaEntrega = new FormaEntregaEntidad();
                     unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
                     unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
-                    unPedido.CUIT = row["CUIT"].ToString();
+                    unPedido.miUsuario.CUIT = row["CUIT"].ToString();
                     unPedido.NumeroTracking = row["NumeroTracking"].ToString();
                     unPedido.miDireccionEntrega = new DireccionEntidad();
                     unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];

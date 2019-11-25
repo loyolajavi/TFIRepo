@@ -969,4 +969,7 @@
   <data name="Ajuste" xml:space="preserve">
     <value>Adjustment</value>
   </data>
+  <data name="Logsdelsistema" xml:space="preserve">
+    <value>System Logs</value>
+  </data>
 </root>

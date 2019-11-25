@@ -23,7 +23,7 @@ namespace TFI.CORE.Managers
             {
                 e.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
                 decimal Nro = 0;
-                if(e.Ajuste != null && e.Ajuste > 0)
+                if(e.Ajuste > 0)
                     Nro = (decimal)_dal.InsertND(e);
                 else
                     Nro = (decimal)_dal.Insert(e);

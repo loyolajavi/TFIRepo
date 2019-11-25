@@ -24,12 +24,15 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the Evento value.
 		/// </summary>
-		public string Evento { get; set; }
+		public string TipoLog { get; set; }
+
+        public string Accion { get; set; }
+        public string Mensaje{ get; set; }
 
 		/// <summary>
 		/// Gets or sets the FechaEvento value.
 		/// </summary>
-		public DateTime FechaEvento { get; set; }
+		public DateTime Fecha { get; set; }
 
 		#endregion
 	}

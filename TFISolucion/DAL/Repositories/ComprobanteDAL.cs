@@ -22,9 +22,9 @@ namespace TFI.DAL.DAL
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", comprobante.NroComprobante),
-				new SqlParameter("@IdSucursal", comprobante.IdSucursal),
+				new SqlParameter("@IdSucursal", comprobante.miSucursal.IdSucursal),
 				new SqlParameter("@CUIT", comprobante.CUIT),
-				new SqlParameter("@IdTipoComprobante", comprobante.IdTipoComprobante),
+				new SqlParameter("@IdTipoComprobante", comprobante.miTipoComprobante.IdTipoComprobante),
 				new SqlParameter("@FechaComprobante", comprobante.FechaComprobante),
 				new SqlParameter("@IdPedido", comprobante.IdPedido)
 			};
@@ -43,9 +43,9 @@ namespace TFI.DAL.DAL
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", comprobante.NroComprobante),
-				new SqlParameter("@IdSucursal", comprobante.IdSucursal),
+				new SqlParameter("@IdSucursal", comprobante.miSucursal.IdSucursal),
 				new SqlParameter("@CUIT", comprobante.CUIT),
-				new SqlParameter("@IdTipoComprobante", comprobante.IdTipoComprobante),
+				new SqlParameter("@IdTipoComprobante", comprobante.miTipoComprobante.IdTipoComprobante),
 				new SqlParameter("@IdComprobante", comprobante.IdComprobante),
 				new SqlParameter("@FechaComprobante", comprobante.FechaComprobante),
 				new SqlParameter("@IdPedido", comprobante.IdPedido)
@@ -275,9 +275,9 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@NroComprobante", comprobante.NroComprobante),
-				new SqlParameter("@IdSucursal", comprobante.IdSucursal),
+				new SqlParameter("@IdSucursal", comprobante.miSucursal.IdSucursal),
 				new SqlParameter("@CUIT", comprobante.CUIT),
-				new SqlParameter("@IdTipoComprobante", comprobante.IdTipoComprobante),
+				new SqlParameter("@IdTipoComprobante", comprobante.miTipoComprobante.IdTipoComprobante),
 				new SqlParameter("@FechaComprobante", comprobante.FechaComprobante),
 				new SqlParameter("@IdPedido", comprobante.IdPedido),
                 new SqlParameter("@Ajuste", comprobante.Ajuste)
@@ -301,8 +301,10 @@ namespace TFI.DAL.DAL
                 unComprobante.CUIT = row["CUIT"].ToString();
                 unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
                 unComprobante.FechaComprobante = DateTime.Parse(row["FechaComprobante"].ToString());
-                unComprobante.IdSucursal = (int)row["IdSucursal"];
-                unComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
+                unComprobante.miSucursal = new SucursalEntidad();
+                unComprobante.miSucursal.IdSucursal = (int)row["IdSucursal"];
+                unComprobante.miTipoComprobante = new TipoComprobanteEntidad();
+                unComprobante.miTipoComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
                 unComprobante.NroComprobante = (int)row["NroComprobante"];
                 if (row["FecBaja"].ToString() != "")
                     unComprobante.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
@@ -326,8 +328,10 @@ namespace TFI.DAL.DAL
                     unComprobante.CUIT = row["CUIT"].ToString();
                     unComprobante.Detalles = new List<ComprobanteDetalleEntidad>();
                     unComprobante.FechaComprobante = DateTime.Parse(row["FechaComprobante"].ToString());
-                    unComprobante.IdSucursal = (int)row["IdSucursal"];
-                    unComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
+                    unComprobante.miSucursal = new SucursalEntidad();
+                    unComprobante.miSucursal.IdSucursal = (int)row["IdSucursal"];
+                    unComprobante.miTipoComprobante = new TipoComprobanteEntidad();
+                    unComprobante.miTipoComprobante.IdTipoComprobante = (int)row["IdTipoComprobante"];
                     unComprobante.NroComprobante = (int)row["NroComprobante"];
                     if (row["FecBaja"].ToString() != "")
                         unComprobante.FecBaja = DateTime.Parse(row["FecBaja"].ToString());

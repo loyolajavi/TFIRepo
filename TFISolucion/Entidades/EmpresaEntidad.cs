@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TFI.Entidades
 {
@@ -16,6 +17,7 @@ namespace TFI.Entidades
 		/// Gets or sets the NombreEmpresa value.
 		/// </summary>
 		public string NombreEmpresa { get; set; }
+        public List<SucursalEntidad> misSucursales { get; set; }
 
 		/// <summary>
 		/// Gets or sets the FecBaja value.

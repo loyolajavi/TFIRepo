@@ -108,6 +108,7 @@
     <Content Include="Areas\Intranet\Forms\Reportes.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateEmpleado.aspx" />
+    <Content Include="Areas\Intranet\Forms\VerLogs.aspx" />
     <Content Include="Areas\Public\Forms\Catalogo.aspx" />
     <Content Include="Areas\Public\Forms\ClientesEmpresa.aspx" />
     <Content Include="Areas\Public\Forms\Contacto.aspx" />
@@ -435,6 +436,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\UpdateEmpleado.aspx.designer.cs">
       <DependentUpon>UpdateEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\VerLogs.aspx.cs">
+      <DependentUpon>VerLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\VerLogs.aspx.designer.cs">
+      <DependentUpon>VerLogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Forms\Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>

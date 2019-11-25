@@ -263,6 +263,13 @@
                                 <li>
                                     <a class="dropdown-toggle" href="../../../LCSK/agent.html"  target="_blank">Chat</a>
                                 </li>
+                                <% if (this.Autenticar("Admin"))
+                                {%>
+                                <li>
+                                    <a class="dropdown-toggle" href="VerLogs.aspx">
+                                        <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"></asp:Label></a>
+                                </li>
+                                <%} %>
                             </ul>
 
                         </nav>

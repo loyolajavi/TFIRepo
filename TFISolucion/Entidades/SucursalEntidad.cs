@@ -11,5 +11,6 @@ namespace TFI.Entidades
         public DateTime? FecBaja { get; set; }
 
         public DireccionEntidad Direccion { get; set; }
+        public StockSucursalEntidad miStock { get; set; }
     }
 }

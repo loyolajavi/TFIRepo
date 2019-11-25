@@ -129,12 +129,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
             for (int i = 0; i < PedidosEntidad.Count; i++)
             {
                 PedidoDTO PedidoAMostrar = new PedidoDTO();
-                PedidoAMostrar.cuit = PedidosEntidad[i].CUIT;
+                PedidoAMostrar.cuit = PedidosEntidad[i].miUsuario.CUIT;
                 DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(PedidosEntidad[i].miDireccionEntrega.IdDireccion);
                 PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                 PedidoAMostrar.FechaPedido = PedidosEntidad[i].FechaPedido;
                 PedidoAMostrar.IdPedido = PedidosEntidad[i].IdPedido;
-                PedidoAMostrar.NombreUsuario = PedidosEntidad[i].NombreUsuario;
+                PedidoAMostrar.NombreUsuario = PedidosEntidad[i].miUsuario.NombreUsuario;
                 PedidoAMostrar.NroPedido = PedidosEntidad[i].NroPedido;
 
                 //PedidoEstadoPedidoEntidad Estado = pedidoCore.PedidoUltimoEstadoSelect(PedidosEntidad[i].IdPedido);
@@ -407,11 +407,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
             var pedidos = core.SelectAllByCUIT(usuarioentidad.CUIT);
             
             /*para evitar duplicados*/
-            var result = pedidos.GroupBy(test => test.NombreUsuario)
+            var result = pedidos.GroupBy(test => test.miUsuario.NombreUsuario)
                    .Select(grp => grp.First())
                    .ToList();
             // return pedidos.Select(x => x.NombreUsuario).ToList();
-            return result.Select(x => x.NombreUsuario).ToList();
+            return result.Select(x => x.miUsuario.NombreUsuario).ToList();
         }
 
 
@@ -430,16 +430,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
 
                 int ddlEstadoInt = Convert.ToInt32(ddlEstadoPedido.SelectedIndex + 1);
-                if (pedido.NombreUsuario == txtClienteBusqueda.Text && pedido.VerEstadoActual().DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
+                if (pedido.miUsuario.NombreUsuario == txtClienteBusqueda.Text && pedido.VerEstadoActual().DescripcionEstadoPedido == ddlEstadoPedido.SelectedItem.Text)
                 {
 
                     PedidoDTO PedidoAMostrar = new PedidoDTO();
-                    PedidoAMostrar.cuit = pedido.CUIT;
+                    PedidoAMostrar.cuit = pedido.miUsuario.CUIT;
                     DireccionEntidad DireccionEntrega = DireccionCore.DireccionSelect(pedido.miDireccionEntrega.IdDireccion);
                     PedidoAMostrar.DireccionEntrega = DireccionEntrega.Calle + " " + DireccionEntrega.Numero + ". " + DireccionEntrega.Localidad;
                     PedidoAMostrar.FechaPedido = pedido.FechaPedido;
                     PedidoAMostrar.IdPedido = pedido.IdPedido;
-                    PedidoAMostrar.NombreUsuario = pedido.NombreUsuario;
+                    PedidoAMostrar.NombreUsuario = pedido.miUsuario.NombreUsuario;
                     PedidoAMostrar.NroPedido = pedido.NroPedido;
 
                     PedidoAMostrar.Estado = pedido.VerEstadoActual().DescripcionEstadoPedido;

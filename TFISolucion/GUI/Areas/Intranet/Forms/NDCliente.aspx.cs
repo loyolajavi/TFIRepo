@@ -79,7 +79,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                 foreach (var comprobante in Comprobantes)
                 {
-                    if (comprobante.IdTipoComprobante == 8 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
+                    if (comprobante.miTipoComprobante.IdTipoComprobante == 8 || comprobante.miTipoComprobante.IdTipoComprobante == 9 || comprobante.miTipoComprobante.IdTipoComprobante == 10)
                     {
                         NDs.Add(comprobante);
                     }
@@ -102,16 +102,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 NDsDTO NDAMostrar = new NDsDTO();
               //  NDAMostrar.NroComprobante = NDs[i].NroComprobante;
                 NDAMostrar.FechaComprobante = NDs[i].FechaComprobante;
-                NDAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NDs[i].IdTipoComprobante).DescripTipoComprobante;
+                NDAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NDs[i].miTipoComprobante.IdTipoComprobante).DescripTipoComprobante;
                 char TipoNDLetra = NDAMostrar.TipoComprobante[NDAMostrar.TipoComprobante.Length - 1];
                 string Sucursal4caracteres = "";
-                Sucursal4caracteres = NDs[i].IdSucursal.ToString("D4");
+                Sucursal4caracteres = NDs[i].miSucursal.IdSucursal.ToString("D4");
                 string NumeroND8Caracteres = "";
                 NumeroND8Caracteres = NDs[i].NroComprobante.ToString("D8");
                 NDAMostrar.NroComprobante = "ND" + TipoNDLetra + "-" + Sucursal4caracteres + "-" + NumeroND8Caracteres;
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdSucursal, NDs[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].miSucursal.IdSucursal, NDs[i].miTipoComprobante.IdTipoComprobante);
                 NDAMostrar.Total = NDs[i].Ajuste;
                 NotasDeDebitoAMostrar.Add(NDAMostrar);
 
@@ -159,13 +159,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 string ultimos8delcode = code.Substring(code.Length - 8);
                 string nrocomprobantesincerosalaizquierda = ultimos8delcode.TrimStart('0');
                 ComprobanteEntidad ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
-                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.IdSucursal, ComprobanteRow.IdTipoComprobante);
+                List<ComprobanteDetalleEntidad> ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.miSucursal.IdSucursal, ComprobanteRow.miTipoComprobante.IdTipoComprobante);
 
                 List<NCDetalleDTO> ListaDetallesDTO = new List<NCDetalleDTO>();
                 foreach (var item in ListadeDetalles)
                 {
                     NCDetalleDTO NuevoDetalle = new NCDetalleDTO();
-                    NuevoDetalle.Producto = coreProducto.Find(item.IdProducto, 1).DescripProducto;
+                    NuevoDetalle.Producto = coreProducto.Find(item.miProducto.IdProducto, 1).DescripProducto;
                     NuevoDetalle.Cantidad = item.CantidadProducto;
                     NuevoDetalle.PrecioUnitario = item.PrecioUnitarioFact;
                     NuevoDetalle.Total = NuevoDetalle.Cantidad * NuevoDetalle.PrecioUnitario;
@@ -196,13 +196,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             foreach (var pedido in Pedidos)
             {
-                if (pedido.NombreUsuario == txtClienteBusqueda.Text)
+                if (pedido.miUsuario.NombreUsuario == txtClienteBusqueda.Text)
                 {
 
                     var Comprobantes = ComprobanteBLL.ComprobanteSelectByIdPedido(pedido.IdPedido);
                     foreach (var comprobante in Comprobantes)
                     {
-                        if (comprobante.IdTipoComprobante == 8 || comprobante.IdTipoComprobante == 9 || comprobante.IdComprobante == 10)
+                        if (comprobante.miTipoComprobante.IdTipoComprobante == 8 || comprobante.miTipoComprobante.IdTipoComprobante == 9 || comprobante.miTipoComprobante.IdTipoComprobante == 10)
                         {
                             NDsDelCliente.Add(comprobante);
                         }
@@ -226,16 +226,16 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 NDsDTO NDAMostrar = new NDsDTO();
                 //  NDAMostrar.NroComprobante = NDs[i].NroComprobante;
                 NDAMostrar.FechaComprobante = NDs[i].FechaComprobante;
-                NDAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NDs[i].IdTipoComprobante).DescripTipoComprobante;
+                NDAMostrar.TipoComprobante = ComprobanteBLL.TipoComprobanteSelectById(NDs[i].miTipoComprobante.IdTipoComprobante).DescripTipoComprobante;
                 char TipoNDLetra = NDAMostrar.TipoComprobante[NDAMostrar.TipoComprobante.Length - 1];
                 string Sucursal4caracteres = "";
-                Sucursal4caracteres = NDs[i].IdSucursal.ToString("D4");
+                Sucursal4caracteres = NDs[i].miSucursal.IdSucursal.ToString("D4");
                 string NumeroND8Caracteres = "";
                 NumeroND8Caracteres = NDs[i].NroComprobante.ToString("D8");
                 NDAMostrar.NroComprobante = "ND" + TipoNDLetra + "-" + Sucursal4caracteres + "-" + NumeroND8Caracteres;
                 List<ComprobanteDetalleEntidad> Detalles = new List<ComprobanteDetalleEntidad>();
 
-                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].IdSucursal, NDs[i].IdTipoComprobante);
+                Detalles = ComprobanteBLL.DetallesSelectByComprobante(NDs[i].NroComprobante, NDs[i].miSucursal.IdSucursal, NDs[i].miTipoComprobante.IdTipoComprobante);
                 NDAMostrar.Total = NDsDelCliente[i].Ajuste;
                 NDsAMostrarDelCliente.Add(NDAMostrar);
 

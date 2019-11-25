@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TFI.Entidades
 {
@@ -22,6 +23,7 @@ namespace TFI.Entidades
 		/// Gets or sets the FecBaja value.
 		/// </summary>
 		public DateTime? FecBaja { get; set; }
+        public List<ProductoEntidad> misProductos { get; set; }
 
 		#endregion
 	}

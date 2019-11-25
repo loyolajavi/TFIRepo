@@ -160,14 +160,13 @@ namespace TFI.GUI.Areas.Public.Forms
             
             
 
-            var pedido = new PedidoEntidad()
-            {
-                FechaPedido = DateTime.Now,
-                NombreUsuario = logueado.NombreUsuario,
-                CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit,
-                misDetalles = pedidosDetalles,
+            var pedido = new PedidoEntidad();
+            pedido.FechaPedido = DateTime.Now;
+            pedido.miUsuario = new UsuarioEntidad();
+            pedido.miUsuario.NombreUsuario = logueado.NombreUsuario;
+            pedido.miUsuario.CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit;
+            pedido.misDetalles = pedidosDetalles;
                 
-            };
 
             pedido.miFormaEntrega = new FormaEntregaEntidad();
             pedido.miFormaEntrega.IdFormaEntrega = entregaTipo;

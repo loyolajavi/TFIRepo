@@ -15,6 +15,7 @@ namespace TFI.Entidades
 		/// Gets or sets the IdLenguaje value.
 		/// </summary>
 		public int IdLenguaje { get; set; }
+        public LenguajeEntidad miLenguaje { get; set; }
 
 		/// <summary>
 		/// Gets or sets the Valor value.

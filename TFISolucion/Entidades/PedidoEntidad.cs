@@ -9,17 +9,16 @@ namespace TFI.Entidades
         public int IdPedido { get; set; }
         public DateTime FechaPedido { get; set; }
         public DateTime? FechaFinPedido { get; set; }
-        public string NombreUsuario { get; set; }
         public FormaEntregaEntidad miFormaEntrega { get; set; }
-        public string CUIT { get; set; }
         public string NumeroTracking { get; set; }
         public DireccionEntidad miDireccionEntrega { get; set; }
         public DateTime? FecBaja { get; set; }
         public Int64 NroPedido { get; set; }
-
+        public UsuarioEntidad miUsuario { get; set; }
         public List<PedidoDetalleEntidad> misDetalles { get; set; }
+        public List<ComprobanteEntidad> misComprobantes { get; set; }
 
-
+        public List<PagoEntidad> misPagos { get; set; }
         #region PatronState
         public StatePedido EstadoActual;
 

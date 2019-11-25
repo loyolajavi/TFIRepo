@@ -28,7 +28,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@PrecioUnitario", producto.PrecioUnitario),
 				new SqlParameter("@IdMarca", producto.miMarca.IdMarca),
 				new SqlParameter("@CUIT", producto.CUIT),
-				new SqlParameter("@IdIvaProducto", producto.IdIvaProducto),
+				new SqlParameter("@IdIvaProducto", producto.miIvaProducto.IdIvaProducto),
 				new SqlParameter("@DescripProducto", producto.DescripProducto),
 				new SqlParameter("@URL", producto.URL)
 			};
@@ -50,7 +50,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@PrecioUnitario", producto.PrecioUnitario),
 				new SqlParameter("@IdMarca", producto.miMarca.IdMarca),
 				new SqlParameter("@CUIT", producto.CUIT),
-				new SqlParameter("@IdIvaProducto", producto.IdIvaProducto),
+				new SqlParameter("@IdIvaProducto", producto.miIvaProducto.IdIvaProducto),
 				new SqlParameter("@DescripProducto", producto.DescripProducto),
 				new SqlParameter("@URL", producto.URL),
                  new SqlParameter("@DescripLarga", producto.DescripLarga)
@@ -248,7 +248,8 @@ namespace TFI.DAL.DAL
                     unItem.miMarca = new MarcaEntidad();
                     unItem.miMarca.IdMarca = (int)row["IdMarca"];
                     unItem.CUIT = row["CUIT"].ToString();
-                    unItem.IdIvaProducto = (int)row["IdIvaProducto"];
+                    unItem.miIvaProducto = new IvaProductoEntidad();
+                    unItem.miIvaProducto.IdIvaProducto = (int)row["IdIvaProducto"];
                     unItem.DescripProducto = row["DescripProducto"].ToString();
                     unItem.URL = row["URL"].ToString();
                     unItem.DescripLarga = row["DescripLarga"].ToString();
