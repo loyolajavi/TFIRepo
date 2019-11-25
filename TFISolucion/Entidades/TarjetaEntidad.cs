@@ -14,17 +14,9 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the IdTipoTarjeta value.
 		/// </summary>
-		public int IdTipoTarjeta { get; set; }
+        public TipoTarjetaEntidad miTipoTarjeta { get; set; }
 
-		/// <summary>
-		/// Gets or sets the CUIT value.
-		/// </summary>
-		public string CUIT { get; set; }
-
-		/// <summary>
-		/// Gets or sets the NombreUsuario value.
-		/// </summary>
-		public string NombreUsuario { get; set; }
+        public UsuarioEntidad miUsuario { get; set; }
 
 		/// <summary>
 		/// Gets or sets the Titular value.

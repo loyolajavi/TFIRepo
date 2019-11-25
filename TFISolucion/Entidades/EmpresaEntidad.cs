@@ -4,26 +4,7 @@ namespace TFI.Entidades
 {
 	public class EmpresaEntidad
 	{
-		#region Constructors
 
-		/// <summary>
-		/// Initializes a new instance of the EmpresaEntidad class.
-		/// </summary>
-		public EmpresaEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the EmpresaEntidad class.
-		/// </summary>
-		public EmpresaEntidad(string CUIT, string nombreEmpresa, DateTime? fecBaja)
-		{
-			this.CUIT = CUIT;
-			this.NombreEmpresa = nombreEmpresa;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>

@@ -101,6 +101,20 @@ namespace TFI.DAL.Services
 
 
 
+        public List<IFamPat> SelectAll()
+        {
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaSelectAll"))
+            {
+                List<IFamPat> familiaEntidadList = new List<IFamPat>();
+
+                familiaEntidadList = MapearFamilias(ds);
+
+                return familiaEntidadList;
+            }
+        }
+
+
+
         //public bool FamiliaCrear(IFamPat nuevaFamilia)
         //{
         //    SqlParameter[] parametersFamCrear = new SqlParameter[]
@@ -358,6 +372,37 @@ namespace TFI.DAL.Services
             }
         }
 
+
+        public void UsuarioFamiliaInsert(UsuarioEntidad elUsuario)
+        {
+            ValidationUtility.ValidateArgument("elUsuario", elUsuario);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", elUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", elUsuario.NombreUsuario),
+				new SqlParameter("@IdFamilia", elUsuario.Permisos[0].IdIFamPat)
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioFamiliaInsert", parameters);
+        }
+
+
+
+        public void UsuarioUpdatePermisosFamilia(UsuarioEntidad elUsuario)
+        {
+            ValidationUtility.ValidateArgument("elUsuario", elUsuario);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@CUIT", elUsuario.CUIT),
+                new SqlParameter("@NombreUsuario", elUsuario.NombreUsuario),
+                new SqlParameter("@IdFamilia", elUsuario.Permisos[0].IdIFamPat)
+				
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioUpdatePermisosFamilia", parameters);
+        }
 
 
 

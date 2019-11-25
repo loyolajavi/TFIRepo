@@ -4,28 +4,6 @@ namespace TFI.Entidades
 {
 	public class BitacoraLogEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the BitacoraLogEntidad class.
-		/// </summary>
-		public BitacoraLogEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the BitacoraLogEntidad class.
-		/// </summary>
-		public BitacoraLogEntidad(int idBitacoraLog, string CUIT, string nombreUsuario, string evento, DateTime fechaEvento)
-		{
-			this.IdBitacoraLog = idBitacoraLog;
-			this.CUIT = CUIT;
-			this.NombreUsuario = nombreUsuario;
-			this.Evento = evento;
-			this.FechaEvento = fechaEvento;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>

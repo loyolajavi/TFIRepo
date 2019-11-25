@@ -6,6 +6,7 @@ using TFI.DAL.DAL;
 using TFI.Entidades;
 using TFI.Entidades.Servicios.Permisos;
 using TFI.SEGURIDAD;
+using TFI.CORE.Servicios;
 
 namespace TFI.CORE.Managers
 {
@@ -20,7 +21,7 @@ namespace TFI.CORE.Managers
         private TipoTelDAL DalDeTipoTelefono = new TipoTelDAL();
         private ProvinciaDAL DalDeProvincia = new ProvinciaDAL();
         private TarjetaDAL DalDeTarjetas = new TarjetaDAL();
-        private UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
+        private BLLFamilia unManagerUsuarioFamilia = new BLLFamilia();
 
 
         public List<TipoTelEntidad> RetornaTipoTel()
@@ -50,17 +51,13 @@ namespace TFI.CORE.Managers
             try
             {
                 usuario.CUIT = Helpers.ConfigSection.Default.Site.Cuit;
-                UsuarioFamiliaEntidad unUsFamilia = new UsuarioFamiliaEntidad();
                 //Chequea si ya existe ese nombre de usuario
                 UsuarioEntidad UsuarioYaRegistrado = new UsuarioEntidad();
                 UsuarioYaRegistrado = Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
                 if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
                 { 
                     _dal.Insert(usuario); 
-                    unUsFamilia.CUIT = ConfigSection.Default.Site.Cuit;
-                    unUsFamilia.NombreUsuario = usuario.NombreUsuario;
-                    unUsFamilia.IdFamilia = (int)usuario.Familia.IdFamilia;
-                    unManagerUsuarioFamilia.UsuarioFamiliaInsert(unUsFamilia);
+                    unManagerUsuarioFamilia.UsuarioFamiliaInsert(usuario);
                 }
                 else
                 {

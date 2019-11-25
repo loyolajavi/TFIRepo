@@ -73,7 +73,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
 
-            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            string[] unosPermisosTest = new string[] { "Cliente", "Publico" };
+            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }

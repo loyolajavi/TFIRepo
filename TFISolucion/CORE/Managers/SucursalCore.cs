@@ -21,7 +21,7 @@ namespace TFI.CORE.Managers
             var sucursales = GestorSucursal.SelectAllByCUIT(Helpers.ConfigSection.Default.Site.Cuit);
             var direcciones = _direccionCore.FindAll();
 
-            sucursales.ForEach(x => x.Direccion = direcciones.Where(d => d.IdDireccion == x.DireccionSucursal).FirstOrDefault());
+            sucursales.ForEach(x => x.Direccion = direcciones.Where(d => d.IdDireccion == x.miDireccion.IdDireccion).FirstOrDefault());
 
             return sucursales;
         }

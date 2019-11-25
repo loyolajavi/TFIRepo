@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TFI.FUNCIONES.Persistencia; 
 using TFI.Entidades;
+using System.Linq;
 
 namespace TFI.DAL.DAL
 {
@@ -19,9 +20,9 @@ namespace TFI.DAL.DAL
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdTipoTarjeta", tarjeta.IdTipoTarjeta),
-				new SqlParameter("@cuit", tarjeta.CUIT),
-				new SqlParameter("@NombreUsuario", tarjeta.NombreUsuario),
+				new SqlParameter("@IdTipoTarjeta", tarjeta.miTipoTarjeta.IdTipoTarjeta),
+				new SqlParameter("@cuit", tarjeta.miUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", tarjeta.miUsuario.NombreUsuario),
 				new SqlParameter("@Titular", tarjeta.Titular),
 				new SqlParameter("@Vencimiento", tarjeta.Vencimiento),
 				new SqlParameter("@Numero", tarjeta.Numero),
@@ -54,9 +55,9 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdTarjeta", tarjeta.IdTarjeta),
-				new SqlParameter("@IdTipoTarjeta", tarjeta.IdTipoTarjeta),
-				new SqlParameter("@cuit", tarjeta.CUIT),
-				new SqlParameter("@NombreUsuario", tarjeta.NombreUsuario),
+				new SqlParameter("@IdTipoTarjeta", tarjeta.miTipoTarjeta.IdTipoTarjeta),
+				new SqlParameter("@cuit", tarjeta.miUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", tarjeta.miUsuario.NombreUsuario),
 				new SqlParameter("@Titular", tarjeta.Titular),
 				new SqlParameter("@Vencimiento", tarjeta.Vencimiento),
 				new SqlParameter("@Numero", tarjeta.Numero),
@@ -138,11 +139,11 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@CUIT", cuit)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectByNumero", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectByNumero", parameters))
             {
                 TarjetaEntidad unTarjetaEntidad = new TarjetaEntidad();
 
-                unTarjetaEntidad = Mapeador.MapearFirst<TarjetaEntidad>(dt);
+                unTarjetaEntidad = MapearMuchos(ds).First();
 
                 return unTarjetaEntidad;
             }
@@ -197,15 +198,86 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectAllByCUIT_NombreUsuario", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TarjetaSelectAllByCUIT_NombreUsuario", parameters))
             {
                 List<TarjetaEntidad> tarjetaEntidadList = new List<TarjetaEntidad>();
 
-                tarjetaEntidadList = Mapeador.Mapear<TarjetaEntidad>(dt);
+                tarjetaEntidadList = MapearMuchos(ds);
 
                 return tarjetaEntidadList;
             }
         }
+
+
+
+        private List<TarjetaEntidad> MapearMuchos(DataSet ds)
+        {
+            List<TarjetaEntidad> ResUnosItem = new List<TarjetaEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    TarjetaEntidad unItem = new TarjetaEntidad();
+
+                    unItem.IdTarjeta = (int)row["IdTarjeta"];
+                    unItem.miTipoTarjeta = new TipoTarjetaEntidad();
+                    unItem.miTipoTarjeta.IdTipoTarjeta = (int)row["IdTipoTarjeta"];
+                    unItem.miUsuario = new UsuarioEntidad();
+                    unItem.miUsuario.CUIT = row["CUIT"].ToString();
+                    unItem.miUsuario.NombreUsuario = row["NombreUsuario"].ToString();
+                    unItem.Titular = row["Titular"].ToString();
+                    unItem.Vencimiento = DateTime.Parse(row["Vencimiento"].ToString());
+                    unItem.Numero = (long)row["Numero"];
+                    unItem.CodSeguridad = (int)row["CodSeguridad"];
+                    unItem.Predeterminada = (bool)row["Predeterminada"];
+                    if (row["FecBaja"].ToString() != "")
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+
+                    ResUnosItem.Add(unItem);
+                }
+                return ResUnosItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+        private TarjetaEntidad Mapear(DataSet ds)
+        {
+            try
+            {
+                TarjetaEntidad unItem = new TarjetaEntidad();
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    unItem.IdTarjeta = (int)row["IdTarjeta"];
+                    unItem.miTipoTarjeta = new TipoTarjetaEntidad();
+                    unItem.miTipoTarjeta.IdTipoTarjeta = (int)row["IdTipoTarjeta"];
+                    unItem.miUsuario = new UsuarioEntidad();
+                    unItem.miUsuario.CUIT = row["CUIT"].ToString();
+                    unItem.miUsuario.NombreUsuario = row["NombreUsuario"].ToString();
+                    unItem.Titular = row["Titular"].ToString();
+                    unItem.Vencimiento = DateTime.Parse(row["Vencimiento"].ToString());
+                    unItem.Numero = (long)row["Numero"];
+                    unItem.CodSeguridad = (int)row["CodSeguridad"];
+                    unItem.Predeterminada = (bool)row["Predeterminada"];
+                    if (row["FecBaja"].ToString() != "")
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                }
+                return unItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
 
 	}
 }

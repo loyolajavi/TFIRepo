@@ -103,7 +103,7 @@ namespace TFI.GUI
             foreach (var tel in TelefonosDelUsuario)
             {
                 TelefonoDTO TipodeTelefono = new TelefonoDTO();
-                TipodeTelefono.Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.IdTipoTel);
+                TipodeTelefono.Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.miTipoTel.IdTipoTel);
                 TipodeTelefono.Telefono = tel.NroTelefono;
                 ListaDeTelefonosDTO.Add(TipodeTelefono);
                 //tipo = false;
@@ -320,7 +320,7 @@ namespace TFI.GUI
             {
                 TelefonoDTO TipodeTelefono = new TelefonoDTO()
                 {
-                    Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.IdTipoTel),
+                    Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.miTipoTel.IdTipoTel),
                     Telefono = tel.NroTelefono
                 };
 
@@ -350,8 +350,9 @@ namespace TFI.GUI
             var Telefono = ((TextBox)row.Cells[1].Controls[0]).Text;
             var Tipo = ((DropDownList)row.Cells[2].Controls[1]).SelectedIndex;
 
-            TelefonoActualizado.CUIT = usuarioentidad.CUIT;
-            TelefonoActualizado.NombreUsuario = usuarioentidad.NombreUsuario;
+            TelefonoActualizado.miUsuario = new UsuarioEntidad();
+            TelefonoActualizado.miUsuario.CUIT = usuarioentidad.CUIT;
+            TelefonoActualizado.miUsuario.NombreUsuario = usuarioentidad.NombreUsuario;
             TelefonoActualizado.NroTelefono = Telefono;
 
             int tipodetelefono = 1;
@@ -360,8 +361,8 @@ namespace TFI.GUI
             {
                 tipodetelefono = 2;
             }
-
-            TelefonoActualizado.IdTipoTel = tipodetelefono;
+            TelefonoActualizado.miTipoTel = new TipoTelEntidad();
+            TelefonoActualizado.miTipoTel.IdTipoTel = tipodetelefono;
 
             UsuarioBLL.UpdateTelefonosPersonales(TelefonoActualizado);
 
@@ -436,10 +437,12 @@ namespace TFI.GUI
                 var telefonoNuevo = new TelefonoEntidad();
 
                 telefonoNuevo.NroTelefono = telefono;
-                telefonoNuevo.NombreUsuario = usuarioentidadStatic.NombreUsuario;
+                telefonoNuevo.miUsuario = new UsuarioEntidad();
+                telefonoNuevo.miUsuario.NombreUsuario = usuarioentidadStatic.NombreUsuario;
                 telefonoNuevo.CodArea = codigo;
-                telefonoNuevo.IdTipoTel = Convert.ToInt32(tipoTel);
-                telefonoNuevo.CUIT = usuarioentidadStatic.CUIT;
+                telefonoNuevo.miTipoTel = new TipoTelEntidad();
+                telefonoNuevo.miTipoTel.IdTipoTel = Convert.ToInt32(tipoTel);
+                telefonoNuevo.miUsuario.CUIT = usuarioentidadStatic.CUIT;
                 coreUsuario.insertTelefonoUsuario(telefonoNuevo);
             }
 

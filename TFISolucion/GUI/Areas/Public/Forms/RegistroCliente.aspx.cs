@@ -10,6 +10,7 @@ using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
 using System.Text;
 using System.Web.Services;
+using TFI.Entidades.Servicios.Permisos;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -114,7 +115,8 @@ namespace TFI.GUI.Areas.Public.Forms
                 unUsuario.Email = txtMail.Value;
                 unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
                 unUsuario.NroIdentificacion = txtDNICUIT.Value;
-                unUsuario.Familia.IdFamilia = FamiliaEntidad.PermisoFamilia.Cliente;
+                unUsuario.Permisos.Add(new Familia());
+                unUsuario.Permisos[0].IdIFamPat = (int)FamiliaEntidad.PermisoFamilia.Cliente;
 
 
                 NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);

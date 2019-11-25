@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using TFI.CORE.Helpers;
 using TFI.CORE.Managers;
 using TFI.Entidades;
+using System.Linq;
 
 namespace TFI.GUI.General
 {
@@ -45,7 +46,9 @@ namespace TFI.GUI.General
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-            if (usuario != null && Autenticacion() >= FamiliaEntidad.PermisoFamilia.Empleado)
+            string[] unosPermisosTest = new string[] { "Empleado", "Admin" };
+
+            if (usuario != null && Autenticar(unosPermisosTest))
             {
                 liIngresar.Visible = false;
                 SetUsuarioLogueado(usuario.Nombre + " " + usuario.Apellido);
@@ -110,6 +113,50 @@ namespace TFI.GUI.General
             }
             return 0;
         }
+
+
+        public bool Autenticar(string[] losPermisosARevisar)
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            //string[] PermisosPagina = { elPermiso };
+
+            if (usuarioAutenticado != null)
+            {
+                foreach (string unTag in losPermisosARevisar)
+                {
+                    if (usuarioAutenticado.Permisos.Exists(x => x.NombreIFamPat == unTag))
+                        return true;
+                }
+                
+                return CORE.Servicios.BLLFamilia.BuscarPermiso(usuarioAutenticado.Permisos, losPermisosARevisar);
+                //return usuarioAutenticado.Permisos.Any(X => X.NombreIFamPat == elPermiso);
+            }
+            return false;
+
+        }
+
+
+        public bool Autenticar(string elPermiso)
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            string[] PermisosPagina = { elPermiso };
+
+            if (usuarioAutenticado != null)
+            {
+                if (usuarioAutenticado.Permisos.Exists(x => x.NombreIFamPat == elPermiso))
+                    return true;
+                if (CORE.Servicios.BLLFamilia.BuscarPermiso(usuarioAutenticado.Permisos, PermisosPagina))
+                    return true;
+                //return usuarioAutenticado.Permisos.Any(X => X.NombreIFamPat == elPermiso);
+            }
+            return false;
+
+        }
+
 
     }
 }

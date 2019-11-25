@@ -112,11 +112,12 @@ namespace TFI.GUI
         protected void grilladetarjetas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             TarjetaEntidad TarjetaAEliminar = new TarjetaEntidad();
-            TarjetaAEliminar.CUIT = usuarioentidad.CUIT;
-            TarjetaAEliminar.NombreUsuario = usuarioentidad.NombreUsuario;
+            TarjetaAEliminar.miUsuario = new UsuarioEntidad();
+            TarjetaAEliminar.miUsuario.CUIT = usuarioentidad.CUIT;
+            TarjetaAEliminar.miUsuario.NombreUsuario = usuarioentidad.NombreUsuario;
             GridViewRow row = (GridViewRow)grilladetarjetas.Rows[e.RowIndex];
             var numerodetarjeta = ((string)row.Cells[1].Text);
-            var id = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(numerodetarjeta), TarjetaAEliminar.CUIT).IdTarjeta;
+            var id = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(numerodetarjeta), TarjetaAEliminar.miUsuario.CUIT).IdTarjeta;
             TarjetaBLL.DeleteTarjeta(id);
 
             CargarGrillaTarjetas();
@@ -126,15 +127,16 @@ namespace TFI.GUI
         protected void grilladetarjetas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             TarjetaEntidad unaTarjeta = new TarjetaEntidad();
-            unaTarjeta.CUIT = usuarioentidad.CUIT;
-            unaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
+            unaTarjeta.miUsuario = new UsuarioEntidad();
+            unaTarjeta.miUsuario.CUIT = usuarioentidad.CUIT;
+            unaTarjeta.miUsuario.NombreUsuario = usuarioentidad.NombreUsuario;
             //GridViewRow row = (GridViewRow)grilladetarjetas.Rows[e.RowIndex];
             //var numerodetarjeta = ((string)row.Cells[1].Text);
             if (e.CommandName.Equals("CambiarPredeterminada"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string unNroTarjeta = grilladetarjetas.DataKeys[index].Value.ToString();
-                int unIdTarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(unNroTarjeta), unaTarjeta.CUIT).IdTarjeta;
+                int unIdTarjeta = TarjetaBLL.SelectTarjetaByNumero(Convert.ToInt64(unNroTarjeta), unaTarjeta.miUsuario.CUIT).IdTarjeta;
                 TarjetaBLL.TarjetaSetearPredeterminada(unIdTarjeta);
             }
             CargarGrillaTarjetas();
@@ -239,13 +241,15 @@ namespace TFI.GUI
             if (Page.IsValid)
             {
                 TarjetaEntidad NuevaTarjeta = new TarjetaEntidad();
-                NuevaTarjeta.NombreUsuario = usuarioentidad.NombreUsuario;
-                NuevaTarjeta.CUIT = usuarioentidad.CUIT;
+                NuevaTarjeta.miUsuario = new UsuarioEntidad();
+                NuevaTarjeta.miUsuario.NombreUsuario = usuarioentidad.NombreUsuario;
+                NuevaTarjeta.miUsuario.CUIT = usuarioentidad.CUIT;
                 NuevaTarjeta.Vencimiento = new DateTime(Convert.ToInt32(expiryYear.Value), Convert.ToInt32(expiryMes.Value), 1);
                 NuevaTarjeta.Titular = txtTitular.Value;
                 NuevaTarjeta.Numero = Convert.ToInt64(txtNumeroTarjeta.Value);
                 NuevaTarjeta.CodSeguridad = Convert.ToInt32(txtCodigoSeguridad.Value);
-                NuevaTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
+                NuevaTarjeta.miTipoTarjeta = new TipoTarjetaEntidad();
+                NuevaTarjeta.miTipoTarjeta.IdTipoTarjeta = tipoTarjeta.SelectedIndex + 1;
 
                 List<TarjetaEntidad> TarjetasDelUser = TarjetaBLL.SelectAllTarjetasByCUIT_NombreUsuario(ConfigSection.Default.Site.Cuit, usuarioentidad.NombreUsuario);
 
@@ -338,7 +342,7 @@ namespace TFI.GUI
                     ddl.DataSource = TarjetaBLL.SelectAllTiposDeTarjeta();
                     ddl.DataValueField = "IdTipoTarjeta";
                     ddl.DataTextField = "Descripcion";
-                    ddl.SelectedValue = tarjeta.IdTipoTarjeta.ToString();
+                    ddl.SelectedValue = tarjeta.miTipoTarjeta.IdTipoTarjeta.ToString();
                     ddl.DataBind();
 
 

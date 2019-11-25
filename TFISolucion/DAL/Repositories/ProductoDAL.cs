@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using TFI.FUNCIONES.Persistencia; using TFI.Entidades;
+using TFI.FUNCIONES.Persistencia; 
+using TFI.Entidades;
+using System.Linq;
 
 
 namespace TFI.DAL.DAL
@@ -24,7 +26,7 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@CodigoProducto", producto.CodigoProducto),
 				new SqlParameter("@PrecioUnitario", producto.PrecioUnitario),
-				new SqlParameter("@IdMarca", producto.IdMarca),
+				new SqlParameter("@IdMarca", producto.miMarca.IdMarca),
 				new SqlParameter("@CUIT", producto.CUIT),
 				new SqlParameter("@IdIvaProducto", producto.IdIvaProducto),
 				new SqlParameter("@DescripProducto", producto.DescripProducto),
@@ -46,7 +48,7 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdProducto", producto.IdProducto),
 				new SqlParameter("@CodigoProducto", producto.CodigoProducto),
 				new SqlParameter("@PrecioUnitario", producto.PrecioUnitario),
-				new SqlParameter("@IdMarca", producto.IdMarca),
+				new SqlParameter("@IdMarca", producto.miMarca.IdMarca),
 				new SqlParameter("@CUIT", producto.CUIT),
 				new SqlParameter("@IdIvaProducto", producto.IdIvaProducto),
 				new SqlParameter("@DescripProducto", producto.DescripProducto),
@@ -124,12 +126,12 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@IdProducto", idProducto)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelect", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelect", parameters))
             {
 
                 ProductoEntidad Producto = new ProductoEntidad();
 
-                Producto = Mapeador.MapearFirst<ProductoEntidad>(dt);
+                Producto = MapearMuchos(dt).First();
 
                 return Producto;
             }
@@ -141,10 +143,10 @@ namespace TFI.DAL.DAL
         /// </summary>
         public List<ProductoEntidad> SelectAll()
         {
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAll"))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAll"))
             {
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                productoEntidadList = MapearMuchos(dt);
 
                 return productoEntidadList;
             }
@@ -161,56 +163,16 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByCUIT", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByCUIT", parameters))
             {
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
 
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                productoEntidadList = MapearMuchos(dt);
                 return productoEntidadList;
             }
         }
 
       
-
-        /// <summary>
-        /// Selects all records from the Producto table by a foreign key.
-        /// </summary>
-        public List<ProductoEntidad> SelectAllByIdIvaProducto(int idIvaProducto)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdIvaProducto", idIvaProducto)
-			};
-
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByIdIvaProducto", parameters))
-            {
-                List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
-
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
-                return productoEntidadList;
-            }
-        }
-
-        /// <summary>
-        /// Selects all records from the Producto table by a foreign key.
-        /// </summary>
-        public List<ProductoEntidad> SelectAllByIdMarca(int idMarca)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdMarca", idMarca)
-			};
-
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectAllByIdMarca", parameters))
-            {
-
-
-                List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
-
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
-                return productoEntidadList;
-            }
-        }
 
 
         public List<ProductoEntidad> ProductoSelectByDescripProducto(string cuit, string DescripProducto)
@@ -221,11 +183,11 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@DescripProducto", DescripProducto)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByDescripProducto", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByDescripProducto", parameters))
             {
 
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                productoEntidadList = MapearMuchos(dt);
                 return productoEntidadList;
             }
         }
@@ -241,11 +203,11 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectMasVendidosByCUIT", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectMasVendidosByCUIT", parameters))
             {
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
 
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                productoEntidadList = MapearMuchos(dt);
                 return productoEntidadList;
             }
         }
@@ -258,71 +220,44 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@IdCategoria", idCategoria)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByCategoria", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ProductoSelectByCategoria", parameters))
             {
 
                 List<ProductoEntidad> productoEntidadList = new List<ProductoEntidad>();
-                productoEntidadList = Mapeador.Mapear<ProductoEntidad>(dt);
+                productoEntidadList = MapearMuchos(dt);
                 return productoEntidadList;
             }
         }
 
 
 
-        private PedidoEntidad MapearPedidoEntidad(DataSet ds)
+        private List<ProductoEntidad> MapearMuchos(DataSet ds)
         {
-            PedidoEntidad unPedido = new PedidoEntidad();
-
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                unPedido.IdPedido = (int)row["IdPedido"];
-                unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
-                if (row["FechaFinPedido"].ToString() != "")
-                    unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
-                unPedido.NombreUsuario = row["NombreUsuario"].ToString();
-                unPedido.miFormaEntrega = new FormaEntregaEntidad();
-                unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
-                unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
-                unPedido.CUIT = row["CUIT"].ToString();
-                unPedido.NumeroTracking = row["NumeroTracking"].ToString();
-                unPedido.miDireccionEntrega = new DireccionEntidad();
-                unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
-                if (row["FecBaja"].ToString() != "")
-                    unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
-                unPedido.NroPedido = (Int64)row["NroPedido"];
-            }
-            return unPedido;
-        }
-
-        private List<PedidoEntidad> MapearMuchosPedidoEntidad(DataSet ds)
-        {
-            List<PedidoEntidad> ResUnosPedidos = new List<PedidoEntidad>();
+            List<ProductoEntidad> ResUnosItem = new List<ProductoEntidad>();
 
             try
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    PedidoEntidad unPedido = new PedidoEntidad();
+                    ProductoEntidad unItem = new ProductoEntidad();
 
-                    unPedido.IdPedido = (int)row["IdPedido"];
-                    unPedido.FechaPedido = DateTime.Parse(row["FechaPedido"].ToString());
-                    if (row["FechaFinPedido"].ToString() != "")
-                        unPedido.FechaFinPedido = DateTime.Parse(row["FechaFinPedido"].ToString());
-                    unPedido.NombreUsuario = row["NombreUsuario"].ToString();
-                    unPedido.miFormaEntrega = new FormaEntregaEntidad();
-                    unPedido.miFormaEntrega.IdFormaEntrega = (int)row["IdFormaEntrega"];
-                    unPedido.miFormaEntrega.DescripcionFormaEntrega = row["DescripcionFormaEntrega"].ToString();
-                    unPedido.CUIT = row["CUIT"].ToString();
-                    unPedido.NumeroTracking = row["NumeroTracking"].ToString();
-                    unPedido.miDireccionEntrega = new DireccionEntidad();
-                    unPedido.miDireccionEntrega.IdDireccion = (int)row["DireccionEntrega"];
+
+                    unItem.IdProducto = (int)row["IdProducto"];
+                    unItem.CodigoProducto = row["CodigoProducto"].ToString();
+                    unItem.PrecioUnitario = (decimal)row["PrecioUnitario"];
+                    unItem.miMarca = new MarcaEntidad();
+                    unItem.miMarca.IdMarca = (int)row["IdMarca"];
+                    unItem.CUIT = row["CUIT"].ToString();
+                    unItem.IdIvaProducto = (int)row["IdIvaProducto"];
+                    unItem.DescripProducto = row["DescripProducto"].ToString();
+                    unItem.URL = row["URL"].ToString();
+                    unItem.DescripLarga = row["DescripLarga"].ToString();
                     if (row["FecBaja"].ToString() != "")
-                        unPedido.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
-                    unPedido.NroPedido = (Int64)row["NroPedido"];
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
 
-                    ResUnosPedidos.Add(unPedido);
+                    ResUnosItem.Add(unItem);
                 }
-                return ResUnosPedidos;
+                return ResUnosItem;
             }
             catch (Exception es)
             {

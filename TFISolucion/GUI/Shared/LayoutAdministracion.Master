@@ -186,7 +186,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <%if (Autenticacion() == TFI.Entidades.FamiliaEntidad.PermisoFamilia.Admin)
+                                <%if (this.Autenticar("Admin"))
                                     {%>
                                 <li id="liAdministracion">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

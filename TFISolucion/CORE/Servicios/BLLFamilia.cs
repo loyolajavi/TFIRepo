@@ -66,6 +66,10 @@ namespace TFI.CORE.Servicios
         }
 
 
+        public List<IFamPat> FamiliaSelectAll()
+        {
+            return GestorFamilia.SelectAll();
+        }
 
 
         //public bool FamiliaCrear(IFamPat nuevaFamilia)
@@ -198,6 +202,20 @@ namespace TFI.CORE.Servicios
             return Res;
         }
 
+
+
+        public void UsuarioFamiliaInsert(UsuarioEntidad elUsuario)
+        {
+            GestorFamilia.UsuarioFamiliaInsert(elUsuario);
+        }
+
+
+
+
+        public void UsuarioUpdatePermisosFamilia(UsuarioEntidad elUsuario)
+        {
+            GestorFamilia.UsuarioUpdatePermisosFamilia(elUsuario);
+        }
 
 
     }

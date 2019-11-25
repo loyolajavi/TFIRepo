@@ -63,7 +63,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
+            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
@@ -180,7 +181,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ProductoActualizado.CUIT = ConfigSection.Default.Site.Cuit;
             ProductoActualizado.CodigoProducto = CodigoProducto;
             ProductoActualizado.DescripProducto = Descripcion;
-            ProductoActualizado.IdMarca = Convert.ToInt32(Marca);
+            ProductoActualizado.miMarca = new MarcaEntidad();
+            ProductoActualizado.miMarca.IdMarca = Convert.ToInt32(Marca);
             ProductoActualizado.IdIvaProducto = Convert.ToInt32(IVA);
             ProductoActualizado.PrecioUnitario = Convert.ToDecimal(PrecioUnitario);
             ProductoActualizado.URL = URL;
@@ -241,7 +243,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     dropdownMarca.DataSource = EmpresaBLL.SeleccionarMarcas();
                     dropdownMarca.DataValueField = "IdMarca";
                     dropdownMarca.DataTextField = "DescripcionMarca";
-                    var marcaEntidad = ProductoBLL.MarcaSelect(ProductoE.IdMarca);
+                    var marcaEntidad = ProductoBLL.MarcaSelect(ProductoE.miMarca.IdMarca);
                     dropdownMarca.SelectedValue = marcaEntidad.IdMarca.ToString();
                     dropdownMarca.DataBind();
 
@@ -316,7 +318,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             NuevoProducto.CUIT = ConfigSection.Default.Site.Cuit;
             NuevoProducto.CodigoProducto = codigoproducto;
             NuevoProducto.DescripProducto = descripcion;
-            NuevoProducto.IdMarca = marca;
+            NuevoProducto.miMarca = new MarcaEntidad();
+            NuevoProducto.miMarca.IdMarca = marca;
             NuevoProducto.IdIvaProducto = iva;
             NuevoProducto.PrecioUnitario = Convert.ToDecimal(precio);
             NuevoProducto.URL = url;

@@ -4,35 +4,6 @@ namespace TFI.Entidades
 {
 	public class CondicionFiscalEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the CondicionFiscalEntidad class.
-		/// </summary>
-		public CondicionFiscalEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the CondicionFiscalEntidad class.
-		/// </summary>
-		public CondicionFiscalEntidad(string descripcion, DateTime? fecBaja)
-		{
-			this.Descripcion = descripcion;
-			this.FecBaja = fecBaja;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the CondicionFiscalEntidad class.
-		/// </summary>
-		public CondicionFiscalEntidad(int idCondicionFiscal, string descripcion, DateTime? fecBaja)
-		{
-			this.IdCondicionFiscal = idCondicionFiscal;
-			this.Descripcion = descripcion;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
 		/// <summary>

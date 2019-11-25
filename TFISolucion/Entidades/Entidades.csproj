@@ -56,7 +56,6 @@
     <Compile Include="ComprobanteDetalleEntidad.cs" />
     <Compile Include="ComprobanteEntidad.cs" />
     <Compile Include="CondicionFiscalEntidad.cs" />
-    <Compile Include="ControladorEntidad.cs" />
     <Compile Include="DireccionEntidad.cs" />
     <Compile Include="DireccionUsuarioEntidad.cs" />
     <Compile Include="EmpresaEntidad.cs" />
@@ -64,10 +63,10 @@
     <Compile Include="FamiliaEntidad.cs" />
     <Compile Include="FormaEntregaEntidad.cs" />
     <Compile Include="FormaPagoEntidad.cs" />
-    <Compile Include="Servicios\GraficoMontoVentas.cs" />
-    <Compile Include="Servicios\GraficoProductoPorCategoria.cs" />
-    <Compile Include="Servicios\Graficos5Productosmasvendidos.cs" />
-    <Compile Include="Servicios\GraficoVentasPeriodo.cs" />
+    <Compile Include="Servicios\Reportes\GraficoMontoVentas.cs" />
+    <Compile Include="Servicios\Reportes\GraficoProductoPorCategoria.cs" />
+    <Compile Include="Servicios\Reportes\Graficos5Productosmasvendidos.cs" />
+    <Compile Include="Servicios\Reportes\GraficoVentasPeriodo.cs" />
     <Compile Include="IvaProductoEntidad.cs" />
     <Compile Include="LenguajeControlEntidad.cs" />
     <Compile Include="LenguajeEntidad.cs" />
@@ -76,8 +75,6 @@
     <Compile Include="MonedaEmpresaEntidad.cs" />
     <Compile Include="MonedaEntidad.cs" />
     <Compile Include="PagoEntidad.cs" />
-    <Compile Include="PatenteEntidad.cs" />
-    <Compile Include="PatenteFamiliaEntidad.cs" />
     <Compile Include="PedidoDetalleEntidad.cs" />
     <Compile Include="PedidoEntidad.cs" />
     <Compile Include="PedidoEstadoPedidoEntidad.cs" />
@@ -89,8 +86,8 @@
     <Compile Include="Servicios\Permisos\Familia.cs" />
     <Compile Include="Servicios\Permisos\IFamPat.cs" />
     <Compile Include="Servicios\Permisos\Patente.cs" />
-    <Compile Include="Servicios\ReportePedidosDeUsuario.cs" />
-    <Compile Include="Servicios\ReportePedidosPorFechayEstado.cs" />
+    <Compile Include="Servicios\Reportes\ReportePedidosDeUsuario.cs" />
+    <Compile Include="Servicios\Reportes\ReportePedidosPorFechayEstado.cs" />
     <Compile Include="StatePatron\StateCancelado.cs" />
     <Compile Include="StatePatron\StateEnCamino.cs" />
     <Compile Include="StatePatron\StateEntregado.cs" />
@@ -107,8 +104,6 @@
     <Compile Include="TipoTarjetaEntidad.cs" />
     <Compile Include="TipoTelEntidad.cs" />
     <Compile Include="UsuarioEntidad.cs" />
-    <Compile Include="UsuarioFamiliaEntidad.cs" />
-    <Compile Include="UsuarioPatenteEntidad.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

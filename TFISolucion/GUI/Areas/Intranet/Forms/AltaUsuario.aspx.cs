@@ -9,6 +9,7 @@ using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
 using System.Text;
+using TFI.Entidades.Servicios.Permisos;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -17,13 +18,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         private FamiliaCore unManagerFamilia = new FamiliaCore();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
-        public UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private LenguajeEntidad idioma;
+        string[] unosPermisosTest;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -66,11 +67,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            if (usuarioentidad == null || this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
+            unosPermisosTest = new string[] { "Publico", "Cliente" };
+            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest)) //this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
-            else if (this.Master.Autenticacion() == FamiliaEntidad.PermisoFamilia.Empleado)
+            unosPermisosTest = new string[] { "Empleado" };
+            if (this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
             }
@@ -163,7 +166,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 unUsuario.Email = txtMail.Value;
                 //unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
                 unUsuario.NroIdentificacion = txtDNICUIT.Value;
-                unUsuario.Familia.IdFamilia = (FamiliaEntidad.PermisoFamilia)ddlPermisosUsuarioAlta.SelectedIndex + 3;
+                unUsuario.Permisos.Add(new Familia());
+                unUsuario.Permisos[0].IdIFamPat = (int)ddlPermisosUsuarioAlta.SelectedIndex + 3;
 
 
                 //ALTA CLIENTE BORRADO

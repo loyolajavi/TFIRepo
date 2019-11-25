@@ -18,7 +18,7 @@ namespace TFI.CORE.Managers
         public TipoTarjetaEntidad ObtenerTipoTarjeta(TarjetaEntidad tarjeta)
         {
 
-            return DalDeTipoTarjeta.Select(tarjeta.IdTipoTarjeta);
+            return DalDeTipoTarjeta.Select(tarjeta.miTipoTarjeta.IdTipoTarjeta);
 
         }
 

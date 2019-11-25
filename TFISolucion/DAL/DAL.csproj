@@ -58,7 +58,6 @@
     <Compile Include="Repositories\ComprobanteDAL.cs" />
     <Compile Include="Repositories\ComprobanteDetalleDAL.cs" />
     <Compile Include="Repositories\CondicionFiscalDAL.cs" />
-    <Compile Include="Repositories\ControladorDAL.cs" />
     <Compile Include="Repositories\DireccionDAL.cs" />
     <Compile Include="Repositories\DireccionUsuarioDAL.cs" />
     <Compile Include="Repositories\EmpresaDAL.cs" />
@@ -75,8 +74,6 @@
     <Compile Include="Repositories\MonedaDAL.cs" />
     <Compile Include="Repositories\MonedaEmpresaDAL.cs" />
     <Compile Include="Repositories\PagoDAL.cs" />
-    <Compile Include="Repositories\PatenteDAL.cs" />
-    <Compile Include="Repositories\PatenteFamiliaDAL.cs" />
     <Compile Include="Repositories\PedidoDAL.cs" />
     <Compile Include="Repositories\PedidoDetalleDAL.cs" />
     <Compile Include="Repositories\PedidoEstadoPedidoDAL.cs" />
@@ -94,8 +91,6 @@
     <Compile Include="Repositories\TipoTarjetaDAL.cs" />
     <Compile Include="Repositories\TipoTelDAL.cs" />
     <Compile Include="Repositories\UsuarioDAL.cs" />
-    <Compile Include="Repositories\UsuarioFamiliaDAL.cs" />
-    <Compile Include="Repositories\UsuarioPatenteDAL.cs" />
     <Compile Include="Services\DALFamilia.cs" />
     <Compile Include="Services\ServicioMailDAL.cs" />
     <Compile Include="SQLServer.cs" />
@@ -108,10 +103,6 @@
     <ProjectReference Include="..\FUNCIONES\FUNCIONES.csproj">
       <Project>{258f06bf-b0a8-4b0e-a679-e494112df4a1}</Project>
       <Name>FUNCIONES</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SEGURIDAD\SEGURIDAD.csproj">
-      <Project>{35b8fc6e-bb13-406e-9c98-b0b533c7c6d3}</Project>
-      <Name>SEGURIDAD</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -4,40 +4,10 @@ namespace TFI.Entidades
 {
 	public class TelefonoEntidad
 	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the TelefonoEntidad class.
-		/// </summary>
-		public TelefonoEntidad()
-		{
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the TelefonoEntidad class.
-		/// </summary>
-		public TelefonoEntidad(string CUIT, string nombreUsuario, string nroTelefono, string codArea, int idTipoTel, DateTime? fecBaja)
-		{
-			this.CUIT = CUIT;
-			this.NombreUsuario = nombreUsuario;
-			this.NroTelefono = nroTelefono;
-			this.CodArea = codArea;
-			this.IdTipoTel = idTipoTel;
-			this.FecBaja = fecBaja;
-		}
-
-		#endregion
 
 		#region Properties
-		/// <summary>
-		/// Gets or sets the CUIT value.
-		/// </summary>
-		public string CUIT { get; set; }
-
-		/// <summary>
-		/// Gets or sets the NombreUsuario value.
-		/// </summary>
-		public string NombreUsuario { get; set; }
+		
+		public UsuarioEntidad miUsuario { get; set; }
 
 		/// <summary>
 		/// Gets or sets the NroTelefono value.
@@ -52,7 +22,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the IdTipoTel value.
 		/// </summary>
-		public int IdTipoTel { get; set; }
+        public TipoTelEntidad miTipoTel { get; set; }
 
 		/// <summary>
 		/// Gets or sets the FecBaja value.

@@ -21,11 +21,11 @@ namespace TFI.DAL.DAL
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@cuit", telefono.CUIT),
-				new SqlParameter("@NombreUsuario", telefono.NombreUsuario),
+				new SqlParameter("@cuit", telefono.miUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", telefono.miUsuario.NombreUsuario),
 				new SqlParameter("@NroTelefono", telefono.NroTelefono),
 				new SqlParameter("@CodArea", telefono.CodArea),
-				new SqlParameter("@IdTipoTel", telefono.IdTipoTel)
+				new SqlParameter("@IdTipoTel", telefono.miTipoTel.IdTipoTel)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoInsert", parameters);
@@ -150,14 +150,48 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@NombreUsuario", nombreUsuario),
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoSelectAllByUsuario", parameters))
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoSelectAllByUsuario", parameters))
             {
                 List<TelefonoEntidad> listadetelefonos = new List<TelefonoEntidad>();
 
-                listadetelefonos = Mapeador.Mapear<TelefonoEntidad>(dt);
+                listadetelefonos = MapearMuchos(ds);
 
                 return listadetelefonos;
             }
+        }
+
+
+
+        private List<TelefonoEntidad> MapearMuchos(DataSet ds)
+        {
+            List<TelefonoEntidad> ResUnosTel = new List<TelefonoEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    TelefonoEntidad unTel = new TelefonoEntidad();
+
+
+                    unTel.miUsuario = new UsuarioEntidad();
+                    unTel.miUsuario.CUIT = row["CUIT"].ToString();
+                    unTel.miUsuario.NombreUsuario = row["NombreUsuario"].ToString();
+                    unTel.NroTelefono = row["NroTelefono"].ToString();
+                    unTel.CodArea = row["CodArea"].ToString();
+                    unTel.miTipoTel = new TipoTelEntidad();
+                    unTel.miTipoTel.IdTipoTel = (int)row["IdTipoTel"];
+                    if (row["FecBaja"].ToString() != "")
+                        unTel.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+
+                    ResUnosTel.Add(unTel);
+                }
+                return ResUnosTel;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
         }
 
 
@@ -171,10 +205,10 @@ namespace TFI.DAL.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				
-				new SqlParameter("@cuit", telefono.CUIT),
-				new SqlParameter("@NombreUsuario", telefono.NombreUsuario),
+				new SqlParameter("@cuit", telefono.miUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", telefono.miUsuario.NombreUsuario),
 				new SqlParameter("@NroTelefono", telefono.NroTelefono),
-				new SqlParameter("@IdTipoTel", telefono.IdTipoTel)
+				new SqlParameter("@IdTipoTel", telefono.miTipoTel.IdTipoTel)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TelefonoUpdateDatosPersonales", parameters);

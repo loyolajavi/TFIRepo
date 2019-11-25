@@ -9,6 +9,8 @@ using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
 using System.Text;
+using TFI.Entidades.Servicios.Permisos;
+using TFI.CORE.Servicios;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -19,7 +21,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         private FamiliaCore unManagerFamilia = new FamiliaCore();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
-        public UsuarioFamiliaCore unManagerUsuarioFamilia = new UsuarioFamiliaCore();
+        public BLLFamilia unManagerUsuarioFamilia = new BLLFamilia();
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         HttpContext Current = HttpContext.Current;
@@ -70,11 +72,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            if (usuarioentidad == null || this.Master.Autenticacion() < FamiliaEntidad.PermisoFamilia.Empleado)
+            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
+            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
-            else if (this.Master.Autenticacion() == FamiliaEntidad.PermisoFamilia.Empleado)
+            unosPermisosTest = new string[] { "Empleado" };
+            if (this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
             }
@@ -146,10 +150,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
         protected void btnPermisosUsuarioUpdate_Click(object sender, EventArgs e)
         {
             unCliente = (UsuarioEntidad)Session["Cliente"];
-            UsuarioFamiliaEntidad unUsuarioFamilia = new UsuarioFamiliaEntidad();
-            unUsuarioFamilia.NombreUsuario = unCliente.NombreUsuario;
-            unUsuarioFamilia.IdFamilia = ddlPermisosUsuarioUpdate.SelectedIndex + 1;
-            unManagerUsuarioFamilia.UsuarioUpdatePermisosFamilia(unUsuarioFamilia);
+            unCliente.Permisos.Clear();
+            unCliente.Permisos.Add(new Familia());
+            unCliente.Permisos[0].IdIFamPat = ddlPermisosUsuarioUpdate.SelectedIndex + 1;
+            unManagerUsuarioFamilia.UsuarioUpdatePermisosFamilia(unCliente);
             cargarPermisos();
         }
 

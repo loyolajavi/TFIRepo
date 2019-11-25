@@ -24,7 +24,7 @@ namespace TFI.Entidades
 		/// <summary>
 		/// Gets or sets the IdMarca value.
 		/// </summary>
-		public int IdMarca { get; set; }
+        public MarcaEntidad miMarca { get; set; }
 
 		/// <summary>
 		/// Gets or sets the CUIT value.

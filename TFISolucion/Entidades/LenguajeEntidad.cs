@@ -23,11 +23,6 @@ namespace TFI.Entidades
 		public DateTime? FecBaja { get; set; }
 
 
-        //ESTO ES LO QUE TENIA PACHU EN LA CLASE LENGUAJE DEL BRANCH DEV
-        //public string Control { get; set; }
-        //public string IsoCode { get; set; }
-        //public string Value { get; set; }
-
 		#endregion
 	}
 }

@@ -167,5 +167,49 @@ namespace TFI.GUI.Shared
             Current.Session["ListaDeseos"] = listaDeseos;
             //ActualizarDeseos();
         }
+
+
+        public bool Autenticar(string elPermiso)
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            string[] PermisosPagina = { elPermiso };
+
+            if (usuarioAutenticado != null)
+            {
+                if (usuarioAutenticado.Permisos.Exists(x => x.NombreIFamPat == elPermiso))
+                    return true;
+                if (CORE.Servicios.BLLFamilia.BuscarPermiso(usuarioAutenticado.Permisos, PermisosPagina))
+                    return true;
+                //return usuarioAutenticado.Permisos.Any(X => X.NombreIFamPat == elPermiso);
+            }
+            return false;
+
+        }
+
+
+        public bool Autenticar(string[] losPermisosARevisar)
+        {
+            UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
+            usuarioAutenticado = (UsuarioEntidad)Current.Session["Usuario"];
+
+            //string[] PermisosPagina = { elPermiso };
+
+            if (usuarioAutenticado != null)
+            {
+                foreach (string unTag in losPermisosARevisar)
+                {
+                    if (usuarioAutenticado.Permisos.Exists(x => x.NombreIFamPat == unTag))
+                        return true;
+                }
+
+                return CORE.Servicios.BLLFamilia.BuscarPermiso(usuarioAutenticado.Permisos, losPermisosARevisar);
+            }
+            return false;
+
+        }
+
+
     }
 }

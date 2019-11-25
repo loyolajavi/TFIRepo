@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using TFI.FUNCIONES.Persistencia; using TFI.Entidades;
+using TFI.FUNCIONES.Persistencia;
+using TFI.Entidades;
+using System.Linq;
 
 namespace TFI.DAL.DAL
 {
@@ -22,7 +24,7 @@ namespace TFI.DAL.DAL
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@DescripSucursal", sucursal.DescripSucursal),
-				new SqlParameter("@DireccionSucursal", sucursal.DireccionSucursal),
+				new SqlParameter("@DireccionSucursal", sucursal.miDireccion.IdDireccion),
 				new SqlParameter("@CUIT", sucursal.CUIT)
 			};
 
@@ -40,7 +42,7 @@ namespace TFI.DAL.DAL
 			{
 				new SqlParameter("@IdSucursal", sucursal.IdSucursal),
 				new SqlParameter("@DescripSucursal", sucursal.DescripSucursal),
-				new SqlParameter("@DireccionSucursal", sucursal.DireccionSucursal),
+				new SqlParameter("@DireccionSucursal", sucursal.miDireccion.IdDireccion),
 				new SqlParameter("@CUIT", sucursal.CUIT)
 			};
 
@@ -138,10 +140,10 @@ namespace TFI.DAL.DAL
                 new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalTraerPorDireccionSucursal", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalTraerPorDireccionSucursal", parameters))
 			{
                 SucursalEntidad unaRes = new SucursalEntidad();
-                unaRes = Mapeador.MapearFirst<SucursalEntidad>(dt);
+                unaRes = MapearMuchos(dt).First();
 
                 return unaRes;
 
@@ -159,10 +161,10 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalSelectAllByCUIT", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SucursalSelectAllByCUIT", parameters))
 			{
                 List<SucursalEntidad> lista = new List<SucursalEntidad>();
-                lista = Mapeador.Mapear<SucursalEntidad>(dt);
+                lista = MapearMuchos(dt);
 
                 return lista;
 			}
@@ -178,10 +180,10 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@CUIT", CUIT)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TraerSucursalesConStock", parameters))
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "TraerSucursalesConStock", parameters))
             {
                 List<StockSucursalEntidad> lista = new List<StockSucursalEntidad>();
-                lista = Mapeador.Mapear<StockSucursalEntidad>(dt);
+                lista = MapearMuchosSucStock(dt);
 
                 return lista;
             }
@@ -211,5 +213,71 @@ namespace TFI.DAL.DAL
 	        }
 
         }
+
+
+
+        private List<SucursalEntidad> MapearMuchos(DataSet ds)
+        {
+            List<SucursalEntidad> ResUnosItem = new List<SucursalEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    SucursalEntidad unItem = new SucursalEntidad();
+
+
+                    unItem.IdSucursal = (int)row["IdSucursal"];
+                    unItem.miDireccion = new DireccionEntidad();
+                    unItem.miDireccion.IdDireccion = (int)row["DireccionSucursal"];
+                    unItem.DescripSucursal = row["DescripSucursal"].ToString();
+                    unItem.CUIT = row["CUIT"].ToString();
+                    if (row["FecBaja"].ToString() != "")
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+
+                    ResUnosItem.Add(unItem);
+                }
+                return ResUnosItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+
+        private List<StockSucursalEntidad> MapearMuchosSucStock(DataSet ds)
+        {
+            List<StockSucursalEntidad> ResUnosItem = new List<StockSucursalEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    StockSucursalEntidad unItem = new StockSucursalEntidad();
+
+                    unItem.IdProducto = (int)row["IdProducto"];
+                    unItem.IdSucursal = (int)row["IdSucursal"];
+                    unItem.CantidadProducto = (int)row["CantidadProducto"];
+                    unItem.CUIT = row["CUIT"].ToString();
+                    if (row["FecBaja"].ToString() != "")
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+
+                    ResUnosItem.Add(unItem);
+                }
+                return ResUnosItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+
+
     }
 }
