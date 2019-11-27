@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title></title>
 
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -298,36 +298,40 @@
     <script src="/LCSK/chat.js"></script>
     <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
 
-    <script>
 
-        LoadMasterBasic();
-
-        var obtenerTags = function () {
-            var result;
-            $.ajax({
-                type: "POST",
-                url: "Home.aspx/ObtenerProductos",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (data) {
-                    result = data.d;
-                }
-            });
-
-            return result;
-        }
-
-        var availableTags = obtenerTags();
-
-        $("#txtSearch").autocomplete({
-            source: availableTags
-        });
-    </script>
 
     <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
+
+        <script>
+
+            LoadMasterBasic();
+
+            var obtenerTags = function () {
+                var result;
+                $.ajax({
+                    type: "POST",
+                    url: "Home.aspx/ObtenerProductos",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    },
+                    success: function (data) {
+                        result = data.d;
+                    }
+                });
+
+                return result;
+            }
+
+            var availableTags = obtenerTags();
+
+            $("#txtSearch").autocomplete({
+                source: availableTags
+            });
+    </script>
+
+
 </body>
 </html>
