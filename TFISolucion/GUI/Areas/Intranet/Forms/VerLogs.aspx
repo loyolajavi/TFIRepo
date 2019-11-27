@@ -72,5 +72,4 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
       <script src="../../../Scripts/shared/Validaciones.js"></script>
-    <script src="../../Scripts/jquery-ui-1.7.1.custom.min.js" type="text/javascript"> </script>
 </asp:Content>

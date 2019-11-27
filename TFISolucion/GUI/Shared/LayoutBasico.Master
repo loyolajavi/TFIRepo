@@ -278,59 +278,50 @@
         </div>
     </form>
 
-    <%--//ESTOS 3 ESCRIPTS ESTABAN ANTES DE PONER LOS SCRIPT DEL CHAT--%>
-    <%--<script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>
-    <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
-    <script src="/Scripts/shared/Funciones.js"></script>--%>
-
-    <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
-    <%--<script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
-    <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
-    <script src="/Scripts/shared/Funciones.js"></script>
-
-    <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>
-    <%--<script src="assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <%--<script src="/LCSK/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>--%>
+    <script src="/Scripts/thirdparty/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/Scripts/shared/Funciones.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/jquery.signalR-2.1.2.js" type="text/javascript"></script>
+    <%--<script src="../LCSK/assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>--%><%--Este lo tengo q quitar--%>
     <script src="/signalr/hubs" type="text/javascript"></script>
-    <script src="agent.js" type="text/javascript"></script>--%>
-
-    <%--<script src="/Scripts/jquery.signalR-2.1.2.min.js"></script>--%>
-    <script src="/signalr/hubs" type="text/javascript"></script>
-    <script src="/LCSK/chat.js"></script>
-    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
+    <script src="/LCSK/chat.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js" type="text/javascript"></script>
 
 
 
-    <asp:ContentPlaceHolder ID="ScriptSection" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+                LoadMasterBasic();
 
-        <script>
+                var obtenerTags = function () {
+                    var result;
+                    $.ajax({
+                        type: "POST",
+                        url: "Home.aspx/ObtenerProductos",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        error: function (xhr, status, error) {
+                            alert(error);
+                        },
+                        success: function (data) {
+                            result = data.d;
+                        }
+                    });
 
-            LoadMasterBasic();
+                    return result;
+                }
 
-            var obtenerTags = function () {
-                var result;
-                $.ajax({
-                    type: "POST",
-                    url: "Home.aspx/ObtenerProductos",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    async: false,
-                    error: function (xhr, status, error) {
-                        alert(error);
-                    },
-                    success: function (data) {
-                        result = data.d;
-                    }
+                var availableTags = obtenerTags();
+
+                $("#txtSearch").autocomplete({
+                    source: availableTags
                 });
-
-                return result;
-            }
-
-            var availableTags = obtenerTags();
-
-            $("#txtSearch").autocomplete({
-                source: availableTags
-            });
     </script>
+    <asp:ContentPlaceHolder ID="ScriptSection" runat="server">
+    </asp:ContentPlaceHolder>
+
+
 
 
 </body>

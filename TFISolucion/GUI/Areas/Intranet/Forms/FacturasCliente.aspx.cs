@@ -109,7 +109,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (Facturas.Count == 0)
             {
-                sinfacturas.InnerHtml = "<strong>Usted no tiene facturas disponibles para consultar. Compre ahora en </strong><a href='http://startbootstrap.com/template-overviews/sb-admin-2' class='alert-link'>nuestra tienda</a>";
+                sinfacturas.InnerHtml = "<strong>No hay facturas disponibles para consultar</strong>";
             }
             else
             {

@@ -5,12 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Mi Cuenta</title>
 
-    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
-    <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
+    <link href="../Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
+    <link href="../Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
+    
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -200,19 +203,20 @@
                 </section>
             </div>
         </footer>
+    </form>
 
-        <script src="/LCSK/assets/js/jquery-2.1.1.min.js"></script>
 
-        <%--    <script src="/Scripts/thirdparty/jquery-3.1.1.min.js"></script>--%>
-        <script src="/Scripts/thirdparty/bootstrap.min.js"></script>
-        <script src="/Scripts/shared/Funciones.js"></script>
+    <script src="/Scripts/thirdparty/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <%--<script src="/LCSK/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>--%>
+    <script src="/Scripts/thirdparty/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/Scripts/shared/Funciones.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/jquery.signalR-2.1.2.js" type="text/javascript"></script>
+    <%--<script src="../LCSK/assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>--%><%--Este lo tengo q quitar--%>
+    <script src="/signalr/hubs" type="text/javascript"></script>
+    <script src="/LCSK/chat.js" type="text/javascript"></script>
+    <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js" type="text/javascript"></script>
 
-        <script src="/LCSK/assets/js/jquery.signalR-2.1.1.min.js"></script>
-        <script src="/signalr/hubs" type="text/javascript"></script>
-        <script src="/LCSK/chat.js"></script>
-        <script src="/Scripts/thirdparty/Autocomplete/jquery-ui.js"> </script>
-
-        <script>
+        <script type="text/javascript">
             updateProductos();
 
             updateDeseos();
@@ -245,6 +249,6 @@
 
         <asp:ContentPlaceHolder runat="server" ID="ScriptsSection">
         </asp:ContentPlaceHolder>
-    </form>
+    
 </body>
 </html>

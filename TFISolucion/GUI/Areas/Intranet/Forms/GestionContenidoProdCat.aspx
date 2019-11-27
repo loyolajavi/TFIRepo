@@ -111,7 +111,7 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
-      <script src="../../../Scripts/shared/Validaciones.js"></script>
+    <script src="../../../Scripts/shared/Validaciones.js"></script>
     <script>
         var obtenerTags = function () {
             var result;

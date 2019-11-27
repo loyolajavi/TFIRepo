@@ -132,7 +132,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\propios\EstiloLayoutPropio.css" />
     <Content Include="Content\css\propios\Pedido.css" />
-    <Content Include="Content\css\sb-admin.css" />
+    <Content Include="Content\css\sb-admin - No Utilizado.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -214,13 +214,13 @@
     <Content Include="LCSK\Agent.aspx" />
     <Content Include="LCSK\Agent.html" />
     <Content Include="LCSK\agent.js" />
-    <Content Include="LCSK\assets\css\bootstrap-theme.min.css" />
-    <Content Include="LCSK\assets\css\bootstrap.min.css" />
-    <Content Include="LCSK\assets\js\bootstrap.min.js" />
-    <Content Include="LCSK\assets\js\jquery-2.1.1.min.js" />
-    <Content Include="LCSK\assets\js\jquery-3.1.1.min.js" />
-    <Content Include="LCSK\assets\js\jquery.signalR-2.1.1.min.js" />
-    <Content Include="LCSK\assets\js\jquery.timeago.js" />
+    <Content Include="LCSK\assets\css\bootstrap-theme.min NO Utilizado.css" />
+    <Content Include="LCSK\assets\css\bootstrap.min No Utilizado.css" />
+    <Content Include="LCSK\assets\js\bootstrap.min No Utilizado.js" />
+    <Content Include="LCSK\assets\js\jquery-2.1.1.min No Utilizado.js" />
+    <Content Include="LCSK\assets\js\jquery-3.1.1.min No Utilizado.js" />
+    <Content Include="LCSK\assets\js\jquery.signalR-2.1.1.min No Utilizado.js" />
+    <Content Include="Scripts\thirdparty\jquery.timeago.js" />
     <Content Include="LCSK\assets\sounds\newchat.mp3" />
     <Content Include="LCSK\assets\sounds\newmsg.mp3" />
     <Content Include="LCSK\chat.js" />
@@ -232,13 +232,13 @@
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\sdf.pubxml" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <None Include="Scripts\thirdparty\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\thirdparty\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\thirdparty\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\shared\Funciones.js" />
     <Content Include="Scripts\shared\Validaciones.js" />
     <Content Include="Scripts\thirdparty\Autocomplete\images\ui-bg_glass_40_ffc73d_1x400.png" />
@@ -258,10 +258,10 @@
     <Content Include="Scripts\thirdparty\Autocomplete\jquery.js" />
     <Content Include="Scripts\thirdparty\bootstrap.js" />
     <Content Include="Scripts\thirdparty\bootstrap.min.js" />
-    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular No Utilizado.woff" />
+    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular No Utilizado.ttf" />
+    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular No Utilizado.svg" />
+    <Content Include="LCSK\assets\fonts\glyphicons-halflings-regular No Utilizado.eot" />
     <Content Include="Content\Files\lcsk.dat" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -270,13 +270,8 @@
     <None Include="Properties\PublishProfiles\miperfil.pubxml" />
     <None Include="Properties\PublishProfiles\tfimerchot.pubxml" />
     <None Include="Properties\PublishProfiles\tfimerchot1.pubxml" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <None Include="Scripts\thirdparty\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.js" />
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\thirdparty\jquery-3.4.1.min.map" />
     <Content Include="Shared\error.aspx" />
     <Content Include="Shared\LayoutBasico.Master" />
     <Content Include="Shared\LayoutAdministracion.Master" />
@@ -288,8 +283,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.min.map" />
-    <Content Include="Scripts\thirdparty\jquery-3.1.1.slim.min.map" />
     <Content Include="Shared\MiCuenta.Master" />
     <None Include="Web.ConnectionStrings.config">
       <DependentUpon>Web.config</DependentUpon>
