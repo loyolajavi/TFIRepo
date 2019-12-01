@@ -45,7 +45,6 @@ namespace TFI.GUI
             _manager = new ProductoCore();
             moneda = new MonedaEntidad();
             _coremoneda = new MonedaCore();
-            _manager = new ProductoCore();
             cotizacion = new MonedaEmpresaEntidad();
         }
 
@@ -67,9 +66,12 @@ namespace TFI.GUI
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
 
-                stringBusqueda = Page.Request.QueryString["search"];
-                stringCategoria = Page.Request.QueryString["Categoria"];
-                Session.Add("ProductosEnSesion", unosProductos);
+                if (cotizacion == null)
+                {
+                    cotizacion = new MonedaEmpresaEntidad();
+                    cotizacion.IdMoneda = 1;
+                    Session["Cotizacion"] = cotizacion;
+                }
 
                 if (idioma == null)
                 {
@@ -78,6 +80,14 @@ namespace TFI.GUI
                     Session["Idioma"] = idioma;
 
                 }
+
+                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+
+                stringBusqueda = Page.Request.QueryString["search"];
+                stringCategoria = Page.Request.QueryString["Categoria"];
+                Session.Add("ProductosEnSesion", unosProductos);
+
+                
 
                 if (!string.IsNullOrEmpty(stringBusqueda))
                 {

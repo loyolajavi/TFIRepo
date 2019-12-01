@@ -43,7 +43,8 @@ function LoadMasterBasic() {
 function onBtnAddClick(btn) {
     var control = $(btn);
     var idProd = control.data('producto');
-
+    if (idProd == null)
+        idProd = $('#IdProductoComprarServer').val();
     $.ajax({
         type: "POST",
         url: "Home.aspx/AgregarDeseo",
@@ -137,6 +138,8 @@ function onBtnComprar(btn2) {
 $('.btn-comprar').click(function () {
     var control = $(this);
     var idProducto = control.data('producto');//Viene desde el .aspx propiedad: data-producto
+    if(idProducto == null)
+        idProducto = $('#IdProductoComprarServer').val();
     //Llama a la función
     consultarStockClickComprar(idProducto, function (stockActual) {
         if (stockActual > 0) {

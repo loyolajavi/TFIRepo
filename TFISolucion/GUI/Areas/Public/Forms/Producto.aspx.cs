@@ -38,7 +38,7 @@ namespace TFI.GUI
             _coreMoneda = new MonedaCore();
             _manager = new ProductoCore();
             idioma = new LenguajeEntidad();
-            
+
         }
 
         ////Para mantener la sesión activa
@@ -51,14 +51,23 @@ namespace TFI.GUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idioma = new LenguajeEntidad();
+            //idioma = new LenguajeEntidad();
             int IdProducto = Convert.ToInt32(Request.QueryString["IdProducto"]);
             _IdProducto = IdProducto;
+            IdProductoComprarServer.Value = IdProducto.ToString();
             if (!IsPostBack)
             {
-                cotizacion = new MonedaEmpresaEntidad();
                 cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+
                 idioma = (LenguajeEntidad)Session["Idioma"];
+                if (cotizacion == null)
+                {
+                    cotizacion = new MonedaEmpresaEntidad();
+                    cotizacion.IdMoneda = 1;
+                    Session["Cotizacion"] = cotizacion;
+                }
+
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
 
                 if (idioma == null)
                 {
@@ -76,9 +85,12 @@ namespace TFI.GUI
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
                 Session["Idioma"] = idioma;
             }
+            if (cotizacion == null)
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
             producto = _manager.Find(IdProducto, cotizacion.IdMoneda);
             moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             Page.Title = producto.DescripProducto;
+            
 
             LoadProducto(IdProducto);
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");

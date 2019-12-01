@@ -49,6 +49,9 @@
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
+                            <li id="LiMoneda" runat="server">
+                                <asp:DropDownList ID="monedaDRW" runat="server" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;" ClientIDMode="Static" AutoPostBack="true" CssClass="dropdown-toggle" OnSelectedIndexChanged="cambiarSeleccion"></asp:DropDownList>
+                            </li>                            
                             <li>
                                 <asp:DropDownList ID="ddlLanguages" runat="server" AutoPostBack="true" Style="margin-top: 18px; background-color: #000000; color: gray; border: none;">
 
@@ -57,6 +60,12 @@
 
                                 </asp:DropDownList>
                             </li>
+                            <% if (this.Autenticar( new string[] {"Empleado", "Admin"}))
+                                {%>
+                            <li id="divLinkIntranet" runat="server">
+                                <a class="btn btn-sm" href="/Areas/Intranet/Forms/ordenespedido.aspx" runat="server" id="LinkIntranet">Intranet</a>
+                            </li>
+                            <%} %>
                              <li>
                                 <a href="/" runat="server" id="EtiquetaUsuario" onclick="return false;"></a>
                             </li>
@@ -71,6 +80,11 @@
 
                             <%-- LISTA DE PEDIDOS END--%>
 
+                            <%-- LISTA DE PEDIDOS REALIZADOS (COMPRAS)--%>
+                            <li id="ComprasDrop" runat="server">
+                                <a href="/Areas/Public/Forms/UltimosPedidos.aspx" runat="server" id="LinkCompras" class="dropdown-toggle" style="min-width: 120px; text-align: center; font-weight: bold;"><asp:Label ID="lblCompras" runat="server" Text="<%$Resources:Global, Compras %>"></asp:Label><span class="glyphicon glyphicon-gift"></span><span id="cantComprasPagar"></span></a>
+                            </li>
+                            <%-- LISTA DE COMPRAS END--%>
 
                             <li id="LiDeseos" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="min-width: 120px; text-align: center; font-weight: bold;">
@@ -166,7 +180,7 @@
                     <p class="lead"><asp:Label ID="Label19"  runat="server" Text="<%$Resources:Global, MiCuenta %>"></asp:Label></p>
                     <div class="list-group">
                         <a href="DatosPersonales.aspx" class="list-group-item"><asp:Label ID="Label11"  runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></a>
-                        <a href="UltimosPedidos.aspx" class="list-group-item"><asp:Label ID="Label12"  runat="server" Text="<%$Resources:Global, UltimosPedidos %>"></asp:Label></a>
+                        <a href="UltimosPedidos.aspx" class="list-group-item"><asp:Label ID="Label12"  runat="server" Text="<%$Resources:Global, Compras %>"></asp:Label></a>
                         <a href="ListaDeDeseos.aspx" class="list-group-item"><asp:Label ID="Label13"  runat="server" Text="<%$Resources:Global, ListaDeseos %>"></asp:Label></a>
                         <a href="Tarjetas.aspx" class="list-group-item"><asp:Label ID="Label14"  runat="server" Text="<%$Resources:Global, DatosDeTarjetas %>"></asp:Label></a>
                     </div>
@@ -218,7 +232,7 @@
 
         <script type="text/javascript">
             updateProductos();
-
+            updateCompras();
             updateDeseos();
 
             var obtenerTags = function () {

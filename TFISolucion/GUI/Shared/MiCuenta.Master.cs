@@ -18,10 +18,14 @@ namespace TFI.GUI.Shared
         private UsuarioEntidad usuario = new UsuarioEntidad();
         private LenguajeEntidad idioma;
         public List<ProductoEntidad> AuxDeseos;
+        private MonedaCore _monedaManager;
+        public MonedaEmpresaEntidad cotizacion { get; set; }
+
         public MiCuenta()
         {
-            idioma = new LenguajeEntidad();
             _manager = new UsuarioCore();
+            this._monedaManager = new MonedaCore();
+            idioma = new LenguajeEntidad();
         }
         public string obtenerIdiomaCombo()
         {
@@ -36,8 +40,13 @@ namespace TFI.GUI.Shared
 
             if (logueado != null)
             {
+                if (usuario.IdUsuarioTipo == 2)
+                {
+                    divLinkIntranet.Visible = true;
+                }
                 liIngresar.Visible = false;
                 LiDeseos.Visible = true;
+                ComprasDrop.Visible = true;
                 SetUsuarioLogueado(logueado.Nombre + " " + logueado.Apellido);
 
                 AuxDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
@@ -51,8 +60,11 @@ namespace TFI.GUI.Shared
             else
             {
                 LiDeseos.Visible = false;
+                ComprasDrop.Visible = false;
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
+            //AGREGADOS PARA MONEDA/////
+            cotizacion = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
             if (!this.IsPostBack)
             {
                 if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
@@ -63,6 +75,11 @@ namespace TFI.GUI.Shared
                 {
                     Session["Idioma"] = obtenerIdiomaCombo();
                 }
+                if (cotizacion == null)
+                {
+                    Session["Cotizacion"] = devolverCotizacion(1);
+                }
+                cargarMonedas();
             }
         }
 
@@ -77,6 +94,43 @@ namespace TFI.GUI.Shared
             Session.Abandon();
             Response.Redirect("/Areas/Public/Forms/Home.aspx");
         }
+
+
+        protected void cargarMonedas()
+        {
+
+            monedaDRW.DataSource = _monedaManager.FinAllMonedasByEmpresa();
+            monedaDRW.DataValueField = "IdMoneda";
+            monedaDRW.DataTextField = "Nombre";
+            monedaDRW.DataBind();
+
+        }
+
+
+
+        public Int32 obtenerValorDropDown()
+        {
+            var val = (monedaDRW.SelectedValue);
+            return Convert.ToInt32(val);
+
+        }
+
+        public void cambiarSeleccion(object sender, EventArgs e)
+        {
+            var valor = monedaDRW.SelectedItem.Text;
+            var IdMoneda = monedaDRW.SelectedValue;
+            Session["Cotizacion"] = devolverCotizacion(Convert.ToInt32(IdMoneda));
+            cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+
+        }
+
+        protected MonedaEmpresaEntidad devolverCotizacion(int valor)
+        {
+            return _monedaManager.Select(valor);
+
+
+        }
+
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {

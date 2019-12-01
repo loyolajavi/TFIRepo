@@ -211,36 +211,31 @@ namespace TFI.CORE.Managers
             return DaldeUsuario.EmpresasConMasPedidos(cuit);
         }
 
-        public List<DireccionEntidad> FindDireccionesPredeterminadas(string nombreUsuario)
+        public List<DireccionEntidad> FindDireccionesPredeterminadas(UsuarioEntidad elUsuario)
         {
-            var direccionUsurio = DaldeDireccionUsuario
-                .SelectAllByCUIT_NombreUsuario(Helpers.ConfigSection.Default.Site.Cuit, nombreUsuario)
-                .Where(x => x.Predeterminada)
-                .ToList();
+            List<DireccionEntidad> unasDirUsuario = SelectDireccionesDeUsuarioActuales(elUsuario)
+                                    .Where(x => x.Predeterminada)
+                                    .ToList();
 
-            if (direccionUsurio == null && !direccionUsurio.Any())
+            if (unasDirUsuario == null && !unasDirUsuario.Any())
                 return null;
-
-            var dirs = new List<DireccionEntidad>();
-            direccionUsurio.ForEach(x => dirs.Add(DaldeDireccion.Select(x.IdDireccion)));
-            dirs.ForEach(x => x.miProvincia = _dalProvicia.Select(x.IdProvincia));
-
-            return dirs;
+   
+            return unasDirUsuario;
         }
 
-        public DireccionEntidad FindDireccionEnvioPredeterminada(string userName)
-        {
-            return FindDireccionesPredeterminadas(userName)
-                       .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Envio)
-                       .FirstOrDefault();
-        }
+        //public DireccionEntidad FindDireccionEnvioPredeterminada(string userName)
+        //{
+        //    return FindDireccionesPredeterminadas(userName)
+        //               .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Envio)
+        //               .FirstOrDefault();
+        //}
 
-        public DireccionEntidad FindDireccionFacturacionPredeterminada(string userName)
-        {
-            return FindDireccionesPredeterminadas(userName)
-                      .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Facturacion)
-                      .FirstOrDefault();
-        }
+        //public DireccionEntidad FindDireccionFacturacionPredeterminada(string userName)
+        //{
+        //    return FindDireccionesPredeterminadas(userName)
+        //              .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Facturacion)
+        //              .FirstOrDefault();
+        //}
 
         public TelefonoEntidad FindTelefonoContacto(string nombreUsuario)
         {

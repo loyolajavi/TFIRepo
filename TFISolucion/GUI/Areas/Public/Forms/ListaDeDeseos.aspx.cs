@@ -19,6 +19,9 @@ namespace TFI.GUI
         public List<ProductoEntidad> unosProductosListaDeseo = new List<ProductoEntidad>();
         public static ProductoEntidad producto;
         private LenguajeEntidad idioma;
+        public MonedaEntidad moneda;
+        public MonedaEmpresaEntidad cotizacion;
+        private MonedaCore _coreMoneda;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -36,10 +39,12 @@ namespace TFI.GUI
         public ListaDeDeseos()
         {
             idioma = new LenguajeEntidad();
+            cotizacion = new MonedaEmpresaEntidad();
+            _coreMoneda = new MonedaCore();
+            moneda = new MonedaEntidad();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            idioma = new LenguajeEntidad();
             logueado = (UsuarioEntidad)Current.Session["Usuario"];
 
             if (logueado == null)
@@ -48,8 +53,18 @@ namespace TFI.GUI
             }
             if (!IsPostBack)
             {
+                cotizacion = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
 
                 idioma = (LenguajeEntidad)Session["Idioma"];
+
+                if (cotizacion == null)
+                {
+                    cotizacion = new MonedaEmpresaEntidad();
+                    cotizacion.IdMoneda = 1;
+                    Current.Session["Cotizacion"] = cotizacion;
+                }
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+                cotizacion = _coreMoneda.Select(cotizacion.IdMoneda);
 
                 if (idioma == null)
                 {
@@ -62,8 +77,12 @@ namespace TFI.GUI
             }
             else
             {
-                idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
-                Session["Idioma"] = idioma;
+                idioma.DescripcionLenguaje = this.Master.obtenerIdiomaCombo();
+                Current.Session["Idioma"] = idioma;
+                cotizacion.IdMoneda = Convert.ToInt16(this.Master.obtenerValorDropDown());
+                Current.Session["Cotizacion"] = cotizacion;
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+                cotizacion = _coreMoneda.Select(cotizacion.IdMoneda);
             }
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
@@ -171,6 +190,18 @@ namespace TFI.GUI
         {
 
             var Current = HttpContext.Current;
+            MonedaEntidad moneda = new MonedaEntidad();
+            MonedaCore _coreMoneda = new MonedaCore();
+            MonedaEmpresaEntidad cotizacion = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
+            ProductoCore ManagerProducto = new ProductoCore();
+
+             if (cotizacion == null)
+                {
+                    cotizacion = new MonedaEmpresaEntidad();
+                    cotizacion.IdMoneda = 1;
+                    Current.Session["Cotizacion"] = cotizacion;
+                }
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
 
             var plantilla = 
                     "<tr class=\"{0}\">" +
@@ -184,25 +215,41 @@ namespace TFI.GUI
                             "<small>SKU: {3}</small>" + 
                         "</td>" + 
                         "<td class=\"text-center\">" + 
-                            "<p>" + 
-                                "<span>ARS</span> <span>$</span> <span>{4}</span>" + 
+                            "<p>" +
+                                "<span>{4}</span> <span>{5}</span>" + 
                             "</p>" + 
                         "</td>" + 
                         "<td class=\"text-center\">" +
-                                "<button class=\"btn btn-info\" id=\"btnComprar2\" data-producto2=\"{5}\" onclick=\"onBtnComprar(this)\">Comprar</button>" + 
+                                "<button class=\"btn btn-info\" id=\"btnComprar2\" data-producto2=\"{6}\" onclick=\"onBtnComprar(this)\">Comprar</button>" + 
                           "</td>" +
                         "<td class=\"text-center\">" +
-                            "<button class=\"btn btn-danger\" id=\"btnEliminarDeseo\" data-prodeliminar=\"{6}\" onclick=\"onbtnEliminarDeseo(this)\">Eliminar</button>" +
+                            "<button class=\"btn btn-danger\" id=\"btnEliminarDeseo\" data-prodeliminar=\"{7}\" onclick=\"onbtnEliminarDeseo(this)\">Eliminar</button>" +
                         "</td>" + 
                   "</tr>"; //FIN Plantilla
 
             var pl = new List<String>();
 
-            var unosDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+            List<ProductoEntidad> unosDeseos = (List<ProductoEntidad>)Current.Session["ListaDeseos"];
+            List<ProductoEntidad> unosDeseosPrecioCalculo = new List<ProductoEntidad>();
 
             if (unosDeseos != null && unosDeseos.Any())
             {
-                unosDeseos.ForEach(x => pl.Add(string.Format(plantilla, x.IdProducto, x.URL, x.DescripProducto, x.CodigoProducto, x.PrecioUnitario, x.IdProducto, x.IdProducto)));
+
+                foreach (ProductoEntidad unDeseo in unosDeseos)
+                {
+                    unosDeseosPrecioCalculo.Add(ManagerProducto.Find(unDeseo.IdProducto, moneda.IdMoneda));
+                }
+
+
+                //foreach (ProductoEntidad unDeseo in unosDeseos)
+                //{
+                //    if (cotizacion.Cotizacion > 1)
+                //        unDeseo.PrecioUnitario = System.Decimal.Round(unDeseo.PrecioUnitario / cotizacion.Cotizacion, 2);
+                //    else
+                //        unDeseo.PrecioUnitario = System.Decimal.Round(unDeseo.PrecioUnitario * cotizacion.Cotizacion, 2);
+                //}
+
+                unosDeseosPrecioCalculo.ForEach(x => pl.Add(string.Format(plantilla, x.IdProducto, x.URL, x.DescripProducto, x.CodigoProducto, moneda.SimboloMoneda, x.PrecioUnitario, x.IdProducto, x.IdProducto)));
             }
 
             return pl;

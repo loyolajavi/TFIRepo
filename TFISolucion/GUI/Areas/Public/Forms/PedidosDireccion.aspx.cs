@@ -83,7 +83,7 @@ namespace TFI.GUI.Areas.Public.Forms
             }
             if (logueado != null)
             {
-                var dirs = _usuarioManager.FindDireccionesPredeterminadas(logueado.NombreUsuario);
+                var dirs = _usuarioManager.FindDireccionesPredeterminadas(logueado);
 
                 direccionEnvio = dirs
                     .Where(x => x.IdTipoDireccion == (int)TipoDireccionEntidad.Options.Envio)

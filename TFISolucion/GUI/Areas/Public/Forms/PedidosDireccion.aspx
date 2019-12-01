@@ -81,11 +81,11 @@
                         </tr>
                         <tr>
                             <td id="lblProvincia" class="td-lbl"><%=Resources.Global.Provincia%> </td>
-                            <td><%=direccionEnvio.miProvincia.DescripcionProvincia%></td>
+                            <td><%=direccionEnvio.miLocalidad.miProvincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblLocalidad" class="td-lbl"><%=Resources.Global.Localidad%> </td>
-                            <td><%=direccionEnvio.Localidad%></td>
+                            <td><%=direccionEnvio.miLocalidad.DescripcionLocalidad%></td>
                         </tr>
                         <tr>
                             <td id="lblTelefono" class="td-lbl"><%=Resources.Global.Telefono%> </td>
@@ -131,11 +131,11 @@
                         </tr>
                         <tr>
                             <td id="lblFacturacionProvincia" class="td-lbl"><%=Resources.Global.Provincia%> </td>
-                            <td><%=direccionFacturacion.miProvincia.DescripcionProvincia%></td>
+                            <td><%=direccionFacturacion.miLocalidad.miProvincia.DescripcionProvincia%></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionLocalidad" class="td-lbl"><%=Resources.Global.Localidad%> </td>
-                            <td><%=direccionFacturacion.Localidad%></td>
+                            <td><%=direccionFacturacion.miLocalidad.DescripcionLocalidad%></td>
                         </tr>
                         <tr>
                             <td id="lblFacturacionTelefono" class="td-lbl"><%=Resources.Global.Telefono%> </td>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master"  EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="TFI.GUI.Producto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutBasico.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Producto.aspx.cs" Inherits="TFI.GUI.Producto" %>
 
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
@@ -58,16 +58,16 @@
                     <div>
                         <h2 class="title text-center"><strong><%=moneda.SimboloMoneda%></strong><strong> <%=producto.PrecioUnitario%></strong></h2>
                     </div>
-                    <p class="text-center">
-
-                        <button type="button" id="btnComprar" class="btn btn-comprar" data-producto="<%=producto.IdProducto%>"><%=Resources.Global.Comprar%></button>
+                    <div class="item-toolbar">
+                         <asp:HiddenField ID="IdProductoComprarServer" runat="server" ClientIDMode="Static" />
+                        <input type="button" id="btnComprarProducto" value="<%$Resources:Global, Comprar %>" clientidmode="static" class="btn btn-success btn-comprar" runat="server" />
+                        <%if (this.Master.Autenticar("Desear"))
+                        {%>
                         <br />
                         <br />
-                        <button class="btn btn-success"><i class="glyphicon glyphicon-heart" style="padding: 5px; padding-left: 2px; padding-right: 2px;"></i></button>
-                       <%=Resources.Global.AgregarAFavoritos%>
-                    </p>
-                    <p>
-                    </p>
+                            <input type="button" class="btn btn-info" clientidmode="static" runat="server" value="<%$Resources:Global, Desear %>" onclick="onBtnAddClick(this)" />
+                        <%}%>
+                    </div>
 
                     <div class="bg-info inner">
                         <div>

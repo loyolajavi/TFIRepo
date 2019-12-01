@@ -7,8 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentCuenta" runat="server">
 
     <div class="col-lg-12">
-        <h1 class="page-header"><%=Resources.Global.UltimosPedidos%><small><%=Resources.Global.MiCuenta%></small>
-        </h1>
+        <h1 class="page-header"><%=Resources.Global.Compras%> </h1>
     </div>
 
     <div class="row" runat="server" id="contenedorsinpedidos">
