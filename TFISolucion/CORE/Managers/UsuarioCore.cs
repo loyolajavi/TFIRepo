@@ -109,6 +109,25 @@ namespace TFI.CORE.Managers
             return ListaDeDirecciones;
         }
 
+
+        public List<DireccionEntidad> SelectDireccionesDeUsuarioActuales(UsuarioEntidad elUsuario)
+        {
+            //List<DireccionUsuarioEntidad> ListaDeIntermedias = new List<DireccionUsuarioEntidad>();
+            //ListaDeIntermedias = DaldeDireccionUsuario.SelectAllByCUIT_NombreUsuario(cuit, nombreUsuario);
+
+            elUsuario.misDirecciones = DaldeDireccion.SelectDireccionesDeUsuarioActuales(elUsuario.CUIT, elUsuario.NombreUsuario);
+
+            //foreach (var item in ListaDeIntermedias)
+            //{
+                //DireccionEntidad UnaDireccion = new DireccionEntidad();
+                //UnaDireccion = DaldeDireccion.Select(item.IdDireccion);
+                //ListaDeDirecciones.Add(UnaDireccion);
+            //}
+
+            return elUsuario.misDirecciones;
+        }
+
+
         public void UpdateDatosPersonales(UsuarioEntidad usuario)
         {
             DaldeUsuario.UpdateDatosPersonales(usuario);
@@ -119,14 +138,18 @@ namespace TFI.CORE.Managers
             DaldeTelefono.UpdateDatosPersonales(telefono);
         }
 
-        public void UpdateDireccionesUsuario(DireccionEntidad direccion)
+        public void UpdateDireccionesUsuario(DireccionEntidad direccion, UsuarioEntidad elUsuario)
         {
             DaldeDireccion.Update(direccion);
+            if(direccion.Predeterminada)
+                DaldeUsuario.UsuarioDireccionActualizar(direccion, elUsuario);
         }
 
         public List<ProvinciaEntidad> SelectALLProvincias()
         {
-            return DalDeProvincia.SelectAll();
+            DireccionCore ManagerDireccion = new DireccionCore();
+            return ManagerDireccion.SelectALLProvincias();
+            //return DalDeProvincia.SelectAll();
         }
 
         public void insertTelefonoUsuario(TelefonoEntidad tel)
@@ -137,13 +160,14 @@ namespace TFI.CORE.Managers
 
         }
 
-        public void InsertDireccionDeFacturacion(DireccionEntidad direccion, DireccionUsuarioEntidad direcciondeusuario)
+        public void InsertDireccionDeFacturacion(DireccionEntidad direccion, UsuarioEntidad elUsuario)
         {
             try
             {
                 var id = DaldeDireccion.Insert(direccion);
-                direcciondeusuario.IdDireccion = id;
-                DaldeDireccionUsuario.Insert(direcciondeusuario);
+                direccion.IdDireccion = id;
+                DaldeUsuario.UsuarioDireccionCrear(direccion, elUsuario);
+                DaldeUsuario.UsuarioDireccionActualizar(direccion, elUsuario);
             }
             catch (Exception ex)
             {
@@ -151,12 +175,12 @@ namespace TFI.CORE.Managers
             }
         }
 
-        public void DeleteDireccion(DireccionEntidad direccion, DireccionUsuarioEntidad direcciondeusuario)
+        public void DeleteDireccion(int elIdDireccion, UsuarioEntidad elUsuario)
         {
             try
             {
-                DaldeDireccion.Delete(direccion.IdDireccion);
-                DaldeDireccionUsuario.Delete(direccion.IdDireccion, direcciondeusuario.CUIT, direcciondeusuario.NombreUsuario);
+                DaldeDireccion.Delete(elIdDireccion);
+                DaldeDireccionUsuario.Delete(elIdDireccion, elUsuario.CUIT, elUsuario.NombreUsuario);
             }
             catch (Exception ex)
             {
@@ -174,10 +198,7 @@ namespace TFI.CORE.Managers
             return DaldeDireccionUsuario.Select(idDireccion, cuit, nombreUsuario);
         }
 
-        public void DireccionUsuarioUpdate(DireccionUsuarioEntidad direccion)
-        {
-            DaldeDireccionUsuario.Update(direccion);
-        }
+
 
         /// <summary>
         /// Metodo que retorna los 5 clientes(empresas solamente)

@@ -148,10 +148,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
-            DireccionEntidad DireccionEnvio = new DireccionEntidad();
-            DireccionUsuarioEntidad DireIntermediaEnvio = new DireccionUsuarioEntidad();
             var NroRetorno = 0;
 
             Page.Validate("AltaEmpleado");

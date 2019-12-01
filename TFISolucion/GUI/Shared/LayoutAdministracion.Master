@@ -21,6 +21,8 @@
 <body>
 
     <form runat="server">
+        <asp:ScriptManager ID="ScriptManagerAdministracion" runat="server" >
+        </asp:ScriptManager>
         <!-- Menu -->
         <div class="container-fluid">
             <nav class="navbar navbar-inverse navbar-fixed-top menuPrincipal">

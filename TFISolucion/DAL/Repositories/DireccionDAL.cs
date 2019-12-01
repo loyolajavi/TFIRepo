@@ -26,8 +26,9 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Piso", direccion.Piso),
 				new SqlParameter("@Departamento", direccion.Departamento),
 				new SqlParameter("@Localidad", direccion.Localidad),
-				new SqlParameter("@IdProvincia", direccion.IdProvincia),
-				new SqlParameter("@IdTipoDireccion", direccion.IdTipoDireccion)
+				new SqlParameter("@IdProvincia", direccion.miLocalidad.miProvincia.IdProvincia),
+				new SqlParameter("@IdTipoDireccion", direccion.IdTipoDireccion),
+                new SqlParameter("@IdLocalidad", direccion.miLocalidad.IdLocalidad)
 			};
 
             var valor = Convert.ToInt32(SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionInsert", parameters));
@@ -49,9 +50,9 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Numero", direccion.Numero),
 				new SqlParameter("@Piso", direccion.Piso),
 				new SqlParameter("@Departamento", direccion.Departamento),
-				new SqlParameter("@Localidad", direccion.Localidad),
-				new SqlParameter("@IdProvincia", direccion.IdProvincia),
-				new SqlParameter("@IdTipoDireccion", direccion.IdTipoDireccion)
+				new SqlParameter("@IdProvincia", direccion.miLocalidad.miProvincia.IdProvincia),
+				new SqlParameter("@IdTipoDireccion", direccion.IdTipoDireccion),
+                new SqlParameter("@IdLocalidad", direccion.miLocalidad.IdLocalidad)
 			};
 
             SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUpdate", parameters);
@@ -144,6 +145,69 @@ namespace TFI.DAL.DAL
                 return direccionEntidadList;
             }
         }
+
+
+
+        public List<DireccionEntidad> SelectDireccionesDeUsuarioActuales(string elCUIT, string elNombreUsuario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@elCUIT", elCUIT),
+                new SqlParameter("@elNombreUsuario", elNombreUsuario)
+			};
+
+            using (DataSet dt = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "SelectDireccionesDeUsuarioActuales", parameters))
+            {
+                List<DireccionEntidad> unasDirecciones = new List<DireccionEntidad>();
+                unasDirecciones = MapearMuchos(dt);
+                return unasDirecciones;
+            }
+        }
+
+
+
+        private List<DireccionEntidad> MapearMuchos(DataSet ds)
+        {
+            List<DireccionEntidad> ResUnosItem = new List<DireccionEntidad>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    DireccionEntidad unItem = new DireccionEntidad();
+
+                    unItem.IdDireccion = (int)row["IdDireccion"];
+                    unItem.Calle = row["Calle"].ToString();
+                    unItem.Numero = (int)row["Numero"];
+                    if (row["Piso"].ToString() != "")
+                    {
+                        int aux = (int)row["Piso"];
+                        unItem.Piso = aux;
+                    }
+                        
+                    unItem.Departamento = row["Departamento"].ToString();
+                    if (row["FecBaja"].ToString() != "")
+                        unItem.FecBaja = DateTime.Parse(row["FecBaja"].ToString());
+                    unItem.Predeterminada = (bool)row["Predeterminada"];
+                    unItem.IdTipoDireccion = (int)row["IdTipoDireccion"];
+                    unItem.miLocalidad = new Localidad();
+                    unItem.miLocalidad.IdLocalidad = (int)row["IdLocalidad"];
+                    unItem.miLocalidad.DescripcionLocalidad = row["DescripcionLocalidad"].ToString();
+                    unItem.miLocalidad.miProvincia = new ProvinciaEntidad();
+                    unItem.miLocalidad.miProvincia.IdProvincia = (int)row["IdProvincia"];
+                    unItem.miLocalidad.miProvincia.DescripcionProvincia = row["DescripcionProvincia"].ToString();
+
+                    ResUnosItem.Add(unItem);
+                }
+                return ResUnosItem;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
 
 
 

@@ -63,6 +63,7 @@
     <Compile Include="FamiliaEntidad.cs" />
     <Compile Include="FormaEntregaEntidad.cs" />
     <Compile Include="FormaPagoEntidad.cs" />
+    <Compile Include="Localidad.cs" />
     <Compile Include="Servicios\Reportes\GraficoMontoVentas.cs" />
     <Compile Include="Servicios\Reportes\GraficoProductoPorCategoria.cs" />
     <Compile Include="Servicios\Reportes\Graficos5Productosmasvendidos.cs" />

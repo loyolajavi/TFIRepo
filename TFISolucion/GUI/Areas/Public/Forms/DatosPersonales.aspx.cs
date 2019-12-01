@@ -24,9 +24,18 @@ namespace TFI.GUI
         private LenguajeEntidad idioma;
 
         public string cuit = ConfigSection.Default.Site.Cuit;
-        List<DireccionDTO> DireccionesFacturacionDeUsuario = new List<DireccionDTO>();
-        List<DireccionDTO> DireccionesEnvioDeUsuario = new List<DireccionDTO>();
-        TextBox txtNumeroEnvio = new TextBox();
+        List<DireccionEntidad> DireccionesFacturacionDeUsuario = new List<DireccionEntidad>();
+        List<DireccionEntidad> DireccionesEnvioDeUsuario = new List<DireccionEntidad>();
+        public List<ProvinciaEntidad> unasProvincias = new List<ProvinciaEntidad>();
+        public List<ProvinciaEntidad> unasProvinciasEnvio = new List<ProvinciaEntidad>();
+        public List<ProvinciaEntidad> unasProvinciasAltaFact = new List<ProvinciaEntidad>();
+        public List<ProvinciaEntidad> unasProvinciasAltaEnvio = new List<ProvinciaEntidad>();
+        DropDownList ddl;
+        DropDownList ddlLoc;
+        DropDownList ddlEnvio;
+        DropDownList ddlLocEnvio;
+
+
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -46,14 +55,11 @@ namespace TFI.GUI
             idioma = new LenguajeEntidad();
             DireccionesFacturacionDeUsuario.Clear();
             DireccionesEnvioDeUsuario.Clear();
-            // CargarGrillaDireccionDeFacturacion();
             cargarTipoTel();
             usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
 
             if (usuarioentidad == null)
-            {
                 Response.Redirect("Home.aspx");
-            }
 
             usuario.Value = usuarioentidad.NombreUsuario;
             clave.Value = usuarioentidad.Clave;
@@ -68,10 +74,8 @@ namespace TFI.GUI
 
 
             List<DatosPersonalesDTO> ListaDatosPersonalesDTO = new List<DatosPersonalesDTO>();
-
             ListaDatosPersonalesDTO.Add(DatosPersonalesDTO);
             grilladedatospersonales.DataSource = ListaDatosPersonalesDTO;
-            grilladedatospersonales.AutoGenerateColumns = false;
 
 
             if (!IsPostBack)
@@ -96,109 +100,48 @@ namespace TFI.GUI
             List<TelefonoEntidad> TelefonosDelUsuario = new List<TelefonoEntidad>();
             TelefonosDelUsuario = UsuarioBLL.SelectTelefonosDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
 
-            //Dictionary<TelefonoEntidad, TipoTelEntidad> DiccionarioDeTelefonos = new Dictionary<TelefonoEntidad, TipoTelEntidad>();
-
-
-
             foreach (var tel in TelefonosDelUsuario)
             {
                 TelefonoDTO TipodeTelefono = new TelefonoDTO();
                 TipodeTelefono.Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.miTipoTel.IdTipoTel);
                 TipodeTelefono.Telefono = tel.NroTelefono;
                 ListaDeTelefonosDTO.Add(TipodeTelefono);
-                //tipo = false;
             }
 
             grillatelefonos.DataSource = ListaDeTelefonosDTO;
-            grillatelefonos.AutoGenerateColumns = false;
 
             if (!IsPostBack)
-            {
-
                 grillatelefonos.DataBind();
 
-
-            }
-
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
-
+            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuarioActuales(usuarioentidad);
 
             foreach (var item in DireccionesDeUsuario)
             {
-
-                DireccionDTO NuevaDireccion = new DireccionDTO()
-                {
-                    Calle = item.Calle,
-                    Departamento = item.Departamento,
-                    Localidad = item.Localidad,
-                    Numero = item.Numero,
-                    Piso = item.Piso,
-                    IdDireccion = item.IdDireccion,
-                    Provincia = item.IdProvincia,
-                    Predeterminada = UsuarioBLL.DireccionUsuarioSelect(item.IdDireccion, usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Predeterminada
-                };
-
                 if (item.IdTipoDireccion == 1)
-                {
-                    DireccionesFacturacionDeUsuario.Add(NuevaDireccion);
-                    //DiccionarioDeDirecciones.Add(item.IdDireccion, item);
-
-                }
+                    DireccionesFacturacionDeUsuario.Add(item);
                 else if (item.IdTipoDireccion == 2)
-                {
-
-                    DireccionesEnvioDeUsuario.Add(NuevaDireccion);
-                    //DiccionarioDeDirecciones.Add(item.IdDireccion, item);
-                }
-
-            }
-
-            if (DireccionesFacturacionDeUsuario.Count == 1)
-            {
-                DireccionesFacturacionDeUsuario[0].Predeterminada = true;
-                DireccionUsuarioEntidad ActualizarPred = new DireccionUsuarioEntidad();
-                ActualizarPred = DireccionBLL.DireccionUsuarioSelect(DireccionesFacturacionDeUsuario[0].IdDireccion).First();
-                ActualizarPred.Predeterminada = true;
-                UsuarioBLL.DireccionUsuarioUpdate(ActualizarPred);
-
-            }
-
-            if (DireccionesEnvioDeUsuario.Count == 1)
-            {
-                DireccionesEnvioDeUsuario[0].Predeterminada = true;
-                DireccionUsuarioEntidad ActualizarPred = new DireccionUsuarioEntidad();
-                ActualizarPred = DireccionBLL.DireccionUsuarioSelect(DireccionesEnvioDeUsuario[0].IdDireccion).First();
-                ActualizarPred.Predeterminada = true;
-                UsuarioBLL.DireccionUsuarioUpdate(ActualizarPred);
+                    DireccionesEnvioDeUsuario.Add(item);
             }
 
             grilladirecciondefacturacion.DataSource = DireccionesFacturacionDeUsuario;
-            grilladirecciondefacturacion.AutoGenerateColumns = false;
             if (!IsPostBack)
-            {
                 grilladirecciondefacturacion.DataBind();
-            }
 
             grilladirecciondeenvio.DataSource = DireccionesEnvioDeUsuario;
-            grilladirecciondeenvio.AutoGenerateColumns = false;
             if (!IsPostBack)
-            {
                 grilladirecciondeenvio.DataBind();
 
-            }
-
             if (!IsPostBack)
             {
-                CargarDropdownProvincias();
+                CargarDropdownProvinciasFact();
+                cargarLocalidadesFact();
+                CargarDropdownProvinciasEnvio();
+                cargarLocalidadesEnvio();
             }
 
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
-            {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
-
-            }
-
         }
 
 
@@ -215,21 +158,9 @@ namespace TFI.GUI
             public string Email { get; set; }
         }
 
-        public class DireccionDTO
-        {
-            public int IdDireccion { get; set; }
-            public string Calle { get; set; }
-            public int Numero { get; set; }
-            public int? Piso { get; set; }
-            public string Departamento { get; set; }
-            public string Localidad { get; set; }
-            public int Provincia { get; set; }
-            public bool Predeterminada { get; set; }
-        }
 
         public void cargarTipoTel()
         {
-
             ddlTipoTel.DataSource = UsuarioBLL.RetornaTipoTel();
             ddlTipoTel.DataValueField = "IdTipoTel";
             ddlTipoTel.DataTextField = "DescripcionTipoTel";
@@ -300,7 +231,6 @@ namespace TFI.GUI
             ListaDatosPersonalesDTO.Add(DatosPersonalesDTO);
 
             grilladedatospersonales.DataSource = ListaDatosPersonalesDTO;
-            grilladedatospersonales.AutoGenerateColumns = false;
 
             //Bind data to the GridView control.
             grilladedatospersonales.DataBind();
@@ -329,7 +259,6 @@ namespace TFI.GUI
             }
 
             grillatelefonos.DataSource = ListaDeTelefonosDTO;
-            grillatelefonos.AutoGenerateColumns = false;
 
             grillatelefonos.DataBind();
         }
@@ -391,10 +320,6 @@ namespace TFI.GUI
                         Telefono = ((string)e.Row.Cells[1].Text);
                         var x = ListaDeTelefonosDTO.Where(t => t.Telefono == Telefono).FirstOrDefault().Tipo;
                         if (x == "Movil") { ddl.SelectedIndex = 1; } else { ddl.SelectedIndex = 0; }
-
-
-
-
                     }
                     ddl.DataBind();
                     //else
@@ -445,10 +370,6 @@ namespace TFI.GUI
                 telefonoNuevo.miUsuario.CUIT = usuarioentidadStatic.CUIT;
                 coreUsuario.insertTelefonoUsuario(telefonoNuevo);
             }
-
-
-
-
         }
 
 
@@ -466,29 +387,26 @@ namespace TFI.GUI
 
         protected void grilladirecciondeenvio_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            DireccionEntidad DireccionaEliminar = new DireccionEntidad();
-            DireccionUsuarioEntidad DireccionUsuarioaEliminar = new DireccionUsuarioEntidad();
-            DireccionUsuarioaEliminar.CUIT = usuarioentidad.CUIT;
-            DireccionUsuarioaEliminar.NombreUsuario = usuarioentidad.NombreUsuario;
-            GridViewRow row = (GridViewRow)grilladirecciondeenvio.Rows[e.RowIndex];
-            var Id = ((string)row.Cells[7].Text);
-            DireccionaEliminar.IdDireccion = Convert.ToInt32(Id);
-            UsuarioBLL.DeleteDireccion(DireccionaEliminar, DireccionUsuarioaEliminar);
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            else
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
+            int AuxIdDireccionEliminar = (int)grilladirecciondeenvio.DataKeys[e.RowIndex].Value;
+            UsuarioBLL.DeleteDireccion(AuxIdDireccionEliminar, usuarioentidad);
             CargarGrillaDireccionDeEnvio();
         }
 
         protected void grilladirecciondefacturacion_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            DireccionEntidad DireccionaEliminar = new DireccionEntidad();
-            DireccionUsuarioEntidad DireccionUsuarioaEliminar = new DireccionUsuarioEntidad();
-            DireccionUsuarioaEliminar.CUIT = usuarioentidad.CUIT;
-            DireccionUsuarioaEliminar.NombreUsuario = usuarioentidad.NombreUsuario;
-            GridViewRow row = (GridViewRow)grilladirecciondefacturacion.Rows[e.RowIndex];
-            var Id = ((string)row.Cells[7].Text);
-            DireccionaEliminar.IdDireccion = Convert.ToInt32(Id);
-            UsuarioBLL.DeleteDireccion(DireccionaEliminar, DireccionUsuarioaEliminar);
-            CargarGrillaDireccionDeFacturacion();
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            else
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
 
+            int AuxIdDireccionEliminar = (int)grilladirecciondefacturacion.DataKeys[e.RowIndex].Value;
+            UsuarioBLL.DeleteDireccion(AuxIdDireccionEliminar, usuarioentidad);
+            CargarGrillaDireccionDeFacturacion();
         }
 
         protected void grilladirecciondefacturacion_RowEditing(object sender, GridViewEditEventArgs e)
@@ -505,268 +423,147 @@ namespace TFI.GUI
 
         protected void grilladirecciondefacturacion_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            else
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            
             DireccionEntidad DireccionActualizada = new DireccionEntidad();
-
-
             GridViewRow row = grilladirecciondefacturacion.Rows[e.RowIndex];
+
             var Calle = ((TextBox)row.Cells[2].Controls[0]).Text;
             var Numero = ((TextBox)row.Cells[3].Controls[0]).Text;
             var Piso = ((TextBox)row.Cells[4].Controls[0]).Text;
             var Departamento = ((TextBox)row.Cells[5].Controls[0]).Text;
-            var Localidad = ((TextBox)row.Cells[6].Controls[0]).Text;
-            var Provincia = ((DropDownList)row.Cells[8].Controls[1]).SelectedIndex + 1;
-            var Id = ((TextBox)row.Cells[7].Controls[0]).Text;
-            var Predeterminado = ((CheckBox)row.Cells[9].Controls[0]).Checked;
+            var Provincia = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
+            var Localidad = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
+            var Predeterminado = ((CheckBox)row.Cells[8].Controls[0]).Checked;
 
-
-            DireccionActualizada.IdDireccion = Convert.ToInt32(Id);
+            DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondefacturacion.DataKeys[e.RowIndex].Value);
             DireccionActualizada.Calle = Calle;
             DireccionActualizada.Departamento = Departamento;
             DireccionActualizada.Numero = Convert.ToInt32(Numero);
             if (!String.IsNullOrEmpty(Piso))
-            {
                 DireccionActualizada.Piso = Convert.ToInt32(Piso);
-            }
+            DireccionActualizada.miLocalidad = new Entidades.Localidad();
+            DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
+            DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
+            DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
+            DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
+            DireccionActualizada.Predeterminada = Predeterminado;
 
-            DireccionActualizada.Localidad = Localidad;
-
-            DireccionActualizada.IdProvincia = Provincia;
-            DireccionActualizada.IdTipoDireccion = 1;
-
-
-            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada);
-
-            DireccionUsuarioEntidad DireccionUsuarioActualizada = new DireccionUsuarioEntidad();
-            DireccionUsuarioActualizada.CUIT = usuarioentidad.CUIT;
-            DireccionUsuarioActualizada.NombreUsuario = usuarioentidad.NombreUsuario;
-            DireccionUsuarioActualizada.Predeterminada = Predeterminado;
-            DireccionUsuarioActualizada.IdDireccion = Convert.ToInt32(Id);
-
-            UsuarioBLL.DireccionUsuarioUpdate(DireccionUsuarioActualizada);
-
-
-            List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
-
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
-
-            foreach (var dir in DireccionesDeUsuario)
-            {
-                if (Predeterminado == true)
-                {
-                    if (dir.IdDireccion != DireccionUsuarioActualizada.IdDireccion && dir.IdTipoDireccion == DireccionActualizada.IdTipoDireccion)
-                    {
-                        DireccionUsuarioEntidad ActualizarNoPredeterminadas = new DireccionUsuarioEntidad();
-                        ActualizarNoPredeterminadas.IdDireccion = dir.IdDireccion;
-                        ActualizarNoPredeterminadas.Predeterminada = false;
-                        ActualizarNoPredeterminadas.CUIT = usuarioentidad.CUIT;
-                        ActualizarNoPredeterminadas.NombreUsuario = usuarioentidad.NombreUsuario;
-
-                        UsuarioBLL.DireccionUsuarioUpdate(ActualizarNoPredeterminadas);
-                    }
-                }
-
-
-            }
-
+            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
 
             //////Reset the edit index.
             grilladirecciondefacturacion.EditIndex = -1;
 
-            ////////Bind data to the GridView control.
-            grilladirecciondefacturacion.DataBind();
-
             CargarGrillaDireccionDeFacturacion();
-
-
-
         }
 
         protected void grilladirecciondeenvio_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            else
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
             DireccionEntidad DireccionActualizada = new DireccionEntidad();
-
-
             GridViewRow row = grilladirecciondeenvio.Rows[e.RowIndex];
+
             var Calle = ((TextBox)row.Cells[2].Controls[0]).Text;
             var Numero = ((TextBox)row.Cells[3].Controls[0]).Text;
             var Piso = ((TextBox)row.Cells[4].Controls[0]).Text;
             var Departamento = ((TextBox)row.Cells[5].Controls[0]).Text;
-            var Localidad = ((TextBox)row.Cells[6].Controls[0]).Text;
-            var Provincia = ((DropDownList)row.Cells[8].Controls[1]).SelectedIndex + 1;
-            var Id = ((TextBox)row.Cells[7].Controls[0]).Text;
-            var Predeterminado = ((CheckBox)row.Cells[9].Controls[0]).Checked;
+            var Provincia = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
+            var Localidad = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
+            var Predeterminado = ((CheckBox)row.Cells[8].Controls[0]).Checked;
 
-
-            DireccionActualizada.IdDireccion = Convert.ToInt32(Id);
+            DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondeenvio.DataKeys[e.RowIndex].Value);
             DireccionActualizada.Calle = Calle;
             DireccionActualizada.Departamento = Departamento;
             DireccionActualizada.Numero = Convert.ToInt32(Numero);
             if (!String.IsNullOrEmpty(Piso))
-            {
                 DireccionActualizada.Piso = Convert.ToInt32(Piso);
-            }
+            DireccionActualizada.miLocalidad = new Entidades.Localidad();
+            DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
+            DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
+            DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
+            DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
+            DireccionActualizada.Predeterminada = Predeterminado;
 
-            DireccionActualizada.Localidad = Localidad;
-
-            DireccionActualizada.IdProvincia = Provincia;
-            DireccionActualizada.IdTipoDireccion = 2;
-
-
-
-            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada);
-
-            DireccionUsuarioEntidad DireccionUsuarioActualizada = new DireccionUsuarioEntidad();
-            DireccionUsuarioActualizada.CUIT = usuarioentidad.CUIT;
-            DireccionUsuarioActualizada.NombreUsuario = usuarioentidad.NombreUsuario;
-            DireccionUsuarioActualizada.Predeterminada = Predeterminado;
-            DireccionUsuarioActualizada.IdDireccion = Convert.ToInt32(Id);
-
-            UsuarioBLL.DireccionUsuarioUpdate(DireccionUsuarioActualizada);
-
-            List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
-
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
-
-            foreach (var dir in DireccionesDeUsuario)
-            {
-
-                if (dir.IdDireccion != DireccionUsuarioActualizada.IdDireccion && dir.IdTipoDireccion == DireccionActualizada.IdTipoDireccion)
-                {
-
-                    DireccionUsuarioEntidad ActualizarNoPredeterminadas = new DireccionUsuarioEntidad();
-                    ActualizarNoPredeterminadas.IdDireccion = dir.IdDireccion;
-                    ActualizarNoPredeterminadas.Predeterminada = false;
-                    ActualizarNoPredeterminadas.CUIT = usuarioentidad.CUIT;
-                    ActualizarNoPredeterminadas.NombreUsuario = usuarioentidad.NombreUsuario;
-
-                    UsuarioBLL.DireccionUsuarioUpdate(ActualizarNoPredeterminadas);
-                }
-
-
-            }
-
-
+            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
 
             //////Reset the edit index.
             grilladirecciondeenvio.EditIndex = -1;
 
-            ////////Bind data to the GridView control.
-            grilladirecciondeenvio.DataBind();
-
             CargarGrillaDireccionDeEnvio();
-
-
-
         }
 
         private void CargarGrillaDireccionDeEnvio()
         {
+            usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
             DireccionesEnvioDeUsuario.Clear();
 
-
             List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuarioActuales(usuarioentidad);
 
             foreach (var item in DireccionesDeUsuario)
             {
-
-                DireccionDTO NuevaDireccion = new DireccionDTO();
-                NuevaDireccion.Calle = item.Calle;
-                NuevaDireccion.Departamento = item.Departamento;
-                NuevaDireccion.Localidad = item.Localidad;
-                NuevaDireccion.Numero = item.Numero;
-                NuevaDireccion.Piso = item.Piso;
-                NuevaDireccion.IdDireccion = item.IdDireccion;
-                NuevaDireccion.Predeterminada = UsuarioBLL.DireccionUsuarioSelect(item.IdDireccion, usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Predeterminada;
-
                 if (item.IdTipoDireccion == 1)
-                {
-                    DireccionesFacturacionDeUsuario.Add(NuevaDireccion);
-
-
-                }
+                    DireccionesFacturacionDeUsuario.Add(item);
                 else if (item.IdTipoDireccion == 2)
-                {
-
-                    DireccionesEnvioDeUsuario.Add(NuevaDireccion);
-
-                }
-
+                    DireccionesEnvioDeUsuario.Add(item);
             }
-
+            grilladirecciondeenvio.DataSource = null;
             grilladirecciondeenvio.DataSource = DireccionesEnvioDeUsuario;
-            grilladirecciondeenvio.AutoGenerateColumns = false;
             grilladirecciondeenvio.DataBind();
         }
 
         private void CargarGrillaDireccionDeFacturacion()
         {
-
             usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
             DireccionesFacturacionDeUsuario.Clear();
 
-
             List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
-            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuarioActuales(usuarioentidad);
 
             foreach (var item in DireccionesDeUsuario)
             {
-
-                DireccionDTO NuevaDireccion = new DireccionDTO();
-                NuevaDireccion.Calle = item.Calle;
-                NuevaDireccion.Departamento = item.Departamento;
-                NuevaDireccion.Localidad = item.Localidad;
-                NuevaDireccion.Numero = item.Numero;
-                NuevaDireccion.Piso = item.Piso;
-                NuevaDireccion.IdDireccion = item.IdDireccion;
-                NuevaDireccion.Predeterminada = UsuarioBLL.DireccionUsuarioSelect(item.IdDireccion, usuarioentidad.CUIT, usuarioentidad.NombreUsuario).Predeterminada;
-
                 if (item.IdTipoDireccion == 1)
-                {
-                    DireccionesFacturacionDeUsuario.Add(NuevaDireccion);
-                    //DiccionarioDeDirecciones.Add(item.IdDireccion, item);
-
-                }
+                    DireccionesFacturacionDeUsuario.Add(item);
                 else if (item.IdTipoDireccion == 2)
-                {
-
-                    DireccionesEnvioDeUsuario.Add(NuevaDireccion);
-                    //DiccionarioDeDirecciones.Add(item.IdDireccion, item);
-                }
-
+                    DireccionesEnvioDeUsuario.Add(item);
             }
-
+            grilladirecciondefacturacion.DataSource = null;
             grilladirecciondefacturacion.DataSource = DireccionesFacturacionDeUsuario;
-            grilladirecciondefacturacion.AutoGenerateColumns = false;
             grilladirecciondefacturacion.DataBind();
-
         }
 
         protected void grilladirecciondefacturacion_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var Id = (string)e.Row.Cells[7].Text;
-
-                if (string.IsNullOrEmpty(Id))
-                {
-                    Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
-                }
-
-                var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
-
-                var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
+                ddl = e.Row.FindControl("ddlProvinciaG") as DropDownList;
+                ddlLoc = e.Row.FindControl("ddlLocalidadG") as DropDownList;
+                
                 if (ddl != null)
                 {
-                    ddl.DataSource = UsuarioBLL.SelectALLProvincias();
+                    unasProvincias = UsuarioBLL.SelectALLProvincias();
+                    ddl.DataSource = null;
+                    ddl.DataSource = unasProvincias;
                     ddl.DataValueField = "IdProvincia";
                     ddl.DataTextField = "DescripcionProvincia";
-                    ddl.SelectedIndex = Dire.IdProvincia - 1;
                     ddl.DataBind();
+                    ddl.SelectedValue = usuarioentidad.misDirecciones.First(X => X.IdDireccion == (int)grilladirecciondefacturacion.DataKeys[e.Row.RowIndex].Value).miLocalidad.miProvincia.IdProvincia.ToString();
 
+                    ddlLoc.DataSource = null;
+                    ddlLoc.DataSource = unasProvincias.Find(X => X.IdProvincia == (Int32.Parse(ddl.SelectedValue))).misLocalidades;
+                    ddlLoc.DataValueField = "IdLocalidad";
+                    ddlLoc.DataTextField = "DescripcionLocalidad";
+                    ddlLoc.DataBind();
+                    ddlLoc.SelectedValue = usuarioentidad.misDirecciones.First(X => X.IdDireccion == (int)grilladirecciondefacturacion.DataKeys[e.Row.RowIndex].Value).miLocalidad.IdLocalidad.ToString();
                 }
             }
-
         }
 
 
@@ -774,87 +571,105 @@ namespace TFI.GUI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var Id = (string)e.Row.Cells[7].Text;
+                ddlEnvio = e.Row.FindControl("ddlProvinciaG") as DropDownList;
+                ddlLocEnvio = e.Row.FindControl("ddlLocalidadG") as DropDownList;
 
-                if (string.IsNullOrEmpty(Id))
+                if (ddlEnvio != null)
                 {
-                    Id = ((TextBox)e.Row.Cells[7].Controls[0]).Text;
+                    unasProvincias = UsuarioBLL.SelectALLProvincias();
+                    ddlEnvio.DataSource = null;
+                    ddlEnvio.DataSource = unasProvincias;
+                    ddlEnvio.DataValueField = "IdProvincia";
+                    ddlEnvio.DataTextField = "DescripcionProvincia";
+                    ddlEnvio.DataBind();
+                    ddlEnvio.SelectedValue = usuarioentidad.misDirecciones.First(X => X.IdDireccion == (int)grilladirecciondeenvio.DataKeys[e.Row.RowIndex].Value).miLocalidad.miProvincia.IdProvincia.ToString();
+
+                    ddlLocEnvio.DataSource = null;
+                    ddlLocEnvio.DataSource = unasProvincias.Find(X => X.IdProvincia == (Int32.Parse(ddlEnvio.SelectedValue))).misLocalidades;
+                    ddlLocEnvio.DataValueField = "IdLocalidad";
+                    ddlLocEnvio.DataTextField = "DescripcionLocalidad";
+                    ddlLocEnvio.DataBind();
+                    ddlLocEnvio.SelectedValue = usuarioentidad.misDirecciones.First(X => X.IdDireccion == (int)grilladirecciondeenvio.DataKeys[e.Row.RowIndex].Value).miLocalidad.IdLocalidad.ToString();
                 }
-                var Dire = DireccionesDeUsuario.Where(X => X.IdDireccion == Int32.Parse(Id)).First();
-
-                var ddl = e.Row.FindControl("ddlProvincia") as DropDownList;
-                if (ddl != null)
-                {
-                    ddl.DataSource = UsuarioBLL.SelectALLProvincias();
-                    ddl.DataValueField = "IdProvincia";
-                    ddl.DataTextField = "DescripcionProvincia";
-                    ddl.SelectedIndex = Dire.IdProvincia - 1;
-                    ddl.DataBind();
-
-                }
-
             }
-
         }
 
-        protected void CargarDropdownProvincias()
+        protected void CargarDropdownProvinciasFact(int? elIndice = null)
         {
-            ddlProvincia.DataSource = UsuarioBLL.SelectALLProvincias();
+            ddlProvincia.DataSource = null;
+            unasProvinciasAltaFact = UsuarioBLL.SelectALLProvincias();
+            ddlProvincia.DataSource = unasProvinciasAltaFact;
             ddlProvincia.DataValueField = "IdProvincia";
             ddlProvincia.DataTextField = "DescripcionProvincia";
             ddlProvincia.DataBind();
-
-            ddlProvinciaEnvio.DataSource = UsuarioBLL.SelectALLProvincias();
-            ddlProvinciaEnvio.DataValueField = "IdProvincia";
-            ddlProvinciaEnvio.DataTextField = "DescripcionProvincia";
-            ddlProvinciaEnvio.DataBind();
-
+            if (elIndice != null)
+                ddlProvincia.SelectedIndex = (int)elIndice;
         }
 
+        public void cargarLocalidadesFact()
+        {
+            ddlLocalidadAltaFact.DataSource = null;
+            ddlLocalidadAltaFact.DataSource = unasProvinciasAltaFact.Find(X => X.IdProvincia == (Int32.Parse(ddlProvincia.SelectedValue))).misLocalidades;
+            ddlLocalidadAltaFact.DataValueField = "IdLocalidad";
+            ddlLocalidadAltaFact.DataTextField = "DescripcionLocalidad";
+            ddlLocalidadAltaFact.DataBind();
+        }
+
+        protected void CargarDropdownProvinciasEnvio(int? elIndice = null)
+        {
+            ddlProvinciaAltaEnvio.DataSource = null;
+            unasProvinciasAltaEnvio = UsuarioBLL.SelectALLProvincias();
+            ddlProvinciaAltaEnvio.DataSource = unasProvinciasAltaEnvio;
+            ddlProvinciaAltaEnvio.DataValueField = "IdProvincia";
+            ddlProvinciaAltaEnvio.DataTextField = "DescripcionProvincia";
+            ddlProvinciaAltaEnvio.DataBind();
+            if (elIndice != null)
+                ddlProvinciaAltaEnvio.SelectedIndex = (int)elIndice;
+        }
+
+        public void cargarLocalidadesEnvio()
+        {
+            ddlLocalidadAltaEnvio.DataSource = null;
+            ddlLocalidadAltaEnvio.DataSource = unasProvinciasAltaEnvio.Find(X => X.IdProvincia == (Int32.Parse(ddlProvinciaAltaEnvio.SelectedValue))).misLocalidades;
+            ddlLocalidadAltaEnvio.DataValueField = "IdLocalidad";
+            ddlLocalidadAltaEnvio.DataTextField = "DescripcionLocalidad";
+            ddlLocalidadAltaEnvio.DataBind();
+        }
 
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void GrabarDireccionDeEnvio(string calleEnvio, int numeroEnvio, int pisoEnvio, string departamentoEnvio, string localidadEnvio, string ddlprovinciaEnvio)
+        public static void GrabarDireccionDeEnvio(string calleEnvio, int numeroEnvio, int pisoEnvio, string departamentoEnvio, string ddllocalidadEnvio, string ddlprovinciaEnvio)
         {
 
             var unUsuarioBLL = new UsuarioCore();
             var usuarioentidadStatic = new UsuarioEntidad();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
             var Current = HttpContext.Current;
 
-            usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
-
-            DireccionUsuarioEntidad NuevaIntermediaEnvio = new DireccionUsuarioEntidad();
-            NuevaIntermediaEnvio.CUIT = usuarioentidadStatic.CUIT;
-            NuevaIntermediaEnvio.NombreUsuario = usuarioentidadStatic.NombreUsuario;
-
-
+            if (Current.Session["Usuario"] != null)
+                usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            else
+                return;
 
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
 
             if (!string.IsNullOrEmpty(calleEnvio))
-            {
                 NuevaDireccion.Calle = calleEnvio;
-            }
 
             if (!string.IsNullOrEmpty(departamentoEnvio))
-            {
                 NuevaDireccion.Departamento = departamentoEnvio;
-            }
 
-            if (!string.IsNullOrEmpty(localidadEnvio))
-            {
-                NuevaDireccion.Localidad = localidadEnvio;
-            }
+            NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
+            NuevaDireccion.Numero = numeroEnvio;
+            NuevaDireccion.Piso = pisoEnvio;
+            NuevaDireccion.miLocalidad = new Entidades.Localidad();
+            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddllocalidadEnvio);
+            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlprovinciaEnvio);
+            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
-            NuevaDireccion.IdTipoDireccion = 2;
-            NuevaDireccion.Numero = Convert.ToInt32(numeroEnvio);
-            NuevaDireccion.Piso = Convert.ToInt32(pisoEnvio);
-            NuevaDireccion.IdProvincia = Int32.Parse(ddlprovinciaEnvio);
-
-            unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermediaEnvio);
-
+            unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, usuarioentidadStatic);
+            //De aca vuelve al ajax,  se cierra el modal; y desde el html (al obtener true del jquery-ajax) vuelve al backend para actualizar la grilla
 
         }
 
@@ -890,48 +705,36 @@ namespace TFI.GUI
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void GrabarDireccionDeFacturacion(string calle, int numero, int piso, string departamento, string localidad, string ddlprovincia)
+        public static void GrabarDireccionDeFacturacion(string calle, int numero, int piso, string departamento, string ddllocalidad, string ddlprovincia)
         {
             var unUsuarioBLL = new UsuarioCore();
             var usuarioEntity = new UsuarioEntidad();
             var formularioDatosPersonales = new DatosPersonales();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
             var Current = HttpContext.Current;
 
-            usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
-
-            NuevaIntermedia.CUIT = usuarioEntity.CUIT;
-            NuevaIntermedia.NombreUsuario = usuarioEntity.NombreUsuario;
-
+            if (Current.Session["Usuario"] != null)
+                usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
+            else
+                return;
 
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
 
             if (!string.IsNullOrEmpty(calle))
-            {
                 NuevaDireccion.Calle = calle;
-            }
-
             if (!string.IsNullOrEmpty(departamento))
-            {
                 NuevaDireccion.Departamento = departamento;
-            }
 
-            if (!string.IsNullOrEmpty(localidad))
-            {
-                NuevaDireccion.Localidad = localidad;
-            }
-
-            NuevaDireccion.IdTipoDireccion = 1;
+            NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
             NuevaDireccion.Numero = numero;
             NuevaDireccion.Piso = piso;
-            NuevaDireccion.IdProvincia = Int32.Parse(ddlprovincia);
-            //NuevaDireccion.IdProvincia = provincia;
+            NuevaDireccion.miLocalidad = new Entidades.Localidad();
+            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddllocalidad);
+            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlprovincia);
+            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
-            unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
-
-            //formularioDatosPersonales.CargarGrillaDireccionDeFacturacion();
-
-
+            unUsuarioBLL.InsertDireccionDeFacturacion(NuevaDireccion, usuarioEntity);
+            //De aca vuelve al ajax,  se cierra el modal; y desde el html (al obtener true del jquery-ajax) vuelve al backend para actualizar la grilla
         }
 
         protected void GrabarDireccionDeFacturacion_Click(object sender, EventArgs e)
@@ -957,6 +760,56 @@ namespace TFI.GUI
             ScriptManager.RegisterClientScriptBlock(this, GetType(),
                        "ModalScript", sb.ToString(), false);
         }
+
+        protected void ddlProvinciaG_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlProv = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlProv.NamingContainer;
+            if (row != null)
+            {
+                unasProvincias = UsuarioBLL.SelectALLProvincias();
+                DropDownList ddlLoc = (DropDownList)row.FindControl("ddlLocalidadG");
+                ddlLoc.DataSource = unasProvincias.Find(X => X.IdProvincia == (Int32.Parse(ddlProv.SelectedValue))).misLocalidades;
+                ddlLoc.DataValueField = "IdLocalidad";
+                ddlLoc.DataTextField = "DescripcionLocalidad";
+                ddlLoc.DataBind();
+            }
+        }
+
+        //Modificar localidades al cambiar provincia seleccionada en alta dir fact
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux = Int32.Parse(ddlProvincia.SelectedValue);
+            aux--;
+            CargarDropdownProvinciasFact(aux);
+            cargarLocalidadesFact();
+        }
+
+        //Modificar localidades al cambiar provincia seleccionada en alta dir Envio
+        protected void ddlProvinciaAltaEnvio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux = Int32.Parse(ddlProvinciaAltaEnvio.SelectedValue);
+            aux--;
+            CargarDropdownProvinciasEnvio(aux);
+            cargarLocalidadesEnvio();
+        }
+
+        protected void ddlProvinciaGEnvio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlProv = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlProv.NamingContainer;
+            if (row != null)
+            {
+                unasProvinciasEnvio = UsuarioBLL.SelectALLProvincias();
+                DropDownList ddlLoc = (DropDownList)row.FindControl("ddlLocalidadG");
+                ddlLoc.DataSource = unasProvinciasEnvio.Find(X => X.IdProvincia == (Int32.Parse(ddlProv.SelectedValue))).misLocalidades;
+                ddlLoc.DataValueField = "IdLocalidad";
+                ddlLoc.DataTextField = "DescripcionLocalidad";
+                ddlLoc.DataBind();
+            }
+        }
+
+
 
     }
 }

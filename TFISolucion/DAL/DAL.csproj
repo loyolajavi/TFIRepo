@@ -70,6 +70,7 @@
     <Compile Include="Repositories\LenguajeControlDAL.cs" />
     <Compile Include="Repositories\LenguajeDAL.cs" />
     <Compile Include="Repositories\ListaDeseoDAL.cs" />
+    <Compile Include="Repositories\LocalidadDAL.cs" />
     <Compile Include="Repositories\MarcaDAL.cs" />
     <Compile Include="Repositories\MonedaDAL.cs" />
     <Compile Include="Repositories\MonedaEmpresaDAL.cs" />

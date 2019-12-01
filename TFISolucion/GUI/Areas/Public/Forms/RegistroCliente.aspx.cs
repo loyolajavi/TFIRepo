@@ -21,6 +21,7 @@ namespace TFI.GUI.Areas.Public.Forms
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
+        public List<ProvinciaEntidad> unasProvincias = new List<ProvinciaEntidad>();
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -53,6 +54,7 @@ namespace TFI.GUI.Areas.Public.Forms
                 idioma = (LenguajeEntidad)Session["Idioma"];
                 cargarFiscal();
                 cargarProvincias();
+                cargarLocalidades();
 
 
                 if (idioma == null)
@@ -86,13 +88,26 @@ namespace TFI.GUI.Areas.Public.Forms
         }
 
 
-        public void cargarProvincias()
+        public void cargarProvincias(int? elIndice = null)
         {
             ddlProvincia.DataSource = null;
-            ddlProvincia.DataSource = unManagerUsuario.SelectALLProvincias();
+            unasProvincias = unManagerUsuario.SelectALLProvincias();
+            ddlProvincia.DataSource = unasProvincias;
             ddlProvincia.DataValueField = "IdProvincia";
             ddlProvincia.DataTextField = "DescripcionProvincia";
             ddlProvincia.DataBind();
+            if(elIndice != null)
+                ddlProvincia.SelectedIndex = (int)elIndice;
+        }
+
+
+        public void cargarLocalidades()
+        {
+            ddlLocalidad.DataSource = null;
+            ddlLocalidad.DataSource = unasProvincias.Find(X => X.IdProvincia == (Int32.Parse(ddlProvincia.SelectedValue))).misLocalidades;
+            ddlLocalidad.DataValueField = "IdLocalidad";
+            ddlLocalidad.DataTextField = "DescripcionLocalidad";
+            ddlLocalidad.DataBind();
         }
 
 
@@ -102,7 +117,6 @@ namespace TFI.GUI.Areas.Public.Forms
             var NroRetorno = 0;
             StringBuilder sb = new StringBuilder();
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
 
             if (Page.IsValid)
             {
@@ -117,34 +131,30 @@ namespace TFI.GUI.Areas.Public.Forms
                 unUsuario.NroIdentificacion = txtDNICUIT.Value;
                 unUsuario.Permisos.Add(new Familia());
                 unUsuario.Permisos[0].IdIFamPat = (int)FamiliaEntidad.PermisoFamilia.Cliente;
+                unUsuario.CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit;
 
 
                 NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
 
                 //Direccion
-                NuevaDireccion.IdTipoDireccion = 1;//Facturacion
+                NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
                 NuevaDireccion.Calle = txtCalle.Value;
                 NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
                 if (!string.IsNullOrEmpty(txtPiso.Value))
-                {
                     NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
-                }
                 if (!string.IsNullOrEmpty(txtDpartamento.Value))
-                {
                     NuevaDireccion.Departamento = txtDpartamento.Value;
-                }
-                NuevaDireccion.Localidad = txtLocalidad.Value;
-                NuevaDireccion.IdProvincia = ddlProvincia.SelectedIndex + 1;
-
-                NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
-                NuevaIntermedia.NombreUsuario = txtNombreUsuario.Value;
-                NuevaIntermedia.Predeterminada = true;
+                NuevaDireccion.miLocalidad = new Localidad();
+                NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidad.SelectedValue);
+                NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+                NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvincia.SelectedValue);
+                NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
                 //Facturacion
-                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, unUsuario);
                 //Envio
-                NuevaDireccion.IdTipoDireccion = 2;//Envío
-                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+                NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
+                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, unUsuario);
 
 
                 if (NroRetorno == 0)
@@ -157,11 +167,7 @@ namespace TFI.GUI.Areas.Public.Forms
                 {
                     divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
                     sb.Append("El nombre de usuario ya existe");
-
                 }
-
-               
-
             }
             else
             {
@@ -187,7 +193,14 @@ namespace TFI.GUI.Areas.Public.Forms
             txtNumero.Value = string.Empty;
             txtPiso.Value = string.Empty;
             txtDpartamento.Value = string.Empty;
-            txtLocalidad.Value = string.Empty;
+        }
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux = Int32.Parse(ddlProvincia.SelectedValue);
+            aux--;
+            cargarProvincias(aux);
+            cargarLocalidades();
         }
 
 

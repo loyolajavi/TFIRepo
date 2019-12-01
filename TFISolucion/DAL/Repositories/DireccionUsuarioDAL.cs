@@ -17,15 +17,15 @@ namespace TFI.DAL.DAL
         /// <summary>
         /// Saves a record to the DireccionUsuario table.
         /// </summary>
-        public void Insert(DireccionUsuarioEntidad direccionUsuario)
+        public void Insert(DireccionEntidad direccionUsuario, UsuarioEntidad elUsuario)
         {
             ValidationUtility.ValidateArgument("direccionUsuario", direccionUsuario);
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdDireccion", direccionUsuario.IdDireccion),
-				new SqlParameter("@CUIT", direccionUsuario.CUIT),
-				new SqlParameter("@NombreUsuario", direccionUsuario.NombreUsuario),
+				new SqlParameter("@CUIT", elUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", elUsuario.NombreUsuario),
                 new SqlParameter("@Predeterminada", direccionUsuario.Predeterminada)
 
 			};
@@ -128,23 +128,7 @@ namespace TFI.DAL.DAL
             }
         }
 
-        /// <summary>
-        /// Updates a record in the Direccion table.
-        /// </summary>
-        public void Update(DireccionUsuarioEntidad direccion)
-        {
-            ValidationUtility.ValidateArgument("direccion", direccion);
 
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-				new SqlParameter("@IdDireccion", direccion.IdDireccion),
-				new SqlParameter("@CUIT", direccion.CUIT),
-				new SqlParameter("@NombreUsuario", direccion.NombreUsuario),
-				new SqlParameter("@Predeterminada", direccion.Predeterminada),
-			};
-
-            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUsuarioUPDATE", parameters);
-        }
 
 		
 

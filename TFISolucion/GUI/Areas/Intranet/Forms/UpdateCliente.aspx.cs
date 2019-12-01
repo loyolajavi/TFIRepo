@@ -26,6 +26,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
         HttpContext Current = HttpContext.Current;
         private LenguajeEntidad idioma;
+        public List<ProvinciaEntidad> unasProvincias = new List<ProvinciaEntidad>();
+        public List<ProvinciaEntidad> unasProvinciasEnvio = new List<ProvinciaEntidad>();
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -70,7 +72,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
             }
 
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+            usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
 
             string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
             if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
@@ -95,7 +97,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                     cargarFiscal();
                     cargarProvincias();
-
+                    cargarLocalidades();
+                    cargarProvinciasEnvio();
+                    cargarLocalidadesEnvio();
                 }
                 else
                 {
@@ -189,81 +193,97 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlFiscalCliente.DataBind();
         }
 
-        public void cargarProvincias()
+
+        public void cargarProvincias(int? elIndice = null)
         {
-            ddlProvincia.DataSource = unManagerUsuario.SelectALLProvincias();
+            ddlProvincia.DataSource = null;
+            unasProvincias = unManagerUsuario.SelectALLProvincias();
+            ddlProvincia.DataSource = unasProvincias;
             ddlProvincia.DataValueField = "IdProvincia";
             ddlProvincia.DataTextField = "DescripcionProvincia";
             ddlProvincia.DataBind();
+            if (elIndice != null)
+                ddlProvincia.SelectedIndex = (int)elIndice;
+        }
 
-            ddlProvinciaEnvio.DataSource = unManagerUsuario.SelectALLProvincias();
+
+        public void cargarLocalidades()
+        {
+            ddlLocalidad.DataSource = null;
+            ddlLocalidad.DataSource = unasProvincias.Find(X => X.IdProvincia == (Int32.Parse(ddlProvincia.SelectedValue))).misLocalidades;
+            ddlLocalidad.DataValueField = "IdLocalidad";
+            ddlLocalidad.DataTextField = "DescripcionLocalidad";
+            ddlLocalidad.DataBind();
+        }
+
+        public void cargarProvinciasEnvio(int? elIndice = null)
+        {
+            ddlProvinciaEnvio.DataSource = null;
+            unasProvinciasEnvio = unManagerUsuario.SelectALLProvincias();
+            ddlProvinciaEnvio.DataSource = unasProvinciasEnvio;
             ddlProvinciaEnvio.DataValueField = "IdProvincia";
             ddlProvinciaEnvio.DataTextField = "DescripcionProvincia";
             ddlProvinciaEnvio.DataBind();
+            if (elIndice != null)
+                ddlProvinciaEnvio.SelectedIndex = (int)elIndice;
+        }
 
+
+        public void cargarLocalidadesEnvio()
+        {
+            ddlLocalidadEnvio.DataSource = null;
+            ddlLocalidadEnvio.DataSource = unasProvinciasEnvio.Find(X => X.IdProvincia == (Int32.Parse(ddlProvinciaEnvio.SelectedValue))).misLocalidades;
+            ddlLocalidadEnvio.DataValueField = "IdLocalidad";
+            ddlLocalidadEnvio.DataTextField = "DescripcionLocalidad";
+            ddlLocalidadEnvio.DataBind();
         }
 
         protected void btnUpdateFacturacion_Click(object sender, EventArgs e)
         {
             //FACTURACION
-
+            unCliente = (UsuarioEntidad)Current.Session["Cliente"];
             StringBuilder sb = new StringBuilder();
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
             DireccionEntidad DireccionEnvio = new DireccionEntidad();
-            DireccionUsuarioEntidad DireIntermediaEnvio = new DireccionUsuarioEntidad();
 
-            NuevaDireccion.IdTipoDireccion = 1;//Facturacion
+            NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
             NuevaDireccion.Calle = txtCalle.Value;
             NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
             if (!string.IsNullOrEmpty(txtPiso.Value))
-            {
                 NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
-            }
             if (!string.IsNullOrEmpty(txtDpartamento.Value))
-            {
                 NuevaDireccion.Departamento = txtDpartamento.Value;
-            }
-            NuevaDireccion.Localidad = txtLocalidad.Value;
-            NuevaDireccion.IdProvincia = ddlProvincia.SelectedIndex + 1;
+            NuevaDireccion.miLocalidad = new Localidad();
+            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidad.SelectedValue);
+            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvincia.SelectedValue);
+            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
-            NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
-            NuevaIntermedia.NombreUsuario = txtNombreUsuario.Value;
-            NuevaIntermedia.Predeterminada = true;
-
-            unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
+            unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, unCliente);
         }
 
         protected void btnUpdateEnvio_Click(object sender, EventArgs e)
         {
             //ENVIO
-
+            unCliente = (UsuarioEntidad)Current.Session["Cliente"];
             StringBuilder sb = new StringBuilder();
             DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionUsuarioEntidad NuevaIntermedia = new DireccionUsuarioEntidad();
             DireccionEntidad DireccionEnvio = new DireccionEntidad();
-            DireccionUsuarioEntidad DireIntermediaEnvio = new DireccionUsuarioEntidad();
 
-            DireccionEnvio.IdTipoDireccion = 2;//Envio
+            DireccionEnvio.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
             DireccionEnvio.Calle = txtCalleEnvio.Value;
             DireccionEnvio.Numero = Int32.Parse(txtNumeroEnvio.Value);
             if (!string.IsNullOrEmpty(txtPisoEnvio.Value))
-            {
                 DireccionEnvio.Piso = Int32.Parse(txtPisoEnvio.Value);
-            }
             if (!string.IsNullOrEmpty(txtDepartamentoEnvio.Value))
-            {
                 DireccionEnvio.Departamento = txtDepartamentoEnvio.Value;
-            }
-            DireccionEnvio.Localidad = txtLocalidadEnvio.Value;
-            DireccionEnvio.IdProvincia = ddlProvinciaEnvio.SelectedIndex + 1;
+            NuevaDireccion.miLocalidad = new Localidad();
+            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidadEnvio.SelectedValue);
+            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvinciaEnvio.SelectedValue);
+            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
-            DireIntermediaEnvio.CUIT = ConfigSection.Default.Site.Cuit;
-            DireIntermediaEnvio.NombreUsuario = txtNombreUsuario.Value;
-            DireIntermediaEnvio.Predeterminada = true;
-
-            unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, DireIntermediaEnvio);
-
+            unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, unCliente);
         }
 
         public void cargarDireFacturacion()
@@ -299,6 +319,23 @@ namespace TFI.GUI.Areas.Intranet.Forms
             txtMail.Value = unCliente.Email;
             txtDNI.Value = unCliente.NroIdentificacion;
 
+        }
+
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux = Int32.Parse(ddlProvincia.SelectedValue);
+            aux--;
+            cargarProvincias(aux);
+            cargarLocalidades();
+        }
+
+        protected void ddlProvinciaEnvio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux = Int32.Parse(ddlProvinciaEnvio.SelectedValue);
+            aux--;
+            cargarProvinciasEnvio(aux);
+            cargarLocalidadesEnvio();
         }
 
 

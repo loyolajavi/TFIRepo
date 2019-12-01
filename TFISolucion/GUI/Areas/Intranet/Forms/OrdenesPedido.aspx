@@ -50,7 +50,6 @@
 
 
             <div class="col-md-8">
-                <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     

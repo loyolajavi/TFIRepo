@@ -183,26 +183,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <asp:Label ID="lblLocalidad" for="txtLocalidad" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
-                        <div class="col-xs-9">
-                            <div class="col-xs-5">
-                                <input type="text" class="form-control" id="txtLocalidad" runat="server" clientidmode="static" />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <div class="form-group">
+                                <asp:Label ID="lblProvincia" for="ddlProvincia" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
+                                <div class="col-xs-9">
+                                    <div class="col-xs-5">
+                                        <asp:DropDownList ID="ddlProvincia" CssClass="form-control" runat="server" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-7">
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator8" Display="Dynamic" runat="server" ControlToValidate="txtLocalidad" CssClass="alert alert-warning" Text="<%$Resources:Global, DemasiadosCaracteres %>" ValidationExpression="([A-Za-z0-9\s]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngresarLocalidad %>" ControlToValidate="txtLocalidad" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
+                            <div class="form-group">
+                                <asp:Label ID="lblLocalidad2" for="ddlLocalidad" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
+                                <div class="col-xs-9">
+                                    <div class="col-xs-5">
+                                        <asp:DropDownList ID="ddlLocalidad" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label ID="lblProvincia" for="ddlProvincia" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
-                        <div class="col-xs-9">
-                            <div class="col-xs-5">
-                                <asp:DropDownList ID="ddlProvincia" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
-                            </div>
-                        </div>
-                    </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>

@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Mi Cuenta</title>
 
-    <link href="../Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../Content/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="../Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="../Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
-    <link href="../Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Scripts/thirdparty/Autocomplete/jquery-ui.css" rel="stylesheet" />
+    <link href="/Content/css/propios/EstiloLayoutPropio.css" rel="stylesheet" />
     
 
     <asp:ContentPlaceHolder ID="head" runat="server">

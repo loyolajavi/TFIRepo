@@ -66,9 +66,20 @@ function ClearModalFacturacion() {
     $('#numero').val('');
     $('#piso').val('');
     $('#departamento').val('');
-    $('#localidad').val('');
-    $('#provincia').val('');
+    $('#ddlLocalidadAltaFact').val('');
+    $('#ddlProvincia').val('');
+    $("#modalDireccionFacturacion").modal("hide");
+}
 
+function ClearModalEnvio() {
+    ClearNotifications();
+    $('#calleenvio').val('');
+    $('#numeroenvio').val('');
+    $('#pisoenvio').val('');
+    $('#departamentoenvio').val('');
+    $('#ddlLocalidadAltaEnvio').val('');
+    $('#ddlProvinciaAltaEnvio').val('');
+    $("#modalDireccionenvio").modal("hide");
 }
 
 function ClearNotifications() {
@@ -150,7 +161,7 @@ function onBtnGrabarClick() {
         numero: $('#numero').val(),
         piso: $('#piso').val(),
         departamento: $('#departamento').val(),
-        localidad: $('#localidad').val(),
+        ddllocalidad: $('#ddlLocalidadAltaFact').val(),
         ddlprovincia: $('#ddlProvincia').val()
         //ddlprovincia: $("#ddlProvincia option:selected").text()
     };
@@ -168,12 +179,10 @@ function onBtnGrabarClick() {
             // $('#notification').text('La información ha sido guardada exitosamente.');
             //window.location.reload();
             ClearModalFacturacion();
-            //Exito("Se ha cambiado la contraseña con exito");
         },
         error: function (data) {          // función que se va a ejecutar si el pedido falla
             alert("ERROR ");
-            //  Error("No se ha podido realizar la consulta");
-
+            return false;
         }
     });
     return true;
@@ -191,8 +200,8 @@ function onbtnGrabarEnvio() {
         numeroEnvio: $('#numeroenvio').val(),
         pisoEnvio: $('#pisoenvio').val(),
         departamentoEnvio: $('#departamentoenvio').val(),
-        localidadEnvio: $('#localidadenvio').val(),
-        ddlprovinciaEnvio: $('#ddlProvinciaEnvio').val()
+        ddllocalidadEnvio: $('#ddlLocalidadAltaEnvio').val(),
+        ddlprovinciaEnvio: $('#ddlProvinciaAltaEnvio').val()
         //ddlprovincia: $("#ddlProvincia option:selected").text()
     };
 
@@ -208,19 +217,17 @@ function onbtnGrabarEnvio() {
         success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
             // $('#notification').text('La información ha sido guardada exitosamente.');
             //window.location.reload();
-            ClearModalFacturacion();
+            ClearModalEnvio();
             //Exito("Se ha cambiado la contraseña con exito");
         },
         error: function (data) {          // función que se va a ejecutar si el pedido falla
             alert("ERROR ");
-            //  Error("No se ha podido realizar la consulta");
+            return false;
 
         }
     });
     return true;
 };
-
-/***************************** FUNCIONES LUCAS  **************//////////////
 
 /***************************** FUNCIONES DE CONTENIDO QUIENES SOMOS  **************//////////////
 function onbtnActualizar() {

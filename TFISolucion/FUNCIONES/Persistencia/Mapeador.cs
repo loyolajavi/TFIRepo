@@ -41,6 +41,11 @@ namespace TFI.FUNCIONES.Persistencia
         {
             T item = new T();
 
+            var columnNames = row.Table.Columns
+                              .Cast<DataColumn>()
+                              .Select(x => x.ColumnName)
+                              .ToList();
+
             foreach (var prop in properties)
             {
                 if (prop.PropertyType.IsPrimitive
@@ -50,16 +55,19 @@ namespace TFI.FUNCIONES.Persistencia
                 {
                     if (typeof(String).IsAssignableFrom(prop.PropertyType))
                     {
-                        prop.SetValue(item, row[prop.Name].ToString(), null);
+                        if(columnNames.Exists(X=>X == prop.Name))
+                            prop.SetValue(item, row[prop.Name].ToString(), null);
                     }
                     else
                     {
-                        prop.SetValue(item, row[prop.Name], null);
+                        if (columnNames.Exists(X => X == prop.Name))
+                            prop.SetValue(item, row[prop.Name], null);
                     }
                 }
                 else if (prop.PropertyType.BaseType.Name == "Enum")
                 {
-                    prop.SetValue(item, row[prop.Name], null);
+                    if (columnNames.Exists(X => X == prop.Name))
+                        prop.SetValue(item, row[prop.Name], null);
                 }
             }
             return item;

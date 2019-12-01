@@ -17,6 +17,9 @@ namespace TFI.Entidades
         public TipoDireccionEntidad miTipoDireccion { get; set; }
 		public DateTime? FecBaja { get; set; }
         public ProvinciaEntidad miProvincia { get; set; }
+        public Localidad miLocalidad { get; set; }
+
+        public bool Predeterminada { get; set; }
 	
 	}
 }

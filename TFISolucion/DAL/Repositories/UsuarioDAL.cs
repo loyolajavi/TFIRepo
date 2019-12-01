@@ -450,6 +450,39 @@ namespace TFI.DAL.DAL
 
 
 
+        public void UsuarioDireccionActualizar(DireccionEntidad direccion, UsuarioEntidad elUsuario)
+        {
+            ValidationUtility.ValidateArgument("direccion", direccion);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdDireccion", direccion.IdDireccion),
+				new SqlParameter("@CUIT", elUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", elUsuario.NombreUsuario),
+                new SqlParameter("@IdTipoDireccion", direccion.IdTipoDireccion)
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUsuarioUPDATE", parameters);
+        }
+
+
+
+        public void UsuarioDireccionCrear(DireccionEntidad direccionUsuario, UsuarioEntidad elUsuario)
+        {
+            ValidationUtility.ValidateArgument("direccionUsuario", direccionUsuario);
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdDireccion", direccionUsuario.IdDireccion),
+				new SqlParameter("@CUIT", elUsuario.CUIT),
+				new SqlParameter("@NombreUsuario", elUsuario.NombreUsuario),
+                new SqlParameter("@Predeterminada", direccionUsuario.Predeterminada)
+
+			};
+
+            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DireccionUsuarioInsert", parameters);
+        }
+
 
         #endregion
     }

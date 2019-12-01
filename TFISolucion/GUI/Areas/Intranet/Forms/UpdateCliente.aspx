@@ -154,16 +154,18 @@
                         <input type="text" class="input-sm" id="txtDpartamento" runat="server" placeholder="Ej para el dpto A: A" clientidmode="static" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" Display="Dynamic" runat="server" ControlToValidate="txtDpartamento" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,20})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
-                    <div class="form-group">
-                        <label for="localidad"><asp:Label ID="Label17" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label></label><br />
-                        <input type="text" class="input-sm" id="txtLocalidad" runat="server" clientidmode="static" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" Display="Dynamic" runat="server" ControlToValidate="txtLocalidad" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseLocalidad %>" ControlToValidate="txtLocalidad" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="form-group">
-                        <label for="provincia"><asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
-                        <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static"></asp:DropDownList>
-                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>                    
+                            <div class="form-group">
+                                <label for="provincia"><asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
+                                <asp:DropDownList ID="ddlProvincia" runat="server" ClientIDMode="static" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="localidad"><asp:Label ID="lblLocalidad2" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label></label><br />
+                                <asp:DropDownList ID="ddlLocalidad" CssClass="form-control" runat="server" ClientIDMode="static" ></asp:DropDownList>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <asp:Button ID="btnUpdateFacturacion" CssClass="btn btn-default" runat="server" Text="<%$Resources:Global, ModificarFacturacion %>" OnClick="btnUpdateFacturacion_Click" />
                 </div>
 
@@ -199,10 +201,18 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator13" Display="Dynamic" runat="server" ControlToValidate="txtLocalidadEnvio" CssClass="alert alert-warning" Text="<%$Resources:Global, CaracteresSobrepasado %>" ValidationExpression="([A-Za-z0-9]{0,50})" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" Display="Dynamic" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, IngreseLocalidad %>" ControlToValidate="txtLocalidadEnvio" ValidationGroup="AltaCliente"></asp:RequiredFieldValidator>
                     </div>
-                    <div class="form-group">
-                        <label for="ddlProvinciaEnvio"><asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
-                        <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" ClientIDMode="static"></asp:DropDownList>
-                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>   
+                            <div class="form-group">
+                                <label for="ddlProvinciaEnvio"><asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label></label><br />
+                                <asp:DropDownList ID="ddlProvinciaEnvio" runat="server" OnSelectedIndexChanged="ddlProvinciaEnvio_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlLocalidadEnvio"><asp:Label ID="Label17" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label></label><br />
+                                <asp:DropDownList ID="ddlLocalidadEnvio" CssClass="form-control" runat="server"></asp:DropDownList>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <asp:Button ID="btnUpdateEnvio" CssClass="btn btn-default" runat="server" Text="<%$Resources:Global, ModificarEnvio %>" OnClick="btnUpdateEnvio_Click" />
                 </div>
 

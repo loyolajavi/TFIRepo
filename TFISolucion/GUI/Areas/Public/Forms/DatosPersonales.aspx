@@ -12,7 +12,6 @@
         <h1 class="page-header">
             <asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label><small><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, MiCuenta %>"></asp:Label></small></h1>
     </div>
-
     <div id="panelDatosPersonales" class="col-lg-12">
         <h2>
             <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, DatosCuenta %>"></asp:Label></h2>
@@ -31,7 +30,6 @@
             <a id="btnLogin" class="btn btn-primary">
                 <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></a>
         </div>
-
         <hr />
     </div>
 
@@ -41,7 +39,7 @@
 
         <div class="text-center">
             <div class="form-group">
-                <asp:GridView ID="grilladedatospersonales" CssClass="table" runat="server" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+                <asp:GridView ID="grilladedatospersonales" CssClass="table" runat="server" AutoGenerateColumns="false" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" ControlStyle-CssClass="btn btn-warning" />
                         <asp:BoundField DataField="Nombre" HeaderText="<%$Resources:Global, Nombre %>" />
@@ -69,7 +67,7 @@
         <h2>Teléfonos</h2>
         <div class="text-center">
             <div class="form-group">
-                <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+                <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" AutoGenerateColumns="false" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
                         <asp:BoundField DataField="Telefono" HeaderText="<%$Resources:Global, Telefono %>" />
@@ -114,35 +112,43 @@
         <div class="text-center">
 
             <div class="form-group">
-                <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None" BackColor="#CCCCCC" BorderColor="#999999">
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                    <Columns>
-                        <asp:CommandField ShowEditButton="True" />
-                        <asp:CommandField ShowDeleteButton="True" />
-                        <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
-                        <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
-                        <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
-                        <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
-                        <asp:BoundField DataField="Localidad" HeaderText="<%$Resources:Global, Localidad %>" />
-                        <asp:BoundField DataField="IdDireccion" HeaderText="<%$Resources:Global, Direccion %>" />
-                        <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ddlProvincia" runat="server"></asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
-                    </Columns>
-                    <EditRowStyle BackColor="#999999" />
-                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                </asp:GridView>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None" BackColor="#CCCCCC" BorderColor="#999999">
+                            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                            <Columns>
+                                <asp:CommandField ShowEditButton="True" />
+                                <asp:CommandField ShowDeleteButton="True" />
+                                <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
+                                <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
+                                <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
+                                <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
+                                <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
+                                    <ItemTemplate>
+                                        <asp:DropDownList ID="ddlProvinciaG" runat="server" OnSelectedIndexChanged="ddlProvinciaG_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>">
+                                    <ItemTemplate>
+                                        <asp:DropDownList ID="ddlLocalidadG" runat="server" AutoPostBack="true" ></asp:DropDownList>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                
+                                <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
+                            </Columns>
+                            <EditRowStyle BackColor="#999999" />
+                            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <br />
 
@@ -175,7 +181,6 @@
                             <asp:AsyncPostBackTrigger ControlID="btnGrabarDireccionDeFacturacion" />
                         </Triggers>
                         <ContentTemplate>
-
                             <form role="form">
                                 <div class="form-group">
                                     <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
@@ -193,14 +198,18 @@
                                     <asp:Label ID="Label14" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
                                     <input type="text" class="form-control" id="departamento" runat="server" placeholder="<%$Resources:Global, IngresarDepartamento %>" clientidmode="static" />
                                 </div>
-                                <div class="form-group">
-                                    <asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
-                                    <input type="text" class="form-control" id="localidad" runat="server" placeholder="<%$Resources:Global, IngresarLocalidad %>" clientidmode="static" />
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
-                                    <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
-                                </div>
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                <ContentTemplate>
+                                    <div class="form-group">
+                                        <asp:Label ID="Label16" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
+                                        <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" AutoPostBack="true" ClientIDMode="static" ></asp:DropDownList>
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label ID="lblLocalidad2" for="ddlLocalidadAltaFact" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
+                                        <asp:DropDownList ID="ddlLocalidadAltaFact" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -219,8 +228,9 @@
 
         <div class="text-center">
             <div class="form-group">
-
-                <asp:GridView ID="grilladirecciondeenvio" CssClass="table" runat="server" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                <asp:GridView ID="grilladirecciondeenvio" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
                     <Columns>
                         <asp:CommandField ShowEditButton="True" />
                         <asp:CommandField ShowDeleteButton="True" />
@@ -228,12 +238,15 @@
                         <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
                         <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
                         <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
-                        <asp:BoundField DataField="Localidad" HeaderText="<%$Resources:Global, Localidad %>" />
-                        <asp:BoundField DataField="IdDireccion" HeaderText="<%$Resources:Global, Direccion %>" />
                         <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
                             <ItemTemplate>
-                                <asp:DropDownList ID="ddlProvincia" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlProvinciaG" runat="server" OnSelectedIndexChanged="ddlProvinciaGEnvio_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                             </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlLocalidadG" runat="server" AutoPostBack="true" ></asp:DropDownList>
+                                </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
                     </Columns>
@@ -248,6 +261,8 @@
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
+                </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
 
             <br />
@@ -276,12 +291,6 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpModalDireEnvio">
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="btnGrabarDireccionDeEnvio" />
-                        </Triggers>
-                        <ContentTemplate>
-                            <form role="form">
                                 <div class="form-group">
                                     <asp:Label ID="Label20" runat="server" Text="<%$Resources:Global, Calle %>"></asp:Label>
                                     <input type="text" class="form-control" id="calleenvio" runat="server" placeholder="<%$Resources:Global, IngresarCalle %>" clientidmode="static" />
@@ -298,18 +307,19 @@
                                     <asp:Label ID="Label23" runat="server" Text="<%$Resources:Global, Departamento %>"></asp:Label>
                                     <input type="text" class="form-control" id="departamentoenvio" runat="server" placeholder="<%$Resources:Global, IngresarDepartamento %>" clientidmode="static" />
                                 </div>
+                                <asp:UpdatePanel runat="server" ID="UpModalDireEnvio">
+                                    <ContentTemplate>
+                                        <div class="form-group">
+                                            <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
+                                            <asp:DropDownList ID="ddlProvinciaAltaEnvio" CssClass="form-control" runat="server" OnSelectedIndexChanged="ddlProvinciaAltaEnvio_SelectedIndexChanged" AutoPostBack="true" ClientIDMode="static"></asp:DropDownList>
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:Label ID="Label34" for="ddlLocalidadAltaEnvio" CssClass="control-label col-xs-3" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
+                                            <asp:DropDownList ID="ddlLocalidadAltaEnvio" CssClass="form-control" runat="server" ClientIDMode="static" ></asp:DropDownList>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
 
-                                <div class="form-group">
-                                    <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Localidad %>"></asp:Label>
-                                    <input type="text" class="form-control" id="localidadenvio" runat="server" placeholder="<%$Resources:Global, IngresarLocalidad %>" clientidmode="static" />
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, Provincia %>"></asp:Label>
-                                    <asp:DropDownList ID="ddlProvinciaEnvio" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
-                                </div>
-                            </form>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
                     <asp:Button ID="btnGrabarDireccionDeEnvio" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarEnvio(this)" OnClick="GrabarDireccionDeEnvio_Click" />
                 </div>
             </div>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TFI.DAL.DAL;
 using TFI.Entidades;
+using System.Linq;
 
 namespace TFI.CORE.Managers
 {
@@ -13,6 +14,8 @@ namespace TFI.CORE.Managers
 
         private DireccionDAL GestorDireccion = new DireccionDAL();
         private DireccionUsuarioDAL DalDeDireccionUsuario = new DireccionUsuarioDAL();
+        private ProvinciaDAL GestorProvincia = new ProvinciaDAL();
+        private LocalidadDAL GestorLocalidad = new LocalidadDAL();
 
         public DireccionEntidad DireccionSelect(int idDireccion)
         {
@@ -34,6 +37,19 @@ namespace TFI.CORE.Managers
         {
             return GestorDireccion.TraerDireccionPorIdSucursal(elIdSucursal);
         }
+
+
+        public List<ProvinciaEntidad> SelectALLProvincias()
+        {
+            List<ProvinciaEntidad> unasProv = new List<ProvinciaEntidad>();
+            unasProv = GestorProvincia.SelectAll();
+            List<Localidad> unasLocal = new List<Localidad>();
+            unasLocal = GestorLocalidad.LocalidadSelectAll();
+            unasProv.ForEach(X => X.misLocalidades = unasLocal.Where(y => y.miProvincia.IdProvincia == X.IdProvincia).ToList());
+            return unasProv;
+        }
+
+            
 
 
     }

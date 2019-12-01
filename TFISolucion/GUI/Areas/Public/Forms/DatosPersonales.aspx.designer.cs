@@ -139,6 +139,15 @@ namespace TFI.GUI {
         protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// Control grilladirecciondefacturacion.
         /// </summary>
         /// <remarks>
@@ -256,22 +265,13 @@ namespace TFI.GUI {
         protected global::System.Web.UI.HtmlControls.HtmlInputText departamento;
         
         /// <summary>
-        /// Control Label15.
+        /// Control UpdatePanel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-        
-        /// <summary>
-        /// Control localidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText localidad;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
         /// Control Label16.
@@ -292,6 +292,24 @@ namespace TFI.GUI {
         protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
         
         /// <summary>
+        /// Control lblLocalidad2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLocalidad2;
+        
+        /// <summary>
+        /// Control ddlLocalidadAltaFact.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocalidadAltaFact;
+        
+        /// <summary>
         /// Control btnGrabarDireccionDeFacturacion.
         /// </summary>
         /// <remarks>
@@ -308,6 +326,15 @@ namespace TFI.GUI {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label17;
+        
+        /// <summary>
+        /// Control UpdatePanel4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
         
         /// <summary>
         /// Control grilladirecciondeenvio.
@@ -335,15 +362,6 @@ namespace TFI.GUI {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label19;
-        
-        /// <summary>
-        /// Control UpModalDireEnvio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpModalDireEnvio;
         
         /// <summary>
         /// Control Label20.
@@ -418,22 +436,13 @@ namespace TFI.GUI {
         protected global::System.Web.UI.HtmlControls.HtmlInputText departamentoenvio;
         
         /// <summary>
-        /// Control Label24.
+        /// Control UpModalDireEnvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label24;
-        
-        /// <summary>
-        /// Control localidadenvio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText localidadenvio;
+        protected global::System.Web.UI.UpdatePanel UpModalDireEnvio;
         
         /// <summary>
         /// Control Label25.
@@ -445,13 +454,31 @@ namespace TFI.GUI {
         protected global::System.Web.UI.WebControls.Label Label25;
         
         /// <summary>
-        /// Control ddlProvinciaEnvio.
+        /// Control ddlProvinciaAltaEnvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaEnvio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaAltaEnvio;
+        
+        /// <summary>
+        /// Control Label34.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label34;
+        
+        /// <summary>
+        /// Control ddlLocalidadAltaEnvio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocalidadAltaEnvio;
         
         /// <summary>
         /// Control btnGrabarDireccionDeEnvio.
