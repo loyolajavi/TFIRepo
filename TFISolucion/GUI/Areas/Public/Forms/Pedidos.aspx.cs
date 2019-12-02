@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -364,6 +365,43 @@ namespace TFI.GUI.Areas.Public.Forms
                 productos.ForEach(x => p.Add(string.Format(template, x.URL, x.DescripProducto)));
             return p;
         }
+
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public static bool ChequearPedido()
+        {
+            List<SucursalEntidad> sucursalesDisponibles;
+            SucursalCore _sucursalCore = new SucursalCore();
+            List<PedidoLista> ProdCantEnPedido;
+            var Current = HttpContext.Current;
+            List<PedidoDetalleEntidad> unosPedidosDetalles = new List<PedidoDetalleEntidad>();
+
+            ProdCantEnPedido = (List<PedidoLista>)Current.Session["Pedido"];
+            if (ProdCantEnPedido != null && ProdCantEnPedido.Count > 0)
+            {
+                PedidoDetalleEntidad unPedDet;
+                //Para armar lista PedidosDetalles y enviarlo como param a la BLL y obtener sucursales con stock suficiente
+                foreach (PedidoLista UnProdCant in ProdCantEnPedido)
+                {
+                    unPedDet = new PedidoDetalleEntidad();
+                    unPedDet.miProducto = new ProductoEntidad();
+                    unPedDet.miProducto.IdProducto = UnProdCant.Producto.IdProducto;
+                    unPedDet.Cantidad = UnProdCant.Cantidad;
+                    unosPedidosDetalles.Add(unPedDet);
+                }
+            }
+
+            sucursalesDisponibles = _sucursalCore.TraerSucursalesConStock(unosPedidosDetalles);
+
+            if (sucursalesDisponibles.Count > 0)
+                return true;
+            //Current.Session.Add("SucursalesDisponibles", sucursalesDisponibles); //Guardo en Sesión las sucursales disponibles para tomarlas en WebMethod "FormaEnvio"
+            //Por si lo quito de PedidosEnvio, puede ir aca solamente la línea de arriba
+            else
+                return false;
+        }
+
 
 
     }

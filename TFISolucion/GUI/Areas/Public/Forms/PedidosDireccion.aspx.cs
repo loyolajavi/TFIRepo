@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.CORE.Managers;
 using TFI.Entidades;
 using TFI.FUNCIONES;
+using TFI.GUI.Helpers.DTO;
 
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
@@ -109,6 +112,9 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             Master.RealizarLogueo(txtUsuario.Value, txtClave.Value);
         }
+
+       
+
 
 
     }

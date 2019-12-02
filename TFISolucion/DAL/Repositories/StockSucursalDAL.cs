@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using TFI.FUNCIONES.Persistencia; using TFI.Entidades;
+using TFI.SEGURIDAD;
 namespace TFI.DAL.DAL
 {
 	public class StockSucursalDAL
@@ -138,13 +139,21 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@IdProducto", idProducto)
 			};
 
-            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "StockSucursalSelectAllByIdProducto", parameters))
-			{
-                List<StockSucursalEntidad> lista = new List<StockSucursalEntidad>();
-                lista = Mapeador.Mapear<StockSucursalEntidad>(dt);
+            try
+            {
+                using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "StockSucursalSelectAllByIdProducto", parameters))
+                {
+                    List<StockSucursalEntidad> lista = new List<StockSucursalEntidad>();
+                    lista = Mapeador.Mapear<StockSucursalEntidad>(dt);
 
-                return lista;
-			}
+                    return lista;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
 		}
 
 		/// <summary>

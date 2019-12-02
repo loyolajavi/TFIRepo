@@ -19,7 +19,15 @@ namespace TFI.CORE.Managers
 
         public List<StockSucursalEntidad> SelectByIdProducto(int idproducto)
         {
-             return DalStock.SelectAllByIdProducto(idproducto);
+            try
+            {
+                return DalStock.SelectAllByIdProducto(idproducto);
+            }
+            catch (Exception)
+            {
+                throw;
+            } 
+            
            
         }
 

@@ -150,7 +150,8 @@ $('.btn-comprar').click(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 error: function (xhr, status, error) {
-                    alert(error);
+                    //alert(error);
+                    alert("Error al agregar Producto al Pedido, por favor reintente");
                 },
                 success: function (result) { //result es el nombre del producto agregado
                     updateProductos();
@@ -329,7 +330,8 @@ var updateCompras = function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 error: function (xhr, status, error) {
-                    alert(error);
+                    //alert(error);
+                    alert("Error al consultar stock, por favor reintente");
                 },
                 success: function (data) {
 
@@ -478,3 +480,31 @@ var updateCompras = function () {
             alert("Ingrese el monto del ajuste a aplicar");
         }
     });
+
+
+
+//*************PedidosDireccion.aspx**********************************************
+//****************************************************************************
+//*********Boton Continuar a Forma Envio (PedidosEnvio.aspx)******************
+//$('#IdContinuarDatosPersonales').click(function () {
+function ChequearStockPedido(){
+    $.ajax({
+        type: "POST",
+        url: "Pedidos.aspx/ChequearPedido",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (xhr, status, error) {
+            alert(error);
+        },
+        success: function (data) {
+            if (data.d == true) {
+                app.redirect('PedidosDireccion.aspx');
+            }
+            else {
+                alert('No se puede realizar el Pedido con la cantidad de Productos solicitada, por favor comuníquese con nosotros');
+            }
+        }
+    });
+};
+//END*********PedidosDireccion.aspx - Boton Continuar a Forma Envio (PedidosEnvio.aspx)****************END
+

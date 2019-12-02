@@ -111,10 +111,25 @@ namespace TFI.GUI.Areas.Public.Forms
             //sucursalesDisponibles = _sucursalCore.FindAll();
             //Ahora se obtienen las que poseen stock unicamente
             sucursalesDisponibles = _sucursalCore.TraerSucursalesConStock(unosPedidosDetalles);
-            Session.Add("SucursalesDisponibles", sucursalesDisponibles); //Guardo en Sesión las sucursales disponibles para tomarlas en WebMethod "FormaEnvio"
-            HttpContext.Current.Session["Seleccionada"] = sucursalesDisponibles[0].IdSucursal;//Sucursal seleccionada, en este momento la primera que tiene stock
-            seleccionado = sucursalesDisponibles[0].IdSucursal; //Sucursal seleccionada, en este momento la primera que tiene stock, por si no hago click y queda
-                                                                //seleccionado Envío por correo
+
+            if (sucursalesDisponibles.Count > 0)
+            {
+                Session.Add("SucursalesDisponibles", sucursalesDisponibles); //Guardo en Sesión las sucursales disponibles para tomarlas en WebMethod "FormaEnvio"
+                HttpContext.Current.Session["Seleccionada"] = sucursalesDisponibles[0].IdSucursal;//Sucursal seleccionada, en este momento la primera que tiene stock
+                seleccionado = sucursalesDisponibles[0].IdSucursal; //Sucursal seleccionada, en este momento la primera que tiene stock, por si no hago click y queda
+                //seleccionado Envío por correo
+            }
+            
+            else
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                //sb.Append("$('#currentdetail').modal('show');");
+                sb.Append("alert('No se puede realizar el Pedido con la cantidad de Productos solicitada, por favor comuníquese con nosotros');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "ModalScript", sb.ToString(), false);
+            }
 
         }
 

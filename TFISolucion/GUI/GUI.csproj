@@ -273,6 +273,7 @@
     <Content Include="Scripts\thirdparty\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\thirdparty\jquery-3.4.1.min.map" />
     <Content Include="Shared\error.aspx" />
+    <Content Include="Shared\Errores.aspx" />
     <Content Include="Shared\LayoutBasico.Master" />
     <Content Include="Shared\LayoutAdministracion.Master" />
     <Content Include="Areas\Public\Forms\Home.aspx" />
@@ -573,6 +574,13 @@
     </Compile>
     <Compile Include="Shared\error.aspx.designer.cs">
       <DependentUpon>error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Errores.aspx.cs">
+      <DependentUpon>Errores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\Errores.aspx.designer.cs">
+      <DependentUpon>Errores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Shared\LayoutAdministracion.Master.cs">
       <DependentUpon>LayoutAdministracion.Master</DependentUpon>

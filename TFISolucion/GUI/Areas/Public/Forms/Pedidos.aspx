@@ -93,7 +93,7 @@
             </table>
 
             <div class="pasos">
-                <a class="btn btn-lg btn-warning pull-right btn-caja" href="PedidosDireccion.aspx"><asp:Label ID="lblDatosPersonales" runat="server" Text="<%$Resources:Global, ContinuarDatosPersonales %>"></asp:Label></a>
+                <input type="button" class="btn btn-lg btn-warning pull-right btn-caja" id="IdContinuarDatosPersonales" value="<%$Resources:Global, ContinuarDatosPersonales %>" runat="server" onclick="ChequearStockPedido()" />
             </div>
 
             <%
