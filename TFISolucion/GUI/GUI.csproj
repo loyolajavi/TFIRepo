@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Intranet\Forms\AltaUsuario.aspx" />
+    <Content Include="Areas\Intranet\Forms\Backup.aspx" />
     <Content Include="Areas\Intranet\Forms\FacturasCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoCategorias.aspx" />
     <Content Include="Areas\Intranet\Forms\GestionContenidoProdCat.aspx" />
@@ -106,6 +107,7 @@
     <Content Include="Areas\Intranet\Forms\PermisosClientes.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosEmpleados.aspx" />
     <Content Include="Areas\Intranet\Forms\Reportes.aspx" />
+    <Content Include="Areas\Intranet\Forms\Restaurar.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateCliente.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateEmpleado.aspx" />
     <Content Include="Areas\Intranet\Forms\VerLogs.aspx" />
@@ -267,9 +269,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\miperfil.pubxml" />
-    <None Include="Properties\PublishProfiles\tfimerchot.pubxml" />
-    <None Include="Properties\PublishProfiles\tfimerchot1.pubxml" />
     <Content Include="Scripts\thirdparty\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\thirdparty\jquery-3.4.1.min.map" />
     <Content Include="Shared\error.aspx" />
@@ -287,6 +286,7 @@
     <Content Include="Shared\MiCuenta.Master" />
     <None Include="Web.ConnectionStrings.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -305,6 +305,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Backup.aspx.cs">
+      <DependentUpon>Backup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Backup.aspx.designer.cs">
+      <DependentUpon>Backup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\FacturasCliente.aspx.cs">
       <DependentUpon>FacturasCliente.aspx</DependentUpon>
@@ -417,6 +424,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Restaurar.aspx.cs">
+      <DependentUpon>Restaurar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\Restaurar.aspx.designer.cs">
+      <DependentUpon>Restaurar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\UpdateCliente.aspx.cs">
       <DependentUpon>UpdateCliente.aspx</DependentUpon>

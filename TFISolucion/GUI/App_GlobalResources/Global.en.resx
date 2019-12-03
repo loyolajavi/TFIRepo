@@ -972,4 +972,13 @@
   <data name="Logsdelsistema" xml:space="preserve">
     <value>System Logs</value>
   </data>
+  <data name="BaseDatos" xml:space="preserve">
+    <value>Database</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="Restaurar" xml:space="preserve">
+    <value>Restore</value>
+  </data>
 </root>

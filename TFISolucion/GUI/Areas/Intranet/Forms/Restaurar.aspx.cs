@@ -4,20 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TFI.CORE.Managers;
-using TFI.CORE.Helpers;
 using TFI.Entidades;
-using TFI.CORE.Servicios;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class VerLogs : BasePage
+    public partial class Restaurar : BasePage
     {
 
-        List<BitacoraLogEntidad> unosLogs = new List<BitacoraLogEntidad>();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private LenguajeEntidad idioma;
-        BLLBitacora ManagerBitacora = new BLLBitacora();
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -32,6 +27,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             return null;
         }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             idioma = new LenguajeEntidad();
@@ -43,7 +40,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     idioma = new LenguajeEntidad();
                     idioma.DescripcionLenguaje = "es";
                     Session["Idioma"] = idioma;
-
                 }
             }
             else
@@ -71,25 +67,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
 
          
-
         }
 
-        protected void btnFiltrarLogs_Click(object sender, EventArgs e)
+        protected void btnRestaurar_Click(object sender, EventArgs e)
         {
-
-            unosLogs = ManagerBitacora.BitacoraVerLogs(idelTIpoLog.Value, DateTime.Parse(elIdFechaInicio.Value), DateTime.Parse(elIdFechaFin.Value));
-            grillaLogs.DataSource = null;
-            grillaLogs.DataSource = unosLogs;
-            grillaLogs.DataBind();
-        }
-
-        protected void grillaLogs_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            grillaLogs.PageIndex = e.NewPageIndex;
-            unosLogs = ManagerBitacora.BitacoraVerLogs(idelTIpoLog.Value, DateTime.Parse(elIdFechaInicio.Value), DateTime.Parse(elIdFechaFin.Value));
-            grillaLogs.DataSource = null;
-            grillaLogs.DataSource = unosLogs;
-            grillaLogs.DataBind();
+            int hola = 2;
         }
     }
 }

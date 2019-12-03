@@ -10,7 +10,7 @@ using TFI.Entidades;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class Graficos : System.Web.UI.Page
+    public partial class Graficos : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

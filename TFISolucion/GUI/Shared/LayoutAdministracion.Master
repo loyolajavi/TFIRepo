@@ -271,6 +271,22 @@
                                         <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"></asp:Label></a>
                                 </li>
                                 <%} %>
+                                <%--Backup--%>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <asp:Label ID="Label25" runat="server" Text="<%$Resources:Global, BaseDatos %>"></asp:Label><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="Backup.aspx">
+                                                <asp:Label ID="Label26" runat="server" Text="<%$Resources:Global, Backup %>"></asp:Label></a>
+                                        </li>
+                                        <li>
+                                            <a href="Restaurar.aspx">
+                                                <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, Restaurar %>"></asp:Label></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <%--END Backup--%>
                             </ul>
 
                         </nav>

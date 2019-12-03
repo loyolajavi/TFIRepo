@@ -212,5 +212,36 @@ namespace TFI.FUNCIONES.Persistencia
                     connection.Close();
                 }
             }
+
+
+            public static void ExecuteNonQueryRestaurar(CommandType commandType, string commandText, params SqlParameter[] parameters)
+            {
+                try
+                {
+                    connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Restaurar"].ConnectionString);
+
+                    connection.Open();
+
+                    tr = connection.BeginTransaction();
+
+                    using (command = CreateCommand(connection, commandType, commandText, parameters))
+                    {
+                        command.ExecuteNonQuery();
+                        tr.Commit();
+                    }
+                }
+                catch (Exception es)
+                {
+                    tr.Rollback();
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+
+
         }
 }

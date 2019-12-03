@@ -969,4 +969,13 @@
   <data name="Logsdelsistema" xml:space="preserve">
     <value>Logs del Sistema</value>
   </data>
+  <data name="BaseDatos" xml:space="preserve">
+    <value>Base de Datos</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="Restaurar" xml:space="preserve">
+    <value>Restaurar</value>
+  </data>
 </root>

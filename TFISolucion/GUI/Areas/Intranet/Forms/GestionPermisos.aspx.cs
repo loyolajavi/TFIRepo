@@ -12,7 +12,7 @@ using System.Text;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
-    public partial class GestionPermisos : System.Web.UI.Page
+    public partial class GestionPermisos : BasePage
     {
 
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
