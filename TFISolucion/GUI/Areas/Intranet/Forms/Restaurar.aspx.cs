@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TFI.Entidades;
+using TFI.SEGURIDAD;
+using System.IO;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -13,6 +15,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private LenguajeEntidad idioma;
+        string unaRuta;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -71,7 +74,76 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnRestaurar_Click(object sender, EventArgs e)
         {
-            int hola = 2;
+            
+            
+                
         }
+
+       
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            string filePath = string.Empty;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            try
+            {
+                if (fileUpload.HasFile)
+                {
+                    string fileExt = System.IO.Path.GetExtension(fileUpload.FileName);
+                    if (fileExt.ToLower() != ".bak")
+                    {
+                        lblMsg.Text = "Únicamente se permiten archivos .bak";
+                        lblMsg.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
+                    filePath = fileUpload.PostedFile.FileName;
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+                    fileUpload.PostedFile.SaveAs(Server.MapPath(@"../../../Content/Files/" + filePath.Trim()));
+                }
+
+                if (!ServicioBackup.Restaurar(Request["txtNombreBD"], Server.MapPath(@"../../../Content/Files/" + filePath.Trim())))
+                {
+                    TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración fallida", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                    sb.Append(@"<script type='text/javascript'>");
+                    //sb.Append("$('#currentdetail').modal('show');");
+                    sb.Append("alert('No pudo restaurarse la base de datos');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "RestauracionOK", sb.ToString(), false);
+                }
+                else
+                {
+                    TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración realizada correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                    //this.Master.CerrarSesion();
+                    Session.Abandon();
+                    //sb.Append(@"<script type='text/javascript'>");
+                    ////sb.Append("$('#currentdetail').modal('show');");
+                    //sb.Append("alert('Se restauró la base de datos correctamente, por favor ingrese nuevamente a la aplicación');");
+                    //sb.Append("app.redirect('Home.aspx');");
+                    //sb.Append(@"</script>");
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    //           "RestauracionOK", sb.ToString(), false);
+                    Response.Redirect("/Areas/Public/Forms/Home.aspx", false);
+                }
+            }
+            catch (Exception es)
+            {
+                ServicioLog.CrearLog(es, "Restaurar", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                //System.Text.StringBuilder sbCatch = new System.Text.StringBuilder();
+                //sbCatch.Append(@"<script type='text/javascript'>");
+                ////sb.Append("$('#currentdetail').modal('show');");
+                //sbCatch.Append("alert('Error al intentar restaurar la base de datos');");
+                //sbCatch.Append(@"</script>");
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                //           "RestauracionOK", sbCatch.ToString(), false);
+                Response.Redirect("../../../Shared/Errores.aspx");
+            }
+
+        }
+
+       
     }
 }

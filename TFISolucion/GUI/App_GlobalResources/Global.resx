@@ -978,4 +978,7 @@
   <data name="Restaurar" xml:space="preserve">
     <value>Restaurar</value>
   </data>
+  <data name="Examinar" xml:space="preserve">
+    <value>Examinar</value>
+  </data>
 </root>

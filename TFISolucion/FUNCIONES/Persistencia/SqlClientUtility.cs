@@ -222,17 +222,13 @@ namespace TFI.FUNCIONES.Persistencia
 
                     connection.Open();
 
-                    tr = connection.BeginTransaction();
-
                     using (command = CreateCommand(connection, commandType, commandText, parameters))
                     {
                         command.ExecuteNonQuery();
-                        tr.Commit();
                     }
                 }
                 catch (Exception es)
                 {
-                    tr.Rollback();
                     throw;
                 }
                 finally

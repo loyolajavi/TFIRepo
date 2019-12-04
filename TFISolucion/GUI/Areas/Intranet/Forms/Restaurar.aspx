@@ -19,18 +19,43 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-8 control-label" for="textinput">Nombre</label>
+            <label class="col-md-8 control-label" >Nombre</label>
             <div class="col-md-8">
-                <input id="txtNombreArchivo" name="textinput" type="text" placeholder="" class="form-control input-md" required="required">
+                <input id="txtNombreBD" name="txtNombreBD" type="text" placeholder="" class="form-control input-md" required="required">
+                 <div>
+                     <asp:UpdatePanel ID="up1" runat="server">
+                         <ContentTemplate>
+                             <asp:FileUpload ID="fileUpload" runat="server" />
+                             <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                             <br />
+                             <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+                         </ContentTemplate>
+                         <Triggers>
+                             <asp:PostBackTrigger ControlID="btnUpload" />
+                         </Triggers>
+                     </asp:UpdatePanel>
+                 </div>
+
+                <%--        <asp:FileUpload id="FileUpload1"                 
+           runat="server">
+       </asp:FileUpload>
+
+                <br>
+                <asp:Button ID="UploadButton"
+                    Text="Upload file"
+                    OnClick="UploadButton_Click"
+                    runat="server">
+                </asp:Button>
+
+                <hr />
+
+                <asp:Label ID="UploadStatusLabel"
+                    runat="server">
+                </asp:Label>--%>
+
             </div>
         </div>
         <div class="form-group">
-            <div class="file-field">
-                <div class="btn btn-primary btn-sm float-left">
-                    <span>Choose file</span>
-                    <input type="file">
-                </div>
-            </div>
         </div>
         <asp:Button type="button" runat="server" id="btnRestaurar" Text="<%$Resources:Global, Restaurar %>" class="btn btn-primary" Mensaje="<%$ Resources:Global, Restaurar %>" OnClientClick='return confirm(this.getAttribute("Mensaje"))' OnClick="btnRestaurar_Click"></asp:Button>
     </div>
