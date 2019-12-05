@@ -270,7 +270,7 @@
                                     <a class="dropdown-toggle" href="VerLogs.aspx">
                                         <asp:Label ID="Label24" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"></asp:Label></a>
                                 </li>
-                                <%} %>
+                                
                                 <%--Backup--%>
                                 <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -287,6 +287,7 @@
                                     </ul>
                                 </li>
                                 <%--END Backup--%>
+                                <%} %>
                             </ul>
 
                         </nav>

@@ -238,6 +238,29 @@ namespace TFI.FUNCIONES.Persistencia
             }
 
 
+            public static void ExecuteNonQueryBackup(string connectionStringName, CommandType commandType, string commandText, params SqlParameter[] parameters)
+            {
+                try
+                {
+                    connection = new SqlConnection(connectionStringName);
+
+                    connection.Open();
+
+                    using (command = CreateCommand(connection, commandType, commandText, parameters))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception es)
+                {
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
 
         }
 }

@@ -25,9 +25,9 @@
                   <option value="Error">Error</option>
                 </select>
                 <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label>
-                <input runat="server" type="date" value="25/11/2019" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker" required="required"/>
+                <input runat="server" type="date" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker" required="required" />
                 <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label>
-                <input runat="server" type="date" value="25/11/2019" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker" required="required"/>
+                <input runat="server" type="date" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker" required="required" />
                 <asp:Button ID="btnFiltrarLogs" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="btn btn-success" OnClick="btnFiltrarLogs_Click" />
                 
             </div>

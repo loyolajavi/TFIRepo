@@ -18,7 +18,7 @@ namespace TFI.SEGURIDAD
             UsuarioEntidad usuarioAutenticado = new UsuarioEntidad();
             HttpContext Current = HttpContext.Current;
 
-            Destino = Destino + "\\" + Nombre + ".bak";
+            //Destino = Destino + "\\" + Nombre + ".bak";
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -34,7 +34,7 @@ namespace TFI.SEGURIDAD
             {
                 if (!usuarioAutenticado.Permisos.Exists(x => x.NombreIFamPat == "Admin"))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "BaseDatosRespaldar", parameters);
+                SqlClientUtility.ExecuteNonQueryBackup(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "BaseDatosRespaldar", parameters);
                 return true;
             }
             catch (Exception es)

@@ -106,6 +106,7 @@
     <Content Include="Areas\Intranet\Forms\OrdenesPedido.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosClientes.aspx" />
     <Content Include="Areas\Intranet\Forms\PermisosEmpleados.aspx" />
+    <Content Include="Areas\Intranet\Forms\RegistrarAdquisicion.aspx" />
     <Content Include="Areas\Intranet\Forms\Reportes.aspx" />
     <Content Include="Areas\Intranet\Forms\Restaurar.aspx" />
     <Content Include="Areas\Intranet\Forms\UpdateCliente.aspx" />
@@ -417,6 +418,13 @@
     </Compile>
     <Compile Include="Areas\Intranet\Forms\PermisosEmpleados.aspx.designer.cs">
       <DependentUpon>PermisosEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\RegistrarAdquisicion.aspx.cs">
+      <DependentUpon>RegistrarAdquisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Intranet\Forms\RegistrarAdquisicion.aspx.designer.cs">
+      <DependentUpon>RegistrarAdquisicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Intranet\Forms\Reportes.aspx.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>

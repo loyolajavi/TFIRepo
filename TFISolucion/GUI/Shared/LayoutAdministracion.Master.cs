@@ -68,14 +68,10 @@ namespace TFI.GUI.General
 
         protected void Salir_Click(object sender, EventArgs e)
         {
-            CerrarSesion();
-        }
-
-        public void CerrarSesion()
-        {
             Session.Abandon();
             Response.Redirect("/Areas/public/forms/Home.aspx");
         }
+
 
         protected void Boton_Command(object sender, CommandEventArgs e)
         {
