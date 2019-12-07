@@ -87,47 +87,70 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             try
             {
-                if (fileUpload.HasFile)
+                string NombreBD = Request["txtNombreBD"];
+                if (!string.IsNullOrWhiteSpace(NombreBD))
                 {
-                    string fileExt = System.IO.Path.GetExtension(fileUpload.FileName);
-                    if (fileExt.ToLower() != ".bak")
+                    if (fileUpload.HasFile)
                     {
-                        lblMsg.Text = "Únicamente se permiten archivos .bak";
-                        lblMsg.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                    filePath = fileUpload.PostedFile.FileName;
-                    if (File.Exists(filePath))
-                    {
-                        File.Delete(filePath);
-                    }
-                    fileUpload.PostedFile.SaveAs(Server.MapPath(@"../../../Content/Files/" + filePath.Trim()));
-                }
+                        string fileExt = System.IO.Path.GetExtension(fileUpload.FileName);
+                        if (fileExt.ToLower() != ".bak")
+                        {
+                            lblMsg.Text = "Únicamente se permiten archivos .bak";
+                            lblMsg.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
+                        filePath = fileUpload.PostedFile.FileName;
+                        if (File.Exists(Server.MapPath(@"../../../Content/Files/" + filePath.Trim())))
+                        {
+                            File.Delete(Server.MapPath(@"../../../Content/Files/" + filePath.Trim()));
+                        }
+                        fileUpload.PostedFile.SaveAs(Server.MapPath(@"../../../Content/Files/" + filePath.Trim()));
 
-                if (!ServicioBackup.Restaurar(Request["txtNombreBD"], Server.MapPath(@"../../../Content/Files/" + filePath.Trim())))
-                {
-                    TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración fallida", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
-                    sb.Append(@"<script type='text/javascript'>");
-                    //sb.Append("$('#currentdetail').modal('show');");
-                    sb.Append("alert('No pudo restaurarse la base de datos');");
-                    sb.Append(@"</script>");
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                               "RestauracionOK", sb.ToString(), false);
+                        if (!ServicioBackup.Restaurar(NombreBD, Server.MapPath(@"../../../Content/Files/" + filePath.Trim())))
+                        {
+                            TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración fallida", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                            sb.Append(@"<script type='text/javascript'>");
+                            //sb.Append("$('#currentdetail').modal('show');");
+                            sb.Append("alert('No pudo restaurarse la base de datos');");
+                            sb.Append(@"</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                       "RestauracionOK", sb.ToString(), false);
+                        }
+                        else
+                        {
+                            TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración realizada correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                            //this.Master.CerrarSesion();
+                            Session.Abandon();
+                            //sb.Append(@"<script type='text/javascript'>");
+                            ////sb.Append("$('#currentdetail').modal('show');");
+                            //sb.Append("alert('Se restauró la base de datos correctamente, por favor ingrese nuevamente a la aplicación');");
+                            //sb.Append("app.redirect('Home.aspx');");
+                            //sb.Append(@"</script>");
+                            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                            //           "RestauracionOK", sb.ToString(), false);
+                            Response.Redirect("/Areas/Public/Forms/Home.aspx", false);
+                        }
+                    }
+                    else
+                    {
+                        sb.Append(@"<script type='text/javascript'>");
+                        //sb.Append("$('#currentdetail').modal('show');");
+                        sb.Append("alert('Seleccione el archivo .bak');");
+                        sb.Append(@"</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                   "FaltaRuta", sb.ToString(), false);
+                    }
                 }
                 else
                 {
-                    TFI.SEGURIDAD.ServicioLog.CrearLog("Restaurar", "Restauración realizada correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
-                    //this.Master.CerrarSesion();
-                    Session.Abandon();
-                    //sb.Append(@"<script type='text/javascript'>");
-                    ////sb.Append("$('#currentdetail').modal('show');");
-                    //sb.Append("alert('Se restauró la base de datos correctamente, por favor ingrese nuevamente a la aplicación');");
-                    //sb.Append("app.redirect('Home.aspx');");
-                    //sb.Append(@"</script>");
-                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                    //           "RestauracionOK", sb.ToString(), false);
-                    Response.Redirect("/Areas/Public/Forms/Home.aspx", false);
+                    sb.Append(@"<script type='text/javascript'>");
+                    //sb.Append("$('#currentdetail').modal('show');");
+                    sb.Append("alert('Ingrese el nombre de la base de datos');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "IngresarNombreBD", sb.ToString(), false);
                 }
+
             }
             catch (Exception es)
             {

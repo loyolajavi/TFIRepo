@@ -18,10 +18,9 @@
                 </h2>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-8 control-label" >Nombre</label>
-            <div class="col-md-12">
-                <input id="txtNombreBD" name="txtNombreBD" type="text" placeholder="" class="form-control input-md col-md-8" required="required">
+        <div class="form-group col-md-8 col-md-offset-2">
+            <label class="control-label" >Nombre</label>
+                <input id="txtNombreBD" name="txtNombreBD" type="text" placeholder="Nombre Base de Datos" class="form-control input-md col-md-8" required="required">
                  <div>
                      <asp:UpdatePanel ID="up1" runat="server">
                          <ContentTemplate>
@@ -36,7 +35,6 @@
                          </Triggers>
                      </asp:UpdatePanel>
                  </div>
-            </div>
         </div>
     </div>
 

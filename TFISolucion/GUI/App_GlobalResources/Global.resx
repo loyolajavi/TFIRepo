@@ -981,4 +981,16 @@
   <data name="Examinar" xml:space="preserve">
     <value>Examinar</value>
   </data>
+  <data name="Accion" xml:space="preserve">
+    <value>Accion</value>
+  </data>
+  <data name="CUIT" xml:space="preserve">
+    <value>CUIT</value>
+  </data>
+  <data name="Fecha" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="IdBitacora" xml:space="preserve">
+    <value>Log</value>
+  </data>
 </root>

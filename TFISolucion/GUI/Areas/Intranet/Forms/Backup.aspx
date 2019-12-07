@@ -14,8 +14,11 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-2">
                  <div>
+                     <b><asp:Label Text="<%$Resources:Global, Nombre %>" runat="server"  /></b>
+                     <asp:TextBox ID="txtNombreArchivo" CssClass="form-control input-md" runat="server" required="required" placeholder="<%$Resources:Global, Nombre %>"></asp:TextBox>
+                     <%--<input id="txtNombreArchivo" name="txtNombreArchivo" type="text" placeholder="" class="form-control input-md col-md-8" required="required">--%>
                      <asp:UpdatePanel ID="up1" runat="server">
                          <ContentTemplate>
                              <asp:Button ID="btnUpload" runat="server" Text="<%$Resources:Global, Backup %>" Mensaje="<%$ Resources:Global, EstaSeguro %>" OnClientClick='return confirm(this.getAttribute("Mensaje"))' OnClick="btnUpload_Click" class="btn btn-primary col-md-2" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -74,31 +75,48 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             try 
 	        {
-                string fecha = DateTime.Now.ToString("yyyy-MM-dd h-mm tt").Trim() + ".bak";
-                string nombre = "BKPGenloysBD-" + fecha;
-                string ruta = Server.MapPath(@"../../../Content/Files/" + nombre);
-                
-                if (ServicioBackup.Respaldar(nombre, ruta, "Obs"))
+                //string fecha = DateTime.Now.ToString("yyyy-MM-dd h-mm tt").Trim() + ".bak";
+                //string nombre = "BKPGenloysBD-" + fecha;
+                if (!string.IsNullOrWhiteSpace(txtNombreArchivo.Text))
                 {
-                    ServicioLog.CrearLog("Backup", "Backup realizado correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
-                    Current.Response.ContentType = "application/octet-stream";
-                    Current.Response.AppendHeader("Content-Disposition", "attachment; " + "filename=" + nombre + "");
-                    Current.Response.TransmitFile(Server.MapPath(@"../../../Content/Files/" + nombre));
-                    Current.Response.Flush();
-                    //Current.Response.End();  //Causa Exception
-                    Current.Response.SuppressContent = true;
-                    Current.ApplicationInstance.CompleteRequest();
+                    string nombre = txtNombreArchivo.Text.Trim() + ".bak";
+                    string ruta = Server.MapPath(@"../../../Content/Files/" + nombre);
+                    if (File.Exists(ruta))
+                    {
+                        File.Delete(ruta);
+                    }
+                    if (ServicioBackup.Respaldar(nombre, ruta, "Obs"))
+                    {
+                        ServicioLog.CrearLog("Backup", "Backup realizado correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                        Current.Response.ContentType = "application/octet-stream";
+                        Current.Response.AppendHeader("Content-Disposition", "attachment; " + "filename=" + nombre + "");
+                        Current.Response.TransmitFile(Server.MapPath(@"../../../Content/Files/" + nombre));
+                        Current.Response.Flush();
+                        //Current.Response.End();  //Causa Exception
+                        Current.Response.SuppressContent = true;
+                        Current.ApplicationInstance.CompleteRequest();
+                    }
+                    else
+                    {
+                        ServicioLog.CrearLog("Backup", "Backup fallido", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                        sb.Append(@"<script type='text/javascript'>");
+                        //sb.Append("$('#currentdetail').modal('show');");
+                        sb.Append("alert('No pudo realizarse el backup');");
+                        sb.Append(@"</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                   "BackupFallido", sb.ToString(), false);
+                    }
                 }
                 else
                 {
-                    ServicioLog.CrearLog("Backup", "Backup fallido", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
                     sb.Append(@"<script type='text/javascript'>");
                     //sb.Append("$('#currentdetail').modal('show');");
-                    sb.Append("alert('No pudo realizarse el backup');");
+                    sb.Append("alert('Complete el campo Nombre');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                               "BackupFallido", sb.ToString(), false);
+                               "CompletarNombre", sb.ToString(), false);
                 }
+                
 	        }
 	        catch (Exception es)
 	        {

@@ -161,10 +161,13 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Contenidos %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
+                                        <%if (this.Autenticar(new string[] { "GestionProducto" }))
+                                          {%>
                                         <li>
                                             <a href="GestionContenidoProductos.aspx">
                                                 <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Productos %>"></asp:Label></a>
                                         </li>
+                                        <%} %>
                                         <li>
                                             <a href="GestionContenidoProdCat.aspx">
                                                 <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AsociarCategorias %>"></asp:Label></a>
@@ -187,7 +190,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <%if (this.Autenticar("Admin"))
+                                <%if (this.Autenticar(new string[] { "GestionClientes", "GestionEmpleados" }))
                                     {%>
                                 <li id="liAdministracion">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -197,10 +200,12 @@
                                             <a href="PermisosClientes.aspx">
                                                 <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Clientes %>"></asp:Label></a>
                                         </li>
+                                        <%if (this.Autenticar(new string[] { "GestionEmpleados" })){%>
                                         <li>
                                             <a href="PermisosEmpleados.aspx">
                                                 <asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, Empleados %>"></asp:Label></a>
                                         </li>
+                                        <%} %>
                                         <%--<li>
                                             <a href="#">Permisos</a>
                                         </li>--%>
@@ -287,6 +292,22 @@
                                     </ul>
                                 </li>
                                 <%--END Backup--%>
+                                <%} %>
+
+                                <%--FamiliaPatente--%>
+                                <% if (this.Autenticar("Admin"))
+                                {%>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <asp:Label ID="Label28" runat="server" Text="<%$Resources:Global, Permisos %>"></asp:Label><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="GestionPermisos.aspx">
+                                                <asp:Label ID="Label29" runat="server" Text="<%= Resources.Global, Permisos %>"></asp:Label></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <%--END FamiliaPatente--%>
                                 <%} %>
                             </ul>
 
