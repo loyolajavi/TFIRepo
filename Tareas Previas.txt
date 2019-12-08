@@ -1,0 +1,3 @@
+- Revisar lo de woff en web config
+- Revisar los include desde el iis y al carpeta raiz
+- El webservice tiene q estar en el puerto 8091, se tiene q llamar SWTarjeta

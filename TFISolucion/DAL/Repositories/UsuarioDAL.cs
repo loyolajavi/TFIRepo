@@ -484,6 +484,127 @@ namespace TFI.DAL.DAL
         }
 
 
+
+        public bool UsuarioAgregarPermisos(List<IFamPat> PerAgregar, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                foreach (IFamPat unPermiso in PerAgregar)
+                {
+                    if (unPermiso.CantHijos > 0)
+                        UsuarioAgregarFamilia(unPermiso as Familia, NombreUsuario, CUIT);
+                    else
+                        UsuarioAgregarPatente(unPermiso as Patente, NombreUsuario, CUIT);
+                }
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public void UsuarioAgregarFamilia(Familia unaFamilia, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                SqlParameter[] parametersFam = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", unaFamilia.IdIFamPat),
+                    new SqlParameter("@NombreUsuario", NombreUsuario),
+                    new SqlParameter("@CUIT", CUIT)
+			    };
+
+                SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioAgregarFamilia", parametersFam);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public void UsuarioAgregarPatente(Patente unaPatente, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                SqlParameter[] parametersPat = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdPatente", unaPatente.IdIFamPat),
+                    new SqlParameter("@NombreUsuario", NombreUsuario),
+                    new SqlParameter("@CUIT", CUIT)
+			    };
+
+                SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioAgregarPatente", parametersPat);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool UsuarioQuitarPermisos(List<IFamPat> PerQuitar, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                foreach (IFamPat unPermiso in PerQuitar)
+                {
+                    if (unPermiso.CantHijos > 0)
+                        UsuarioQuitarFamilia(unPermiso as Familia, NombreUsuario, CUIT);
+                    else
+                        UsuarioQuitarPatente(unPermiso as Patente, NombreUsuario, CUIT);
+                }
+
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public void UsuarioQuitarFamilia(Familia unaFamilia, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                SqlParameter[] parametersFam = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", unaFamilia.IdIFamPat),
+                    new SqlParameter("@NombreUsuario", NombreUsuario),
+                    new SqlParameter("@CUIT", CUIT)
+			    };
+
+                SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioQuitarFamilia", parametersFam);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public void UsuarioQuitarPatente(Patente unaPatente, string NombreUsuario, string CUIT)
+        {
+            try
+            {
+                SqlParameter[] parametersPat = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdPatente", unaPatente.IdIFamPat),
+                    new SqlParameter("@NombreUsuario", NombreUsuario),
+                    new SqlParameter("@CUIT", CUIT)
+			    };
+
+                SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioQuitarPatente", parametersPat);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
         #endregion
     }
 }

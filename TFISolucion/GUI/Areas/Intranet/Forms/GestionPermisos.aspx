@@ -10,46 +10,66 @@
     <div class="container paddingPaginas">
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-12">
                 <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
             </div>
         </div>
 
         <div class="row">
-            <asp:DropDownList ID="cboFamilia" runat="server"></asp:DropDownList>
-                        <%--    <asp:Repeater ID="rptFamilia" ClientIDMode="Static" runat="server">
-                    <ItemTemplate>
-                        <table class="table-bordered col-md-12" id="tblFamilias">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" id="txtFamilia">Familia</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center">
-                                    <td class="text-center" style="padding: 7px;">
-                                        <div class="">
-                                            <a href=""/>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </ItemTemplate>
-                </asp:Repeater>--%>
+            <div class="col-md-3">
+                <asp:Button ID="btnAltaFamilia" runat="server" Text="Crear Familia" OnClick="btnAltaFamilia_Click" CssClass="btn btn-primary" />
+            </div>
+            <div class="col-md-3">
+                <asp:DropDownList ID="cboFamilia" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cboFamilia_SelectedIndexChanged" CssClass="dropdown dropdown-toggle"></asp:DropDownList>
+            </div>
+            <div class="col-md-3">
+                <asp:TextBox ID="txtName" runat="server" >
+                </asp:TextBox>
+                <asp:Button ID="btnModificarFamilia" runat="server" Text="Modificar Familia" OnClick="btnModificarFamilia_Click" CssClass="btn btn-success" />
+            </div>
+            <div class="col-md-3">
+                <asp:Button ID="btnEliminarFamilia" runat="server" Text="Eliminar Familia" OnClick="btnEliminarFamilia_Click" CssClass="btn btn-danger btn-sm" />
+            </div>
         </div>
-        <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
+
+        
         <div class="row">
-            <asp:TreeView ID="treeDisponibles" runat="server" ></asp:TreeView>
-
+            <div class="col-md-4">
+                <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
+                <asp:UpdatePanel ID="upTreeDisp" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:TreeView ID="treeDisponibles" runat="server" SelectedNodeStyle-CssClass="bg-success" ></asp:TreeView>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+            <div class="col-md-2">
+                <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
+            </div>
+            <div class="col-md-4">
+                <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
+                <asp:UpdatePanel ID="uptreeAsig" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                <asp:TreeView ID="treeAsignados" runat="server" SelectedNodeStyle-CssClass="bg-success" ></asp:TreeView>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
+                    </Triggers>
+                        </asp:UpdatePanel>
+            </div>
+            <div class="col-md-2">
+                <asp:Button ID="btnQuitar" runat="server" Text="Quitar" OnClick="btnQuitar_Click" />
+            </div>
 
         </div>
 
         <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
 
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <asp:TextBox ID="txtName" runat="server" Width="150px" ReadOnly="true"
                     BorderStyle="Double">
@@ -58,12 +78,11 @@
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="treeTodos" EventName="SelectedNodeChanged" />
             </Triggers>
-        </asp:UpdatePanel>
+        </asp:UpdatePanel>--%>
 
         <div class="row">
-            <asp:TreeView ID="treeTodos" runat="server" OnSelectedNodeChanged="treeTodos_SelectedNodeChanged" SelectedNodeStyle-CssClass="bg-success" >
+            <asp:TreeView ID="treeTodos" runat="server" OnSelectedNodeChanged="treeTodos_SelectedNodeChanged">
             </asp:TreeView>
-            <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
         </div>
 
 

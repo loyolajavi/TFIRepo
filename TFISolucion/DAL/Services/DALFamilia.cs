@@ -115,64 +115,55 @@ namespace TFI.DAL.Services
 
 
 
-        //public bool FamiliaCrear(IFamPat nuevaFamilia)
-        //{
-        //    SqlParameter[] parametersFamCrear = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@NombreFamilia", nuevaFamilia.NombreIFamPat)
-        //    };
+        public bool FamiliaCrear(IFamPat nuevaFamilia)
+        {
+            SqlParameter[] parametersFamCrear = new SqlParameter[]
+            {
+                new SqlParameter("@NombreFamilia", nuevaFamilia.NombreIFamPat)
+            };
 
-        //    try
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-        //        var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "FamiliaCrear", parametersFamCrear);
-        //        int IdFamRes = Decimal.ToInt32(Resultado);
-        //        nuevaFamilia.IdIFamPat = IdFamRes;
+            try
+            {
+                var Resultado = (decimal)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaCrear", parametersFamCrear);
+                int IdFamRes = Decimal.ToInt32(Resultado);
+                nuevaFamilia.IdIFamPat = IdFamRes;
 
-        //        if (nuevaFamilia.CantHijos > 0)
-        //        {
-        //            foreach (IFamPat unPermiso in (nuevaFamilia as Familia).ElementosFamPat)
-        //            {
-        //                //Asociar Familia con Familia
-        //                if (unPermiso.CantHijos > 0)
-        //                {
-        //                    SqlParameter[] parametersRelFamFam = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamiliaPadre", nuevaFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
-        //                    };
+                if (nuevaFamilia.CantHijos > 0)
+                {
+                    foreach (IFamPat unPermiso in (nuevaFamilia as Familia).ElementosFamPat)
+                    {
+                        //Asociar Familia con Familia
+                        if (unPermiso.CantHijos > 0)
+                        {
+                            SqlParameter[] parametersRelFamFam = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamiliaPadre", nuevaFamilia.IdIFamPat),
+                            new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaFamiliaAsociar", parametersRelFamFam);
-        //                }
-        //                //Asociar Familia con Patente
-        //                else
-        //                {
-        //                    SqlParameter[] parametersRelFamPat = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamilia", nuevaFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
-        //                    };
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaFamiliaAsociar", parametersRelFamFam);
+                        }
+                        //Asociar Familia con Patente
+                        else
+                        {
+                            SqlParameter[] parametersRelFamPat = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamilia", nuevaFamilia.IdIFamPat),
+                            new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaPatenteAsociar", parametersRelFamPat);
-        //                }
-        //            }
-        //        }
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaPatenteAsociar", parametersRelFamPat);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-        //        return true;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-        //    }
-        //}
 
         public Familia FamiliaBuscar(string NombreIFamPat)
         {
@@ -183,10 +174,10 @@ namespace TFI.DAL.Services
 
             try
             {
-                using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaBuscar", parameters))
+                using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaBuscar", parameters))
                 {
                     Familia unaFam = new Familia();
-                    unaFam = Mapeador.MapearFirst<Familia>(dt);
+                    unaFam = MapearFamiliaUno(ds);
                     return unaFam;
                 }
             }
@@ -196,138 +187,131 @@ namespace TFI.DAL.Services
             }
         }
 
-        //public bool FamiliaModificar(IFamPat AModifFamilia, List<IFamPat> FamQuitarMod, List<IFamPat> FamAgregarMod)
-        //{
-        //    SqlParameter[] parametersFamModif = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@NombreFamilia", AModifFamilia.NombreIFamPat),
-        //        new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat)
-        //    };
+        public bool FamiliaModificar(IFamPat AModifFamilia, List<IFamPat> FamQuitarMod, List<IFamPat> FamAgregarMod)
+        {
+            SqlParameter[] parametersFamModif = new SqlParameter[]
+            {
+                new SqlParameter("@NombreFamilia", AModifFamilia.NombreIFamPat),
+                new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat)
+            };
 
-        //    try
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaModificar", parametersFamModif);
+            try
+            {
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaModificar", parametersFamModif);
 
-        //        //Quitar Permisos
-        //        if (FamQuitarMod.Count > 0)
-        //        {
-        //            foreach (IFamPat unPermiso in FamQuitarMod)
-        //            {
-        //                //Quitar Familia
-        //                if (unPermiso.CantHijos > 0)
-        //                {
-        //                    SqlParameter[] parametersFamQuitar = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamiliaPadre", AModifFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
-        //                    };
+                //Quitar Permisos
+                if (FamQuitarMod.Count > 0)
+                {
+                    foreach (IFamPat unPermiso in FamQuitarMod)
+                    {
+                        //Quitar Familia
+                        if (unPermiso.CantHijos > 0)
+                        {
+                            SqlParameter[] parametersFamQuitar = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamiliaPadre", AModifFamilia.IdIFamPat),
+                            new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaFamiliaDesasociar", parametersFamQuitar);
-        //                }
-        //                //Quitar Patente
-        //                else
-        //                {
-        //                    SqlParameter[] parametersPatQuitar = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
-        //                    };
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaFamiliaDesasociar", parametersFamQuitar);
+                        }
+                        //Quitar Patente
+                        else
+                        {
+                            SqlParameter[] parametersPatQuitar = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat),
+                            new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaPatenteDesasociar", parametersPatQuitar);
-        //                }
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaPatenteDesasociar", parametersPatQuitar);
+                        }
 
-        //            }
-        //        }
-        //        //Agregar Permisos
-        //        if (FamAgregarMod.Count > 0)
-        //        {
-        //            foreach (IFamPat unPermiso in FamAgregarMod)
-        //            {
-        //                //Agregar Familia
-        //                if (unPermiso.CantHijos > 0)
-        //                {
-        //                    SqlParameter[] parametersFamAgregar = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamiliaPadre", AModifFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
-        //                    };
+                    }
+                }
+                //Agregar Permisos
+                if (FamAgregarMod.Count > 0)
+                {
+                    foreach (IFamPat unPermiso in FamAgregarMod)
+                    {
+                        //Agregar Familia
+                        if (unPermiso.CantHijos > 0)
+                        {
+                            SqlParameter[] parametersFamAgregar = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamiliaPadre", AModifFamilia.IdIFamPat),
+                            new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaFamiliaAsociar", parametersFamAgregar);
-        //                }
-        //                //Agregar Patente
-        //                else
-        //                {
-        //                    SqlParameter[] parametersPatAgregar = new SqlParameter[]
-        //                    {
-        //                    new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat),
-        //                    new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
-        //                    };
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaFamiliaAsociar", parametersFamAgregar);
+                        }
+                        //Agregar Patente
+                        else
+                        {
+                            SqlParameter[] parametersPatAgregar = new SqlParameter[]
+                            {
+                            new SqlParameter("@IdFamilia", AModifFamilia.IdIFamPat),
+                            new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
+                            };
 
-        //                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaPatenteAsociar", parametersPatAgregar);
-        //                }
-        //            }
-        //        }
+                            SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaPatenteAsociar", parametersPatAgregar);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-        //        return true;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-        //    }
-        //}
 
-        //public List<Usuario> FamiliaUsuariosComprometidos(int IdFamilia)
-        //{
-        //    SqlParameter[] parameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@IdFamilia", IdFamilia)
-        //    };
+        public List<UsuarioEntidad> FamiliaUsuariosComprometidos(int IdFamilia, string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdFamilia", IdFamilia),
+                new SqlParameter("@CUIT", CUIT)
+            };
 
-        //    try
-        //    {
-        //        using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaUsuariosComprometidos", parameters))
-        //        {
-        //            List<Usuario> unosUsuarios = new List<Usuario>();
-        //            unosUsuarios = FRAMEWORK.Persistencia.Mapeador.Mapear<Usuario>(ds);
-        //            return unosUsuarios;
-        //        }
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                using (DataTable ds = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaUsuariosComprometidos", parameters))
+                {
+                    List<UsuarioEntidad> unosUsuarios = new List<UsuarioEntidad>();
+                    unosUsuarios = Mapeador.Mapear<UsuarioEntidad>(ds);
+                    return unosUsuarios;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //public List<UsuarioEntidad> FamiliaUsuariosAsociados(int IdFamilia)
-        //{
-        //    SqlParameter[] parameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@IdFamilia", IdFamilia)
-        //    };
+        public List<UsuarioEntidad> FamiliaUsuariosAsociados(int IdFamilia, string CUIT)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdFamilia", IdFamilia),
+                new SqlParameter("@CUIT", CUIT)
+            };
 
-        //    try
-        //    {
-        //        using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaUsuariosAsociados", parameters))
-        //        {
-        //            List<UsuarioEntidad> unosUsuarios = new List<UsuarioEntidad>();
-        //            unosUsuarios = FRAMEWORK.Persistencia.Mapeador.Mapear<Usuario>(ds);
-        //            return unosUsuarios;
-        //        }
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                using (DataTable ds = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaUsuariosAsociados", parameters))
+                {
+                    List<UsuarioEntidad> unosUsuarios = new List<UsuarioEntidad>();
+                    unosUsuarios = Mapeador.Mapear<UsuarioEntidad>(ds);
+                    return unosUsuarios;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
         public static List<IFamPat> MapearFamilias(DataSet ds)
@@ -407,54 +391,64 @@ namespace TFI.DAL.Services
 
 
 
-        //public bool FamiliaEliminar(int IdFamilia)
-        //{
+        public bool FamiliaEliminar(int IdFamilia)
+        {
+            try
+            {
+                //Quitar Permisos
+                //Quitar Familias asociadas
+                SqlParameter[] parametersFamQuitar = new SqlParameter[]
+                {
+                    new SqlParameter("@IdFamiliaPadre", IdFamilia),
+                    new SqlParameter("@IdFamiliaHijo", IdFamilia)
+                };
+
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaEliminarAsocFamilias", parametersFamQuitar);
+
+                //Quitar Patentes asociadas
+                SqlParameter[] parametersPatQuitar = new SqlParameter[]
+                {
+                    new SqlParameter("@IdFamilia", IdFamilia)
+                };
+
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaEliminarAsocPatentes", parametersPatQuitar);
+
+                //Eliminar Familia
+                SqlParameter[] parametersFam = new SqlParameter[]
+                {
+                    new SqlParameter("@IdFamilia", IdFamilia)
+                };
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "FamiliaEliminar", parametersFam);
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
-        //    try
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+        public static Familia MapearFamiliaUno(DataSet ds)
+        {
+            Familia unaFamilia = new Familia();
 
-        //        //Quitar Permisos
-        //        //Quitar Familias asociadas
-        //        SqlParameter[] parametersFamQuitar = new SqlParameter[]
-        //        {
-        //            new SqlParameter("@IdFamiliaPadre", IdFamilia),
-        //            new SqlParameter("@IdFamiliaHijo", IdFamilia)
-        //        };
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    unaFamilia.IdIFamPat = (int)row["IdFamilia"];
+                    unaFamilia.NombreIFamPat = row["NombreFamilia"].ToString();
+                }
+                return unaFamilia;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminarAsocFamilias", parametersFamQuitar);
 
-        //        //Quitar Patentes asociadas
-        //        SqlParameter[] parametersPatQuitar = new SqlParameter[]
-        //        {
-        //            new SqlParameter("@IdFamilia", IdFamilia)
-        //        };
 
-        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminarAsocPatentes", parametersPatQuitar);
-
-        //        //Eliminar Familia
-        //        SqlParameter[] parametersFam = new SqlParameter[]
-        //        {
-        //            new SqlParameter("@IdFamilia", IdFamilia)
-        //        };
-        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminar", parametersFam);
-
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-        //        return true;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-        //    }
-        //}
 
     }
 }

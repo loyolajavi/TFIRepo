@@ -303,7 +303,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="GestionPermisos.aspx">
-                                                <asp:Label ID="Label29" runat="server" Text="<%= Resources.Global, Permisos %>"></asp:Label></a>
+                                                <asp:Label ID="Label29" runat="server" Text="<%$ Resources:Global, Permisos %>"></asp:Label></a>
                                         </li>
                                     </ul>
                                 </li>

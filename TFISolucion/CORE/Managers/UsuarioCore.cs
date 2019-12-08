@@ -304,5 +304,23 @@ namespace TFI.CORE.Managers
         }
 
 
+
+        public bool UsuarioModificarPermisos(List<IFamPat> PerAgregar, List<IFamPat> PerQuitar, string NombreUsuario)
+        {
+            try
+            {
+                if (PerAgregar.Count > 0)
+                    _dal.UsuarioAgregarPermisos(PerAgregar, NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                if (PerQuitar.Count > 0)
+                    _dal.UsuarioQuitarPermisos(PerQuitar, NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                return true;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

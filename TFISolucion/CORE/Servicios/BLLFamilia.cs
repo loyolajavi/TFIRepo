@@ -72,21 +72,19 @@ namespace TFI.CORE.Servicios
         }
 
 
-        //public bool FamiliaCrear(IFamPat nuevaFamilia)
-        //{
-        //    try
-        //    {
-        //        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Crear" }))
-        //            throw new InvalidOperationException("No posee los permisos suficientes");
-        //        if (GestorFamilia.FamiliaCrear(nuevaFamilia))
-        //            return true;
-        //        return false;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public bool FamiliaCrear(IFamPat nuevaFamilia)
+        {
+            try
+            {
+                if (GestorFamilia.FamiliaCrear(nuevaFamilia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
         public Familia FamiliaBuscar(string NombreIFamPat)
         {
@@ -100,61 +98,57 @@ namespace TFI.CORE.Servicios
             }
         }
 
-        //public bool FamiliaModificar(IFamPat AModifFamilia, List<IFamPat> FamQuitarMod, List<IFamPat> FamAgregarMod)
-        //{
-        //    try
-        //    {
-        //        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Modificar" }))
-        //            throw new InvalidOperationException("No posee los permisos suficientes");
-        //        if (GestorFamilia.FamiliaModificar(AModifFamilia, FamQuitarMod, FamAgregarMod))
-        //            return true;
-        //        return false;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public bool FamiliaModificar(IFamPat AModifFamilia, List<IFamPat> FamQuitarMod, List<IFamPat> FamAgregarMod)
+        {
+            try
+            {
+                if (GestorFamilia.FamiliaModificar(AModifFamilia, FamQuitarMod, FamAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //public bool FamiliaEliminar(Familia unafamilia)
-        //{
-        //    try
-        //    {
-        //        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Eliminar" }))
-        //            throw new InvalidOperationException("No posee los permisos suficientes");
-        //        if (GestorFamilia.FamiliaEliminar(unafamilia.IdIFamPat))
-        //            return true;
-        //        return false;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public bool FamiliaEliminar(int IdFamilia)
+        {
+            try
+            {
+                if (GestorFamilia.FamiliaEliminar(IdFamilia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //public List<UsuarioEntidad> FamiliaUsuariosComprometidos(int IdFamilia)
-        //{
-        //    try
-        //    {
-        //        return GestorFamilia.FamiliaUsuariosComprometidos(IdFamilia);
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public List<UsuarioEntidad> FamiliaUsuariosComprometidos(int IdFamilia)
+        {
+            try
+            {
+                return GestorFamilia.FamiliaUsuariosComprometidos(IdFamilia, CORE.Helpers.ConfigSection.Default.Site.Cuit);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
-        //public List<UsuarioEntidad> FamiliaUsuariosAsociados(int IdFamilia)
-        //{
-        //    try
-        //    {
-        //        return GestorFamilia.FamiliaUsuariosAsociados(IdFamilia);
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public List<UsuarioEntidad> FamiliaUsuariosAsociados(int IdFamilia)
+        {
+            try
+            {
+                return GestorFamilia.FamiliaUsuariosAsociados(IdFamilia, CORE.Helpers.ConfigSection.Default.Site.Cuit);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
         public static bool BuscarPermiso(List<IFamPat> PermisosVer, string[] unTagControl)
