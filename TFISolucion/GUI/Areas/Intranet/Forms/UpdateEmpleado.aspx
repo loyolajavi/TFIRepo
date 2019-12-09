@@ -21,53 +21,100 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <div class="form-group row">
+                    <h4 class="page-header">
+                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, CuentaEmpleado %>"></asp:Label></h4>
+                    <div class="form-group">
+                        <label for="txtNombreUsuario">
+                            <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></label>
+                        <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
+                    </div>
+                    <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" />
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label for="txtClave">
+                            <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label><br />
+                        <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
+                        <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
+                    </div>
 
-                <h4 class="page-header"><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, CuentaEmpleado %>"></asp:Label></h4>
-                <div class="form-group">
-                    <label for="txtNombreUsuario"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></label>
-                    <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
-                </div>
-                <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" />
-                <br />
-                <br />
-                <div class="form-group">
-                    <label for="txtClave"><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label><br />
-                    <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
-                    <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
-                </div>
-
-                <div class="form-group">
-                    <label for="txtClaveRep"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, RepetirContrasena %>"></asp:Label></label><br />
-                    <input type="password" class="input-sm" id="txtClaveRep" runat="server" clientidmode="static" placeholder="********" />
-                    <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
-                </div>
+                    <div class="form-group">
+                        <label for="txtClaveRep">
+                            <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, RepetirContrasena %>"></asp:Label></label><br />
+                        <input type="password" class="input-sm" id="txtClaveRep" runat="server" clientidmode="static" placeholder="********" />
+                        <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
+                    </div>
                     <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarContrasena %>" runat="server" OnClick="btnCambiarClave_Click" />
-                
-                <div id="divEspacioModifClave" runat="server"></div>
-                <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ModificoContrasena %>"></asp:Label></div>
-                <h4 class="page-header"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></h4>
-                <div class="form-group">
-                    <label for="txtApellido"><asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></label>
-                    <input type="text" class="form-control" id="txtApellido" runat="server" clientidmode="static" />
+
+                    <div id="divEspacioModifClave" runat="server"></div>
+                    <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">
+                        <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ModificoContrasena %>"></asp:Label></div>
                 </div>
-                <div class="form-group">
-                    <label for="txtNombre"><asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></label>
-                    <input type="text" class="form-control" id="txtNombre" runat="server" clientidmode="static" />
+                <div class="form-group row">
+                    <h4 class="page-header">
+                        <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></h4>
+                    <div class="form-group">
+                        <label for="txtApellido">
+                            <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></label>
+                        <input type="text" class="form-control" id="txtApellido" runat="server" clientidmode="static" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtNombre">
+                            <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></label>
+                        <input type="text" class="form-control" id="txtNombre" runat="server" clientidmode="static" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtMail">E-mail</label>
+                        <input type="text" class="form-control" id="txtMail" runat="server" clientidmode="static" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDNI">DNI</label>
+                        <input type="text" class="form-control" id="txtDNI" runat="server" clientidmode="static" />
+                    </div>
+                    <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
                 </div>
-                <div class="form-group">
-                    <label for="txtMail">E-mail</label>
-                    <input type="text" class="form-control" id="txtMail" runat="server" clientidmode="static" />
+                <%--Permisos--%>
+                <div class="form-group row">
+                    <h4 class="page-header">
+                        <asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, PermisosUsuario %>"></asp:Label></h4>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="page-header"><%=Resources.Global.Permisos %></h5>
+                            <asp:UpdatePanel ID="upTreeDisp" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:TreeView ID="treeDisponibles" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
+                                    <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="col-md-2">
+                            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="page-header"><%=Resources.Global.Permisos %></h5>
+                            <asp:UpdatePanel ID="uptreeAsig" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:TreeView ID="treeAsignados" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
+                                    <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="col-md-2">
+                            <asp:Button ID="btnQuitar" runat="server" Text="Quitar" OnClick="btnQuitar_Click" />
+                        </div>
+                    </div>
+                    <br />
+                        <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
                 </div>
-                <div class="form-group">
-                    <label for="txtDNI">DNI</label>
-                    <input type="text" class="form-control" id="txtDNI" runat="server" clientidmode="static" />
-                </div>
-                <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
-                <div class="form-group">
-                    <h4 class="page-header"><asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, PermisosUsuario %>"></asp:Label></h4>
-                    <asp:DropDownList ID="ddlPermisosUsuarioUpdate" CssClass="list-group" runat="server"></asp:DropDownList>
-                </div>
-                <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
+                 <%--ENDPermissos--%>
             </div>
         </div>
     </div>

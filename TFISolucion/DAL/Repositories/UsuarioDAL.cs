@@ -114,7 +114,9 @@ namespace TFI.DAL.DAL
 				new SqlParameter("@Clave", usuario.Clave),
 			};
 
-            SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioInsert", parameters);
+            var Resultado = (decimal)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "UsuarioInsert", parameters);
+            int IdUsuarioRes = Decimal.ToInt32(Resultado);
+            usuario.IdUsuario = IdUsuarioRes;
         }
 
         /// <summary>

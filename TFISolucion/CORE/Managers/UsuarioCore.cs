@@ -56,19 +56,12 @@ namespace TFI.CORE.Managers
                 UsuarioYaRegistrado = Select(ConfigSection.Default.Site.Cuit, usuario.NombreUsuario);
                 if (string.IsNullOrEmpty(UsuarioYaRegistrado.NombreUsuario))
                 { 
-                    _dal.Insert(usuario); 
-                    unManagerUsuarioFamilia.UsuarioFamiliaInsert(usuario);
+                    _dal.Insert(usuario);
+                    _dal.UsuarioAgregarPermisos(usuario.Permisos, usuario.NombreUsuario, usuario.CUIT);
+                    //unManagerUsuarioFamilia.UsuarioFamiliaInsert(usuario);
+                    return 0;
                 }
-                else
-                {
-                    return 1;
-                }
-                return 0;
-                
-
-
-
-
+                return 1;
             }
             catch (Exception ex)
             {

@@ -10,13 +10,15 @@ using TFI.CORE.Helpers;
 using TFI.FUNCIONES;
 using System.Text;
 using TFI.Entidades.Servicios.Permisos;
+using TFI.CORE.Servicios;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
     public partial class AltaUsuario : BasePage
     {
 
-        private FamiliaCore unManagerFamilia = new FamiliaCore();
+        BLLFamilia ManagerFamilia = new BLLFamilia();
         public List<FamiliaEntidad> unasFamilias = new List<FamiliaEntidad>();
         public List<CondicionFiscalEntidad> unosFiscales = new List<CondicionFiscalEntidad>();
         private CondicionFiscalCore unManagerFiscal = new CondicionFiscalCore();
@@ -24,7 +26,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private LenguajeEntidad idioma;
+        HttpContext Current = HttpContext.Current;
         string[] unosPermisosTest;
+        List<IFamPat> LisAuxAsig;
+        List<IFamPat> LisAuxDisp;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -80,199 +85,223 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (!IsPostBack)
             {
-
-                //ALTA CLIENTE BORRADO
-                //cargarFiscal();
-                //ALTA CLIENTE BORRADO
-                //cargarTiposUsuarios();
-                cargarPermisos();
-                //ALTA CLIENTE BORRADO
-                //if (divDirFacturacion.Visible)
-                //{
-                //    cargarProvincias();
-                //}
-
+                LisAuxAsig = new List<IFamPat>();
+                LisAuxDisp = new List<IFamPat>();
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                Current.Session["PermisosDisp"] = LisAuxDisp;
+                treeDisponibles.CollapseAll();
+            }
+            else
+            {
+                LisAuxDisp = new List<IFamPat>();
+                LisAuxDisp = (List<IFamPat>)Current.Session["PermisosDisp"];
+                LisAuxAsig = (List<IFamPat>)Current.Session["PermisosAsig"];
+                if(LisAuxAsig == null)
+                    LisAuxAsig = new List<IFamPat>();
+                
             }
 
         }
 
-        public void cargarPermisos()
-        {
-            ddlPermisosUsuarioAlta.DataSource = null;
-            unasFamilias = unManagerFamilia.FamiliaSelectAll();
-          
-            ddlPermisosUsuarioAlta.DataSource = unasFamilias.Where(o=> (o.IdFamilia == FamiliaEntidad.PermisoFamilia.Empleado || o.IdFamilia==FamiliaEntidad.PermisoFamilia.Admin));
-            ddlPermisosUsuarioAlta.DataValueField = "NombreFamilia";
-            //ddlPermisosUsuarioUpdate.SelectedIndex = unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
-            ddlPermisosUsuarioAlta.DataBind();
-        }
-
-
-        //ALTA CLIENTE BORRADO
-        //public void cargarFiscal()
-        //{
-        //    ddlFiscal.DataSource = null;
-        //    unosFiscales = unManagerFiscal.CondicionFiscalSelectAll();
-        //    ddlFiscal.DataSource = unosFiscales;
-        //    ddlFiscal.DataValueField = "Descripcion";
-        //    ddlFiscal.DataBind();
-
-
-        //}
-
-        //ALTA CLIENTE BORRADO
-        //public void cargarTiposUsuarios()
-        //{
-        //    ddlTipoUsuario.DataSource = null;
-        //    unosTiposUsuarios = unManagerUsuarioTipo.UsuarioTipoSelectAll();
-        //    ddlTipoUsuario.DataSource = unosTiposUsuarios;
-        //    ddlTipoUsuario.DataValueField = "Descripcion";
-        //    ddlTipoUsuario.DataBind();
-        //}
-
-
-        //public void cargarProvincias()
-        //{
-        //    ddlProvincia.DataSource = unManagerUsuario.SelectALLProvincias();
-        //    ddlProvincia.DataValueField = "IdProvincia";
-        //    ddlProvincia.DataTextField = "DescripcionProvincia";
-        //    ddlProvincia.DataBind();
-
-        //    ddlProvinciaEnvio.DataSource = unManagerUsuario.SelectALLProvincias();
-        //    ddlProvinciaEnvio.DataValueField = "IdProvincia";
-        //    ddlProvinciaEnvio.DataTextField = "DescripcionProvincia";
-        //    ddlProvinciaEnvio.DataBind();
-
-        //}
+       
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
             var NroRetorno = 0;
 
-            Page.Validate("AltaEmpleado");
-            if (Page.IsValid)
+            try
             {
-
-                unUsuario.IdUsuarioTipo = 2; //Significa Empleado y se quita lo siguiente porque los clietes se dan de alta en la web pública //ddlTipoUsuario.SelectedIndex + 1;
-                unUsuario.NombreUsuario = txtNombreUsuario.Value;
-                unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
-                unUsuario.Apellido = txtApellido.Value;
-                unUsuario.Nombre = txtNombre.Value;
-                unUsuario.Email = txtMail.Value;
-                //unUsuario.IdCondicionFiscal = ddlFiscal.SelectedIndex + 1;
-                unUsuario.NroIdentificacion = txtDNICUIT.Value;
-                unUsuario.Permisos.Add(new Familia());
-                unUsuario.Permisos[0].IdIFamPat = (int)ddlPermisosUsuarioAlta.SelectedIndex + 3;
-
-
-                //ALTA CLIENTE BORRADO
-                //if (ddlTipoUsuario.SelectedItem.Value == "Cliente")
-                //{
-                //    //SOLO DEL CLIENTE
-                //    //FACTURACION
-
-                //    NuevaDireccion.IdTipoDireccion = 1;//Facturacion
-                //    NuevaDireccion.Calle = txtCalle.Value;
-                //    NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
-                //    if (!string.IsNullOrEmpty(txtPiso.Value))
-                //    {
-                //        NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
-                //    }
-                //    if (!string.IsNullOrEmpty(txtDpartamento.Value))
-                //    {
-                //        NuevaDireccion.Departamento = txtDpartamento.Value;
-                //    }
-                //    NuevaDireccion.Localidad = txtLocalidad.Value;
-                //    NuevaDireccion.IdProvincia = ddlProvincia.SelectedIndex + 1;
-
-                //    NuevaIntermedia.CUIT = ConfigSection.Default.Site.Cuit;
-                //    NuevaIntermedia.NombreUsuario = txtNombreUsuario.Value;
-                //    NuevaIntermedia.Predeterminada = true;
-
-                //    //ENVIO
-
-
-                //    DireccionEnvio.IdTipoDireccion = 2;//Envio
-                //    DireccionEnvio.Calle = txtCalleEnvio.Value;
-                //    DireccionEnvio.Numero = Int32.Parse(txtNumeroEnvio.Value);
-                //    if (!string.IsNullOrEmpty(txtPisoEnvio.Value))
-                //    {
-                //        DireccionEnvio.Piso = Int32.Parse(txtPisoEnvio.Value);
-                //    }
-                //    if (!string.IsNullOrEmpty(txtDepartamentoEnvio.Value))
-                //    {
-                //        DireccionEnvio.Departamento = txtDepartamentoEnvio.Value;
-                //    }
-                //    DireccionEnvio.Localidad = txtLocalidadEnvio.Value;
-                //    DireccionEnvio.IdProvincia = ddlProvinciaEnvio.SelectedIndex + 1;
-
-                //    DireIntermediaEnvio.CUIT = ConfigSection.Default.Site.Cuit;
-                //    DireIntermediaEnvio.NombreUsuario = txtNombreUsuario.Value;
-                //    DireIntermediaEnvio.Predeterminada = true;
-                //}
-
-                NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
-
-                //ALTA CLIENTE BORRADO
-                //if (ddlTipoUsuario.SelectedItem.Value == "Cliente")
-                //{
-                //    unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, NuevaIntermedia);
-
-                //    unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, DireIntermediaEnvio);
-                //}
-
-                if (NroRetorno == 0)
+                Page.Validate("AltaEmpleado");
+                if (Page.IsValid)
                 {
-                    divAlertaUsCreado.Attributes["class"] = "alert alert-success";
-                    sb.Append("Usuario creado correctamente");
+                    //Verificar que quede al menos un permiso asignado
+                    if (LisAuxAsig.Count == 0)
+                    {
+                        divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
+                        sb.Append("Por favor revisar que el usuario posea al menos un permiso asignado");
+                    }
+                    else
+                    {
+                        unUsuario.IdUsuarioTipo = 2; //Emp
+                        unUsuario.NombreUsuario = txtNombreUsuario.Value;
+                        unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
+                        unUsuario.Apellido = txtApellido.Value;
+                        unUsuario.Nombre = txtNombre.Value;
+                        unUsuario.Email = txtMail.Value;
+                        unUsuario.NroIdentificacion = txtDNICUIT.Value;
+                        unUsuario.Permisos = LisAuxAsig;
+
+                        NroRetorno = unManagerUsuario.RegistrarUsuario(unUsuario);
+                        TFI.SEGURIDAD.ServicioLog.CrearLog("Crear Usuario", "Usuario: " + unUsuario.NombreUsuario + " creado correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+
+
+                        if (NroRetorno == 0)
+                        {
+                            divAlertaUsCreado.Attributes["class"] = "alert alert-success";
+                            sb.Append("Usuario creado correctamente");
+                        }
+                        else
+                        {
+                            divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
+                            sb.Append("El nombre de usuario ya existe");
+                        }
+                    }
                 }
                 else
                 {
-                    divAlertaUsCreado.Attributes["class"] = "alert alert-warning";
-                    sb.Append("El nombre de usuario ya existe");
+                    divAlertaUsCreado.Attributes["class"] = "alert alert-danger";
+                    sb.Append("Error al crear usuario");
                 }
-
-
+                divAlertaUsCreado.InnerText = sb.ToString();
+                divAlertaUsCreado.Visible = true;
+                limpiarCampos();
             }
-            else
+            catch (Exception es)
             {
-                divAlertaUsCreado.Attributes["class"] = "alert alert-danger";
-                sb.Append("Error al crear usuario");
+                ServicioLog.CrearLog(es, "AltaUsuario", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                Response.Redirect("../../../Shared/Errores.aspx");
             }
-            divAlertaUsCreado.InnerText = sb.ToString();
-            divAlertaUsCreado.Visible = true;
-            limpiarCampos();
+
+
         }
 
         public void limpiarCampos()
         {
-
             txtNombreUsuario.Value = string.Empty;
             txtApellido.Value = string.Empty;
             txtNombre.Value = string.Empty;
             txtMail.Value = string.Empty;
             txtDNICUIT.Value = string.Empty;
-            //ALTA CLIENTE BORRADO
-            //ddlTipoUsuario.SelectedIndex = 0;
-            //ddlFiscal.SelectedIndex = 0;
-            ddlPermisosUsuarioAlta.SelectedIndex = 0;
-            //ALTA CLIENTE BORRADO
-            //ddlProvincia.SelectedIndex = 0;
-            //ddlProvinciaEnvio.SelectedIndex = 0;
-
-            //txtCalle.Value = string.Empty;
-            //txtNumero.Value = string.Empty;
-            //txtPiso.Value = string.Empty;
-            //txtDpartamento.Value = string.Empty;
-            //txtLocalidad.Value = string.Empty;
-            //txtCalleEnvio.Value = string.Empty;
-            //txtNumeroEnvio.Value = string.Empty;
-            //txtPisoEnvio.Value = string.Empty;
-            //txtDepartamentoEnvio.Value = string.Empty;
-            //txtLocalidadEnvio.Value = string.Empty;
+            LisAuxAsig = new List<IFamPat>();
+            Current.Session["PermisosAsig"] = null;
+            LisAuxDisp = new List<IFamPat>();
+            LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+            ListarPermisos(LisAuxDisp, treeDisponibles);
+            Current.Session["PermisosDisp"] = LisAuxDisp;
+            treeDisponibles.CollapseAll();
+            treeAsignados.Nodes.Clear();
+        }
 
 
+        public void ListarPermisos(List<IFamPat> PermisosVer, TreeView treePermisos)
+        {
+            treePermisos.Nodes.Clear();
+            foreach (IFamPat item in PermisosVer)
+            {
+                TreeNode Padre = new TreeNode();
+                Padre.Text = item.GetType().Name.ToString() + ": " + item.NombreIFamPat;
+                Padre.Value = item.NombreIFamPat;
+                Padre.Expand();
+                treePermisos.Nodes.Add(Padre);
+                if (item.CantHijos > 0)
+                    ListarYAgregarSubPermisos((item as Familia).ElementosFamPat, Padre);
+            }
+        }
+
+
+        public void ListarYAgregarSubPermisos(List<IFamPat> PermisosVer, TreeNode elNodo = null)
+        {
+            int I = 0;
+
+            do
+            {
+                TreeNode NodoHijo = null;
+                if (elNodo == null)
+                {
+                    elNodo = new TreeNode();
+                    elNodo.Text = PermisosVer[I].GetType().Name.ToString() + ": " + PermisosVer[I].NombreIFamPat;
+                    elNodo.Value = PermisosVer[I].NombreIFamPat;
+                }
+                else
+                {
+                    NodoHijo = new TreeNode(PermisosVer[I].GetType().Name.ToString() + ": " + PermisosVer[I].NombreIFamPat);
+                    NodoHijo.Collapse();
+                    elNodo.ChildNodes.Add(NodoHijo);
+                }
+                if (PermisosVer[I].CantHijos > 0)
+                    ListarYAgregarSubPermisos((PermisosVer[I] as Familia).ElementosFamPat, NodoHijo);
+                I++;
+            } while (I < PermisosVer.Count);
+        }
+
+        public void FiltrarDisponibles(ref List<IFamPat> PerDisp, List<IFamPat> PerAsig)
+        {
+            PerDisp = PerDisp.Where(d => !PerAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+
+            foreach (IFamPat item in PerAsig)
+            {
+                if (item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref PerDisp);
+            }
+        }
+
+
+        public void FiltrarSubpermisos(Familia fam, ref List<IFamPat> disp)
+        {
+            disp = disp.Where(d => !fam.ElementosFamPat.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+            foreach (IFamPat item in fam.ElementosFamPat)
+            {
+                if (item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref disp);
+            }
+        }
+
+
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
+            {
+                sb.Append(@"<script type='text/javascript'>");
+                //sb.Append("$('#currentdetail').modal('show');");
+                sb.Append("alert('Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "AgregarClickMsj1", sb.ToString(), false);
+            }
+            else
+            {
+                LisAuxAsig.Add(LisAuxDisp.First(X => X.NombreIFamPat == treeDisponibles.SelectedNode.Value));
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados);
+                Current.Session["PermisosDisp"] = LisAuxDisp;
+                Current.Session["PermisosAsig"] = LisAuxAsig;
+                treeAsignados.CollapseAll();
+                treeDisponibles.CollapseAll();
+            }
+        }
+
+        protected void btnQuitar_Click(object sender, EventArgs e)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
+            {
+                sb.Append(@"<script type='text/javascript'>");
+                //sb.Append("$('#currentdetail').modal('show');");
+                sb.Append("alert('Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "QuitarClickMsj1", sb.ToString(), false);
+            }
+            else
+            {
+                LisAuxAsig.Remove(LisAuxAsig.First(X => X.NombreIFamPat == treeAsignados.SelectedNode.Value));
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados);
+                Current.Session["PermisosDisp"] = LisAuxDisp;
+                Current.Session["PermisosAsig"] = LisAuxAsig;
+                treeAsignados.CollapseAll();
+                treeDisponibles.CollapseAll();
+            }
         }
 
     }

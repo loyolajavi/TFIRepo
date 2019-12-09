@@ -336,78 +336,95 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 if (Int32.Parse(cboFamilia.SelectedValue) > 0)
                 {
-                    UsuariosConFamiliaAEliminar = ManagerFamilia.FamiliaUsuariosAsociados(Int32.Parse(cboFamilia.SelectedValue));
-                    UsuariosComprometidos = ManagerFamilia.FamiliaUsuariosComprometidos(Int32.Parse(cboFamilia.SelectedValue));
-                    if (UsuariosComprometidos.Count > 0)
+                    if (cboFamilia.SelectedItem.Text == "Cliente" | cboFamilia.SelectedItem.Text == "Empleado" | cboFamilia.SelectedItem.Text == "Admin")
                     {
-                        List<string> LisUs = new List<string>();
-                        foreach (UsuarioEntidad unUs in UsuariosComprometidos)
-                        {
-                            LisUs.Add(unUs.NombreUsuario);
-                        }
-                        string UsuariosCompString = string.Join(Environment.NewLine, LisUs);
-
-                        // Agregar msj de que no se puede eliminar la Familia porque los usuarios "UsuariosCompString", la tienen asignada como único permiso
                         sb.Append(@"<script type='text/javascript'>");
                         //sb.Append("$('#currentdetail').modal('show');");
-                        sb.Append("alert('No se puede eliminar la familia porque los siguientes usuarios la poseen asignada como único permiso: ");
-                        sb.Append(UsuariosCompString + "');");
+                        sb.Append("alert('No pueden eliminarse las familias por defecto Cliente, Empleado o Admin');");
                         sb.Append(@"</script>");
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                                   "EliminarClickMsj2", sb.ToString(), false);
+                                   "EliminarDefecto", sb.ToString(), false);
                     }
                     else
                     {
-                        PerQuitar.Add(PermisosCbo.Where(X => X.IdIFamPat == Int32.Parse(cboFamilia.SelectedValue)).First());
-
-                        //Modifico los permisos de los usuarios que no están comprometidos
-                        PerAgregar.Clear(); //Limpio para que no agregue permisos a los usuarios no comprometidos
-                        foreach (UsuarioEntidad unUs in UsuariosConFamiliaAEliminar.Where(x => !UsuariosComprometidos.Any(y => y.IdUsuario == x.IdUsuario)).ToList())
+                        UsuariosConFamiliaAEliminar = ManagerFamilia.FamiliaUsuariosAsociados(Int32.Parse(cboFamilia.SelectedValue));
+                        UsuariosComprometidos = ManagerFamilia.FamiliaUsuariosComprometidos(Int32.Parse(cboFamilia.SelectedValue));
+                        if (UsuariosComprometidos.Count > 0)
                         {
-                            ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUs.NombreUsuario);
-                        }
+                            List<string> LisUs = new List<string>();
+                            foreach (UsuarioEntidad unUs in UsuariosComprometidos)
+                            {
+                                LisUs.Add(unUs.NombreUsuario);
+                            }
+                            string UsuariosCompString = string.Join(Environment.NewLine, LisUs);
 
-                        if (ManagerFamilia.FamiliaEliminar(Int32.Parse(cboFamilia.SelectedValue)))
-                        {
-                            //Resguardo el nombre de la familia eliminada para el log
-                            string FamiliaLog = cboFamilia.Text;
-
-                            PermisosTodos = ManagerFamilia.PermisosTraerTodos();
-                            PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
-                            txtName.Text = "";
-                            Familia FamAux = new Familia();
-                            FamAux.IdIFamPat = -1;
-                            FamAux.NombreIFamPat = "";
-                            PermisosCbo.Insert(0, FamAux);
-                            cboFamilia.Items.Clear();
-                            cboFamilia.DataSource = null;
-                            cboFamilia.DataSource = PermisosCbo;
-                            cboFamilia.DataTextField = "NombreIFamPat";
-                            cboFamilia.DataValueField = "IdIFamPat";
-                            cboFamilia.DataBind();
-
-                            LisAuxDisp = PermisosTodos.ToList();
-                            LisAuxAsig = new List<IFamPat>();
-                            LisAuxAsigBKP = new List<IFamPat>();
-                            ListarPermisos(PermisosTodos, treeTodos);
-                            ListarPermisos(LisAuxDisp, treeDisponibles);
-                            ListarPermisos(LisAuxAsig, treeAsignados);
-                            TFI.SEGURIDAD.ServicioLog.CrearLog("Eliminar Familia", "Familia " + FamiliaLog + " eliminada correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
-                            treeAsignados.CollapseAll();
-                            treeDisponibles.CollapseAll();
-                            treeTodos.CollapseAll();
+                            // Agregar msj de que no se puede eliminar la Familia porque los usuarios "UsuariosCompString", la tienen asignada como único permiso
                             sb.Append(@"<script type='text/javascript'>");
                             //sb.Append("$('#currentdetail').modal('show');");
-                            sb.Append("alert('Familia eliminada correctamente');");
+                            sb.Append("alert('No se puede eliminar la familia porque los siguientes usuarios la poseen asignada como único permiso: ");
+                            sb.Append(UsuariosCompString + "');");
                             sb.Append(@"</script>");
                             ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                                       "EliminarOK", sb.ToString(), false);
+                                       "EliminarClickMsj2", sb.ToString(), false);
+                        }
+                        else
+                        {
+                            PerQuitar.Add(PermisosCbo.Where(X => X.IdIFamPat == Int32.Parse(cboFamilia.SelectedValue)).First());
+
+                            //Modifico los permisos de los usuarios que no están comprometidos
+                            PerAgregar.Clear(); //Limpio para que no agregue permisos a los usuarios no comprometidos
+                            foreach (UsuarioEntidad unUs in UsuariosConFamiliaAEliminar.Where(x => !UsuariosComprometidos.Any(y => y.IdUsuario == x.IdUsuario)).ToList())
+                            {
+                                ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUs.NombreUsuario);
+                            }
+
+                            if (ManagerFamilia.FamiliaEliminar(Int32.Parse(cboFamilia.SelectedValue)))
+                            {
+                                //Resguardo el nombre de la familia eliminada para el log
+                                string FamiliaLog = cboFamilia.Text;
+
+                                PermisosTodos = ManagerFamilia.PermisosTraerTodos();
+                                PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
+                                txtName.Text = "";
+                                Familia FamAux = new Familia();
+                                FamAux.IdIFamPat = -1;
+                                FamAux.NombreIFamPat = "";
+                                PermisosCbo.Insert(0, FamAux);
+                                cboFamilia.Items.Clear();
+                                cboFamilia.DataSource = null;
+                                cboFamilia.DataSource = PermisosCbo;
+                                cboFamilia.DataTextField = "NombreIFamPat";
+                                cboFamilia.DataValueField = "IdIFamPat";
+                                cboFamilia.DataBind();
+
+                                LisAuxDisp = PermisosTodos.ToList();
+                                LisAuxAsig = new List<IFamPat>();
+                                LisAuxAsigBKP = new List<IFamPat>();
+                                ListarPermisos(PermisosTodos, treeTodos);
+                                ListarPermisos(LisAuxDisp, treeDisponibles);
+                                ListarPermisos(LisAuxAsig, treeAsignados);
+                                TFI.SEGURIDAD.ServicioLog.CrearLog("Eliminar Familia", "Familia " + FamiliaLog + " eliminada correctamente", usuarioentidad.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+                                treeAsignados.CollapseAll();
+                                treeDisponibles.CollapseAll();
+                                treeTodos.CollapseAll();
+                                sb.Append(@"<script type='text/javascript'>");
+                                //sb.Append("$('#currentdetail').modal('show');");
+                                sb.Append("alert('Familia eliminada correctamente');");
+                                sb.Append(@"</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                           "EliminarOK", sb.ToString(), false);
+                            }
                         }
                     }
                 }
                 else
                 {
-
+                    sb.Append(@"<script type='text/javascript'>");
+                    //sb.Append("$('#currentdetail').modal('show');");
+                    sb.Append("alert('Debe seleccionar una Familia para eliminarla');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                               "EliminarSeleccionar", sb.ToString(), false);
                 }
 
             }
