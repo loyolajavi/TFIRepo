@@ -92,7 +92,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 if (!string.IsNullOrEmpty(usuarioString))
                 {
-                    cargarPermisos();
+                    //cargarPermisos();
                     cargarDatosCliente();
 
                     cargarFiscal();
@@ -110,15 +110,15 @@ namespace TFI.GUI.Areas.Intranet.Forms
         }
 
 
-        public void cargarPermisos()
-        {
-            ddlPermisosUsuarioUpdate.DataSource = null;
-            unasFamilias = unManagerFamilia.FamiliaSelectAll();
-            ddlPermisosUsuarioUpdate.DataSource = unasFamilias;
-            ddlPermisosUsuarioUpdate.DataValueField = "NombreFamilia";
-            ddlPermisosUsuarioUpdate.SelectedIndex = (int)unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
-            ddlPermisosUsuarioUpdate.DataBind();
-        }
+        //public void cargarPermisos()
+        //{
+        //    ddlPermisosUsuarioUpdate.DataSource = null;
+        //    unasFamilias = unManagerFamilia.FamiliaSelectAll();
+        //    ddlPermisosUsuarioUpdate.DataSource = unasFamilias;
+        //    ddlPermisosUsuarioUpdate.DataValueField = "NombreFamilia";
+        //    ddlPermisosUsuarioUpdate.SelectedIndex = (int)unManagerFamilia.FamiliaSelectNombreFamiliaByIdUsuario(Int32.Parse(usuarioString)).IdFamilia - 1;//PONE EL PERMISO Q TIENE EL USUARIO;
+        //    ddlPermisosUsuarioUpdate.DataBind();
+        //}
 
         public void cargarDatosCliente()
         {
@@ -151,15 +151,15 @@ namespace TFI.GUI.Areas.Intranet.Forms
             cargarDatosCliente();
         }
 
-        protected void btnPermisosUsuarioUpdate_Click(object sender, EventArgs e)
-        {
-            unCliente = (UsuarioEntidad)Session["Cliente"];
-            unCliente.Permisos.Clear();
-            unCliente.Permisos.Add(new Familia());
-            unCliente.Permisos[0].IdIFamPat = ddlPermisosUsuarioUpdate.SelectedIndex + 1;
-            unManagerUsuarioFamilia.UsuarioUpdatePermisosFamilia(unCliente);
-            cargarPermisos();
-        }
+        //protected void btnPermisosUsuarioUpdate_Click(object sender, EventArgs e)
+        //{
+        //    unCliente = (UsuarioEntidad)Session["Cliente"];
+        //    unCliente.Permisos.Clear();
+        //    unCliente.Permisos.Add(new Familia());
+        //    unCliente.Permisos[0].IdIFamPat = ddlPermisosUsuarioUpdate.SelectedIndex + 1;
+        //    unManagerUsuarioFamilia.UsuarioUpdatePermisosFamilia(unCliente);
+        //    cargarPermisos();
+        //}
 
         protected void btnCambiarClave_Click(object sender, EventArgs e)
         {

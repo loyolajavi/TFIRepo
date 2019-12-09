@@ -6,7 +6,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
 
-
     <div class="container paddingPaginas">
 
         <div class="row">
@@ -18,21 +17,26 @@
                 </h1>
             </div>
         </div>
-
+         
+        
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="form-group">
-                    <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server"></asp:TextBox>
-                    <br />
-                    <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
 
+                    <div class="form-inline">
+                        <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server" Width="40%"></asp:TextBox>
+                        <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                        <span style="margin-left:30%;"><a href="#modalProdCategoria" class="btn btn-info" data-toggle="modal"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a></span>
 
-                    <div class="col-lg-6">
-                        <div class="form-group">
+                    </div>
+
+        </div>
+   
+        
+        <div class="row">
+
                             <label for="grillacatprod"></label>
-                            <asp:GridView ID="grillacatprod" CssClass="table" runat="server" OnRowDeleting="grillacatprod_RowDeleting">
+                            <asp:GridView ID="grillacatprod" CssClass="table" runat="server" GridLines="None" OnRowDeleting="grillacatprod_RowDeleting">
                                 <Columns>
-                                    <asp:CommandField ShowDeleteButton="True" />
+                                    <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" />
                                     <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
                                     <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
                                     <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" />
@@ -49,17 +53,10 @@
                                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                             </asp:GridView>
-                        </div>
 
                         <br />
-                        <div class="col-md-4 col-md-offset-4">
-                            <div class=" form-group">
-                                <a href="#modalProdCategoria" class="btn btn-primary " data-toggle="modal">
-                                    <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>
-                            </div>
-                        </div>
+
                     </div>
-                </div>
 
                 <div class="modal fade" id="modalProdCategoria">
                     <div class="modal-dialog">
@@ -104,8 +101,6 @@
                     </div>
                 </div>
             </div> 
-        </div>
-    </div>
 
 
 </asp:Content>

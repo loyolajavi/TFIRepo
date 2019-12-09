@@ -247,33 +247,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Button btnDatosUsuarioUpdate;
         
         /// <summary>
-        /// Control Label11.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
-        
-        /// <summary>
-        /// Control ddlPermisosUsuarioUpdate.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPermisosUsuarioUpdate;
-        
-        /// <summary>
-        /// Control btnPermisosUsuarioUpdate.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPermisosUsuarioUpdate;
-        
-        /// <summary>
         /// Control divDirFacturacion.
         /// </summary>
         /// <remarks>

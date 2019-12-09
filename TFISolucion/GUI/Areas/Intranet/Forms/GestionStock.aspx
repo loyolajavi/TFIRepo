@@ -20,17 +20,30 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="form-group">
-                    <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server"></asp:TextBox>
-                    <br />
-                    <asp:Button ID="btnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <div class="form-inline">
+                        <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server" Width="40%"></asp:TextBox>
+                        <asp:Button ID="btnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                            <span style="margin-left:30%;">
+                                <a href="#modalStock" class="btn btn-info" data-toggle="modal"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarStock %>"></asp:Label></a>
+
+                            </span>
+
+                        </div>
+                    
+                </div>
 
 
-                    <div class="col-lg-6">
-                        <div class="form-group">
+
+
+
+
+        <div class="row">
+              <div class="col-md-8 col-md-offset-2">         
+                     <div class="form-group">
                             <label for="grillastock"></label>
-                            <asp:GridView ID="grillastock"  CssClass="table" runat="server"  >
+                            <asp:GridView ID="grillastock"  CssClass="table" runat="server" GridLines="None"  >
                                 <Columns>
                                     <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
                                     <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
@@ -49,17 +62,8 @@
                                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                             </asp:GridView>
                         </div>
-
-                        <br />
-
-                        <div class="col-md-6 col-md-offset-6">
-                            <div class=" form-group">
-                                <a href="#modalStock" class="btn btn-primary" data-toggle="modal">
-                                    <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarStock %>"></asp:Label></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
+        </div>
 
                 <div class="modal fade" id="modalStock">
                     <div class="modal-dialog">
@@ -105,7 +109,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">

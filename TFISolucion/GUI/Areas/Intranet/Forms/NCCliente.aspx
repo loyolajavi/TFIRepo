@@ -12,7 +12,59 @@
                     <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, NCClientes %>"></asp:Label>
                 </h1>
             </div>
+
         </div>
+         
+         
+         
+         
+          <div class="row">
+                <div class="list-group col-md-4">
+                         <div class="form-group">
+                    <label for="txtClienteBusqueda" class="control-label">
+                     <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Cliente %>"></asp:Label></label>
+                     <div class="form-inline">
+
+                            <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
+                            <asp:Button ID="btnBuscarCliente" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control col-md-" OnClick="btnBuscarCliente_Click" />
+                    </div>
+                </div>
+
+                </div>
+          </div>
+
+
+
+
+            <div class="row">
+
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+                    <ContentTemplate>
+                        <asp:GridView ID="grilladenc" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladenc_RowCommand" AllowPaging="true" OnPageIndexChanging="grilladenc_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" GridLines="None">
+                            <Columns>
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-primary" />
+                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroNC %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaNC %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="Total" HeaderText="Total" HeaderStyle-CssClass="bg-primary" />
+                                <%--<asp:ButtonField CommandName="GenerarND" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
+                            </Columns>
+                        </asp:GridView>
+                    </ContentTemplate>
+
+                </asp:UpdatePanel>
+            </div>
+
+
+
+            
+        
+
+
+
+
+
 
 
           <div class="row" runat="server" id="contenedorsinnc">
@@ -26,60 +78,7 @@
             </div>
 
 
-          <div class="row">
-            <div class="list-group col-md-4">
-                <div class="form-group">
-                    <label for="txtClienteBusqueda" class="control-label">
-                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Cliente %>"></asp:Label></label>
-
-                    <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
-                    <asp:Button ID="btnBuscarCliente" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control col-md-" OnClick="btnBuscarCliente_Click" />
-
-                </div>
-
-            </div>
-
-
-
-
-            <hr />
-
-
-            <div class="col-md-8">
-
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-
-                    <ContentTemplate>
-                        <asp:GridView ID="grilladenc" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladenc_RowCommand" AllowPaging="true" OnPageIndexChanging="grilladenc_PageIndexChanging" PageSize="10" AutoGenerateColumns="false">
-                            <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
-                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroNC %>" />
-                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaNC %>" />
-                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
-                                <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <%--<asp:ButtonField CommandName="GenerarND" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
-                            </Columns>
-                        </asp:GridView>
-                    </ContentTemplate>
-
-                </asp:UpdatePanel>
-            </div>
-
-
-
-            
         </div>
-
-
-
-
-
-
-
-
-
-
-          </div>
 
       <div id="currentdetail" class="modal fade">
                 <div class="modal-dialog" style="width:55%">

@@ -42,14 +42,14 @@
                     <ContentTemplate>
                         <asp:GridView ID="grilladefacturas" AllowPaging="true" OnPageIndexChanging="grilladefacturas_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand" GridLines="None">
                             <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-info" />
-                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" />
-                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" />
-                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
-                                <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>">
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-info" />
+                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="Total" HeaderText="Total" HeaderStyle-CssClass="bg-primary" />
+                                <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>" HeaderStyle-CssClass="bg-primary">
                                     <ItemTemplate>
-                                        <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-info" />
+                                        <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-info" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <%--<asp:ButtonField CommandName="GenerarNDeb" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>

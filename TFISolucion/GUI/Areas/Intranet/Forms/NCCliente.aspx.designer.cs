@@ -22,24 +22,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control contenedorsinnc.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contenedorsinnc;
-        
-        /// <summary>
-        /// Control sinnc.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinnc;
-        
-        /// <summary>
         /// Control Label2.
         /// </summary>
         /// <remarks>
@@ -83,6 +65,24 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grilladenc;
+        
+        /// <summary>
+        /// Control contenedorsinnc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contenedorsinnc;
+        
+        /// <summary>
+        /// Control sinnc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinnc;
         
         /// <summary>
         /// Control Label3.

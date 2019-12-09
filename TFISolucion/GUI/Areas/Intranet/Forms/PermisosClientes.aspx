@@ -20,10 +20,7 @@
                         <asp:Label ID="Label3" runat="server" Text="AltaUsuario"></asp:Label></a></span>--%>
                 </h1>
                 <%--<asp:Button ID="btnEliminarUsuario" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" />--%><p>Eliminar los usuarios seleccionados</p>
-                                <div class=" text-center">
-                    <a href="#ConfirmarDelete" class="btn btn-primary" data-toggle="modal">
-                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, EliminarUsuario %>"></asp:Label></a>
-                </div>
+
             </div>
         </div>
 
@@ -32,15 +29,15 @@
             <div class="col-md-12">
 
 
-                <table class="table-bordered col-md-6 col-md-offset-3 table-responsive" id="tblClientes">
+                <table class="table table-hover table-responsive table-striped" id="tblClientes">
                     <thead>
                         <tr>
-                            <th class="text-center">
+                            <th class="text-center bg-primary">
                                 <input type="checkbox" id="CheckAllUsuarios" value="Y" runat="server" /></th>
-                            <th class="text-center">
-                                <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></th>
-                            <th class="text-center"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></th>
-                            <th class="text-center"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></th>
+                            <th class="text-center bg-primary">
+                                <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, NombreUsuario %>" ></asp:Label></th>
+                            <th class="text-center bg-primary"><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></th>
+                            <th class="text-center bg-primary"><asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></th>
                         </tr>
                     </thead>
                     <asp:Repeater ID="rptClientes" ClientIDMode="Static" runat="server">
@@ -69,6 +66,15 @@
                     </asp:Repeater>
                 </table>
             </div>
+        </div>
+
+
+        <div class="row">
+                <div class=" text-center">
+                        <a href="#ConfirmarDelete" class="btn btn-primary" data-toggle="modal">
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, EliminarUsuario %>"></asp:Label></a>
+                </div>
+
         </div>
     </div>
 

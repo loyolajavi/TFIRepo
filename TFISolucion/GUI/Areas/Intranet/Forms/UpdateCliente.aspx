@@ -70,11 +70,11 @@
                     <input type="text" class="form-control" id="txtDNI" runat="server" clientidmode="static" />
                 </div>
                 <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
-                <div class="form-group">
+<%--                <div class="form-group">
                     <h4 class="page-header"><asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, Permisos %>"></asp:Label></h4>
                     <asp:DropDownList ID="ddlPermisosUsuarioUpdate" CssClass="list-group" runat="server"></asp:DropDownList>
                 </div>
-                <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
+                <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />--%>
 
 
 

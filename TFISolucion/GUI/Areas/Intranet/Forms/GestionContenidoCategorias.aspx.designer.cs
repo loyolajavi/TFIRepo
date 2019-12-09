@@ -22,13 +22,13 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control Label2.
+        /// Control Label5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// Control grillacategorias.
@@ -38,15 +38,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grillacategorias;
-        
-        /// <summary>
-        /// Control Label5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// Control Label3.

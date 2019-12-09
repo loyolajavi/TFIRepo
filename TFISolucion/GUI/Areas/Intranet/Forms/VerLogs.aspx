@@ -19,34 +19,43 @@
 
         <div class="row">
             <div class="col-md-10 col-md-offset-2">
-                <b><asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
-                <select id="idelTIpoLog" runat="server" class="browser-default custom-select">
-                  <option value="Evento">Evento</option>
-                  <option value="Error">Error</option>
+                <b>
+                    <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
+                <select id="idelTIpoLog" runat="server" class="browser-default custom-select form-control ">
+                    <option value="Evento">Evento</option>
+                    <option value="Error">Error</option>
                 </select>
-                <b><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
-                <input runat="server" type="date" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker" required="required" />
-                <b><asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
-                <input runat="server" type="date" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker" required="required" />
-                <asp:Button ID="btnFiltrarLogs" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="btn btn-success" OnClick="btnFiltrarLogs_Click" />
-                
+                <div class="form-inline">
+
+                    <b>
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
+
+                    <input runat="server" type="date" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker form-control " required="required" />
+
+                    <b>
+                        <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
+
+                    <input runat="server" type="date" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker form-control " required="required" />
+                    <asp:Button ID="btnFiltrarLogs" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control btn-success" OnClick="btnFiltrarLogs_Click" />
+
+                </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
-                    <label for="grillaLogs"></label>
-                    <asp:GridView ID="grillaLogs"  CssClass="table table-hover table-striped fa-border"  runat="server" AllowPaging="true" OnPageIndexChanging="grillaLogs_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" >
-                        <Columns>
-                            <asp:BoundField DataField="IdBitacoraLog" HeaderText="<%$Resources:Global, IdBitacora %>" Visible="false" />
-                            <asp:BoundField DataField="CUIT" HeaderText="<%$Resources:Global, CUIT %>" />
-                            <asp:BoundField DataField="NombreUsuario" HeaderText="<%$Resources:Global, NombreUsuario %>" />
-                            <asp:BoundField DataField="Fecha" HeaderText="<%$Resources:Global, Fecha %>" />
-                            <asp:BoundField DataField="TipoLog" HeaderText="<%$Resources:Global, Tipo %>" />
-                            <asp:BoundField DataField="Accion" HeaderText="<%$Resources:Global, Accion %>" />
-                            <asp:BoundField DataField="Mensaje" HeaderText="<%$Resources:Global, Mensaje %>" />
-                        </Columns>
-                        <%--<EditRowStyle BackColor="#999999" />
+            <div class="col-md-10 col-md-offset-2">
+                <label for="grillaLogs"></label>
+                <asp:GridView ID="grillaLogs" CssClass="table table-hover table-striped fa-border" runat="server" AllowPaging="true" OnPageIndexChanging="grillaLogs_PageIndexChanging" PageSize="10" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField DataField="IdBitacoraLog" HeaderText="<%$Resources:Global, IdBitacora %>" Visible="false" />
+                        <asp:BoundField DataField="CUIT" HeaderText="<%$Resources:Global, CUIT %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="NombreUsuario" HeaderText="<%$Resources:Global, NombreUsuario %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Fecha" HeaderText="<%$Resources:Global, Fecha %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="TipoLog" HeaderText="<%$Resources:Global, Tipo %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Accion" HeaderText="<%$Resources:Global, Accion %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Mensaje" HeaderText="<%$Resources:Global, Mensaje %>" HeaderStyle-CssClass="bg-primary" />
+                    </Columns>
+                    <%--<EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -56,15 +65,13 @@
                         <SortedAscendingHeaderStyle BackColor="#506C8C" />
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
-                    </asp:GridView>
+                </asp:GridView>
 
                 <br />
 
-                
+
             </div>
         </div>
-
-
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">

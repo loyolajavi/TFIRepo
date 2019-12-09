@@ -49,15 +49,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Button btnConsultar;
         
         /// <summary>
-        /// Control grillastock.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grillastock;
-        
-        /// <summary>
         /// Control Label3.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// Control grillastock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grillastock;
         
         /// <summary>
         /// Control Label4.

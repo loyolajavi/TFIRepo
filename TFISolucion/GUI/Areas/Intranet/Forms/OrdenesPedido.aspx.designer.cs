@@ -22,24 +22,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control contenedorsinpedidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contenedorsinpedidos;
-        
-        /// <summary>
-        /// Control sinpedidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinpedidos;
-        
-        /// <summary>
         /// Control Label2.
         /// </summary>
         /// <remarks>
@@ -58,15 +40,6 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.TextBox txtClienteBusqueda;
         
         /// <summary>
-        /// Control btnBuscarCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
-        
-        /// <summary>
         /// Control ddlEstadoPedido.
         /// </summary>
         /// <remarks>
@@ -74,6 +47,15 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoPedido;
+        
+        /// <summary>
+        /// Control btnBuscarCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
         
         /// <summary>
         /// Control UpdatePanel1.
@@ -92,6 +74,24 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grilladeultimospedidos;
+        
+        /// <summary>
+        /// Control contenedorsinpedidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contenedorsinpedidos;
+        
+        /// <summary>
+        /// Control sinpedidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinpedidos;
         
         /// <summary>
         /// Control Label3.

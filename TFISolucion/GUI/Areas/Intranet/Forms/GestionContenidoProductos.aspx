@@ -18,33 +18,45 @@
                 </h1>
             </div>
         </div>
+        <div class="row">
+
+                <div class="col-md-12 text-right" style="align-content:flex-end;">
+                    <a href="#modalProducto" class="btn btn-info" data-toggle="modal">
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
+                </div>
+
+        </div>
+
+
+
+
 
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="grillaproductos"></label>
-                    <asp:GridView ID="grillaproductos" CssClass="table" runat="server" OnRowCancelingEdit="grillaproductos_RowCancelingEdit" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnRowUpdating="grillaproductos_RowUpdating" OnRowEditing="grillaproductos_RowEditing" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true">
+                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillaproductos_RowCancelingEdit" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnRowUpdating="grillaproductos_RowUpdating" OnRowEditing="grillaproductos_RowEditing" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true">
                         <Columns>
-                            <asp:CommandField ShowEditButton="True" />
-                            <asp:CommandField ShowDeleteButton="True" />
-                            <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" />
-                            <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" />
-                            <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>">
+                            <asp:CommandField ShowEditButton="True"  ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
+                            <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" HeaderStyle-CssClass="bg-primary" />
+                            <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>" HeaderStyle-CssClass="bg-primary" >
                                 <ItemTemplate>
                                     <asp:DropDownList ID="dropdownMarca" runat="server"></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="IVA">
+                            <asp:TemplateField HeaderText="IVA" HeaderStyle-CssClass="bg-primary" >
                                 <ItemTemplate>
                                     <asp:DropDownList ID="ddlIVA" runat="server" disabled="true"></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="PrecioUnitario" HeaderText="<%$Resources:Global, PrecioUnitario %>" />
-                            <asp:BoundField DataField="URL" HeaderText="URL" />
-                            <asp:BoundField DataField="DescripLarga" HeaderText="<%$Resources:Global, Detalle %>" />
+                            <asp:BoundField DataField="PrecioUnitario" HeaderText="<%$Resources:Global, PrecioUnitario %>" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="URL" HeaderText="URL" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="DescripLarga" HeaderText="<%$Resources:Global, Detalle %>" HeaderStyle-CssClass="bg-primary" />
 
                         </Columns>
-                        <EditRowStyle BackColor="#999999" />
+<%--                        <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <PagerSettings Mode="NextPreviousFirstLast" FirstPageText=" First > " PreviousPageText=" Previous > " NextPageText=" Next > " LastPageText=" Last " />
@@ -54,16 +66,13 @@
                         <SortedAscendingCellStyle BackColor="#E9E7E2" />
                         <SortedAscendingHeaderStyle BackColor="#506C8C" />
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
                     </asp:GridView>
                 </div>
 
                 <br />
 
-                <div class=" text-center">
-                    <a href="#modalProducto" class="btn btn-primary" data-toggle="modal">
-                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
-                </div>
+
             </div>
         </div>
 

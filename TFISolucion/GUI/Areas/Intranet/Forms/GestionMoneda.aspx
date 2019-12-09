@@ -3,18 +3,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
-    <div class="col-lg-6" style="margin-top:40px; margin-left:100px;">
+        <div class="container paddingPaginas">
+   
+     <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 class="page-header">
+                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Categorias %>"> </asp:Label><small>
+                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
+                </h1>
+            </div>
+        </div>
+     <div class="row">
+
+    <div class="col-md-8 col-md-offset-2" >
         <div class="form-group">
             <label for="grillaMoneda"></label>
-            <asp:GridView ID="grillaCotizacion" CssClass="table" runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+            <asp:GridView ID="grillaCotizacion" CssClass="table table-hover table-responsive table-striped"  runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" GridLines="None" >
                 <Columns>
-                    <asp:CommandField ControlStyle-ForeColor="BurlyWood" ShowEditButton="True" />
-                    <asp:BoundField DataField="IdMoneda" HeaderText="Id" />
-                    <asp:BoundField DataField="Nombre" HeaderText="Iso Code" />
-                    <asp:BoundField DataField="Cotizacion" HeaderText="<%$Resources:Global, Cotizacion %>" />
-                    <asp:BoundField DataField="SimboloMoneda" HeaderText="<%$Resources:Global, Simbolo %>" />
+                    <asp:CommandField ShowEditButton="True"  ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
+                    <asp:BoundField DataField="IdMoneda" HeaderText="Id" HeaderStyle-CssClass="bg-primary" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Iso Code" HeaderStyle-CssClass="bg-primary" />
+                    <asp:BoundField DataField="Cotizacion" HeaderText="<%$Resources:Global, Cotizacion %>" HeaderStyle-CssClass="bg-primary" />
+                    <asp:BoundField DataField="SimboloMoneda" HeaderText="<%$Resources:Global, Simbolo %>" HeaderStyle-CssClass="bg-primary" />
                 </Columns>
-                <EditRowStyle BackColor="#999999" />
+<%--                <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                 <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -23,10 +35,10 @@
                 <SortedAscendingCellStyle BackColor="#E9E7E2" />
                 <SortedAscendingHeaderStyle BackColor="#506C8C" />
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
             </asp:GridView>
         </div>
-
+          </div>
         <br />
 
     <%--    <div class=" text-center">
@@ -70,6 +82,7 @@
         </div>
     </div>--%>
         </div>
+</div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
     <script src="/Scripts/shared/Validaciones.js"></script>
