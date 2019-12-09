@@ -14,9 +14,55 @@
                 </h1>
             </div>
         </div>
+        
+<%--        Panel de busqueda de las facturas del Cliente--%>
+        <div class="row">
+<%--            <div class="list-group col-md-4">
+                <div class="form-group">--%>
 
+                    <label for="txtClienteBusqueda" class="control-label">
+                    <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Cliente %>"></asp:Label></label>
+                    <div class="form-inline">
+                    <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
+                    <asp:Button ID="btnBuscarCliente" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control btn-success" OnClick="btnBuscarCliente_Click"></asp:Button>
 
-        <div class="row" runat="server" clientidmode="Static" id="contenedorsinfacturas">
+                    </div>
+
+<%--                </div>--%>
+
+        </div>
+
+         <hr />
+<%--        Tabla de las facturas--%>
+        <div class="row">
+
+     <%--       <div class="col-md-8">--%>
+                   <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+                    <ContentTemplate>
+                        <asp:GridView ID="grilladefacturas" AllowPaging="true" OnPageIndexChanging="grilladefacturas_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand" GridLines="None">
+                            <Columns>
+                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-info" />
+                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" />
+                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" />
+                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
+                                <asp:BoundField DataField="Total" HeaderText="Total" />
+                                <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-info" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--<asp:ButtonField CommandName="GenerarNDeb" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
+                            </Columns>
+                        </asp:GridView>
+                    </ContentTemplate>
+
+                </asp:UpdatePanel>
+      
+        </div>
+
+<%--        Error sin facturas--%>
+                <div class="row" runat="server" clientidmode="Static" id="contenedorsinfacturas">
             <div class="col-md-9">
                 <div class="alert alert-info alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -28,65 +74,18 @@
 
 
 
-        <div class="row">
-            <div class="list-group col-md-4">
-                <div class="form-group">
-                    <label for="txtClienteBusqueda" class="control-label">
-                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, Cliente %>"></asp:Label></label>
-
-                    <asp:TextBox ID="txtClienteBusqueda" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
-                    <asp:Button ID="btnBuscarCliente" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control col-md-" OnClick="btnBuscarCliente_Click" />
-
-                </div>
-
-            </div>
-
-
-
-
-            <hr />
-
-
-            <div class="col-md-8">
-
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-
-                    <ContentTemplate>
-                        <asp:GridView ID="grilladefacturas" AllowPaging="true" OnPageIndexChanging="grilladefacturas_PageIndexChanging" PageSize="10" AutoGenerateColumns="false" CssClass="tablesorter table table-striped table-hover table-users" DataKeyNames="NroComprobante" runat="server" OnRowCommand="grilladefacturas_RowCommand">
-                            <Columns>
-                                <asp:ButtonField CommandName="VerDetalle" HeaderText="<%$Resources:Global, VerDetalle %>" Text="<%$Resources:Global, VerDetalle %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
-                                <asp:BoundField DataField="NroComprobante" HeaderText="<%$Resources:Global, NumeroFactura %>" />
-                                <asp:BoundField DataField="FechaComprobante" HeaderText="<%$Resources:Global, FechaFactura %>" />
-                                <asp:BoundField DataField="TipoComprobante" HeaderText="<%$Resources:Global, Tipo %>" />
-                                <asp:BoundField DataField="Total" HeaderText="Total" />
-                                <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>">
-                                    <ItemTemplate>
-                                        <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <%--<asp:ButtonField CommandName="GenerarNDeb" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
-                            </Columns>
-                        </asp:GridView>
-                    </ContentTemplate>
-
-                </asp:UpdatePanel>
-            </div>
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-
     </div>
+
+
+
+
+
+
+
+
+
+
+<%--    </div>--%>
 
     <div id="currentdetail" class="modal fade">
         <div class="modal-dialog" style="width: 55%">
@@ -128,7 +127,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="mdl_MontoNotaDebito" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
 
