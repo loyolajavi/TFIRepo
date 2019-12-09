@@ -11,6 +11,7 @@ using TFI.Entidades;
 using TFI.Entidades.Servicios.Permisos;
 using TFI.FUNCIONES;
 using System.Linq;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI.General
 {
@@ -273,7 +274,7 @@ namespace TFI.GUI.General
         public void RealizarLogueo(string elUsuario, string laClave)
         {
             usuario = new UsuarioEntidad();
-            usuario.Clave = Encriptacion.ToHash(laClave);
+            usuario.Clave = ServicioSecurizacion.AplicarHash(laClave);
             usuario = _manager.loginUsuario(usuario.Clave, elUsuario);
 
             if (!string.IsNullOrEmpty(usuario.Nombre))
@@ -283,7 +284,7 @@ namespace TFI.GUI.General
                 Session["Usuario"] = usuario;
                 //Session["Permiso"] = unaFamilia.IdFamilia;
                 SetUsuarioLogueado(usuario.NombreUsuario);
-
+                TFI.SEGURIDAD.ServicioLog.CrearLog("Logueo", "Logueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
                 CargarListaDeseosEnSession();
 
                 if (usuario.IdUsuarioTipo == 2)

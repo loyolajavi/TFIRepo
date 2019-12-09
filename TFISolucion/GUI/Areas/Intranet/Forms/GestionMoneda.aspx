@@ -8,8 +8,7 @@
      <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h1 class="page-header">
-                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Categorias %>"> </asp:Label><small>
-                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
+                    <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Cotizacion %>"> </asp:Label>
                 </h1>
             </div>
         </div>

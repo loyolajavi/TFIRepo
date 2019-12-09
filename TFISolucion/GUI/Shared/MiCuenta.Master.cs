@@ -91,6 +91,7 @@ namespace TFI.GUI.Shared
 
         protected void Salir_Click(object sender, EventArgs e)
         {
+            TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
             Session.Abandon();
             Response.Redirect("/Areas/Public/Forms/Home.aspx");
         }
@@ -146,7 +147,7 @@ namespace TFI.GUI.Shared
                     {
                         Session["Usuario"] = usuario;
                         SetUsuarioLogueado(usuario.NombreUsuario);
-
+                        TFI.SEGURIDAD.ServicioLog.CrearLog("Logueo", "Logueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
                         CargarListaDeseosEnSession();
 
                         Response.Redirect(Request.RawUrl);

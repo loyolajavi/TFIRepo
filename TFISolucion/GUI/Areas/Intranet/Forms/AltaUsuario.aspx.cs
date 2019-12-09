@@ -126,7 +126,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     {
                         unUsuario.IdUsuarioTipo = 2; //Emp
                         unUsuario.NombreUsuario = txtNombreUsuario.Value;
-                        unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
+                        unUsuario.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
                         unUsuario.Apellido = txtApellido.Value;
                         unUsuario.Nombre = txtNombre.Value;
                         unUsuario.Email = txtMail.Value;

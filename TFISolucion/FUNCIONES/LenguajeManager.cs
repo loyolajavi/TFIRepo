@@ -26,7 +26,6 @@ namespace TFI.FUNCIONES
             return diccionario;
         }
 
-        // PACHU: CAMBIE LENGUAJE POR LENGUAJEENTIDAD
         //private static IEnumerable<Entidades.LenguajeEntidad> FindByLenguage(string lenguage)
         //{
         //    var language = new List<Entidades.LenguajeEntidad>();

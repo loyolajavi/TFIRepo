@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ConfigSection.cs" />
-    <Compile Include="Helpers\HelperPedidoDetalle.cs" />
     <Compile Include="Managers\CategoriaCore.cs" />
     <Compile Include="Managers\ComprobanteCore.cs" />
     <Compile Include="Managers\CondicionFiscalCore.cs" />

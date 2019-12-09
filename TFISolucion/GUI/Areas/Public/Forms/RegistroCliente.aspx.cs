@@ -11,6 +11,7 @@ using TFI.FUNCIONES;
 using System.Text;
 using System.Web.Services;
 using TFI.Entidades.Servicios.Permisos;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI.Areas.Public.Forms
 {
@@ -123,7 +124,7 @@ namespace TFI.GUI.Areas.Public.Forms
 
                 unUsuario.IdUsuarioTipo = 1;//Cliente
                 unUsuario.NombreUsuario = txtNombreUsuario.Value;
-                unUsuario.Clave = Encriptacion.ToHash(txtClave.Value);
+                unUsuario.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
                 unUsuario.Apellido = txtApellido.Value;
                 unUsuario.Nombre = txtNombre.Value;
                 unUsuario.Email = txtMail.Value;

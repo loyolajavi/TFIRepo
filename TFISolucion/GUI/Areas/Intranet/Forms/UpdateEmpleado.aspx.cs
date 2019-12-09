@@ -11,6 +11,7 @@ using TFI.FUNCIONES;
 using System.Text;
 using TFI.Entidades.Servicios.Permisos;
 using TFI.CORE.Servicios;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI.Areas.Intranet.Forms
 {
@@ -220,7 +221,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 StringBuilder sb = new StringBuilder();
                 unEmpleado = (UsuarioEntidad)Session["Empleado"];
-                unEmpleado.Clave = Encriptacion.ToHash(txtClave.Value);
+                unEmpleado.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
                 unManagerUsuario.UpdateUsuarioContraseña(unEmpleado);
                 sb.Append("<br />");
                 divEspacioModifClave.InnerHtml = sb.ToString();

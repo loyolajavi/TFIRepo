@@ -10,6 +10,7 @@ using TFI.CORE.Managers;
 using TFI.Entidades;
 using TFI.FUNCIONES;
 using TFI.GUI.Helpers.DTO;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI.Areas.Public.Forms
     //namespace TFI.GUI
@@ -105,7 +106,7 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             var manager = new UsuarioCore();
 
-            HttpContext.Current.Session["Usuario"] = manager.loginUsuario(Encriptacion.ToHash(pass), user);
+            HttpContext.Current.Session["Usuario"] = manager.loginUsuario(ServicioSecurizacion.AplicarHash(pass), user);
         }
 
         protected void btnRegistro_Click(object sender, EventArgs e)
