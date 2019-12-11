@@ -22,5 +22,22 @@ namespace TFI.Entidades
 		public DateTime? FecBaja { get; set; }
 
 		#endregion
+
+        public enum Options
+        {
+            FacturaA = 1, 
+            FacturaB = 2,
+            FacturaC = 3,
+            FacturaM = 4,
+            NotaCreditoA = 5,
+            NotaCreditoB = 6,
+            NotaCreditoC = 7,
+            NotaDebitoA = 8,
+            NotaDebitoB = 9,
+            NotaDebitoC = 10
+            
+        }
+
+
 	}
 }

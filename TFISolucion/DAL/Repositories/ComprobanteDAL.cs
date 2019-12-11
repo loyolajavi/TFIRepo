@@ -288,6 +288,24 @@ namespace TFI.DAL.DAL
         }
 
 
+        public ComprobanteEntidad SelectAllByIdComprobante(int elIdComprobante)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdComprobante", elIdComprobante)
+			};
+
+            using (DataSet ds = SqlClientUtility.ExecuteDataSet(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ComprobanteSelectAllByIdComprobante", parameters))
+            {
+                ComprobanteEntidad comprobanteEntidadList = new ComprobanteEntidad();
+
+                comprobanteEntidadList = MapearUno(ds);
+
+                return comprobanteEntidadList;
+            }
+        }
+
+
         private ComprobanteEntidad MapearUno(DataSet ds)
         {
             ComprobanteEntidad unComprobante = new ComprobanteEntidad();

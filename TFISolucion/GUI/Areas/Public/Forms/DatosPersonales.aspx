@@ -27,7 +27,7 @@
         </div>
 
         <div class="text-center">
-            <a id="btnLogin" class="btn btn-primary">
+            <a id="btnLogin" class="btn btn-info">
                 <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></a>
         </div>
         <hr />
@@ -39,14 +39,14 @@
 
         <div class="text-center">
             <div class="form-group">
-                <asp:GridView ID="grilladedatospersonales" CssClass="table" runat="server" AutoGenerateColumns="false" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+                <asp:GridView ID="grilladedatospersonales" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" >
                     <Columns>
-                        <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" ControlStyle-CssClass="btn btn-warning" />
-                        <asp:BoundField DataField="Nombre" HeaderText="<%$Resources:Global, Nombre %>" />
-                        <asp:BoundField DataField="Apellido" HeaderText="<%$Resources:Global, Apellido %>" />
-                        <asp:BoundField DataField="Email" HeaderText="<%$Resources:Global, Correo %>" />
+                        <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
+                        <asp:BoundField DataField="Nombre" HeaderText="<%$Resources:Global, Nombre %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Apellido" HeaderText="<%$Resources:Global, Apellido %>"  HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Email" HeaderText="<%$Resources:Global, Correo %>" HeaderStyle-CssClass="bg-primary" />
                     </Columns>
-                    <FooterStyle BackColor="#CCCCCC" />
+<%--                    <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
                     <RowStyle BackColor="White" />
@@ -54,7 +54,7 @@
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                     <SortedAscendingHeaderStyle BackColor="#808080" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                    <SortedDescendingHeaderStyle BackColor="#383838" />--%>
                 </asp:GridView>
             </div>
         </div>
@@ -67,19 +67,19 @@
         <h2>Teléfonos</h2>
         <div class="text-center">
             <div class="form-group">
-                <asp:GridView ID="grillatelefonos" CssClass="table" runat="server" AutoGenerateColumns="false" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+                <asp:GridView ID="grillatelefonos" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" >
                     <Columns>
-                        <asp:CommandField ShowEditButton="True" />
-                        <asp:BoundField DataField="Telefono" HeaderText="<%$Resources:Global, Telefono %>" />
+                        <asp:CommandField ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
+                        <asp:BoundField DataField="Telefono" HeaderText="<%$Resources:Global, Telefono %>" HeaderStyle-CssClass="bg-primary" />
 
                         <%-- <asp:BoundField DataField="Tipo" HeaderText="Tipo" />--%>
-                        <asp:TemplateField HeaderText="Tipo">
+                        <asp:TemplateField HeaderText="Tipo" HeaderStyle-CssClass="bg-primary">
                             <ItemTemplate>
                                 <asp:DropDownList ID="ddlTipo" runat="server"></asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                    <FooterStyle BackColor="#CCCCCC" />
+<%--                    <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
                     <RowStyle BackColor="White" />
@@ -87,7 +87,7 @@
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                     <SortedAscendingHeaderStyle BackColor="#808080" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                    <SortedDescendingHeaderStyle BackColor="#383838" />--%>
                 </asp:GridView>
             </div>
 
@@ -95,7 +95,7 @@
 
                 <%-- TODO: AGREGAR TELEFONO --%>
 
-                <a href="#mdlAgregarTelefono" class="btn btn-primary" data-toggle="modal">
+                <a href="#mdlAgregarTelefono" class="btn btn-info" data-toggle="modal">
                     <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarTelefono %>"></asp:Label></a>
             </div>
         </div>
@@ -114,29 +114,28 @@
             <div class="form-group">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grilladirecciondefacturacion" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" CellPadding="4" ForeColor="#333333" GridLines="None" BackColor="#CCCCCC" BorderColor="#999999">
-                            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                        <asp:GridView ID="grilladirecciondefacturacion" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondefacturacion_RowCancelingEdit" OnRowDataBound="grilladirecciondefacturacion_RowDataBound" OnRowDeleting="grilladirecciondefacturacion_RowDeleting" OnRowEditing="grilladirecciondefacturacion_RowEditing" OnRowUpdating="grilladirecciondefacturacion_RowUpdating" >
                             <Columns>
-                                <asp:CommandField ShowEditButton="True" />
-                                <asp:CommandField ShowDeleteButton="True" />
-                                <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
-                                <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
-                                <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
-                                <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
-                                <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
+                                <asp:CommandField ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
+                                <asp:CommandField ShowDeleteButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-default" />
+                                <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>"  HeaderStyle-CssClass="bg-primary" />
+                                <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" HeaderStyle-CssClass="bg-primary" />
+                                <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>" HeaderStyle-CssClass="bg-primary" >
                                     <ItemTemplate>
                                         <asp:DropDownList ID="ddlProvinciaG" runat="server" OnSelectedIndexChanged="ddlProvinciaG_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>">
+                                <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>" HeaderStyle-CssClass="bg-primary">
                                     <ItemTemplate>
                                         <asp:DropDownList ID="ddlLocalidadG" runat="server" AutoPostBack="true" ></asp:DropDownList>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 
-                                <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
+                                <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" HeaderStyle-CssClass="bg-primary" />
                             </Columns>
-                            <EditRowStyle BackColor="#999999" />
+<%--                            <EditRowStyle BackColor="#999999" />
                             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -145,7 +144,7 @@
                             <SortedAscendingCellStyle BackColor="#E9E7E2" />
                             <SortedAscendingHeaderStyle BackColor="#506C8C" />
                             <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
                         </asp:GridView>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -153,7 +152,7 @@
             <br />
 
             <div class="text-center">
-                <a href="#modalDireccionFacturacion" class="btn btn-primary" data-toggle="modal">
+                <a href="#modalDireccionFacturacion" class="btn btn-info" data-toggle="modal">
                     <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, AgregarDireccion %>"></asp:Label></a>
             </div>
         </div>
@@ -230,27 +229,27 @@
             <div class="form-group">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                <asp:GridView ID="grilladirecciondeenvio" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
+                <asp:GridView ID="grilladirecciondeenvio" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDireccion" OnRowCancelingEdit="grilladirecciondeenvio_RowCancelingEdit" OnRowDataBound="grilladirecciondeenvio_RowDataBound" OnRowDeleting="grilladirecciondeenvio_RowDeleting" OnRowEditing="grilladirecciondeenvio_RowEditing" OnRowUpdating="grilladirecciondeenvio_RowUpdating">
                     <Columns>
-                        <asp:CommandField ShowEditButton="True" />
-                        <asp:CommandField ShowDeleteButton="True" />
-                        <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" />
-                        <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" />
-                        <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" />
-                        <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" />
-                        <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>">
+                        <asp:CommandField ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
+                        <asp:CommandField ShowDeleteButton="True"  HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-default" />
+                        <asp:BoundField DataField="Calle" HeaderText="<%$Resources:Global, Calle %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Numero" HeaderText="<%$Resources:Global, Numero %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Piso" HeaderText="<%$Resources:Global, Piso %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:BoundField DataField="Departamento" HeaderText="<%$Resources:Global, Departamento %>" HeaderStyle-CssClass="bg-primary" />
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Provincia %>" HeaderStyle-CssClass="bg-primary">
                             <ItemTemplate>
                                 <asp:DropDownList ID="ddlProvinciaG" runat="server" OnSelectedIndexChanged="ddlProvinciaGEnvio_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>">
+                        <asp:TemplateField HeaderText="<%$Resources:Global, Localidad %>" HeaderStyle-CssClass="bg-primary">
                                 <ItemTemplate>
                                     <asp:DropDownList ID="ddlLocalidadG" runat="server" AutoPostBack="true" ></asp:DropDownList>
                                 </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" />
+                        <asp:CheckBoxField DataField="Predeterminada" HeaderText="<%$Resources:Global, Predeterminada %>" HeaderStyle-CssClass="bg-primary" />
                     </Columns>
-                    <EditRowStyle BackColor="#999999" />
+<%--                    <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -259,7 +258,7 @@
                     <SortedAscendingCellStyle BackColor="#E9E7E2" />
                     <SortedAscendingHeaderStyle BackColor="#506C8C" />
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
                 </asp:GridView>
                 </ContentTemplate>
                 </asp:UpdatePanel>
@@ -268,7 +267,7 @@
             <br />
 
             <div class=" text-center">
-                <a href="#modalDireccionenvio" class="btn btn-primary" data-toggle="modal">
+                <a href="#modalDireccionenvio" class="btn btn-info" data-toggle="modal">
                     <asp:Label ID="Label18" runat="server" Text="<%$Resources:Global, AgregarDireccion %>"></asp:Label></a>
             </div>
         </div>

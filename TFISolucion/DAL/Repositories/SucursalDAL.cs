@@ -215,6 +215,28 @@ namespace TFI.DAL.DAL
         }
 
 
+        public void DevolverStockSucursalPorCancelacion(PedidoDetalleEntidad unPedidoDetalle, int IdSucursal, string elCUIT)
+        {
+            try
+            {
+                ValidationUtility.ValidateArgument("unPedidoDetalle", unPedidoDetalle);
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+				    new SqlParameter("@IdSucursal", IdSucursal),
+				    new SqlParameter("@IdProducto", unPedidoDetalle.miProducto.IdProducto),
+				    new SqlParameter("@CantDevolver", unPedidoDetalle.Cantidad),
+				    new SqlParameter("@CUIT", elCUIT)
+			    };
+                SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "DevolverStockSucursalPorCancelacion", parameters);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
 
         private List<SucursalEntidad> MapearMuchos(DataSet ds)
         {

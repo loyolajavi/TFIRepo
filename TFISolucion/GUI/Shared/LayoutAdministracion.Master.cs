@@ -68,6 +68,8 @@ namespace TFI.GUI.General
 
         protected void Salir_Click(object sender, EventArgs e)
         {
+            usuario = new UsuarioEntidad();
+            usuario = (UsuarioEntidad)Current.Session["Usuario"];
             TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
             Session.Abandon();
             Response.Redirect("/Areas/public/forms/Home.aspx");

@@ -97,5 +97,23 @@ namespace TFI.CORE.Managers
         }
 
 
+
+        public void DevolverStockSucursalPorCancelacion(List<PedidoDetalleEntidad> unosPedidosDetalles, int IdSucursal)
+        {
+            try
+            {
+                foreach (PedidoDetalleEntidad unPedDet in unosPedidosDetalles)
+                {
+                    GestorSucursal.DevolverStockSucursalPorCancelacion(unPedDet, IdSucursal, Helpers.ConfigSection.Default.Site.Cuit);
+                }
+            }
+            catch (System.Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
     }
 }

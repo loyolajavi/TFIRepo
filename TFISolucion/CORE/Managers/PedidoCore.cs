@@ -249,21 +249,100 @@ namespace TFI.CORE.Managers
 
         public void CancelarPedido(PedidoEntidad elPedido)
         {
-            //Cambiar Estado del Pedido en memoria a ListoRetirar/Entregado segun corresponda
-            elPedido.Avanzar(true, elPedido.miFormaEntrega.IdFormaEntrega);
-            PedidoSetearEstadoDescripEnMemoria(elPedido);
+            ComprobanteCore ManagerComprobante = new ComprobanteCore();
+            ComprobanteEntidad unaFacturaAsociada = new ComprobanteEntidad();
+            ComprobanteEntidad unaNotaCredito = new ComprobanteEntidad();
+            List<ComprobanteEntidad> unosComprobantes = new List<ComprobanteEntidad>();
+            List<ComprobanteEntidad> unosCompAux = new List<ComprobanteEntidad>();
+            int unIdComprobante = 0;
 
-            //Devolución del stock
-
-            //Nota de crédido en caso de estar en estado > a Pendiente de Pago
-
-            //Insertar nuevo estado
-            _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+            try
             {
-                Fecha = DateTime.Now,
-                IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
-                IdPedido = elPedido.IdPedido
-            });
+                //Reverificar que no esté cancelado
+                if (elPedido.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
+                    return;
+                //Nota de crédido en caso de estar en estado > a Pendiente de Pago
+                if (elPedido.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.PendientePago)
+                {
+                    unosComprobantes = ManagerComprobante.ComprobanteSelectByIdPedido(elPedido.IdPedido);
+                    if (unosComprobantes != null)
+                        unosCompAux = unosComprobantes.Where(X =>
+                                                X.miTipoComprobante.IdTipoComprobante == (int)TipoComprobanteEntidad.Options.FacturaA |
+                                                X.miTipoComprobante.IdTipoComprobante == (int)TipoComprobanteEntidad.Options.FacturaB |
+                                                X.miTipoComprobante.IdTipoComprobante == (int)TipoComprobanteEntidad.Options.FacturaC).ToList();
+
+                    foreach (ComprobanteEntidad unAux in unosCompAux)
+                    {
+                        if (unIdComprobante < unAux.IdComprobante)
+                            unIdComprobante = unAux.IdComprobante;
+                    }
+
+                    unaFacturaAsociada = unosComprobantes.First(X => X.IdComprobante == unIdComprobante);
+                    //ObtenerDetalles factura asociada
+                    unaFacturaAsociada.Detalles = ManagerComprobante.DetallesSelectByComprobante(unaFacturaAsociada.NroComprobante, unaFacturaAsociada.miSucursal.IdSucursal, unaFacturaAsociada.miTipoComprobante.IdTipoComprobante);
+
+                    //Armar NotaCredito
+                    unaNotaCredito = unaFacturaAsociada;
+                    unaNotaCredito.FechaComprobante = DateTime.Now;
+
+                    switch (unaFacturaAsociada.miTipoComprobante.IdTipoComprobante)
+                    {
+                        case 1:
+                            unaNotaCredito.miTipoComprobante.IdTipoComprobante = (int)TipoComprobanteEntidad.Options.NotaCreditoA;
+                            break;
+                        case 2:
+                            unaNotaCredito.miTipoComprobante.IdTipoComprobante = (int)TipoComprobanteEntidad.Options.NotaCreditoB;
+                            break;
+                        case 3:
+                            unaNotaCredito.miTipoComprobante.IdTipoComprobante = (int)TipoComprobanteEntidad.Options.NotaCreditoC;
+                            break;
+                        default:
+                            unaNotaCredito.miTipoComprobante.IdTipoComprobante = (int)TipoComprobanteEntidad.Options.NotaCreditoA;
+                            break;
+                    }
+
+                    //NroComrpobante
+                    int NroComp;
+                    ComprobanteEntidad unComAux = ManagerComprobante.FindAll().LastOrDefault(X => X.miTipoComprobante.IdTipoComprobante == unaNotaCredito.miTipoComprobante.IdTipoComprobante);
+                    if (unComAux != null && unComAux.IdComprobante > 0)
+                        NroComp = unComAux.NroComprobante;
+                    else
+                        NroComp = 0;
+                    NroComp++;
+                    unaNotaCredito.NroComprobante = NroComp;
+
+                    foreach (ComprobanteDetalleEntidad unDet in unaNotaCredito.Detalles)
+                    {
+                        unDet.IdTipoComprobante = unaNotaCredito.miTipoComprobante.IdTipoComprobante;
+                        unDet.NroComprobante = unaNotaCredito.NroComprobante;
+                    }
+
+                    ManagerComprobante.Create(unaNotaCredito);
+
+                    //Devolución del stock
+                    SucursalCore ManagerSucursal = new SucursalCore();
+                    elPedido.misDetalles = this.PedidosDetalleSelect(elPedido.IdPedido);
+                    ManagerSucursal.DevolverStockSucursalPorCancelacion(elPedido.misDetalles, unaNotaCredito.miSucursal.IdSucursal);
+                }
+
+                //Cambiar Estado del Pedido en memoria a Cancelado
+                elPedido.Avanzar(true, elPedido.miFormaEntrega.IdFormaEntrega);
+                PedidoSetearEstadoDescripEnMemoria(elPedido);
+
+                //Insertar nuevo estado
+                _pedidoEstadoPedidoDal.Insert(new PedidoEstadoPedidoEntidad()
+                {
+                    Fecha = DateTime.Now,
+                    IdEstadoPedido = elPedido.VerEstadoActual().IdEstadoPedido,
+                    IdPedido = elPedido.IdPedido
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
         }
 
 
