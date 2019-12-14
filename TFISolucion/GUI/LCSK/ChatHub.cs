@@ -117,7 +117,7 @@ namespace TFI.GUI.LCSK
                 Clients.Client(connectionId).setChat(connectionId, agent.Name, false);
 
                 Clients.Caller.addMessage(connectionId, "system", "You invited this visitor to chat...");
-                Clients.Client(connectionId).addMessage(agent.Name, "Hola, que tal" + agent.Name + " vamos a ver si tenés preguntas.");
+                Clients.Client(connectionId).addMessage(agent.Name, "Hola, soy " + agent.Name + ". Estoy a su disposición ante cualquier consulta");
             }
         }
 
