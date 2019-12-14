@@ -1,12 +1,7 @@
 bin
 obj
 *.suo
-/Varios
-Web.ConnectionStrings.config
-/TFISolucion/GUI/Web.ConnectionStrings.config
-Logo.png
-TFISolucion/GUI/Content/Images/Empresas/Logo.png
-Recursos/Recurso1.jpg
-Recursos/Recurso2.jpg
-Recursos/Recurso3.jpg
-/TFISolucion/GUI/Content/Images/Empresas/Logo.png
+
+
+
+
