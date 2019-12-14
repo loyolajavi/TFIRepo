@@ -16,12 +16,13 @@ namespace TFI.DAL.Repositories
         /// <summary>
         /// Selects all records from the Direccion table.
         /// </summary>
-       public List<ReportePedidosPorFechayEstado> ReportePedidosPorFechayEstado(string CUIT)
+       public List<ReportePedidosPorFechayEstado> ReportePedidosPorFechayEstado(string CUIT, DateTime? fechaDesde, DateTime? fechaHasta)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@CUIT", CUIT)
-				
+				new SqlParameter("@CUIT", CUIT),
+                new SqlParameter("@fechaDesde", fechaDesde),
+				new SqlParameter("@fechaHasta", fechaHasta)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ReportePedidosPorFechayEstado",parameters))
@@ -34,12 +35,14 @@ namespace TFI.DAL.Repositories
             }
         }
 
-       public List<ReportePedidosDeUsuario> ReportePedidosDeUsuario(string CUIT,string usuario)
+       public List<ReportePedidosDeUsuario> ReportePedidosDeUsuario(string CUIT, string usuario, DateTime? fechaDesde, DateTime? fechaHasta)
        {
            SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@CUIT", CUIT),
-				new SqlParameter("@Usuario", usuario)
+				new SqlParameter("@Usuario", usuario),
+                new SqlParameter("@fechaDesde", fechaDesde),
+				new SqlParameter("@fechaHasta", fechaHasta)
 			};
 
            using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ReportePedidosDeUsuario", parameters))

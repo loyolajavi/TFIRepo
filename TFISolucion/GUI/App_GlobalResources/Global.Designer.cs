@@ -1918,6 +1918,21 @@ namespace Resources {
             }
         }
 
+        internal static string Desde
+        {
+            get
+            {
+                return ResourceManager.GetString("Desde", resourceCulture);
+            }
+        }
+
+        internal static string Hasta
+        {
+            get
+            {
+                return ResourceManager.GetString("Hasta", resourceCulture);
+            }
+        }
 
     }
 }

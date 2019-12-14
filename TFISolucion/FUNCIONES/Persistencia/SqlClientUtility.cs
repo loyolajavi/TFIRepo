@@ -39,20 +39,20 @@ namespace TFI.FUNCIONES.Persistencia
                         connection.Open();
                     }
 
-                    tr = connection.BeginTransaction();
+                    //tr = connection.BeginTransaction();
 
                     using (command = CreateCommand(connection, commandType, commandText, parameters))
                     {
                         //TRANSACCIONES
                         result = CreateDataTable(command);
-                        tr.Commit();
+                        //tr.Commit();
                         return result;
                     }
                 }
                 catch (Exception es)
                 {
                     
-                    tr.Rollback();
+                    //tr.Rollback();
                     throw;
                 }
                 finally

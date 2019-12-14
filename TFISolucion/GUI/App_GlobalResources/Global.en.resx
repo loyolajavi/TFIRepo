@@ -1017,4 +1017,10 @@
   <data name="msjCampoVacio" xml:space="preserve">
     <value>Name cannot be empty</value>
   </data>
+  <data name="Desde" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Hasta" xml:space="preserve">
+    <value>Ends</value>
+  </data>
 </root>

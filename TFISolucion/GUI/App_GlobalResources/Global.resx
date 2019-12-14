@@ -1014,4 +1014,10 @@
   <data name="msjCampoVacio" xml:space="preserve">
     <value>El nombre no puede quedar vacío</value>
   </data>
+  <data name="Desde" xml:space="preserve">
+    <value>Desde</value>
+  </data>
+  <data name="Hasta" xml:space="preserve">
+    <value>Hasta</value>
+  </data>
 </root>

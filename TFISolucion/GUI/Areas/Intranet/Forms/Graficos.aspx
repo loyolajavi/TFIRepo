@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="Graficos.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.Graficos" enableEventValidation="true" %>
+<%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
@@ -45,10 +46,14 @@
         // Instantiate and draw our chart, passing in some options  
 
         var chart = new google.visualization.BarChart(document.getElementById('chartdiv3'));
-
+        var idioma = $("#ddlLanguages").val();
+        if (idioma == 'es')
+            var titulo = "Monto de ventas por Mes";
+        else
+            var titulo = "Sales amount per month";
         chart.draw(data,
         {
-            title: "Monto de ventas por Mes",
+            title: titulo,
             position: "top",
             fontsize: "14px",
             chartArea: { width: '50%' },

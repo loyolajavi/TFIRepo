@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TFI.DAL.DAL;
 using TFI.DAL.Repositories;
 using TFI.Entidades;
@@ -35,6 +36,9 @@ namespace TFI.CORE.Managers
 
            // 4: we open document and start the worker on the document
            doc.Open();
+           Image image = Image.GetInstance(HttpContext.Current.Server.MapPath(@"../../../Content/Images/Empresas/Logo.png"));
+           doc.Add(Chunk.NEWLINE);
+           doc.Add(image);
            htmlWorker.StartDocument();
 
            // 5: parse the html into the document
@@ -52,11 +56,13 @@ namespace TFI.CORE.Managers
 
        private ReporteDAL DalReporte = new ReporteDAL();
 
-       public byte[] ReportePedidosPorFechayEstado()
+       public byte[] ReportePedidosPorFechayEstado(DateTime? fechaDesde, DateTime? fechaHasta)
        {
-          List<ReportePedidosPorFechayEstado> items =  DalReporte.ReportePedidosPorFechayEstado(Helpers.ConfigSection.Default.Site.Cuit);
+          List<ReportePedidosPorFechayEstado> items =  DalReporte.ReportePedidosPorFechayEstado(Helpers.ConfigSection.Default.Site.Cuit, fechaDesde, fechaHasta);
 
-           string HTMLContent = "<table><tr><th>Fecha</th><th>Pedido</th><th>Usuario</th><th>Estado</th></tr>";
+           string HTMLContent = "<h3>Pedidos desde: " + fechaDesde;
+           HTMLContent += " Hasta: " + fechaHasta + "</h3> <br />";
+           HTMLContent += "<table border='1'><tr><th>Fecha</th><th>Pedido</th><th>Usuario</th><th>Estado</th></tr>";
 
            foreach (var item in items)
            {
@@ -68,11 +74,13 @@ namespace TFI.CORE.Managers
           return GetPDF(HTMLContent,"Reporte de pedidos por fecha y estado");
        }
 
-       public byte[] ReportePedidosDeUsuario(string usuario)
+       public byte[] ReportePedidosDeUsuario(string usuario, DateTime? fechaDesde, DateTime? fechaHasta)
        {
-           List<ReportePedidosDeUsuario> items = DalReporte.ReportePedidosDeUsuario(Helpers.ConfigSection.Default.Site.Cuit,usuario);
+           List<ReportePedidosDeUsuario> items = DalReporte.ReportePedidosDeUsuario(Helpers.ConfigSection.Default.Site.Cuit,usuario, fechaDesde, fechaHasta);
 
-           string HTMLContent = "<table><tr><th>Fecha</th><th>Pedido</th><th>Estado</th></tr>";
+           string HTMLContent = "<h3>Pedidos de " + usuario + ". Desde: " + fechaDesde;
+           HTMLContent += " Hasta: " + fechaHasta + "</h3> <br />";
+           HTMLContent += "<table border='1'><tr><th>Fecha</th><th>Pedido</th><th>Estado</th></tr>";
 
            foreach (var item in items)
            {

@@ -36,6 +36,15 @@
                         <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, ReportePorUsuario %>"></asp:Label>
                     </td>
                     <td style="width: 0%; text-align: center;">
+                        <b>
+                            <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Desde %>"> </asp:Label></b>
+
+                        <input runat="server" type="date" name="nFechaInicio2" id="txtfechaInicio" class="hasDatepicker form-control " />
+
+                        <b>
+                            <asp:Label ID="Label10" runat="server" Text="<%$Resources:Global, Hasta %>"> </asp:Label></b>
+
+                        <input runat="server" type="date" name="nFechaFin2" id="txtfechaFin" class="hasDatepicker form-control " />
                         <a href="#">
                             <asp:TextBox ID="txtUsuario" runat="server" ClientIDMode="Static"></asp:TextBox>
                             <img src="/Content/Images/Iconos/pdf.png" />
@@ -48,6 +57,16 @@
                         <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, ReportePedidosPorFecha %>"></asp:Label>
                     </td>
                     <td style="width: 0%; text-align: center;">
+                         <b>
+                        <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, Desde %>"> </asp:Label></b>
+
+                    <input runat="server" type="date" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker form-control " />
+
+                    <b>
+                        <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Hasta %>"> </asp:Label></b>
+
+                    <input runat="server" type="date" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker form-control " />
+
                         <a href="#">
                             <img src="/Content/Images/Iconos/pdf.png" />
                             <asp:Button ID="btnReportePxF" runat="server" Text="<%$Resources:Global, Obtener %>" OnClick="btnReportePxF_Click" />

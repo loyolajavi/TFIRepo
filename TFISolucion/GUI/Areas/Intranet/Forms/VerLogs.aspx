@@ -28,12 +28,12 @@
                 <div class="form-inline">
 
                     <b>
-                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
+                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, Desde %>"> </asp:Label></b>
 
                     <input runat="server" type="date" name="nFechaInicio" id="elIdFechaInicio" class="hasDatepicker form-control " required="required" />
 
                     <b>
-                        <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Logsdelsistema %>"> </asp:Label></b>
+                        <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Hasta %>"> </asp:Label></b>
 
                     <input runat="server" type="date" name="nFechaFin" id="elIdFechaFin" class="hasDatepicker form-control " required="required" />
                     <asp:Button ID="btnFiltrarLogs" runat="server" Text="<%$Resources:Global, Buscar %>" CssClass="form-control btn-success" OnClick="btnFiltrarLogs_Click" />
