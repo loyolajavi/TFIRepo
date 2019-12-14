@@ -3,6 +3,9 @@
 <%@ MasterType VirtualPath="~/Shared/LayoutBasico.Master" %>
 
 
+    <asp:Content ID="headHome" ContentPlaceHolderID="head" runat="server">
+    </asp:Content>
+
 <asp:Content ID="ContenidoCuerpo" ContentPlaceHolderID="ContentPlaceHolderCuerpo" runat="server">
 
 
@@ -119,7 +122,7 @@
 
 
         <div class="modal fade" tabindex="-1" role="dialog">
-        <form id="mdl_pedido_agregado">
+        <div id="mdl_pedido_agregado">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -139,7 +142,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
 

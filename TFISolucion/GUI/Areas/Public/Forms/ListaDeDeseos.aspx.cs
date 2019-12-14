@@ -8,6 +8,8 @@ using TFI.Entidades;
 using TFI.CORE.Managers;
 using TFI.CORE.Helpers;
 using System.Web.Services;
+using System.Web.Script.Services;
+using TFI.SEGURIDAD;
 
 namespace TFI.GUI
 {
@@ -285,7 +287,36 @@ namespace TFI.GUI
 
         }
 
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public static int consultarStock(int id)
+        {
+            StockCore _coreStock = new StockCore();
 
+            try
+            {
+                List<StockSucursalEntidad> Stocks = _coreStock.SelectByIdProducto(id);
+                int StockAcumulado = 0;
+                if (Stocks.Count > 0)
+                {
+                    foreach (var stockdeproducto in Stocks)
+                    {
+                        StockAcumulado = StockAcumulado + stockdeproducto.CantidadProducto;
+                    }
+                    return StockAcumulado;
+                }
+            }
+            catch (Exception es)
+            {
+                UsuarioEntidad logueado = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+                if (logueado != null)
+                    ServicioLog.CrearLog(es, "ConsultarStockWebMethod", logueado.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                else
+                    ServicioLog.CrearLog(es, "ConsultarStockWebMethod", "SIN_USUARIO", CORE.Helpers.ConfigSection.Default.Site.Cuit);
+                throw;
+            }
+            return 0;
+        }
 
 
 

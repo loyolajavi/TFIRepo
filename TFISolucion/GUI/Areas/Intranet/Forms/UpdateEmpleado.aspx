@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="UpdateEmpleado.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.UpdateEmpleado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="UpdateEmpleado.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.UpdateEmpleado" EnableEventValidation="false" %>
 <%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -27,30 +27,39 @@
                     <div class="form-group">
                         <label for="txtNombreUsuario">
                             <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, NombreUsuario %>"></asp:Label></label>
-                        <input type="text" class="form-control" id="txtNombreUsuario" runat="server" clientidmode="static" />
+                        <input type="text" name="txtNombreUsuario" class="form-control" id="txtNombreUsuario" runat="server" required="required" />
+                        <asp:RegularExpressionValidator ID="vldExpNombreUsuario" Display="Dynamic" runat="server" ControlToValidate="txtNombreUsuario" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([a-zA-Z]+)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
-                    <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" />
+                    <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" ValidationGroup="AltaCliente" />
+                </div>
+                <div id="divNombreUsbr" runat="server"></div>
+                    <div id="divNombreUsMal" class="alert alert-danger" runat="server" visible="false">
+                        <asp:Label ID="Label13" runat="server" Text="<%$Resources:Global, msjCampoVacio %>"></asp:Label></div>
                     <br />
-                    <br />
+                <div class="form-group row">
                     <div class="form-group">
                         <label for="txtClave">
                             <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, Contrasena %>"></asp:Label></label><br />
-                        <input type="password" class=" input-sm" id="txtClave" runat="server" clientidmode="static" placeholder="********" />
-                        <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
+                        <input type="password" class="input-sm" id="txtClave" runat="server" placeholder="********" />
+                        <asp:RegularExpressionValidator ID="vldTextoClave" runat="server" Text="<%$Resources:Global, ValidacionContrasena %>" ControlToValidate="txtClave" CssClass="alert alert-warning" ValidationGroup="ModifPass" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"></asp:RegularExpressionValidator>
                     </div>
 
                     <div class="form-group">
                         <label for="txtClaveRep">
                             <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, RepetirContrasena %>"></asp:Label></label><br />
-                        <input type="password" class="input-sm" id="txtClaveRep" runat="server" clientidmode="static" placeholder="********" />
-                        <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave"></asp:CompareValidator>
+                        <input type="password" class="input-sm" id="txtClaveRep" runat="server" placeholder="********" />
+                        <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave" ValidationGroup="ModifPass"></asp:CompareValidator>
                     </div>
-                    <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarContrasena %>" runat="server" OnClick="btnCambiarClave_Click" />
+                    <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarContrasena %>" runat="server" OnClick="btnCambiarClave_Click" ValidationGroup="ModifPass" />
 
                     <div id="divEspacioModifClave" runat="server"></div>
                     <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">
                         <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ModificoContrasena %>"></asp:Label></div>
+                    <div id="divMsjError" class="alert alert-danger" runat="server" visible="false">
+                        <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, msjAVerifiquePass %>"></asp:Label></div>
                 </div>
+
+                <%--Datos Personales--%>
                 <div class="form-group row">
                     <h4 class="page-header">
                         <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, DatosPersonales %>"></asp:Label></h4>
@@ -74,6 +83,7 @@
                     </div>
                     <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
                 </div>
+
                 <%--Permisos--%>
                 <div class="form-group row">
                     <h4 class="page-header">

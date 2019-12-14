@@ -993,4 +993,25 @@
   <data name="IdBitacora" xml:space="preserve">
     <value>Log</value>
   </data>
+  <data name="Adquisicion" xml:space="preserve">
+    <value>Adquisición</value>
+  </data>
+  <data name="Atencion" xml:space="preserve">
+    <value>Atencion</value>
+  </data>
+  <data name="CampoNombreVacio" xml:space="preserve">
+    <value>Datos Personales: No pueden haber campos vacíos</value>
+  </data>
+  <data name="msjADirEnvVacio" xml:space="preserve">
+    <value>Dirección de Envío: La calle y la altura no pueden quedar vacíos</value>
+  </data>
+  <data name="msjADirFacVacio" xml:space="preserve">
+    <value>Dirección de Facturación: La calle y la altura no pueden quedar vacíos</value>
+  </data>
+  <data name="msjAVerifiquePass" xml:space="preserve">
+    <value>Verifique las contraseñas nuevamente</value>
+  </data>
+  <data name="msjCampoVacio" xml:space="preserve">
+    <value>El nombre no puede quedar vacío</value>
+  </data>
 </root>

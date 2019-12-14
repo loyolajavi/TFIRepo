@@ -21,6 +21,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         ProductoCore ProductoBLL = new ProductoCore();
         StockCore StockBLL1 = new StockCore();
         private LenguajeEntidad idioma;
+        SucursalCore ManagerSucursal = new SucursalCore();
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -78,7 +79,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 if (!IsPostBack) { grillastock.DataBind(); }
             }
 
-            if (!IsPostBack) { CargarDropdownProductos(); }
+            if (!IsPostBack) 
+            { 
+                CargarDropdownProductos();
+                CargarSucursales();
+            }
         }
 
         private void CargarDropdownProductos()
@@ -89,6 +94,13 @@ namespace TFI.GUI.Areas.Intranet.Forms
             ddlProducto.DataBind();
         }
 
+        private void CargarSucursales()
+        {
+            cboSucursal.DataSource = ManagerSucursal.FindAll();
+            cboSucursal.DataValueField = "IdSucursal";
+            cboSucursal.DataTextField = "DescripSucursal";
+            cboSucursal.DataBind();
+        }
 
         protected void btnGrabarStock_Click(object sender, EventArgs e)
         {

@@ -3,6 +3,7 @@
 <%@ MasterType VirtualPath="~/Shared/MiCuenta.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
 </asp:Content>
 
 
@@ -20,7 +21,7 @@
         }
     </style>
 
-    <link href="/Content/css/propios/Pedido.css" rel="stylesheet" />
+    
     <div class="col-lg-12">
         <h1 class="page-header"><asp:Label ID="lbldestacados" runat="server" Text="<%$Resources:Global, ListaDeseos %>"></asp:Label><small><asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, MiCuenta %>"></asp:Label></small>
         </h1>

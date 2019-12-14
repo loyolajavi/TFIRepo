@@ -27,7 +27,7 @@
         </div>
 
         <div class="text-center">
-            <a id="btnLogin" class="btn btn-info">
+            <a id="btnCambiarPassPersonal" class="btn btn-info">
                 <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, CambiarContrasena %>"></asp:Label></a>
         </div>
         <hr />
@@ -39,6 +39,9 @@
 
         <div class="text-center">
             <div class="form-group">
+                                   <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+
+                    <ContentTemplate>
                 <asp:GridView ID="grilladedatospersonales" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" OnRowCancelingEdit="grilladedatospersonales_RowCancelingEdit" OnRowEditing="grilladedatospersonales_RowEditing" OnRowUpdating="grilladedatospersonales_RowUpdating" >
                     <Columns>
                         <asp:CommandField ControlStyle-ForeColor="White" ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
@@ -56,6 +59,9 @@
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
                     <SortedDescendingHeaderStyle BackColor="#383838" />--%>
                 </asp:GridView>
+                        </ContentTemplate>
+
+                </asp:UpdatePanel>
             </div>
         </div>
 
@@ -67,9 +73,11 @@
         <h2>Teléfonos</h2>
         <div class="text-center">
             <div class="form-group">
-                <asp:GridView ID="grillatelefonos" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" >
+                <asp:GridView ID="grillatelefonos" CssClass="table table-hover table-responsive table-striped table-bordered" runat="server" AutoGenerateColumns="false" OnRowEditing="grillatelefonos_RowEditing" OnRowCancelingEdit="grillatelefonos_RowCancelingEdit" OnRowUpdating="grillatelefonos_RowUpdating" OnRowDataBound="grillatelefonos_RowDataBound" OnRowDeleting="grillatelefonos_RowDeleting" >
                     <Columns>
                         <asp:CommandField ShowEditButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-success" />
+                        <asp:CommandField ShowDeleteButton="True" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-default" />
+                        <asp:BoundField DataField="CodArea" HeaderText="<%$Resources:Global, Telefono %>" HeaderStyle-CssClass="bg-primary" />
                         <asp:BoundField DataField="Telefono" HeaderText="<%$Resources:Global, Telefono %>" HeaderStyle-CssClass="bg-primary" />
 
                         <%-- <asp:BoundField DataField="Tipo" HeaderText="Tipo" />--%>
@@ -326,7 +334,7 @@
     </div>
 
     <!--MODAL Password-->
-    <div class="modal fade" id="modalLogin" role="dialog">
+    <div class="modal fade" id="modalCambiarPassPersonal" role="dialog">
         <div class="modal-dialog">
 
             <div class="modal-content">
@@ -342,7 +350,7 @@
                             <asp:AsyncPostBackTrigger ControlID="btnCambiarClave" />
                         </Triggers>
                         <ContentTemplate>
-                            <form role="form" id="formPass">
+                            <div role="form" id="formPass">
 
                                 <div class="form-group">
                                     <asp:Label ID="Label27" runat="server" Text="<%$Resources:Global, ContrasenaAnterior %>"></asp:Label>
@@ -360,7 +368,7 @@
                                 </div>
 
                                 <%-- <button type="button" id="btnCambiarContra" runat="server"="btnCambiarContra_Click">Cambiar</button>--%>
-                            </form>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--agrege onsubmit--%>
@@ -406,12 +414,35 @@
                             </form>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnGrabarTelefono" CausesValidation="True" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="return onbtnGrabarTelefono(this)" OnClick="btnGrabarTelefono_Click" />
+                    <asp:Button ID="btnGrabarTelefono" runat="server" ClientIDMode="static" Text="<%$Resources:Global, Guardar %>" CssClass="btn btn-primary btn-block" OnClientClick="onbtnGrabarTelefono(this)" />
                 </div>
             </div>
         </div>
     </div>
     <%--modal telefono end--%>
+
+
+    <!--MODAL ErrorMsj-->
+    <div class="modal fade" id="ErrorMsj" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" id="btnCerrarErrorMsj" class="close" data-dismiss="modal">&times;</button>
+                    <h2>
+                        <asp:Label ID="Label15" runat="server" Text="<%$Resources:Global, Atencion %>"></asp:Label></h2>
+                    
+                </div>
+                <div class="modal-body">
+                            <div id="notificationAtencion"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--modal ErrorMsj end--%>
+
+
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsSection" runat="server">

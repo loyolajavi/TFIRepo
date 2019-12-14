@@ -34,6 +34,7 @@ namespace TFI.GUI
         DropDownList ddlLoc;
         DropDownList ddlEnvio;
         DropDownList ddlLocEnvio;
+        List<TelefonoEntidad> TelefonosDelUsuario = new List<TelefonoEntidad>();
 
 
         protected T FindControlFromMaster<T>(string name) where T : Control
@@ -97,14 +98,18 @@ namespace TFI.GUI
             }
 
 
-            List<TelefonoEntidad> TelefonosDelUsuario = new List<TelefonoEntidad>();
+            
             TelefonosDelUsuario = UsuarioBLL.SelectTelefonosDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            if (TelefonosDelUsuario != null && TelefonosDelUsuario.Count > 0)
+                TelefonosDelUsuario = TelefonosDelUsuario.Where(X => X.FecBaja == null).ToList();
+
 
             foreach (var tel in TelefonosDelUsuario)
             {
                 TelefonoDTO TipodeTelefono = new TelefonoDTO();
                 TipodeTelefono.Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.miTipoTel.IdTipoTel);
                 TipodeTelefono.Telefono = tel.NroTelefono;
+                TipodeTelefono.CodArea = tel.CodArea;
                 ListaDeTelefonosDTO.Add(TipodeTelefono);
             }
 
@@ -147,6 +152,7 @@ namespace TFI.GUI
 
         public class TelefonoDTO
         {
+            public string CodArea { get; set; }
             public string Telefono { get; set; }
             public string Tipo { get; set; }
         }
@@ -195,27 +201,50 @@ namespace TFI.GUI
             //usuarioentidad.cuit = "20377540582";
 
             GridViewRow row = grilladedatospersonales.Rows[e.RowIndex];
-            UsuarioActualizado.Nombre = ((TextBox)row.Cells[1].Controls[0]).Text;
-            UsuarioActualizado.Apellido = ((TextBox)row.Cells[2].Controls[0]).Text;
-            UsuarioActualizado.Email = ((TextBox)row.Cells[3].Controls[0]).Text;
 
-            UsuarioActualizado.CUIT = usuarioentidad.CUIT;
-            UsuarioActualizado.NombreUsuario = usuarioentidad.NombreUsuario;
+            string unNombre = ((TextBox)row.Cells[1].Controls[0]).Text;
+            string unApellido = ((TextBox)row.Cells[2].Controls[0]).Text;
+            string unEmail = ((TextBox)row.Cells[3].Controls[0]).Text;
 
-            UsuarioBLL.UpdateDatosPersonales(UsuarioActualizado);
-            usuarioentidad.Email = UsuarioActualizado.Email;
-            usuarioentidad.Nombre = UsuarioActualizado.Nombre;
-            usuarioentidad.Apellido = UsuarioActualizado.Apellido;
+            if (!string.IsNullOrWhiteSpace(unNombre) && !string.IsNullOrWhiteSpace(unApellido) && !string.IsNullOrWhiteSpace(unEmail))
+            {
+                UsuarioActualizado.Nombre = ((TextBox)row.Cells[1].Controls[0]).Text;
+                UsuarioActualizado.Apellido = ((TextBox)row.Cells[2].Controls[0]).Text;
+                UsuarioActualizado.Email = ((TextBox)row.Cells[3].Controls[0]).Text;
 
-            //Reset the edit index.
-            grilladedatospersonales.EditIndex = -1;
+                UsuarioActualizado.CUIT = usuarioentidad.CUIT;
+                UsuarioActualizado.NombreUsuario = usuarioentidad.NombreUsuario;
 
-            //Bind data to the GridView control.
-            grilladedatospersonales.DataBind();
+                UsuarioBLL.UpdateDatosPersonales(UsuarioActualizado);
+                usuarioentidad.Email = UsuarioActualizado.Email;
+                usuarioentidad.Nombre = UsuarioActualizado.Nombre;
+                usuarioentidad.Apellido = UsuarioActualizado.Apellido;
 
-            CargarGrillaDatosPersonales();
+                //Reset the edit index.
+                grilladedatospersonales.EditIndex = -1;
 
-            grilladedatospersonales.DataBind();
+                //Bind data to the GridView control.
+                grilladedatospersonales.DataBind();
+
+                CargarGrillaDatosPersonales();
+
+                grilladedatospersonales.DataBind();
+            }
+            else
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("MsjAtencion('");
+                sb.Append(Resources.Global.CampoNombreVacio);
+                sb.Append("');");
+                sb.Append("$('#ErrorMsj').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "ModalScriptError1", sb.ToString(), false);
+            }
+
+
+            
         }
 
         private void CargarGrillaDatosPersonales()
@@ -245,13 +274,16 @@ namespace TFI.GUI
 
             List<TelefonoEntidad> TelefonosDelUsuario = new List<TelefonoEntidad>();
             TelefonosDelUsuario = UsuarioBLL.SelectTelefonosDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
+            if (TelefonosDelUsuario != null && TelefonosDelUsuario.Count > 0)
+                TelefonosDelUsuario = TelefonosDelUsuario.Where(X => X.FecBaja == null).ToList();
 
             foreach (var tel in TelefonosDelUsuario)
             {
                 TelefonoDTO TipodeTelefono = new TelefonoDTO()
                 {
                     Tipo = UsuarioBLL.ObtenerTipodeTelefono(tel.miTipoTel.IdTipoTel),
-                    Telefono = tel.NroTelefono
+                    Telefono = tel.NroTelefono,
+                    CodArea = tel.CodArea
                 };
 
                 ListaDeTelefonosDTO.Add(TipodeTelefono);
@@ -276,13 +308,15 @@ namespace TFI.GUI
 
 
             GridViewRow row = grillatelefonos.Rows[e.RowIndex];
-            var Telefono = ((TextBox)row.Cells[1].Controls[0]).Text;
-            var Tipo = ((DropDownList)row.Cells[2].Controls[1]).SelectedIndex;
+            var CodArea = ((TextBox)row.Cells[2].Controls[0]).Text;
+            var Telefono = ((TextBox)row.Cells[3].Controls[0]).Text;
+            var Tipo = ((DropDownList)row.Cells[4].Controls[1]).SelectedIndex;
 
             TelefonoActualizado.miUsuario = new UsuarioEntidad();
             TelefonoActualizado.miUsuario.CUIT = usuarioentidad.CUIT;
             TelefonoActualizado.miUsuario.NombreUsuario = usuarioentidad.NombreUsuario;
             TelefonoActualizado.NroTelefono = Telefono;
+            TelefonoActualizado.CodArea = CodArea;
 
             int tipodetelefono = 1;
 
@@ -317,7 +351,7 @@ namespace TFI.GUI
 
                     if (grillatelefonos.EditIndex == -1)
                     {
-                        Telefono = ((string)e.Row.Cells[1].Text);
+                        Telefono = ((string)e.Row.Cells[3].Text);
                         var x = ListaDeTelefonosDTO.Where(t => t.Telefono == Telefono).FirstOrDefault().Tipo;
                         if (x == "Movil") { ddl.SelectedIndex = 1; } else { ddl.SelectedIndex = 0; }
                     }
@@ -342,11 +376,11 @@ namespace TFI.GUI
                 }
             }
         }
-        protected void btnGrabarTelefono_Click(object sender, EventArgs e)
-        {
-            CargarGrillaTelefonos();
-            Response.Redirect(Request.RawUrl);
-        }
+        //protected void btnGrabarTelefono_Click(object sender, EventArgs e)
+        //{
+        //    CargarGrillaTelefonos();
+        //    Response.Redirect(Request.RawUrl);
+        //}
 
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -356,8 +390,13 @@ namespace TFI.GUI
             var usuariosdad = new UsuarioCore();
             var Current = HttpContext.Current;
             var coreUsuario = new UsuarioCore();
-            UsuarioEntidad usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
-            if (!string.IsNullOrEmpty(telefono))
+            UsuarioEntidad usuarioentidadStatic;
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidadStatic = (UsuarioEntidad)Current.Session["Usuario"];
+            else
+                return;
+            
+            if (!string.IsNullOrEmpty(telefono) && !string.IsNullOrEmpty(codigo))
             {
                 var telefonoNuevo = new TelefonoEntidad();
 
@@ -427,10 +466,9 @@ namespace TFI.GUI
                 usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
             else
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
-            
+
             DireccionEntidad DireccionActualizada = new DireccionEntidad();
             GridViewRow row = grilladirecciondefacturacion.Rows[e.RowIndex];
-
             var Calle = ((TextBox)row.Cells[2].Controls[0]).Text;
             var Numero = ((TextBox)row.Cells[3].Controls[0]).Text;
             var Piso = ((TextBox)row.Cells[4].Controls[0]).Text;
@@ -439,25 +477,41 @@ namespace TFI.GUI
             var Localidad = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
             var Predeterminado = ((CheckBox)row.Cells[8].Controls[0]).Checked;
 
-            DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondefacturacion.DataKeys[e.RowIndex].Value);
-            DireccionActualizada.Calle = Calle;
-            DireccionActualizada.Departamento = Departamento;
-            DireccionActualizada.Numero = Convert.ToInt32(Numero);
-            if (!String.IsNullOrEmpty(Piso))
-                DireccionActualizada.Piso = Convert.ToInt32(Piso);
-            DireccionActualizada.miLocalidad = new Entidades.Localidad();
-            DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
-            DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
-            DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
-            DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
-            DireccionActualizada.Predeterminada = Predeterminado;
+            if(!string.IsNullOrWhiteSpace(Calle) && !string.IsNullOrWhiteSpace(Numero))
+            {
+                DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondefacturacion.DataKeys[e.RowIndex].Value);
+                DireccionActualizada.Calle = Calle;
+                DireccionActualizada.Departamento = Departamento;
+                DireccionActualizada.Numero = Convert.ToInt32(Numero);
+                if (!String.IsNullOrEmpty(Piso))
+                    DireccionActualizada.Piso = Convert.ToInt32(Piso);
+                DireccionActualizada.miLocalidad = new Entidades.Localidad();
+                DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
+                DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
+                DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
+                DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
+                DireccionActualizada.Predeterminada = Predeterminado;
 
-            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
+                UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
 
-            //////Reset the edit index.
-            grilladirecciondefacturacion.EditIndex = -1;
+                //////Reset the edit index.
+                grilladirecciondefacturacion.EditIndex = -1;
 
-            CargarGrillaDireccionDeFacturacion();
+                CargarGrillaDireccionDeFacturacion();
+            }
+            else
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("MsjAtencion('");
+                sb.Append(Resources.Global.msjADirFacVacio);
+                sb.Append("');");
+                sb.Append("$('#ErrorMsj').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "ModalScriptError1", sb.ToString(), false);
+            }
+
         }
 
         protected void grilladirecciondeenvio_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -478,25 +532,41 @@ namespace TFI.GUI
             var Localidad = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
             var Predeterminado = ((CheckBox)row.Cells[8].Controls[0]).Checked;
 
-            DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondeenvio.DataKeys[e.RowIndex].Value);
-            DireccionActualizada.Calle = Calle;
-            DireccionActualizada.Departamento = Departamento;
-            DireccionActualizada.Numero = Convert.ToInt32(Numero);
-            if (!String.IsNullOrEmpty(Piso))
-                DireccionActualizada.Piso = Convert.ToInt32(Piso);
-            DireccionActualizada.miLocalidad = new Entidades.Localidad();
-            DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
-            DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
-            DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
-            DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
-            DireccionActualizada.Predeterminada = Predeterminado;
+            if (!string.IsNullOrWhiteSpace(Calle) && !string.IsNullOrWhiteSpace(Numero))
+            {
+                DireccionActualizada.IdDireccion = Convert.ToInt32((int)grilladirecciondeenvio.DataKeys[e.RowIndex].Value);
+                DireccionActualizada.Calle = Calle;
+                DireccionActualizada.Departamento = Departamento;
+                DireccionActualizada.Numero = Convert.ToInt32(Numero);
+                if (!String.IsNullOrEmpty(Piso))
+                    DireccionActualizada.Piso = Convert.ToInt32(Piso);
+                DireccionActualizada.miLocalidad = new Entidades.Localidad();
+                DireccionActualizada.miLocalidad.IdLocalidad = Int32.Parse(Localidad);
+                DireccionActualizada.miLocalidad.miProvincia = new ProvinciaEntidad();
+                DireccionActualizada.miLocalidad.miProvincia.IdProvincia = Int32.Parse(Provincia);
+                DireccionActualizada.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
+                DireccionActualizada.Predeterminada = Predeterminado;
 
-            UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
+                UsuarioBLL.UpdateDireccionesUsuario(DireccionActualizada, usuarioentidad);
 
-            //////Reset the edit index.
-            grilladirecciondeenvio.EditIndex = -1;
+                //////Reset the edit index.
+                grilladirecciondeenvio.EditIndex = -1;
 
-            CargarGrillaDireccionDeEnvio();
+                CargarGrillaDireccionDeEnvio();
+            }
+            else
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("MsjAtencion('");
+                sb.Append(Resources.Global.msjADirEnvVacio);
+                sb.Append("');");
+                sb.Append("$('#ErrorMsj').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                           "ModalScriptError1", sb.ToString(), false);
+            }
+
         }
 
         private void CargarGrillaDireccionDeEnvio()
@@ -690,7 +760,7 @@ namespace TFI.GUI
 
             if (password == passVieja)
             {
-                if (passNueva == passRepetida)
+                if (!string.IsNullOrWhiteSpace(passNueva) && !string.IsNullOrWhiteSpace(passRepetida) && passNueva == passRepetida)
                 {
                     usuarioentidadStatic.Clave = passRepetida;
                     usuariosdad.UpdateUsuarioContraseña(usuarioentidadStatic);
@@ -807,6 +877,18 @@ namespace TFI.GUI
                 ddlLoc.DataTextField = "DescripcionLocalidad";
                 ddlLoc.DataBind();
             }
+        }
+
+        protected void grillatelefonos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            if (HttpContext.Current.Session["Usuario"] != null)
+                usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+            else
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+
+            UsuarioBLL.DeleteTelefono(usuarioentidad, TelefonosDelUsuario[e.RowIndex].NroTelefono, TelefonosDelUsuario[e.RowIndex].CodArea, TelefonosDelUsuario[e.RowIndex].miTipoTel.IdTipoTel);
+
+            CargarGrillaTelefonos();
         }
 
 

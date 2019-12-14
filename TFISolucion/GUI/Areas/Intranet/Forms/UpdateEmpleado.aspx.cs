@@ -90,9 +90,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (!string.IsNullOrEmpty(usuarioString))
             {
-                cargarDatosEmpleado();
+                unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
+                
                 if (!IsPostBack)
                 {
+                    cargarDatosEmpleado();
                     LisAuxAsig = new List<IFamPat>();
                     LisAuxAsig = unManagerUsuario.UsuarioTraerPermisos(unEmpleado.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit);
                     LisAuxAsigBKP = LisAuxAsig.ToList();
@@ -146,13 +148,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         public void cargarDatosEmpleado(){
             
-            unEmpleado = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
+            
 
             lblEmpleado.Text = unEmpleado.Nombre + " " + unEmpleado.Apellido;
             Session["Empleado"] = (UsuarioEntidad)unEmpleado;
             txtNombreUsuario.Value = unEmpleado.NombreUsuario;
-            txtClave.Value = "********";
-            txtClaveRep.Value = "********";
             txtApellido.Value = unEmpleado.Apellido;
             txtNombre.Value = unEmpleado.Nombre;
             txtMail.Value = unEmpleado.Email;
@@ -217,23 +217,58 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnCambiarClave_Click(object sender, EventArgs e)
         {
+            divEspacioModifClave.InnerHtml = "";
+            divAlertaModifClave.Visible = false;
+            divMsjError.Visible = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<br />");
+
+            Page.Validate("ModifPass");
             if (Page.IsValid)
             {
-                StringBuilder sb = new StringBuilder();
-                unEmpleado = (UsuarioEntidad)Session["Empleado"];
-                unEmpleado.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
-                unManagerUsuario.UpdateUsuarioContraseña(unEmpleado);
-                sb.Append("<br />");
-                divEspacioModifClave.InnerHtml = sb.ToString();
-                divAlertaModifClave.Visible = true;
+                if (!string.IsNullOrWhiteSpace(txtClave.Value) && !string.IsNullOrWhiteSpace(txtClaveRep.Value) && txtClave.Value == txtClaveRep.Value)
+                {
+                    
+                    unEmpleado = (UsuarioEntidad)Session["Empleado"];
+                    unEmpleado.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
+                    unManagerUsuario.UpdateUsuarioContraseña(unEmpleado);
+                    divEspacioModifClave.InnerHtml = sb.ToString();
+                    divAlertaModifClave.Visible = true;
+                }
+                else
+                {
+                    divEspacioModifClave.InnerHtml = sb.ToString();
+                    divAlertaModifClave.Visible = false;
+                    divMsjError.Visible = true;
+                }
+                
             }
         }
 
         protected void btnNombreUsuario_Click(object sender, EventArgs e)
         {
-            unEmpleado.NombreUsuario = txtNombreUsuario.Value;
-            unEmpleado.IdUsuario = Int32.Parse(usuarioString);
-            unManagerUsuario.UsuarioUpdateNombreUsuario(unEmpleado);
+            divNombreUsMal.Visible = false;
+            divNombreUsbr.InnerHtml = "";
+
+            Page.Validate("AltaCliente");
+            if (Page.IsValid)
+            {
+                string NombreBD = txtNombreUsuario.Value;
+                if (!string.IsNullOrWhiteSpace(NombreBD))
+                {
+                    unEmpleado.NombreUsuario = NombreBD;
+                    unEmpleado.IdUsuario = Int32.Parse(usuarioString);
+                    unManagerUsuario.UsuarioUpdateNombreUsuario(unEmpleado);
+                }
+                else
+                {
+                    divNombreUsMal.Visible = true;
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<br />");
+                    divNombreUsbr.InnerHtml = "";
+                }
+            }
+            
         }
 
 

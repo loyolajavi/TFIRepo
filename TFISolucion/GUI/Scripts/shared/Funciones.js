@@ -100,7 +100,7 @@ function onBtnComprar(btn2) {
     var control = $(btn2);
     var idProdComprar = control.data('producto2');
 
-    consultarStockClickComprar(idProdComprar, function (stockActual) {
+    consultarStockClickComprarEnDesear(idProdComprar, function (stockActual) {
         if (stockActual > 0) {
             $.ajax({
                 type: "POST",
@@ -117,6 +117,9 @@ function onBtnComprar(btn2) {
                     //$modal.modal("show");
                     //updateProductos();
                     actualizarDeseos();
+                    updateDeseos(); //Para cargar los deseos al inicial la página
+                    updateProductos();//Para cargar los productos en el pedido al inicial la página
+                    app.reload();
                 }
             });
         }
@@ -126,10 +129,7 @@ function onBtnComprar(btn2) {
     });
     //return true;
 
-    actualizarDeseos();
-    updateDeseos(); //Para cargar los deseos al inicial la página
-    updateProductos();//Para cargar los productos en el pedido al inicial la página
-    app.reload();
+
 };
 //END******Para colocar producto de lista deseos en Pedidos al hacer click en Comprar en un produto Deseado*********END
 
@@ -320,13 +320,11 @@ var updateCompras = function () {
         var stockActual = 0;
         //Para consultar el stock va a codigo Producto.aspx.cs método consultarStock (que es un webMethod, ..
         //..no lee las variables locales de la clase Producto.aspx.cs), osea al server
-        $(document).ready(function () {
+        
             $.ajax({
                 type: "POST",
                 url: "Producto.aspx/consultarStock",
-                data: JSON.stringify({
-                    id: id,
-                }),
+                data: '{ id: ' + id + '}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 error: function (xhr, status, error) {
@@ -345,13 +343,46 @@ var updateCompras = function () {
                     //}
                     //my_callback(flagStock);
                     my_callback(stockActual);
+                    return stockActual;
                 }
             });
-        });
-        return stockActual; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
+        //return stockActual; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
     };
 
 
+    //PARA CONSULTAR STOCK AL CLICKEAR COMPRAR EN DESEAR
+    function consultarStockClickComprarEnDesear(id, my_callback) {
+        var stockActual = 0;
+        //Para consultar el stock va a codigo Producto.aspx.cs método consultarStock (que es un webMethod, ..
+        //..no lee las variables locales de la clase Producto.aspx.cs), osea al server
+
+        $.ajax({
+            type: "POST",
+            url: "/Areas/Public/Forms/ListaDeDeseos.aspx/consultarStock",
+            data: '{ id: ' + id + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (xhr, status, error) {
+                //alert(error);
+                alert("Error al consultar stock, por favor reintente");
+            },
+            success: function (data) {
+
+                var stockActual = data.d;
+
+                //if (stockActual >= 1) {
+                //    flagStock = true;
+                //}
+                //else {
+                //    flagStock = false;
+                //}
+                //my_callback(flagStock);
+                my_callback(stockActual);
+                return stockActual;
+            }
+        });
+        //return stockActual; // CON ESTO RETORNO SI HAY STOCK O NO A LA FUNCION btnComprar.CLick y onbtncomprar
+    };
 
 
 
@@ -361,7 +392,7 @@ var updateCompras = function () {
             url: "/Areas/Public/Forms/ListaDeDeseos.aspx/ObtenerDeseosSession",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            async: false,
+            
             error: function (xhr, status, error) {
                 alert(error);
             },

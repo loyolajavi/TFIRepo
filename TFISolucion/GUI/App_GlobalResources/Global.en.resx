@@ -996,4 +996,25 @@
   <data name="Accion" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Adquisicion" xml:space="preserve">
+    <value>Adquisition</value>
+  </data>
+  <data name="Atencion" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="CampoNombreVacio" xml:space="preserve">
+    <value>Personal data: There can be  no empty fields</value>
+  </data>
+  <data name="msjADirEnvVacio" xml:space="preserve">
+    <value>The street and number cannot be empty</value>
+  </data>
+  <data name="msjADirFacVacio" xml:space="preserve">
+    <value>The street and number cannot be empty</value>
+  </data>
+  <data name="msjAVerifiquePass" xml:space="preserve">
+    <value>Check passwords again</value>
+  </data>
+  <data name="msjCampoVacio" xml:space="preserve">
+    <value>Name cannot be empty</value>
+  </data>
 </root>

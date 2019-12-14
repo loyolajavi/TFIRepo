@@ -20,19 +20,18 @@
         </div>
 
         <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-
-                        <div class="form-inline">
-                        <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server" Width="40%"></asp:TextBox>
-                        <asp:Button ID="btnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
-                            <span style="margin-left:30%;">
-                                <a href="#modalStock" class="btn btn-info" data-toggle="modal"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarStock %>"></asp:Label></a>
-
-                            </span>
-
-                        </div>
-                    
+            <div class="col-md-8 col-md-offset-2">
+                <label class="control-label">Sucursal</label>
+                <asp:DropDownList ID="cboSucursal" runat="server" CssClass="form-control"></asp:DropDownList>
+                <div class="form-inline">
+                    <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server" Width="40%"></asp:TextBox>
+                    <asp:Button ID="btnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                    <span style="margin-left: 30%;">
+                        <a href="#modalStock" class="btn btn-info btn-xs" data-toggle="modal">
+                            <asp:Label ID="Label3" runat="server" Text="Ajustar Stock"></asp:Label></a>
+                    </span>
                 </div>
+            </div>
 
 
 
@@ -43,13 +42,13 @@
               <div class="col-md-8 col-md-offset-2">         
                      <div class="form-group">
                             <label for="grillastock"></label>
-                            <asp:GridView ID="grillastock"  CssClass="table" runat="server" GridLines="None"  >
+                            <asp:GridView ID="grillastock"   BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" runat="server" GridLines="None"  >
                                 <Columns>
-                                    <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
-                                    <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
-                                    <asp:BoundField DataField="CantidadEnStock" HeaderText="Stock" />
+                                    <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" HeaderStyle-CssClass="bg-primary" />
+                                    <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" HeaderStyle-CssClass="bg-primary" />
+                                    <asp:BoundField DataField="CantidadEnStock" HeaderText="Stock" HeaderStyle-CssClass="bg-primary" />
                                 </Columns>
-                                <EditRowStyle BackColor="#999999" />
+<%--                                <EditRowStyle BackColor="#999999" />
                                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                 <PagerSettings Mode="NextPreviousFirstLast" />
@@ -59,7 +58,7 @@
                                 <SortedAscendingCellStyle BackColor="#E9E7E2" />
                                 <SortedAscendingHeaderStyle BackColor="#506C8C" />
                                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
                             </asp:GridView>
                         </div>
               </div>

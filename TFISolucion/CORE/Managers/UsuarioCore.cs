@@ -315,5 +315,20 @@ namespace TFI.CORE.Managers
         }
 
 
+        public void DeleteTelefono(UsuarioEntidad elUsuario, string nroTelefono, string codArea, int idTipoTel)
+        {
+            TelefonoDAL GestorTelefono = new TelefonoDAL();
+
+            try
+            {
+                GestorTelefono.Delete(elUsuario.CUIT, elUsuario.NombreUsuario, nroTelefono, codArea, idTipoTel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

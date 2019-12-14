@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adquisicion.cs" />
+    <Compile Include="AdquisicionDetalle.cs" />
     <Compile Include="BitacoraLogEntidad.cs" />
     <Compile Include="CategoriaEntidad.cs" />
     <Compile Include="ComprobanteDetalleEntidad.cs" />

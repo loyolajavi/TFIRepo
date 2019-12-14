@@ -73,36 +73,42 @@ namespace TFI.GUI
 
         protected void EnviarCorreo(object sender, EventArgs e)
         {
-            contenedorsinpedidos.Visible = true;
-            notificacion.Visible = true;
 
-            //Obtener host servicio Mail
-            TFI.CORE.Servicios.ServicioMailCore.CargarMailConfig();
 
-            TFI.FUNCIONES.ServicioMail.EnviarCorreo("egenloys@gmail.com", txtNombre.Value + txtApellido.Value, txtAsunto.Value, txtMensaje.Value + " " + txtCorreo.Value + " " + txtTelefono.Value);
-            //Correo manager = new Correo();
-            //manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", txtNombre.Value, txtTelefono.Value,
-            //   "egenloys@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
-            
 
+            if (Page.IsValid)
             {
-                idioma = (LenguajeEntidad)Session["Idioma"];
-                if (idioma.DescripcionLenguaje == "es")
-                    notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
-                else
-                    notificacion.InnerHtml = "<strong>The message has been send!</strong>";
-                // notificacion.InnerHtml = <%$Resources:Global, co %>;
-                //notificacion.InnerText = Resources.Global.correo;
-                //notificacion.InnerHtml = "Resources:Global,
-                //CorreoEnviadoCorrectamente";
-                txtNombre.Value = "";
-                txtApellido.Value = "";
-                txtAsunto.Value = "";
-                txtCorreo.Value = "";
-                txtMensaje.Value = "";
-                txtTelefono.Value = "";
+                contenedorsinpedidos.Visible = true;
+                notificacion.Visible = true;
+                //Obtener host servicio Mail
+                TFI.CORE.Servicios.ServicioMailCore.CargarMailConfig();
 
+                TFI.FUNCIONES.ServicioMail.EnviarCorreo("egenloys@gmail.com", txtNombre.Value + txtApellido.Value, txtAsunto.Value, txtMensaje.Value + " " + txtCorreo.Value + " " + txtTelefono.Value);
+                //Correo manager = new Correo();
+                //manager.EnviarCorreo("egenloys@gmail.com", "Pass123*", txtNombre.Value, txtTelefono.Value,
+                //   "egenloys@gmail.com", txtApellido.Value + " " + txtNombre.Value + "-" + txtCorreo.Value, txtAsunto.Value, txtMensaje.Value);
+
+
+                {
+                    idioma = (LenguajeEntidad)Session["Idioma"];
+                    if (idioma.DescripcionLenguaje == "es")
+                        notificacion.InnerHtml = "<strong>El correo se ha enviado correctamente</strong>";
+                    else
+                        notificacion.InnerHtml = "<strong>The message has been send!</strong>";
+                    // notificacion.InnerHtml = <%$Resources:Global, co %>;
+                    //notificacion.InnerText = Resources.Global.correo;
+                    //notificacion.InnerHtml = "Resources:Global,
+                    //CorreoEnviadoCorrectamente";
+                    txtNombre.Value = "";
+                    txtApellido.Value = "";
+                    txtAsunto.Value = "";
+                    txtCorreo.Value = "";
+                    txtMensaje.Value = "";
+                    txtTelefono.Value = "";
+
+                }
             }
+
         }
     }
 }

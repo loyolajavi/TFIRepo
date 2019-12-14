@@ -215,6 +215,7 @@
     <Content Include="Content\Images\Usuarios\enbelWayLogo.jpg" />
     <Content Include="Content\Images\Usuarios\microsoftLogo.jpg" />
     <Content Include="Content\Images\Usuarios\SonyLogo.jpg" />
+    <Content Include="Favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="LCSK\Agent.aspx" />
     <Content Include="LCSK\Agent.html" />

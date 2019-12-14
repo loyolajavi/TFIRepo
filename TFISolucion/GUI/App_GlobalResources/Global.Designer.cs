@@ -1877,5 +1877,47 @@ namespace Resources {
                 return ResourceManager.GetString("Vision", resourceCulture);
             }
         }
+
+        internal static string CampoNombreVacio
+        {
+            get
+            {
+                return ResourceManager.GetString("CampoNombreVacio", resourceCulture);
+            }
+        }
+
+        internal static string msjADirFacVacio
+        {
+            get
+            {
+                return ResourceManager.GetString("msjADirFacVacio", resourceCulture);
+            }
+        }
+
+        internal static string msjADirEnvVacio
+        {
+            get
+            {
+                return ResourceManager.GetString("msjADirEnvVacio", resourceCulture);
+            }
+        }
+
+        internal static string msjAVerifiquePass
+        {
+            get
+            {
+                return ResourceManager.GetString("msjAVerifiquePass", resourceCulture);
+            }
+        }
+
+        internal static string msjCampoVacio
+        {
+            get
+            {
+                return ResourceManager.GetString("msjCampoVacio", resourceCulture);
+            }
+        }
+
+
     }
 }

@@ -80,19 +80,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
 
 
-            CargarGrillaUltimosPedidos();
+            
 
             if (!IsPostBack)
             {
+                CargarGrillaUltimosPedidos();
                 CargarDropdownEstados();
             }
         }
 
         private void CargarDropdownEstados()
         {
-            if (!Page.IsPostBack)
-            {
-
                 listaEstados = pedidoCore.EstadoPedidoSelectAll();
                 //ddlestados.DataSource = listaEstados;
                 //ddlestados.DataTextField = "DescripcionEstadoPedido";
@@ -103,9 +101,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 ddlEstadoPedido.DataTextField = "DescripcionEstadoPedido";
                 ddlEstadoPedido.DataValueField = "IdEstadoPedido";
                 ddlEstadoPedido.DataBind();
-
-            }
-
         }
 
         private void CargarGrillaUltimosPedidos()
@@ -455,6 +450,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             if (PedidosAMostrarDelCliente.Count == 0)
             {
                 contenedorsinpedidos.Visible = true;
+                grilladeultimospedidos.DataSource = null;
+                grilladeultimospedidos.DataBind();
                 sinpedidos.InnerHtml = "<strong>No existen pedidos para este Cliente con el estado seleccionado.</a>";
             }
             else

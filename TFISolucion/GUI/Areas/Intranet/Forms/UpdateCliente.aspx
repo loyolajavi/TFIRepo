@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="UpdateCliente.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.UpdateCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="UpdateCliente.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.UpdateCliente" EnableEventValidation="false" %>
 <%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

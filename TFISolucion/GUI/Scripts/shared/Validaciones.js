@@ -1,15 +1,16 @@
 ﻿var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 var $notif = $('#notification');
+var $notifAtencion = $('#notificationAtencion');
 var $form = $('#formPass');
 var $passNueva = $('#passnueva');
 var $passVieja = $('#passanterior');
 var $passConf = $('#passnuevarepetida');
 
-$('#btnLogin').on("click", function () {
+$('#btnCambiarPassPersonal').on("click", function () {
 
     ClearModal();
     ClearNotifications();
-    $("#modalLogin").modal("show");
+    $("#modalCambiarPassPersonal").modal("show");
     $passVieja.focus;
 });
 
@@ -96,6 +97,12 @@ function Exito(mensaje) {
     $notif.append(msj);
 }
 
+function MsjAtencion(mensaje) {
+    $notifAtencion.empty();
+    var msj = '<p class="alert-danger">' + mensaje + '</p>';
+    $notifAtencion.append(msj);
+}
+
 
 /***********PRUEBA DE AJAX PARA MODAL CAMBIAR CONTRASEÑA************************************/
 
@@ -108,7 +115,13 @@ $('#btnCambiarClave').click(function (e) {
         passNueva: $('#passnueva').val(),
         passRepetida: $('#passnuevarepetida').val()
     };
-    if (passnueva == passRepetida) {
+    if (passnueva == "" | passRepetida == "")
+    {
+        ClearNotifications();
+        Error("Por favor revisar los campos de la nueva contraseña");
+        return;
+    }
+        if(passnueva == passRepetida) {
         // Ahora hacemos la llamada tipo AJAX utilizando jQuery
         $.ajax({
             type: 'POST',                               // tipo de llamada (POST, GET)
@@ -130,7 +143,7 @@ $('#btnCambiarClave').click(function (e) {
                 else
                 {
                     ClearNotifications();
-                    Error("La contraseña actual no es correcta")
+                    Error("La contraseña actual no es correcta");
                 }
                 
                 
@@ -145,7 +158,7 @@ $('#btnCambiarClave').click(function (e) {
     else
     {
         ClearNotifications();
-        Error("Las contraseñas no coinciden")
+        Error("Las contraseñas no coinciden");
     }
     
 });
@@ -453,14 +466,14 @@ function onbtnGrabarTelefono() {
             // $('#notification').text('La información ha sido guardada exitosamente.');
             //window.location.reload();
             //Exito("Se ha cambiado la contraseña con exito");
+            location.reload(true);
         },
         error: function (data) {          // función que se va a ejecutar si el pedido falla
             alert("ERROR ");
             //  Error("No se ha podido realizar la consulta");
-
         }
     });
-    return true;
+    
 };
 
 

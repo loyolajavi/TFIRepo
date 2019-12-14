@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="FacturasCliente.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.FacturasCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/LayoutAdministracion.Master" AutoEventWireup="true" CodeBehind="FacturasCliente.aspx.cs" Inherits="TFI.GUI.Areas.Intranet.Forms.FacturasCliente" EnableEventValidation="false" %>
 
 <%@ MasterType VirtualPath="~/Shared/LayoutAdministracion.Master" %>
 
