@@ -69,8 +69,8 @@ namespace TFI.GUI
                     cotizacion.IdMoneda = 1;
                     Session["Cotizacion"] = cotizacion;
                 }
-
-                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
 
                 if (idioma == null)
                 {
@@ -93,14 +93,16 @@ namespace TFI.GUI
             producto = _manager.Find(IdProducto, cotizacion.IdMoneda);
             if(producto.FecBaja != null)
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
-            moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+            if (cotizacion != null)
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             Page.Title = producto.DescripProducto;
             
 
             LoadProducto(IdProducto);
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
             if (lblStatus != null)
-                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+                if (cotizacion != null)
+                    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)

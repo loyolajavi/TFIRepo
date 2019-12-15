@@ -79,8 +79,8 @@ namespace TFI.GUI
                     cotizacion.IdMoneda = 1;
                     Session["Cotizacion"] = cotizacion;
                 }
-
-                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
                 // ProductoCore unProductoCore = new ProductoCore();
                 if (idioma == null)
                 {
@@ -117,7 +117,8 @@ namespace TFI.GUI
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
                 Session["Cotizacion"] = cotizacion;
 
-                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
                 unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).Where(o => o.FecBaja == null).OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 // var miDropMoneda = Master.combo.SelectedItem.Value;
 
@@ -133,6 +134,7 @@ namespace TFI.GUI
 
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
             if (lblStatus != null)
+                if (cotizacion != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
             //pruebo lo de idioma para que quede seteado el combo cuando vuelve a home desde cualquier otra pagina

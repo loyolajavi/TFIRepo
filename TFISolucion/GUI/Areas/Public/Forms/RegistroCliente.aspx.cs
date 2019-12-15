@@ -23,6 +23,9 @@ namespace TFI.GUI.Areas.Public.Forms
         private UsuarioCore unManagerUsuario = new UsuarioCore();
         public UsuarioEntidad unUsuario = new UsuarioEntidad();
         public List<ProvinciaEntidad> unasProvincias = new List<ProvinciaEntidad>();
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coreMoneda;
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -39,6 +42,9 @@ namespace TFI.GUI.Areas.Public.Forms
         public RegistroCliente()
         {
             idioma = new LenguajeEntidad();
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
+            _coreMoneda = new MonedaCore();
         }
 
         ////Para mantener la sesión activa
@@ -65,16 +71,27 @@ namespace TFI.GUI.Areas.Public.Forms
                     Session["Idioma"] = idioma;
 
                 }
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+                Session.Add("cotizacionAnterior", "");
             }
             else
             {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
             }
+            if(cotizacion != null)
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
             }
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                if(cotizacion != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
         }
 
 

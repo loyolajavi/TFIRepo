@@ -80,8 +80,8 @@ namespace TFI.GUI
                     Session["Idioma"] = idioma;
 
                 }
-
-                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
 
                 stringBusqueda = Page.Request.QueryString["search"];
                 stringCategoria = Page.Request.QueryString["Categoria"];
@@ -166,7 +166,8 @@ namespace TFI.GUI
 
 
             }
-            moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
+            if (cotizacion != null)
+                moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
             //CargarCategorias
 
             unasCategorias = ManagerCategoria.SeleccionarCategorias();
@@ -183,6 +184,7 @@ namespace TFI.GUI
                 //Thread.CurrentThread.CurrentUICulture = new CultureInfo(idioma.DescripcionLenguaje);
             }
            if( lblStatus != null)
+               if (cotizacion != null)
                 lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
            var valordropdown = Session["ValorDrop"];

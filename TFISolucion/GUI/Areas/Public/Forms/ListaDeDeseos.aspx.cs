@@ -65,7 +65,8 @@ namespace TFI.GUI
                     cotizacion.IdMoneda = 1;
                     Current.Session["Cotizacion"] = cotizacion;
                 }
-                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
                 cotizacion = _coreMoneda.Select(cotizacion.IdMoneda);
 
                 if (idioma == null)
@@ -83,15 +84,22 @@ namespace TFI.GUI
                 Current.Session["Idioma"] = idioma;
                 cotizacion.IdMoneda = Convert.ToInt16(this.Master.obtenerValorDropDown());
                 Current.Session["Cotizacion"] = cotizacion;
-                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+                if (cotizacion != null)
+                    moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
                 cotizacion = _coreMoneda.Select(cotizacion.IdMoneda);
             }
+            if (cotizacion != null)
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                if (cotizacion != null)
+                    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
             //if (!IsPostBack)
             //{
             //    cargarListaDeseos();

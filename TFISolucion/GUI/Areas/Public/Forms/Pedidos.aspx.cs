@@ -88,7 +88,8 @@ namespace TFI.GUI.Areas.Public.Forms
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
                 Session["Idioma"] = idioma;
             }
-            moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
+            if (cotizacion != null)
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
@@ -97,7 +98,8 @@ namespace TFI.GUI.Areas.Public.Forms
             }
             DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
             if (lblStatus != null)
-                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+                if (cotizacion != null)
+                    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
 
 
             //Son los productos que hay en el Pedido actual, sin cantidades

@@ -16,6 +16,9 @@ namespace TFI.GUI
     public partial class QuienesSomos : BasePage
     {
         private LenguajeEntidad idioma;
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coreMoneda;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -33,6 +36,9 @@ namespace TFI.GUI
         public QuienesSomos()
         {
             idioma = new LenguajeEntidad();
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
+            _coreMoneda = new MonedaCore();
         }
 
 
@@ -61,19 +67,31 @@ namespace TFI.GUI
                     Session["Idioma"] = idioma;
 
                 }
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+                Session.Add("cotizacionAnterior", "");
 
             }
             else
             {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
                 Session["Idioma"] = idioma;
             }
+            if (cotizacion != null)
+                moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                if (cotizacion != null)
+                    lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
+
             nombreempresa.InnerHtml = EmpresaBLL.EmpresaSelectByCuit(ConfigSection.Default.Site.Cuit).NombreEmpresa;
 
             quienessomos.InnerHtml = EmpresaBLL.SeleccionarContenidoEmpresa(ConfigSection.Default.Site.Cuit, "QuienesSomos", 1).Valor;
