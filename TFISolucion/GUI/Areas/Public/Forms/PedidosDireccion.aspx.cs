@@ -21,6 +21,9 @@ namespace TFI.GUI.Areas.Public.Forms
         public DireccionEntidad direccionEnvio;
         public DireccionEntidad direccionFacturacion;
         public TelefonoEntidad telefonoContacto;
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coreMoneda;
 
         protected UsuarioCore _usuarioManager;
         private LenguajeEntidad idioma;
@@ -41,6 +44,9 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             idioma = new LenguajeEntidad();
             _usuarioManager = new UsuarioCore();
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
+            _coreMoneda = new MonedaCore();
         }
 
 
@@ -72,19 +78,28 @@ namespace TFI.GUI.Areas.Public.Forms
                     Session["Idioma"] = idioma;
 
                 }
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+                Session.Add("cotizacionAnterior", "");
 
             }
             else
             {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
                 Session["Idioma"] = idioma;
             }
+            moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
             if (logueado != null)
             {
                 var dirs = _usuarioManager.FindDireccionesPredeterminadas(logueado);

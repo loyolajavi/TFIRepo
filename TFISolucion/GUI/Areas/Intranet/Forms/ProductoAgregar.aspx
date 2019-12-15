@@ -86,7 +86,10 @@
                     </div>
 
                     <div style="text-align: center;">
+                        <%if (this.Master.Autenticar(new string[] { "ProductoAlta", "ProductoMod" }))
+                          { %>
                         <asp:Button Text="Guardar" runat="server" ClientIDMode="Static" ID="btnGuardar" CssClass="btn btn-primary" OnClick="Guardar" />
+                        <% } %>
                         <a href="GestionContenidoProductos.aspx" class="btn btn-default">Volver</a>
                     </div>
                 </div>

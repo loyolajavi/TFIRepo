@@ -155,6 +155,7 @@
     <Content Include="Content\Images\Iconos\pdf.ico" />
     <Content Include="Content\Images\Iconos\pdf.png" />
     <Content Include="Content\Images\Iconos\visa_xs.png" />
+    <Content Include="Content\Images\Productos\10-11.5-KVA-3-B.jpg" />
     <Content Include="Content\Images\Productos\1234.jpg" />
     <Content Include="Content\Images\Productos\13.jpg" />
     <Content Include="Content\Images\Productos\acdc.jpg" />
@@ -179,6 +180,7 @@
     <Content Include="Content\Images\Productos\cuchaLiving.jpg" />
     <Content Include="Content\Images\Productos\cuchaMadera.jpg" />
     <Content Include="Content\Images\Productos\dave.jpg" />
+    <Content Include="Content\Images\Productos\default.jpg" />
     <Content Include="Content\Images\Productos\ff.jpg" />
     <Content Include="Content\Images\Productos\flashpoint.jpg" />
     <Content Include="Content\Images\Productos\GE10000ME.png" />
@@ -188,6 +190,7 @@
     <Content Include="Content\Images\Productos\GE8000.png" />
     <Content Include="Content\Images\Productos\ghoststories.jpg" />
     <Content Include="Content\Images\Productos\hablatuespejo.jpg" />
+    <Content Include="Content\Images\Productos\honda-eg5000.jpg" />
     <Content Include="Content\Images\Productos\inexs.jpg" />
     <Content Include="Content\Images\Productos\ironmaiden.jpg" />
     <Content Include="Content\Images\Productos\lazarus.jpg" />

@@ -36,16 +36,17 @@
             <div class="col-md-12">
                 <h1 class="page-header">
                     <asp:Label ID="Label1" runat="server" Text="<%$Resources:Global, Productos %>"></asp:Label>
-                    <small>
-                        <asp:Label ID="Label2" runat="server" Text="<%$Resources:Global, GestionContenidos %>"></asp:Label></small>
                 </h1>
             </div>
         </div>
         <div class="row">
 
                 <div class="col-md-12 text-right" style="align-content: flex-end;">
+                    <%if (this.Master.Autenticar(new string[] { "ProductoAlta" }))
+                      { %>
                     <a href="/Areas/Intranet/Forms/ProductoAgregar.aspx" class="btn btn-primary" data-toggle="modal">
                         <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
+                    <% } %>
                 </div>
 
         </div>
@@ -60,16 +61,27 @@
                     <label for="grillaproductos"></label>
                     <asp:UpdatePanel ID="up1" runat="server">
                         <ContentTemplate>
-                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" >
+                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCommand="grillaproductos_RowCommand"  OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" >
                         <Columns>
                             <%--<asp:CommandField ShowEditButton="True" CausesValidation="false" ButtonType="Image" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />--%>
                             <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
                                 <ItemTemplate>
+                                    <%if (this.Master.Autenticar(new string[] { "ProductoMod" }))
+                                      { %>
                                     <a href="/Areas/Intranet/Forms/ProductoAgregar.aspx?id=<%# Eval ("IdProducto") %>">
                                         <asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" /></a>
+                                    <% } %>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="5%" />
+                            <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
+                                <ItemTemplate>
+                                    <%if(this.Master.Autenticar(new string[] { "ProductoEliminar" }))
+                                      { %>
+                                    <asp:LinkButton runat="server" CommandArgument='<%# Eval ("IdProducto") %>' CommandName="EliminarProdCommand" ><asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/eliminar -16.png" /></asp:LinkButton>
+                                    <% } %>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <%--<asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="5%" />--%>
                             <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" HeaderStyle-CssClass="bg-primary" />
                             <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" HeaderStyle-CssClass="bg-primary" />
                             <%--<asp:BoundField DataField="Marca" HeaderText="<%$Resources:Global, Marca %>" HeaderStyle-CssClass="bg-primary" />--%>

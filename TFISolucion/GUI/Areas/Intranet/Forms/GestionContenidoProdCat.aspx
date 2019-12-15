@@ -17,16 +17,29 @@
                 </h1>
             </div>
         </div>
-         
-        
+
+
         <div class="row">
 
-                    <div class="form-inline">
-                        <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server" Width="40%"></asp:TextBox>
-                        <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
-                        <span style="margin-left:30%;"><a href="#modalProdCategoria" class="btn btn-info" data-toggle="modal"><asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a></span>
+            <div class="col-md-5 col-md-offset-1">
+                <div class="col-md-9">
+                    <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="<%$Resources:Global, IngresoCodigoProducto %>" runat="server"></asp:TextBox>
+                </div>
+                <div class="col-md-3">
+                    <asp:Button ID="brnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                </div>
+            </div>
+            <div class="form-inline col-md-3 text-right">
+                    <label for="cboCategoria">
+                        <asp:Label ID="Label3" runat="server" class="control-label text-center" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
+                    <asp:DropDownList ID="cboCategoria" runat="server" CssClass="form-control" ClientIDMode="static" AutoPostBack="true"></asp:DropDownList>
+            </div>
+            <div class="col-md-3">
+                <asp:Button ID="btnAsociarCat" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>" CssClass="btn btn-info" OnClick="btnGrabarAsociacion_Click" />
+                <%--<a href="#modalProdCategoria" class="btn btn-info" data-toggle="modal">
+                    <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>--%>
+            </div>
 
-                    </div>
 
         </div>
    

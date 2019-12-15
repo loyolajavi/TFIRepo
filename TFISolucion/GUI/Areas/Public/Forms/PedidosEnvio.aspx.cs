@@ -20,6 +20,10 @@ namespace TFI.GUI.Areas.Public.Forms
         private LenguajeEntidad idioma;
         public List<PedidoLista> ProdCantEnPedido;
         public List<PedidoDetalleEntidad> unosPedidosDetalles;//Para guardar los productos y consultar las sucursales con stock
+        public MonedaEmpresaEntidad cotizacion;
+        public MonedaEntidad moneda;
+        private MonedaCore _coreMoneda;
+
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
             MasterPage master = this.Master;
@@ -40,6 +44,9 @@ namespace TFI.GUI.Areas.Public.Forms
         {
             idioma = new LenguajeEntidad();
             _sucursalCore = new SucursalCore();
+            cotizacion = new MonedaEmpresaEntidad();
+            moneda = new MonedaEntidad();
+            _coreMoneda = new MonedaCore();
         }
 
         ////Para mantener la sesión activa
@@ -78,7 +85,6 @@ namespace TFI.GUI.Areas.Public.Forms
 
             if (!IsPostBack)
             {
-
                 idioma = (LenguajeEntidad)Session["Idioma"];
 
                 if (idioma == null)
@@ -86,22 +92,29 @@ namespace TFI.GUI.Areas.Public.Forms
                     idioma = new LenguajeEntidad();
                     idioma.DescripcionLenguaje = "es";
                     Session["Idioma"] = idioma;
-
                 }
+                cotizacion = new MonedaEmpresaEntidad();
+                cotizacion = (MonedaEmpresaEntidad)Session["Cotizacion"];
+                Session.Add("cotizacionAnterior", "");
 
             }
             else
             {
+                cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
+                Session["Cotizacion"] = cotizacion;
                 idioma.DescripcionLenguaje = Master.obtenerIdiomaCombo();
                 Session["Idioma"] = idioma;
             }
+            moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             DropDownList lblIdioma = FindControlFromMaster<DropDownList>("ddlLanguages");
             if (lblIdioma != null)
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
 
             }
-
+            DropDownList lblStatus = FindControlFromMaster<DropDownList>("MonedaDRW");
+            if (lblStatus != null)
+                lblStatus.SelectedValue = cotizacion.IdMoneda.ToString();
             
             formaEnvioId = (int?)Current.Session["FormaEnvio"];
             Current.Session["FormaEnvio"] = 1;//REVISAR

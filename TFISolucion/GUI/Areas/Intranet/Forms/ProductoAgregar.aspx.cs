@@ -36,6 +36,14 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
+
+            string[] unosPermisosTest = new string[] { "ProductoAlta", "ProductoMod" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             idioma = new LenguajeEntidad();
             if (!IsPostBack)
             {
@@ -60,18 +68,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             {
                 lblIdioma.SelectedValue = idioma.DescripcionLenguaje;
             }
-            usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
-            {
-                Response.Redirect("/Areas/Public/Forms/Home.aspx");
-            }
-            unosPermisosTest = new string[] { "Empleado" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
-            {
-                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
-            }
+            
 
 
         }
@@ -83,6 +81,11 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (!String.IsNullOrEmpty(id))
             {
+                string[] unosPermisosTest = new string[] { "ProductoMod" };
+                if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
+                {
+                    Response.Redirect("/Areas/Public/Forms/Home.aspx");
+                }
                 action.Value = "Edit";
 
                 var p = ManagerProducto.Find(int.Parse(id), 1);
@@ -99,6 +102,14 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 //IVA
                 ddiva.SelectedValue = p.miIvaProducto.IdIvaProducto.ToString();
                 ddiva.DataBind();
+            }
+            else
+            {
+                string[] unosPermisosTest = new string[] { "ProductoAlta" };
+                if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
+                {
+                    Response.Redirect("/Areas/Public/Forms/Home.aspx");
+                }
             }
         }
 

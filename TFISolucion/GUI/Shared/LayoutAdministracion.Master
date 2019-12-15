@@ -161,7 +161,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, Contenidos %>"></asp:Label><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <%if (this.Autenticar(new string[] { "GestionProducto" }))
+                                        <%if (this.Autenticar(new string[] { "ProductoEliminar", "ProductoAlta", "ProductoMod" }))
                                           {%>
                                         <li>
                                             <a href="GestionContenidoProductos.aspx">

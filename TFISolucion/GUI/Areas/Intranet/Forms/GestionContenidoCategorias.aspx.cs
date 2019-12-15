@@ -113,20 +113,25 @@ namespace TFI.GUI.Areas.Intranet.Forms
             var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
             var Descripcion = ((TextBox)row.Cells[3].Controls[0]).Text;
 
-            CategoriaActualizada.IdCategoria = Convert.ToInt32(IdCategoria);
-            CategoriaActualizada.DescripCategoria = Descripcion;
-            CategoriaActualizada.CUIT = ConfigSection.Default.Site.Cuit;
+            Regex reg = new Regex("[0-9]"); //Expresión que solo acepta números.
+            
 
-            CategoriaBLL.CategoriaUpdate(CategoriaActualizada);
+            if (!string.IsNullOrWhiteSpace(Descripcion) && !reg.IsMatch(Descripcion))
+            {
+                CategoriaActualizada.IdCategoria = Convert.ToInt32(IdCategoria);
+                CategoriaActualizada.DescripCategoria = Descripcion;
+                CategoriaActualizada.CUIT = ConfigSection.Default.Site.Cuit;
 
-            //////Reset the edit index.
-            grillacategorias.EditIndex = -1;
+                CategoriaBLL.CategoriaUpdate(CategoriaActualizada);
 
-            ////////Bind data to the GridView control.
-            grillacategorias.DataBind();
+                //////Reset the edit index.
+                grillacategorias.EditIndex = -1;
 
-            Response.Redirect(Request.RawUrl);
+                ////////Bind data to the GridView control.
+                grillacategorias.DataBind();
 
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         protected void grillacategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)

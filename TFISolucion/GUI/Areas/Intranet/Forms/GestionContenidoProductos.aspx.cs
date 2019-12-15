@@ -63,7 +63,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "GestionProducto" };
+            string[] unosPermisosTest = new string[] { "ProductoEliminar", "ProductoAlta", "ProductoMod" };
             if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
@@ -317,6 +317,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
             grillaproductos.PageIndex = e.NewPageIndex;
             CargarGrillaProductos();
 
+        }
+
+        
+
+
+
+        protected void grillaproductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            var hola = 0;
+            if (e.CommandName.Equals("EliminarProdCommand"))
+                hola = Convert.ToInt32(e.CommandArgument);
         }
     }
 }

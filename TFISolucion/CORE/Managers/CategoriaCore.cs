@@ -26,6 +26,7 @@ namespace TFI.CORE.Managers
 
         public void CategoriaDelete(int idcat)
         {
+            DalDeProdCategoria.DeleteAllByIdCategoria(idcat);
             DalDeCategoria.Delete(idcat);
         }
 

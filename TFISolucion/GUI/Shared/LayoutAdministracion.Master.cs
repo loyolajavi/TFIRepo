@@ -46,7 +46,7 @@ namespace TFI.GUI.General
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Empleado", "Admin" };
+            string[] unosPermisosTest = new string[] { "ProductoEliminar", "ProductoAlta", "ProductoMod" };
 
             if (usuario != null && Autenticar(unosPermisosTest))
             {

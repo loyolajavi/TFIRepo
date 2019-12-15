@@ -19,6 +19,9 @@ namespace TFI.GUI.Areas.Intranet.Forms
         ProductoCore ProductoBLL = new ProductoCore();
         UsuarioEntidad usuarioentidad = new UsuarioEntidad();
         private LenguajeEntidad idioma;
+        List<CategoriaEntidad> unasCategorias = new List<CategoriaEntidad>();
+        HttpContext Current = HttpContext.Current;
+        int IdProdAux = 0;
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -75,9 +78,23 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 if (!IsPostBack) { grillacatprod.DataBind(); }
             }
 
-            if (!IsPostBack) { CargarDropdownCategorias(); }
+            if (!IsPostBack) 
+            { 
+                unasCategorias = EmpresaBLL.SeleccionarCategorias(ConfigSection.Default.Site.Cuit);
+                Current.Session["unasCategoriasFiltradas"] = unasCategorias;
+                IdProdAux = 0;
+                Current.Session["IdProdAux"] = IdProdAux;
+                CargarCategorias();
+            }
+            else
+            {
+                if (Current.Session["unasCategoriasFiltradas"] != null)
+                    unasCategorias = (List<CategoriaEntidad>)Current.Session["unasCategoriasFiltradas"];
+                if (Current.Session["IdProdAux"] != null)
+                    IdProdAux = (int)Current.Session["IdProdAux"];
+                    
+            }
 
-            if (!IsPostBack) { CargarDropdownProductos(); }
         }
 
         protected void CargarGrillaCatProd()
@@ -90,32 +107,40 @@ namespace TFI.GUI.Areas.Intranet.Forms
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
             Consultas.Clear();
+            ActualizarCategoriasFiltradas();
+        }
 
-
+        public void ActualizarCategoriasFiltradas()
+        {
+            List<CategoriaEntidad> CategoriasDeProducto = new List<CategoriaEntidad>();
             List<ProductoEntidad> productos = ProductoBLL.FindAllByDescripProducto(txtProductoaBuscar.Text);
 
-            foreach (var item in productos)
+            if (productos != null && productos.Count > 0)
             {
-
-                List<CategoriaEntidad> CategoriasDeProducto = new List<CategoriaEntidad>();
-                CategoriasDeProducto = ProductoBLL.ProductoSelectAllCategorias(item.IdProducto);
+                CategoriasDeProducto = ProductoBLL.ProductoSelectAllCategorias(productos.First().IdProducto);
+                IdProdAux = productos.First().IdProducto;
+                Current.Session["IdProdAux"] = IdProdAux;
 
                 foreach (var cat in CategoriasDeProducto)
                 {
 
                     ConsultaDTO Consulta = new ConsultaDTO();
-                    Consulta.IdProducto = item.IdProducto;
+                    Consulta.IdProducto = productos.First().IdProducto;
                     Consulta.IdCategoria = cat.IdCategoria;
-                    Consulta.Descripcion = item.DescripProducto;
+                    Consulta.Descripcion = productos.First().DescripProducto;
                     Consulta.DescripCategoria = cat.DescripCategoria;
 
                     Consultas.Add(Consulta);
                 }
 
+                unasCategorias = EmpresaBLL.SeleccionarCategorias(ConfigSection.Default.Site.Cuit);
+                unasCategorias = unasCategorias.Where(X => !CategoriasDeProducto.Any(Y => Y.IdCategoria == X.IdCategoria)).ToList();
+                CargarCategorias();
+                Current.Session["unasCategoriasFiltradas"] = unasCategorias;
+                CargarGrillaCatProd();
             }
-
-            CargarGrillaCatProd();
         }
+
 
         public class ConsultaDTO
         {
@@ -126,60 +151,88 @@ namespace TFI.GUI.Areas.Intranet.Forms
             public string DescripCategoria { get; set; }
         }
 
-        protected void btnGrabarAsociacion_Click(object sender, EventArgs e)
-        {
-            CargarGrillaCatProd();
-            Response.Redirect(Request.RawUrl);
 
+
+        //protected void CargarDropdownCategorias()
+        //{
+        //    ddlCategoria.DataSource = EmpresaBLL.SeleccionarCategorias(ConfigSection.Default.Site.Cuit); 
+        //    ddlCategoria.DataValueField = "IdCategoria";
+        //    ddlCategoria.DataTextField = "DescripCategoria";
+        //    ddlCategoria.DataBind();
+        //}
+
+        protected void CargarCategorias()
+        {
+            cboCategoria.DataSource = unasCategorias;
+            cboCategoria.DataValueField = "IdCategoria";
+            cboCategoria.DataTextField = "DescripCategoria";
+            cboCategoria.DataBind();
         }
 
-        protected void CargarDropdownCategorias()
-        {
-            ddlCategoria.DataSource = EmpresaBLL.SeleccionarCategorias(ConfigSection.Default.Site.Cuit);
-            ddlCategoria.DataValueField = "IdCategoria";
-            ddlCategoria.DataTextField = "DescripCategoria";
-            ddlCategoria.DataBind();
-        }
-
-        protected void CargarDropdownProductos()
-        {
-            ddlProducto.DataSource = ProductoBLL.FindAllByCUIT(1);
-            ddlProducto.DataValueField = "IdProducto";
-            ddlProducto.DataTextField = "DescripProducto";
-            ddlProducto.DataBind();
-        }
+        //protected void CargarDropdownProductos()
+        //{
+        //    ddlProducto.DataSource = ProductoBLL.FindAllByCUIT(1);
+        //    ddlProducto.DataValueField = "IdProducto";
+        //    ddlProducto.DataTextField = "DescripProducto";
+        //    ddlProducto.DataBind();
+        //}
 
         protected void grillacatprod_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             ProdCategoriaEntidad AsociacionAEliminar = new ProdCategoriaEntidad();
             GridViewRow row = (GridViewRow)grillacatprod.Rows[e.RowIndex];
-            var IdProducto = ((string)row.Cells[1].Text);
             var IdCategoria = ((string)row.Cells[3].Text);
-            AsociacionAEliminar.IdProducto = Convert.ToInt32(IdProducto);
+            AsociacionAEliminar.IdProducto = IdProdAux;
             AsociacionAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
             CategoriaBLL.CategoriaProdDelete(AsociacionAEliminar.IdProducto, AsociacionAEliminar.IdCategoria);
-            Response.Redirect(Request.RawUrl);
+            ActualizarCategoriasFiltradas();
 
         }
 
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        [System.Web.Services.WebMethod]
-        public static void GrabarAsociacion(int producto, int categoria)
+
+        protected void btnGrabarAsociacion_Click(object sender, EventArgs e)
         {
-            var usuarioEntity = new UsuarioEntidad();
-            var Current = HttpContext.Current;
+            if (IdProdAux > 0)
+            {
+                ProdCategoriaEntidad NuevaAsociacion = new ProdCategoriaEntidad();
 
-            usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
+                NuevaAsociacion.IdProducto = IdProdAux;
+                NuevaAsociacion.IdCategoria = Int32.Parse(cboCategoria.SelectedValue);
+                NuevaAsociacion.CUIT = ConfigSection.Default.Site.Cuit;
 
-            ProdCategoriaEntidad NuevaAsociacion = new ProdCategoriaEntidad();
+                ProductoCore UnCoreProducto = new ProductoCore();
+                UnCoreProducto.ProductoCategoriaInsert(NuevaAsociacion);
 
-            NuevaAsociacion.IdProducto = producto;
-            NuevaAsociacion.IdCategoria = categoria;
-            NuevaAsociacion.CUIT = ConfigSection.Default.Site.Cuit;
-
-            ProductoCore UnCoreProducto = new ProductoCore();
-            UnCoreProducto.ProductoCategoriaInsert(NuevaAsociacion);
-
+                ActualizarCategoriasFiltradas();
+                Current.Session["IdProdAux"] = null;
+                IdProdAux = 0;
+                Current.Session["unasCategoriasFiltradas"] = null;
+                unasCategorias.Clear();
+            }
         }
+
+
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //[System.Web.Services.WebMethod]
+        //public static void GrabarAsociacion(int producto, int categoria)
+        //{
+        //    var usuarioEntity = new UsuarioEntidad();
+        //    var Current = HttpContext.Current;
+
+        //    usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
+
+        //    ProdCategoriaEntidad NuevaAsociacion = new ProdCategoriaEntidad();
+
+        //    NuevaAsociacion.IdProducto = producto;
+        //    NuevaAsociacion.IdCategoria = categoria;
+        //    NuevaAsociacion.CUIT = ConfigSection.Default.Site.Cuit;
+
+        //    ProductoCore UnCoreProducto = new ProductoCore();
+        //    UnCoreProducto.ProductoCategoriaInsert(NuevaAsociacion);
+
+        //}
+
+
+
     }
 }

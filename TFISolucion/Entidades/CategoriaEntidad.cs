@@ -19,10 +19,6 @@ namespace TFI.Entidades
 
         public string CUIT { get; set; }
 
-		/// <summary>
-		/// Gets or sets the FecBaja value.
-		/// </summary>
-		public DateTime? FecBaja { get; set; }
         public List<ProductoEntidad> misProductos { get; set; }
 
 		#endregion
