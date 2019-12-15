@@ -190,19 +190,19 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         }
 
-        protected void grillaproductos_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            ProductoEntidad ProductoAEliminar = new ProductoEntidad();
-            GridViewRow row = (GridViewRow)grillaproductos.Rows[e.RowIndex];
-            var CodigoProducto = ((string)row.Cells[2].Text);
-            var ProductoE = ProductosDeEmpresa.Where(X => X.CodigoProducto == CodigoProducto).First();
-            ProductoAEliminar.IdProducto = ProductoE.IdProducto;
-            ProductoBLL.ProdCategoriaDeleteByProducto(ProductoAEliminar.IdProducto);
-            ProductoBLL.ProductoDelete(ProductoAEliminar.IdProducto);
+        //protected void grillaproductos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    ProductoEntidad ProductoAEliminar = new ProductoEntidad();
+        //    GridViewRow row = (GridViewRow)grillaproductos.Rows[e.RowIndex];
+        //    var CodigoProducto = ((string)row.Cells[2].Text);
+        //    var ProductoE = ProductosDeEmpresa.Where(X => X.CodigoProducto == CodigoProducto).First();
+        //    ProductoAEliminar.IdProducto = ProductoE.IdProducto;
+        //    ProductoBLL.ProdCategoriaDeleteByProducto(ProductoAEliminar.IdProducto);
+        //    ProductoBLL.ProductoDelete(ProductoAEliminar.IdProducto);
 
-            Response.Redirect(Request.RawUrl);
+        //    Response.Redirect(Request.RawUrl);
 
-        }
+        //}
 
         protected void grillaproductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -325,9 +325,17 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void grillaproductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            var hola = 0;
+            int IdProdEliminar = 0;
+
             if (e.CommandName.Equals("EliminarProdCommand"))
-                hola = Convert.ToInt32(e.CommandArgument);
+            {
+                IdProdEliminar = Convert.ToInt32(e.CommandArgument);
+                ProductoBLL.ProdCategoriaDeleteByProducto(IdProdEliminar);
+                ProductoBLL.ProductoDelete(IdProdEliminar);
+                Response.Redirect(Request.RawUrl);
+            }
+
+
         }
     }
 }

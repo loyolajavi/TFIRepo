@@ -61,7 +61,7 @@
                     <label for="grillaproductos"></label>
                     <asp:UpdatePanel ID="up1" runat="server">
                         <ContentTemplate>
-                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCommand="grillaproductos_RowCommand"  OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" >
+                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCommand="grillaproductos_RowCommand"  OnRowDataBound="grillaproductos_RowDataBound" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" >
                         <Columns>
                             <%--<asp:CommandField ShowEditButton="True" CausesValidation="false" ButtonType="Image" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />--%>
                             <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">

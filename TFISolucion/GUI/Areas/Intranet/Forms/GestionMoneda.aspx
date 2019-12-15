@@ -17,10 +17,10 @@
     <div class="col-md-8 col-md-offset-2" >
         <div class="form-group">
             <label for="grillaMoneda"></label>
-            <asp:GridView ID="grillaCotizacion" CssClass="table table-hover table-responsive table-striped"  runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" GridLines="None" >
+            <asp:GridView ID="grillaCotizacion" CssClass="table table-hover table-responsive table-striped"  runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" DataKeyNames="IdMoneda" OnRowUpdating="grillaCotizacion_RowUpdating" GridLines="None" >
                 <Columns>
-                    <asp:CommandField ShowEditButton="True" ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
-                    <asp:BoundField DataField="IdMoneda" HeaderText="Id" HeaderStyle-CssClass="bg-primary" />
+                    <asp:CommandField ShowEditButton="True" ButtonType="Image" CausesValidation="false" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="10%" HeaderStyle-CssClass="bg-primary"/>
+                    <asp:BoundField DataField="IdMoneda" HeaderText="Id" HeaderStyle-CssClass="bg-primary" ReadOnly="true" />
                     <asp:BoundField DataField="Nombre" HeaderText="Iso Code" HeaderStyle-CssClass="bg-primary" />
                     <asp:BoundField DataField="Cotizacion" HeaderText="<%$Resources:Global, Cotizacion %>" HeaderStyle-CssClass="bg-primary" />
                     <asp:BoundField DataField="SimboloMoneda" HeaderText="<%$Resources:Global, Simbolo %>" HeaderStyle-CssClass="bg-primary" />

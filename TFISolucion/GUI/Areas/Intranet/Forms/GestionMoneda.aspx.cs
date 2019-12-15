@@ -9,6 +9,7 @@ using TFI.CORE.Helpers;
 using TFI.Entidades;
 using System.Web.Script.Services;
 using TFI.GUI;
+using System.Text.RegularExpressions;
 
 namespace TFI.CORE.Areas.Intranet.Forms
 {
@@ -224,23 +225,30 @@ namespace TFI.CORE.Areas.Intranet.Forms
             GridViewRow row = grillaCotizacion.Rows[e.RowIndex];
             //var txt = (TextBox)row.Cells[1].FindControl("ID");
             //txt.ReadOnly = false;
-            var IdMoneda = ((TextBox)row.Cells[1].Controls[0]).Text;
+
+            var IdMoneda = Int32.Parse(e.Keys["IdMoneda"].ToString());
             var ISOCODE = ((TextBox)row.Cells[2].Controls[0]).Text;
             var cotizacion = ((TextBox)row.Cells[3].Controls[0]).Text;
             // var fechaCotizacion = ((TextBox)row.Cells[4].Controls[0]).Text;
             var simbolo = ((TextBox)row.Cells[4].Controls[0]).Text;
 
-            moneda.IdMoneda = Convert.ToInt32(IdMoneda);
-            moneda.Cotizacion = Convert.ToDecimal(cotizacion);
-            _managerMoneda.MonedaEmpresaUpdate(moneda);
+            Regex reg = new Regex("[0-9]"); //Expresión que solo acepta números.
 
-            //////Reset the edit index.
-            grillaCotizacion.EditIndex = -1;
+            if (!string.IsNullOrWhiteSpace(ISOCODE) && !string.IsNullOrWhiteSpace(cotizacion) && !string.IsNullOrWhiteSpace(simbolo) && !reg.IsMatch(ISOCODE) && !reg.IsMatch(simbolo) && reg.IsMatch(cotizacion))
+            {
+                moneda.IdMoneda = Convert.ToInt32(IdMoneda);
+                moneda.Cotizacion = Convert.ToDecimal(cotizacion);
+                _managerMoneda.MonedaEmpresaUpdate(moneda);
 
-            ////////Bind data to the GridView control.
-            grillaCotizacion.DataBind();
+                //////Reset the edit index.
+                grillaCotizacion.EditIndex = -1;
 
-            Response.Redirect(Request.RawUrl);
+                ////////Bind data to the GridView control.
+                grillaCotizacion.DataBind();
+
+                Response.Redirect(Request.RawUrl);
+            }
+            
 
         }
 
