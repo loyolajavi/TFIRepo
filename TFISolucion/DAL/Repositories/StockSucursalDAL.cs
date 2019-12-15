@@ -90,12 +90,13 @@ namespace TFI.DAL.DAL
 		/// <summary>
 		/// Selects a single record from the StockSucursal table.
 		/// </summary>
-		public StockSucursalEntidad Select(int idProducto, int idSucursal)
+		public StockSucursalEntidad Select(int idProducto, int idSucursal, string CUIT)
 		{
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdProducto", idProducto),
-				new SqlParameter("@IdSucursal", idSucursal)
+				new SqlParameter("@IdSucursal", idSucursal),
+                new SqlParameter("@CUIT", CUIT)
 			};
 
             using (DataTable dt = SqlClientUtility.ExecuteDataTable(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "StockSucursalSelect", parameters))

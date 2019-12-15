@@ -1020,4 +1020,16 @@
   <data name="Hasta" xml:space="preserve">
     <value>Hasta</value>
   </data>
+  <data name="Remito" xml:space="preserve">
+    <value>Remito</value>
+  </data>
+  <data name="Registrar" xml:space="preserve">
+    <value>Registrar</value>
+  </data>
+  <data name="Agregar" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="AdqCreada" xml:space="preserve">
+    <value>Adquisición creada correctamente</value>
+  </data>
 </root>

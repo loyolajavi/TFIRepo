@@ -5,6 +5,18 @@ namespace TFI.Entidades
 	public class StockSucursalEntidad
 	{
 
+        public StockSucursalEntidad(int elProd, int laSucursal, int laCantidad, string elCUIT, DateTime? lafecBaja = null)
+        {
+            IdProducto  = elProd;
+            IdSucursal = laSucursal;
+            CantidadProducto = laCantidad;
+            CUIT = elCUIT;
+            FecBaja = lafecBaja;
+        }
+
+        public StockSucursalEntidad() { }
+
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the IdProducto value.

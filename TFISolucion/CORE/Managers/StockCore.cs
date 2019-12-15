@@ -27,13 +27,26 @@ namespace TFI.CORE.Managers
             {
                 throw;
             } 
-            
-           
         }
 
         public void Update(StockSucursalEntidad stock)
         {
             DalStock.Update(stock);
         }
+
+
+        public StockSucursalEntidad Select(int elIdProducto, int elIdSucursal, string elCUIT)
+        {
+            try
+            {
+                return DalStock.Select(elIdProducto, elIdSucursal, elCUIT);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

@@ -177,6 +177,10 @@
                                                 <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Categorias %>"></asp:Label></a>
                                         </li>
                                         <li>
+                                            <a href="RegistrarAdquisicion.aspx">
+                                                <asp:Label ID="Label31" runat="server" Text="<%$Resources:Global, Adquisicion %>"></asp:Label></a>
+                                        </li>
+                                        <li>
                                             <a href="GestionStock.aspx">
                                                 <asp:Label ID="Label22" runat="server" Text="<%$Resources:Global, GestionStockMenu %>"></asp:Label></a>
                                         </li>
@@ -204,6 +208,10 @@
                                         <li>
                                             <a href="PermisosEmpleados.aspx">
                                                 <asp:Label ID="Label12" runat="server" Text="<%$Resources:Global, Empleados %>"></asp:Label></a>
+                                        </li>
+                                        <li>
+                                            <a href="AltaUsuario.aspx">
+                                                <asp:Label ID="Label30" runat="server" Text="<%$Resources:Global, AltaUsuario %>"></asp:Label></a>
                                         </li>
                                         <%} %>
                                         <%--<li>

@@ -18,14 +18,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="text-right col-md-12">
-                <span><a class="btn btn-info" href="AltaUsuario.aspx"><asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AltaUsuario %>"></asp:Label></a></span>
-
-            </div>
-
-        </div>
-
+        
         <div class="row">
             <div class="col-md-12">
 

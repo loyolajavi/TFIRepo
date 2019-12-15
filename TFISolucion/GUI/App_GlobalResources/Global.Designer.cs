@@ -1934,5 +1934,36 @@ namespace Resources {
             }
         }
 
+        internal static string Remito
+        {
+            get
+            {
+                return ResourceManager.GetString("Remito", resourceCulture);
+            }
+        }
+
+        internal static string Registrar
+        {
+            get
+            {
+                return ResourceManager.GetString("Registrar", resourceCulture);
+            }
+        }
+
+        internal static string Agregar
+        {
+            get
+            {
+                return ResourceManager.GetString("Agregar", resourceCulture);
+            }
+        }
+        internal static string AdqCreada
+        {
+            get
+            {
+                return ResourceManager.GetString("AdqCreada", resourceCulture);
+            }
+        }
+        
     }
 }

@@ -301,7 +301,7 @@
     <value>Site´s map</value>
   </data>
   <data name="MasVendidos" xml:space="preserve">
-    <value>Producst more sold</value>
+    <value>Products more sold</value>
   </data>
   <data name="MejoresClientes" xml:space="preserve">
     <value>They are the best Companies who choise us</value>
@@ -1022,5 +1022,17 @@
   </data>
   <data name="Hasta" xml:space="preserve">
     <value>Ends</value>
+  </data>
+  <data name="Remito" xml:space="preserve">
+    <value>Remittance</value>
+  </data>
+  <data name="Registrar" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Agregar" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AdqCreada" xml:space="preserve">
+    <value>Adquisition succesfully created</value>
   </data>
 </root>
