@@ -5,7 +5,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MiContenido" runat="server">
+     <style>
+        .thumbnail {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+        }
 
+        .thumbnail img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 100%;
+            width: auto;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+
+        .thumbnail img.portrait {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 
     <div class="container paddingPaginas">
 
@@ -20,9 +43,9 @@
         </div>
         <div class="row">
 
-                <div class="col-md-12 text-right" style="align-content:flex-end;">
-                    <a href="#modalProducto" class="btn btn-info" data-toggle="modal">
-                        <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
+                <div class="col-md-12 text-right" style="align-content: flex-end;">
+                    <a href="/Areas/Intranet/Forms/ProductoAgregar.aspx" class="btn btn-primary" data-toggle="modal">
+                        <asp:Label ID="Label11" runat="server" Text="<%$Resources:Global, AgregarProducto %>"></asp:Label></a>
                 </div>
 
         </div>
@@ -35,39 +58,49 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="grillaproductos"></label>
-                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillaproductos_RowCancelingEdit" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnRowUpdating="grillaproductos_RowUpdating" OnRowEditing="grillaproductos_RowEditing" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true">
+                    <asp:UpdatePanel ID="up1" runat="server">
+                        <ContentTemplate>
+                    <asp:GridView ID="grillaproductos" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowDataBound="grillaproductos_RowDataBound" OnRowDeleting="grillaproductos_RowDeleting" OnPageIndexChanging="grillaproductos_PageIndexChanging" AllowPaging="true" >
                         <Columns>
-                            <asp:CommandField ShowEditButton="True"  ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
-                            <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" />
-                            <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" HeaderStyle-CssClass="bg-primary" />
-                            <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" HeaderStyle-CssClass="bg-primary" />
-                            <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>" HeaderStyle-CssClass="bg-primary" >
+                            <%--<asp:CommandField ShowEditButton="True" CausesValidation="false" ButtonType="Image" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />--%>
+                            <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="dropdownMarca" runat="server"></asp:DropDownList>
+                                    <a href="/Areas/Intranet/Forms/ProductoAgregar.aspx?id=<%# Eval ("IdProducto") %>">
+                                        <asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" /></a>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="5%" />
+                            <asp:BoundField DataField="CodigoProducto" HeaderText="<%$Resources:Global, CodigoProducto %>" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, Descripcion %>" HeaderStyle-CssClass="bg-primary" />
+                            <%--<asp:BoundField DataField="Marca" HeaderText="<%$Resources:Global, Marca %>" HeaderStyle-CssClass="bg-primary" />--%>
+                            <asp:TemplateField HeaderText="<%$Resources:Global, Marca %>" HeaderStyle-CssClass="bg-primary" >
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="dropdownMarca" runat="server" Enabled="false" ></asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <%--<asp:BoundField DataField="Iva" HeaderText="<%$Resources:Global, IVA %>" HeaderStyle-CssClass="bg-primary" />--%>
                             <asp:TemplateField HeaderText="IVA" HeaderStyle-CssClass="bg-primary" >
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlIVA" runat="server" disabled="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlIVA" runat="server" Enabled="false"></asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="PrecioUnitario" HeaderText="<%$Resources:Global, PrecioUnitario %>" HeaderStyle-CssClass="bg-primary" />
-                            <asp:BoundField DataField="URL" HeaderText="URL" HeaderStyle-CssClass="bg-primary" />
-                            <asp:BoundField DataField="DescripLarga" HeaderText="<%$Resources:Global, Detalle %>" HeaderStyle-CssClass="bg-primary" />
+                            <%--<asp:BoundField DataField="URL" HeaderText="URL" HeaderStyle-CssClass="bg-primary" />--%>
+                            <asp:TemplateField HeaderText="URL" HeaderStyle-CssClass="bg-primary" >
+                                <ItemTemplate>
+                                    <div class="thumbnail">
+                                        <img src="/Content/Images/Productos/<%# Eval ("URL") %>" alt="<%# Eval ("URL") %>" />
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            
+
 
                         </Columns>
-<%--                        <EditRowStyle BackColor="#999999" />
-                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <PagerSettings Mode="NextPreviousFirstLast" FirstPageText=" First > " PreviousPageText=" Previous > " NextPageText=" Next > " LastPageText=" Last " />
-                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
+
                     </asp:GridView>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                 </div>
 
                 <br />

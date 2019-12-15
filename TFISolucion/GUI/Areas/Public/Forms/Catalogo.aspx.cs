@@ -95,7 +95,7 @@ namespace TFI.GUI
                     if (stringBusqueda == "*")
                     {
                         //unosProductos = _manager.ProductoSelectMasVendidosByCUIT(TFI.CORE.Helpers.ConfigSection.Default.Site.Cuit);
-                        unosProductos = _manager.FindAllByCUIT(cotizacion.IdMoneda);
+                        unosProductos = _manager.FindAllByCUIT(cotizacion.IdMoneda).Where(o => o.FecBaja == null).ToList(); 
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                         Session["ProductosEnSesion"] = unosProductos;
@@ -105,7 +105,7 @@ namespace TFI.GUI
                         var cotizacionStatic = new MonedaEmpresaEntidad();
                         cotizacionStatic = (MonedaEmpresaEntidad)Current.Session["Cotizacion"];
                         //                      unosProductos = _manager.FindAllByDescripProducto(stringBusqueda);
-                        unosProductos = _manager.FindAllByDescripProducto(stringBusqueda, cotizacionStatic.IdMoneda);
+                        unosProductos = _manager.FindAllByDescripProducto(stringBusqueda, cotizacionStatic.IdMoneda).Where(o => o.FecBaja == null).ToList(); 
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                         Session["ProductosEnSesion"] = unosProductos;
@@ -117,7 +117,7 @@ namespace TFI.GUI
                 {
                     if (Int32.Parse(stringCategoria) > 0 && Int32.Parse(stringCategoria) < 500)
                     {
-                        unosProductos = _manager.ProductoSelectByCategoria(Int32.Parse(stringCategoria), cotizacion.IdMoneda);
+                        unosProductos = _manager.ProductoSelectByCategoria(Int32.Parse(stringCategoria), cotizacion.IdMoneda).Where(o => o.FecBaja == null).ToList();
                         catalogo.DataSource = unosProductos;
                         catalogo.DataBind();
                         Session["ProductosEnSesion"] = unosProductos;

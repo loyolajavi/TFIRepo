@@ -1964,6 +1964,12 @@ namespace Resources {
                 return ResourceManager.GetString("AdqCreada", resourceCulture);
             }
         }
-        
+        internal static string IVA
+        {
+            get
+            {
+                return ResourceManager.GetString("IVA", resourceCulture);
+            }
+        }
     }
 }

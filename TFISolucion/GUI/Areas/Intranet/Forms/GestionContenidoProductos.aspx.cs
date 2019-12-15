@@ -69,26 +69,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
 
-            ProductoCore ProductoBLL = new ProductoCore();
-            ProductosDeEmpresa = ProductoBLL.FindAllByCUIT(1);
-
-            foreach (var prod in ProductosDeEmpresa)
-            {
-                ProductoDTO producto = new ProductoDTO();
-                producto.CodigoProducto = prod.CodigoProducto;
-                producto.Descripcion = prod.DescripProducto;
-                producto.DescripLarga = prod.DescripLarga;
-                producto.PrecioUnitario = Convert.ToDecimal(prod.PrecioUnitario);
-                producto.URL = prod.URL;
-
-                ProductosenGrilla.Add(producto);
-            }
-
-            grillaproductos.DataSource = ProductosenGrilla;
-            grillaproductos.AutoGenerateColumns = false;
+            CargarGrillaProductos();
             if (!IsPostBack)
             {
-                grillaproductos.DataBind();
+
             }
 
             if (!IsPostBack)
@@ -118,6 +102,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             foreach (var prod in ProductosDeEmpresa)
             {
                 ProductoDTO producto = new ProductoDTO();
+                producto.IdProducto = prod.IdProducto;
                 producto.CodigoProducto = prod.CodigoProducto;
                 producto.Descripcion = prod.DescripProducto;
                 producto.DescripLarga = prod.DescripLarga;
@@ -139,7 +124,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         public class ProductoDTO
         {
-
+            public int IdProducto { get; set; }
             public string CodigoProducto { get; set; }
             public string Descripcion { get; set; }
             public decimal PrecioUnitario { get; set; }
@@ -224,17 +209,10 @@ namespace TFI.GUI.Areas.Intranet.Forms
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string codigo;
-
                 if (e.Row.RowIndex == grillaproductos.EditIndex)
-                {
                     codigo = ((TextBox)e.Row.Cells[2].Controls[0]).Text;
-
-                }
                 else
-                {
                     codigo = (string)e.Row.Cells[2].Text;
-                }
-
 
                 var ProductoE = ProductosDeEmpresa.Where(X => X.CodigoProducto == codigo).First();
 
@@ -247,9 +225,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     var marcaEntidad = ProductoBLL.MarcaSelect(ProductoE.miMarca.IdMarca);
                     dropdownMarca.SelectedValue = marcaEntidad.IdMarca.ToString();
                     dropdownMarca.DataBind();
-
                 }
-
                 var ddlIVA = e.Row.FindControl("ddlIva") as DropDownList;
                 if (ddlIVA != null)
                 {
@@ -258,12 +234,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     ddlIVA.DataTextField = "PorcentajeIvaProd";
                     ddlIVA.SelectedValue = ProductoE.miIvaProducto.IdIvaProducto.ToString();
                     ddlIVA.DataBind();
-
                 }
-
-
-
-
             }
         }
 

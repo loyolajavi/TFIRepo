@@ -29,26 +29,16 @@
         <hr />
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-2">
                 <div class="form-group">
                     <label for="grillacategorias"></label>
-                    <asp:GridView ID="grillacategorias" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillacategorias_RowCancelingEdit" OnRowDeleting="grillacategorias_RowDeleting" OnRowUpdating="grillacategorias_RowUpdating" OnRowEditing="grillacategorias_RowEditing">
+                    <asp:GridView ID="grillacategorias" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillacategorias_RowCancelingEdit" OnRowDeleting="grillacategorias_RowDeleting" OnRowUpdating="grillacategorias_RowUpdating" OnRowEditing="grillacategorias_RowEditing" AutoGenerateColumns="false">
                         <Columns>
-                            <asp:CommandField ShowEditButton="True" ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
-                            <asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" />
+                            <asp:CommandField ShowEditButton="true" ButtonType="Image" CausesValidation="false" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="10%" HeaderStyle-CssClass="bg-primary" />
+                            <asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="5%"  />
                             <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" Visible="false" HeaderStyle-CssClass="bg-primary" />
-                            <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, Descripcion %>" HeaderStyle-CssClass="bg-primary" />
+                            <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, Descripcion %>" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="bg-primary text-center" />
                         </Columns>
-<%--                        <EditRowStyle BackColor="#999999" />
-                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />--%>
                     </asp:GridView>
                 </div>
 

@@ -91,6 +91,8 @@ namespace TFI.GUI
             if (cotizacion == null)
                 cotizacion.IdMoneda = Convert.ToInt16(Master.obtenerValorDropDown());
             producto = _manager.Find(IdProducto, cotizacion.IdMoneda);
+            if(producto.FecBaja != null)
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
             moneda = _coreMoneda.selectMoneda(cotizacion.IdMoneda);
             Page.Title = producto.DescripProducto;
             

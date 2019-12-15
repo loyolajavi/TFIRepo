@@ -19,7 +19,7 @@
             <label for="grillaMoneda"></label>
             <asp:GridView ID="grillaCotizacion" CssClass="table table-hover table-responsive table-striped"  runat="server" OnRowCancelingEdit="grillaCotizacion_RowCancelingEdit" OnRowEditing="grillaCotizacion_RowEditing" OnRowUpdating="grillaCotizacion_RowUpdating" GridLines="None" >
                 <Columns>
-                    <asp:CommandField ShowEditButton="True"  ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
+                    <asp:CommandField ShowEditButton="True" ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
                     <asp:BoundField DataField="IdMoneda" HeaderText="Id" HeaderStyle-CssClass="bg-primary" />
                     <asp:BoundField DataField="Nombre" HeaderText="Iso Code" HeaderStyle-CssClass="bg-primary" />
                     <asp:BoundField DataField="Cotizacion" HeaderText="<%$Resources:Global, Cotizacion %>" HeaderStyle-CssClass="bg-primary" />

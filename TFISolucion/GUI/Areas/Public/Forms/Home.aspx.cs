@@ -99,13 +99,13 @@ namespace TFI.GUI
 
                 //SI NO
                 //MUESTRA LOS ULTIMOS AGREGADOS AL ECOMMERCE
-                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).Where(o => o.FecBaja == null).OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 lstProductosDestacados.DataBind();
 
 
                 //**************MOSTRAR PRODUCTOS MAS VENDIDOS (PARA LA SEGUNDA PESTAÑA)**********************************************************************                
-                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda);
+                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda).Where(o => o.FecBaja == null).ToList(); 
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
             }
@@ -118,14 +118,14 @@ namespace TFI.GUI
                 Session["Cotizacion"] = cotizacion;
 
                 moneda = _coremoneda.selectMoneda(cotizacion.IdMoneda);
-                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).OrderByDescending(x => x.IdProducto).Take(2).ToList();
+                unosProductosDestacados = (List<ProductoEntidad>)unProductoCore.FindAllByCUIT(cotizacion.IdMoneda).Where(o => o.FecBaja == null).OrderByDescending(x => x.IdProducto).Take(2).ToList();
                 // var miDropMoneda = Master.combo.SelectedItem.Value;
 
                 // Master.FindControl("DRWMoneda");
                 lstProductosDestacados.DataSource = unosProductosDestacados;
                 // cotizacion.Cotizacion = this.Master.cotizacion.Cotizacion;
                 lstProductosDestacados.DataBind();
-                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda);
+                unosProductosMasVendidos = unProductoCore.ProductoSelectMasVendidosByCUIT(ConfigSection.Default.Site.Cuit, cotizacion.IdMoneda).Where(o => o.FecBaja == null).ToList(); 
                 lstMasVendidos.DataSource = unosProductosMasVendidos;
                 lstMasVendidos.DataBind();
 
@@ -222,7 +222,7 @@ namespace TFI.GUI
             var cotizacion = new MonedaEmpresaEntidad();
             cotizacion = (MonedaEmpresaEntidad)HttpContext.Current.Session["Cotizacion"];
             var cot2 = Convert.ToInt32(cotizacion.IdMoneda);
-            var productosEmpresa = core.FindAllByCUIT(cot2);
+            var productosEmpresa = core.FindAllByCUIT(cot2).Where(o => o.FecBaja == null).ToList();
 
             return productosEmpresa.Select(x => x.DescripProducto).ToList();
 

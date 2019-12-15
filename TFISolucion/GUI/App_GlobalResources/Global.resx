@@ -1032,4 +1032,7 @@
   <data name="AdqCreada" xml:space="preserve">
     <value>Adquisición creada correctamente</value>
   </data>
+  <data name="IVA" xml:space="preserve">
+    <value>IVA</value>
+  </data>
 </root>
