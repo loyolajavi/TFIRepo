@@ -65,8 +65,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
+            string[] unosPermisosTest = new string[] { "CategoriaAlta", "CategoriaMod", "CategoriaEliminar" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
@@ -104,55 +104,60 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void grillacategorias_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            CategoriaEntidad CategoriaActualizada = new CategoriaEntidad();
-
-
-            GridViewRow row = grillacategorias.Rows[e.RowIndex];
-            //var IdCategoria = ((TextBox)row.Cells[2].Controls[0]).Text;
-            //var IdCategoria = CategoriasDeEmpresa.Where(x => x.IdCategoria == Int32.Parse().First().IdCategoria;
-            var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
-            var Descripcion = ((TextBox)row.Cells[3].Controls[0]).Text;
-
-            Regex reg = new Regex("[0-9]"); //Expresión que solo acepta números.
-            
-
-            if (!string.IsNullOrWhiteSpace(Descripcion) && !reg.IsMatch(Descripcion))
+            string[] unosPermisosTest = new string[] { "CategoriaMod" };
+            if (this.Master.Autenticar(unosPermisosTest))
             {
-                CategoriaActualizada.IdCategoria = Convert.ToInt32(IdCategoria);
-                CategoriaActualizada.DescripCategoria = Descripcion;
-                CategoriaActualizada.CUIT = ConfigSection.Default.Site.Cuit;
+                CategoriaEntidad CategoriaActualizada = new CategoriaEntidad();
 
-                CategoriaBLL.CategoriaUpdate(CategoriaActualizada);
+                GridViewRow row = grillacategorias.Rows[e.RowIndex];
+                //var IdCategoria = ((TextBox)row.Cells[2].Controls[0]).Text;
+                //var IdCategoria = CategoriasDeEmpresa.Where(x => x.IdCategoria == Int32.Parse().First().IdCategoria;
+                var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
+                var Descripcion = ((TextBox)row.Cells[3].Controls[0]).Text;
 
-                //////Reset the edit index.
-                grillacategorias.EditIndex = -1;
+                Regex reg = new Regex("[0-9]"); //Expresión que solo acepta números.
 
-                ////////Bind data to the GridView control.
-                grillacategorias.DataBind();
 
-                Response.Redirect(Request.RawUrl);
+                if (!string.IsNullOrWhiteSpace(Descripcion) && !reg.IsMatch(Descripcion))
+                {
+                    CategoriaActualizada.IdCategoria = Convert.ToInt32(IdCategoria);
+                    CategoriaActualizada.DescripCategoria = Descripcion;
+                    CategoriaActualizada.CUIT = ConfigSection.Default.Site.Cuit;
+
+                    CategoriaBLL.CategoriaUpdate(CategoriaActualizada);
+
+                    //////Reset the edit index.
+                    grillacategorias.EditIndex = -1;
+
+                    ////////Bind data to the GridView control.
+                    grillacategorias.DataBind();
+
+                    Response.Redirect(Request.RawUrl);
+                }
             }
         }
 
-        protected void grillacategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            CategoriaEntidad CategoriaAEliminar = new CategoriaEntidad();
-            GridViewRow row = (GridViewRow)grillacategorias.Rows[e.RowIndex];
-            //var IdCategoria = ((string)row.Cells[2].Text);
-            var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
-            //CategoriaAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
-            CategoriaAEliminar.IdCategoria = IdCategoria;
-            CategoriaBLL.CategoriaDelete(CategoriaAEliminar.IdCategoria);
+        //protected void grillacategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    CategoriaEntidad CategoriaAEliminar = new CategoriaEntidad();
+        //    GridViewRow row = (GridViewRow)grillacategorias.Rows[e.RowIndex];
+        //    //var IdCategoria = ((string)row.Cells[2].Text);
+        //    var IdCategoria = CategoriasDeEmpresa[e.RowIndex].IdCategoria;
+        //    //CategoriaAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
+        //    CategoriaAEliminar.IdCategoria = IdCategoria;
+        //    CategoriaBLL.CategoriaDelete(CategoriaAEliminar.IdCategoria);
 
-            Response.Redirect(Request.RawUrl);
+        //    Response.Redirect(Request.RawUrl);
 
-        }
+        //}
 
 
         protected void grillacategorias_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            grillacategorias.EditIndex = e.NewEditIndex;
-            grillacategorias.DataBind();
+
+                grillacategorias.EditIndex = e.NewEditIndex;
+                grillacategorias.DataBind();
+            
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -209,6 +214,18 @@ namespace TFI.GUI.Areas.Intranet.Forms
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                        "ModalScript", sb.ToString(), false);
+        }
+
+        protected void grillacategorias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int IdCatEliminar = 0;
+
+            if (e.CommandName.Equals("EliminarCommand"))
+            {
+                IdCatEliminar = Convert.ToInt32(e.CommandArgument);
+                CategoriaBLL.CategoriaDelete(IdCatEliminar);
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
     }

@@ -64,8 +64,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
+            string[] unosPermisosTest = new string[] { "CategoriaAsociar", "CategoriaDesasociar" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
@@ -73,7 +73,6 @@ namespace TFI.GUI.Areas.Intranet.Forms
             if (Consultas.Count > 0)
             {
                 grillacatprod.DataSource = Consultas;
-                grillacatprod.AutoGenerateColumns = false;
 
                 if (!IsPostBack) { grillacatprod.DataBind(); }
             }
@@ -99,8 +98,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void CargarGrillaCatProd()
         {
+            grillacatprod.DataSource = null;
             grillacatprod.DataSource = Consultas;
-            grillacatprod.AutoGenerateColumns = false;
             grillacatprod.DataBind();
         }
 
@@ -163,6 +162,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void CargarCategorias()
         {
+            cboCategoria.DataSource = null;
             cboCategoria.DataSource = unasCategorias;
             cboCategoria.DataValueField = "IdCategoria";
             cboCategoria.DataTextField = "DescripCategoria";
@@ -177,38 +177,60 @@ namespace TFI.GUI.Areas.Intranet.Forms
         //    ddlProducto.DataBind();
         //}
 
-        protected void grillacatprod_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            ProdCategoriaEntidad AsociacionAEliminar = new ProdCategoriaEntidad();
-            GridViewRow row = (GridViewRow)grillacatprod.Rows[e.RowIndex];
-            var IdCategoria = ((string)row.Cells[3].Text);
-            AsociacionAEliminar.IdProducto = IdProdAux;
-            AsociacionAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
-            CategoriaBLL.CategoriaProdDelete(AsociacionAEliminar.IdProducto, AsociacionAEliminar.IdCategoria);
-            ActualizarCategoriasFiltradas();
+        //protected void grillacatprod_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    ProdCategoriaEntidad AsociacionAEliminar = new ProdCategoriaEntidad();
+        //    GridViewRow row = (GridViewRow)grillacatprod.Rows[e.RowIndex];
+        //    var IdCategoria = ((string)row.Cells[3].Text);
+        //    AsociacionAEliminar.IdProducto = IdProdAux;
+        //    AsociacionAEliminar.IdCategoria = Convert.ToInt32(IdCategoria);
+        //    CategoriaBLL.CategoriaProdDelete(AsociacionAEliminar.IdProducto, AsociacionAEliminar.IdCategoria);
+        //    ActualizarCategoriasFiltradas();
 
-        }
+        //}
 
 
         protected void btnGrabarAsociacion_Click(object sender, EventArgs e)
         {
+            List<CategoriaEntidad> CategoriasDeProducto = new List<CategoriaEntidad>();
+            ProdCategoriaEntidad NuevaAsociacion = new ProdCategoriaEntidad();
+
             if (IdProdAux > 0)
             {
-                ProdCategoriaEntidad NuevaAsociacion = new ProdCategoriaEntidad();
+                CategoriasDeProducto = ProductoBLL.ProductoSelectAllCategorias(IdProdAux);
+                if(!CategoriasDeProducto.Exists(X=>X.IdCategoria == Int32.Parse(cboCategoria.SelectedValue)))
+                {
+                    NuevaAsociacion.IdProducto = IdProdAux;
+                    NuevaAsociacion.IdCategoria = Int32.Parse(cboCategoria.SelectedValue);
+                    NuevaAsociacion.CUIT = ConfigSection.Default.Site.Cuit;
 
-                NuevaAsociacion.IdProducto = IdProdAux;
-                NuevaAsociacion.IdCategoria = Int32.Parse(cboCategoria.SelectedValue);
-                NuevaAsociacion.CUIT = ConfigSection.Default.Site.Cuit;
+                    ProductoCore UnCoreProducto = new ProductoCore();
+                    UnCoreProducto.ProductoCategoriaInsert(NuevaAsociacion);
 
-                ProductoCore UnCoreProducto = new ProductoCore();
-                UnCoreProducto.ProductoCategoriaInsert(NuevaAsociacion);
-
-                ActualizarCategoriasFiltradas();
-                Current.Session["IdProdAux"] = null;
-                IdProdAux = 0;
-                Current.Session["unasCategoriasFiltradas"] = null;
-                unasCategorias.Clear();
+                    ActualizarCategoriasFiltradas();
+                    Current.Session["unasCategoriasFiltradas"] = null;
+                    unasCategorias.Clear();
+                }
+                
             }
+        }
+
+        protected void grillacatprod_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            int IdCatEliminar = 0;
+
+            if (e.CommandName.Equals("EliminarCommand"))
+            {
+                IdCatEliminar = Convert.ToInt32(e.CommandArgument);
+                ProdCategoriaEntidad AsociacionAEliminar = new ProdCategoriaEntidad();
+                AsociacionAEliminar.IdProducto = IdProdAux;
+                AsociacionAEliminar.IdCategoria = IdCatEliminar;
+                CategoriaBLL.CategoriaProdDelete(AsociacionAEliminar.IdProducto, AsociacionAEliminar.IdCategoria);
+                ActualizarCategoriasFiltradas();
+            }
+
+            
         }
 
 

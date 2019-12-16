@@ -35,9 +35,10 @@
                     <asp:DropDownList ID="cboCategoria" runat="server" CssClass="form-control" ClientIDMode="static" AutoPostBack="true"></asp:DropDownList>
             </div>
             <div class="col-md-3">
+                <%if (this.Master.Autenticar(new string[] { "CategoriaAsociar" }))
+                  { %>
                 <asp:Button ID="btnAsociarCat" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>" CssClass="btn btn-info" OnClick="btnGrabarAsociacion_Click" />
-                <%--<a href="#modalProdCategoria" class="btn btn-info" data-toggle="modal">
-                    <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, AgregarCATPROD %>"></asp:Label></a>--%>
+                <% } %>
             </div>
 
 
@@ -47,24 +48,22 @@
         <div class="row">
 
                             <label for="grillacatprod"></label>
-                            <asp:GridView ID="grillacatprod" CssClass="table" runat="server" GridLines="None" OnRowDeleting="grillacatprod_RowDeleting">
+                            <asp:GridView ID="grillacatprod" BorderStyle="NotSet" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCommand="grillacatprod_RowCommand" >
                                 <Columns>
-                                    <asp:CommandField ShowDeleteButton="True"  ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" />
-                                    <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" />
-                                    <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" />
-                                    <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" />
-                                    <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, DescripcionCategoria %>" />
+                                    <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
+                                        <ItemTemplate>
+                                            <%if (this.Master.Autenticar(new string[] { "CategoriaDesasociar" }))
+                                              { %>
+                                            <asp:LinkButton runat="server" CausesValidation="false" CommandArgument='<%# Eval ("IdCategoria") %>' CommandName="EliminarCommand"><asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/eliminar -16.png" /></asp:LinkButton>
+                                            <% } %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="IdProducto" HeaderText="<%$Resources:Global, IdProducto %>" HeaderStyle-CssClass="bg-primary" />
+                                    <asp:BoundField DataField="Descripcion" HeaderText="<%$Resources:Global, DescripcionProducto %>" HeaderStyle-CssClass="bg-primary" />
+                                    <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" HeaderStyle-CssClass="bg-primary" />
+                                    <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, DescripcionCategoria %>" HeaderStyle-CssClass="bg-primary" />
                                 </Columns>
-                                <EditRowStyle BackColor="#999999" />
-                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+
                             </asp:GridView>
 
                         <br />

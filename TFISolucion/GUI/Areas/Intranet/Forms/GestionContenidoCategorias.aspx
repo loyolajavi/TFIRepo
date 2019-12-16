@@ -21,8 +21,11 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2 " style="align-content: flex-end;">
+                <%if (this.Master.Autenticar(new string[] { "CategoriaAlta" }))
+                  { %>
                 <a href="#modalCategoria" class="btn btn-info" data-toggle="modal">
                     <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></a>
+                <% } %>
             </div>
         </div>
 
@@ -32,10 +35,26 @@
             <div class="col-md-5 col-md-offset-2">
                 <div class="form-group">
                     <label for="grillacategorias"></label>
-                    <asp:GridView ID="grillacategorias" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillacategorias_RowCancelingEdit" OnRowDeleting="grillacategorias_RowDeleting" OnRowUpdating="grillacategorias_RowUpdating" OnRowEditing="grillacategorias_RowEditing" AutoGenerateColumns="false">
+                    <asp:GridView ID="grillacategorias" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillacategorias_RowCancelingEdit" OnRowUpdating="grillacategorias_RowUpdating" OnRowEditing="grillacategorias_RowEditing" OnRowCommand="grillacategorias_RowCommand" AutoGenerateColumns="false">
                         <Columns>
+                            <%--<asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
+                                <ItemTemplate>
+                                    <%if (this.Master.Autenticar(new string[] { "CategoriaMod" }))
+                                      { %>
+                                    <asp:LinkButton runat="server" CausesValidation="false" CommandArgument='<%# Eval ("IdCategoria") %>' CommandName="ModificarCommand"><asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/eliminar -16.png" /></asp:LinkButton>
+                                    <% } %>
+                                </ItemTemplate>
+                            </asp:TemplateField>--%>
                             <asp:CommandField ShowEditButton="true" ButtonType="Image" CausesValidation="false" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="10%" HeaderStyle-CssClass="bg-primary" />
-                            <asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="10%"  />
+                            <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
+                                <ItemTemplate>
+                                    <%if (this.Master.Autenticar(new string[] { "CategoriaEliminar" }))
+                                      { %>
+                                    <asp:LinkButton runat="server" CausesValidation="false" CommandArgument='<%# Eval ("IdCategoria") %>' CommandName="EliminarCommand"><asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/eliminar -16.png" /></asp:LinkButton>
+                                    <% } %>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <%--<asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" ItemStyle-Width="10%"  />--%>
                             <asp:BoundField DataField="IdCategoria" HeaderText="<%$Resources:Global, IdCategoria %>" Visible="false" HeaderStyle-CssClass="bg-primary" />
                             <asp:BoundField DataField="DescripCategoria" HeaderText="<%$Resources:Global, Descripcion %>" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="bg-primary text-center" />
                         </Columns>
