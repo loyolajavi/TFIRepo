@@ -73,8 +73,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Cliente", "Publico" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
+            string[] unosPermisosTest = new string[] { "PedidoVer", "PedidoMod", "PedidoCancelar" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
@@ -267,113 +267,121 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
                 if (e.CommandName.Equals("CambiarEstado"))
                 {
-                    //variables
-                    PedidoCore unManagerPedido = new PedidoCore();
-                    var Current = HttpContext.Current;
-                    PedidoEntidad unPedidoPagar = new PedidoEntidad();
-                    SucursalCore ManagerSucursal = new SucursalCore();
-
-                    //Inicializacion
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
-
-                    //Preparar parámetros a enviar a Avanzar()
-                    logueado = (UsuarioEntidad)Current.Session["Usuario"];
-                    unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
-                    unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
-                    SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
-
-                    //No se puede descancelar un Pedido
-                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
+                    string[] unosPermisosTest = new string[] { "PedidoMod" };
+                    if (usuarioentidad != null && this.Master.Autenticar(unosPermisosTest))
                     {
-                        System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
-                        sb2.Append(@"<script type='text/javascript'>");
-                        sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
-                        sb2.Append(@"</script>");
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                                   "ModalScript2", sb2.ToString(), false);
+                        //variables
+                        PedidoCore unManagerPedido = new PedidoCore();
+                        var Current = HttpContext.Current;
+                        PedidoEntidad unPedidoPagar = new PedidoEntidad();
+                        SucursalCore ManagerSucursal = new SucursalCore();
+
+                        //Inicializacion
+                        int index = Convert.ToInt32(e.CommandArgument);
+                        Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+
+                        //Preparar parámetros a enviar a Avanzar()
+                        logueado = (UsuarioEntidad)Current.Session["Usuario"];
+                        unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
+                        unPedidoPagar.misDetalles = unManagerPedido.PedidosDetalleSelect(unPedidoPagar.IdPedido);
+                        SucursalEntidad unaSucursal = ManagerSucursal.SucursalTraerPorDireccionSucursal(unPedidoPagar.miDireccionEntrega.IdDireccion);
+
+                        //No se puede descancelar un Pedido
+                        if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Cancelado)
+                        {
+                            System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
+                            sb2.Append(@"<script type='text/javascript'>");
+                            sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
+                            sb2.Append(@"</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                       "ModalScript2", sb2.ToString(), false);
+                        }
+
+                        //Pendiente hacia Pago
+                        if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.PendientePago)
+                        {
+                            unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado, (int)FormaPagoEntidad.Options.Externa);
+                        }
+
+                        //Pago Hacia EnCamino
+                        else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
+                        {
+                            string unNroTracking = "TNK9966784523234";
+                            unManagerPedido.AvanzarPaso(unPedidoPagar, unNroTracking);
+                        }
+
+                        //Pago Hacia ListoRetirar
+                        else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Sucursal)
+                        {
+                            unManagerPedido.AvanzarPaso(unPedidoPagar);
+                        }
+
+                        //EnCamino y/o ListoRetirar hacia Entregado
+                        else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.EnCamino | unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.ListoRetirar)
+                        {
+                            unManagerPedido.AvanzarPaso(unPedidoPagar);
+                        }
                     }
-
-                    //Pendiente hacia Pago
-                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.PendientePago)
-                    {
-                        unManagerPedido.AvanzarPaso(unPedidoPagar, unaSucursal, logueado, (int)FormaPagoEntidad.Options.Externa);
-                    }
-
-                    //Pago Hacia EnCamino
-                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Correo)
-                    {
-                        //Obtener el nro de tracking ingresado en el modal
-                        //El mismo es obtenido por una funcion jquery que se ejecuta por la clase del commandname actual, 
-                        //..muestra el modal 'modaltracking' y al hacer click en 'Aceptar' del modal, se llama al webmethod "ObtenerTracking"
-                        // y en backend se lo coloca en Session["tracking"] NO FUNCIONA
-                        string unNroTracking = "TNK9966784523234";
-                        //string unNroTracking = hdnfilename.Value.ToString();
-                        //string unNroTracking = Current.Session["tracking"].ToString();
-                        unManagerPedido.AvanzarPaso(unPedidoPagar, unNroTracking);
-                    }
-
-                    //Pago Hacia ListoRetirar
-                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.Pago && unPedidoPagar.miFormaEntrega.IdFormaEntrega == (int)FormaEntregaEntidad.Options.Sucursal)
-                    {
-                        unManagerPedido.AvanzarPaso(unPedidoPagar);
-                    }
-
-                    //EnCamino y/o ListoRetirar hacia Entregado
-                    else if (unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.EnCamino | unPedidoPagar.VerEstadoActual().IdEstadoPedido == (int)EstadoPedidoEntidad.Options.ListoRetirar)
-                    {
-                        unManagerPedido.AvanzarPaso(unPedidoPagar);
-                    }
-
-
-
-                    //Era para seleccionar y modificar el estado a mano, ya no utilizado
-                    //else
-                    //{
-                    //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    //    sb.Append(@"<script type='text/javascript'>");
-                    //    sb.Append("$('#currentestado').modal('show');");
-                    //    sb.Append(@"</script>");
-                    //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                    //               "ModalScript3", sb.ToString(), false);
-                    //}//Abrir Modal que servía para el estado, pero ya no utilizado a partir del StatePatron
-                    //CargarGrillaUltimosPedidos();
-                    //Response.Redirect(Request.RawUrl);
-                }
-
-                if (e.CommandName.Equals("CancelarPedido"))
-                {
-                    //variables
-                    PedidoCore unManagerPedido = new PedidoCore();
-                    var Current = HttpContext.Current;
-                    PedidoEntidad unPedidoPagar = new PedidoEntidad();
-                    SucursalCore ManagerSucursal = new SucursalCore();
-
-                    //Inicializacion
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
-
-                    //Preparar parámetros a enviar a Avanzar()
-                    logueado = (UsuarioEntidad)Current.Session["Usuario"];
-                    unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
-
-                    //Cancelar
-                    if (unPedidoPagar.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.Cancelado)
-                    {
-                        unManagerPedido.CancelarPedido(unPedidoPagar);
-                    }
-                    //No se puede descancelar un pedido
                     else
                     {
                         System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
                         sb2.Append(@"<script type='text/javascript'>");
-                        sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
+                        sb2.Append("$('#PedidoModFalse').modal('show');");
                         sb2.Append(@"</script>");
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
-                                   "ModalScript7", sb2.ToString(), false);
+                                   "ModalScript10", sb2.ToString(), false);
+                    }
+
+
+                }
+
+                if (e.CommandName.Equals("CancelarPedido"))
+                {
+                    string[] unosPermisosTest = new string[] { "PedidoCancelar" };
+                    if (usuarioentidad != null && this.Master.Autenticar(unosPermisosTest))
+                    {
+                        //variables
+                        PedidoCore unManagerPedido = new PedidoCore();
+                        var Current = HttpContext.Current;
+                        PedidoEntidad unPedidoPagar = new PedidoEntidad();
+                        SucursalCore ManagerSucursal = new SucursalCore();
+
+                        //Inicializacion
+                        int index = Convert.ToInt32(e.CommandArgument);
+                        Int64 unNroPedido = Int64.Parse(grilladeultimospedidos.DataKeys[index].Value.ToString());
+
+                        //Preparar parámetros a enviar a Avanzar()
+                        logueado = (UsuarioEntidad)Current.Session["Usuario"];
+                        unPedidoPagar = pedidoCore.PedidoSelectByCUIT_NroPedidoCliente(usuarioentidad.CUIT, unNroPedido);
+
+                        //Cancelar
+                        if (unPedidoPagar.VerEstadoActual().IdEstadoPedido != (int)EstadoPedidoEntidad.Options.Cancelado)
+                        {
+                            unManagerPedido.CancelarPedido(unPedidoPagar);
+                        }
+                        //No se puede descancelar un pedido
+                        else
+                        {
+                            System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
+                            sb2.Append(@"<script type='text/javascript'>");
+                            sb2.Append("$('#BloqueadoModifFinalizado').modal('show');");
+                            sb2.Append(@"</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                       "ModalScript7", sb2.ToString(), false);
+                        }
+                    
+                        CargarGrillaUltimosPedidos();
+                    }
+                    else
+                    {
+                        System.Text.StringBuilder sb2 = new System.Text.StringBuilder();
+                        sb2.Append(@"<script type='text/javascript'>");
+                        sb2.Append("$('#PedidoModFalse').modal('show');");
+                        sb2.Append(@"</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                                   "ModalScript11", sb2.ToString(), false);
                     }
                 }
-                CargarGrillaUltimosPedidos();
         }
 
 

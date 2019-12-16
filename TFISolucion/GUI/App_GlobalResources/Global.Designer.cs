@@ -2257,5 +2257,29 @@ namespace Resources {
             }
         }
 
+        internal static string NoPermisos
+        {
+            get
+            {
+                return ResourceManager.GetString("NoPermisos", resourceCulture);
+            }
+        }
+
+        internal static string Disponibles
+        {
+            get
+            {
+                return ResourceManager.GetString("Disponibles", resourceCulture);
+            }
+        }
+
+        internal static string Asignados
+        {
+            get
+            {
+                return ResourceManager.GetString("Asignados", resourceCulture);
+            }
+        }
+
     }
 }

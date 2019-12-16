@@ -58,7 +58,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "GestionClientes" };
+            string[] unosPermisosTest = new string[] { "ClienteVer", "ClienteEliminar", "ClienteMod" };
             if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");

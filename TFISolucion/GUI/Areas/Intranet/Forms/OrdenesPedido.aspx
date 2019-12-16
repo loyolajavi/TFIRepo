@@ -159,6 +159,19 @@
                 </div>
     </div>
 
+        <div id="PedidoModFalse" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" 
+                                aria-hidden="true">
+                                ×</button>
+                            <h3><asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, NoPermisos %>"></asp:Label></h3>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
 <%--    <div id="modaltracking" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

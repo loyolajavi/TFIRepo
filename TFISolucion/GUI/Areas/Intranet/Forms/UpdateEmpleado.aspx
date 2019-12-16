@@ -30,7 +30,10 @@
                         <input type="text" name="txtNombreUsuario" class="form-control" id="txtNombreUsuario" runat="server" required="required" />
                         <asp:RegularExpressionValidator ID="vldExpNombreUsuario" Display="Dynamic" runat="server" ControlToValidate="txtNombreUsuario" CssClass="alert alert-warning" Text="<%$Resources:Global, IngresarSoloLetras %>" ValidationExpression="([a-zA-Z]+)" ValidationGroup="AltaCliente"></asp:RegularExpressionValidator>
                     </div>
-                    <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" ValidationGroup="AltaCliente" />
+                    <%if (this.Master.Autenticar(new string[] { "EmpleadoMod" }))
+                      {%>
+                    <asp:Button ID="btnNombreUsuario" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarNombreUsuario %>" runat="server" OnClick="btnNombreUsuario_Click" ValidationGroup="AltaCliente" required="required" />
+                    <%} %>
                 </div>
                 <div id="divNombreUsbr" runat="server"></div>
                     <div id="divNombreUsMal" class="alert alert-danger" runat="server" visible="false">
@@ -50,8 +53,10 @@
                         <input type="password" class="input-sm" id="txtClaveRep" runat="server" placeholder="********" />
                         <asp:CompareValidator ID="vldClave" CssClass="alert alert-warning" runat="server" Text="<%$Resources:Global, ContrasenaNoCoincide %>" ControlToValidate="txtClaveRep" ControlToCompare="txtClave" ValidationGroup="ModifPass"></asp:CompareValidator>
                     </div>
+                    <%if (this.Master.Autenticar(new string[] { "EmpleadoMod" }))
+                      {%>
                     <asp:Button ID="btnCambiarClave" CssClass="btn btn-primary" Text="<%$Resources:Global, ModificarContrasena %>" runat="server" OnClick="btnCambiarClave_Click" ValidationGroup="ModifPass" />
-
+                    <%} %>
                     <div id="divEspacioModifClave" runat="server"></div>
                     <div id="divAlertaModifClave" class="alert alert-success" runat="server" visible="false">
                         <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, ModificoContrasena %>"></asp:Label></div>
@@ -66,22 +71,25 @@
                     <div class="form-group">
                         <label for="txtApellido">
                             <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Apellido %>"></asp:Label></label>
-                        <input type="text" class="form-control" id="txtApellido" runat="server" clientidmode="static" />
+                        <input type="text" class="form-control" id="txtApellido" runat="server" title="Ingrese solo letras y menos de 20 letras" pattern="^[_A-z\s]{1,20}$" clientidmode="static" ValidationGroup="ModifDatos" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="txtNombre">
                             <asp:Label ID="Label9" runat="server" Text="<%$Resources:Global, Nombre %>"></asp:Label></label>
-                        <input type="text" class="form-control" id="txtNombre" runat="server" clientidmode="static" />
+                        <input type="text" class="form-control" id="txtNombre" runat="server" title="Ingrese solo letras y menos de 20 letras" pattern="^[_A-z\s]{1,20}$" clientidmode="static" ValidationGroup="ModifDatos" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="txtMail">E-mail</label>
-                        <input type="text" class="form-control" id="txtMail" runat="server" clientidmode="static" />
+                        <input type="text" class="form-control" id="txtMail" runat="server" title="mail@mail.com" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" clientidmode="static" ValidationGroup="ModifDatos"  required="required" />
                     </div>
                     <div class="form-group">
                         <label for="txtDNI">DNI</label>
-                        <input type="text" class="form-control" id="txtDNI" runat="server" clientidmode="static" />
+                        <input type="text" class="form-control" id="txtDNI" runat="server" pattern="[0-9]{8,9}" title="Solo números hasta 9 dígitos"  clientidmode="static" ValidationGroup="ModifDatos" required="required" />
                     </div>
-                    <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" />
+                    <%if (this.Master.Autenticar(new string[] { "EmpleadoMod" }))
+                      {%>
+                    <asp:Button ID="btnDatosUsuarioUpdate" CssClass="btn btn-info" Text="Modificar Datos" runat="server" OnClick="btnDatosUsuarioUpdate_Click" ValidationGroup="ModifDatos" />
+                    <%} %>
                 </div>
 
                 <%--Permisos--%>
@@ -122,7 +130,10 @@
                         </div>
                     </div>
                     <br />
+                    <%if (this.Master.Autenticar(new string[] { "EmpleadoMod" }))
+                      {%>
                         <asp:Button ID="btnPermisosUsuarioUpdate" CssClass="btn btn-warning" Text="<%$Resources:Global, ModificarPermiso %>" runat="server" OnClick="btnPermisosUsuarioUpdate_Click" />
+                    <%} %>
                 </div>
                  <%--ENDPermissos--%>
             </div>

@@ -70,7 +70,7 @@
             </div>
         </div>
         <div id="pagos" class="box text-center" style="padding-bottom: 180px;">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -198,7 +198,7 @@
                     <%if (MiTarjeta != null)
                         { %>
                     <div class="modal-body text-center">
-                        <table>
+                        <table border="1">
                             <tr>
                                 <td id="lblTitular" class="td-lbl"><%=Resources.Global.Titular%> : </td>
                                 <td><%=MiTarjeta.Titular%></td>

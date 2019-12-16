@@ -93,7 +93,10 @@ namespace TFI.GUI.Shared
         {
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
-            TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+            if (usuario != null && !string.IsNullOrWhiteSpace(usuario.NombreUsuario))
+                TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+            else
+                TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", "", CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
             Session.Abandon();
             Response.Redirect("/Areas/Public/Forms/Home.aspx");
         }

@@ -49,7 +49,10 @@
                                 <asp:BoundField DataField="Total" HeaderText="Total" HeaderStyle-CssClass="bg-primary" />
                                 <asp:TemplateField HeaderText="<%$Resources:Global, GenerarND %>" HeaderStyle-CssClass="bg-primary">
                                     <ItemTemplate>
+                                        <%if (this.Master.Autenticar(new string[] { "NDebitoAlta" }))
+                                          {%>
                                         <asp:LinkButton runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CommandName="GenerarNDeb" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" HeaderStyle-CssClass="bg-primary" ControlStyle-CssClass="btn btn-info" />
+                                        <%} %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <%--<asp:ButtonField CommandName="GenerarNDeb" HeaderText="<%$Resources:Global, GenerarND %>" Text="<%$Resources:Global, GenerarND %>" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" />--%>
@@ -139,7 +142,7 @@
                 </div>
                 <div class="modal-body text-center">
                     <input type="text" readonly="readonly" class="form-control" clientidmode="static" id="NroFactAsocND" runat="server" maxlength="50" />
-                    <nav><b><asp:Label CssClass="" runat="server" Text="<%$Resources:Global, Ajuste%>" ></asp:Label></b></nav><input type="number" class="form-control" clientidmode="static" id="MontoNotaDebito" runat="server" maxlength="20" />
+                    <nav><b><asp:Label CssClass="" runat="server" Text="<%$Resources:Global, Ajuste%>" ></asp:Label></b></nav><input type="text" pattern="[0-9]{1,8}" title="Solo números hasta 8 dígitos"  class="form-control" clientidmode="static" id="MontoNotaDebito" runat="server" />
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">

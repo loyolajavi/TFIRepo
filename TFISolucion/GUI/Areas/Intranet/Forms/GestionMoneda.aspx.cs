@@ -66,10 +66,12 @@ namespace TFI.CORE.Areas.Intranet.Forms
             }
             usuarioLoeado = (UsuarioEntidad)Session["Usuario"];
 
-            //if (usuarioLoeado == null)
-            //{
-            //    Response.Redirect("/Areas/Public/Forms/Home.aspx");
-            //}
+            string[] unosPermisosTest = new string[] { "MonedaMod" };
+            if (usuarioLoeado == null || !this.Master.Autenticar(unosPermisosTest))
+            {
+                Response.Redirect("/Areas/Public/Forms/Home.aspx");
+            }
+
             _managerMoneda = new MonedaCore();
             listaMonedas = new List<MonedaEntidad>();
             listaCotizacion = new List<CotizacionDTO>();

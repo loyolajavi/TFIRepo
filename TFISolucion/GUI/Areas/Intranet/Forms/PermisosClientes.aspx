@@ -69,8 +69,11 @@
 
         <div class="row">
                 <div class=" text-center">
-                        <a href="#ConfirmarDelete" class="btn btn-primary" data-toggle="modal">
+                    <% if (this.Master.Autenticar(new string[] { "ClienteEliminar" }))
+                       {%>
+                    <a href="#ConfirmarDelete" class="btn btn-primary" data-toggle="modal">
                         <asp:Label ID="Label3" runat="server" Text="<%$Resources:Global, EliminarUsuario %>"></asp:Label></a>
+                    <%} %>
                 </div>
 
         </div>

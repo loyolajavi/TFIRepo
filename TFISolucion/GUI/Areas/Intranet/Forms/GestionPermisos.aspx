@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="col-md-4">
-                <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
+                <h3 class="page-header"><%=Resources.Global.Disponibles %></h3>
                 <asp:UpdatePanel ID="upTreeDisp" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:TreeView ID="treeDisponibles" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
@@ -46,7 +46,7 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-4">
-                <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
+                <h3 class="page-header"><%=Resources.Global.Asignados %></h3>
                 <asp:UpdatePanel ID="uptreeAsig" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:TreeView ID="treeAsignados" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
@@ -65,15 +65,19 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-2">
+                <%if (this.Master.Autenticar(new string[] { "PermisosAlta", "PermisosMod" }))
+                  {%>
                 <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" Style="align-content: flex-end;" CssClass="btn btn-success" />
-
+                <%} %>
             </div>
             <div class="col-md-4">
             </div>
 
             <div class="col-md-2">
+                <%if (this.Master.Autenticar(new string[] { "PermisosAlta", "PermisosMod" }))
+                  {%>
                 <asp:Button ID="btnQuitar" runat="server" Text="Quitar" OnClick="btnQuitar_Click" Style="align-content: flex-end;" CssClass="btn btn-danger" />
-
+                <%} %>
 
             </div>
 
@@ -83,11 +87,20 @@
 
         <hr />
         <div class="row" style="align-content: center;">
-
+            <%if (this.Master.Autenticar(new string[] { "PermisosAlta" }))
+              {%>
             <asp:Button ID="btnAltaFamilia" runat="server" Text="Crear Familia" OnClick="btnAltaFamilia_Click" CssClass="btn btn-primary" />
+            <%} %>
 
+            <%if (this.Master.Autenticar(new string[] { "PermisosMod" }))
+              {%>
             <asp:Button ID="btnModificarFamilia" runat="server" Text="Modificar Familia" OnClick="btnModificarFamilia_Click" CssClass="btn btn-success" />
+            <%} %>
+
+            <%if (this.Master.Autenticar(new string[] { "PermisosEliminar" }))
+              {%>
             <asp:Button ID="btnEliminarFamilia" runat="server" Text="Eliminar Familia" OnClick="btnEliminarFamilia_Click" CssClass="btn btn-danger" />
+            <%} %>
         </div>
         <hr />
         <h3 class="page-header"><%=Resources.Global.Permisos %></h3>

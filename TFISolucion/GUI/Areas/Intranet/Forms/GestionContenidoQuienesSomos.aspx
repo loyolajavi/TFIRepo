@@ -31,35 +31,35 @@
                 <h3>
                     <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, TelefonoEmpresa %>"></asp:Label></h3>
                 <label for="TelefonoEmpresa"></label>
-                <input id="TelefonoEmpresa" class="form-control" clientidmode="static" name="TelefonoEmpresa" runat="server" />
+                <input id="TelefonoEmpresa" class="form-control" clientidmode="static" name="TelefonoEmpresa" runat="server" required="required" />
 
                 <hr />
 
                 <h3>
                     <asp:Label ID="Label5" runat="server" Text="<%$Resources:Global, MailEmpresa %>"></asp:Label></h3>
                 <label for="MailEmpresa"></label>
-                <input id="MailEmpresa" class="form-control" clientidmode="static" name="MailEmpresa" runat="server" />
+                <input id="MailEmpresa" class="form-control" clientidmode="static" name="MailEmpresa" runat="server" required="required" />
 
                 <hr />
 
                 <h3>
                     <asp:Label ID="Label6" runat="server" Text="<%$Resources:Global, QuienesSomos %>"></asp:Label></h3>
                 <label for="QuienesSomos"></label>
-                <textarea id="QuienesSomos" class="form-control" clientidmode="static" name="QuienesSomos" rows="9" cols="25" maxlength="1000" runat="server"></textarea>
+                <textarea id="QuienesSomos" class="form-control" clientidmode="static" name="QuienesSomos" rows="9" cols="25" maxlength="1000" runat="server" required="required"></textarea>
 
                 <hr />
 
                 <h3>
                     <asp:Label ID="Label7" runat="server" Text="<%$Resources:Global, Mision %>"></asp:Label></h3>
                 <label for="Mision"></label>
-                <textarea id="Mision" class="form-control" clientidmode="static" name="Mision" rows="9" cols="25" maxlength="1000" runat="server"></textarea>
+                <textarea id="Mision" class="form-control" clientidmode="static" name="Mision" rows="9" cols="25" maxlength="1000" runat="server" required="required"></textarea>
 
                 <hr />
 
                 <h3>
                     <asp:Label ID="Label8" runat="server" Text="<%$Resources:Global, Vision %>"></asp:Label></h3>
                 <label for="Vision"></label>
-                <textarea id="Vision" class="form-control" clientidmode="static" name="Vision" rows="9" cols="25" maxlength="400" runat="server"></textarea>
+                <textarea id="Vision" class="form-control" clientidmode="static" name="Vision" rows="9" cols="25" maxlength="400" runat="server" required="required"></textarea>
 
                 <hr />
 

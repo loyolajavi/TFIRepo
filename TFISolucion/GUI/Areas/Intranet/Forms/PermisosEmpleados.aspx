@@ -63,7 +63,10 @@
         </div>
         <div class="row">
             <div class="text-right col-md-12">
-              <asp:Button ID="Button1" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" />
+                <% if (this.Master.Autenticar(new string[] { "EmpleadoEliminar" }))
+                   {%>
+                <asp:Button ID="Button1" class="btn btn-default" Text="<%$Resources:Global, EliminarUsuario %>" OnClick="btnEliminarUsuario_Click" ClientIDMode="Static" runat="server" />
+                <%} %>
             </div>
 
         </div>

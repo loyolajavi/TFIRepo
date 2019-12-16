@@ -64,8 +64,8 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))//if (usuarioentidad == null || this.Master.Autenticacion() <= FamiliaEntidad.PermisoFamilia.Cliente)
+            string[] unosPermisosTest = new string[] { "Factura", "NDebitoAlta" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
@@ -334,6 +334,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 ComprobanteRow = ComprobanteBLL.ComprobanteSelectAllByCUIT_NroComprobante(Convert.ToInt32(nrocomprobantesincerosalaizquierda));
                 List<ComprobanteDetalleEntidad> ListadeDetalles = new List<ComprobanteDetalleEntidad>();
                 ListadeDetalles = ComprobanteBLL.DetallesSelectByComprobante(ComprobanteRow.NroComprobante, ComprobanteRow.miSucursal.IdSucursal, ComprobanteRow.miTipoComprobante.IdTipoComprobante);
+
+                decimal montoAux = 0;
+                if (!string.IsNullOrWhiteSpace(MontoNotaDebito))
+                    montoAux = Decimal.Parse(MontoNotaDebito);
+                if (ListadeDetalles.Sum(X => X.PrecioUnitarioFact) < Decimal.Parse(MontoNotaDebito) | montoAux < 1)
+                    return false;
 
                 ComprobanteEntidad unaNotaDebito = new ComprobanteEntidad();
 

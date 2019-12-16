@@ -46,7 +46,9 @@ namespace TFI.GUI.General
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "ProductoEliminar", "ProductoAlta", "ProductoMod" };
+            string[] unosPermisosTest = new string[] { "ProductoEliminar", "ProductoAlta", "ProductoMod", "CategoriaAsociar", "CategoriaDesasociar", "CategoriaAlta", "CategoriaMod", "CategoriaEliminar", "AdquisicionRegistrar", "StockVer", "StockAjustar",
+            "QuienesSomosMod", "MonedaMod", "ClienteVer", "EmpleadoVer", "ClienteEliminar", "ClienteMod", "EmpleadoEliminar", "EmpleadoMod", "UsuarioAlta", "PedidoVer", "PedidoMod", "PedidoCancelar", "Reportes", "Graficos", "Factura", "NDebitoAlta", "NDebito", "NCredito", 
+            "Chat", "Logs", "Backup", "Restaurar", "PermisosVer", "PermisosAlta", "PermisosMod", "PermisosEliminar" };
 
             if (usuario != null && Autenticar(unosPermisosTest))
             {
@@ -70,7 +72,10 @@ namespace TFI.GUI.General
         {
             usuario = new UsuarioEntidad();
             usuario = (UsuarioEntidad)Current.Session["Usuario"];
-            TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+            if(usuario != null && !string.IsNullOrWhiteSpace(usuario.NombreUsuario))
+                TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", usuario.NombreUsuario, CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
+            else
+                TFI.SEGURIDAD.ServicioLog.CrearLog("Deslogueo", "Deslogueo Correcto", "", CORE.Helpers.ConfigSection.Default.Site.Cuit.ToString());
             Session.Abandon();
             Response.Redirect("/Areas/public/forms/Home.aspx");
         }

@@ -39,7 +39,7 @@
                 <asp:TextBox ID="txtProd" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                 <%--<input id="txtProd" name="txtProd" type="text" class="form-control" required="required">--%>
                 <label class="control-label"><%=Resources.Global.Cantidad %></label>
-                <input id="txtCant" name="txtCant" runat="server" type="number" class="form-control" required="required">
+                <input id="txtCant" name="txtCant" pattern="[0-9]{1,4}" title="Solo números hasta 4 dígitos" runat="server" type="text" class="form-control" required="required">
                 <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-info" Text="<%$Resources:Global, Agregar %>" OnClick="btnAgregar_Click" />
             </div>
         </div>

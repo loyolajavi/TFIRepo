@@ -37,14 +37,6 @@
                     <label for="grillacategorias"></label>
                     <asp:GridView ID="grillacategorias" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" OnRowCancelingEdit="grillacategorias_RowCancelingEdit" OnRowUpdating="grillacategorias_RowUpdating" OnRowEditing="grillacategorias_RowEditing" OnRowCommand="grillacategorias_RowCommand" AutoGenerateColumns="false">
                         <Columns>
-                            <%--<asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
-                                <ItemTemplate>
-                                    <%if (this.Master.Autenticar(new string[] { "CategoriaMod" }))
-                                      { %>
-                                    <asp:LinkButton runat="server" CausesValidation="false" CommandArgument='<%# Eval ("IdCategoria") %>' CommandName="ModificarCommand"><asp:Image runat="server" ImageUrl="../../../Content/Images/Iconos/eliminar -16.png" /></asp:LinkButton>
-                                    <% } %>
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
                             <asp:CommandField ShowEditButton="true" ButtonType="Image" CausesValidation="false" CancelImageUrl="../../../Content/Images/Iconos/Cancelar.png" UpdateImageUrl="../../../Content/Images/Iconos/Actualizar.png" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="10%" HeaderStyle-CssClass="bg-primary" />
                             <asp:TemplateField ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="bg-primary">
                                 <ItemTemplate>

@@ -75,16 +75,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             usuarioentidad = (UsuarioEntidad)Current.Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
+            string[] unosPermisosTest = new string[] { "ClienteVer", "ClienteMod" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
-            unosPermisosTest = new string[] { "Empleado" };
-            if (this.Master.Autenticar(unosPermisosTest))
-            {
-                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
-            }
+
 
             usuarioString = Page.Request.QueryString["Cli"];
 
@@ -101,6 +97,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     cargarLocalidades();
                     cargarProvinciasEnvio();
                     cargarLocalidadesEnvio();
+                    CargarDireccionesUsuario();
                 }
                 else
                 {
@@ -164,15 +161,30 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnCambiarClave_Click(object sender, EventArgs e)
         {
+            divEspacioModifClave.InnerHtml = "";
+            divAlertaModifClave.Visible = false;
+            divMsjError.Visible = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<br />");
+
+            Page.Validate("ModifPass");
             if (Page.IsValid)
             {
-                StringBuilder sb = new StringBuilder();
-                unCliente = (UsuarioEntidad)Session["Cliente"];
-                unCliente.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
-                unManagerUsuario.UpdateUsuarioContraseña(unCliente);
-                sb.Append("<br />");
-                divEspacioModifClave.InnerHtml = sb.ToString();
-                divAlertaModifClave.Visible = true;
+                if (!string.IsNullOrWhiteSpace(txtClave.Value) && !string.IsNullOrWhiteSpace(txtClaveRep.Value) && txtClave.Value == txtClaveRep.Value)
+                {
+                    unCliente = (UsuarioEntidad)Session["Cliente"];
+                    unCliente.Clave = ServicioSecurizacion.AplicarHash(txtClave.Value);
+                    unManagerUsuario.UpdateUsuarioContraseña(unCliente);
+                    sb.Append("<br />");
+                    divEspacioModifClave.InnerHtml = sb.ToString();
+                    divAlertaModifClave.Visible = true;
+                }
+                else
+                {
+                    divEspacioModifClave.InnerHtml = sb.ToString();
+                    divAlertaModifClave.Visible = false;
+                    divMsjError.Visible = true;
+                }
             }
         }
 
@@ -241,86 +253,62 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
         protected void btnUpdateFacturacion_Click(object sender, EventArgs e)
         {
-            //FACTURACION
-            unCliente = (UsuarioEntidad)Current.Session["Cliente"];
-            StringBuilder sb = new StringBuilder();
-            DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionEntidad DireccionEnvio = new DireccionEntidad();
+            Page.Validate("DirFac");
+            if (Page.IsValid)
+            {
+                //FACTURACION
+                unCliente = (UsuarioEntidad)Current.Session["Cliente"];
+                StringBuilder sb = new StringBuilder();
+                DireccionEntidad NuevaDireccion = new DireccionEntidad();
+                DireccionEntidad DireccionEnvio = new DireccionEntidad();
 
-            NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
-            NuevaDireccion.Calle = txtCalle.Value;
-            NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
-            if (!string.IsNullOrEmpty(txtPiso.Value))
-                NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
-            if (!string.IsNullOrEmpty(txtDpartamento.Value))
-                NuevaDireccion.Departamento = txtDpartamento.Value;
-            NuevaDireccion.miLocalidad = new Localidad();
-            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidad.SelectedValue);
-            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
-            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvincia.SelectedValue);
-            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
+                NuevaDireccion.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Facturacion;
+                NuevaDireccion.Calle = txtCalle.Value;
+                NuevaDireccion.Numero = Int32.Parse(txtNumero.Value);
+                if (!string.IsNullOrEmpty(txtPiso.Value))
+                    NuevaDireccion.Piso = Int32.Parse(txtPiso.Value);
+                if (!string.IsNullOrEmpty(txtDpartamento.Value))
+                    NuevaDireccion.Departamento = txtDpartamento.Value;
+                NuevaDireccion.miLocalidad = new Localidad();
+                NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidad.SelectedValue);
+                NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+                NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvincia.SelectedValue);
+                NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
 
-            unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, unCliente);
+                unManagerUsuario.InsertDireccionDeFacturacion(NuevaDireccion, unCliente);
+            }
         }
 
         protected void btnUpdateEnvio_Click(object sender, EventArgs e)
         {
-            //ENVIO
-            unCliente = (UsuarioEntidad)Current.Session["Cliente"];
-            StringBuilder sb = new StringBuilder();
-            DireccionEntidad NuevaDireccion = new DireccionEntidad();
-            DireccionEntidad DireccionEnvio = new DireccionEntidad();
+            Page.Validate("DirEnvio");
+            if (Page.IsValid)
+            {
 
-            DireccionEnvio.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
-            DireccionEnvio.Calle = txtCalleEnvio.Value;
-            DireccionEnvio.Numero = Int32.Parse(txtNumeroEnvio.Value);
-            if (!string.IsNullOrEmpty(txtPisoEnvio.Value))
-                DireccionEnvio.Piso = Int32.Parse(txtPisoEnvio.Value);
-            if (!string.IsNullOrEmpty(txtDepartamentoEnvio.Value))
-                DireccionEnvio.Departamento = txtDepartamentoEnvio.Value;
-            NuevaDireccion.miLocalidad = new Localidad();
-            NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidadEnvio.SelectedValue);
-            NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
-            NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvinciaEnvio.SelectedValue);
-            NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
+                //ENVIO
+                unCliente = (UsuarioEntidad)Current.Session["Cliente"];
+                StringBuilder sb = new StringBuilder();
+                DireccionEntidad NuevaDireccion = new DireccionEntidad();
+                DireccionEntidad DireccionEnvio = new DireccionEntidad();
 
-            unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, unCliente);
+                DireccionEnvio.IdTipoDireccion = (int)TipoDireccionEntidad.Options.Envio;
+                DireccionEnvio.Calle = txtCalleEnvio.Value;
+                DireccionEnvio.Numero = Int32.Parse(txtNumeroEnvio.Value);
+                if (!string.IsNullOrEmpty(txtPisoEnvio.Value))
+                    DireccionEnvio.Piso = Int32.Parse(txtPisoEnvio.Value);
+                if (!string.IsNullOrEmpty(txtDepartamentoEnvio.Value))
+                    DireccionEnvio.Departamento = txtDepartamentoEnvio.Value;
+                NuevaDireccion.miLocalidad = new Localidad();
+                NuevaDireccion.miLocalidad.IdLocalidad = Int32.Parse(ddlLocalidadEnvio.SelectedValue);
+                NuevaDireccion.miLocalidad.miProvincia = new ProvinciaEntidad();
+                NuevaDireccion.miLocalidad.miProvincia.IdProvincia = Int32.Parse(ddlProvinciaEnvio.SelectedValue);
+                NuevaDireccion.Predeterminada = true;//Se crea por default como predeterminada
+
+                unManagerUsuario.InsertDireccionDeFacturacion(DireccionEnvio, unCliente);
+            }
         }
 
-        public void cargarDireFacturacion()
-        {
 
-            unCliente = unManagerUsuario.UsuarioSelectByIdUsuario(Int32.Parse(usuarioString));
-
-            //DireccionesDeUsuario = UsuarioBLL.SelectDireccionesDeUsuario(usuarioentidad.CUIT, usuarioentidad.NombreUsuario);
-
-
-            //txtCalle.Value;
-            //txtNumero.Value;
-            //txtPiso.Value;
-            //txtDpartamento.Value;
-            //txtLocalidad.Value;
-            //ddlProvincia.SelectedIndex + 1;
-
-            
-
-
-
-
-
-
-            lblCliente.Text = unCliente.Nombre + " " + unCliente.Apellido;
-            Session["Cliente"] = (UsuarioEntidad)unCliente;
-            txtNombreUsuario.Value = unCliente.NombreUsuario;
-            txtClave.Value = "********";
-            txtClaveRep.Value = "********";
-            txtApellido.Value = unCliente.Apellido;
-            txtNombre.Value = unCliente.Nombre;
-            ddlFiscalCliente.SelectedIndex = (int)unCliente.IdCondicionFiscal;
-            txtMail.Value = unCliente.Email;
-            txtDNI.Value = unCliente.NroIdentificacion;
-
-        }
 
 
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
@@ -340,6 +328,57 @@ namespace TFI.GUI.Areas.Intranet.Forms
         }
 
 
+
+        private void CargarDireccionesUsuario()
+        {
+            usuarioentidad = (UsuarioEntidad)HttpContext.Current.Session["Usuario"];
+
+            DireccionEntidad unaDirUsuarioFact = new DireccionEntidad();
+            DireccionEntidad unaDirUsuarioEnvio = new DireccionEntidad();
+            List<DireccionEntidad> DireccionesDeUsuario = new List<DireccionEntidad>();
+            DireccionesDeUsuario = unManagerUsuario.SelectDireccionesDeUsuarioActuales(unCliente);
+
+            if(DireccionesDeUsuario != null && DireccionesDeUsuario.Count > 0)
+            {
+                foreach (var item in DireccionesDeUsuario)
+                {
+                    if (item.IdTipoDireccion == 1 && item.Predeterminada == true)
+                        unaDirUsuarioFact = item;
+                    else if (item.IdTipoDireccion == 2 && item.Predeterminada == true)
+                        unaDirUsuarioEnvio = item;
+                }    
+            }
+
+            if (unaDirUsuarioFact != null && unaDirUsuarioFact.IdDireccion > 0)
+            {
+                txtCalle.Value = unaDirUsuarioFact.Calle;
+                txtNumero.Value = unaDirUsuarioFact.Numero.ToString();
+                txtPiso.Value = unaDirUsuarioFact.Piso.ToString();
+                txtDpartamento.Value = unaDirUsuarioFact.Departamento;
+                ddlProvincia.SelectedIndexChanged -= new EventHandler(ddlProvincia_SelectedIndexChanged);
+                ddlProvincia.SelectedValue = unaDirUsuarioFact.miLocalidad.miProvincia.IdProvincia.ToString();
+                ddlLocalidad.SelectedValue = unaDirUsuarioFact.miLocalidad.IdLocalidad.ToString().Trim();
+                ddlProvincia.SelectedIndexChanged += new EventHandler(ddlProvincia_SelectedIndexChanged);
+
+            }
+
+            if (unaDirUsuarioEnvio != null && unaDirUsuarioEnvio.IdDireccion > 0)
+            {
+                txtCalleEnvio.Value = unaDirUsuarioEnvio.Calle;
+                txtNumeroEnvio.Value = unaDirUsuarioEnvio.Numero.ToString();
+                txtPisoEnvio.Value = unaDirUsuarioEnvio.Piso.ToString();
+                txtDepartamentoEnvio.Value = unaDirUsuarioEnvio.Departamento;
+                ddlProvinciaEnvio.SelectedIndexChanged -= new EventHandler(ddlProvinciaEnvio_SelectedIndexChanged);
+                ddlProvinciaEnvio.SelectedValue = unaDirUsuarioEnvio.miLocalidad.miProvincia.IdProvincia.ToString();
+                ddlLocalidadEnvio.SelectedValue = unaDirUsuarioEnvio.miLocalidad.IdLocalidad.ToString().Trim();
+                ddlProvinciaEnvio.SelectedIndexChanged += new EventHandler(ddlProvinciaEnvio_SelectedIndexChanged);
+
+            }
+            
+
+        }
+
+        
 
 
     }

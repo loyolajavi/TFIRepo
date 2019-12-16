@@ -58,16 +58,12 @@ namespace TFI.GUI.Areas.Intranet.Forms
             }
             usuarioentidad = (UsuarioEntidad)Session["Usuario"];
 
-            string[] unosPermisosTest = new string[] { "Publico", "Cliente" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
+            string[] unosPermisosTest = new string[] { "Restaurar" };
+            if (usuarioentidad == null || !this.Master.Autenticar(unosPermisosTest))
             {
                 Response.Redirect("/Areas/Public/Forms/Home.aspx");
             }
-            unosPermisosTest = new string[] { "Empleado" };
-            if (usuarioentidad == null || this.Master.Autenticar(unosPermisosTest))
-            {
-                Response.Redirect("/Areas/Intranet/Forms/OrdenesPedido.aspx");
-            }
+
 
          
         }

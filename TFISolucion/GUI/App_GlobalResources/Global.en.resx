@@ -1193,5 +1193,13 @@
   <data name="CompletaCampo" xml:space="preserve">
     <value>Complete this line</value>
   </data>
-
+  <data name="NoPermisos" xml:space="preserve">
+    <value>You dont have rights to do it</value>
+  </data>
+  <data name="Disponibles" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Asignados" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
 </root>

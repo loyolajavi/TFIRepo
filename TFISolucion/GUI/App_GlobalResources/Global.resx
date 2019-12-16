@@ -1190,4 +1190,13 @@
   <data name="CompletaCampo" xml:space="preserve">
     <value>Completa Este Campo</value>
   </data>
+  <data name="NoPermisos" xml:space="preserve">
+    <value>No posee permisos para realizar esta acción</value>
+  </data>
+  <data name="Disponibles" xml:space="preserve">
+    <value>Disponibles</value>
+  </data>
+  <data name="Asignados" xml:space="preserve">
+    <value>Asignados</value>
+  </data>
 </root>

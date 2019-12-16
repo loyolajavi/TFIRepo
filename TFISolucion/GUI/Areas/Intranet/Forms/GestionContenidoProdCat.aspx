@@ -70,48 +70,7 @@
 
                     </div>
 
-                <div class="modal fade" id="modalProdCategoria">
-                    <div class="modal-dialog">
-                        <%--<asp:UpdatePanel ID="upModal" ChildrenAsTriggers="false" UpdateMode="Conditional" runat="server">--%>
-                        <%--<ContentTemplate>--%>
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2>
-                                    <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarCategoria %>"></asp:Label></h2>
-                                <div id="notificationprodcategoria">
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upModalProdCategoria">
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnGrabarAsociacion" />
-                                    </Triggers>
-                                    <ContentTemplate>
 
-                                        <form role="form" class=" col-xs-8">
-                                            <div class="form-group">
-                                                <label for="ddlProducto">
-                                                    <asp:Label ID="Label5" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Producto %>"></asp:Label></label>
-                                                <asp:DropDownList ID="ddlProducto" CssClass="form-control" runat="server" ClientIDMode="static"></asp:DropDownList>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="ddlCategoria">
-                                                    <asp:Label ID="Label6" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Categoria %>"></asp:Label></label>
-                                                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
-                                            </div>
-                                        </form>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                                <%--Agrego boton, con update panel, le agrege ClientIDMode a los elementos del modal.--%>
-                                <div style="text-align: center;" class="form-group">
-                                    <asp:Button runat="server" ID="btnGrabarAsociacion" ClientIDMode="static" class="btn btn-primary "  Text="<%$Resources:Global, Aceptar %>" OnClientClick="return onbtnAsociarCategoria(this)" OnClick="btnGrabarAsociacion_Click" />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div> 
 
 

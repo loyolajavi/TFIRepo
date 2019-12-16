@@ -26,10 +26,13 @@
                 <div class="form-inline">
                     <asp:TextBox ID="txtProductoaBuscar" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server" Width="40%"></asp:TextBox>
                     <asp:Button ID="btnConsultar" CssClass="form-control" runat="server" Text="<%$Resources:Global, Buscar %>" OnClick="btnConsultar_Click" />
+                    <%if (this.Master.Autenticar(new string[] { "StockAjustar" }))
+                      {%>
                     <span style="margin-left: 30%;">
-                        <a href="#modalStock" class="btn btn-info btn-xs" data-toggle="modal">
+                        <a href="#modalStock" class="btn btn-info" data-toggle="modal">
                             <asp:Label ID="Label3" runat="server" Text="Ajustar Stock"></asp:Label></a>
                     </span>
+                    <%} %>
                 </div>
             </div>
 
