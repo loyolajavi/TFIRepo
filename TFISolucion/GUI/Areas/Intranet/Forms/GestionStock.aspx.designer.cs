@@ -103,22 +103,40 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.UpdatePanel upmodalStock;
         
         /// <summary>
-        /// Control Label5.
+        /// Control hIdProd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.HiddenField hIdProd;
         
         /// <summary>
-        /// Control ddlProducto.
+        /// Control hIdSuc.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProducto;
+        protected global::System.Web.UI.WebControls.HiddenField hIdSuc;
+        
+        /// <summary>
+        /// Control Label7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+        
+        /// <summary>
+        /// Control NroAdq.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl NroAdq;
         
         /// <summary>
         /// Control Label6.
@@ -130,13 +148,13 @@ namespace TFI.GUI.Areas.Intranet.Forms {
         protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// Control cantidad.
+        /// Control ajuste.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cantidad;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ajuste;
         
         /// <summary>
         /// Control btnGrabarStock.

@@ -44,7 +44,29 @@ namespace TFI.CORE.Managers
             }
         }
 
+        public int ObtenerIDAdqByIdSucIdProdIdAdq(int IdAdq, int IdSuc, int IdProd)
+        {
+            try
+            {
+                return GestorAdquisicion.ObtenerIDAdqByIdSucIdProdIdAdq(IdAdq, IdSuc, IdProd);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
+        public void AjustarStock(Adquisicion laAdq)
+        {
+            try
+            {
+                GestorAdquisicion.AjustarStock(laAdq);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
     }
 }

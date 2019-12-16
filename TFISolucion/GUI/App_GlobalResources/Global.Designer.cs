@@ -1971,5 +1971,291 @@ namespace Resources {
                 return ResourceManager.GetString("IVA", resourceCulture);
             }
         }
+
+
+		
+		internal static string ConsumidorFinal
+        {
+            get
+            {
+                return ResourceManager.GetString("ConsumidorFinal", resourceCulture);
+            }
+        }
+		
+		internal static string ResponsableInscripto
+        {
+            get
+            {
+                return ResourceManager.GetString("ResponsableInscripto", resourceCulture);
+            }
+        }
+		
+		internal static string Contactenos
+        {
+            get
+            {
+                return ResourceManager.GetString("Contactenos!", resourceCulture);
+            }
+        }
+		
+		internal static string SuDirecciónDeEmail
+        {
+            get
+            {
+                return ResourceManager.GetString("SuDirecciónDeEmail", resourceCulture);
+            }
+        }
+		
+		internal static string SuMensaje
+        {
+            get
+            {
+                return ResourceManager.GetString("SuMensaje", resourceCulture);
+            }
+        }
+		
+		internal static string Teléfonos
+        {
+            get
+            {
+                return ResourceManager.GetString("Teléfonos", resourceCulture);
+            }
+        }
+		
+		
+		internal static string Fijo
+        {
+            get
+            {
+                return ResourceManager.GetString("Fijo", resourceCulture);
+            }
+        }
+		
+		internal static string Móvil
+        {
+            get
+            {
+                return ResourceManager.GetString("Móvil", resourceCulture);
+            }
+        }
+		
+		internal static string Pago
+        {
+            get
+            {
+                return ResourceManager.GetString("Pago", resourceCulture);
+            }
+        }
+		
+		internal static string PendienteDePago
+        {
+            get
+            {
+                return ResourceManager.GetString("PendienteDePago", resourceCulture);
+            }
+        }
+		
+		internal static string VerDeseos
+        {
+            get
+            {
+                return ResourceManager.GetString("VerDeseos", resourceCulture);
+            }
+        }
+		
+		internal static string Sucursal
+        {
+            get
+            {
+                return ResourceManager.GetString("Sucursal", resourceCulture);
+            }
+        }
+		
+		internal static string AjustarStock
+        {
+            get
+            {
+                return ResourceManager.GetString("AjustarStock", resourceCulture);
+            }
+        }
+		
+		internal static string IngresoProducto
+        {
+            get
+            {
+                return ResourceManager.GetString("IngresoProducto", resourceCulture);
+            }
+        }
+		
+		
+		internal static string Quitar
+        {
+            get
+            {
+                return ResourceManager.GetString("Quitar", resourceCulture);
+            }
+        }
+		
+		
+		internal static string EnCamino
+        {
+            get
+            {
+                return ResourceManager.GetString("EnCamino", resourceCulture);
+            }
+        }
+		
+		internal static string ListoParaRetirar
+        {
+            get
+            {
+                return ResourceManager.GetString("ListoParaRetirar", resourceCulture);
+            }
+        }
+		
+		internal static string Entregado
+        {
+            get
+            {
+                return ResourceManager.GetString("Entregado", resourceCulture);
+            }
+        }
+		
+		internal static string Cancelado
+        {
+            get
+            {
+                return ResourceManager.GetString("Cancelado", resourceCulture);
+            }
+        }
+		
+		internal static string RevisiónEstadisticas
+        {
+            get
+            {
+                return ResourceManager.GetString("RevisiónEstadisticas", resourceCulture);
+            }
+        }
+		
+		internal static string InformaciónVentas
+        {
+            get
+            {
+                return ResourceManager.GetString("InformaciónVentas", resourceCulture);
+            }
+        }
+		
+		internal static string VentasPeriodo
+        {
+            get
+            {
+                return ResourceManager.GetString("VentasPeriodo", resourceCulture);
+            }
+        }
+		
+		internal static string InformaciónCategorías
+        {
+            get
+            {
+                return ResourceManager.GetString("InformaciónCategorías", resourceCulture);
+            }
+        }
+		
+		internal static string ProductosporCategoria
+        {
+            get
+            {
+                return ResourceManager.GetString("ProductosporCategoria", resourceCulture);
+            }
+        }
+		
+		internal static string RankingProductos
+        {
+            get
+            {
+                return ResourceManager.GetString("RankingProductos", resourceCulture);
+            }
+        }
+		
+		internal static string ProductosMasVendidos
+        {
+            get
+            {
+                return ResourceManager.GetString("ProductosMasVendidos", resourceCulture);
+            }
+        }
+		
+		internal static string VentasValorizadas
+        {
+            get
+            {
+                return ResourceManager.GetString("VentasValorizadas", resourceCulture);
+            }
+        }
+		
+		internal static string SeleccionarArchivo
+        {
+            get
+            {
+                return ResourceManager.GetString("SeleccionarArchivo", resourceCulture);
+            }
+        }
+		
+		internal static string NombreBaseDeDatos
+        {
+            get
+            {
+                return ResourceManager.GetString("NombreBaseDeDatos", resourceCulture);
+            }
+        }
+		
+		internal static string CrearFamilia
+        {
+            get
+            {
+                return ResourceManager.GetString("CrearFamilia", resourceCulture);
+            }
+        }
+		
+		internal static string ModificarFamilia
+        {
+            get
+            {
+                return ResourceManager.GetString("ModificarFamilia", resourceCulture);
+            }
+        }
+		
+		internal static string EliminarFamilia
+        {
+            get
+            {
+                return ResourceManager.GetString("EliminarFamilia", resourceCulture);
+            }
+        }
+		
+		internal static string IngreseNúmeroUsuario
+        {
+            get
+            {
+                return ResourceManager.GetString("IngreseNúmeroUsuario", resourceCulture);
+            }
+        }
+		
+		internal static string ProductoPrecioMenosrCero
+        {
+            get
+            {
+                return ResourceManager.GetString("ProductoPrecioMenosrCero", resourceCulture);
+            }
+        }
+		
+		internal static string CompletaCampo
+        {
+            get
+            {
+                return ResourceManager.GetString("CompletaCampo", resourceCulture);
+            }
+        }
+
     }
 }

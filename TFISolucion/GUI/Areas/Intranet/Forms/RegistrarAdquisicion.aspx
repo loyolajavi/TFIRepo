@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <label class="control-label"><%=Resources.Global.Detalle %></label>
-                        <asp:GridView ID="grillaDetallesAdq" AutoGenerateColumns="false" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" >
+                        <asp:GridView ID="grillaDetallesAdq" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="Ingrese un Producto a registrar" BorderStyle="NotSet" CssClass="table table-hover table-responsive table-striped" GridLines="None" runat="server" >
                             <Columns>
                                 <asp:CommandField ShowEditButton="True" ButtonType="Image" EditImageUrl="../../../Content/Images/Iconos/boton-de-edicion-de-lapiz.png" ItemStyle-Width="5%" HeaderStyle-CssClass="bg-primary" />
                                 <asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="../../../Content/Images/Iconos/eliminar -16.png" HeaderStyle-CssClass="bg-primary" />

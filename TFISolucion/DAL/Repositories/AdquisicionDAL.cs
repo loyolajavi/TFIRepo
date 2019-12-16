@@ -59,5 +59,40 @@ namespace TFI.DAL.DAL
         }
 
 
+        public int ObtenerIDAdqByIdSucIdProdIdAdq(int IdAdquisicion, int IdSucursal, int IdProducto)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdAdquisicion", IdAdquisicion),
+                new SqlParameter("@IdSucursal", IdSucursal),
+                new SqlParameter("@IdProducto", IdProducto)
+			};
+
+            return (int)SqlClientUtility.ExecuteScalar(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "ObtenerIDAdqByIdSucIdProdIdAdq", parameters);
+        }
+
+
+        public void AjustarStock(Adquisicion laAdquisicion)
+        {
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+		        {
+                    new SqlParameter("@Ajuste", laAdquisicion.MisAdqDetalles.First().Ajuste),
+			        new SqlParameter("@IdAdquisicionDetalle", laAdquisicion.MisAdqDetalles.First().IdAdquisicionDetalle),
+                    new SqlParameter("@IdProducto", laAdquisicion.MisAdqDetalles.First().miProducto.IdProducto),
+                    new SqlParameter("@IdSucursal", laAdquisicion.miSucursal.IdSucursal),
+                    new SqlParameter("@CUIT", laAdquisicion.CUIT)
+		        };
+
+                    SqlClientUtility.ExecuteNonQuery(SqlClientUtility.connectionStringName, CommandType.StoredProcedure, "AjustarStock", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

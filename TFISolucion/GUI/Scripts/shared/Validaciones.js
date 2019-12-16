@@ -386,20 +386,24 @@ function onbtnAsociarCategoria() {
 function onbtnGrabarStock() {
     //e.preventDefault(); // Usamos esta línea para cancelar el postback que el botón crea
     var parametros = {
-        producto: $('#ddlProducto').val(),
-        stock: $('#cantidad').val()
+        IdSuc: $('#hIdSuc').val(),
+        IdProd: $('#hIdProd').val(),
+        IdAdq: $('#NroAdq').val(),
+        ajuste: $('#ajuste').val()
     };
 
 
     // Ahora hacemos la llamada tipo AJAX utilizando jQuery
     $.ajax({
         type: 'POST',                               // tipo de llamada (POST, GET)
-        url: 'GestionStock.aspx/GrabarStock',
+        url: 'GestionStock.aspx/AjustarStock',
         dataType: "json",  // el URL del método que vamos a llamar
         // los parámetros en formato JSON
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(parametros),                        // tipo de datos enviados al servidor
         success: function (data) {                      // función que se va a ejecutar si el pedido resulta exitoso
+            if (data.d)
+                alert("Ajuste aplicado correctamente");
             // $('#notification').text('La información ha sido guardada exitosamente.');
             //window.location.reload();
             //Exito("Se ha cambiado la contraseña con exito");

@@ -22,6 +22,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
         StockCore StockBLL1 = new StockCore();
         private LenguajeEntidad idioma;
         SucursalCore ManagerSucursal = new SucursalCore();
+        List<SucursalEntidad> unasSucursales = new List<SucursalEntidad>();
 
         protected T FindControlFromMaster<T>(string name) where T : Control
         {
@@ -81,22 +82,29 @@ namespace TFI.GUI.Areas.Intranet.Forms
 
             if (!IsPostBack) 
             { 
-                CargarDropdownProductos();
+                //CargarDropdownProductos();
                 CargarSucursales();
             }
         }
 
-        private void CargarDropdownProductos()
-        {
-            ddlProducto.DataSource = ProductoBLL.FindAllByCUIT(1);
-            ddlProducto.DataValueField = "IdProducto";
-            ddlProducto.DataTextField = "DescripProducto";
-            ddlProducto.DataBind();
-        }
+        //private void CargarDropdownProductos()
+        //{
+        //    ddlProducto.DataSource = ProductoBLL.FindAllByCUIT(1);
+        //    ddlProducto.DataValueField = "IdProducto";
+        //    ddlProducto.DataTextField = "DescripProducto";
+        //    ddlProducto.DataBind();
+        //}
 
         private void CargarSucursales()
         {
-            cboSucursal.DataSource = ManagerSucursal.FindAll();
+            unasSucursales = ManagerSucursal.FindAll();
+            SucursalEntidad unaSuc = new SucursalEntidad();
+            unaSuc.IdSucursal = -1;
+            unaSuc.DescripSucursal = "";
+            unasSucursales.Insert(0, unaSuc);
+            cboSucursal.Items.Clear();
+            cboSucursal.DataSource = null;
+            cboSucursal.DataSource = unasSucursales;
             cboSucursal.DataValueField = "IdSucursal";
             cboSucursal.DataTextField = "DescripSucursal";
             cboSucursal.DataBind();
@@ -127,24 +135,46 @@ namespace TFI.GUI.Areas.Intranet.Forms
         {
             Consultas.Clear();
 
-            List<ProductoEntidad> productos = ProductoBLL.FindAllByDescripProducto(txtProductoaBuscar.Text);
+            ProductoEntidad unProducto;
+            List<ProductoEntidad> productos;
+            if(!string.IsNullOrWhiteSpace(txtProductoaBuscar.Text))
+                productos = ProductoBLL.FindAllByDescripProducto(txtProductoaBuscar.Text);
+            else
+                return;
 
-            foreach (var item in productos)
+            if (productos != null && productos.Count > 0)
             {
+                unProducto = (ProductoEntidad)productos.First();
+
+                //StockSucursalEntidad unStock = StockBLL1.Select(item.miProducto.IdProducto, laAdquisicion.miSucursal.IdSucursal, laAdquisicion.CUIT);
 
                 List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
-                StockDeProducto = StockBLL1.SelectByIdProducto(item.IdProducto);
+                StockDeProducto = StockBLL1.SelectByIdProducto(unProducto.IdProducto);
 
                 ConsultaDTO Consulta = new ConsultaDTO();
-                Consulta.IdProducto = item.IdProducto;
-                Consulta.Descripcion = item.DescripProducto;
+                Consulta.IdProducto = unProducto.IdProducto;
+                Consulta.Descripcion = unProducto.DescripProducto;
                 if (StockDeProducto.Count > 0)
                 {
-                    foreach (StockSucursalEntidad unProdSucStock in StockDeProducto)
+                    if(Int32.Parse(cboSucursal.SelectedValue) < 0) //Si no se indica sucursal se muestra stock total
                     {
-                        Consulta.CantidadEnStock += unProdSucStock.CantidadProducto;
+                        hIdSuc.Value = "";
+                        hIdProd.Value = "";
+                        foreach (StockSucursalEntidad unProdSucStock in StockDeProducto)
+                        {
+                            Consulta.CantidadEnStock += unProdSucStock.CantidadProducto;
+                        }
                     }
-                    //Consulta.CantidadEnStock = StockDeProducto[0].CantidadProducto;
+                    else //Se indica sucursal y se muestra el sucursal en la misma
+                    {
+                        if(StockDeProducto.Exists(X=>X.IdSucursal == Int32.Parse(cboSucursal.SelectedValue) && X.IdProducto == unProducto.IdProducto))
+                        {
+                            hIdSuc.Value = cboSucursal.SelectedValue;
+                            hIdProd.Value = unProducto.IdProducto.ToString();
+                            StockSucursalEntidad unProdSucStock = StockDeProducto.First(X=>X.IdSucursal == Int32.Parse(cboSucursal.SelectedValue) && X.IdProducto == unProducto.IdProducto);
+                            Consulta.CantidadEnStock = unProdSucStock.CantidadProducto;
+                        }
+                    }
                 }
                 else
                 {
@@ -152,7 +182,7 @@ namespace TFI.GUI.Areas.Intranet.Forms
                     var listSucursales = coreSucursal.FindAll();
 
                     StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
-                    NuevoStock.IdProducto = item.IdProducto;
+                    NuevoStock.IdProducto = unProducto.IdProducto;
                     NuevoStock.CantidadProducto = 0;
                     NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
                     NuevoStock.IdSucursal = listSucursales[0].IdSucursal; ;
@@ -164,79 +194,91 @@ namespace TFI.GUI.Areas.Intranet.Forms
                 }
 
                 Consultas.Add(Consulta);
-
+                CargarGrillaStock();
             }
-
-            CargarGrillaStock();
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [System.Web.Services.WebMethod]
-        public static void GrabarStock(int producto, int stock)
+        public static bool AjustarStock(int IdSuc, int IdProd, int IdAdq, int ajuste)
         {
             var usuarioEntity = new UsuarioEntidad();
             var Current = HttpContext.Current;
 
-            SucursalCore coreSucursal = new SucursalCore();
-            var listSucursales = coreSucursal.FindAll();
-
             usuarioEntity = (UsuarioEntidad)Current.Session["Usuario"];
 
-            StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
-            NuevoStock.IdProducto = producto;
-            NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
-            NuevoStock.IdSucursal = listSucursales[0].IdSucursal;
-            NuevoStock.CantidadProducto = stock;
-
-            StockCore StockBLL = new StockCore();
-
-            List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
-            StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
-
-
-
-            if (StockDeProducto.Count > 0)
+            Adquisicion unaAdqAjuste = new Adquisicion();
+            AdquisicionCore ManagerAdquisicion = new AdquisicionCore();
+            int IdAdqDetalle = 0;
+            if(IdSuc > 0 && IdProd > 0 && IdAdq > 0)
+                IdAdqDetalle = ManagerAdquisicion.ObtenerIDAdqByIdSucIdProdIdAdq(IdAdq, IdSuc, IdProd);
+            if(IdAdqDetalle > 0)
             {
-                if (stock < 0)
-                {
-                    int debesermayora0;
-                    debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
-                    if (debesermayora0 >= 0)
-                    {
-                        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
-                        StockBLL.Update(NuevoStock);
-                    }
-                }
-                else
-                {
-                    NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
-                    StockBLL.Update(NuevoStock);
-                }
+                unaAdqAjuste.IdAdquisicion = IdAdq;
+                unaAdqAjuste.miSucursal = new SucursalEntidad();
+                unaAdqAjuste.miSucursal.IdSucursal = IdSuc;
+                unaAdqAjuste.CUIT = CORE.Helpers.ConfigSection.Default.Site.Cuit;
+                ProductoEntidad unProdAux = new ProductoEntidad();
+                unProdAux.IdProducto = IdProd;
+                unaAdqAjuste.AgregarDetalle(unProdAux, 0, ajuste);
+                unaAdqAjuste.MisAdqDetalles.First().IdAdquisicionDetalle = IdAdqDetalle;
+                ManagerAdquisicion.AjustarStock(unaAdqAjuste);
+                return true;
             }
-            else
-            {
-                if (stock < 0)
-                {
-                    int debesermayora0;
-                    debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
-                    if (debesermayora0 >= 0)
-                    {
-                        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
-                        StockBLL.Insert(NuevoStock);
-                    }
-                    else
-                    {
-                        StockBLL.Insert(NuevoStock);
-                    }
+            return false;
+            //StockSucursalEntidad NuevoStock = new StockSucursalEntidad();
+            //NuevoStock.IdProducto = IdProd;
+            //NuevoStock.CUIT = ConfigSection.Default.Site.Cuit;
+            //NuevoStock.IdSucursal = IdSuc;
+            //NuevoStock.CantidadProducto = ajuste;
 
+            //StockCore StockBLL = new StockCore();
 
-                }
+            //List<StockSucursalEntidad> StockDeProducto = new List<StockSucursalEntidad>();
+            //StockDeProducto = StockBLL.SelectByIdProducto(NuevoStock.IdProducto);
 
 
 
-
-            }
+            //if (StockDeProducto.Count > 0)
+            //{
+            //    if (stock < 0)
+            //    {
+            //        int debesermayora0;
+            //        debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
+            //        if (debesermayora0 >= 0)
+            //        {
+            //            NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+            //            StockBLL.Update(NuevoStock);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+            //        StockBLL.Update(NuevoStock);
+            //    }
+            //}
+            //else
+            //{
+            //    if (stock < 0)
+            //    {
+            //        int debesermayora0;
+            //        debesermayora0 = StockDeProducto[0].CantidadProducto + stock;
+            //        if (debesermayora0 >= 0)
+            //        {
+            //            NuevoStock.CantidadProducto = StockDeProducto[0].CantidadProducto + stock;
+            //            StockBLL.Insert(NuevoStock);
+            //        }
+            //        else
+            //        {
+            //            StockBLL.Insert(NuevoStock);
+            //        }
+            //    }
+            //}
+        
         }
+
+
+
         [WebMethod]
         public static List<String> ObtenerProductos()
         {

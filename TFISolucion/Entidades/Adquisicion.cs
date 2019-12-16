@@ -22,9 +22,12 @@ namespace TFI.Entidades
             set { _misAdqDetalles = value; }
         }
         
-        public void AgregarDetalle(ProductoEntidad elProd, int laCantidad)
+        public void AgregarDetalle(ProductoEntidad elProd, int laCantidad, int elAjuste = 0)
         {
-            _misAdqDetalles.Add(new AdquisicionDetalle(elProd, laCantidad));
+            if(elAjuste == 0)
+                _misAdqDetalles.Add(new AdquisicionDetalle(elProd, laCantidad));
+            else
+                _misAdqDetalles.Add(new AdquisicionDetalle(elProd, laCantidad, elAjuste));
         }
 
     }

@@ -16,29 +16,26 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
-                <asp:Button ID="btnAltaFamilia" runat="server" Text="Crear Familia" OnClick="btnAltaFamilia_Click" CssClass="btn btn-primary" />
+            <div class="col-md-4">
+                <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
-            <div class="col-md-3">
-                <asp:DropDownList ID="cboFamilia" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cboFamilia_SelectedIndexChanged" CssClass="dropdown dropdown-toggle"></asp:DropDownList>
+            <div class="col-md-2">
             </div>
-            <div class="col-md-3">
-                <asp:TextBox ID="txtName" runat="server" >
-                </asp:TextBox>
-                <asp:Button ID="btnModificarFamilia" runat="server" Text="Modificar Familia" OnClick="btnModificarFamilia_Click" CssClass="btn btn-success" />
+            <div class="col-md-4">
+                <asp:DropDownList ID="cboFamilia" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cboFamilia_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+
             </div>
-            <div class="col-md-3">
-                <asp:Button ID="btnEliminarFamilia" runat="server" Text="Eliminar Familia" OnClick="btnEliminarFamilia_Click" CssClass="btn btn-danger btn-sm" />
-            </div>
+
         </div>
 
-        
+
+
         <div class="row">
             <div class="col-md-4">
                 <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
                 <asp:UpdatePanel ID="upTreeDisp" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:TreeView ID="treeDisponibles" runat="server" SelectedNodeStyle-CssClass="bg-success" ></asp:TreeView>
+                        <asp:TreeView ID="treeDisponibles" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
@@ -47,26 +44,52 @@
                 </asp:UpdatePanel>
             </div>
             <div class="col-md-2">
-                <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
             </div>
             <div class="col-md-4">
                 <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
                 <asp:UpdatePanel ID="uptreeAsig" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                <asp:TreeView ID="treeAsignados" runat="server" SelectedNodeStyle-CssClass="bg-success" ></asp:TreeView>
+                        <asp:TreeView ID="treeAsignados" runat="server" SelectedNodeStyle-CssClass="bg-success"></asp:TreeView>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnAgregar" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
                     </Triggers>
-                        </asp:UpdatePanel>
+                </asp:UpdatePanel>
             </div>
             <div class="col-md-2">
-                <asp:Button ID="btnQuitar" runat="server" Text="Quitar" OnClick="btnQuitar_Click" />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" Style="align-content: flex-end;" CssClass="btn btn-success" />
+
+            </div>
+            <div class="col-md-4">
+            </div>
+
+            <div class="col-md-2">
+                <asp:Button ID="btnQuitar" runat="server" Text="Quitar" OnClick="btnQuitar_Click" Style="align-content: flex-end;" CssClass="btn btn-danger" />
+
+
             </div>
 
         </div>
 
+
+
+        <hr />
+        <div class="row" style="align-content: center;">
+
+            <asp:Button ID="btnAltaFamilia" runat="server" Text="Crear Familia" OnClick="btnAltaFamilia_Click" CssClass="btn btn-primary" />
+
+            <asp:Button ID="btnModificarFamilia" runat="server" Text="Modificar Familia" OnClick="btnModificarFamilia_Click" CssClass="btn btn-success" />
+            <asp:Button ID="btnEliminarFamilia" runat="server" Text="Eliminar Familia" OnClick="btnEliminarFamilia_Click" CssClass="btn btn-danger" />
+        </div>
+        <hr />
         <h3 class="page-header"><%=Resources.Global.Permisos %></h3>
 
         <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
@@ -84,6 +107,10 @@
             <asp:TreeView ID="treeTodos" runat="server" OnSelectedNodeChanged="treeTodos_SelectedNodeChanged">
             </asp:TreeView>
         </div>
+
+
+
+
 
 
     </div>

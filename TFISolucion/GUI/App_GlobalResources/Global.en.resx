@@ -1038,4 +1038,160 @@
   <data name="IVA" xml:space="preserve">
     <value>IVA</value>
   </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>User</value>
+  </data>
+
+  <data name="Clave" xml:space="preserve">
+    <value>Password</value>
+  </data>
+
+  <data name="ConsumidorFinal" xml:space="preserve">
+    <value>Final Consumer</value>
+  </data>
+
+  <data name="ResponsableInscripto" xml:space="preserve">
+    <value>Registered Person</value>
+  </data>
+
+  <data name="Contactenos!" xml:space="preserve">
+    <value>Contac us!</value>
+  </data>
+
+  <data name="SuDirecciónDeEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+
+  <data name="SuMensaje" xml:space="preserve">
+    <value>Message</value>
+  </data>
+
+  <data name="Teléfonos" xml:space="preserve">
+    <value>Phones</value>
+  </data>
+
+  <data name="Tipo" xml:space="preserve">
+    <value>Type</value>
+  </data>
+
+  <data name="Fijo" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+
+  <data name="Móvil" xml:space="preserve">
+    <value>Movile</value>
+  </data>
+
+  <data name="PendienteDePago" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+
+  <data name="Pago" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+
+  <data name="VerDeseos" xml:space="preserve">
+    <value>See The Wishes</value>
+  </data>
+
+  <data name="Sucursal" xml:space="preserve">
+    <value>Subsidiary</value>
+  </data>
+
+  <data name="AjustarStock" xml:space="preserve">
+    <value>Adjust Stock</value>
+  </data>
+
+  <data name="IngresoProducto" xml:space="preserve">
+    <value>Add Product</value>
+  </data>
+
+  <data name="Agregar" xml:space="preserve">
+    <value>Add</value>
+  </data>
+
+  <data name="Quitar" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+
+  <data name="EnCamino" xml:space="preserve">
+    <value>In track</value>
+  </data>
+
+  <data name="ListoParaRetirar" xml:space="preserve">
+    <value>Ready to go</value>
+  </data>
+
+  <data name="Entregado" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
+
+  <data name="Cancelado" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+
+  <data name="RevisiónEstadisticas" xml:space="preserve">
+    <value>Stadistics Review</value>
+  </data>
+
+  <data name="InformaciónVentas" xml:space="preserve">
+    <value>Sales Information</value>
+  </data>
+
+  <data name="VentasPeriodo" xml:space="preserve">
+    <value>Sales Period</value>
+  </data>
+
+  <data name="InformaciónCategorías" xml:space="preserve">
+    <value>Category Information</value>
+  </data>
+
+  <data name="ProductosporCategoria" xml:space="preserve">
+    <value>Category products</value>
+  </data>
+
+  <data name="RankingProductos" xml:space="preserve">
+    <value>Product Ranking</value>
+  </data>
+
+  <data name="ProductosMasVendidos" xml:space="preserve">
+    <value>Most selled products</value>
+  </data>
+
+  <data name="VentasValorizadas" xml:space="preserve">
+    <value>Valued Sales</value>
+  </data>
+
+  <data name="SeleccionarArchivo" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+
+  <data name="NombreBaseDeDatos" xml:space="preserve">
+    <value>Database Name</value>
+  </data>
+
+  <data name="CrearFamilia" xml:space="preserve">
+    <value>Create Family</value>
+  </data>
+
+  <data name="ModificarFamilia" xml:space="preserve">
+    <value>Modify Family</value>
+  </data>
+
+  <data name="EliminarFamilia" xml:space="preserve">
+    <value>Delete Family</value>
+  </data>
+
+  <data name="IngreseNúmeroUsuario" xml:space="preserve">
+    <value>Add User Number</value>
+  </data>
+
+  <data name="ProductoPrecioMenosrCero" xml:space="preserve">
+    <value>The product cannot have a price equal to or less than zero</value>
+  </data>
+
+  <data name="CompletaCampo" xml:space="preserve">
+    <value>Complete this line</value>
+  </data>
+
 </root>

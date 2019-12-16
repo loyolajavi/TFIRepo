@@ -72,7 +72,7 @@
                             <div class="modal-header text-center">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h2>
-                                    <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AgregarStock %>"></asp:Label></h2>
+                                    <asp:Label ID="Label4" runat="server" Text="<%$Resources:Global, AjustarStock %>"></asp:Label></h2>
                                 <div id="notificationStock" runat="server">
                                 </div>
                             </div>
@@ -82,18 +82,18 @@
                                         <asp:AsyncPostBackTrigger ControlID="btnGrabarStock" />
                                     </Triggers>
                                     <ContentTemplate>
-
+                                        <asp:HiddenField ID="hIdProd" ClientIDMode="Static" runat="server" />
+                                        <asp:HiddenField ID="hIdSuc" ClientIDMode="Static" runat="server" />
                                         <form role="form" class="col-xs-12">
                                             <div class="form-group">
-                                                <label for="ddlProducto">
-                                                    <asp:Label ID="Label5" class="control-label col-xs-2" runat="server" Text="<%$Resources:Global, Producto %>"></asp:Label></label>
-                                                <%--<asp:TextBox ID="TextBox1" ClientIDMode="Static" CssClass="form-control" placeholder="Ingreso producto" runat="server"></asp:TextBox>--%>
-                                                <asp:DropDownList ID="ddlProducto" runat="server" CssClass="form-control" ClientIDMode="static"></asp:DropDownList>
+                                                <label for="NroAdq">
+                                                    <asp:Label ID="Label7" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Adquisicion %>"></asp:Label></label>
+                                                <input type="number" id="NroAdq" class="form-control" placeholder="Ingrese el Nro de Adquisición" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="cantidad">
+                                                <label for="ajuste">
                                                     <asp:Label ID="Label6" runat="server" class="control-label col-xs-2" Text="<%$Resources:Global, Cantidad %>"></asp:Label></label>
-                                                <input type="number" id="cantidad" class="form-control" placeholder="Ingrese la cantidad" runat="server" clientidmode="static" />
+                                                <input type="number" id="ajuste" class="form-control" placeholder="Ingrese el ajuste de stock" runat="server" clientidmode="static" />
                                             </div>
                                         </form>
                                     </ContentTemplate>

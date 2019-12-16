@@ -16,6 +16,7 @@ namespace TFI.Entidades
             Ajuste = elAjuste;
         }
 
+        public int IdAdquisicionDetalle { get; set; }
         public ProductoEntidad miProducto { get; set; }
         public int Cantidad { get; set; }
         public int Ajuste { get; set; }
